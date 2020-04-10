@@ -1,1556 +1,5 @@
 ///<reference path='mscorlib.ts'/>
-class BaseViewModel extends NObject
-{
-	private isBusy: boolean = false;
-	private title: string = NString.Empty;
-	set IsBusy(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.isBusy
-			];
-			var _r = this.SetProperty<boolean>(_p0, value, "IsBusy", null);
-			this.isBusy = _p0[0];
-			return _r;
-		})();
-	}
-	get IsBusy(): boolean
-	{
-		return this.isBusy;
-	}
-	set Title(value: string)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.title
-			];
-			var _r = this.SetProperty<string>(_p0, value, "Title", null);
-			this.title = _p0[0];
-			return _r;
-		})();
-	}
-	get Title(): string
-	{
-		return this.title;
-	}
-	SetProperty<T>(backingStore: T[], value: T, propertyName: string = "", onChanged: () => void = null): boolean
-	{
-		var flag: boolean = EqualityComparer<T>.Default.Equals(backingStore[0], value);
-		var result: boolean;
-		if (flag)
-		{
-			result = false;
-		}
-		else
-		{
-			backingStore[0] = value;
-			if (onChanged !== null)
-			{
-				onChanged();
-			}
-			result = true;
-		}
-		return result;
-	}
-	constructor()
-	{
-		super();
-	}
-}
-class PlayerCharacterSheetViewModel extends BaseViewModel
-{
-	private isEditing: boolean = true;
-	private characterName: string = NString.Empty;
-	private ancestriesList: List<string> = PF2eCoreUtils.GetListOfAncestries();
-	private ancestry: string = NString.Empty;
-	private backgroundsList: List<string> = PF2eCoreUtils.GetListOfBackgrounds();
-	private background: string = NString.Empty;
-	private backgroundAbilityChoices: List<string> = new List<string>();
-	private backgroundAbilityChoice: string = null;
-	private pcClass: string = NString.Empty;
-	private subClassList: List<string> = new List<string>();
-	private subClass: string = NString.Empty;
-	private playerName: string = NString.Empty;
-	private strengthScore: number = 0;
-	private dexterityScore: number = 0;
-	private constitutionScore: number = 0;
-	private intelligenceScore: number = 0;
-	private wisdomScore: number = 0;
-	private charismaScore: number = 0;
-	private armorclass: number = 0;
-	private armorClassProficiencyAmount: number = 0;
-	private armorClassDexCap: number = 0;
-	private armorClassIsTrained: boolean = false;
-	private armorClassIsExpert: boolean = false;
-	private armorClassIsMaster: boolean = false;
-	private armorClassIsLegendary: boolean = false;
-	private armorClassItemBonus: number = 0;
-	private unarmoredIsTrained: boolean = false;
-	private unarmoredIsExpert: boolean = false;
-	private unarmoredIsMaster: boolean = false;
-	private unarmoredIsLegendary: boolean = false;
-	private lightArmorIsTrained: boolean = false;
-	private lightArmorIsExpert: boolean = false;
-	private lightArmorIsMaster: boolean = false;
-	private lightArmorIsLegendary: boolean = false;
-	private mediumArmorIsTrained: boolean = false;
-	private mediumArmorIsExpert: boolean = false;
-	private mediumArmorIsMaster: boolean = false;
-	private mediumArmorIsLegendary: boolean = false;
-	private heavyArmorIsTrained: boolean = false;
-	private heavyArmorIsExpert: boolean = false;
-	private heavyArmorIsMaster: boolean = false;
-	private heavyArmorIsLegendary: boolean = false;
-	private shieldBonus: number = 0;
-	private shieldHardness: number = 0;
-	private shieldMaxHitPoints: number = 0;
-	private shieldBrokenThreshold: number = 0;
-	private shieldCurrentHitPoints: number = 0;
-	private classDc: number = 0;
-	private classDCKeyAbilityModifier: number = 0;
-	private classDCProficiencyBonus: number = 0;
-	private classDcIsTrained: boolean = false;
-	private classDcIsExpert: boolean = false;
-	private classDcIsMaster: boolean = false;
-	private classDcIsLegendary: boolean = false;
-	private classDCItemBonus: number = 0;
-	private playerCharacter: PlayerCharacter = null;
-	set IsEditing(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.isEditing
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "IsEditing", null);
-			this.isEditing = _p0[0];
-			return _r;
-		})();
-	}
-	get IsEditing(): boolean
-	{
-		return this.isEditing;
-	}
-	set CharacterName(value: string)
-	{
-		this.playerCharacter.Name = value;
-		(()=>
-		{
-			var _p0 = [
-				this.characterName
-			];
-			var _r = super.SetProperty<string>(_p0, value, "CharacterName", null);
-			this.characterName = _p0[0];
-			return _r;
-		})();
-	}
-	get CharacterName(): string
-	{
-		return this.characterName;
-	}
-	get AncestriesList(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.ancestriesList);
-	}
-	set Ancestry(value: string)
-	{
-		this.playerCharacter.SetAncestry(value);
-		(()=>
-		{
-			var _p0 = [
-				this.ancestry
-			];
-			var _r = super.SetProperty<string>(_p0, value, "Ancestry", null);
-			this.ancestry = _p0[0];
-			return _r;
-		})();
-	}
-	get Ancestry(): string
-	{
-		return this.ancestry;
-	}
-	get BackgroundsList(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.backgroundsList);
-	}
-	set Background(value: string)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.background
-			];
-			var _r = super.SetProperty<string>(_p0, value, "Background", null);
-			this.background = _p0[0];
-			return _r;
-		})();
-		this.playerCharacter.SetBackground(value);
-		this.backgroundAbilityChoices = this.playerCharacter.GetBackgroundAbilityChoices();
-	}
-	get Background(): string
-	{
-		return this.background;
-	}
-	set BackgroundAbilityChoices(value: ObservableCollection<string>)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.backgroundAbilityChoices
-			];
-			var _r = super.SetProperty<List<string>>(_p0, Enumerable.ToList<string>(value), "BackgroundAbilityChoices", null);
-			this.backgroundAbilityChoices = _p0[0];
-			return _r;
-		})();
-	}
-	get BackgroundAbilityChoices(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.backgroundAbilityChoices);
-	}
-	set BackgroundAbilityChoice(value: string)
-	{
-		this.playerCharacter.SetBackgroundAbility(value);
-		(()=>
-		{
-			var _p0 = [
-				this.backgroundAbilityChoice
-			];
-			var _r = super.SetProperty<string>(_p0, value, "BackgroundAbilityChoice", null);
-			this.backgroundAbilityChoice = _p0[0];
-			return _r;
-		})();
-	}
-	get BackgroundAbilityChoice(): string
-	{
-		return this.backgroundAbilityChoice;
-	}
-	get ClassList(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(PF2eCoreUtils.GetListOfClasses());
-	}
-	set PcClass(value: string)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.pcClass
-			];
-			var _r = super.SetProperty<string>(_p0, value, "PcClass", null);
-			this.pcClass = _p0[0];
-			return _r;
-		})();
-		this.playerCharacter.SetClass(value);
-	}
-	get PcClass(): string
-	{
-		return this.pcClass;
-	}
-	get SubClassPickerTitle(): string
-	{
-		var flag: boolean = this.playerCharacter.PcClass === null;
-		var result: string;
-		if (flag)
-		{
-			result = "-";
-		}
-		else
-		{
-			result = this.playerCharacter.PcClass.NameOfSubClass;
-		}
-		return result;
-	}
-	get SubClassList(): ObservableCollection<string>
-	{
-		var flag: boolean = this.playerCharacter.PcClass === null;
-		var result: ObservableCollection<string>;
-		if (flag)
-		{
-			result = new ObservableCollection<string>(new List<string>());
-		}
-		else
-		{
-			result = new ObservableCollection<string>(this.playerCharacter.PcClass.SubClasses);
-		}
-		return result;
-	}
-	set SubClass(value: string)
-	{
-		var flag: boolean = !NString.IsNullOrEmpty(value);
-		if (flag)
-		{
-			this.playerCharacter.PcClass.SetSubClass(value);
-		}
-		(()=>
-		{
-			var _p0 = [
-				this.subClass
-			];
-			var _r = super.SetProperty<string>(_p0, value, "SubClass", null);
-			this.subClass = _p0[0];
-			return _r;
-		})();
-	}
-	get SubClass(): string
-	{
-		return this.subClass;
-	}
-	get Heritage(): string
-	{
-		return this.CheckNullString(this.playerCharacter.Heritage.Name);
-	}
-	get Level(): number
-	{
-		return (this.playerCharacter.Level > 0) ? this.playerCharacter.Level : 1;
-	}
-	set PlayerName(value: string)
-	{
-		this.playerCharacter.PlayerName = value;
-		(()=>
-		{
-			var _p0 = [
-				this.playerName
-			];
-			var _r = super.SetProperty<string>(_p0, value, "PlayerName", null);
-			this.playerName = _p0[0];
-			return _r;
-		})();
-	}
-	get PlayerName(): string
-	{
-		return this.playerName;
-	}
-	get Size(): string
-	{
-		return this.CheckNullString(Size[this.playerCharacter.Size]);
-	}
-	set Alignment(value: string)
-	{
-		this.playerCharacter.SetNewAlignment(value);
-	}
-	get Alignment(): string
-	{
-		return this.CheckNullString(Alignment[this.playerCharacter.Alignment]);
-	}
-	Traits: ObservableCollection<Trait> = null;
-	set Deity(value: string)
-	{
-		this.playerCharacter.Deity = value;
-	}
-	get Deity(): string
-	{
-		return this.CheckNullString(this.playerCharacter.Deity);
-	}
-	set HeroPoints(value: number)
-	{
-		this.playerCharacter.HeroPoints = value;
-	}
-	get HeroPoints(): number
-	{
-		return this.playerCharacter.HeroPoints;
-	}
-	set ExperiencePoints(value: number)
-	{
-		this.playerCharacter.ExperiencePoints = value;
-	}
-	get ExperiencePoints(): number
-	{
-		return this.playerCharacter.ExperiencePoints;
-	}
-	get AbilityScoreRange(): List<number>
-	{
-		return PF2eCoreUtils.GetAbilityScoreRange();
-	}
-	set StrengthScore(value: number)
-	{
-		this.playerCharacter.SetAbilityScore("Strength", value);
-		this.strengthModifier = this.playerCharacter.AbilityScores.Strength.Modifier;
-		(()=>
-		{
-			var _p0 = [
-				this.strengthScore
-			];
-			var _r = super.SetProperty<number>(_p0, value, "StrengthScore", null);
-			this.strengthScore = _p0[0];
-			return _r;
-		})();
-	}
-	get StrengthScore(): number
-	{
-		var flag: boolean = this.playerCharacter.AbilityScores === null || this.playerCharacter.AbilityScores.Strength === null;
-		var result: number;
-		if (flag)
-		{
-			result = 10;
-		}
-		else
-		{
-			this.strengthScore = this.playerCharacter.AbilityScores.Strength.Score;
-			result = this.strengthScore;
-		}
-		return result;
-	}
-	private strengthModifier: number = 0;
-	get StrengthModifierString(): string
-	{
-		return this.CreateAbilityModifierString(this.strengthModifier);
-	}
-	set DexterityScore(value: number)
-	{
-		this.playerCharacter.SetAbilityScore("Dexterity", value);
-		this.dexterityModifier = this.playerCharacter.AbilityScores.Dexterity.Modifier;
-		(()=>
-		{
-			var _p0 = [
-				this.dexterityScore
-			];
-			var _r = super.SetProperty<number>(_p0, value, "DexterityScore", null);
-			this.dexterityScore = _p0[0];
-			return _r;
-		})();
-	}
-	get DexterityScore(): number
-	{
-		var flag: boolean = this.playerCharacter.AbilityScores.Dexterity === null;
-		var result: number;
-		if (flag)
-		{
-			result = 10;
-		}
-		else
-		{
-			this.dexterityScore = this.playerCharacter.AbilityScores.Dexterity.Score;
-			result = this.dexterityScore;
-		}
-		return result;
-	}
-	private dexterityModifier: number = 0;
-	get DexterityModifierString(): string
-	{
-		return this.CreateAbilityModifierString(this.dexterityModifier);
-	}
-	set ConstitutionScore(value: number)
-	{
-		this.playerCharacter.SetAbilityScore("Constitution", value);
-		this.constitutionModifier = this.playerCharacter.AbilityScores.Constitution.Modifier;
-		(()=>
-		{
-			var _p0 = [
-				this.constitutionScore
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ConstitutionScore", null);
-			this.constitutionScore = _p0[0];
-			return _r;
-		})();
-	}
-	get ConstitutionScore(): number
-	{
-		var flag: boolean = this.playerCharacter.AbilityScores.Constitution === null;
-		var result: number;
-		if (flag)
-		{
-			result = 10;
-		}
-		else
-		{
-			this.constitutionScore = this.playerCharacter.AbilityScores.Constitution.Score;
-			result = this.constitutionScore;
-		}
-		return result;
-	}
-	private constitutionModifier: number = 0;
-	get ConstitutionModifierString(): string
-	{
-		return this.CreateAbilityModifierString(this.constitutionModifier);
-	}
-	set IntelligenceScore(value: number)
-	{
-		this.playerCharacter.SetAbilityScore("Intelligence", value);
-		this.intelligenceModifier = this.playerCharacter.AbilityScores.Intelligence.Modifier;
-		(()=>
-		{
-			var _p0 = [
-				this.intelligenceScore
-			];
-			var _r = super.SetProperty<number>(_p0, value, "IntelligenceScore", null);
-			this.intelligenceScore = _p0[0];
-			return _r;
-		})();
-	}
-	get IntelligenceScore(): number
-	{
-		var flag: boolean = this.playerCharacter.AbilityScores.Intelligence === null;
-		var result: number;
-		if (flag)
-		{
-			result = 10;
-		}
-		else
-		{
-			this.intelligenceScore = this.playerCharacter.AbilityScores.Intelligence.Score;
-			result = this.intelligenceScore;
-		}
-		return result;
-	}
-	private intelligenceModifier: number = 0;
-	get IntelligenceModifierString(): string
-	{
-		return this.CreateAbilityModifierString(this.intelligenceModifier);
-	}
-	set WisdomScore(value: number)
-	{
-		this.playerCharacter.SetAbilityScore("Wisdom", value);
-		this.wisdomModifier = this.playerCharacter.AbilityScores.Wisdom.Modifier;
-		(()=>
-		{
-			var _p0 = [
-				this.wisdomScore
-			];
-			var _r = super.SetProperty<number>(_p0, value, "WisdomScore", null);
-			this.wisdomScore = _p0[0];
-			return _r;
-		})();
-	}
-	get WisdomScore(): number
-	{
-		var flag: boolean = this.playerCharacter.AbilityScores.Wisdom === null;
-		var result: number;
-		if (flag)
-		{
-			result = 10;
-		}
-		else
-		{
-			this.wisdomScore = this.playerCharacter.AbilityScores.Wisdom.Score;
-			result = this.wisdomScore;
-		}
-		return result;
-	}
-	private wisdomModifier: number = 0;
-	get WisdomModifierString(): string
-	{
-		return this.CreateAbilityModifierString(this.wisdomModifier);
-	}
-	set CharismaScore(value: number)
-	{
-		this.playerCharacter.SetAbilityScore("Charisma", value);
-		this.charismaModifier = this.playerCharacter.AbilityScores.Charisma.Modifier;
-		(()=>
-		{
-			var _p0 = [
-				this.charismaScore
-			];
-			var _r = super.SetProperty<number>(_p0, value, "CharismaScore", null);
-			this.charismaScore = _p0[0];
-			return _r;
-		})();
-	}
-	get CharismaScore(): number
-	{
-		var flag: boolean = this.playerCharacter.AbilityScores.Charisma === null;
-		var result: number;
-		if (flag)
-		{
-			result = 10;
-		}
-		else
-		{
-			this.charismaScore = this.playerCharacter.AbilityScores.Charisma.Score;
-			result = this.charismaScore;
-		}
-		return result;
-	}
-	private charismaModifier: number = 0;
-	get CharismaModifierString(): string
-	{
-		return this.CreateAbilityModifierString(this.charismaModifier);
-	}
-	set ArmorClass(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorclass
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ArmorClass", null);
-			this.armorclass = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClass(): number
-	{
-		return this.armorclass;
-	}
-	set ArmorClassProficiencyAmount(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassProficiencyAmount
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ArmorClassProficiencyAmount", null);
-			this.armorClassProficiencyAmount = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassProficiencyAmount(): number
-	{
-		return this.armorClassProficiencyAmount;
-	}
-	set ArmorClassDexCap(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassDexCap
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ArmorClassDexCap", null);
-			this.armorClassDexCap = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassDexCap(): number
-	{
-		return this.armorClassDexCap;
-	}
-	set ArmorClassIsTrained(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassIsTrained
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ArmorClassIsTrained", null);
-			this.armorClassIsTrained = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassIsTrained(): boolean
-	{
-		return this.armorClassIsTrained;
-	}
-	set ArmorClassIsExpert(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassIsExpert
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ArmorClassIsExpert", null);
-			this.armorClassIsExpert = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassIsExpert(): boolean
-	{
-		return this.armorClassIsExpert;
-	}
-	set ArmorClassIsMaster(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassIsMaster
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ArmorClassIsMaster", null);
-			this.armorClassIsMaster = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassIsMaster(): boolean
-	{
-		return this.armorClassIsMaster;
-	}
-	set ArmorClassIsLegendary(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassIsLegendary
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ArmorClassIsLegendary", null);
-			this.armorClassIsLegendary = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassIsLegendary(): boolean
-	{
-		return this.armorClassIsLegendary;
-	}
-	set ArmorClassItemBonus(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.armorClassItemBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ArmorClassItemBonus", null);
-			this.armorClassItemBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ArmorClassItemBonus(): number
-	{
-		return this.armorClassItemBonus;
-	}
-	set UnarmoredIsTrained(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.unarmoredIsTrained
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "UnarmoredIsTrained", null);
-			this.unarmoredIsTrained = _p0[0];
-			return _r;
-		})();
-	}
-	get UnarmoredIsTrained(): boolean
-	{
-		return this.unarmoredIsTrained;
-	}
-	set UnarmoredIsExpert(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.unarmoredIsExpert
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "UnarmoredIsExpert", null);
-			this.unarmoredIsExpert = _p0[0];
-			return _r;
-		})();
-	}
-	get UnarmoredIsExpert(): boolean
-	{
-		return this.unarmoredIsExpert;
-	}
-	set UnarmoredIsMaster(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.unarmoredIsMaster
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "UnarmoredIsMaster", null);
-			this.unarmoredIsMaster = _p0[0];
-			return _r;
-		})();
-	}
-	get UnarmoredIsMaster(): boolean
-	{
-		return this.unarmoredIsMaster;
-	}
-	set UnarmoredIsLegendary(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.unarmoredIsLegendary
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "UnarmoredIsLegendary", null);
-			this.unarmoredIsLegendary = _p0[0];
-			return _r;
-		})();
-	}
-	get UnarmoredIsLegendary(): boolean
-	{
-		return this.unarmoredIsLegendary;
-	}
-	set LightArmorIsTrained(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.lightArmorIsTrained
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "LightArmorIsTrained", null);
-			this.lightArmorIsTrained = _p0[0];
-			return _r;
-		})();
-	}
-	get LightArmorIsTrained(): boolean
-	{
-		return this.lightArmorIsTrained;
-	}
-	set LightArmorIsExpert(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.lightArmorIsExpert
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "LightArmorIsExpert", null);
-			this.lightArmorIsExpert = _p0[0];
-			return _r;
-		})();
-	}
-	get LightArmorIsExpert(): boolean
-	{
-		return this.lightArmorIsExpert;
-	}
-	set LightArmorIsMaster(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.lightArmorIsMaster
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "LightArmorIsMaster", null);
-			this.lightArmorIsMaster = _p0[0];
-			return _r;
-		})();
-	}
-	get LightArmorIsMaster(): boolean
-	{
-		return this.lightArmorIsMaster;
-	}
-	set LightArmorIsLegendary(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.lightArmorIsLegendary
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "LightArmorIsLegendary", null);
-			this.lightArmorIsLegendary = _p0[0];
-			return _r;
-		})();
-	}
-	get LightArmorIsLegendary(): boolean
-	{
-		return this.lightArmorIsLegendary;
-	}
-	set MediumArmorIsTrained(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.mediumArmorIsTrained
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "MediumArmorIsTrained", null);
-			this.mediumArmorIsTrained = _p0[0];
-			return _r;
-		})();
-	}
-	get MediumArmorIsTrained(): boolean
-	{
-		return this.mediumArmorIsTrained;
-	}
-	set MediumArmorIsExpert(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.mediumArmorIsExpert
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "MediumArmorIsExpert", null);
-			this.mediumArmorIsExpert = _p0[0];
-			return _r;
-		})();
-	}
-	get MediumArmorIsExpert(): boolean
-	{
-		return this.mediumArmorIsExpert;
-	}
-	set MediumArmorIsMaster(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.mediumArmorIsMaster
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "MediumArmorIsMaster", null);
-			this.mediumArmorIsMaster = _p0[0];
-			return _r;
-		})();
-	}
-	get MediumArmorIsMaster(): boolean
-	{
-		return this.mediumArmorIsMaster;
-	}
-	set MediumArmorIsLegendary(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.mediumArmorIsLegendary
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "MediumArmorIsLegendary", null);
-			this.mediumArmorIsLegendary = _p0[0];
-			return _r;
-		})();
-	}
-	get MediumArmorIsLegendary(): boolean
-	{
-		return this.mediumArmorIsLegendary;
-	}
-	set HeavyArmorIsTrained(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.heavyArmorIsTrained
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "HeavyArmorIsTrained", null);
-			this.heavyArmorIsTrained = _p0[0];
-			return _r;
-		})();
-	}
-	get HeavyArmorIsTrained(): boolean
-	{
-		return this.heavyArmorIsTrained;
-	}
-	set HeavyArmorIsExpert(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.heavyArmorIsExpert
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "HeavyArmorIsExpert", null);
-			this.heavyArmorIsExpert = _p0[0];
-			return _r;
-		})();
-	}
-	get HeavyArmorIsExpert(): boolean
-	{
-		return this.heavyArmorIsExpert;
-	}
-	set HeavyArmorIsMaster(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.heavyArmorIsMaster
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "HeavyArmorIsMaster", null);
-			this.heavyArmorIsMaster = _p0[0];
-			return _r;
-		})();
-	}
-	get HeavyArmorIsMaster(): boolean
-	{
-		return this.heavyArmorIsMaster;
-	}
-	set HeavyArmorIsLegendary(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.heavyArmorIsLegendary
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "HeavyArmorIsLegendary", null);
-			this.heavyArmorIsLegendary = _p0[0];
-			return _r;
-		})();
-	}
-	get HeavyArmorIsLegendary(): boolean
-	{
-		return this.heavyArmorIsLegendary;
-	}
-	set ShieldBonus(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.shieldBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ShieldBonus", null);
-			this.shieldBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ShieldBonus(): number
-	{
-		return this.shieldBonus;
-	}
-	set ShieldHardness(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.shieldBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ShieldHardness", null);
-			this.shieldBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ShieldHardness(): number
-	{
-		return this.shieldHardness;
-	}
-	set ShieldMaxHitPoints(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.shieldBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ShieldMaxHitPoints", null);
-			this.shieldBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ShieldMaxHitPoints(): number
-	{
-		return this.shieldMaxHitPoints;
-	}
-	set ShieldBrokenThreshold(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.shieldBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ShieldBrokenThreshold", null);
-			this.shieldBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ShieldBrokenThreshold(): number
-	{
-		return this.shieldBrokenThreshold;
-	}
-	set ShieldCurrentHitPoints(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.shieldBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ShieldCurrentHitPoints", null);
-			this.shieldBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ShieldCurrentHitPoints(): number
-	{
-		return this.shieldCurrentHitPoints;
-	}
-	get FortitudeSave(): number
-	{
-		return this.playerCharacter.FortitudeSave.Amount;
-	}
-	get FortitudeSaveProficiencyBonus(): number
-	{
-		return this.playerCharacter.FortitudeSave.ProficiencyBonus;
-	}
-	get FortitudeItemBonus(): number
-	{
-		return this.playerCharacter.FortitudeSave.ItemBonus;
-	}
-	get FortitudeProficiency(): boolean
-	{
-		return true;
-	}
-	get ReflexSave(): number
-	{
-		return this.playerCharacter.ReflexSave.Amount;
-	}
-	get ReflexSaveProficiencyBonus(): number
-	{
-		return this.playerCharacter.ReflexSave.ProficiencyBonus;
-	}
-	get ReflexItemBonus(): number
-	{
-		return this.playerCharacter.ReflexSave.ItemBonus;
-	}
-	get ReflexProficiency(): boolean
-	{
-		return true;
-	}
-	get WillSave(): number
-	{
-		return this.playerCharacter.WillSave.Amount;
-	}
-	get WillSaveProficiencyBonus(): number
-	{
-		return this.playerCharacter.WillSave.ProficiencyBonus;
-	}
-	get WillItemBonus(): number
-	{
-		return this.playerCharacter.WillSave.ItemBonus;
-	}
-	get WillProficiency(): boolean
-	{
-		return true;
-	}
-	get MaxHitPoints(): number
-	{
-		return this.playerCharacter.MaxHitPoints;
-	}
-	set CurrentHitPoints(value: number)
-	{
-		this.playerCharacter.CurrentHitPoints = value;
-	}
-	get CurrentHitPoints(): number
-	{
-		return this.playerCharacter.CurrentHitPoints;
-	}
-	set TemporaryHitPoints(value: number)
-	{
-		this.playerCharacter.TemporaryHitPoints = value;
-	}
-	get TemporaryHitPoints(): number
-	{
-		return this.playerCharacter.TemporaryHitPoints;
-	}
-	set DyingValue(value: number)
-	{
-		this.playerCharacter.DyingValue = value;
-	}
-	get DyingValue(): number
-	{
-		return this.playerCharacter.DyingValue;
-	}
-	set WoundedValue(value: number)
-	{
-		this.playerCharacter.WoundedValue = value;
-	}
-	get WoundedValue(): number
-	{
-		return this.playerCharacter.WoundedValue;
-	}
-	set Resistances(value: ObservableCollection<string>)
-	{
-		this.playerCharacter.Resistances = value;
-	}
-	get Resistances(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.Resistances);
-	}
-	set Immunities(value: ObservableCollection<string>)
-	{
-		this.playerCharacter.Immunities = value;
-	}
-	get Immunities(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.Immunities);
-	}
-	set Conditions(value: ObservableCollection<string>)
-	{
-		this.playerCharacter.Conditions = value;
-	}
-	get Conditions(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.Conditions);
-	}
-	get Perception(): number
-	{
-		return this.playerCharacter.Perception.Amount;
-	}
-	get PerceptionProficiencyBonus(): number
-	{
-		return this.playerCharacter.Perception.ProficiencyBonus;
-	}
-	get PerceptionProficiency(): boolean
-	{
-		return true;
-	}
-	get PerceptionItemBonus(): number
-	{
-		return this.playerCharacter.Perception.ItemBonus;
-	}
-	get Senses(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.Senses);
-	}
-	set ClassDc(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDc
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ClassDc", null);
-			this.classDc = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDc(): number
-	{
-		return this.classDc;
-	}
-	set ClassDCKeyAbilityModifier(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDCKeyAbilityModifier
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ClassDCKeyAbilityModifier", null);
-			this.classDCKeyAbilityModifier = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDCKeyAbilityModifier(): number
-	{
-		return this.classDCKeyAbilityModifier;
-	}
-	set ClassDCProficiencyBonus(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDCProficiencyBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ClassDCProficiencyBonus", null);
-			this.classDCProficiencyBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDCProficiencyBonus(): number
-	{
-		return this.classDCProficiencyBonus;
-	}
-	set ClassDcIsTrained(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDcIsTrained
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ClassDcIsTrained", null);
-			this.classDcIsTrained = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDcIsTrained(): boolean
-	{
-		return this.classDcIsTrained;
-	}
-	set ClassDcIsExpert(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDcIsExpert
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ClassDcIsExpert", null);
-			this.classDcIsExpert = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDcIsExpert(): boolean
-	{
-		return this.classDcIsExpert;
-	}
-	set ClassDcIsMaster(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDcIsMaster
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ClassDcIsMaster", null);
-			this.classDcIsMaster = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDcIsMaster(): boolean
-	{
-		return this.classDcIsMaster;
-	}
-	set ClassDcIsLegendary(value: boolean)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDcIsLegendary
-			];
-			var _r = super.SetProperty<boolean>(_p0, value, "ClassDcIsLegendary", null);
-			this.classDcIsLegendary = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDcIsLegendary(): boolean
-	{
-		return this.classDcIsLegendary;
-	}
-	set ClassDCItemBonus(value: number)
-	{
-		(()=>
-		{
-			var _p0 = [
-				this.classDCItemBonus
-			];
-			var _r = super.SetProperty<number>(_p0, value, "ClassDCItemBonus", null);
-			this.classDCItemBonus = _p0[0];
-			return _r;
-		})();
-	}
-	get ClassDCItemBonus(): number
-	{
-		return this.classDCItemBonus;
-	}
-	get Speed(): number
-	{
-		return this.playerCharacter.Speed;
-	}
-	get MovementTypes(): string
-	{
-		return this.playerCharacter.MovementTypes;
-	}
-	get MeleeStrikesDetails(): string
-	{
-		return this.playerCharacter.MeleeStrikesDetails;
-	}
-	get RangedStrikesDetails(): string
-	{
-		return this.playerCharacter.RangedStrikesDetails;
-	}
-	get UnarmedProficiency(): boolean
-	{
-		return true;
-	}
-	get SimpleWeaponProficiency(): boolean
-	{
-		return true;
-	}
-	get MartialWeaponProficiency(): boolean
-	{
-		return true;
-	}
-	get OtherWeaponProficiency(): boolean
-	{
-		return true;
-	}
-	get Acrobatics(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Acrobatics);
-	}
-	get Arcana(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Arcana);
-	}
-	get Athletics(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Athletics);
-	}
-	get Crafting(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Crafting);
-	}
-	get Deception(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Deception);
-	}
-	get Diplomacy(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Diplomacy);
-	}
-	get Intimidation(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Intimidation);
-	}
-	get Lore1(): SkillViewModel
-	{
-		return new SkillViewModel(Enumerable.First<Skill>(this.playerCharacter.Lore));
-	}
-	get Lore2(): SkillViewModel
-	{
-		return new SkillViewModel(Enumerable.Last<Skill>(this.playerCharacter.Lore));
-	}
-	get Medicine(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Medicine);
-	}
-	get Nature(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Nature);
-	}
-	get Occultism(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Occultism);
-	}
-	get Performance(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Performance);
-	}
-	get Religion(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Religion);
-	}
-	get Society(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Society);
-	}
-	get Stealth(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Stealth);
-	}
-	get Survival(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Survival);
-	}
-	get Thievery(): SkillViewModel
-	{
-		return new SkillViewModel(this.playerCharacter.Thievery);
-	}
-	set Languages(value: ObservableCollection<string>)
-	{
-		this.playerCharacter.Languages = value;
-	}
-	get Languages(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.Languages);
-	}
-	get AncestryFeatsAndAbilities(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.AncestryFeatsAndAbilities);
-	}
-	get SkillFeats(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.SkillFeats);
-	}
-	get GeneralFeats(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.GeneralFeats);
-	}
-	get ClassFeatsAndAbilities(): ObservableCollection<IClassFeat>
-	{
-		return new ObservableCollection<IClassFeat>(this.playerCharacter.ClassFeatsAndAbilities);
-	}
-	get BonusFeats(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.BonusFeats);
-	}
-	get WornItems(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.WornItems);
-	}
-	get ReadiedItems(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.ReadiedItems);
-	}
-	get OtherItems(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.OtherItems);
-	}
-	get TotalBulk(): number
-	{
-		return this.playerCharacter.GetTotalBulk();
-	}
-	get EncumberedBulk(): number
-	{
-		return this.playerCharacter.GetEncumbered();
-	}
-	get MaxBulk(): number
-	{
-		return this.playerCharacter.GetMaxBulk();
-	}
-	get Copper(): number
-	{
-		return this.playerCharacter.Coins.Copper;
-	}
-	get Silver(): number
-	{
-		return this.playerCharacter.Coins.Silver;
-	}
-	get Gold(): number
-	{
-		return this.playerCharacter.Coins.Gold;
-	}
-	get Platinum(): number
-	{
-		return this.playerCharacter.Coins.Platinum;
-	}
-	get SpellAttackRoll(): number
-	{
-		return this.playerCharacter.GetSpellAttackRoll();
-	}
-	get SpellKeyAbilityModifier(): number
-	{
-		return this.playerCharacter.GetSpellKeyAbilityModifier();
-	}
-	get SpellAttackProficiency(): boolean
-	{
-		return true;
-	}
-	get SpellDC(): number
-	{
-		return this.playerCharacter.GetSpellDC();
-	}
-	get SpellDCModifier(): number
-	{
-		return this.playerCharacter.GetSpellDCModifier();
-	}
-	get SpellDCProficiency(): boolean
-	{
-		return true;
-	}
-	get CantripLevel(): number
-	{
-		return this.playerCharacter.GetCantripLevel();
-	}
-	get SpellSlotsPerDay(): number[]
-	{
-		return this.playerCharacter.GetDailySpellSlot();
-	}
-	get Cantrips(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.GetCantrip());
-	}
-	get InnateSpells(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.GetInnateSpells());
-	}
-	get Spells(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.GetSpells());
-	}
-	get FocusSpells(): ObservableCollection<string>
-	{
-		return new ObservableCollection<string>(this.playerCharacter.GetFocusSpells());
-	}
-	private CreateAbilityModifierString(modifier: number): string
-	{
-		var flag: boolean = modifier <= 0;
-		var result: string;
-		if (flag)
-		{
-			result = NString.Format("{0}", modifier);
-		}
-		else
-		{
-			result = NString.Format("+{0}", modifier);
-		}
-		return result;
-	}
-	constructor();
-	constructor(PC: PlayerCharacter);
-	constructor(PC?: PlayerCharacter)
-	{
-		super();
-		if (arguments.length === 0)
-		{
-			this.constructor_0();
-			return;
-		}
-		this.constructor_1(PC);
-	}
-	private constructor_0(): void
-	{
-		this.Title = "New Adventurer";
-		var playerCharacter: PlayerCharacter = new PlayerCharacter();
-		this.playerCharacter = playerCharacter;
-		this.IsEditing = true;
-	}
-	private constructor_1(PC: PlayerCharacter): void
-	{
-		this.Title = "Character Sheet";
-		this.playerCharacter = (PC || new PlayerCharacter());
-		this.IsEditing = true;
-	}
-	private CheckNullString(value: string): string
-	{
-		return NString.IsNullOrEmpty(value) ? "" : value;
-	}
-}
-class ProficiencyViewModel extends NObject
+class ProficiencyViewModel extends Object
 {
 	get IsUntrained(): boolean
 	{
@@ -1630,7 +79,7 @@ class ProficiencyViewModel extends NObject
 		this._IsLegendary_k__BackingField = false;
 	}
 }
-class SkillViewModel extends NObject
+class SkillViewModel extends Object
 {
 	Proficiency: ProficiencyViewModel = null;
 	Modifier: number = 0;
@@ -1640,10 +89,10 @@ class SkillViewModel extends NObject
 		super();
 		this.Proficiency = new ProficiencyViewModel(skill.Proficiency);
 		this.Modifier = skill.ModifierBonus;
-		this.Descriptor = (NString.IsNullOrWhiteSpace(skill.Descriptor) ? "" : skill.Descriptor);
+		this.Descriptor = (String.IsNullOrWhiteSpace(skill.Descriptor) ? "" : skill.Descriptor);
 	}
 }
-class PF2eCoreUtils extends NObject
+class PF2eCoreUtils extends Object
 {
 	static GetListOfAncestries(): List<string>
 	{
@@ -1681,7 +130,7 @@ class PF2eCoreUtils extends NObject
 		super();
 	}
 }
-class PF2eCoreUtils___c extends NObject
+class PF2eCoreUtils___c extends Object
 {
 	static __9: PF2eCoreUtils___c = new PF2eCoreUtils___c();
 	static __9__5_1: (arg: Type) => string = null;
@@ -1694,7 +143,7 @@ class PF2eCoreUtils___c extends NObject
 		super();
 	}
 }
-class Bonus extends NObject
+class Bonus extends Object
 {
 	get Type(): string
 	{
@@ -1742,7 +191,7 @@ interface IPfObject
 {
 	Level: number;
 }
-class CheckOutcome extends NObject
+class CheckOutcome extends Object
 {
 	private difficultyClass: number = 0;
 	private checkTotal: number = 0;
@@ -1844,7 +293,7 @@ class CheckOutcome extends NObject
 		return this.isCritical ? ("Critical " + text) : text;
 	}
 }
-class Penalty extends NObject
+class Penalty extends Object
 {
 	Type: string = null;
 	Amount: number = 0;
@@ -2110,7 +559,7 @@ enum Trait
 	Xulgath,
 	Zombie
 }
-class Armor extends NObject
+class Armor extends Object
 {
 	Name: string = null;
 	Category: ArmorCategory = 0;
@@ -2143,7 +592,7 @@ enum ArmorCategory
 	Medium,
 	Heavy
 }
-class Bulk extends NObject
+class Bulk extends Object
 {
 	private BulkAmount: number = 0;
 	constructor(value: number = 0.0)
@@ -2151,7 +600,7 @@ class Bulk extends NObject
 		super();
 	}
 }
-class Coins extends NObject
+class Coins extends Object
 {
 	Copper: number = 0;
 	Silver: number = 0;
@@ -2172,7 +621,7 @@ interface IEquipment
 	Price: Coins;
 	Bulk: Bulk;
 }
-class ActionCost extends NObject
+class ActionCost extends Object
 {
 	private cost: number = 0;
 	set Cost(value: number)
@@ -2201,7 +650,7 @@ class ActionCost extends NObject
 interface IWeapon
 {
 }
-class MeleeAttack extends NObject implements ICheck
+class MeleeAttack extends Object implements ICheck
 {
 	private Traits: List<Trait> = null;
 	Bonuses: Bonus[] = null;
@@ -2222,7 +671,7 @@ enum Ability
 	Wisdom,
 	Charisma
 }
-class AbilityScore extends NObject
+class AbilityScore extends Object
 {
 	Score: number = 0;
 	Ability: Ability = 0;
@@ -2278,7 +727,7 @@ enum Alignment
 	NE,
 	CE
 }
-class ProficiencyBasedNumber extends NObject
+class ProficiencyBasedNumber extends Object
 {
 	get Amount(): number
 	{
@@ -2439,7 +888,7 @@ enum Size
 	Huge,
 	Gargantuan
 }
-class AbilityScoreArray extends NObject
+class AbilityScoreArray extends Object
 {
 	private propertiesOfThisClass: PropertyInfo[] = null;
 	Strength: AbilityScore = null;
@@ -2596,7 +1045,7 @@ class AbilityScoreArray extends NObject
 		}
 	}
 }
-class AbilityScoreBoostFlaw extends NObject
+class AbilityScoreBoostFlaw extends Object
 {
 	IsBoost: boolean = false;
 	Ability: string = null;
@@ -2607,7 +1056,7 @@ class AbilityScoreBoostFlaw extends NObject
 		this.Ability = Ability[ability];
 	}
 }
-class Ancestries extends NObject
+class Ancestries extends Object
 {
 	static Dwarf: Dwarf = null;
 	static Elf: Elf = null;
@@ -2636,7 +1085,7 @@ interface IAncestry
 	Traits: ICollection<Trait>;
 	SpecialAbilities: ICollection<string>;
 }
-class Dwarf extends NObject implements IAncestry, IAoNItem
+class Dwarf extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -2693,7 +1142,7 @@ class Dwarf extends NObject implements IAncestry, IAoNItem
 		super();
 	}
 }
-class Elf extends NObject implements IAncestry, IAoNItem
+class Elf extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -2750,7 +1199,7 @@ class Elf extends NObject implements IAncestry, IAoNItem
 		super();
 	}
 }
-class Gnome extends NObject implements IAncestry, IAoNItem
+class Gnome extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -2807,7 +1256,7 @@ class Gnome extends NObject implements IAncestry, IAoNItem
 		super();
 	}
 }
-class Goblin extends NObject implements IAncestry, IAoNItem
+class Goblin extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -2868,7 +1317,7 @@ interface IHeritage
 {
 	Name: string;
 }
-class HalfElf extends NObject implements IAncestry, IHeritage, IAoNItem
+class HalfElf extends Object implements IAncestry, IHeritage, IAoNItem
 {
 	get Name(): string
 	{
@@ -2923,7 +1372,7 @@ class HalfElf extends NObject implements IAncestry, IHeritage, IAoNItem
 		super();
 	}
 }
-class Halfling extends NObject implements IAncestry, IAoNItem
+class Halfling extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -2980,7 +1429,7 @@ class Halfling extends NObject implements IAncestry, IAoNItem
 		super();
 	}
 }
-class HalfOrc extends NObject implements IAncestry, IHeritage, IAoNItem
+class HalfOrc extends Object implements IAncestry, IHeritage, IAoNItem
 {
 	get Name(): string
 	{
@@ -3035,7 +1484,7 @@ class HalfOrc extends NObject implements IAncestry, IHeritage, IAoNItem
 		super();
 	}
 }
-class Hobgoblin extends NObject implements IAncestry, IAoNItem
+class Hobgoblin extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -3092,7 +1541,7 @@ class Hobgoblin extends NObject implements IAncestry, IAoNItem
 		super();
 	}
 }
-class Human extends NObject implements IAncestry, IAoNItem
+class Human extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -3145,7 +1594,7 @@ class Human extends NObject implements IAncestry, IAoNItem
 		super();
 	}
 }
-class Leshy extends NObject implements IAncestry, IAoNItem
+class Leshy extends Object implements IAncestry, IAoNItem
 {
 	get Name(): string
 	{
@@ -3211,7 +1660,7 @@ interface IBackground
 	TrainedSkill: string;
 	TrainedLoreSkill: string;
 }
-class Emancipated extends NObject implements IBackground
+class Emancipated extends Object implements IBackground
 {
 	get Name(): string
 	{
@@ -3257,7 +1706,7 @@ class Emancipated extends NObject implements IBackground
 		super();
 	}
 }
-class Scholar extends NObject implements IBackground
+class Scholar extends Object implements IBackground
 {
 	get Name(): string
 	{
@@ -3291,7 +1740,7 @@ class Scholar extends NObject implements IBackground
 		super();
 	}
 }
-class CharacterBackgrounds extends NObject
+class CharacterBackgrounds extends Object
 {
 	static Emancipated: Emancipated = new Emancipated();
 	static Scholar: Scholar = new Scholar();
@@ -3319,7 +1768,7 @@ interface IPcClass
 	GetKeyAbilityScoreModifier(): number;
 	SetSubClass(value: string): void;
 }
-class Rogue extends NObject implements IPcClass
+class Rogue extends Object implements IPcClass
 {
 	get Name(): string
 	{
@@ -3384,7 +1833,7 @@ class Rogue extends NObject implements IPcClass
 	}
 	SetSubClass(value: string): void
 	{
-		var flag: boolean = NString.IsNullOrEmpty(value);
+		var flag: boolean = String.IsNullOrEmpty(value);
 		if (!flag)
 		{
 			this.SubClass = value;
@@ -3395,7 +1844,7 @@ class Rogue extends NObject implements IPcClass
 		super();
 	}
 }
-class PcClasses extends NObject
+class PcClasses extends Object
 {
 	static Rogue: Rogue = new Rogue();
 	constructor()
@@ -3412,7 +1861,7 @@ interface IGeneralFeat
 interface ISkillFeat
 {
 }
-class AnvilDwarf extends NObject implements IHeritage
+class AnvilDwarf extends Object implements IHeritage
 {
 	get Name(): string
 	{
@@ -3423,7 +1872,7 @@ class AnvilDwarf extends NObject implements IHeritage
 		super();
 	}
 }
-class Heritages extends NObject
+class Heritages extends Object
 {
 	static AnvilDwarf: AnvilDwarf = new AnvilDwarf();
 	constructor()
@@ -3431,7 +1880,7 @@ class Heritages extends NObject
 		super();
 	}
 }
-class PlayerCharacter extends NObject
+class PlayerCharacter extends Object
 {
 	Id: Guid = null;
 	Name: string = null;
@@ -3518,7 +1967,7 @@ class PlayerCharacter extends NObject
 	}
 	SetAncestry(value: string): void
 	{
-		var flag: boolean = NString.IsNullOrEmpty(value);
+		var flag: boolean = String.IsNullOrEmpty(value);
 		if (!flag)
 		{
 			try
@@ -3531,7 +1980,7 @@ class PlayerCharacter extends NObject
 			{
 				if (ex instanceof Exception)
 				{
-					throw new Exception(NString.Concat([
+					throw new Exception(String.Concat([
 						"Check the Ancestries.cs file to see if ", value, " has a property there. Could not assign ", value, " as an Ancestry. Invalid Ancestry name or String.  ", ex.Message
 					]));
 				}
@@ -3542,7 +1991,7 @@ class PlayerCharacter extends NObject
 	}
 	SetBackground(value: string): void
 	{
-		var flag: boolean = NString.IsNullOrEmpty(value);
+		var flag: boolean = String.IsNullOrEmpty(value);
 		if (!flag)
 		{
 			try
@@ -3556,7 +2005,7 @@ class PlayerCharacter extends NObject
 			{
 				if (ex instanceof Exception)
 				{
-					throw new Exception(NString.Concat([
+					throw new Exception(String.Concat([
 						"Check to make sure ", value, " exists in the CharacterBackgrounds.cs file. Could not assign ", value, " as an Background. Invalid Background name or String. ", ex.Message
 					]));
 				}
@@ -3567,7 +2016,7 @@ class PlayerCharacter extends NObject
 	}
 	SetBackgroundAbility(value: string): void
 	{
-		var flag: boolean = NString.IsNullOrEmpty(value);
+		var flag: boolean = String.IsNullOrEmpty(value);
 		if (!flag)
 		{
 			var ability: Ability = <Ability>Enum.Parse(new Type("Number"), value);
@@ -3611,7 +2060,7 @@ class PlayerCharacter extends NObject
 			{
 				if (ex instanceof Exception)
 				{
-					throw new Exception(NString.Concat([
+					throw new Exception(String.Concat([
 						"Check to make sure ", value, " exists in the Heritages.cs file. Could not assign ", value, " as an Heritage. Invalid Heritage name or String. ", ex.Message
 					]));
 				}
@@ -3626,7 +2075,7 @@ class PlayerCharacter extends NObject
 	}
 	SetClass(value: string): void
 	{
-		var flag: boolean = NString.IsNullOrEmpty(value);
+		var flag: boolean = String.IsNullOrEmpty(value);
 		if (!flag)
 		{
 			try
@@ -3639,7 +2088,7 @@ class PlayerCharacter extends NObject
 			{
 				if (ex instanceof Exception)
 				{
-					throw new Exception(NString.Concat([
+					throw new Exception(String.Concat([
 						" Make sure ", value, " has an entry in the PcClasses.cs file. Could not assign ", value, " as an PcClass. Invalid PcClass name or String. ", ex.Message
 					]));
 				}
@@ -3655,7 +2104,7 @@ class PlayerCharacter extends NObject
 		{
 			this.AbilityScores = new AbilityScoreArray(new List<AbilityScoreBoostFlaw>());
 		}
-		var flag2: boolean = NString.IsNullOrEmpty(abilityName);
+		var flag2: boolean = String.IsNullOrEmpty(abilityName);
 		if (!flag2)
 		{
 			this.AbilityScores.SetAbilityScore(score, Enum.Parse<Ability>(abilityName));
@@ -3730,7 +2179,7 @@ class PlayerCharacter extends NObject
 		throw new NotImplementedException();
 	}
 }
-class PlayerCharacter___c extends NObject
+class PlayerCharacter___c extends Object
 {
 	static __9: PlayerCharacter___c = new PlayerCharacter___c();
 	static __9__24_0: (arg: AbilityScoreBoostFlaw) => string = null;
