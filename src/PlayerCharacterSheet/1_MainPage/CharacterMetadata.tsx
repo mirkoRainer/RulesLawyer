@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
 interface Props {}
 
 interface State {}
 
 const styles = StyleSheet.create({
-    app: {
+    container: {
         flex: 1,
-        paddingTop: 10,
-        marginTop: 10,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderColor: 'black',
+        backgroundColor: 'grey',
     },
 });
 
@@ -23,6 +18,10 @@ export default class CharacterMetadata extends Component<Props, State> {
     }
 
     render() {
-        return <View>Character Metadata</View>;
+        return (
+            <View style={styles.container}>
+                <Text>Character Metadata</Text>
+            </View>
+        );
     }
 }
