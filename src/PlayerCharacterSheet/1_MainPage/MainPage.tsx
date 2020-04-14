@@ -16,15 +16,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         width: width,
     },
-    text: {
-        flex: 1,
-        width: 100,
-        backgroundColor: 'blue',
-    },
-    metadata: {
-        flex: 1,
-        backgroundColor: 'grey',
-    },
 });
 
 export default class MainPage extends Component<Props, State> {
@@ -35,7 +26,6 @@ export default class MainPage extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Main Page </Text>
                 <CharacterMetadata />
             </View>
         );
