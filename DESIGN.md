@@ -8,15 +8,15 @@ This designd subsequent code architecture document an was inspired by [Thinking 
     -   CharacterMetadata
         -   CharacterName
         -   PlayerName
-        -   ExperiencePoints
         -   AncestryAndHeritage
         -   Background
         -   Class
+        -   Level
+        -   ExperiencePoints
         -   Size
         -   Alignment
         -   Traits
         -   Deity
-        -   Level
         -   HeroPoints
     -   AbilityScores
         -   AbilityModifier
