@@ -1,4 +1,8 @@
-# CharacterSheet
+# Design
+
+This designd subsequent code architecture document an was inspired by [Thinking in React](https://reactjs.org/docs/thinking-in-react.html) focusing on the [Pathfinder](https://paizo.s3-us-west-2.amazonaws.com/PZO2101-CharacterSheet-Color.pdf) as the mock-up.
+
+## CharacterSheet
 
 -   MainPage
     -   CharacterMetadata
