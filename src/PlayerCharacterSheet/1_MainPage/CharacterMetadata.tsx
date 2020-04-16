@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    rowContainer: {
+        flexDirection: 'row',
+    },
     header: {
         alignContent: 'center',
         alignSelf: 'center',
@@ -27,9 +30,7 @@ const styles = StyleSheet.create({
 });
 
 export default class CharacterMetadata extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-    }
+    public static defaultProps = {};
 
     render() {
         return (
@@ -37,8 +38,10 @@ export default class CharacterMetadata extends Component<Props, State> {
                 <Text h3 style={styles.header}>
                     Character Metadata
                 </Text>
-                <CharacterName />
-                <PlayerName />
+                <View style={styles.rowContainer}>
+                    <CharacterName />
+                    <PlayerName />
+                </View>
                 <AncestryAndHeritage />
                 <Background />
                 <Class />

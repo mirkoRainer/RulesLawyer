@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-interface Props {}
+interface Props {
+    playerName: string;
+}
 
 interface State {}
 
@@ -10,23 +12,23 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignContent: 'center',
+        alignSelf: 'stretch',
     },
     text: {
-        flex: 1,
-        width: 100,
         backgroundColor: 'green',
     },
 });
 
 export default class PlayerName extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-    }
+    public static defaultProps = {
+        playerName: 'Mirko',
+    };
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> PlayerName </Text>
+                <Text style={styles.text}> PlayerName: {this.props.playerName} </Text>
             </View>
         );
     }

@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignContent: 'center',
+        alignSelf: 'stretch',
     },
     text: {
-        flex: 1,
-        width: 100,
         backgroundColor: 'green',
     },
 });

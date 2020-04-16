@@ -19,9 +19,7 @@ const styles = StyleSheet.create({
 });
 
 export default class SpellsPage extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-    }
+    public static defaultProps = {};
 
     render() {
         return (
