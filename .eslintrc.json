@@ -7,8 +7,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "prettier/react"
+        "plugin:@typescript-eslint/eslint-recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -27,6 +26,8 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         "indent": [
             "error",
             4

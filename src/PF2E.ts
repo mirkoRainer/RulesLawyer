@@ -1,83 +1,83 @@
 ///<reference path='mscorlib.ts'/>
 class ProficiencyViewModel extends Object
 {
-	get IsUntrained(): boolean
-	{
-		return this._IsUntrained_k__BackingField;
-	}
-	get IsTrained(): boolean
-	{
-		return this._IsTrained_k__BackingField;
-	}
-	get IsExpert(): boolean
-	{
-		return this._IsExpert_k__BackingField;
-	}
-	get IsMaster(): boolean
-	{
-		return this._IsMaster_k__BackingField;
-	}
-	get IsLegendary(): boolean
-	{
-		return this._IsLegendary_k__BackingField;
-	}
-	constructor(ProficiencyLevel: Proficiency);
-	constructor();
-	constructor(ProficiencyLevel?: Proficiency)
-	{
-		if (arguments.length === 1 && (ProficiencyLevel === null || ProficiencyLevel.constructor === Number))
-		{
-			super();
-			this.constructor_0(ProficiencyLevel);
-			return;
-		}
-		super();
-		this.constructor_1();
-	}
-	private constructor_0(ProficiencyLevel: Proficiency): void
-	{
-		var flag: boolean = ProficiencyLevel > Proficiency.Untrained;
-		if (flag)
-		{
-			this._IsUntrained_k__BackingField = false;
-			var flag2: boolean = ProficiencyLevel >= Proficiency.Trained;
-			if (flag2)
-			{
-				this._IsTrained_k__BackingField = true;
-				var flag3: boolean = ProficiencyLevel >= Proficiency.Expert;
-				if (flag3)
-				{
-					this._IsExpert_k__BackingField = true;
-					var flag4: boolean = ProficiencyLevel >= Proficiency.Master;
-					if (flag4)
-					{
-						this._IsMaster_k__BackingField = true;
-						var flag5: boolean = ProficiencyLevel >= Proficiency.Legendary;
-						if (flag5)
-						{
-							this._IsLegendary_k__BackingField = true;
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			this._IsUntrained_k__BackingField = true;
-			this._IsTrained_k__BackingField = false;
-			this._IsExpert_k__BackingField = false;
-			this._IsMaster_k__BackingField = false;
-			this._IsLegendary_k__BackingField = false;
-		}
-	}
-	private constructor_1(): void
-	{
-		this._IsUntrained_k__BackingField = true;
-		this._IsTrained_k__BackingField = false;
-		this._IsExpert_k__BackingField = false;
-		this._IsMaster_k__BackingField = false;
-		this._IsLegendary_k__BackingField = false;
-	}
+    get IsUntrained(): boolean
+    {
+        return this._IsUntrained_k__BackingField;
+    }
+    get IsTrained(): boolean
+    {
+        return this._IsTrained_k__BackingField;
+    }
+    get IsExpert(): boolean
+    {
+        return this._IsExpert_k__BackingField;
+    }
+    get IsMaster(): boolean
+    {
+        return this._IsMaster_k__BackingField;
+    }
+    get IsLegendary(): boolean
+    {
+        return this._IsLegendary_k__BackingField;
+    }
+    constructor(ProficiencyLevel: Proficiency);
+    constructor();
+    constructor(ProficiencyLevel?: Proficiency)
+    {
+        if (arguments.length === 1 && (ProficiencyLevel === null || ProficiencyLevel.constructor === Number))
+        {
+            super();
+            this.constructor_0(ProficiencyLevel);
+            return;
+        }
+        super();
+        this.constructor_1();
+    }
+    private constructor_0(ProficiencyLevel: Proficiency): void
+    {
+        var flag: boolean = ProficiencyLevel > Proficiency.Untrained;
+        if (flag)
+        {
+            this._IsUntrained_k__BackingField = false;
+            var flag2: boolean = ProficiencyLevel >= Proficiency.Trained;
+            if (flag2)
+            {
+                this._IsTrained_k__BackingField = true;
+                var flag3: boolean = ProficiencyLevel >= Proficiency.Expert;
+                if (flag3)
+                {
+                    this._IsExpert_k__BackingField = true;
+                    var flag4: boolean = ProficiencyLevel >= Proficiency.Master;
+                    if (flag4)
+                    {
+                        this._IsMaster_k__BackingField = true;
+                        var flag5: boolean = ProficiencyLevel >= Proficiency.Legendary;
+                        if (flag5)
+                        {
+                            this._IsLegendary_k__BackingField = true;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            this._IsUntrained_k__BackingField = true;
+            this._IsTrained_k__BackingField = false;
+            this._IsExpert_k__BackingField = false;
+            this._IsMaster_k__BackingField = false;
+            this._IsLegendary_k__BackingField = false;
+        }
+    }
+    private constructor_1(): void
+    {
+        this._IsUntrained_k__BackingField = true;
+        this._IsTrained_k__BackingField = false;
+        this._IsExpert_k__BackingField = false;
+        this._IsMaster_k__BackingField = false;
+        this._IsLegendary_k__BackingField = false;
+    }
 }
 class SkillViewModel extends Object
 {
@@ -86,49 +86,49 @@ class SkillViewModel extends Object
 	Descriptor: string = null;
 	constructor(skill: Skill)
 	{
-		super();
-		this.Proficiency = new ProficiencyViewModel(skill.Proficiency);
-		this.Modifier = skill.ModifierBonus;
-		this.Descriptor = (String.IsNullOrWhiteSpace(skill.Descriptor) ? "" : skill.Descriptor);
+	    super();
+	    this.Proficiency = new ProficiencyViewModel(skill.Proficiency);
+	    this.Modifier = skill.ModifierBonus;
+	    this.Descriptor = (String.IsNullOrWhiteSpace(skill.Descriptor) ? '' : skill.Descriptor);
 	}
 }
 class PF2eCoreUtils extends Object
 {
-	static GetListOfAncestries(): List<string>
-	{
-		return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type("IAncestry"));
-	}
-	static GetListOfBackgrounds(): List<string>
-	{
-		return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type("IBackground"));
-	}
-	static GetListOfClasses(): List<string>
-	{
-		return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type("IPcClass"));
-	}
-	static GetListOfHeritages(): List<string>
-	{
-		return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type("IHeritage"));
-	}
-	static GetAbilityScoreRange(): List<number>
-	{
-		return Enumerable.ToList<number>(Enumerable.Range(1, 40));
-	}
-	static GetListOfNamesOfClassesThatImplement(interfaceName: Type): List<string>
-	{
-		var arg_48_0: IEnumerable<Type> = Enumerable.Where<Type>(NArray.ToEnumerable(Assembly.GetExecutingAssembly().GetTypes()), (t: Type)=>{return Enumerable.Contains<Type>(NArray.ToEnumerable(t.GetInterfaces()), interfaceName);});
-		var arg_48_1: (arg: Type) => string;
-		if ((arg_48_1 = PF2eCoreUtils___c.__9__5_1) === null)
-		{
-			arg_48_1 = (PF2eCoreUtils___c.__9__5_1 = PF2eCoreUtils___c.__9._GetListOfNamesOfClassesThatImplement_b__5_1);
-		}
-		var source: IEnumerable<string> = Enumerable.Select<Type, string>(arg_48_0, arg_48_1);
-		return Enumerable.ToList<string>(source);
-	}
-	constructor()
-	{
-		super();
-	}
+    static GetListOfAncestries(): List<string>
+    {
+        return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type('IAncestry'));
+    }
+    static GetListOfBackgrounds(): List<string>
+    {
+        return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type('IBackground'));
+    }
+    static GetListOfClasses(): List<string>
+    {
+        return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type('IPcClass'));
+    }
+    static GetListOfHeritages(): List<string>
+    {
+        return PF2eCoreUtils.GetListOfNamesOfClassesThatImplement(new Type('IHeritage'));
+    }
+    static GetAbilityScoreRange(): List<number>
+    {
+        return Enumerable.ToList<number>(Enumerable.Range(1, 40));
+    }
+    static GetListOfNamesOfClassesThatImplement(interfaceName: Type): List<string>
+    {
+        var arg_48_0: IEnumerable<Type> = Enumerable.Where<Type>(NArray.ToEnumerable(Assembly.GetExecutingAssembly().GetTypes()), (t: Type)=>{return Enumerable.Contains<Type>(NArray.ToEnumerable(t.GetInterfaces()), interfaceName);});
+        var arg_48_1: (arg: Type) => string;
+        if ((arg_48_1 = PF2eCoreUtils___c.__9__5_1) === null)
+        {
+            arg_48_1 = (PF2eCoreUtils___c.__9__5_1 = PF2eCoreUtils___c.__9._GetListOfNamesOfClassesThatImplement_b__5_1);
+        }
+        var source: IEnumerable<string> = Enumerable.Select<Type, string>(arg_48_0, arg_48_1);
+        return Enumerable.ToList<string>(source);
+    }
+    constructor()
+    {
+        super();
+    }
 }
 class PF2eCoreUtils___c extends Object
 {
@@ -136,27 +136,27 @@ class PF2eCoreUtils___c extends Object
 	static __9__5_1: (arg: Type) => string = null;
 	_GetListOfNamesOfClassesThatImplement_b__5_1(t: Type): string
 	{
-		return t.Name;
+	    return t.Name;
 	}
 	constructor()
 	{
-		super();
+	    super();
 	}
 }
 class Bonus extends Object
 {
-	get Type(): string
-	{
-		return this._Type_k__BackingField;
-	}
-	get Amount(): number
-	{
-		return this._Amount_k__BackingField;
-	}
-	constructor()
-	{
-		super();
-	}
+    get Type(): string
+    {
+        return this._Type_k__BackingField;
+    }
+    get Amount(): number
+    {
+        return this._Amount_k__BackingField;
+    }
+    constructor()
+    {
+        super();
+    }
 }
 enum Bonustype
 {
@@ -201,96 +201,96 @@ class CheckOutcome extends Object
 	private criticalThreshold: number = 0;
 	constructor(difficultyClass: number, checkTotal: number, dieRoll: number, criticalThreshold: number = 10)
 	{
-		super();
-		this.checkTotal = checkTotal;
-		this.difficultyClass = difficultyClass;
-		this.criticalThreshold = criticalThreshold;
-		this.numberOnDie = dieRoll;
-		this.isCritical = false;
-		this.isSuccess = false;
-		this.DetermineOutcome();
+	    super();
+	    this.checkTotal = checkTotal;
+	    this.difficultyClass = difficultyClass;
+	    this.criticalThreshold = criticalThreshold;
+	    this.numberOnDie = dieRoll;
+	    this.isCritical = false;
+	    this.isSuccess = false;
+	    this.DetermineOutcome();
 	}
 	private DetermineOutcome(): void
 	{
-		this.isSuccess = (this.checkTotal >= this.difficultyClass);
-		this.DetermineCritical();
+	    this.isSuccess = (this.checkTotal >= this.difficultyClass);
+	    this.DetermineCritical();
 	}
 	private DetermineCritical(): void
 	{
-		var num: number = this.isSuccess ? (this.checkTotal - this.difficultyClass) : (this.difficultyClass - this.checkTotal);
-		this.isCritical = (num >= this.criticalThreshold);
-		this.AccountFor20or1onDie();
+	    var num: number = this.isSuccess ? (this.checkTotal - this.difficultyClass) : (this.difficultyClass - this.checkTotal);
+	    this.isCritical = (num >= this.criticalThreshold);
+	    this.AccountFor20or1onDie();
 	}
 	private AccountFor20or1onDie(): void
 	{
-		var flag: boolean = this.numberOnDie === 1;
-		if (flag)
-		{
-			this.DowngradeResult();
-		}
-		var flag2: boolean = this.numberOnDie === 20;
-		if (flag2)
-		{
-			this.UpgradeResult();
-		}
+	    var flag: boolean = this.numberOnDie === 1;
+	    if (flag)
+	    {
+	        this.DowngradeResult();
+	    }
+	    var flag2: boolean = this.numberOnDie === 20;
+	    if (flag2)
+	    {
+	        this.UpgradeResult();
+	    }
 	}
 	private UpgradeResult(): void
 	{
-		var flag: boolean = this.isSuccess && this.isCritical;
-		if (!flag)
-		{
-			var flag2: boolean = this.isSuccess && !this.isCritical;
-			if (flag2)
-			{
-				this.isCritical = true;
-			}
-			var flag3: boolean = !this.isSuccess && !this.isCritical;
-			if (flag3)
-			{
-				this.isSuccess = true;
-			}
-			var flag4: boolean = !this.isSuccess && this.isCritical;
-			if (flag4)
-			{
-				this.isCritical = false;
-			}
-		}
+	    var flag: boolean = this.isSuccess && this.isCritical;
+	    if (!flag)
+	    {
+	        var flag2: boolean = this.isSuccess && !this.isCritical;
+	        if (flag2)
+	        {
+	            this.isCritical = true;
+	        }
+	        var flag3: boolean = !this.isSuccess && !this.isCritical;
+	        if (flag3)
+	        {
+	            this.isSuccess = true;
+	        }
+	        var flag4: boolean = !this.isSuccess && this.isCritical;
+	        if (flag4)
+	        {
+	            this.isCritical = false;
+	        }
+	    }
 	}
 	private DowngradeResult(): void
 	{
-		var flag: boolean = this.isSuccess && this.isCritical;
-		if (flag)
-		{
-			this.isCritical = false;
-		}
-		else
-		{
-			var flag2: boolean = this.isSuccess && !this.isCritical;
-			if (flag2)
-			{
-				this.isSuccess = false;
-			}
-			else
-			{
-				var flag3: boolean = !this.isSuccess && !this.isCritical;
-				if (flag3)
-				{
-					this.isCritical = true;
-				}
-				else
-				{
-					var flag4: boolean = !this.isSuccess && this.isCritical;
-					if (flag4)
-					{
-					}
-				}
-			}
-		}
+	    var flag: boolean = this.isSuccess && this.isCritical;
+	    if (flag)
+	    {
+	        this.isCritical = false;
+	    }
+	    else
+	    {
+	        var flag2: boolean = this.isSuccess && !this.isCritical;
+	        if (flag2)
+	        {
+	            this.isSuccess = false;
+	        }
+	        else
+	        {
+	            var flag3: boolean = !this.isSuccess && !this.isCritical;
+	            if (flag3)
+	            {
+	                this.isCritical = true;
+	            }
+	            else
+	            {
+	                var flag4: boolean = !this.isSuccess && this.isCritical;
+	                if (flag4)
+	                {
+	                }
+	            }
+	        }
+	    }
 	}
 	RetrieveOutcomeReport(): string
 	{
-		var text: string = this.isSuccess ? "Success" : "Failure";
-		return this.isCritical ? ("Critical " + text) : text;
+	    var text: string = this.isSuccess ? 'Success' : 'Failure';
+	    return this.isCritical ? ('Critical ' + text) : text;
 	}
 }
 class Penalty extends Object
@@ -299,7 +299,7 @@ class Penalty extends Object
 	Amount: number = 0;
 	constructor()
 	{
-		super();
+	    super();
 	}
 }
 enum Proficiency
@@ -575,7 +575,7 @@ class Armor extends Object
 	Traits: IEnumerable<Trait> = null;
 	constructor()
 	{
-		super();
+	    super();
 	}
 }
 enum ArmorGroup
@@ -597,7 +597,7 @@ class Bulk extends Object
 	private BulkAmount: number = 0;
 	constructor(value: number = 0.0)
 	{
-		super();
+	    super();
 	}
 }
 class Coins extends Object
@@ -608,11 +608,11 @@ class Coins extends Object
 	Platinum: number = 0;
 	constructor(copper: number, silver: number, gold: number, platinum: number)
 	{
-		super();
-		this.Copper = copper;
-		this.Silver = silver;
-		this.Gold = gold;
-		this.Platinum = platinum;
+	    super();
+	    this.Copper = copper;
+	    this.Silver = silver;
+	    this.Gold = gold;
+	    this.Platinum = platinum;
 	}
 }
 interface IEquipment
@@ -626,25 +626,25 @@ class ActionCost extends Object
 	private cost: number = 0;
 	set Cost(value: number)
 	{
-		var flag: boolean = value < -1;
-		if (flag)
-		{
-			this.cost = -1;
-		}
-		var flag2: boolean = value > 3;
-		if (flag2)
-		{
-			this.cost = 3;
-		}
-		this.cost = value;
+	    var flag: boolean = value < -1;
+	    if (flag)
+	    {
+	        this.cost = -1;
+	    }
+	    var flag2: boolean = value > 3;
+	    if (flag2)
+	    {
+	        this.cost = 3;
+	    }
+	    this.cost = value;
 	}
 	get Cost(): number
 	{
-		return this.cost;
+	    return this.cost;
 	}
 	constructor()
 	{
-		super();
+	    super();
 	}
 }
 interface IWeapon
@@ -658,7 +658,7 @@ class MeleeAttack extends Object implements ICheck
 	Penalties: Penalty[] = null;
 	constructor()
 	{
-		super();
+	    super();
 	}
 }
 enum Ability
@@ -674,44 +674,36 @@ enum Ability
 class AbilityScore extends Object
 {
 	Score: number = 0;
-	Ability: Ability = 0;
+	Ability: string = '';
 	Modifier: number = 0;
 	constructor(score: number, ability: Ability);
 	constructor(score: number, ability: string);
-	constructor(score: number, ability: any)
-	{
-		super();
-		if (arguments.length === 2 && (score === null || score.constructor === Number) && (ability === null || ability.constructor === Number))
-		{
-			this.constructor_0(score, ability);
-			return;
-		}
+	constructor(score: number, ability: any)	    	{
+		supe	    );
+		if (arguments.length === 2 && (score === null || score.constructor === Number) && (ability === null || ability.constructor === Numb	    ))	        {
+			this.constructor_0(score, abili	        ;
+			ret	    n;	    	}
 		this.constructor_1(score, ability);
 	}
-	private constructor_0(score: number, ability: Ability): void
-	{
-		this.Score = score;
-		this.Ability = ability;
-		var d: number = <number>(this.Score - 10) / 2.0;
+	private constructor_0(score: number, ability: Ability): void	    	{
+		this.Score = sc	    e;
+		this.Ability = abil	    y;
+		var d: number = <number>(this.Score - 10) / 	    0;
 		this.Modifier = <number>Math.floor(d);
 	}
-	private constructor_1(score: number, ability: string): void
-	{
-		this.Score = score;
-		var d: number = <number>(this.Score - 10) / 2.0;
-		this.Modifier = <number>Math.floor(d);
-		try
-		{
-			this.Ability = <Ability>Enum.Parse(new Type("Number"), ability);
-		}
-		catch (ex_53)
-		{
-			if (ex_53 instanceof NullReferenceException)
-			{
-				throw new NullReferenceException("An ability string passed to the AbilityScore constructor was null. ");
-			}
-			else
-				throw ex_53;
+	private constructor_1(score: number, ability: string): void	    	{
+		this.Score = sc	    e;
+		var d: number = <number>(this.Score - 10) / 	    0;
+		this.Modifier = <number>Math.floor	    );
+		    ry	        {
+			this.Ability = <Ability>Enum.Parse(new'Number'umber"), abili	    );	    	}
+		catch (ex	    3)	        {
+			if (ex_53 instanceof NullReferenceExcept	        )
+	            
+				throw new NullReferenceExce'An ability string passed to the AbilityScore constructor was null. 'ull.	        ;
+	        }
+				            
+				throw ex	    3;
 		}
 	}
 }
@@ -727,95 +719,74 @@ enum Alignment
 	NE,
 	CE
 }
-class ProficiencyBasedNumber extends Object
+class ProficiencyBasedNumber extends Objec    
 {
-	get Amount(): number
-	{
-		return this._Amount_k__BackingField;
+	get Amount(): nu    ber        	{
+		return this._Amount_k__BackingFi    ld;
 	}
 	Proficiency: Proficiency = 0;
 	ModifierBonus: number = 0;
 	ItemBonus: number = 0;
-	get ProficiencyBonus(): number
-	{
+	get ProficiencyBonus(): number	    	{
 		return this._ProficiencyBonus_k__BackingField;
 	}
-	get IsUntrained(): boolean
-	{
+	get IsUntrained(): boolean	    	{
 		return this._IsUntrained_k__BackingField;
 	}
-	get IsTrained(): boolean
-	{
+	get IsTrained(): boolean	    	{
 		return this._IsTrained_k__BackingField;
 	}
-	get IsExpert(): boolean
-	{
+	get IsExpert(): boolean	    	{
 		return this._IsExpert_k__BackingField;
 	}
-	get IsMaster(): boolean
-	{
+	get IsMaster(): boolean	    	{
 		return this._IsMaster_k__BackingField;
 	}
-	get IsLegendary(): boolean
-	{
+	get IsLegendary(): boolean	    	{
 		return this._IsLegendary_k__BackingField;
 	}
-	constructor(proficiency: Proficiency, level: number, modifierBonus: number, isDC: boolean = false, itemBonus: number = 0)
-	{
-		super();
-		this.Proficiency = proficiency;
-		this.ItemBonus = itemBonus;
-		this._ProficiencyBonus_k__BackingField = <number>(this.Proficiency + level);
-		this._Amount_k__BackingField = this.ProficiencyBonus + this.ItemBonus + modifierBonus;
-		if (isDC)
-		{
-			this._Amount_k__BackingField = this.Amount + 10;
-		}
-		var flag: boolean = proficiency > Proficiency.Untrained;
-		if (flag)
-		{
-			this._IsUntrained_k__BackingField = false;
-			var flag2: boolean = proficiency >= Proficiency.Trained;
-			if (flag2)
-			{
-				this._IsTrained_k__BackingField = true;
-				var flag3: boolean = proficiency >= Proficiency.Expert;
-				if (flag3)
-				{
-					this._IsExpert_k__BackingField = true;
-					var flag4: boolean = proficiency >= Proficiency.Master;
-					if (flag4)
-					{
-						this._IsMaster_k__BackingField = true;
-						var flag5: boolean = proficiency >= Proficiency.Legendary;
-						if (flag5)
-						{
-							this._IsLegendary_k__BackingField = true;
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			this._IsUntrained_k__BackingField = true;
-			this._IsTrained_k__BackingField = false;
-			this._IsExpert_k__BackingField = false;
-			this._IsMaster_k__BackingField = false;
-			this._IsLegendary_k__BackingField = false;
+	constructor(proficiency: Proficiency, level: number, modifierBonus: number, isDC: boolean = false, itemBonus: number = 0)	    	{
+		supe	    );
+		this.Proficiency = proficie	    y;
+		this.ItemBonus = itemBo	    s;
+		this._ProficiencyBonus_k__BackingField = <number>(this.Proficiency + lev	    );
+		this._Amount_k__BackingField = this.ProficiencyBonus + this.ItemBonus + modifierBo	    s;
+		if (i	    C)	        {
+			this._Amount_k__BackingField = this.Amount +	    0;	    	}
+		var flag: boolean = proficiency > Proficiency.Untrai	    d;
+		if (f	    g)	        {
+			this._IsUntrained_k__BackingField = fa	        ;
+			var flag2: boolean = proficiency >= Proficiency.Trai	        ;
+			if (fl	        )
+	            
+				this._IsTrained_k__BackingField = t	            
+				var flag3: boolean = proficiency >= Proficiency.Exp	            
+				if (fl	            
+		                
+					this._IsExpert_k__BackingField = t	                
+					var flag4: boolean = proficiency >= Proficiency.Mas	                
+					if (fl	                
+			                    						this._IsMaster_k__BackingField = t	                    						var flag5: boolean = proficiency >= Proficiency.Legend	                    						if (fl	                    				                        						this._IsLegendary_k__BackingField = t	                    				                
+			            
+		        }
+	    	}	    	}
+			    se	        {
+			this._IsUntrained_k__BackingField = t	        ;
+			this._IsTrained_k__BackingField = fa	        ;
+			this._IsExpert_k__BackingField = fa	        ;
+			this._IsMaster_k__BackingField = fa	        ;
+			this._IsLegendary_k__BackingField = fa	    e;
 		}
 	}
 }
-class ArmorClass extends ProficiencyBasedNumber
+class ArmorClass extends ProficiencyBasedNumbe    
 {
-	get Total(): number
-	{
-		return this._Total_k__BackingField;
+	get Total(): nu    ber        	{
+		return this._Total_k__BackingFi    ld;    
 	}
-	constructor(proficiency: Proficiency, level: number, modifierBonus: number, armor: Armor, isDC: boolean = false, itemBonus: number = 0)
-	{
-		super(proficiency, level, modifierBonus, isDC, 0);
-		this._Total_k__BackingField = armor.ACBonus + Math.min(armor.DexCap, modifierBonus) + this.ProficiencyBonus + 10;
+	constructor(proficiency: Proficiency, level: number, modifierBonus: number, armor: Armor, isDC: boolean = false, itemBonus: number      0)        	{
+		super(proficiency, level, modifierBonus, isDC,        );
+		this._Total_k__BackingField = armor.ACBonus + Math.min(armor.DexCap, modifierBonus) + this.ProficiencyBonus +    10;
 	}
 }
 interface ICreature extends IPfObject
@@ -874,8 +845,7 @@ class Skill extends ProficiencyBasedNumber
 {
 	Name: string = null;
 	Descriptor: string = null;
-	constructor(proficiency: Proficiency, level: number, modifierBonus: number, isDC: boolean = false, itemBonus: number = 0, armor: Armor = null)
-	{
+	constructor(proficiency: Proficiency, level: number, modifierBonus: number, isDC: boolean = false, itemBonus: number = 0, armor: Armor = null)	    	{
 		super(proficiency, level, modifierBonus, isDC, itemBonus);
 	}
 }
@@ -898,150 +868,99 @@ class AbilityScoreArray extends Object
 	Wisdom: AbilityScore = null;
 	Charisma: AbilityScore = null;
 	FreeBoostsAvailable: number = 0;
-	constructor(boostsAndFlaws: List<AbilityScoreBoostFlaw>)
-	{
-		super();
-		this.propertiesOfThisClass = super.GetType().GetProperties();
+	constructor(boostsAndFlaws: List<AbilityScoreBoostFlaw>)	    	{
+		supe	    );
+		this.propertiesOfThisClass = super.GetType().GetPropertie	    );
 		this.CalculateAbilityScores(boostsAndFlaws);
 	}
-	AddBoosts(boosts: List<AbilityScoreBoostFlaw>): void
-	{
-		var array: PropertyInfo[] = this.propertiesOfThisClass;
-		for (var i: number = 0; i < array.length; i = i + 1)
-		{
-			var propertyInfo: PropertyInfo = array[i];
-			var flag: boolean = propertyInfo.Name === "FreeBoostsAvailable";
-			if (!flag)
-			{
-				var flag2: boolean = boosts.Count === 0;
-				if (flag2)
-				{
-					propertyInfo.SetValue(this, new AbilityScore(10, propertyInfo.Name));
-				}
-				var enumerator: List_Enumerator<AbilityScoreBoostFlaw> = boosts.GetEnumerator();
-				try
-				{
-					while (enumerator.MoveNext())
-					{
-						var current: AbilityScoreBoostFlaw = enumerator.Current;
-						var flag3: boolean = current.Ability === Ability[Ability.Free];
-						if (flag3)
-						{
-							var freeBoostsAvailable: number = this.FreeBoostsAvailable;
-							this.FreeBoostsAvailable = freeBoostsAvailable + 1;
-						}
-						else
-						{
-							var flag4: boolean = current.Ability === propertyInfo.Name;
-							if (flag4)
-							{
-								var abilityScore: AbilityScore = <AbilityScore>propertyInfo.GetValue(this);
-								var num: number = (abilityScore.Score >= 18) ? 1 : 2;
-								propertyInfo.SetValue(this, new AbilityScore(abilityScore.Score + num, propertyInfo.Name));
-							}
-						}
-					}
-				}
-				finally
-				{
-					(<IDisposable>enumerator).Dispose();
-				}
-			}
+	AddBoosts(boosts: List<AbilityScoreBoostFlaw>): void	    	{
+		var array: PropertyInfo[] = this.propertiesOfThisCl	    s;
+		for (var i: number = 0; i < array.length; i = i 	    1)	        {
+			var propertyInfo: PropertyInfo = array	        ;
+			var flag: boolean = propertyInfo.Nam'FreeBoostsAvailable'lab	        ;
+			if (!f	        )
+	            
+				var flag2: boolean = boosts.Count ==	            
+				if (fl	            
+		                
+					propertyInfo.SetValue(this, new AbilityScore(10, propertyInfo.Nam	            
+		            
+				var enumerator: List_Enumerator<AbilityScoreBoostFlaw> = boosts.GetEnumerato	            
+				            
+		                
+					while (enumerator.MoveNex	                
+			                    						var current: AbilityScoreBoostFlaw = enumerator.Curr	                    						var flag3: boolean = current.Ability === Ability[Ability.Fr	                    						if (fl	                    				                        						var freeBoostsAvailable: number = this.FreeBoostsAvaila	                        						this.FreeBoostsAvailable = freeBoostsAvailable 	                    				                    							                    				                        						var flag4: boolean = current.Ability === propertyInfo.N	                        						if (fl	                        				                            						var abilityScore: AbilityScore = <AbilityScore>propertyInfo.GetValue(th	                            						var num: number = (abilityScore.Score >= 18) ? 1 	                            						propertyInfo.SetValue(this, new AbilityScore(abilityScore.Score + num, propertyInfo.Nam	                        				                    				                
+			            
+		            
+				fin	            
+		                
+					(<IDisposable>enumerator).Dispos	            
+		        }
+	    	}
 		}
 	}
-	private CalculateAbilityScores(boostsAndFlaws: List<AbilityScoreBoostFlaw>): void
-	{
-		this.Strength = new AbilityScore(10, Ability.Strength);
-		this.Dexterity = new AbilityScore(10, Ability.Dexterity);
-		this.Constitution = new AbilityScore(10, Ability.Constitution);
-		this.Intelligence = new AbilityScore(10, Ability.Intelligence);
-		this.Wisdom = new AbilityScore(10, Ability.Wisdom);
-		this.Charisma = new AbilityScore(10, Ability.Charisma);
-		var enumerator: List_Enumerator<AbilityScoreBoostFlaw> = boostsAndFlaws.GetEnumerator();
-		try
-		{
-			while (enumerator.MoveNext())
-			{
-				var current: AbilityScoreBoostFlaw = enumerator.Current;
-				var array: PropertyInfo[] = this.propertiesOfThisClass;
-				for (var i: number = 0; i < array.length; i = i + 1)
-				{
-					var propertyInfo: PropertyInfo = array[i];
-					var flag: boolean = propertyInfo.Name === "FreeBoostsAvailable";
-					if (!flag)
-					{
-						var flag2: boolean = current.Ability === Ability[Ability.Free];
-						if (!flag2)
-						{
-							var flag3: boolean = current.Ability === propertyInfo.Name;
-							if (flag3)
-							{
-								var abilityScore: AbilityScore = ((propertyInfo.GetValue(this) instanceof AbilityScore)?<AbilityScore>propertyInfo.GetValue(this):null);
-								var isBoost: boolean = current.IsBoost;
-								var value: AbilityScore;
-								if (isBoost)
-								{
-									value = new AbilityScore(abilityScore.Score + 2, abilityScore.Ability);
-								}
-								else
-								{
-									value = new AbilityScore(abilityScore.Score - 2, abilityScore.Ability);
-								}
-								propertyInfo.SetValue(this, value);
-							}
-						}
-					}
-				}
-				var flag4: boolean = current.Ability === "Free";
-				if (flag4)
-				{
-					var freeBoostsAvailable: number = this.FreeBoostsAvailable;
-					this.FreeBoostsAvailable = freeBoostsAvailable + 1;
-				}
-			}
-		}
-		finally
-		{
-			(<IDisposable>enumerator).Dispose();
+	private CalculateAbilityScores(boostsAndFlaws: List<AbilityScoreBoostFlaw>): void	    	{
+		this.Strength = new AbilityScore(10, Ability.Streng	    );
+		this.Dexterity = new AbilityScore(10, Ability.Dexteri	    );
+		this.Constitution = new AbilityScore(10, Ability.Constituti	    );
+		this.Intelligence = new AbilityScore(10, Ability.Intelligen	    );
+		this.Wisdom = new AbilityScore(10, Ability.Wisd	    );
+		this.Charisma = new AbilityScore(10, Ability.Charis	    );
+		var enumerator: List_Enumerator<AbilityScoreBoostFlaw> = boostsAndFlaws.GetEnumerato	    );
+		    ry	        {
+			while (enumerator.MoveNex	        )
+	            
+				var current: AbilityScoreBoostFlaw = enumerator.Curr	            
+				var array: PropertyInfo[] = this.propertiesOfThisCl	            
+				for (var i: number = 0; i < array.length; i = i 	            
+		                
+					var propertyInfo: PropertyInfo = array	                
+					var flag: boolean = propertyInfo.Nam'FreeBoostsAvailable'lab	                
+					if (!f	                
+			                    						var flag2: boolean = current.Ability === Ability[Ability.Fr	                    						if (!fl	                    				                        						var flag3: boolean = current.Ability === propertyInfo.N	                        						if (fl	                        				                            						var abilityScore: AbilityScore = ((propertyInfo.GetValue(this) instanceof AbilityScore)?<AbilityScore>propertyInfo.GetValue(this):nu	                            						var isBoost: boolean = current.IsBo	                            						var value: AbilitySc	                            						if (isBo	                            				                                						value = new AbilityScore(abilityScore.Score + 2, abilityScore.Abili	                            				                            							                            				                                						value = new AbilityScore(abilityScore.Score - 2, abilityScore.Abili	                            				                            						propertyInfo.SetValue(this, val	                        				                    				                
+			            
+		            
+				var flag4: boolean = current.Abilit'Free'"Fr	            
+				if (fl	            
+		                
+					var freeBoostsAvailable: number = this.FreeBoostsAvaila	                
+					this.FreeBoostsAvailable = freeBoostsAvailable 	            
+		        }
+	    	}	    	}
+		fin	    ly	        {
+			(<IDisposable>enumerator).Dispos	    );
 		}
 	}
 	SetAbilityScore(score: number, ability: Ability): void;
 	SetAbilityScore(abilityScore: AbilityScore): void;
-	SetAbilityScore(scoreOrAbilityScore: any, ability?: Ability): void
-	{
-		if (arguments.length === 2 && (scoreOrAbilityScore === null || scoreOrAbilityScore.constructor === Number) && (ability === null || ability.constructor === Number))
-		{
-			this.SetAbilityScore_0(scoreOrAbilityScore, ability);
-			return;
-		}
+	SetAbilityScore(scoreOrAbilityScore: any, ability?: Ability): void	    	{
+		if (arguments.length === 2 && (scoreOrAbilityScore === null || scoreOrAbilityScore.constructor === Number) && (ability === null || ability.constructor === Numb	    ))	        {
+			this.SetAbilityScore_0(scoreOrAbilityScore, abili	        ;
+			ret	    n;	    	}
 		this.SetAbilityScore_1(scoreOrAbilityScore);
 	}
-	private SetAbilityScore_0(score: number, ability: Ability): void
-	{
-		var array: PropertyInfo[] = this.propertiesOfThisClass;
-		for (var i: number = 0; i < array.length; i = i + 1)
-		{
-			var propertyInfo: PropertyInfo = array[i];
-			var flag: boolean = propertyInfo.Name === Ability[ability];
-			if (flag)
-			{
-				propertyInfo.SetValue(this, new AbilityScore(score, ability));
-				break;
-			}
+	private SetAbilityScore_0(score: number, ability: Ability): void	    	{
+		var array: PropertyInfo[] = this.propertiesOfThisCl	    s;
+		for (var i: number = 0; i < array.length; i = i 	    1)	        {
+			var propertyInfo: PropertyInfo = array	        ;
+			var flag: boolean = propertyInfo.Name === Ability[abili	        ;
+			if (f	        )
+	            
+				propertyInfo.SetValue(this, new AbilityScore(score, abilit	            
+				br	        ;
+	    	}
 		}
 	}
-	private SetAbilityScore_1(abilityScore: AbilityScore): void
-	{
-		var array: PropertyInfo[] = this.propertiesOfThisClass;
-		for (var i: number = 0; i < array.length; i = i + 1)
-		{
-			var propertyInfo: PropertyInfo = array[i];
-			var flag: boolean = propertyInfo.Name === Ability[abilityScore.Ability];
-			if (flag)
-			{
-				propertyInfo.SetValue(this, abilityScore);
-				break;
-			}
+	private SetAbilityScore_1(abilityScore: AbilityScore): void	    	{
+		var array: PropertyInfo[] = this.propertiesOfThisCl	    s;
+		for (var i: number = 0; i < array.length; i = i 	    1)	        {
+			var propertyInfo: PropertyInfo = array	        ;
+			var flag: boolean = propertyInfo.Name === Ability[abilityScore.Abili	        ;
+			if (f	        )
+	            
+				propertyInfo.SetValue(this, abilitySco	            
+				br	        ;
+	    	}
 		}
 	}
 }
@@ -1049,10 +968,9 @@ class AbilityScoreBoostFlaw extends Object
 {
 	IsBoost: boolean = false;
 	Ability: string = null;
-	constructor(isBoost: boolean, ability: Ability)
-	{
-		super();
-		this.IsBoost = isBoost;
+	constructor(isBoost: boolean, ability: Ability)	    	{
+		supe	    );
+		this.IsBoost = isBo	    t;
 		this.Ability = Ability[ability];
 	}
 }
@@ -1068,8 +986,7 @@ class Ancestries extends Object
 	static Human: Human = null;
 	static Hobgoblin: Hobgoblin = null;
 	static Leshy: Leshy = null;
-	constructor()
-	{
+	constructor()	    	{
 		super();
 	}
 }
@@ -1085,570 +1002,451 @@ interface IAncestry
 	Traits: ICollection<Trait>;
 	SpecialAbilities: ICollection<string>;
 }
-class Dwarf extends Object implements IAncestry, IAoNItem
+class Dwarf extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Dwarf";
+	get Name(): st    ing        	{
+		r'Dwarf'Dwa    f";    
 	}
-	get HitPoints(): number
-	{
-		return 10;
+	get HitPoints(): nu    ber        	{
+		return    10;    
 	}
-	get Size(): Size
-	{
-		return Size.Medium;
+	get Size():     ize        	{
+		return Size.Med    um;    
 	}
-	get Speed(): number
-	{
-		return 20;
+	get Speed(): nu    ber        	{
+		return    20;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Wisdom), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Wisdom), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(false, Ability.Charisma)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(false, Ability.Chari        a)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Dwarven, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Dwarven, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Dwarf, Trait.Humanoid
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Dwarf, Trait.Huma        id
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Darkvision", "Clan Dagger"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Darkvision'is'Clan Dagger'ag        r"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=1");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=1'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Elf extends Object implements IAncestry, IAoNItem
+class Elf extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Elf";
+	get Name(): st    ing        	{
+		r'Elf' "E    f";    
 	}
-	get HitPoints(): number
-	{
-		return 6;
+	get HitPoints(): nu    ber        	{
+		retur     6;    
 	}
-	get Size(): Size
-	{
-		return Size.Medium;
+	get Size():     ize        	{
+		return Size.Med    um;    
 	}
-	get Speed(): number
-	{
-		return 30;
+	get Speed(): nu    ber        	{
+		return    30;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Dexterity), new AbilityScoreBoostFlaw(true, Ability.Intelligence), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Dexterity), new AbilityScoreBoostFlaw(true, Ability.Intelligence), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Constitution)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Constitut        n)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Elven, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Elven, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Elf, Trait.Humanoid
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Elf, Trait.Huma        id
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Low-Light Vision"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Low-Light Vision'is        n"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=2");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=2'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Gnome extends Object implements IAncestry, IAoNItem
+class Gnome extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Gnome";
+	get Name(): st    ing        	{
+		r'Gnome'Gno    e";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;    
 	}
-	get Size(): Size
-	{
-		return Size.Small;
+	get Size():     ize        	{
+		return Size.Sm    ll;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Charisma), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Charisma), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Strength)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Stren        h)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Gnomish, Language.Sylvan, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Gnomish, Language.Sylvan, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Gnome, Trait.Humanoid
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Gnome, Trait.Huma        id
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Low-Light Vision"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Low-Light Vision'is        n"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=3");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=3'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Goblin extends Object implements IAncestry, IAoNItem
+class Goblin extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Goblin";
+	get Name(): st    ing        	{
+		r'Goblin'obl    n";    
 	}
-	get HitPoints(): number
-	{
-		return 6;
+	get HitPoints(): nu    ber        	{
+		retur     6;    
 	}
-	get Size(): Size
-	{
-		return Size.Small;
+	get Size():     ize        	{
+		return Size.Sm    ll;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Dexterity), new AbilityScoreBoostFlaw(true, Ability.Charisma), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Dexterity), new AbilityScoreBoostFlaw(true, Ability.Charisma), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Wisdom)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Wis        m)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Goblin, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Goblin, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Goblin, Trait.Humanoid
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Goblin, Trait.Huma        id
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Darkvision"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Darkvision'is        n"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=4");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=4'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
 interface IHeritage
 {
 	Name: string;
 }
-class HalfElf extends Object implements IAncestry, IHeritage, IAoNItem
+class HalfElf extends Object implements IAncestry, IHeritage, IAoNIte    
 {
-	get Name(): string
-	{
-		return "HalfElf";
+	get Name(): st    ing        	{
+		r'HalfElf'lfE    f";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;    
 	}
-	get Size(): Size
-	{
-		return Size.Medium;
+	get Size():     ize        	{
+		return Size.Med    um;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Free), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Free), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return new Array<AbilityScoreBoostFlaw>(0);
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		return new Array<AbilityScoreBoostFlaw>    0);    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Elf, Trait.Humanoid, Trait.HalfElf
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Elf, Trait.Humanoid, Trait.Hal        lf
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Low-Light Vision"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Low-Light Vision'is        n"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=7");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=7'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Halfling extends Object implements IAncestry, IAoNItem
+class Halfling extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Halfling";
+	get Name(): st    ing        	{
+		r'Halfling'fli    g";    
 	}
-	get HitPoints(): number
-	{
-		return 6;
+	get HitPoints(): nu    ber        	{
+		retur     6;    
 	}
-	get Size(): Size
-	{
-		return Size.Small;
+	get Size():     ize        	{
+		return Size.Sm    ll;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Dexterity), new AbilityScoreBoostFlaw(true, Ability.Wisdom), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Dexterity), new AbilityScoreBoostFlaw(true, Ability.Wisdom), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Strength)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Stren        h)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Halfling, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Halfling, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Halfling, Trait.Humanoid
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Halfling, Trait.Huma        id
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Keen Eyes"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Keen Eyes' E        s"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=5");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=5'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class HalfOrc extends Object implements IAncestry, IHeritage, IAoNItem
+class HalfOrc extends Object implements IAncestry, IHeritage, IAoNIte    
 {
-	get Name(): string
-	{
-		return "HalfOrc";
+	get Name(): st    ing        	{
+		r'HalfOrc'lfO    c";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;    
 	}
-	get Size(): Size
-	{
-		return Size.Medium;
+	get Size():     ize        	{
+		return Size.Med    um;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Free), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Free), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return new Array<AbilityScoreBoostFlaw>(0);
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		return new Array<AbilityScoreBoostFlaw>    0);    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Orc, Trait.Humanoid, Trait.HalfOrc
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Orc, Trait.Humanoid, Trait.Hal        rc
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Low-Light Vision"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Low-Light Vision'is        n"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=8");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=8'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Hobgoblin extends Object implements IAncestry, IAoNItem
+class Hobgoblin extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Hobgoblin";
+	get Name(): st    ing        	{
+		r'Hobgoblin'obl    n";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;    
 	}
-	get Size(): Size
-	{
-		return Size.Medium;
+	get Size():     ize        	{
+		return Size.Med    um;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Intelligence), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Intelligence), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Wisdom)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Wis        m)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Goblin, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Goblin, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Goblin, Trait.Humanoid, Trait.Uncommon
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Goblin, Trait.Humanoid, Trait.Unco        on
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Darkvision"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Darkvision'is        n"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=13");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=13'ID=1    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Human extends Object implements IAncestry, IAoNItem
+class Human extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Human";
+	get Name(): st    ing        	{
+		r'Human'Hum    n";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;    
 	}
-	get Size(): Size
-	{
-		return Size.Medium;
+	get Size():     ize        	{
+		return Size.Med    um;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Free), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Free), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return new Array<AbilityScoreBoostFlaw>(0);
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		return new Array<AbilityScoreBoostFlaw>    0);    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Human, Trait.Humanoid
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Human, Trait.Huma        id
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return new Array<string>(0);
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		return new Array<string>    0);    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=6");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=6'?ID=    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Leshy extends Object implements IAncestry, IAoNItem
+class Leshy extends Object implements IAncestry, IAoNIte    
 {
-	get Name(): string
-	{
-		return "Leshy";
+	get Name(): st    ing        	{
+		r'Leshy'Les    y";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;    
 	}
-	get Size(): Size
-	{
-		return Size.Small;
+	get Size():     ize        	{
+		return Size.Sm    ll;    
 	}
-	get Speed(): number
-	{
-		return 25;
+	get Speed(): nu    ber        	{
+		return    25;    
 	}
-	get AbilityBoosts(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Wisdom), new AbilityScoreBoostFlaw(true, Ability.Free)
-		];
+	get AbilityBoosts(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(true, Ability.Constitution), new AbilityScoreBoostFlaw(true, Ability.Wisdom), new AbilityScoreBoostFlaw(true, Ability.F        e)
+    	];    
 	}
-	get AbilityFlaws(): ICollection<AbilityScoreBoostFlaw>
-	{
-		return [
-			new AbilityScoreBoostFlaw(false, Ability.Intelligence)
-		];
+	get AbilityFlaws(): ICollection<AbilityScoreBoostF    aw>        	{
+		retu            [
+			new AbilityScoreBoostFlaw(false, Ability.Intellige        e)
+    	];    
 	}
-	get Languages(): ICollection<Language>
-	{
-		return [
-			Language.Sylvan, Language.Common
-		];
+	get Languages(): ICollection<Langu    ge>        	{
+		retu            [
+			Language.Sylvan, Language.Co        on
+    	];    
 	}
-	get Traits(): ICollection<Trait>
-	{
-		return [
-			Trait.Plant, Trait.Leshy, Trait.Uncommon
-		];
+	get Traits(): ICollection<Tr    it>        	{
+		retu            [
+			Trait.Plant, Trait.Leshy, Trait.Unco        on
+    	];    
 	}
-	get SpecialAbilities(): ICollection<string>
-	{
-		return [
-			"Low-Light Vision", "Plant Nourishment"
-		];
+	get SpecialAbilities(): ICollection<str    ng>        	{
+		retu            'Low-Light Vision'is'Plant Nourishment'hm        t"
+    	];    
 	}
-	get AoNUri(): Uri
-	{
-		return new Uri("http://2e.aonprd.com/Ancestries.aspx?ID=14");
+	get AoNUri():    Uri        	{
+		return ne'http://2e.aonprd.com/Ancestries.aspx?ID=14'ID=1    ");    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
 interface IBackground
@@ -1660,92 +1458,74 @@ interface IBackground
 	TrainedSkill: string;
 	TrainedLoreSkill: string;
 }
-class Emancipated extends Object implements IBackground
+class Emancipated extends Object implements IBackgroun    
 {
-	get Name(): string
-	{
-		return super.GetType().Name;
+	get Name(): st    ing        	{
+		return super.GetType().N    me;    
 	}
-	get AbilityBoostOptions(): List<AbilityScoreBoostFlaw>
-	{
-		var expr_05: List<AbilityScoreBoostFlaw> = new List<AbilityScoreBoostFlaw>();
-		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Dexterity));
-		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Charisma));
-		return expr_05;
+	get AbilityBoostOptions(): List<AbilityScoreBoostF    aw>        	{
+		var expr_05: List<AbilityScoreBoostFlaw> = new List<AbilityScoreBoostFlaw        );
+		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Dexterit        );
+		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Charism        );
+		return expr    05;    
 	}
-	get AbilityScoreBoost(): AbilityScoreBoostFlaw
-	{
-		return new AbilityScoreBoostFlaw(true, Ability.Free);
+	get AbilityScoreBoost(): AbilityScoreBoost    law        	{
+		return new AbilityScoreBoostFlaw(true, Ability.Fr    e);    
 	}
-	set SkillFeat(value: string)
-	{
-		throw new NotImplementedException();
+	set SkillFeat(value: str    ng)        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	get SkillFeat(): string
-	{
-		throw new NotImplementedException();
+	get SkillFeat(): st    ing        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	set TrainedSkill(value: string)
-	{
-		throw new NotImplementedException();
+	set TrainedSkill(value: str    ng)        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	get TrainedSkill(): string
-	{
-		throw new NotImplementedException();
+	get TrainedSkill(): st    ing        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	set TrainedLoreSkill(value: string)
-	{
-		throw new NotImplementedException();
+	set TrainedLoreSkill(value: str    ng)        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	get TrainedLoreSkill(): string
-	{
-		throw new NotImplementedException();
+	get TrainedLoreSkill(): st    ing        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
-class Scholar extends Object implements IBackground
+class Scholar extends Object implements IBackgroun    
 {
-	get Name(): string
-	{
-		return super.GetType().Name;
+	get Name(): st    ing        	{
+		return super.GetType().N    me;    
 	}
-	get AbilityBoostOptions(): List<AbilityScoreBoostFlaw>
-	{
-		var expr_05: List<AbilityScoreBoostFlaw> = new List<AbilityScoreBoostFlaw>();
-		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Intelligence));
-		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Wisdom));
-		return expr_05;
+	get AbilityBoostOptions(): List<AbilityScoreBoostF    aw>        	{
+		var expr_05: List<AbilityScoreBoostFlaw> = new List<AbilityScoreBoostFlaw        );
+		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Intelligenc        );
+		expr_05.Add(new AbilityScoreBoostFlaw(true, Ability.Wisdo        );
+		return expr    05;    
 	}
-	get AbilityScoreBoost(): AbilityScoreBoostFlaw
-	{
-		return new AbilityScoreBoostFlaw(true, Ability.Free);
+	get AbilityScoreBoost(): AbilityScoreBoost    law        	{
+		return new AbilityScoreBoostFlaw(true, Ability.Fr    e);    
 	}
-	get SkillFeat(): string
-	{
-		throw new NotImplementedException();
+	get SkillFeat(): st    ing        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	get TrainedSkill(): string
-	{
-		throw new NotImplementedException();
+	get TrainedSkill(): st    ing        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	get TrainedLoreSkill(): string
-	{
-		throw new NotImplementedException();
+	get TrainedLoreSkill(): st    ing        	{
+		throw new NotImplementedExceptio    ();    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
 class CharacterBackgrounds extends Object
 {
 	static Emancipated: Emancipated = new Emancipated();
 	static Scholar: Scholar = new Scholar();
-	constructor()
-	{
+	constructor()	    	{
 		super();
 	}
 }
@@ -1768,87 +1548,69 @@ interface IPcClass
 	GetKeyAbilityScoreModifier(): number;
 	SetSubClass(value: string): void;
 }
-class Rogue extends Object implements IPcClass
+class Rogue extends Object implements IPcClas    
 {
-	get Name(): string
-	{
-		return "Rogue";
+	get Name(): st    ing        	{
+		r'Rogue'Rog    e";    
 	}
-	get HitPoints(): number
-	{
-		return 8;
+	get HitPoints(): nu    ber        	{
+		retur     8;
 	}
 	SubClass: string = null;
-	get KeyAbilityScore(): AbilityScoreBoostFlaw
-	{
+	get KeyAbilityScore(): AbilityScoreBoostFlaw	    	{
 		return new AbilityScoreBoostFlaw(true, Ability.Dexterity);
 	}
-	get AlternateKeyAbilityScore(): AbilityScoreBoostFlaw
-	{
+	get AlternateKeyAbilityScore(): AbilityScoreBoostFlaw	    	{
 		return new AbilityScoreBoostFlaw(true, Ability.Strength);
 	}
-	get TypicalMembers(): string
-	{
+	get TypicalMembers(): string	    	{
 		throw new NotImplementedException();
 	}
-	get RolePlayingSuggestions(): string
-	{
+	get RolePlayingSuggestions(): string	    	{
 		throw new NotImplementedException();
 	}
-	get Proficiencies(): Dictionary<string, Proficiency>
-	{
+	get Proficiencies(): Dictionary<string, Proficiency>	    	{
 		throw new NotImplementedException();
 	}
-	get AdvancementTable(): Dictionary<number, string[]>
-	{
+	get AdvancementTable(): Dictionary<number, string[]>	    	{
 		throw new NotImplementedException();
 	}
-	get SubClasses(): List<string>
-	{
-		var expr_05: List<string> = new List<string>();
-		expr_05.Add("Ruffian");
-		expr_05.Add("Scoundrel");
-		expr_05.Add("Thief");
+	get SubClasses(): List<string>	    	{
+		var expr_05: List<string> = new List<string	    );
+		expr_0'Ruffian'ffia	    );
+		expr_0'Scoundrel'ndre	    );
+		expr_0'Thief'Thie	    );
 		return expr_05;
 	}
-	get NameOfSubClass(): string
-	{
-		return "Racket";
+	get NameOfSubClass(): string	    	{
+		r'Racket'acket";
 	}
-	get ClassFeats(): List<IClassFeat>
-	{
+	get ClassFeats(): List<IClassFeat>	    	{
 		throw new NotImplementedException();
 	}
-	GetKeyAbilityScore(): number
-	{
+	GetKeyAbilityScore(): number	    	{
 		throw new NotImplementedException();
 	}
-	GetKeyAbilityScoreModifier(): number
-	{
+	GetKeyAbilityScoreModifier(): number	    	{
 		throw new NotImplementedException();
 	}
-	GetProficiency(proficiencyWanted: PlayerCharacter_Proficiencies, level: number): Proficiency
-	{
+	GetProficiency(proficiencyWanted: PlayerCharacter_Proficiencies, level: number): Proficiency	    	{
 		throw new NotImplementedException();
 	}
-	SetSubClass(value: string): void
-	{
-		var flag: boolean = String.IsNullOrEmpty(value);
-		if (!flag)
-		{
-			this.SubClass = value;
+	SetSubClass(value: string): void	    	{
+		var flag: boolean = String.IsNullOrEmpty(val	    );
+		if (!f	    g)	        {
+			this.SubClass = va	    e;
 		}
 	}
-	constructor()
-	{
+	constructor()	    	{
 		super();
 	}
 }
 class PcClasses extends Object
 {
 	static Rogue: Rogue = new Rogue();
-	constructor()
-	{
+	constructor()	    	{
 		super();
 	}
 }
@@ -1861,22 +1623,19 @@ interface IGeneralFeat
 interface ISkillFeat
 {
 }
-class AnvilDwarf extends Object implements IHeritage
+class AnvilDwarf extends Object implements IHeritag    
 {
-	get Name(): string
-	{
-		return "Anvil Dwarf";
+	get Name(): st    ing        	{
+		r'Anvil Dwarf'Dwa    f";    
 	}
-	constructor()
-	{
-		super();
+	construct    r()        	{
+		supe    ();
 	}
 }
 class Heritages extends Object
 {
 	static AnvilDwarf: AnvilDwarf = new AnvilDwarf();
-	constructor()
-	{
+	constructor()	    	{
 		super();
 	}
 }
@@ -1959,223 +1718,181 @@ class PlayerCharacter extends Object
 	ReadiedItems: List<string> = null;
 	OtherItems: List<string> = null;
 	Coins: Coins = null;
-	constructor()
-	{
-		super();
-		this.Id = null;
+	constructor()	    	{
+		supe	    );
+		this.Id = n	    l;
 		this.Level = 1;
 	}
-	SetAncestry(value: string): void
-	{
-		var flag: boolean = String.IsNullOrEmpty(value);
-		if (!flag)
-		{
-			try
-			{
-				var typeFromHandle: Type = new Type("Ancestries");
-				var ancestry: IAncestry = <IAncestry>typeFromHandle.GetField(value).GetValue(null);
-				this.Ancestry = ancestry;
-			}
-			catch (ex)
-			{
-				if (ex instanceof Exception)
-				{
-					throw new Exception(String.Concat([
-						"Check the Ancestries.cs file to see if ", value, " has a property there. Could not assign ", value, " as an Ancestry. Invalid Ancestry name or String.  ", ex.Message
-					]));
-				}
-				else
-					throw ex;
-			}
+	SetAncestry(value: string): void	    	{
+		var flag: boolean = String.IsNullOrEmpty(val	    );
+		if (!f	    g)	        {
+			        y
+	            
+				var typeFromHandle: Type = new'Ancestries'trie	            
+				var ancestry: IAncestry = <IAncestry>typeFromHandle.GetField(value).GetValue(nu	            
+				this.Ancestry = ances	        ;
+	        }
+			catch 	        )
+	            
+				if (ex instanceof Except	            
+		                
+					throw new Exception(String.Conc	                    'Check the Ancestries.cs file to see if 'e if ", v' has a property there. Could not assign 'sign ", v' as an Ancestry. Invalid Ancestry name or String.  'ng.  ", ex.Mes	                
+						            
+		            
+					                
+					throw	        ;
+	    	}
 		}
 	}
-	SetBackground(value: string): void
-	{
-		var flag: boolean = String.IsNullOrEmpty(value);
-		if (!flag)
-		{
-			try
-			{
-				var typeFromHandle: Type = new Type("CharacterBackgrounds");
-				var background: IBackground = <IBackground>typeFromHandle.GetField(value).GetValue(null);
-				this.Background = background;
-				this.BackgroundAbilityChoice = Enumerable.First<AbilityScoreBoostFlaw>(background.AbilityBoostOptions);
-			}
-			catch (ex)
-			{
-				if (ex instanceof Exception)
-				{
-					throw new Exception(String.Concat([
-						"Check to make sure ", value, " exists in the CharacterBackgrounds.cs file. Could not assign ", value, " as an Background. Invalid Background name or String. ", ex.Message
-					]));
-				}
-				else
-					throw ex;
-			}
+	SetBackground(value: string): void	    	{
+		var flag: boolean = String.IsNullOrEmpty(val	    );
+		if (!f	    g)	        {
+			        y
+	            
+				var typeFromHandle: Type = new'CharacterBackgrounds'ound	            
+				var background: IBackground = <IBackground>typeFromHandle.GetField(value).GetValue(nu	            
+				this.Background = backgro	            
+				this.BackgroundAbilityChoice = Enumerable.First<AbilityScoreBoostFlaw>(background.AbilityBoostOptio	        ;
+	        }
+			catch 	        )
+	            
+				if (ex instanceof Except	            
+		                
+					throw new Exception(String.Conc	                    'Check to make sure 'sure ", v' exists in the CharacterBackgrounds.cs file. Could not assign 'sign ", v' as an Background. Invalid Background name or String. 'ing. ", ex.Mes	                
+						            
+		            
+					                
+					throw	        ;
+	    	}
 		}
 	}
-	SetBackgroundAbility(value: string): void
-	{
-		var flag: boolean = String.IsNullOrEmpty(value);
-		if (!flag)
-		{
-			var ability: Ability = <Ability>Enum.Parse(new Type("Number"), value);
-			this.BackgroundAbilityChoice = new AbilityScoreBoostFlaw(true, ability);
+	SetBackgroundAbility(value: string): void	    	{
+		var flag: boolean = String.IsNullOrEmpty(val	    );
+		if (!f	    g)	        {
+			var ability: Ability = <Ability>Enum.Parse(new'Number'umber"), val	        ;
+			this.BackgroundAbilityChoice = new AbilityScoreBoostFlaw(true, abili	    );
 		}
 	}
-	GetBackgroundAbilityChoices(): List<string>
-	{
-		var flag: boolean = this.Background === null;
-		var result: List<string>;
-		if (flag)
-		{
-			result = new List<string>();
-		}
-		else
-		{
-			var abilityBoostOptions: List<AbilityScoreBoostFlaw> = this.Background.AbilityBoostOptions;
-			var arg_42_0: IEnumerable<AbilityScoreBoostFlaw> = abilityBoostOptions;
-			var arg_42_1: (arg: AbilityScoreBoostFlaw) => string;
-			if ((arg_42_1 = PlayerCharacter___c.__9__24_0) === null)
-			{
-				arg_42_1 = (PlayerCharacter___c.__9__24_0 = PlayerCharacter___c.__9._GetBackgroundAbilityChoices_b__24_0);
-			}
-			var source: IEnumerable<string> = Enumerable.Select<AbilityScoreBoostFlaw, string>(arg_42_0, arg_42_1);
-			result = Enumerable.ToList<string>(source);
-		}
+	GetBackgroundAbilityChoices(): List<string>	    	{
+		var flag: boolean = this.Background === n	    l;
+		var result: List<stri	    >;
+		if (f	    g)	        {
+			result = new List<string	    );	    	}
+			    se	        {
+			var abilityBoostOptions: List<AbilityScoreBoostFlaw> = this.Background.AbilityBoostOpti	        ;
+			var arg_42_0: IEnumerable<AbilityScoreBoostFlaw> = abilityBoostOpti	        ;
+			var arg_42_1: (arg: AbilityScoreBoostFlaw) => str	        ;
+			if ((arg_42_1 = PlayerCharacter___c.__9__24_0) === n	        )
+	            
+				arg_42_1 = (PlayerCharacter___c.__9__24_0 = PlayerCharacter___c.__9._GetBackgroundAbilityChoices_b__24	        ;
+	        }
+			var source: IEnumerable<string> = Enumerable.Select<AbilityScoreBoostFlaw, string>(arg_42_0, arg_42	        ;
+			result = Enumerable.ToList<string>(sour	    );	    	}
 		return result;
 	}
-	SetHeritage(value: string): void
-	{
-		var flag: boolean = PF2eCoreUtils.GetListOfHeritages().Contains(value);
-		if (flag)
-		{
-			try
-			{
-				var typeFromHandle: Type = new Type("Heritages");
-				var heritage: IHeritage = <IHeritage>typeFromHandle.GetField(value).GetValue(null);
-				this.Heritage = heritage;
-			}
-			catch (ex)
-			{
-				if (ex instanceof Exception)
-				{
-					throw new Exception(String.Concat([
-						"Check to make sure ", value, " exists in the Heritages.cs file. Could not assign ", value, " as an Heritage. Invalid Heritage name or String. ", ex.Message
-					]));
-				}
-				else
-					throw ex;
-			}
+	SetHeritage(value: string): void	    	{
+		var flag: boolean = PF2eCoreUtils.GetListOfHeritages().Contains(val	    );
+		if (f	    g)	        {
+			        y
+	            
+				var typeFromHandle: Type = new'Heritages'tage	            
+				var heritage: IHeritage = <IHeritage>typeFromHandle.GetField(value).GetValue(nu	            
+				this.Heritage = herit	        ;
+	        }
+			catch 	        )
+	            
+				if (ex instanceof Except	            
+		                
+					throw new Exception(String.Conc	                    'Check to make sure 'sure ", v' exists in the Heritages.cs file. Could not assign 'sign ", v' as an Heritage. Invalid Heritage name or String. 'ing. ", ex.Mes	                
+						            
+		            
+					                
+					throw	        ;
+	    	}
 		}
 	}
-	SetLevel(newLevel: number): void
-	{
+	SetLevel(newLevel: number): void	    	{
 		throw new NotImplementedException();
 	}
-	SetClass(value: string): void
-	{
-		var flag: boolean = String.IsNullOrEmpty(value);
-		if (!flag)
-		{
-			try
-			{
-				var typeFromHandle: Type = new Type("PcClasses");
-				var pcClass: IPcClass = <IPcClass>typeFromHandle.GetField(value).GetValue(null);
-				this.PcClass = pcClass;
-			}
-			catch (ex)
-			{
-				if (ex instanceof Exception)
-				{
-					throw new Exception(String.Concat([
-						" Make sure ", value, " has an entry in the PcClasses.cs file. Could not assign ", value, " as an PcClass. Invalid PcClass name or String. ", ex.Message
-					]));
-				}
-				else
-					throw ex;
-			}
+	SetClass(value: string): void	    	{
+		var flag: boolean = String.IsNullOrEmpty(val	    );
+		if (!f	    g)	        {
+			        y
+	            
+				var typeFromHandle: Type = new'PcClasses'asse	            
+				var pcClass: IPcClass = <IPcClass>typeFromHandle.GetField(value).GetValue(nu	            
+				this.PcClass = pcCl	        ;
+	        }
+			catch 	        )
+	            
+				if (ex instanceof Except	            
+		                
+					throw new Exception(String.Conc	                    ' Make sure 'sure ", v' has an entry in the PcClasses.cs file. Could not assign 'sign ", v' as an PcClass. Invalid PcClass name or String. 'ing. ", ex.Mes	                
+						            
+		            
+					                
+					throw	        ;
+	    	}
 		}
 	}
-	SetAbilityScore(abilityName: string, score: number): void
-	{
-		var flag: boolean = this.AbilityScoreArrayIsMissing();
-		if (flag)
-		{
-			this.AbilityScores = new AbilityScoreArray(new List<AbilityScoreBoostFlaw>());
-		}
-		var flag2: boolean = String.IsNullOrEmpty(abilityName);
-		if (!flag2)
-		{
-			this.AbilityScores.SetAbilityScore(score, Enum.Parse<Ability>(abilityName));
+	SetAbilityScore(abilityName: string, score: number): void	    	{
+		var flag: boolean = this.AbilityScoreArrayIsMissin	    );
+		if (f	    g)	        {
+			this.AbilityScores = new AbilityScoreArray(new List<AbilityScoreBoostFlaw>	    );	    	}
+		var flag2: boolean = String.IsNullOrEmpty(abilityNa	    );
+		if (!fl	    2)	        {
+			this.AbilityScores.SetAbilityScore(score, Enum.Parse<Ability>(abilityNam	    );
 		}
 	}
-	AbilityScoreArrayIsMissing(): boolean
-	{
+	AbilityScoreArrayIsMissing(): boolean	    	{
 		return this.AbilityScores === null;
 	}
-	SetNewAlignment(value: string): void
-	{
+	SetNewAlignment(value: string): void	    	{
 		throw new NotImplementedException();
 	}
-	GetTotalBulk(): number
-	{
+	GetTotalBulk(): number	    	{
 		throw new NotImplementedException();
 	}
-	GetEncumbered(): number
-	{
+	GetEncumbered(): number	    	{
 		return 5 + this.AbilityScores.Strength.Modifier;
 	}
-	GetMaxBulk(): number
-	{
+	GetMaxBulk(): number	    	{
 		return 10 + this.AbilityScores.Strength.Modifier;
 	}
-	GetSpellAttackRoll(): number
-	{
+	GetSpellAttackRoll(): number	    	{
 		return 0;
 	}
-	GetSpellKeyAbilityModifier(): number
-	{
+	GetSpellKeyAbilityModifier(): number	    	{
 		return 0;
 	}
-	GetSpellAttackProficiency(): Proficiency
-	{
+	GetSpellAttackProficiency(): Proficiency	    	{
 		return Proficiency.Untrained;
 	}
-	GetSpellDCModifier(): number
-	{
+	GetSpellDCModifier(): number	    	{
 		return 0;
 	}
-	GetSpellDC(): number
-	{
+	GetSpellDC(): number	    	{
 		return 0;
 	}
-	GetSpellDCProficiency(): Proficiency
-	{
+	GetSpellDCProficiency(): Proficiency	    	{
 		return Proficiency.Untrained;
 	}
-	GetCantripLevel(): number
-	{
+	GetCantripLevel(): number	    	{
 		return 0;
 	}
-	GetDailySpellSlot(): number[]
-	{
+	GetDailySpellSlot(): number[]	    	{
 		return new Array<number>(2);
 	}
-	GetCantrip(): List<string>
-	{
+	GetCantrip(): List<string>	    	{
 		throw new NotImplementedException();
 	}
-	GetInnateSpells(): List<string>
-	{
+	GetInnateSpells(): List<string>	    	{
 		throw new NotImplementedException();
 	}
-	GetSpells(): List<string>
-	{
+	GetSpells(): List<string>	    	{
 		throw new NotImplementedException();
 	}
-	GetFocusSpells(): List<string>
-	{
+	GetFocusSpells(): List<string>	    	{
 		throw new NotImplementedException();
 	}
 }
@@ -2183,12 +1900,10 @@ class PlayerCharacter___c extends Object
 {
 	static __9: PlayerCharacter___c = new PlayerCharacter___c();
 	static __9__24_0: (arg: AbilityScoreBoostFlaw) => string = null;
-	_GetBackgroundAbilityChoices_b__24_0(choice: AbilityScoreBoostFlaw): string
-	{
+	_GetBackgroundAbilityChoices_b__24_0(choice: AbilityScoreBoostFlaw): string	    	{
 		return choice.Ability;
 	}
-	constructor()
-	{
+	constructor()	    	{
 		super();
 	}
 }

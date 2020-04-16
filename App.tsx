@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 import MainPage from './src/PlayerCharacterSheet/1_MainPage/MainPage';
 import FeatsAndInventoryPage from './src/PlayerCharacterSheet/2_FeatsAndInventoryPage/FeatsAndInventoryPage';
