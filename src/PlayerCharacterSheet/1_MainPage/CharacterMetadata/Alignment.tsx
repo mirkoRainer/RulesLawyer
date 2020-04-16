@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-interface Props {}
+interface Props {
+    alignment: string;
+}
 
 interface State {}
 
@@ -10,21 +12,23 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignSelf: 'stretch',
+        alignContent: 'stretch',
     },
     text: {
-        flex: 1,
-        width: 100,
         backgroundColor: 'green',
     },
 });
 
 export default class Alignment extends Component<Props, State> {
-    public static defaultProps = {};
+    public static defaultProps = {
+        alignment: 'LN'
+    };
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Alignment </Text>
+                <Text style={styles.text}> Alignment: {this.props.alignment} </Text>
             </View>
         );
     }

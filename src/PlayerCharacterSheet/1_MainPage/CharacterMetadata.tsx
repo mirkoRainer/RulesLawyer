@@ -18,38 +18,46 @@ interface State {}
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     rowContainer: {
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     header: {
-        alignContent: 'center',
-        alignSelf: 'center',
-    },
+        alignContent: 'stretch',
+        alignSelf: 'stretch'
+    }
 });
 
 export default class CharacterMetadata extends Component<Props, State> {
     public static defaultProps = {};
 
-    render() {
+    render () {
         return (
             <View style={styles.container}>
                 <Text h3 style={styles.header}>
-                    Character Metadata
+            Character Metadata
                 </Text>
                 <View style={styles.rowContainer}>
                     <CharacterName />
                     <PlayerName />
                 </View>
-                <AncestryAndHeritage />
-                <Background />
-                <Class />
-                <Level />
-                <ExperiencePoints />
-                <Alignment />
+                <View style={styles.rowContainer}>
+                    <AncestryAndHeritage />
+                    <View style={styles.container}>
+                        <Level />
+                        <ExperiencePoints />
+                    </View>
+                </View>
+                <View style={styles.rowContainer}>
+                    <Background />
+                    <Class />
+                </View>
+                <View style={styles.rowContainer}>
+                    <Alignment />
+                    <Deity />
+                </View>
                 <Traits />
-                <Deity />
             </View>
         );
     }

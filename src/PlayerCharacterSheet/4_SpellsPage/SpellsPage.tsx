@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignSelf: 'stretch',
+        alignContent: 'stretch',
     },
     text: {
-        flex: 1,
-        width: 100,
         backgroundColor: 'yellow',
     },
 });

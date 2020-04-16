@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-interface Props {}
+interface Props {
+    pcClass: string;
+    subClass: string;
+}
 
 interface State {}
 
@@ -10,21 +13,33 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignSelf: 'stretch',
+        alignContent: 'stretch',
     },
     text: {
-        flex: 1,
-        width: 100,
         backgroundColor: 'green',
     },
 });
 
 export default class Class extends Component<Props, State> {
-    public static defaultProps = {};
+    public static defaultProps = {
+        pcClass: 'Rogue',
+        subClass: 'Ruffian',
+    };
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Class </Text>
+                <Text style={styles.text}>
+                    {' '}
+            Class:
+                    {' '}
+                    {this.props.pcClass}
+                    {' '}
+            (
+                    {this.props.subClass}
+            )
+                </Text>
             </View>
         );
     }

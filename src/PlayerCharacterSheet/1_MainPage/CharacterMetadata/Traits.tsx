@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-interface Props {}
+interface Props {
+    traits: string
+}
 
 interface State {}
 
@@ -10,21 +12,23 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignSelf: 'stretch',
+        alignContent: 'stretch',
     },
     text: {
-        flex: 1,
-        width: 100,
         backgroundColor: 'green',
     },
 });
 
 export default class Traits extends Component<Props, State> {
-    public static defaultProps = {};
+    public static defaultProps = {
+        traits: 'Dwarf, Humanoid'
+    };
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Traits </Text>
+                <Text style={styles.text}> Traits: {this.props.traits} </Text>
             </View>
         );
     }

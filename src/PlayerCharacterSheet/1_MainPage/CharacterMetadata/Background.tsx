@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-interface Props {}
+interface Props {
+    background: string,
+}
 
 interface State {}
 
@@ -10,21 +12,23 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
+        alignContent: 'stretch',
+        alignSelf: 'stretch'
     },
     text: {
-        flex: 1,
-        width: 100,
-        backgroundColor: 'green',
-    },
+        backgroundColor: 'green'
+    }
 });
 
 export default class Background extends Component<Props, State> {
-    public static defaultProps = {};
+    public static defaultProps = {
+        background: 'Emancipated'
+    };
 
-    render() {
+    render () {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Background </Text>
+                <Text style={styles.text}> Background: {this.props.background}</Text>
             </View>
         );
     }

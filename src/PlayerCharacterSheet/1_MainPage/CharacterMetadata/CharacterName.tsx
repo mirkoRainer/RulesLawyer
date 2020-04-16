@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
-        alignContent: 'center',
+        alignContent: 'stretch',
         alignSelf: 'stretch',
     },
     text: {

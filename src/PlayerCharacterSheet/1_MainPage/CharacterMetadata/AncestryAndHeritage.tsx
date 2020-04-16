@@ -13,21 +13,21 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: 'black',
         borderWidth: 2,
-        alignContent: 'center',
-        alignSelf: 'stretch',
+        alignContent: 'stretch',
+        alignSelf: 'stretch'
     },
     text: {
-        backgroundColor: 'green',
-    },
+        backgroundColor: 'green'
+    }
 });
 
 export default class AncestryAndHeritage extends Component<Props, State> {
     public static defaultProps = {
         ancestry: 'Dwarf',
-        heritage: 'Anvil Dwarf',
+        heritage: 'Anvil Dwarf'
     };
 
-    render() {
+    render () {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}> Ancestry: {this.props.ancestry} </Text>
