@@ -4,6 +4,7 @@ import CharacterMetadata from './CharacterMetadata';
 import AbilityScores from './AbilityScoresView';
 import { Dimensions } from 'react-native';
 import { IAbilityScore } from './AbilityScores/IAbilityScores';
+import ProficiencyView from '../Shared/ProficiencyView';
 
 var width: number = Dimensions.get('window').width; //full width
 
@@ -23,18 +24,19 @@ const styles = StyleSheet.create({
 export default class MainPage extends Component<Props, State> {
     public static defaultProps = {};
     scores: IAbilityScore[] = [
-        { amount: 10, ability: 'Strength'},
-        { amount: 10, ability: 'Dexterity'},
-        { amount: 10, ability: 'Constitution'},
-        { amount: 10, ability: 'Intelligence'},
-        { amount: 10, ability: 'Wisdom'},
-        { amount: 10, ability: 'Charisma'},
-    ]
+        { amount: 10, ability: 'Strength' },
+        { amount: 10, ability: 'Dexterity' },
+        { amount: 10, ability: 'Constitution' },
+        { amount: 10, ability: 'Intelligence' },
+        { amount: 10, ability: 'Wisdom' },
+        { amount: 10, ability: 'Charisma' },
+    ];
     render() {
         return (
             <View style={styles.container}>
                 <CharacterMetadata />
                 <AbilityScores abilityScores={this.scores} />
+                <ProficiencyView title="Class DC" is10base="true" />
             </View>
         );
     }
