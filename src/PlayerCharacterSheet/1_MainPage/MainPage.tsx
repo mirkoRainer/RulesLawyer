@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import CharacterMetadata from './CharacterMetadata';
-import AbilityScores from './AbilityScoresView';
-import { Dimensions } from 'react-native';
-import { IAbilityScore } from './AbilityScores/IAbilityScores';
-import ProficiencyView from '../Shared/ProficiencyView';
+import React, { Component } from "react";
+import { View, StyleSheet } from "react-native";
+import CharacterMetadata from "./CharacterMetadata";
+import AbilityScores from "./AbilityScoresView";
+import { Dimensions } from "react-native";
+import { IAbilityScore } from "./AbilityScores/IAbilityScores";
+import ProficiencyView from "../Shared/ProficiencyView";
 
-var width: number = Dimensions.get('window').width; //full width
+var width: number = Dimensions.get("window").width; //full width
 
 interface Props {}
 
@@ -15,7 +15,7 @@ interface State {}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: 'black',
+        borderColor: "black",
         borderWidth: 2,
         width: width,
     },
@@ -24,19 +24,26 @@ const styles = StyleSheet.create({
 export default class MainPage extends Component<Props, State> {
     public static defaultProps = {};
     scores: IAbilityScore[] = [
-        { amount: 10, ability: 'Strength' },
-        { amount: 10, ability: 'Dexterity' },
-        { amount: 10, ability: 'Constitution' },
-        { amount: 10, ability: 'Intelligence' },
-        { amount: 10, ability: 'Wisdom' },
-        { amount: 10, ability: 'Charisma' },
+        { amount: 10, ability: "Strength" },
+        { amount: 10, ability: "Dexterity" },
+        { amount: 10, ability: "Constitution" },
+        { amount: 10, ability: "Intelligence" },
+        { amount: 10, ability: "Wisdom" },
+        { amount: 10, ability: "Charisma" },
     ];
     render() {
         return (
             <View style={styles.container}>
                 <CharacterMetadata />
                 <AbilityScores abilityScores={this.scores} />
-                <ProficiencyView title="Class DC" is10base="true" />
+                <ProficiencyView
+                    title="Class DC"
+                    proficiency="Trained"
+                    keyAbilityModifier={4}
+                    is10base={true}
+                    itemBonus={1}
+                    level={1}
+                />
             </View>
         );
     }
