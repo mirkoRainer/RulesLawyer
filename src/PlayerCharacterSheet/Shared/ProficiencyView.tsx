@@ -26,19 +26,42 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         alignContent: "stretch",
         alignSelf: "stretch",
+        justifyContent: "space-evenly",
     },
     text: {
-        flex: 1,
+        flex: 2,
         width: 100,
     },
-    title: {},
-    total: {
-        fontWeight: "bold",
+    title: {
+        flex: 2,
+        alignSelf: "center",
     },
-    equals: {},
-    acBase: {},
-    profBonus: {},
-    itemBonus: {},
+    total: {
+        flex: 2,
+        fontWeight: "bold",
+        fontSize: 16,
+        alignSelf: "center",
+    },
+    equals: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    acBase: {
+        flex: 2,
+        alignSelf: "center",
+    },
+    profBonus: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    itemBonus: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    equalSign: {
+        flex: 1,
+        alignSelf: "center",
+    },
 });
 
 export default class ProficiencyView extends Component<Props, State> {
@@ -49,9 +72,9 @@ export default class ProficiencyView extends Component<Props, State> {
 
     render() {
         const tenBase = this.props.is10base ? (
-            <Text style={styles.equals}> = Base: 10</Text>
+            <Text style={styles.equals}>Base: 10</Text>
         ) : (
-            <Text style={styles.equals}> =</Text>
+            <Text style={styles.equals}></Text>
         );
         const keyModifier = this.props.isACbase ? (
             <Text style={styles.acBase}>
@@ -65,7 +88,9 @@ export default class ProficiencyView extends Component<Props, State> {
         );
         const proficiencyBonus = (
             <Text style={styles.profBonus}>
-                {this.props.proficiency} at Level {this.props.level}
+                {this.props.proficiency}
+                {"\n"}
+                Level {this.props.level}
             </Text>
         );
         const itemBonus =
@@ -80,6 +105,7 @@ export default class ProficiencyView extends Component<Props, State> {
             <View style={styles.container}>
                 <Text style={styles.title}>{this.props.title}:</Text>
                 <Text style={styles.total}>16</Text>
+                <Text style={styles.equalSign}> = </Text>
                 {tenBase}
                 {keyModifier}
                 {proficiencyBonus}
