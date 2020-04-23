@@ -68,6 +68,7 @@ export default class ProficiencyView extends Component<Props, State> {
     public static defaultProps = {
         is10base: false,
         isACbase: false,
+        itemBonus: 0,
     };
 
     render() {
@@ -105,11 +106,29 @@ export default class ProficiencyView extends Component<Props, State> {
             this.props.descriptor !== undefined ? (
                 <Text style={styles.container}>{this.props.descriptor}</Text>
             ) : undefined;
+        const total = this.props.is10base ? (
+            <Text style={styles.total}>
+                {this.props.keyAbilityModifier +
+                    10 +
+                    this.props.level +
+                    this.props.itemBonus! +
+                    2}
+                {/* 2 will become proficiency bonus */}
+            </Text>
+        ) : (
+            <Text style={styles.total}>
+                {this.props.keyAbilityModifier +
+                    this.props.level +
+                    this.props.itemBonus! +
+                    2}
+                {/* 2 will become proficiency bonus */}
+            </Text>
+        );
         return (
             <>
                 <View style={styles.container}>
                     <Text style={styles.title}>{this.props.title}:</Text>
-                    <Text style={styles.total}>16</Text>
+                    {total}
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
                     {keyModifier}

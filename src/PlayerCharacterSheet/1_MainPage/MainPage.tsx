@@ -8,6 +8,7 @@ import ProficiencyView from "../Shared/ProficiencyView";
 import ArmorProficiencies from "./ArmorClass/ArmorProficiencies";
 import Shield from "./ArmorClass/Shield";
 import HitPoints from "./HitPoints/HitPoints";
+import Weapons from "./Weapons/Weapons";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -118,6 +119,7 @@ export default class MainPage extends Component<Props, State> {
                     <Text>Speed: {30} feet</Text>
                     <Text>Movement Types/Notes: {"Climb 20"}</Text>
                 </View>
+                <Weapons />
             </View>
         );
     }
