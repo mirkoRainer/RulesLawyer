@@ -106,6 +106,18 @@ export default class MainPage extends Component<Props, State> {
                     <Text>Immunities: All</Text>
                 </View>
                 <Text>Conditions: Flat Footed</Text>
+                <ProficiencyView
+                    title={"Perception"}
+                    keyAbilityModifier={2}
+                    proficiency={"Expert"}
+                    level={1}
+                    itemBonus={0}
+                    descriptor={"Senses: Low Light Vision"}
+                />
+                <View style={styles.rowContainer}>
+                    <Text>Speed: {30} feet</Text>
+                    <Text>Movement Types/Notes: {"Climb 20"}</Text>
+                </View>
             </View>
         );
     }

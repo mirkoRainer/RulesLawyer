@@ -101,17 +101,24 @@ export default class ProficiencyView extends Component<Props, State> {
             ) : (
                 <Text style={styles.itemBonus}> Item: 0</Text>
             );
+        const descriptor =
+            this.props.descriptor !== undefined ? (
+                <Text style={styles.container}>{this.props.descriptor}</Text>
+            ) : undefined;
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{this.props.title}:</Text>
-                <Text style={styles.total}>16</Text>
-                <Text style={styles.equalSign}> = </Text>
-                {tenBase}
-                {keyModifier}
-                {proficiencyBonus}
-                <ProficiencyArrayView proficiency="Trained" />
-                {itemBonus}
-            </View>
+            <>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{this.props.title}:</Text>
+                    <Text style={styles.total}>16</Text>
+                    <Text style={styles.equalSign}> = </Text>
+                    {tenBase}
+                    {keyModifier}
+                    {proficiencyBonus}
+                    <ProficiencyArrayView proficiency="Trained" />
+                    {itemBonus}
+                </View>
+                {descriptor}
+            </>
         );
     }
 }
