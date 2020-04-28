@@ -10,28 +10,13 @@ import Shield from "./ArmorClass/Shield";
 import HitPoints from "./HitPoints/HitPoints";
 import Weapons from "./Weapons/Weapons";
 import WeaponProficiencies from "./Weapons/WeaponProficiencies";
+import Skills from "./Skills";
 
 var width: number = Dimensions.get("window").width; //full width
 
 interface Props {}
 
 interface State {}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
-        width: width,
-    },
-    rowContainer: {
-        flex: 1,
-        flexDirection: "row",
-    },
-    notes: {
-        flex: 1,
-    },
-});
 
 export default class MainPage extends Component<Props, State> {
     public static defaultProps = {};
@@ -43,6 +28,7 @@ export default class MainPage extends Component<Props, State> {
         { amount: 10, ability: "Wisdom" },
         { amount: 10, ability: "Charisma" },
     ];
+    languages: string[] = [" Common", " Dwarf", " Goblin"];
     render() {
         return (
             <View style={styles.container}>
@@ -128,7 +114,32 @@ export default class MainPage extends Component<Props, State> {
                     }
                 />
                 <Weapons />
+                <Text style={styles.text}>Skillz</Text>
+                <Skills skills={["Object/array of skills"]} level={1} />
+                <Text style={styles.text}>
+                    Languages: {this.languages.toString()}
+                </Text>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        borderColor: "black",
+        borderWidth: 2,
+        width: width,
+    },
+    rowContainer: {
+        flex: 1,
+        flexDirection: "row",
+    },
+    notes: {
+        flex: 1,
+    },
+    text: {
+        alignSelf: "center",
+        flex: 1,
+    },
+});
