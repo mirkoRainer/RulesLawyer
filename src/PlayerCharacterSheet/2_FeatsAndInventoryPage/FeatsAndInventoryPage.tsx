@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { Component } from "react";
+import { View, StyleSheet, Text } from "react-native";
 
-interface Props {}
+interface Props {
+    ancestryFeatsAndAbilities: string[];
+    skillFeats: string[];
+    generalFeats: string[];
+    classFeatsAndAbilities: string[];
+    bonusFeats?: string[];
+}
 
 interface State {}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: 'black',
+        borderColor: "black",
         borderWidth: 2,
-        alignSelf: 'stretch',
-        alignContent: 'stretch',
+        alignSelf: "stretch",
+        alignContent: "stretch",
     },
-    text: {
-        backgroundColor: 'green',
-    },
+    text: {},
 });
 
 export default class FeatsAndInventoryPage extends Component<Props, State> {
@@ -24,7 +28,9 @@ export default class FeatsAndInventoryPage extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Feats And Inventory Page </Text>
+                <AncestryFeatsAndAbilities
+                    featsAndAbilities={this.props.ancestryFeatsAndAbilities}
+                />
             </View>
         );
     }
