@@ -8,7 +8,7 @@ interface Props {
     keyAbilityModifier: number;
     proficiency: string;
     level: number;
-    itemBonus?: number;
+    itemBonus: number;
     is10base?: boolean;
     isACbase?: boolean;
     dexCap?: number;
