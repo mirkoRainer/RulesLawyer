@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
+import AncestryFeatsAndAbilities from "./Feats/AncestryFeatsAndAbilities";
 
 interface Props {
     ancestryFeatsAndAbilities: string[];
