@@ -15,26 +15,20 @@ import { Skill } from "./Skill";
 
 var width: number = Dimensions.get("window").width; //full width
 
-interface Props {}
+interface Props {
+    skills: Skill[];
+    languages: string[];
+    scores: IAbilityScore[];
+}
 
 interface State {}
 
 export default class MainPage extends Component<Props, State> {
-    public static defaultProps = {};
-    scores: IAbilityScore[] = [
-        { amount: 10, ability: "Strength" },
-        { amount: 10, ability: "Dexterity" },
-        { amount: 10, ability: "Constitution" },
-        { amount: 10, ability: "Intelligence" },
-        { amount: 10, ability: "Wisdom" },
-        { amount: 10, ability: "Charisma" },
-    ];
-    languages: string[] = [" Common", " Dwarf", " Goblin"];
     render() {
         return (
             <View style={styles.container}>
                 <CharacterMetadata />
-                <AbilityScores abilityScores={this.scores} />
+                <AbilityScores abilityScores={this.props.scores} />
                 <ProficiencyView
                     title={"Class\nDC"}
                     proficiency="Trained"
@@ -116,153 +110,14 @@ export default class MainPage extends Component<Props, State> {
                 />
                 <Weapons />
                 <Text style={styles.text}>Skillz</Text>
-                <Skills skills={["Object/array of skills"]} level={1} />
+                <Skills skills={this.props.skills} level={1} />
                 <Text style={styles.text}>
-                    Languages: {this.languages.toString()}
+                    Languages: {this.props.languages.toString()}
                 </Text>
             </View>
         );
     }
 }
-
-const SKILLSDATA: Skill[] = [
-    {
-        name: "Acrobatics",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Arcana",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Atheltics",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Crafting",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Deception",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Diplomacy",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Intimidation",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Lore",
-        loreDescriptor: "Golarion",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Medicine",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Nature",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Occultism",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Performance",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Religion",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Society",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Stealth",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 0,
-    },
-    {
-        name: "Survival",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: false,
-    },
-    {
-        name: "Thievery",
-        abilityModifier: 3,
-        proficiency: "Trained",
-        itemBonus: 1,
-        hasArmorPenalty: true,
-        armorPenalty: 2,
-    },
-];
 
 const styles = StyleSheet.create({
     container: {

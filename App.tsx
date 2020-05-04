@@ -5,17 +5,9 @@ import MainPage from "./src/PlayerCharacterSheet/1_MainPage/MainPage";
 import FeatsAndInventoryPage from "./src/PlayerCharacterSheet/2_FeatsAndInventoryPage/FeatsAndInventoryPage";
 import StoryAndActionsPage from "./src/PlayerCharacterSheet/3_StoryAndActionsPage/StoryAndActionsPage";
 import SpellsPage from "./src/PlayerCharacterSheet/4_SpellsPage/SpellsPage";
+import { example } from "./examplePlayerCharacter";
 
 export default function App() {
-    const exampleData = {
-        playerCharacter: {
-            ancestryFeatsAndAbilities: ["Dwarf Stuff", "moar Dwarf stuff"],
-            skillFeats: ["Quikc Repair", "Battle Medicine"],
-            generalFeats: ["GeneralFeat 1", "General Feat 2"],
-            classFeatsAndAbilities: ["Sneak Attack", "Surprise Attack"],
-            bonusFeats: undefined,
-        },
-    };
     return (
         <View style={styles.container}>
             <Header
@@ -28,17 +20,21 @@ export default function App() {
                 rightComponent={{ icon: "home", color: "#fff" }}
             />
             <ScrollView>
-                <MainPage />
+                <MainPage
+                    skills={example.playerCharacter.skills}
+                    scores={example.playerCharacter.abilityScores}
+                    languages={example.playerCharacter.languages}
+                />
                 <FeatsAndInventoryPage
                     ancestryFeatsAndAbilities={
-                        exampleData.playerCharacter.ancestryFeatsAndAbilities
+                        example.playerCharacter.ancestryFeatsAndAbilities
                     }
-                    skillFeats={exampleData.playerCharacter.skillFeats}
-                    generalFeats={exampleData.playerCharacter.generalFeats}
+                    skillFeats={example.playerCharacter.skillFeats}
+                    generalFeats={example.playerCharacter.generalFeats}
                     classFeatsAndAbilities={
-                        exampleData.playerCharacter.classFeatsAndAbilities
+                        example.playerCharacter.classFeatsAndAbilities
                     }
-                    bonusFeats={exampleData.playerCharacter.bonusFeats}
+                    bonusFeats={example.playerCharacter.bonusFeats}
                 />
                 <StoryAndActionsPage />
                 <SpellsPage />
