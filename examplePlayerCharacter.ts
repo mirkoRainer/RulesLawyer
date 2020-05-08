@@ -250,5 +250,15 @@ export const example = {
                 },
             ],
         },
+        biographicalData: {
+            ethnicity: "Varisian",
+            nationality: "Absalomnian",
+            birthplace: "Absalom",
+            age: 89,
+            gender: "M",
+            height: 70,
+            weight: 210,
+            appearance: "middle height fair skin moderate looks",
+        },
     },
 };

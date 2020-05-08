@@ -36,7 +36,9 @@ export default function App() {
                     }
                     bonusFeats={example.playerCharacter.bonusFeats}
                 />
-                <StoryAndActionsPage />
+                <StoryAndActionsPage
+                    bioData={example.playerCharacter.biographicalData}
+                />
                 <SpellsPage />
             </ScrollView>
         </View>
