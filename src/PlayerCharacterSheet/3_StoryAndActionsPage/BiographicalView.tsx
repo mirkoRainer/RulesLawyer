@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-export interface BiographicalDataProps {
+export interface BiographicalData {
     ethnicity: string;
     nationality: string;
     birthplace: string;
@@ -13,18 +13,18 @@ export interface BiographicalDataProps {
 }
 
 interface Props {
-    bioData: BiographicalDataProps;
+    bioData: BiographicalData;
 }
 
 interface State {}
 
-export default class BiographicalData extends Component<Props, State> {
+export default class BiographicalView extends Component<Props, State> {
     public static defaultProps = {};
 
     render() {
         return (
-            <View>
-                <View style={styles.container}>
+            <View style={styles.container}>
+                <View style={styles.rowContainer}>
                     <View style={styles.rowContainerFlex3}>
                         <Text style={styles.sectionLabel}>Ethnicity</Text>
                         <Text style={styles.text}>
@@ -75,8 +75,12 @@ export default class BiographicalData extends Component<Props, State> {
                         </Text>
                     </View>
                 </View>
-                <Text style={styles.sectionLabel}>Appearance</Text>
-                <Text style={styles.text}>{this.props.bioData.appearance}</Text>
+                <View style={styles.rowContainerFlex1}>
+                    <Text style={styles.sectionLabel}>Appearance</Text>
+                    <Text style={styles.text}>
+                        {this.props.bioData.appearance}
+                    </Text>
+                </View>
             </View>
         );
     }
@@ -85,6 +89,11 @@ export default class BiographicalData extends Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        borderColor: "black",
+        borderWidth: 2,
+    },
+    rowContainer: {
+        flex: 1,
         flexDirection: "row",
         borderColor: "black",
         borderWidth: 2,
@@ -92,6 +101,7 @@ const styles = StyleSheet.create({
     text: {
         flex: 1,
         alignSelf: "center",
+        alignContent: "center",
         justifyContent: "center",
     },
     sectionLabel: {

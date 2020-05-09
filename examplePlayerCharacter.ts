@@ -178,7 +178,7 @@ export const example = {
         ],
         classFeatsAndAbilities: [
             { title: "Feature 1st", description: "Dwarf Stuff" },
-            { title: "Feature 1st", description: "Dwarf Stuff" },
+            { title: "-Feature 1st", description: "Dwarf Stuff" },
             { title: "Feat 1st", description: "other Dwarf Stuff" },
             { title: "Feat 2nd", description: "other Dwarf Stuff" },
             { title: "Feature 3rd", description: "other Dwarf Stuff" },
@@ -260,5 +260,30 @@ export const example = {
             weight: 210,
             appearance: "middle height fair skin moderate looks",
         },
+        personalityData: {
+            attitude: "sassy",
+            beliefs: "all people are good",
+            likes: "peanut butter",
+            dislikes: "sassy people",
+            catchphrases: "to infinity and beyond!",
+        },
+        campaignNotesData: {
+            notes:
+                "this is my campaign notes. They are thorough and they help my GM keep track of that various things that we do so he doesn't have to do all the work.",
+            allies: "my trusty sword, my trusty dagger, my cat",
+            enemies: "World Hungry",
+            organizations: "PETA, NRA, PFS, LP",
+        },
+        actions: [
+            {
+                name: "Shove",
+                numberOfActions: 1,
+                traits: ["Attack", "Atheletics"],
+                bookAbbreviation: "CRB",
+                pageNumber: 242,
+                description:
+                    "You shove your foe away and stuff. You can go too, if you want.",
+            },
+        ],
     },
 };

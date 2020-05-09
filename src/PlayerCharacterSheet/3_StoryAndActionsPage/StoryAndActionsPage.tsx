@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, Image } from "react-native-elements";
-import BiographicalData, { BiographicalDataProps } from "./BiographicalData";
-import Personality from "./Personality";
+import BiographicalView, { BiographicalData } from "./BiographicalView";
+import Personality, { PersonalityData } from "./Personality";
+import CampaignNotes, { CampaignNotesData } from "./CampaignNotes";
+import ActionsAndActivities, { Action } from "./ActionsAndActivities";
 
 interface Props {
-    bioData: BiographicalDataProps;
+    bioData: BiographicalData;
+    personalityData: PersonalityData;
+    campaignNotesData: CampaignNotesData;
+    actions: Action[];
 }
 
 interface State {}
@@ -18,8 +23,12 @@ export default class StoryAndActionsPage extends Component<Props, State> {
             <View style={styles.container}>
                 <Text h4> Story and Actions Page </Text>
                 {/*CharacterSketch placeholder*/}
-                <BiographicalData bioData={this.props.bioData} />
-                <Personality />
+                <BiographicalView bioData={this.props.bioData} />
+                <Personality personalityData={this.props.personalityData} />
+                <CampaignNotes
+                    campaignNotesData={this.props.campaignNotesData}
+                />
+                <ActionsAndActivities actions={this.props.actions} />
             </View>
         );
     }

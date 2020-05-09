@@ -38,6 +38,11 @@ export default function App() {
                 />
                 <StoryAndActionsPage
                     bioData={example.playerCharacter.biographicalData}
+                    personalityData={example.playerCharacter.personalityData}
+                    campaignNotesData={
+                        example.playerCharacter.campaignNotesData
+                    }
+                    actions={example.playerCharacter.actions}
                 />
                 <SpellsPage />
             </ScrollView>

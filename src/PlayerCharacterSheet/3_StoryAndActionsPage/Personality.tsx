@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-interface Props {}
+export interface PersonalityData {
+    attitude: string;
+    beliefs: string;
+    likes: string;
+    dislikes: string;
+    catchphrases: string;
+}
+
+interface Props {
+    personalityData: PersonalityData;
+}
 
 interface State {}
 
@@ -11,21 +21,70 @@ export default class Personality extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Personality </Text>
+                <Text style={styles.header}>Personality</Text>
+                <View style={styles.rowContainerFlex3}>
+                    <Text style={styles.sectionLabel}>Attitude</Text>
+                    <Text style={styles.text}>
+                        {" "}
+                        {this.props.personalityData.attitude}{" "}
+                    </Text>
+                </View>
+                <View style={styles.rowContainerFlex3}>
+                    <Text style={styles.sectionLabel}>Beliefs</Text>
+                    <Text style={styles.text}>
+                        {" "}
+                        {this.props.personalityData.beliefs}{" "}
+                    </Text>
+                </View>
+                <View style={styles.rowContainerFlex3}>
+                    <Text style={styles.sectionLabel}>Likes</Text>
+                    <Text style={styles.text}>
+                        {" "}
+                        {this.props.personalityData.likes}{" "}
+                    </Text>
+                </View>
+                <View style={styles.rowContainerFlex3}>
+                    <Text style={styles.sectionLabel}>Dislikes</Text>
+                    <Text style={styles.text}>
+                        {" "}
+                        {this.props.personalityData.dislikes}{" "}
+                    </Text>
+                </View>
+                <View style={styles.rowContainerFlex3}>
+                    <Text style={styles.sectionLabel}>Catchphrases</Text>
+                    <Text style={styles.text}>
+                        {" "}
+                        {this.props.personalityData.catchphrases}{" "}
+                    </Text>
+                </View>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flex: 1,
+        fontSize: 16,
+        fontWeight: "bold",
+        alignContent: "center",
+        justifyContent: "center",
+        alignSelf: "center",
+    },
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
     },
     text: {
         flex: 1,
-        width: 100,
-        backgroundColor: "green",
+        justifyContent: "center",
+        alignSelf: "center",
+    },
+    sectionLabel: {
+        fontWeight: "bold",
+    },
+    rowContainerFlex3: {
+        flex: 3,
+        borderColor: "black",
+        borderWidth: 1,
     },
 });
