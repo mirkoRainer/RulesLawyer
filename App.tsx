@@ -44,7 +44,18 @@ export default function App() {
                     }
                     actions={example.playerCharacter.actions}
                 />
-                <SpellsPage />
+                <SpellsPage
+                    spellAttackProficiency={
+                        example.playerCharacter.spellAttackProficiency
+                    }
+                    spellcastingAbilityModifier={
+                        example.playerCharacter.spellcastingAbilityModifier
+                    }
+                    currentLevel={example.playerCharacter.level}
+                    spellAttackItemBonusTotal={4}
+                    spellDCItemBonusTotal={2}
+                    /* Need to calculate the bonus total from the bonuses given */
+                />
             </ScrollView>
         </View>
     );

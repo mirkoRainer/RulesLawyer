@@ -18,52 +18,6 @@ interface Props {
 
 interface State {}
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
-        alignContent: "stretch",
-        alignSelf: "stretch",
-        justifyContent: "space-evenly",
-    },
-    text: {
-        flex: 2,
-        width: 100,
-    },
-    title: {
-        flex: 2,
-        alignSelf: "center",
-    },
-    total: {
-        flex: 2,
-        fontWeight: "bold",
-        fontSize: 16,
-        alignSelf: "center",
-    },
-    equals: {
-        flex: 1,
-        alignSelf: "center",
-    },
-    acBase: {
-        flex: 2,
-        alignSelf: "center",
-    },
-    profBonus: {
-        flex: 1,
-        alignSelf: "center",
-    },
-    itemBonus: {
-        flex: 1,
-        alignSelf: "center",
-    },
-    equalSign: {
-        flex: 1,
-        alignSelf: "center",
-    },
-});
-
 export default class ProficiencyView extends Component<Props, State> {
     public static defaultProps = {
         is10base: false,
@@ -141,3 +95,49 @@ export default class ProficiencyView extends Component<Props, State> {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: "row",
+        borderColor: "black",
+        borderWidth: 2,
+        alignContent: "stretch",
+        alignSelf: "stretch",
+        justifyContent: "space-evenly",
+    },
+    text: {
+        flex: 2,
+        width: 100,
+    },
+    title: {
+        flex: 2,
+        alignSelf: "center",
+    },
+    total: {
+        flex: 2,
+        fontWeight: "bold",
+        fontSize: 16,
+        alignSelf: "center",
+    },
+    equals: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    acBase: {
+        flex: 2,
+        alignSelf: "center",
+    },
+    profBonus: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    itemBonus: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    equalSign: {
+        flex: 1,
+        alignSelf: "center",
+    },
+});

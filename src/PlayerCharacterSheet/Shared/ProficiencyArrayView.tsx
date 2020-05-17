@@ -7,53 +7,82 @@ interface Props {
 
 interface State {}
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 4,
-        flexDirection: "row",
-        alignContent: "stretch",
-        alignSelf: "stretch",
-        justifyContent: "space-around",
-    },
-    profContainer: {
-        flex: 1,
-        width: 100,
-        borderColor: "black",
-        borderWidth: 1,
-    },
-    profText: {
-        fontSize: 12,
-        alignSelf: "center",
-    },
-    checkboxStatus: {
-        alignSelf: "center",
-        fontSize: 12,
-    },
-});
-
 export default class ProficiencyArrayView extends Component<Props, State> {
     public static defaultProps = {};
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.profContainer}>
-                    <Text style={styles.profText}>T</Text>
-                    <Text style={styles.checkboxStatus}>X</Text>
-                </View>
-                <View style={styles.profContainer}>
-                    <Text style={styles.profText}>E</Text>
-                    <Text style={styles.checkboxStatus}>-</Text>
-                </View>
-                <View style={styles.profContainer}>
-                    <Text style={styles.profText}>M</Text>
-                    <Text style={styles.checkboxStatus}>-</Text>
-                </View>
-                <View style={styles.profContainer}>
-                    <Text style={styles.profText}>L</Text>
-                    <Text style={styles.checkboxStatus}>-</Text>
-                </View>
+                <Text
+                    style={
+                        ["T", "E", "M", "L"].includes(
+                            this.props.proficiency.substring(0, 1)
+                        )
+                            ? styles.profTextTrue
+                            : styles.profTextFalse
+                    }
+                >
+                    T
+                </Text>
+                <Text
+                    style={
+                        ["E", "M", "L"].includes(
+                            this.props.proficiency.substring(0, 1)
+                        )
+                            ? styles.profTextTrue
+                            : styles.profTextFalse
+                    }
+                >
+                    E
+                </Text>
+                <Text
+                    style={
+                        ["M", "L"].includes(
+                            this.props.proficiency.substring(0, 1)
+                        )
+                            ? styles.profTextTrue
+                            : styles.profTextFalse
+                    }
+                >
+                    M
+                </Text>
+                <Text
+                    style={
+                        ["L"].includes(this.props.proficiency.substring(0, 1))
+                            ? styles.profTextTrue
+                            : styles.profTextFalse
+                    }
+                >
+                    L
+                </Text>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 4,
+        flexDirection: "row",
+        alignSelf: "stretch",
+        alignItems: "center",
+    },
+    profTextTrue: {
+        flex: 1,
+        fontSize: 12,
+        backgroundColor: "black",
+        color: "white",
+        textAlign: "center",
+        justifyContent: "center",
+        borderColor: "black",
+        borderWidth: 1,
+    },
+    profTextFalse: {
+        flex: 1,
+        fontSize: 12,
+        textAlign: "center",
+        justifyContent: "center",
+        borderColor: "black",
+        borderWidth: 1,
+    },
+});

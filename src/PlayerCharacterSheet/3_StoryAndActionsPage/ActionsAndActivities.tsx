@@ -4,11 +4,12 @@ import ActionView from "./ActionView";
 
 export interface Action {
     name: string;
-    numberOfActions: number;
-    traits: string;
+    numberOfActions: number; // 0 is a free action; 0.5 is a reaction;
+    traits: string[];
     bookAbbreviation: string;
     pageNumber: number;
     description: string;
+    trigger?: string;
 }
 
 interface Props {
@@ -24,6 +25,9 @@ export default class ActionsAndActivities extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.header}>
+                    Actions // Activities // Reactions
+                </Text>
                 <FlatList<Action>
                     data={this.props.actions}
                     renderItem={this.renderItem}
@@ -44,5 +48,13 @@ const styles = StyleSheet.create({
         flex: 1,
         width: 100,
         backgroundColor: "green",
+    },
+    header: {
+        flex: 1,
+        fontSize: 16,
+        fontWeight: "bold",
+        alignContent: "center",
+        justifyContent: "center",
+        alignSelf: "center",
     },
 });

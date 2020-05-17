@@ -1,5 +1,6 @@
 export const example = {
     playerCharacter: {
+        level: 1,
         abilityScores: [
             { amount: 10, ability: "Strength" },
             { amount: 10, ability: "Dexterity" },
@@ -284,6 +285,42 @@ export const example = {
                 description:
                     "You shove your foe away and stuff. You can go too, if you want.",
             },
+            {
+                name: "Power Attack",
+                numberOfActions: 2,
+                traits: ["Attack", "Flourish"],
+                bookAbbreviation: "CRB",
+                pageNumber: 278,
+                description: "Moar damage dice!",
+            },
+            {
+                name: "Speak out loud",
+                numberOfActions: 0,
+                traits: ["Free Action", "Verbal"],
+                bookAbbreviation: "CRB",
+                pageNumber: 1,
+                description: "You speak. Like a dog.",
+            },
+            {
+                name: "Attack of Opportunity",
+                numberOfActions: 0.5,
+                traits: [],
+                bookAbbreviation: "CRB",
+                pageNumber: 142,
+                description:
+                    "You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn’t count toward your multiple attack penalty, and your multiple attack penalty doesn’t apply to this Strike.",
+                trigger:
+                    "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
+            },
         ],
+        spellcastingAbilityModifier: 2,
+        spellAttackProficiency: "Trained",
+        bonuses: [
+            { type: "item", appliesTo: "spellAttack", amount: 1 },
+            { type: "item", appliesTo: "spellAttack", amount: 4 },
+            { type: "item", appliesTo: "spellAttack", amount: 2 },
+            { type: "item", appliesTo: "spellAttack", amount: 1 },
+        ],
+        penalties: [],
     },
 };
