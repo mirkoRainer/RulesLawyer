@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import MagicTradition from "./MagicTradition";
 
-interface Props {
+export interface MagicTraditionProps {
     prepared: boolean;
     spontaneous: boolean;
     arcane: boolean;
@@ -13,7 +13,10 @@ interface Props {
 
 interface State {}
 
-export default class MagicTraditions extends Component<Props, State> {
+export default class MagicTraditions extends Component<
+    MagicTraditionProps,
+    State
+> {
     public static defaultProps = {};
 
     render() {

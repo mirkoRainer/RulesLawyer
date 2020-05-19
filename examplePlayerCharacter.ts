@@ -322,5 +322,70 @@ export const example = {
             { type: "item", appliesTo: "spellAttack", amount: 1 },
         ],
         penalties: [],
+        magicTraditions: {
+            prepared: true,
+            spontaneous: false,
+            arcane: true,
+            primal: false,
+            divine: true,
+            occult: false,
+        },
+        spellSlots: [
+            {
+                spellLevel: "Focus",
+                maximum: 1,
+                current: 0,
+            },
+            {
+                spellLevel: "1",
+                maximum: 3,
+                current: 3,
+            },
+            {
+                spellLevel: "2",
+                maximum: 3,
+                current: 3,
+            },
+            {
+                spellLevel: "3",
+                maximum: 2,
+                current: 1,
+            },
+            {
+                spellLevel: "4",
+                maximum: 0,
+                current: 0,
+            },
+            {
+                spellLevel: "5",
+                maximum: 0,
+                current: 0,
+            },
+            {
+                spellLevel: "6",
+                maximum: 0,
+                current: 0,
+            },
+            {
+                spellLevel: "7",
+                maximum: 0,
+                current: 0,
+            },
+            {
+                spellLevel: "8",
+                maximum: 0,
+                current: 0,
+            },
+            {
+                spellLevel: "9",
+                maximum: 0,
+                current: 0,
+            },
+            {
+                spellLevel: "10",
+                maximum: 0,
+                current: 0,
+            },
+        ],
     },
 };

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import SpellAttackAndDCView from "./SpellAttackAndDCView";
-import MagicTraditions from "./MagicTraditions";
+import MagicTraditions, { MagicTraditionProps } from "./MagicTraditions";
+import SpellSlots from "./SpellSlots";
+import { SpellSlotProps } from "./SpellSlotView";
 
 interface Props {
     spellAttackProficiency: string;
@@ -9,6 +11,8 @@ interface Props {
     currentLevel: number;
     spellAttackItemBonusTotal: number;
     spellDCItemBonusTotal: number;
+    magicTraditions: MagicTraditionProps;
+    spellSlots: SpellSlotProps[];
 }
 
 interface State {}
@@ -28,13 +32,14 @@ export default class SpellsPage extends Component<Props, State> {
                     spellDCItemBonus={this.props.spellDCItemBonusTotal}
                 />
                 <MagicTraditions
-                    prepared={true}
-                    spontaneous={false}
-                    arcane={false}
-                    primal={true}
-                    divine={true}
-                    occult={false}
+                    prepared={this.props.magicTraditions.prepared}
+                    spontaneous={this.props.magicTraditions.spontaneous}
+                    arcane={this.props.magicTraditions.arcane}
+                    primal={this.props.magicTraditions.primal}
+                    divine={this.props.magicTraditions.divine}
+                    occult={this.props.magicTraditions.occult}
                 />
+                <SpellSlots SpellSlots={this.props.spellSlots} />
             </View>
         );
     }
