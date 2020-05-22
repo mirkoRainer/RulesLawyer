@@ -35,14 +35,14 @@ export default class SpellSlotView extends Component<SpellSlotProps, State> {
 }
 
 const styles = StyleSheet.create({
+    text: {
+        flex: 1,
+        textAlign: "center",
+    },
     hasSpellsAvailable: {
         flex: 1,
         borderColor: "black",
         borderWidth: 2,
-    },
-    text: {
-        flex: 1,
-        textAlign: "center",
     },
     outOfSpells: {
         flex: 1,

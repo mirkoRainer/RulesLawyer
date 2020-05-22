@@ -13,6 +13,7 @@ interface Props {
     spellDCItemBonusTotal: number;
     magicTraditions: MagicTraditionProps;
     spellSlots: SpellSlotProps[];
+    spells: Spell[];
 }
 
 interface State {}
@@ -40,6 +41,7 @@ export default class SpellsPage extends Component<Props, State> {
                     occult={this.props.magicTraditions.occult}
                 />
                 <SpellSlots SpellSlots={this.props.spellSlots} />
+                <Spells spells={this.props.spells} />
             </View>
         );
     }

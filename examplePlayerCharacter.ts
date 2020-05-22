@@ -387,5 +387,38 @@ export const example = {
                 current: 0,
             },
         ],
+        spells: [
+            {
+                actionAbbr: "R",
+                area: "60-foot emanation",
+                cast: "|R| somatic or verbal",
+                components: ["Somatic", "Verbal"],
+                descr:
+                    "Your performance protects you and your allies. Roll a Performance check for a type you know: an auditory performance if the trigger was auditory, or a visual one for a visual trigger. You and allies in the area can use the better result between your Performance check and the saving throw.",
+                duration: null,
+                level: 1,
+                name: "Counter Performance",
+                range: null,
+                requirements: null,
+                source: {
+                    abbr: "CRB",
+                    page_start: 386,
+                    page_stop: 386,
+                },
+                targets: null,
+                traditions: null,
+                traits: [
+                    "Uncommon",
+                    "Bard",
+                    "Composition",
+                    "Enchantment",
+                    "Fortune",
+                    "Mental",
+                ],
+                trigger:
+                    "You or an ally within 60 feet rolls a saving throw against an auditory or visual effect.",
+                type: "Focus",
+            },
+        ],
     },
 };

@@ -21,19 +21,18 @@ export default class SpellSlots extends Component<Props, State> {
         return (
             <View style={styles.container}>
                 <Text style={styles.header}> Spell Slots </Text>
-                <View style={styles.rowContainer}>
-                    <FlatList<SpellSlotProps>
-                        data={this.props.SpellSlots}
-                        renderItem={this.renderItem}
-                        keyExtractor={this.keyExtractor}
-                        horizontal={true}
-                        contentContainerStyle={{
-                            flexGrow: 1,
-                            justifyContent: "space-evenly",
-                        }}
-                        scrollEnabled={false}
-                    />
-                </View>
+                <FlatList<SpellSlotProps>
+                    style={styles.flatContainer}
+                    data={this.props.SpellSlots}
+                    renderItem={this.renderItem}
+                    keyExtractor={this.keyExtractor}
+                    horizontal={true}
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                        justifyContent: "center",
+                    }}
+                    scrollEnabled={false}
+                />
             </View>
         );
     }
@@ -45,12 +44,17 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 1,
     },
+    flatContainer: {
+        flex: 1,
+        flexGrow: 1,
+        borderColor: "yellow",
+        borderWidth: 4,
+    },
     rowContainer: {
         flex: 1,
         flexDirection: "row",
         borderColor: "black",
         borderWidth: 1,
-        justifyContent: "center",
     },
     text: {
         flex: 1,
