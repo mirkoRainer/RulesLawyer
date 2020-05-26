@@ -38,11 +38,12 @@
         ],
         "quotes": [
             "error",
-            "single"
+            "double"
         ],
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-unused-vars": "off"
     }
 }

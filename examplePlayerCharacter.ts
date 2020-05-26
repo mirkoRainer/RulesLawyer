@@ -419,6 +419,34 @@ export const example = {
                     "You or an ally within 60 feet rolls a saving throw against an auditory or visual effect.",
                 type: "Focus",
             },
+            {
+                action_abbr: "1",
+                area: null,
+                cast: "somatic",
+                components: [ "Somatic" ],
+                descr: "You mime creating an invisible 10-foot-by-10-foot stretch of wall adjacent to you and within your reach. The wall is solid to those creatures that don't disbelieve it, even incorporeal creatures. You and your allies can voluntarily believe the wall exists to continue to treat it as solid, for instance to climb onto it. A creature that disbelieves the illusion is temporarily immune to your house of imaginary walls for 1 minute. The wall doesn't block creatures that didn't see your visual performance, nor does it block objects. The wall has AC 10, Hardness equal to double the spell's level, and HP equal to quadruple the spell's level.",
+                duration: "1 round",
+                name: "House of Imaginary Walls",
+                range: "touch",
+                requirements: null,
+                source: {
+                    abbr: "CRB",
+                    page_start: 386,
+                    page_stop: 386,
+                },
+                targets: null,
+                traditions: null,
+                traits: [
+                    "Uncommon",
+                    "Bard",
+                    "Cantrip",
+                    "Composition",
+                    "Illusion",
+                    "Visual",
+                ],
+                trigger: null,
+                type: "Cantrip"
+            }
         ],
     },
 };
