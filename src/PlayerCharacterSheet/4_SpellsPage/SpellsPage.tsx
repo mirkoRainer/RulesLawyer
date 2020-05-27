@@ -4,6 +4,8 @@ import SpellAttackAndDCView from "./SpellAttackAndDCView";
 import MagicTraditions, { MagicTraditionProps } from "./MagicTraditions";
 import SpellSlots from "./SpellSlots";
 import { SpellSlotProps } from "./SpellSlotView";
+import { Spell } from "./Spell";
+import Spells from "./Spells";
 
 interface Props {
     spellAttackProficiency: string;

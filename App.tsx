@@ -57,7 +57,7 @@ export default function App() {
                     /* Need to calculate the bonus total from the bonuses given */
                     spellSlots={example.playerCharacter.spellSlots}
                     magicTraditions={example.playerCharacter.magicTraditions}
-                    spell={example.playerCharacter.spells}
+                    spells={example.playerCharacter.spells}
                 />
             </ScrollView>
         </View>

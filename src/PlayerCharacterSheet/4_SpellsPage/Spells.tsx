@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
-import { Spell } from "./SpellView";
+import SpellView from "./SpellView";
+import { Spell } from "./Spell";
 
 interface Props {
     spells: Spell[];
@@ -8,14 +9,8 @@ interface Props {
 
 interface State {}
 export default class Spells extends Component<Props, State> {
-    renderItem = ({ item }: { item: Spell }) => (
-        <SpellView
-            spellLevel={item.spellLevel}
-            maximum={item.maximum}
-            current={item.current}
-        />
-    );
-    keyExtractor = (item: Spell) => item.spellLevel;
+    renderItem = ({ item }: { item: Spell }) => <SpellView spell={item} />;
+    keyExtractor = (item: Spell) => item.name;
     render() {
         return (
             <View style={styles.container}>
@@ -46,8 +41,6 @@ const styles = StyleSheet.create({
     flatContainer: {
         flex: 1,
         flexGrow: 1,
-        borderColor: "yellow",
-        borderWidth: 4,
     },
     rowContainer: {
         flex: 1,

@@ -1,19 +1,34 @@
 import { RulebookEntry } from "../Shared/RulebookEntry";
 
-export interface Spell {
-    action_abbr: string;
-    area: string;
-    cast: string;
-    components: string[];
-    descr: string;
-    duration: string;
-    name: string;
-    range: string;
-    requirements: string;
-    source: RulebookEntry;
-    targets: string;
-    traditions: string[];
-    traits: string[];
-    trigger: string;
-    type: string;
+import React, { Component } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { Spell } from "./Spell";
+
+interface Props {
+    spell: Spell;
 }
+
+interface State {}
+
+export default class SpellView extends Component<Props, State> {
+    public static defaultProps = {};
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}> {this.props.spell.name} </Text>
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        borderColor: "black",
+        borderWidth: 1,
+    },
+    text: {
+        flex: 1,
+    },
+});
