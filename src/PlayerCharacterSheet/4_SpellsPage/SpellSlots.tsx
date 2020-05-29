@@ -20,6 +20,7 @@ export default class SpellSlots extends Component<Props, State> {
                         spellLevel={this.props.spellSlots[0].spellLevel}
                         maximum={this.props.spellSlots[0].maximum}
                         current={this.props.spellSlots[0].current}
+                        focus={true}
                     />
                     <SpellSlotView
                         /* 1st Level */

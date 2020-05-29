@@ -16,7 +16,7 @@ export default class SpellView extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> {this.props.spell.name} </Text>
+                <Text style={styles.spellName}> {this.props.spell.name} </Text>
             </View>
         );
     }
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 1,
     },
-    text: {
+    spellName: {
         flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
     },
 });

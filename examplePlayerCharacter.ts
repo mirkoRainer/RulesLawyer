@@ -337,87 +337,188 @@ export const example = {
                 current: 0,
             },
             {
-                spellLevel: "1",
+                spellLevel: "1st",
                 maximum: 3,
                 current: 3,
             },
             {
-                spellLevel: "2",
+                spellLevel: "2nd",
                 maximum: 3,
                 current: 3,
             },
             {
-                spellLevel: "3",
+                spellLevel: "3rd",
                 maximum: 2,
                 current: 1,
             },
             {
-                spellLevel: "4",
+                spellLevel: "4th",
                 maximum: 0,
                 current: 0,
             },
             {
-                spellLevel: "5",
+                spellLevel: "5th",
                 maximum: 0,
                 current: 0,
             },
             {
-                spellLevel: "6",
+                spellLevel: "6th",
                 maximum: 0,
                 current: 0,
             },
             {
-                spellLevel: "7",
+                spellLevel: "7th",
                 maximum: 0,
                 current: 0,
             },
             {
-                spellLevel: "8",
+                spellLevel: "8th",
                 maximum: 0,
                 current: 0,
             },
             {
-                spellLevel: "9",
+                spellLevel: "9th",
                 maximum: 0,
                 current: 0,
             },
             {
-                spellLevel: "10",
+                spellLevel: "10th",
                 maximum: 0,
                 current: 0,
             },
         ],
         spells: [
             {
-                actionAbbr: "R",
-                area: "60-foot emanation",
-                cast: "|R| somatic or verbal",
-                components: ["Somatic", "Verbal"],
-                descr:
-                    "Your performance protects you and your allies. Roll a Performance check for a type you know: an auditory performance if the trigger was auditory, or a visual one for a visual trigger. You and allies in the area can use the better result between your Performance check and the saving throw.",
-                duration: null,
-                level: 1,
-                name: "Counter Performance",
-                range: null,
-                requirements: null,
-                source: {
-                    abbr: "CRB",
-                    page_start: 386,
-                    page_stop: 386,
-                },
-                targets: null,
-                traditions: null,
-                traits: [
-                    "Uncommon",
-                    "Bard",
-                    "Composition",
-                    "Enchantment",
-                    "Fortune",
-                    "Mental",
+                spellType: "Focus",
+                data: [
+                    {
+                        action_abbr: "2",
+                        cast: null,
+                        components: ["Somatic", "Verbal"],
+                        descr:
+                            "You become a mantis. You gain the effects of *insect form*, heightened to *mantis form*'s level, and you can only transform into a mantis.",
+                        duration: "1 minute",
+                        has_been_manually_proofread: false,
+                        level: 4,
+                        name: "Mantis Form",
+                        req: null,
+                        source: [
+                            {
+                                abbr: "LOWG",
+                                page_start: 71,
+                                page_stop: 71,
+                            },
+                        ],
+                        targets: null,
+                        traditions: null,
+                        traits: ["Uncommon", "Polymorph", "Transmutation"],
+                        trigger: null,
+                        type: "Focus",
+                    },
                 ],
-                trigger:
-                    "You or an ally within 60 feet rolls a saving throw against an auditory or visual effect.",
-                type: "Focus",
+            },
+            {
+                spellType: "1st Level",
+                data: [
+                    {
+                        action_abbr: ["1", "2", "3"],
+                        cast: "|1| to |3|",
+                        components: null,
+                        description:
+                            "You channel positive energy to heal the living or damage the undead. If the target is a willing living creature, you restore 1d8 Hit Points. If the target is undead, you deal that amount of positive damage to it, and it gets a basic Fortitude save. The number of actions you spend when Casting this Spell determines its targets, range, area, and other parameters.  \n\n  \n\n |1| (somatic) The spell has a range of touch.  \n\n |2| (verbal, somatic) The spell has a range of 30 feet. If you're healing a living creature, increase the Hit Points restored by 8.  \n\n |3| (material, somatic, verbal) You disperse positive energy in a 30-foot emanation. This targets all living and undead creatures in the burst.  \n\n**Heightened (+1)**  The amount of healing or damage increases by 1d8, and the extra healing for the 2-action version increases by 8.",
+                        duration: null,
+                        has_been_manually_proofread: false,
+                        heightened: [
+                            {
+                                damagetype_name: "Positive",
+                                description:
+                                    "**Heightened (+1)** The amount of healing or damage increases by 1d8, and the extra healing for the 2-action version increases by 8.",
+                                formula: "1d8",
+                                type: 1,
+                            },
+                        ],
+                        level: 1,
+                        name: "Heal",
+                        range: "varies",
+                        requirements: null,
+                        rolls: [
+                            {
+                                action_abbr: "1",
+                                components: ["Somatic"],
+                                damagetype_name: "Positive",
+                                dice: "1d8",
+                                range: "Touch",
+                            },
+                            {
+                                action_abbr: "2",
+                                components: ["Somatic", "Verbal"],
+                                damagetype_name: "Positive",
+                                description:
+                                    "If you're healing a living creature, increase the Hit Points restored by 8.",
+                                dice: "1d8",
+                                range: "30 feet",
+                            },
+                            {
+                                action_abbr: "3",
+                                components: ["Material", "Somatic", "Verbal"],
+                                damagetype_name: "Positive",
+                                description:
+                                    "You disperse positive energy in a 30-foot emanation. This targets all living and undead creatures in the burst.",
+                                dice: "1d8",
+                                range: "30-foot emanation",
+                            },
+                        ],
+                        source: [
+                            {
+                                abbr: "CRB",
+                                page_start: 342,
+                                page_stop: 342,
+                            },
+                        ],
+                        targets:
+                            "1 willing living creature or 1 undead creature",
+                        traditions: ["Divine", "Primal"],
+                        traits: ["Healing", "Necromancy", "Positive"],
+                        trigger: null,
+                        type: "Spell",
+                    },
+                ],
+            },
+            {
+                spellType: "2nd Level",
+                data: [],
+            },
+            {
+                spellType: "3rd Level",
+                data: [],
+            },
+            {
+                spellType: "4th Level",
+                data: [],
+            },
+            {
+                spellType: "5th Level",
+                data: [],
+            },
+            {
+                spellType: "6th Level",
+                data: [],
+            },
+            {
+                spellType: "7th Level",
+                data: [],
+            },
+            {
+                spellType: "8th Level",
+                data: [],
+            },
+            {
+                spellType: "9th Level",
+                data: [],
+            },
+            {
+                spellType: "10th Level",
+                data: [],
             },
         ],
     },

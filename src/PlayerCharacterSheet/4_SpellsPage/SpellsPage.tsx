@@ -42,7 +42,7 @@ export default class SpellsPage extends Component<Props, State> {
                     divine={this.props.magicTraditions.divine}
                     occult={this.props.magicTraditions.occult}
                 />
-                <SpellSlots SpellSlots={this.props.spellSlots} />
+                <SpellSlots spellSlots={this.props.spellSlots} />
                 <Spells spells={this.props.spells} />
             </View>
         );

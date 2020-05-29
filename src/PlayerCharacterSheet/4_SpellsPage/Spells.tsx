@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { View, StyleSheet, Text, FlatList, SectionList } from "react-native";
 import SpellView from "./SpellView";
-import { Spell } from "./Spell";
+import { Spell, SpellListEntry } from "./Spell";
 
 interface Props {
-    spells: Spell[];
+    spells: SpellListEntry[];
 }
 
 interface State {}
@@ -14,18 +14,26 @@ export default class Spells extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.header}> Spell Slots </Text>
-                <FlatList<Spell>
+                <Text style={styles.header}> Spells </Text>
+                <SectionList
                     style={styles.flatContainer}
-                    data={this.props.spells}
+                    sections={this.props.spells}
                     renderItem={this.renderItem}
                     keyExtractor={this.keyExtractor}
-                    horizontal={true}
                     contentContainerStyle={{
                         flexGrow: 1,
-                        justifyContent: "center",
+                        justifyContent: "flex-start",
                     }}
-                    scrollEnabled={false}
+                    renderSectionHeader={({ section: { spellType } }) => (
+                        <Text
+                            style={{
+                                ...styles.header,
+                                ...styles.sectionHeader,
+                            }}
+                        >
+                            {spellType}
+                        </Text>
+                    )}
                 />
             </View>
         );
@@ -58,5 +66,8 @@ const styles = StyleSheet.create({
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",
+    },
+    sectionHeader: {
+        fontSize: 12,
     },
 });
