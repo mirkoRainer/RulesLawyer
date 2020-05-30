@@ -6,9 +6,9 @@ export interface SpellListEntry {
 }
 
 export interface Spell {
-    actionAbbr: string;
+    actionAbbr: string | string[];
     area?: string | null;
-    cast: string;
+    cast?: string | null;
     components?: string[] | null;
     description: string;
     duration?: string | null;

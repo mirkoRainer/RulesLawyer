@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Text } from "react-native-elements";
 import SpellAttackAndDCView from "./SpellAttackAndDCView";
 import MagicTraditions, { MagicTraditionProps } from "./MagicTraditions";
 import SpellSlots from "./SpellSlots";
 import { SpellSlotProps } from "./SpellSlotView";
-import { Spell } from "./Spell";
+import { Spell, SpellListEntry } from "./Spell";
 import Spells from "./Spells";
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
     spellDCItemBonusTotal: number;
     magicTraditions: MagicTraditionProps;
     spellSlots: SpellSlotProps[];
-    spells: Spell[];
+    spells: SpellListEntry[];
 }
 
 interface State {}
@@ -24,7 +25,7 @@ export default class SpellsPage extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Spells Page </Text>
+                <Text h4> Spells Page </Text>
                 <SpellAttackAndDCView
                     proficiency={this.props.spellAttackProficiency}
                     keySpellcastingAbilityModifier={

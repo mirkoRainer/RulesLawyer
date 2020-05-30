@@ -392,23 +392,21 @@ export const example = {
                 spellType: "Focus",
                 data: [
                     {
-                        action_abbr: "2",
+                        actionAbbr: "2",
                         cast: null,
                         components: ["Somatic", "Verbal"],
-                        descr:
+                        description:
                             "You become a mantis. You gain the effects of *insect form*, heightened to *mantis form*'s level, and you can only transform into a mantis.",
                         duration: "1 minute",
                         has_been_manually_proofread: false,
                         level: 4,
                         name: "Mantis Form",
                         req: null,
-                        source: [
-                            {
-                                abbr: "LOWG",
-                                page_start: 71,
-                                page_stop: 71,
-                            },
-                        ],
+                        source: {
+                            abbr: "LOWG",
+                            page_start: 71,
+                            page_stop: 71,
+                        },
                         targets: null,
                         traditions: null,
                         traits: ["Uncommon", "Polymorph", "Transmutation"],
@@ -421,7 +419,7 @@ export const example = {
                 spellType: "1st Level",
                 data: [
                     {
-                        action_abbr: ["1", "2", "3"],
+                        actionAbbr: ["1", "2", "3"],
                         cast: "|1| to |3|",
                         components: null,
                         description:
@@ -468,13 +466,11 @@ export const example = {
                                 range: "30-foot emanation",
                             },
                         ],
-                        source: [
-                            {
-                                abbr: "CRB",
-                                page_start: 342,
-                                page_stop: 342,
-                            },
-                        ],
+                        source: {
+                            abbr: "CRB",
+                            page_start: 342,
+                            page_stop: 342,
+                        },
                         targets:
                             "1 willing living creature or 1 undead creature",
                         traditions: ["Divine", "Primal"],

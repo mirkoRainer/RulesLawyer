@@ -27,9 +27,9 @@ export default class ProficiencyView extends Component<Props, State> {
 
     render() {
         const tenBase = this.props.is10base ? (
-            <Text style={styles.equals}>Base: 10</Text>
+            <Text style={styles.tenBase}>Base: 10</Text>
         ) : (
-            <Text style={styles.equals}></Text>
+            <Text style={styles.tenBase}></Text>
         );
         const keyModifier = this.props.isACbase ? (
             <Text style={styles.acBase}>
@@ -107,11 +107,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
     },
     text: {
-        flex: 2,
+        flex: 3,
         width: 100,
     },
     title: {
-        flex: 2,
+        flex: 3,
         alignSelf: "center",
     },
     total: {
@@ -121,19 +121,23 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     equals: {
-        flex: 1,
-        alignSelf: "center",
-    },
-    acBase: {
         flex: 2,
         alignSelf: "center",
     },
+    tenBase: {
+        flex: 3,
+        alignSelf: "center",
+    },
+    acBase: {
+        flex: 3,
+        alignSelf: "center",
+    },
     profBonus: {
-        flex: 1,
+        flex: 2,
         alignSelf: "center",
     },
     itemBonus: {
-        flex: 1,
+        flex: 3,
         alignSelf: "center",
     },
     equalSign: {
