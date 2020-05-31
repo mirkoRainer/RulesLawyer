@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Text } from "react-native-elements";
-import AncestryFeatsAndAbilities from "./Feats/AncestryFeatsAndAbilities";
-import { FeatAndAbilityEntry } from "./Feats/FeatAndAbilityEntry";
+import { FeatAndAbilityEntry } from "./FeatAndAbilityEntry";
 
 interface Props {
     ancestryFeatsAndAbilities: FeatAndAbilityEntry[];
