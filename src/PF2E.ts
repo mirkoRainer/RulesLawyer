@@ -1,11 +1,5 @@
 ///<reference path='mscorlib.ts'/>
-enum Bonustype
-{
-	Proficiency,
-	Circumstance,
-	Status,
-	Item
-}
+
 interface IAction
 {
 	ActionCost: ActionCost;
@@ -14,16 +8,6 @@ interface IAction
 	Trigger: string;
 	Check: ICheck;
 	Effect: IEffect;
-}
-interface IAoNItem
-{
-	AoNUri: Uri;
-}
-interface ICheck
-{
-	Bonuses: Bonus[];
-	AbilityModifier: number;
-	Penalties: Penalty[];
 }
 interface IPfObject
 {

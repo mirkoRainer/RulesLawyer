@@ -8,7 +8,10 @@ export default class ProficiencyCalculator {
         master: 6,
         legendary: 8,
     };
-    calculateProficiencyBonus(proficiency: string, level: number) {
-        return this.proficiencies[proficiency] + level;
+    calculateProficiencyBonus(proficiency: string, level: number): number {
+        const proficiencyBonus: number = this.proficiencies[
+            proficiency.toLowerCase()
+        ];
+        return proficiencyBonus + level;
     }
 }
