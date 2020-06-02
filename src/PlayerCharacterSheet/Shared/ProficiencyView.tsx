@@ -10,10 +10,10 @@ interface Props {
     level: number;
     itemBonus: number;
     is10base?: boolean;
-    isACbase?: boolean;
+    isACBase?: boolean;
     dexCap?: number;
     descriptor?: string;
-    armorPenatly?: number;
+    armorPenalty?: number;
 }
 
 interface State {}
@@ -21,7 +21,7 @@ interface State {}
 export default class ProficiencyView extends Component<Props, State> {
     public static defaultProps = {
         is10base: false,
-        isACbase: false,
+        isACBase: false,
         itemBonus: 0,
     };
 
@@ -31,7 +31,7 @@ export default class ProficiencyView extends Component<Props, State> {
         ) : (
             <Text style={styles.tenBase}></Text>
         );
-        const keyModifier = this.props.isACbase ? (
+        const keyModifier = this.props.isACBase ? (
             <Text style={styles.acBase}>
                 Dex:{this.props.keyAbilityModifier} Cap:
                 {this.props.dexCap !== undefined ? this.props.dexCap : 0}
