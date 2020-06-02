@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, FlatList } from "react-native";
-// eslint-disable-next-line no-unused-vars
 import { IAbilityScore } from "./AbilityScores/IAbilityScores";
 import AbilityScoreView from "./AbilityScores/AbilityScoreView";
 

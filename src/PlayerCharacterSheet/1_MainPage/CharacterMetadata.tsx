@@ -19,6 +19,12 @@ interface Props {
     heritage: string;
     level: number;
     experiencePoints: number;
+    background: string;
+    pcClass: string;
+    subclass: string;
+    alignment: string;
+    deity: string;
+    traits: string[];
 }
 
 interface State {}
@@ -49,14 +55,17 @@ export default class CharacterMetadata extends Component<Props, State> {
                     </View>
                 </View>
                 <View style={styles.rowContainer}>
-                    <Background />
-                    <Class />
+                    <Background background={this.props.background} />
+                    <Class
+                        pcClass={this.props.pcClass}
+                        subClass={this.props.subclass}
+                    />
                 </View>
                 <View style={styles.rowContainer}>
-                    <Alignment />
-                    <Deity />
+                    <Alignment alignment={this.props.alignment} />
+                    <Deity deity={this.props.deity} />
                 </View>
-                <Traits />
+                <Traits traits={this.props.traits} />
             </View>
         );
     }
