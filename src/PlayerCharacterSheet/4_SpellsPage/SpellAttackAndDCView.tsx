@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import ProficiencyView from "../Shared/ProficiencyView";
+import { Proficiencies } from "../Shared/PF2eCoreLib/Proficiencies";
 
 interface Props {
-    proficiency: string;
+    proficiency: Proficiencies;
     keySpellcastingAbilityModifier: number;
     level: number;
     spellAttackItemBonus: number;

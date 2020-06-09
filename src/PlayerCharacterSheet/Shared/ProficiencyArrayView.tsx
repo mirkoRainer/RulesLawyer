@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, CheckBox, Switch } from "react-native";
+import { Proficiencies } from "./PF2eCoreLib/Proficiencies";
 
 interface Props {
-    proficiency: string;
+    proficiency: Proficiencies;
 }
 
 interface State {}
 
 export default class ProficiencyArrayView extends Component<Props, State> {
-    public static defaultProps = {};
-
     render() {
         return (
             <View style={styles.container}>
                 <Text
                     style={
                         ["T", "E", "M", "L"].includes(
-                            this.props.proficiency.substring(0, 1)
+                            this.props.proficiency.toString().substring(0, 1)
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -27,7 +26,7 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 <Text
                     style={
                         ["E", "M", "L"].includes(
-                            this.props.proficiency.substring(0, 1)
+                            this.props.proficiency.toString().substring(0, 1)
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -38,7 +37,7 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 <Text
                     style={
                         ["M", "L"].includes(
-                            this.props.proficiency.substring(0, 1)
+                            this.props.proficiency.toString().substring(0, 1)
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -48,7 +47,9 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 </Text>
                 <Text
                     style={
-                        ["L"].includes(this.props.proficiency.substring(0, 1))
+                        ["L"].includes(
+                            this.props.proficiency.toString().substring(0, 1)
+                        )
                             ? styles.profTextTrue
                             : styles.profTextFalse
                     }

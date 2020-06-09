@@ -1,17 +1,26 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import CharacterMetadata from "./CharacterMetadata";
+import { View, Text, StyleSheet, SnapshotViewIOSProps } from "react-native";
+import CharacterMetadata, { CharacterMetadataProps } from "./CharacterMetadata";
 import AbilityScores from "./AbilityScoresView";
 import { Dimensions } from "react-native";
 import { IAbilityScore } from "./AbilityScores/IAbilityScores";
-import ProficiencyView from "../Shared/ProficiencyView";
-import ArmorProficiencies from "./ArmorClass/ArmorProficiencies";
-import Shield from "./ArmorClass/Shield";
-import HitPoints from "./HitPoints/HitPoints";
+import ProficiencyView, { ProficiencyProps } from "../Shared/ProficiencyView";
+import ArmorProficiencies, {
+    ArmorProficiencyProps,
+} from "./ArmorClass/ArmorProficiencies";
+import Shield, { ShieldProps } from "./ArmorClass/Shield";
+import HitPoints, { HitPointProps } from "./HitPoints/HitPoints";
 import Weapons from "./Weapons/Weapons";
-import WeaponProficiencies from "./Weapons/WeaponProficiencies";
+import WeaponProficiencies, {
+    WeaponProficiencyProps,
+} from "./Weapons/WeaponProficiencies";
 import Skills from "./Skills";
 import { Skill } from "./Skill";
+import { MovementProps } from "./MovementProps";
+import OtherMovements from "./OtherMovements";
+import WeaponDamageSection from "./Weapons/WeaponDamageSection";
+import { WeaponViewProps } from "./Weapons/Weapon";
+import { SavesProp } from "./SavesProps";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -19,6 +28,21 @@ interface Props {
     skills: Skill[];
     languages: string[];
     scores: IAbilityScore[];
+    characterMetadata: CharacterMetadataProps;
+    classDCProficiency: ProficiencyProps;
+    acProficiency: ProficiencyProps;
+    level: number;
+    armorProficiency: ArmorProficiencyProps;
+    shieldProps: ShieldProps;
+    saves: SavesProp;
+    hitPoints: HitPointProps;
+    resistances: string[];
+    immunities: string[];
+    conditions: string[];
+    perception: ProficiencyProps;
+    movement: MovementProps;
+    weaponProficiencies: WeaponProficiencyProps;
+    weapons: WeaponViewProps[];
 }
 
 interface State {}
@@ -27,88 +51,121 @@ export default class MainPage extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <CharacterMetadata />
+                <CharacterMetadata
+                    characterMetadata={this.props.characterMetadata}
+                />
                 <AbilityScores abilityScores={this.props.scores} />
                 <ProficiencyView
-                    title={"Class\nDC"}
-                    proficiency="Trained"
-                    keyAbilityModifier={4}
-                    is10base={true}
-                    itemBonus={1}
-                    level={1}
+                    title={this.props.classDCProficiency.title}
+                    proficiency={this.props.classDCProficiency.proficiency}
+                    keyAbilityModifier={
+                        this.props.classDCProficiency.keyAbilityModifier
+                    }
+                    is10base={this.props.classDCProficiency.is10base}
+                    itemBonus={this.props.classDCProficiency.itemBonus}
+                    level={this.props.level}
                 />
                 <ProficiencyView
                     title={"AC"}
-                    keyAbilityModifier={2}
-                    proficiency="Trained"
-                    level={1}
-                    itemBonus={1}
-                    is10base={true}
-                    isACbase={true}
-                    dexCap={3}
-                    armorPenatly={0}
+                    keyAbilityModifier={
+                        this.props.acProficiency.keyAbilityModifier
+                    }
+                    proficiency={this.props.acProficiency.proficiency}
+                    level={this.props.level}
+                    itemBonus={this.props.acProficiency.itemBonus}
+                    is10base={this.props.acProficiency.is10base}
+                    isACBase={true}
+                    dexCap={this.props.acProficiency.dexCap}
+                    armorPenalty={this.props.acProficiency.armorPenalty}
                 />
                 <ArmorProficiencies
-                    unarmoredProficiency={"Trained"}
-                    lightArmorProficiency={"Expert"}
-                    mediumArmorProficiency={"Master"}
-                    heavyArmorProficiency={"Legendary"}
+                    unarmoredProficiency={
+                        this.props.armorProficiency.unarmoredProficiency
+                    }
+                    lightArmorProficiency={
+                        this.props.armorProficiency.lightArmorProficiency
+                    }
+                    mediumArmorProficiency={
+                        this.props.armorProficiency.mediumArmorProficiency
+                    }
+                    heavyArmorProficiency={
+                        this.props.armorProficiency.heavyArmorProficiency
+                    }
                 />
-                <Shield acBonus={2} hardness={5} maxHP={10} currentHP={7} />
+                <Shield
+                    hasShield={this.props.shieldProps.hasShield}
+                    acBonus={this.props.shieldProps.acBonus}
+                    hardness={this.props.shieldProps.hardness}
+                    maxHP={this.props.shieldProps.maxHP}
+                    currentHP={this.props.shieldProps.currentHP}
+                />
                 <ProficiencyView
                     title={"Fortitude"}
-                    keyAbilityModifier={3}
-                    proficiency="Trained"
-                    level={1}
-                    itemBonus={0}
+                    keyAbilityModifier={
+                        this.props.saves.fortitude.keyAbilityModifier
+                    }
+                    proficiency={this.props.saves.fortitude.proficiency}
+                    level={this.props.level}
+                    itemBonus={this.props.saves.fortitude.itemBonus}
                 />
                 <ProficiencyView
                     title={"Reflex"}
-                    keyAbilityModifier={3}
-                    proficiency="Trained"
-                    level={1}
-                    itemBonus={0}
+                    keyAbilityModifier={
+                        this.props.saves.reflex.keyAbilityModifier
+                    }
+                    proficiency={this.props.saves.reflex.proficiency}
+                    level={this.props.level}
+                    itemBonus={this.props.saves.reflex.itemBonus}
                 />
                 <ProficiencyView
                     title={"Will"}
-                    keyAbilityModifier={3}
-                    proficiency="Trained"
-                    level={1}
-                    itemBonus={0}
+                    keyAbilityModifier={
+                        this.props.saves.will.keyAbilityModifier
+                    }
+                    proficiency={this.props.saves.will.proficiency}
+                    level={this.props.level}
+                    itemBonus={this.props.saves.will.itemBonus}
                 />
                 <Text style={styles.notes}>Notes: </Text>
                 <HitPoints
-                    max={20}
-                    current={19}
-                    temporary={5}
-                    dying={0}
-                    wounded={0}
+                    max={this.props.hitPoints.max}
+                    current={this.props.hitPoints.current}
+                    temporary={this.props.hitPoints.temporary}
+                    dying={this.props.hitPoints.dying}
+                    wounded={this.props.hitPoints.wounded}
                 />
                 <View style={styles.rowContainer}>
-                    <Text>Resistances: None</Text>
-                    <Text>Immunities: All</Text>
+                    <Text>Resistances: {this.props.resistances}</Text>
+                    <Text>Immunities: {this.props.immunities}</Text>
                 </View>
-                <Text>Conditions: Flat Footed</Text>
+                <Text>Conditions: {this.props.conditions}</Text>
                 <ProficiencyView
                     title={"Perception"}
-                    keyAbilityModifier={2}
-                    proficiency={"Expert"}
-                    level={1}
-                    itemBonus={0}
-                    descriptor={"Senses: Low Light Vision"}
+                    keyAbilityModifier={
+                        this.props.perception.keyAbilityModifier
+                    }
+                    proficiency={this.props.perception.proficiency}
+                    level={this.props.level}
+                    itemBonus={this.props.perception.itemBonus}
+                    descriptor={this.props.perception.descriptor}
                 />
                 <View style={styles.rowContainer}>
-                    <Text>Speed: {30} feet</Text>
-                    <Text>Movement Types/Notes: {"Climb 20"}</Text>
+                    <Text>Speed: {this.props.movement.landSpeed} feet</Text>
+                    <OtherMovements movements={this.props.movement} />
                 </View>
                 <WeaponProficiencies
-                    simple={"Trained"}
-                    martial={"Trained"}
+                    unarmed={this.props.weaponProficiencies.unarmed}
+                    simple={this.props.weaponProficiencies.simple}
+                    martial={this.props.weaponProficiencies.martial}
                     others={
-                        [] /* Others should have a description and proficiency. */
+                        this.props.weaponProficiencies.others
+                        /* Others should have a description and proficiency. */
                     }
                 />
-                <Weapons />
+                <Weapons
+                    weapons={this.props.weapons}
+                    level={this.props.level}
+                />
                 <Text style={styles.text}>Skillz</Text>
                 <Skills skills={this.props.skills} level={1} />
                 <Text style={styles.text}>

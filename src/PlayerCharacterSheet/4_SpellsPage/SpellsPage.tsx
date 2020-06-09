@@ -7,13 +7,15 @@ import SpellSlots from "./SpellSlots";
 import { SpellSlotProps } from "./SpellSlotView";
 import { Spell, SpellListEntry } from "./Spell";
 import Spells from "./Spells";
+import { Proficiencies } from "../Shared/PF2eCoreLib/Proficiencies";
+import { GetBonusFor, Bonus } from "../Shared/PF2eCoreLib/Bonus";
+import { BonusType } from "../Shared/PF2eCoreLib/BonusTypes";
 
 interface Props {
-    spellAttackProficiency: string;
+    spellAttackProficiency: Proficiencies;
     spellcastingAbilityModifier: number;
     currentLevel: number;
-    spellAttackItemBonusTotal: number;
-    spellDCItemBonusTotal: number;
+    bonuses: Bonus[];
     magicTraditions: MagicTraditionProps;
     spellSlots: SpellSlotProps[];
     spells: SpellListEntry[];
@@ -32,8 +34,14 @@ export default class SpellsPage extends Component<Props, State> {
                         this.props.spellcastingAbilityModifier
                     }
                     level={this.props.currentLevel}
-                    spellAttackItemBonus={this.props.spellAttackItemBonusTotal}
-                    spellDCItemBonus={this.props.spellDCItemBonusTotal}
+                    spellAttackItemBonus={GetBonusFor(
+                        "SpellAttack",
+                        BonusType.Item,
+                        this.props.bonuses
+                    )}
+                    spellDCItemBonus={DetermineBonusTotal(
+                        this.props.bonuses.filter
+                    )}
                 />
                 <MagicTraditions
                     prepared={this.props.magicTraditions.prepared}

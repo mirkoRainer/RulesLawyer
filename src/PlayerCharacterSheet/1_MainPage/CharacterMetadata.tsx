@@ -12,7 +12,7 @@ import Traits from "./CharacterMetadata/Traits";
 import Alignment from "./CharacterMetadata/Alignment";
 import Deity from "./CharacterMetadata/Deity";
 
-interface Props {
+export interface CharacterMetadataProps {
     characterName: string;
     playerName: string;
     ancestry: string;
@@ -27,6 +27,10 @@ interface Props {
     traits: string[];
 }
 
+interface Props {
+    characterMetadata: CharacterMetadataProps;
+}
+
 interface State {}
 
 export default class CharacterMetadata extends Component<Props, State> {
@@ -39,33 +43,45 @@ export default class CharacterMetadata extends Component<Props, State> {
                     Character Metadata
                 </Text>
                 <View style={styles.rowContainer}>
-                    <CharacterName characterName={this.props.characterName} />
-                    <PlayerName playerName={this.props.playerName} />
+                    <CharacterName
+                        characterName={
+                            this.props.characterMetadata.characterName
+                        }
+                    />
+                    <PlayerName
+                        playerName={this.props.characterMetadata.playerName}
+                    />
                 </View>
                 <View style={styles.rowContainer}>
                     <AncestryAndHeritage
-                        ancestry={this.props.ancestry}
-                        heritage={this.props.heritage}
+                        ancestry={this.props.characterMetadata.ancestry}
+                        heritage={this.props.characterMetadata.heritage}
                     />
                     <View style={styles.container}>
-                        <Level level={this.props.level} />
+                        <Level level={this.props.characterMetadata.level} />
                         <ExperiencePoints
-                            experiencePoints={this.props.experiencePoints}
+                            experiencePoints={
+                                this.props.characterMetadata.experiencePoints
+                            }
                         />
                     </View>
                 </View>
                 <View style={styles.rowContainer}>
-                    <Background background={this.props.background} />
+                    <Background
+                        background={this.props.characterMetadata.background}
+                    />
                     <Class
-                        pcClass={this.props.pcClass}
-                        subClass={this.props.subclass}
+                        pcClass={this.props.characterMetadata.pcClass}
+                        subClass={this.props.characterMetadata.subclass}
                     />
                 </View>
                 <View style={styles.rowContainer}>
-                    <Alignment alignment={this.props.alignment} />
-                    <Deity deity={this.props.deity} />
+                    <Alignment
+                        alignment={this.props.characterMetadata.alignment}
+                    />
+                    <Deity deity={this.props.characterMetadata.deity} />
                 </View>
-                <Traits traits={this.props.traits} />
+                <Traits traits={this.props.characterMetadata.traits} />
             </View>
         );
     }

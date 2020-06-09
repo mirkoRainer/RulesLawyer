@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-interface Props {
+export interface HitPointProps {
     max: number;
     current: number;
     temporary: number;
@@ -11,19 +11,7 @@ interface Props {
 
 interface State {}
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
-        alignContent: "stretch",
-        alignSelf: "stretch",
-    },
-    text: {},
-});
-
-export default class HitPoints extends Component<Props, State> {
+export default class HitPoints extends Component<HitPointProps, State> {
     render() {
         return (
             <View style={styles.container}>
@@ -37,3 +25,14 @@ export default class HitPoints extends Component<Props, State> {
         );
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: "row",
+        borderColor: "black",
+        borderWidth: 2,
+        alignContent: "stretch",
+        alignSelf: "stretch",
+    },
+    text: {},
+});

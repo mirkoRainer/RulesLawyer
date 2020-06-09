@@ -1,11 +1,14 @@
+import { Dictionary } from "../Dictionary";
+import { Proficiencies } from "./Proficiencies";
+
 interface PcClass {
     Name: string;
     TypicalMembers: string;
     RolePlayingSuggestions: string;
     KeyAbilityScores: Ability[];
     HitPoints: number;
-    Proficiencies: Dictionary<string, Proficiency>;
-    AdvancementTable: Dictionary<number, string[]>;
+    Proficiencies: Dictionary<Proficiencies>;
+    AdvancementTable: Dictionary<string[]>;
     ClassFeats: string[];
     NameOfSubClass: string;
     SubClass: string;

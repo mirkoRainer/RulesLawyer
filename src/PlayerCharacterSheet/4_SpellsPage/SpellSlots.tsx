@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, Virtualiz } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import SpellSlotView, { SpellSlotProps } from "./SpellSlotView";
 
 interface Props {

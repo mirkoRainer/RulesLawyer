@@ -2,10 +2,40 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import ProficiencyView from "../../Shared/ProficiencyView";
 import WeaponDamageSection from "./WeaponDamageSection";
+import { WeaponViewProps } from "./Weapon";
 
-interface Props {}
+interface Props {
+    weapons: WeaponViewProps[];
+    level: number;
+}
 
 interface State {}
+
+export default class Weapons extends Component<Props, State> {
+    render() {
+        return (
+            <View style={styles.container}>
+                {/* Need to use a SectionList of Strikes and SpellAttack here. */}
+                <ProficiencyView
+                    title={this.props.weapons[0].title}
+                    keyAbilityModifier={this.props.weapons[0].abilityModifier}
+                    proficiency={this.props.weapons[0].proficiency}
+                    level={this.props.level}
+                    itemBonus={this.props.weapons[0].itemBonus}
+                />
+                <WeaponDamageSection
+                    damageDice={this.props.weapons[0].damageDice}
+                    abilityModifier={
+                        this.props.weapons[0].damageAbilityModifier
+                    }
+                    damageType={this.props.weapons[0].damageType}
+                    other={""}
+                    traits={this.props.weapons[0].weaponTraits}
+                />
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -19,29 +49,3 @@ const styles = StyleSheet.create({
         backgroundColor: "green",
     },
 });
-
-export default class Weapons extends Component<Props, State> {
-    public static defaultProps = {};
-
-    render() {
-        return (
-            <View style={styles.container}>
-                {/* Need to use a FlatList of Strikes here. */}
-                <ProficiencyView
-                    title={"Morning Star"}
-                    keyAbilityModifier={3}
-                    proficiency={"Trained"}
-                    level={1}
-                    itemBonus={0}
-                />
-                <WeaponDamageSection
-                    damageDice={"1d6"}
-                    abilityModifier={3}
-                    damageType={"P/B"}
-                    other={""}
-                    traits={["simple", "club"]}
-                />
-            </View>
-        );
-    }
-}

@@ -24,6 +24,25 @@ export default function App() {
                     skills={example.playerCharacter.skills}
                     scores={example.playerCharacter.abilityScores}
                     languages={example.playerCharacter.languages}
+                    characterMetadata={example.playerCharacter.metadata}
+                    classDCProficiency={
+                        example.playerCharacter.pcClass.proficiency
+                    }
+                    acProficiency={example.playerCharacter.ac}
+                    level={example.playerCharacter.level}
+                    armorProficiency={example.playerCharacter.armorProficiency}
+                    shieldProps={example.playerCharacter.shield}
+                    saves={example.playerCharacter.saves}
+                    hitPoints={example.playerCharacter.hitPoints}
+                    resistances={example.playerCharacter.resistances}
+                    immunities={example.playerCharacter.immunities}
+                    conditions={example.playerCharacter.conditions}
+                    perception={example.playerCharacter.perception}
+                    movement={example.playerCharacter.movement}
+                    weaponProficiencies={
+                        example.playerCharacter.weaponProficiencies
+                    }
+                    weapons={example.playerCharacter.weapons}
                 />
                 <FeatsAndInventoryPage
                     ancestryFeatsAndAbilities={
@@ -52,8 +71,7 @@ export default function App() {
                         example.playerCharacter.spellcastingAbilityModifier
                     }
                     currentLevel={example.playerCharacter.level}
-                    spellAttackItemBonusTotal={4}
-                    spellDCItemBonusTotal={2}
+                    bonuses={example.playerCharacter.bonuses}
                     /* Need to calculate the bonus total from the bonuses given */
                     spellSlots={example.playerCharacter.spellSlots}
                     magicTraditions={example.playerCharacter.magicTraditions}

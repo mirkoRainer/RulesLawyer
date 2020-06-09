@@ -1,3 +1,5 @@
+import { Proficiencies } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Proficiencies";
+
 export const example = {
     playerCharacter: {
         level: 1,
@@ -14,7 +16,7 @@ export const example = {
             {
                 name: "Acrobatics",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Legendary,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -22,15 +24,15 @@ export const example = {
             {
                 name: "Arcana",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
             },
             {
-                name: "Atheltics",
+                name: "Athletics",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -38,7 +40,7 @@ export const example = {
             {
                 name: "Crafting",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -46,7 +48,7 @@ export const example = {
             {
                 name: "Deception",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -54,7 +56,7 @@ export const example = {
             {
                 name: "Diplomacy",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Untrained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -62,7 +64,7 @@ export const example = {
             {
                 name: "Intimidation",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Expert,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -71,7 +73,7 @@ export const example = {
                 name: "Lore",
                 loreDescriptor: "Golarion",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -79,7 +81,7 @@ export const example = {
             {
                 name: "Medicine",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -87,7 +89,7 @@ export const example = {
             {
                 name: "Nature",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -95,7 +97,7 @@ export const example = {
             {
                 name: "Occultism",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Master,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -103,7 +105,7 @@ export const example = {
             {
                 name: "Performance",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -111,7 +113,7 @@ export const example = {
             {
                 name: "Religion",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -119,7 +121,7 @@ export const example = {
             {
                 name: "Society",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -127,7 +129,7 @@ export const example = {
             {
                 name: "Stealth",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 0,
@@ -135,14 +137,14 @@ export const example = {
             {
                 name: "Survival",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: false,
             },
             {
                 name: "Thievery",
                 abilityModifier: 3,
-                proficiency: "Trained",
+                proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
                 armorPenalty: 2,
@@ -314,7 +316,9 @@ export const example = {
             },
         ],
         spellcastingAbilityModifier: 2,
-        spellAttackProficiency: "Trained",
+        spellAttackProficiency: Proficiencies.Trained,
+        spellAttackItemBonus: 1,
+        spellDCItemBonus: 2,
         bonuses: [
             { type: "item", appliesTo: "spellAttack", amount: 1 },
             { type: "item", appliesTo: "spellAttack", amount: 4 },

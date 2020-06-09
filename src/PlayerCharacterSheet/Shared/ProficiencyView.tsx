@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import ProficiencyArrayView from "./ProficiencyArrayView";
+import { Proficiencies } from "./PF2eCoreLib/Proficiencies";
 
-interface Props {
+export interface ProficiencyProps {
     title: string;
     keyAbilityModifier: number;
-    proficiency: string;
+    proficiency: Proficiencies;
     level: number;
     itemBonus: number;
     is10base?: boolean;
@@ -18,7 +19,10 @@ interface Props {
 
 interface State {}
 
-export default class ProficiencyView extends Component<Props, State> {
+export default class ProficiencyView extends Component<
+    ProficiencyProps,
+    State
+> {
     public static defaultProps = {
         is10base: false,
         isACBase: false,
@@ -87,7 +91,9 @@ export default class ProficiencyView extends Component<Props, State> {
                     {tenBase}
                     {keyModifier}
                     {proficiencyBonus}
-                    <ProficiencyArrayView proficiency="Trained" />
+                    <ProficiencyArrayView
+                        proficiency={this.props.proficiency}
+                    />
                     {itemBonus}
                 </View>
                 {descriptor}

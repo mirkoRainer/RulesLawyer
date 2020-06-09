@@ -1,21 +1,31 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import ProficiencyArrayView from "../../Shared/ProficiencyArrayView";
+import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
+import { OtherWeaponProficiency } from "./OtherWeaponProficiency";
 
-interface Props {
-    simple: string;
-    martial: string;
-    others: string[];
+export interface WeaponProficiencyProps {
+    unarmed: Proficiencies;
+    simple: Proficiencies;
+    martial: Proficiencies;
+    others: OtherWeaponProficiency[];
 }
 
 interface State {}
 
-export default class WeaponProficiencies extends Component<Props, State> {
+export default class WeaponProficiencies extends Component<
+    WeaponProficiencyProps,
+    State
+> {
     public static defaultProps = {};
 
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.weaponProf}>
+                    <Text style={styles.text}>Unarmed</Text>
+                    <ProficiencyArrayView proficiency={this.props.unarmed} />
+                </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Simple</Text>
                     <ProficiencyArrayView proficiency={this.props.simple} />
@@ -27,10 +37,11 @@ export default class WeaponProficiencies extends Component<Props, State> {
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Other</Text>
                     {/* 
-                    Need to convert an array of "others" into a flat list. 
-                    Others should have a description and proficiency. 
+                    TODO: Need to convert an array of "others" into a flat list. 
                     */}
-                    <ProficiencyArrayView proficiency={this.props.simple} />
+                    <ProficiencyArrayView
+                        proficiency={this.props.others[0].proficiency}
+                    />
                 </View>
             </View>
         );
