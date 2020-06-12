@@ -1,4 +1,4 @@
-import ProficiencyCalculator from "../../src/PlayerCharacterSheet/Shared/ProficiencyCalculator";
+import ProficiencyCalculator from "../src/PlayerCharacterSheet/Shared/ProficiencyCalculator";
 
 describe(`ProficiencyCalculator`, () => {
     describe(`calculateProficiencyBonus`, () => {

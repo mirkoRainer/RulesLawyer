@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, FlatList } from "react-native";
-import { IAbilityScore } from "./AbilityScores/IAbilityScores";
+import { AbilityScore } from "../Shared/PF2eCoreLib/AbilityScores";
 import AbilityScoreView from "./AbilityScores/AbilityScoreView";
 
 export interface Props {
-    abilityScores: IAbilityScore[];
+    abilityScores: AbilityScore[];
 }
 export interface State {}
 
@@ -21,16 +21,16 @@ const styles = StyleSheet.create({
 });
 
 export default class AbilityScoresView extends Component<Props, State> {
-    renderItem = ({ item }: { item: IAbilityScore }) => (
+    renderItem = ({ item }: { item: AbilityScore }) => (
         <AbilityScoreView ability={item.ability} amount={item.amount} />
     );
-    keyExtractor = (item: IAbilityScore) => item.ability;
+    keyExtractor = (item: AbilityScore) => item.ability;
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Ability Scores</Text>
-                <FlatList<IAbilityScore>
+                <FlatList<AbilityScore>
                     data={this.props.abilityScores}
                     renderItem={this.renderItem}
                     keyExtractor={this.keyExtractor}

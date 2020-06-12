@@ -2,7 +2,27 @@ import { Proficiencies } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Pro
 
 export const example = {
     playerCharacter: {
+        metadata: {},
         level: 1,
+        experiencePoints: 100,
+        name: "Chuck",
+        playerName: "Mirko",
+        alignment: "LN",
+        deity: "Lamashtu",
+        traits: ["Dwarf", "Druid", "Humanoid"],
+        ancestry: {
+            name: "Dwarf",
+            heritage: "Anvil Dwarf",
+        },
+        background: {
+            name: "Emancipated",
+        },
+        class: {
+            name: "Druid",
+            subClass: "Wild Order",
+            proficiency: Proficiencies.Master,
+            keyAbility: "Wisdom",
+        },
         abilityScores: [
             { amount: 10, ability: "Strength" },
             { amount: 10, ability: "Dexterity" },
@@ -324,6 +344,7 @@ export const example = {
             { type: "item", appliesTo: "spellAttack", amount: 4 },
             { type: "item", appliesTo: "spellAttack", amount: 2 },
             { type: "item", appliesTo: "spellAttack", amount: 1 },
+            { type: "item", appliesTo: "spellDC", amount: 12 },
         ],
         penalties: [],
         magicTraditions: {

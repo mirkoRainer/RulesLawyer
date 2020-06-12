@@ -39,8 +39,10 @@ export default class SpellsPage extends Component<Props, State> {
                         BonusType.Item,
                         this.props.bonuses
                     )}
-                    spellDCItemBonus={DetermineBonusTotal(
-                        this.props.bonuses.filter
+                    spellDCItemBonus={GetBonusFor(
+                        "SpellDC",
+                        BonusType.Item,
+                        this.props.bonuses
                     )}
                 />
                 <MagicTraditions

@@ -6,8 +6,38 @@ import FeatsAndInventoryPage from "./src/PlayerCharacterSheet/2_FeatsAndInventor
 import StoryAndActionsPage from "./src/PlayerCharacterSheet/3_StoryAndActionsPage/StoryAndActionsPage";
 import SpellsPage from "./src/PlayerCharacterSheet/4_SpellsPage/SpellsPage";
 import { example } from "./examplePlayerCharacter";
+import { CharacterMetadataProps } from "./src/PlayerCharacterSheet/1_MainPage/CharacterMetadata";
+import { ProficiencyProps } from "./src/PlayerCharacterSheet/Shared/ProficiencyView";
+import { GetAbilityModifier } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
 
 export default function App() {
+    const characterMetadata: CharacterMetadataProps = {
+        characterName: example.playerCharacter.name,
+        playerName: example.playerCharacter.playerName,
+        ancestry: example.playerCharacter.ancestry.name,
+        heritage: example.playerCharacter.ancestry.heritage,
+        level: example.playerCharacter.level,
+        experiencePoints: example.playerCharacter.experiencePoints,
+        background: example.playerCharacter.background.name,
+        pcClass: example.playerCharacter.class.name,
+        subclass: example.playerCharacter.class.subClass,
+        alignment: example.playerCharacter.alignment,
+        deity: example.playerCharacter.deity,
+        traits: example.playerCharacter.traits,
+    };
+    const classDCProficiency: ProficiencyProps = {
+        title: "Class DC",
+        keyAbilityModifier: GetAbilityModifier(example.playerCharacter.class.keyAbility, example.playerCharacter.abilityScores),
+        proficiency: Proficiencies;
+        level: number;
+        itemBonus: number;
+        is10base?: boolean;
+        isACBase?: boolean;
+        dexCap?: number;
+        descriptor?: string;
+        armorPenalty?: number;
+    };
+
     return (
         <View style={styles.container}>
             <Header
@@ -24,9 +54,9 @@ export default function App() {
                     skills={example.playerCharacter.skills}
                     scores={example.playerCharacter.abilityScores}
                     languages={example.playerCharacter.languages}
-                    characterMetadata={example.playerCharacter.metadata}
+                    characterMetadata={characterMetadata}
                     classDCProficiency={
-                        example.playerCharacter.pcClass.proficiency
+                        example.playerCharacter.class.proficiency
                     }
                     acProficiency={example.playerCharacter.ac}
                     level={example.playerCharacter.level}

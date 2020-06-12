@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SnapshotViewIOSProps } from "react-native";
 import CharacterMetadata, { CharacterMetadataProps } from "./CharacterMetadata";
 import AbilityScores from "./AbilityScoresView";
 import { Dimensions } from "react-native";
-import { IAbilityScore } from "./AbilityScores/IAbilityScores";
+import { AbilityScore } from "../Shared/PF2eCoreLib/AbilityScores";
 import ProficiencyView, { ProficiencyProps } from "../Shared/ProficiencyView";
 import ArmorProficiencies, {
     ArmorProficiencyProps,
@@ -27,7 +27,7 @@ var width: number = Dimensions.get("window").width; //full width
 interface Props {
     skills: Skill[];
     languages: string[];
-    scores: IAbilityScore[];
+    scores: AbilityScore[];
     characterMetadata: CharacterMetadataProps;
     classDCProficiency: ProficiencyProps;
     acProficiency: ProficiencyProps;

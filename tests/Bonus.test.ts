@@ -1,8 +1,8 @@
-import { DetermineBonusTotal } from "../../src/PlayerCharacterSheet/Shared/PF2eCoreLib/Bonus";
-import { BonusType } from "../../src/PlayerCharacterSheet/Shared/PF2eCoreLib/BonusTypes";
+import { Bonus } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/Bonus";
+import { BonusType } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/BonusTypes";
 
 describe(`Bonus`, () => {
-    describe(`DetermineBonusTotal`, () => {
+    describe(`GetBonusFor`, () => {
         it(`outputs bonus total by type`, () => {
             const bonuses = [
                 { type: BonusType.Item, appliesTo: "spellAttack", amount: 1 },
@@ -20,7 +20,7 @@ describe(`Bonus`, () => {
                 },
                 { type: BonusType.Status, appliesTo: "spellAttack", amount: 3 },
             ];
-            const actual = DetermineBonusTotal(bonuses);
+            const actual = Bonus.DetermineBonusTotal(bonuses);
             expect(actual).toStrictEqual({
                 circumstance: expect.any(Number),
                 status: expect.any(Number),
@@ -45,7 +45,7 @@ describe(`Bonus`, () => {
                 { type: BonusType.Status, appliesTo: "spellAttack", amount: 3 },
                 { type: BonusType.Status, appliesTo: "spellAttack", amount: 2 },
             ];
-            const actual = DetermineBonusTotal(bonuses);
+            const actual = Bonus.DetermineBonusTotal(bonuses);
             expect(actual).toStrictEqual({
                 circumstance: 1,
                 status: 3,

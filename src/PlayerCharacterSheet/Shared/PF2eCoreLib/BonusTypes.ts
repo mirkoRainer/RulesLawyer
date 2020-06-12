@@ -1,6 +1,6 @@
 export enum BonusType {
-    Proficiency,
-    Circumstance,
-    Status,
-    Item,
+    Proficiency = "proficiency",
+    Circumstance = "circumstance",
+    Status = "status",
+    Item = "item",
 }
