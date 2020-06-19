@@ -3,7 +3,7 @@ export interface AbilityScore {
     amount: number;
 }
 
-export function GetAbilityModifier(
+export function GetAbilityModifierFromScores(
     ability: string,
     abilityScores: AbilityScore[]
 ): number {
@@ -12,7 +12,12 @@ export function GetAbilityModifier(
     }
     let abilityScore: number | undefined = abilityScores.find(
         (score) => score.ability === ability
-    );
-    const abilityModifier;
+    )?.amount;
+    const abilityModifier =
+        abilityScore !== undefined
+            ? CalculateAbilityScoreModifier(abilityScore)
+            : 0;
     return abilityModifier;
 }
+
+function CalculateAbilityScoreModifier(abilityScore: number): number {}
