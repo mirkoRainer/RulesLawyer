@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
     },
     weaponProf: {
         flex: 1,
+        borderColor: "black",
+        borderWidth: 1,
         justifyContent: "center",
     },
     text: {

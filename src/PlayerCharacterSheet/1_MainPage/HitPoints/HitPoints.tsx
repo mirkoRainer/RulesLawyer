@@ -15,12 +15,12 @@ export default class HitPoints extends Component<HitPointProps, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text>
+                <Text style={styles.text2}>
                     HP: {this.props.current}/{this.props.max}:
-                    {this.props.temporary}
+                    Temp: {this.props.temporary}
                 </Text>
-                <Text>Dying {this.props.dying}</Text>
-                <Text>Wounded {this.props.wounded}</Text>
+                <Text style={styles.text}>Dying {this.props.dying}</Text>
+                <Text style={styles.text}>Wounded {this.props.wounded}</Text>
             </View>
         );
     }
@@ -34,5 +34,12 @@ const styles = StyleSheet.create({
         alignContent: "stretch",
         alignSelf: "stretch",
     },
-    text: {},
+    text: {
+        flex: 1,
+        alignSelf: "center",
+    },
+    text2: {
+        flex: 2,
+        alignSelf: "center",
+    },
 });

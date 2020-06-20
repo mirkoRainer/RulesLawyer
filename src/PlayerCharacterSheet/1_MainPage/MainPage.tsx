@@ -21,6 +21,9 @@ import OtherMovements from "./OtherMovements";
 import WeaponDamageSection from "./Weapons/WeaponDamageSection";
 import { WeaponViewProps } from "./Weapons/WeaponViewProps";
 import { SavesProp } from "./SavesProps";
+import ResistancesImmunitiesWeaknesses from "./ResistancesImmunitiesWeaknesses";
+import Conditions from "./Conditions";
+import Movements from "./Movements";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -36,11 +39,12 @@ interface Props {
     shieldProps: ShieldProps;
     saves: SavesProp;
     hitPoints: HitPointProps;
-    resistances: string[];
-    immunities: string[];
-    conditions: string[];
+    resistances: string;
+    immunities: string;
+    weaknesses: string;
+    conditions: string;
     perception: ProficiencyProps;
-    movement: MovementProps;
+    movements: MovementProps;
     weaponProficiencies: WeaponProficiencyProps;
     weapons: WeaponViewProps[];
 }
@@ -56,7 +60,7 @@ export default class MainPage extends Component<Props, State> {
                 />
                 <AbilityScores abilityScores={this.props.scores} />
                 <ProficiencyView
-                    title={this.props.classDCProficiency.title}
+                    title={"Class DC"}
                     proficiency={this.props.classDCProficiency.proficiency}
                     keyAbilityModifier={
                         this.props.classDCProficiency.keyAbilityModifier
@@ -93,11 +97,7 @@ export default class MainPage extends Component<Props, State> {
                     }
                 />
                 <Shield
-                    hasShield={this.props.shieldProps.hasShield}
-                    acBonus={this.props.shieldProps.acBonus}
-                    hardness={this.props.shieldProps.hardness}
-                    maxHP={this.props.shieldProps.maxHP}
-                    currentHP={this.props.shieldProps.currentHP}
+                    shieldProps={this.props.shieldProps}
                 />
                 <ProficiencyView
                     title={"Fortitude"}
@@ -134,11 +134,12 @@ export default class MainPage extends Component<Props, State> {
                     dying={this.props.hitPoints.dying}
                     wounded={this.props.hitPoints.wounded}
                 />
-                <View style={styles.rowContainer}>
-                    <Text>Resistances: {this.props.resistances}</Text>
-                    <Text>Immunities: {this.props.immunities}</Text>
-                </View>
-                <Text>Conditions: {this.props.conditions}</Text>
+                <ResistancesImmunitiesWeaknesses 
+                    resistances={this.props.resistances}
+                    immunities={this.props.immunities}
+                    weaknesses={this.props.weaknesses}
+                />
+                <Conditions conditions={this.props.conditions} />
                 <ProficiencyView
                     title={"Perception"}
                     keyAbilityModifier={
@@ -149,10 +150,10 @@ export default class MainPage extends Component<Props, State> {
                     itemBonus={this.props.perception.itemBonus}
                     descriptor={this.props.perception.descriptor}
                 />
-                <View style={styles.rowContainer}>
-                    <Text>Speed: {this.props.movement.landSpeed} feet</Text>
-                    <OtherMovements movements={this.props.movement} />
-                </View>
+                <Movements 
+                    movements={this.props.movements}
+                />
+                <Text style={styles.text}>Weapon Proficiencies</Text>
                 <WeaponProficiencies
                     unarmed={this.props.weaponProficiencies.unarmed}
                     simple={this.props.weaponProficiencies.simple}

@@ -6,21 +6,26 @@ export interface ShieldProps {
     acBonus: number;
     hardness: number;
     maxHP: number;
+    breakThreshold: number;
     currentHP: number;
+}
+
+interface Props {
+    shieldProps: ShieldProps;
 }
 
 export interface State {}
 
-export default class Shield extends Component<ShieldProps, State> {
+export default class Shield extends Component<Props, State> {
     render() {
-        const shieldView = this.props.hasShield ? (
+        const shieldView = this.props.shieldProps.hasShield ? (
             <View style={styles.container}>
-                <Text style={styles.text}>Shield: {this.props.acBonus}</Text>
-                <Text style={styles.text}>Hardness: {this.props.hardness}</Text>
-                <Text style={styles.text}>Max HP: {this.props.maxHP}</Text>
-                <Text style={styles.text}>BT: {this.props.maxHP / 2}</Text>
+                <Text style={styles.text}>Shield Bonus: +{this.props.shieldProps.acBonus}</Text>
+                <Text style={styles.text}>Hardness: {this.props.shieldProps.hardness}</Text>
+                <Text style={styles.text}>Max HP: {this.props.shieldProps.maxHP}</Text>
+                <Text style={styles.text}>BT: {this.props.shieldProps.breakThreshold}</Text>
                 <Text style={styles.text}>
-                    Current HP: {this.props.currentHP}
+                    Current HP: {this.props.shieldProps.currentHP}
                 </Text>
             </View>
         ) : (

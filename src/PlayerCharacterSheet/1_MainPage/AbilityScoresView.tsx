@@ -9,6 +9,27 @@ export interface Props {
 }
 export interface State {}
 
+
+export default class AbilityScoresView extends Component<Props, State> {
+    renderItem = ({ item }: { item: AbilityScore }) => (
+        <AbilityScoreView ability={item.ability} amount={item.amount} />
+    );
+        keyExtractor = (item: AbilityScore) => item.ability.toString();
+
+        render() {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.text}>Ability Scores</Text>
+                    <FlatList<AbilityScore>
+                        data={this.props.abilityScores}
+                        renderItem={this.renderItem}
+                        keyExtractor={this.keyExtractor}
+                    />
+                </View>
+            );
+        }
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -20,23 +41,3 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
 });
-
-export default class AbilityScoresView extends Component<Props, State> {
-    renderItem = ({ item }: { item: AbilityScore }) => (
-        <AbilityScoreView ability={item.ability} amount={item.amount} />
-    );
-    keyExtractor = (item: AbilityScore) => item.ability.toString();
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Ability Scores</Text>
-                <FlatList<AbilityScore>
-                    data={this.props.abilityScores}
-                    renderItem={this.renderItem}
-                    keyExtractor={this.keyExtractor}
-                />
-            </View>
-        );
-    }
-}

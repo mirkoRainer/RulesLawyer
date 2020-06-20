@@ -56,8 +56,9 @@ export const example = {
             hasShield: true,
             acBonus: 2,
             hardness: 5,
-            maxHP: 15,
-            currentHP: 15
+            maxHP: 20,
+            currentHP: 15,
+            breakThreshold: 10 
         },
         saves: {
             fortitude: Proficiencies.Expert,
@@ -246,7 +247,7 @@ export const example = {
                 damageDice: "1d6",
                 damageAbilityModifier: Ability.Strength,
                 damageType: "Piercing",
-                weaponTraits: ["Agile", "Finesse", "Versatile"],
+                weaponTraits: "Agile, Finesse, Versatile",
             },
             {
                 title: "Longbow",
@@ -255,14 +256,15 @@ export const example = {
                 damageDice: "1d8",
                 damageAbilityModifier: Ability.Free,
                 damageType: "Piercing",
-                weaponTraits: ["Volley 30ft"],
+                weaponTraits: "Volley 30ft",
             }
         ],
         perceptionProficiency: Proficiencies.Trained,
         senses: "Low-Light Vision",
-        resistances: ["everything", "nothing"],
-        immunities: ["everything", "nothing"],
-        conditions: ["everything", "nothing"],
+        resistances: "Force 5, Cold 5",
+        immunities: "Electricity, Fire",
+        conditions: "Clumsy 1, Flat-Footed",
+        weakness: "Silver 5",
         skillFeats: [
             { title: "Background", description: "Dwarf Stuff" },
             { title: "2nd", description: "other Dwarf Stuff" },
@@ -429,6 +431,8 @@ export const example = {
             { type: BonusType.Item, appliesTo: "spellAttack", amount: 2 },
             { type: BonusType.Item, appliesTo: "spellAttack", amount: 1 },
             { type: BonusType.Item, appliesTo: "spellDC", amount: 12 },
+            { type: BonusType.Item, appliesTo: "classDC", amount: 3 },
+            { type: BonusType.Item, appliesTo: "classDC", amount: 2 },
         ],
         penalties: [],
         magicTraditions: {

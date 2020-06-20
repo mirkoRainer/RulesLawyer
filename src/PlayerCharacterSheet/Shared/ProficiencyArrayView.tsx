@@ -15,7 +15,7 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 <Text
                     style={
                         ["T", "E", "M", "L"].includes(
-                            this.props.proficiency.toString().substring(0, 1)
+                            this.props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -26,7 +26,7 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 <Text
                     style={
                         ["E", "M", "L"].includes(
-                            this.props.proficiency.toString().substring(0, 1)
+                            this.props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -37,7 +37,7 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 <Text
                     style={
                         ["M", "L"].includes(
-                            this.props.proficiency.toString().substring(0, 1)
+                            this.props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -48,7 +48,7 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 <Text
                     style={
                         ["L"].includes(
-                            this.props.proficiency.toString().substring(0, 1)
+                            this.props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse

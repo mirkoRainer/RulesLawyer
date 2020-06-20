@@ -49,6 +49,7 @@ export class Bonus {
         const bonusesFor = bonuses.filter(
             (bonus) => bonus.appliesTo.toLowerCase() === bonusFor.toLowerCase()
         );
+        if (bonusesFor.length === 0) return 0; 
         const bonusByType = Bonus.DetermineBonusTotal(bonusesFor);
         let output: number;
         switch (type) {

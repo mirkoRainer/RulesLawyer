@@ -142,9 +142,10 @@ export default function App() {
                     hitPoints={example.playerCharacter.hitPoint}
                     resistances={example.playerCharacter.resistances}
                     immunities={example.playerCharacter.immunities}
+                    weaknesses={example.playerCharacter.weakness}
                     conditions={example.playerCharacter.conditions}
                     perception={perception}
-                    movement={example.playerCharacter.movement}
+                    movements={example.playerCharacter.movement}
                     weaponProficiencies={
                         example.playerCharacter.weaponProficiencies
                     }

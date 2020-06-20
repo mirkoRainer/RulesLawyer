@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import ProficiencyArrayView from "./ProficiencyArrayView";
-import { Proficiencies } from "./PF2eCoreLib/Proficiencies";
+import { Proficiencies, GetProficiencyValue } from "./PF2eCoreLib/Proficiencies";
 
 export interface ProficiencyProps {
     title: string;
@@ -33,8 +33,9 @@ export default class ProficiencyView extends Component<
         const tenBase = this.props.is10base ? (
             <Text style={styles.tenBase}>Base: 10</Text>
         ) : (
-            <Text style={styles.tenBase}></Text>
+            <Text style={styles.noTenBase}></Text>
         );
+
         const keyModifier = this.props.isACBase ? (
             <Text style={styles.acBase}>
                 Dex:{this.props.keyAbilityModifier} Cap:
@@ -42,51 +43,43 @@ export default class ProficiencyView extends Component<
             </Text>
         ) : (
             <Text style={styles.acBase}>
-                Key: {this.props.keyAbilityModifier}
+                Ability Modifier: {this.props.keyAbilityModifier}
             </Text>
         );
+
         const proficiencyBonus = (
             <Text style={styles.profBonus}>
-                {this.props.proficiency}
-                {"\n"}
                 Level {this.props.level}
             </Text>
         );
         const itemBonus =
-            this.props.itemBonus !== undefined ? (
+            this.props.itemBonus !== null ? (
                 <Text style={styles.itemBonus}>
                     Item: {this.props.itemBonus}
                 </Text>
             ) : (
                 <Text style={styles.itemBonus}> Item: 0</Text>
             );
+
         const descriptor =
             this.props.descriptor !== undefined ? (
                 <Text style={styles.container}>{this.props.descriptor}</Text>
             ) : undefined;
-        const total = this.props.is10base ? (
+        const total = this.props.keyAbilityModifier + this.props.level + this.props.itemBonus + GetProficiencyValue(this.props.proficiency);
+        const totalView = this.props.is10base ? (
             <Text style={styles.total}>
-                {this.props.keyAbilityModifier +
-                    10 +
-                    this.props.level +
-                    this.props.itemBonus! +
-                    2}
-                {/* 2 will become proficiency bonus */}
+                {10 + total}
             </Text>
         ) : (
             <Text style={styles.total}>
-                {this.props.keyAbilityModifier +
-                    this.props.level +
-                    this.props.itemBonus! +
-                    2}
-                {/* 2 will become proficiency bonus */}
+                {total}
             </Text>
         );
         return (
             <>
                 <View style={styles.container}>
                     <Text style={styles.title}>{this.props.title}:</Text>
-                    {total}
+                    {totalView}
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
                     {keyModifier}
@@ -119,12 +112,14 @@ const styles = StyleSheet.create({
     title: {
         flex: 3,
         alignSelf: "center",
+        textAlign: "center"
     },
     total: {
-        flex: 2,
+        flex: 1,
         fontWeight: "bold",
         fontSize: 16,
         alignSelf: "center",
+        textAlign: "center"
     },
     equals: {
         flex: 2,
@@ -134,6 +129,7 @@ const styles = StyleSheet.create({
         flex: 3,
         alignSelf: "center",
     },
+    noTenBase: {},
     acBase: {
         flex: 3,
         alignSelf: "center",
