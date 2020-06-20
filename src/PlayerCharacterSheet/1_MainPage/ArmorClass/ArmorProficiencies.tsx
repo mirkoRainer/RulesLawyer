@@ -4,10 +4,10 @@ import ProficiencyArrayView from "../../Shared/ProficiencyArrayView";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 
 export interface ArmorProficiencyProps {
-    unarmoredProficiency: Proficiencies;
-    lightArmorProficiency: Proficiencies;
-    mediumArmorProficiency: Proficiencies;
-    heavyArmorProficiency: Proficiencies;
+    unarmored: Proficiencies;
+    light: Proficiencies;
+    medium: Proficiencies;
+    heavy : Proficiencies;
 }
 
 export interface State {}
@@ -22,25 +22,25 @@ export default class ArmorProficiencies extends Component<
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Unarmored</Text>
                     <ProficiencyArrayView
-                        proficiency={this.props.unarmoredProficiency}
+                        proficiency={this.props.unarmored}
                     />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Light Armor</Text>
                     <ProficiencyArrayView
-                        proficiency={this.props.lightArmorProficiency}
+                        proficiency={this.props.light}
                     />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Medium Armor</Text>
-                    <ProficiencyArrayView
-                        proficiency={this.props.mediumArmorProficiency}
-                    />
+                    <ProficiencyArrayView                     
+                        proficiency={this.props.medium}
+                    /> 
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Heavy Armor</Text>
                     <ProficiencyArrayView
-                        proficiency={this.props.heavyArmorProficiency}
+                        proficiency={this.props.heavy}
                     />
                 </View>
             </View>

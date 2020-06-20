@@ -27,7 +27,7 @@ export default class Shield extends Component<ShieldProps, State> {
             <View></View>
         );
 
-        return { shieldView };
+        return shieldView;
     }
 }
 

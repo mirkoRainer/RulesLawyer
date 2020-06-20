@@ -1,4 +1,9 @@
 import { Proficiencies } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Proficiencies";
+import { GetAbilityModifierFromScores } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
+import { BonusType } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/BonusTypes";
+import { Ability } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Ability";
+import { ArmorCategory } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/ArmorCategory";
+import { ArmorGroup } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/ArmorGroup";
 
 export const example = {
     playerCharacter: {
@@ -21,17 +26,50 @@ export const example = {
             name: "Druid",
             subClass: "Wild Order",
             proficiency: Proficiencies.Master,
-            keyAbility: "Wisdom",
+            keyAbility: Ability.Wisdom,
         },
         abilityScores: [
-            { amount: 10, ability: "Strength" },
-            { amount: 10, ability: "Dexterity" },
-            { amount: 10, ability: "Constitution" },
-            { amount: 10, ability: "Intelligence" },
-            { amount: 10, ability: "Wisdom" },
-            { amount: 10, ability: "Charisma" },
+            { amount: 10, ability: Ability.Strength },
+            { amount: 16, ability: Ability.Dexterity },
+            { amount: 20, ability: Ability.Constitution },
+            { amount: 6, ability: Ability.Intelligence },
+            { amount: 18, ability: Ability.Wisdom },
+            { amount: 8, ability: Ability.Charisma },
         ],
         languages: [" Common", " Dwarf", " Goblin"],
+        wornArmor: {
+            Name: "Leather Armor",
+            Category: ArmorCategory.Light,
+            Level: 0,
+            Price: { Copper: 0, Silver: 7, Gold: 0, Platinum: 0 },
+            ACBonus: 2,
+            DexCap: 4,
+            CheckPenalty: {type:"armor", appliesTo: "armorCheck", amount: 0 },
+            SpeedPenalty: {type:"speed", appliesTo: "armorCheck", amount: 0 },
+            StrengthRequirement: 12,
+            Bulk: 1,
+            WornBulk: 1,
+            Group: ArmorGroup.Leather,
+            Traits: [],
+        },
+        shield: {
+            hasShield: true,
+            acBonus: 2,
+            hardness: 5,
+            maxHP: 15,
+            currentHP: 15
+        },
+        saves: {
+            fortitude: Proficiencies.Expert,
+            reflex: Proficiencies.Trained,
+            will: Proficiencies.Expert
+        },
+        armorProficiencies: {
+            unarmored: Proficiencies.Trained,
+            light: Proficiencies.Trained,
+            medium: Proficiencies.Untrained,
+            heavy: Proficiencies.Untrained
+        },
         skills: [
             {
                 name: "Acrobatics",
@@ -179,6 +217,52 @@ export const example = {
             { title: "Feat 13th", description: "other Dwarf Stuff" },
             { title: "Feat 17th", description: "other Dwarf Stuff" },
         ],
+        hitPoint: {
+            max: 30,
+            current: 30,
+            temporary: 2,
+            dying: 0,
+            wounded: 1
+        },
+        movement: {
+            landSpeed: 25,
+            burrowSpeed: 5,
+            climbSpeed: 10,
+            flySpeed: 0,
+        },
+        weaponProficiencies: {
+            unarmed: Proficiencies.Trained,
+            simple: Proficiencies.Trained,
+            martial: Proficiencies.Untrained,
+            others: [
+                { description: "brass knuckles", proficiency: Proficiencies.Expert }
+            ]
+        },
+        weapons: [
+            {
+                title: "+1 ShortSword",
+                ability: Ability.Strength,
+                toHitBonus: 1,
+                damageDice: "1d6",
+                damageAbilityModifier: Ability.Strength,
+                damageType: "Piercing",
+                weaponTraits: ["Agile", "Finesse", "Versatile"],
+            },
+            {
+                title: "Longbow",
+                ability: Ability.Dexterity,
+                toHitBonus: 0,
+                damageDice: "1d8",
+                damageAbilityModifier: Ability.Free,
+                damageType: "Piercing",
+                weaponTraits: ["Volley 30ft"],
+            }
+        ],
+        perceptionProficiency: Proficiencies.Trained,
+        senses: "Low-Light Vision",
+        resistances: ["everything", "nothing"],
+        immunities: ["everything", "nothing"],
+        conditions: ["everything", "nothing"],
         skillFeats: [
             { title: "Background", description: "Dwarf Stuff" },
             { title: "2nd", description: "other Dwarf Stuff" },
@@ -340,11 +424,11 @@ export const example = {
         spellAttackItemBonus: 1,
         spellDCItemBonus: 2,
         bonuses: [
-            { type: "item", appliesTo: "spellAttack", amount: 1 },
-            { type: "item", appliesTo: "spellAttack", amount: 4 },
-            { type: "item", appliesTo: "spellAttack", amount: 2 },
-            { type: "item", appliesTo: "spellAttack", amount: 1 },
-            { type: "item", appliesTo: "spellDC", amount: 12 },
+            { type: BonusType.Item, appliesTo: "spellAttack", amount: 1 },
+            { type: BonusType.Item, appliesTo: "spellAttack", amount: 4 },
+            { type: BonusType.Item, appliesTo: "spellAttack", amount: 2 },
+            { type: BonusType.Item, appliesTo: "spellAttack", amount: 1 },
+            { type: BonusType.Item, appliesTo: "spellDC", amount: 12 },
         ],
         penalties: [],
         magicTraditions: {

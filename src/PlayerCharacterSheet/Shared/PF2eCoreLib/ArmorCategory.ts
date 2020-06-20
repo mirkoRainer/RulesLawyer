@@ -1,6 +1,6 @@
-enum ArmorCategory {
-    Unarmored,
-    Light,
-    Medium,
-    Heavy,
+export enum ArmorCategory {
+    Unarmored = "Unarmored",
+    Light = "Light",
+    Medium = "Medium",
+    Heavy = "Heavy",
 }

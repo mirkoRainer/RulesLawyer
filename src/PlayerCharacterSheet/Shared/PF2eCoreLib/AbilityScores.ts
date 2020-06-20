@@ -1,10 +1,12 @@
+import { Ability } from "./Ability";
+
 export interface AbilityScore {
-    ability: string;
+    ability: Ability;
     amount: number;
 }
 
 export function GetAbilityModifierFromScores(
-    ability: string,
+    ability: Ability,
     abilityScores: AbilityScore[]
 ): number {
     if (abilityScores.length <= 0) {
@@ -20,4 +22,7 @@ export function GetAbilityModifierFromScores(
     return abilityModifier;
 }
 
-function CalculateAbilityScoreModifier(abilityScore: number): number {}
+export function CalculateAbilityScoreModifier(abilityScore: number): number {
+    let result = (abilityScore - 10) / 2;
+    return Math.floor(result);
+}

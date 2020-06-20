@@ -1,7 +1,7 @@
 import { BonusType } from "./BonusTypes";
 import { prop } from "./TypescriptEvolution";
 
-export interface Bonus {
+export interface iBonus {
     type: BonusType;
     appliesTo: string;
     amount: number;
@@ -13,7 +13,7 @@ interface BonusesByType {
     item: number;
 }
 export class Bonus {
-    static DetermineBonusTotal(bonuses: Bonus[]): BonusesByType {
+    static DetermineBonusTotal(bonuses: iBonus[]): BonusesByType {
         const output = { circumstance: 0, status: 0, item: 0 };
         // Find all bonuses of one type
         const circumstanceBonuses = bonuses.filter(
@@ -44,26 +44,29 @@ export class Bonus {
     static GetBonusFor(
         bonusFor: string,
         type: BonusType,
-        bonuses: Bonus[]
+        bonuses: iBonus[]
     ): number {
         const bonusesFor = bonuses.filter(
-            (bonus) => bonus.appliesTo === bonusFor
+            (bonus) => bonus.appliesTo.toLowerCase() === bonusFor.toLowerCase()
         );
-        const bonusByType = DetermineBonusTotal(bonusesFor);
+        const bonusByType = Bonus.DetermineBonusTotal(bonusesFor);
         let output: number;
         switch (type) {
-            case BonusType.Item: {
-                output = prop(bonusByType, "item");
-            }
-            case BonusType.Circumstance: {
-                output = prop(bonusByType, "circumstance");
-            }
-            case BonusType.Status: {
-                output = prop(bonusByType, "status");
-            }
-            default: {
-                output = 0;
-            }
+        case BonusType.Item: {
+            output = prop(bonusByType, "item");
+            break;
+        }
+        case BonusType.Circumstance: {
+            output = prop(bonusByType, "circumstance");
+            break;
+        }
+        case BonusType.Status: {
+            output = prop(bonusByType, "status");
+            break;
+        }
+        default: {
+            output = 0;
+        }
         }
         return output;
     }

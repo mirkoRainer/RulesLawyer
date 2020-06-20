@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, FlatList } from "react-native";
 import { AbilityScore } from "../Shared/PF2eCoreLib/AbilityScores";
 import AbilityScoreView from "./AbilityScores/AbilityScoreView";
+import { Ability } from "../Shared/PF2eCoreLib/Ability";
 
 export interface Props {
     abilityScores: AbilityScore[];
@@ -24,7 +25,7 @@ export default class AbilityScoresView extends Component<Props, State> {
     renderItem = ({ item }: { item: AbilityScore }) => (
         <AbilityScoreView ability={item.ability} amount={item.amount} />
     );
-    keyExtractor = (item: AbilityScore) => item.ability;
+    keyExtractor = (item: AbilityScore) => item.ability.toString();
 
     render() {
         return (

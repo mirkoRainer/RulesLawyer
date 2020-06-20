@@ -1,9 +1,9 @@
 import { Bonus } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/BonusTypes";
 
-describe(`Bonus`, () => {
-    describe(`GetBonusFor`, () => {
-        it(`outputs bonus total by type`, () => {
+describe("Bonus", () => {
+    describe("GetBonusFor", () => {
+        it("outputs bonus total by type", () => {
             const bonuses = [
                 { type: BonusType.Item, appliesTo: "spellAttack", amount: 1 },
                 { type: BonusType.Item, appliesTo: "spellAttack", amount: 4 },
@@ -27,7 +27,7 @@ describe(`Bonus`, () => {
                 item: expect.any(Number),
             });
         });
-        it(`outputs the highest bonus of one type and doesn't add them together`, () => {
+        it("outputs the highest bonus of one type and doesn't add them together", () => {
             const bonuses = [
                 { type: BonusType.Item, appliesTo: "spellAttack", amount: 1 },
                 { type: BonusType.Item, appliesTo: "spellAttack", amount: 4 },

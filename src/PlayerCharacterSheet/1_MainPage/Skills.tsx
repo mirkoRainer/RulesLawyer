@@ -18,7 +18,7 @@ export default class Skills extends Component<Props, State> {
             proficiency={item.proficiency}
             level={this.props.level}
             itemBonus={item.itemBonus}
-            armorPenatly={item.hasArmorPenalty ? item.armorPenalty : 0}
+            armorPenalty={item.hasArmorPenalty ? item.armorPenalty : 0}
         />
     );
     keyExtractor = (item: Skill) => item.name;

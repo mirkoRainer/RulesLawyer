@@ -1,4 +1,6 @@
 import { Bonus } from "./Bonus";
+import { ArmorCategory } from "./ArmorCategory";
+import { ArmorGroup } from "./ArmorGroup";
 
 interface Armor {
     Name: string;
@@ -11,6 +13,7 @@ interface Armor {
     SpeedPenalty: Bonus;
     StrengthRequirement: number;
     Bulk: number;
+    WornBulk: number;
     Group: ArmorGroup;
     Traits: Traits[];
 }

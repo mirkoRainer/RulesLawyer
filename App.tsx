@@ -8,7 +8,14 @@ import SpellsPage from "./src/PlayerCharacterSheet/4_SpellsPage/SpellsPage";
 import { example } from "./examplePlayerCharacter";
 import { CharacterMetadataProps } from "./src/PlayerCharacterSheet/1_MainPage/CharacterMetadata";
 import { ProficiencyProps } from "./src/PlayerCharacterSheet/Shared/ProficiencyView";
-import { GetAbilityModifier } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
+import { GetAbilityModifierFromScores } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
+import { Bonus } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Bonus";
+import { BonusType } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/BonusTypes";
+import { prop } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/TypescriptEvolution";
+import { Proficiencies } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Proficiencies";
+import { WeaponViewProps, GetProficiencyForWeapon } from "./src/PlayerCharacterSheet/1_MainPage/Weapons/WeaponViewProps";
+import { ArmorCategory } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/ArmorCategory";
+import { Ability } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Ability";
 
 export default function App() {
     const characterMetadata: CharacterMetadataProps = {
@@ -27,16 +34,87 @@ export default function App() {
     };
     const classDCProficiency: ProficiencyProps = {
         title: "Class DC",
-        keyAbilityModifier: GetAbilityModifier(example.playerCharacter.class.keyAbility, example.playerCharacter.abilityScores),
-        proficiency: Proficiencies;
-        level: number;
-        itemBonus: number;
-        is10base?: boolean;
-        isACBase?: boolean;
-        dexCap?: number;
-        descriptor?: string;
-        armorPenalty?: number;
+        keyAbilityModifier: GetAbilityModifierFromScores(example.playerCharacter.class.keyAbility, example.playerCharacter.abilityScores),
+        proficiency: example.playerCharacter.class.proficiency,
+        level: example.playerCharacter.level,
+        itemBonus: Bonus.GetBonusFor("classDc", BonusType.Item, example.playerCharacter.bonuses),
+        is10base: true,
     };
+
+    let wornArmorProficiency: Proficiencies;
+    switch (example.playerCharacter.wornArmor.Category) {
+    case ArmorCategory.Unarmored: {
+        wornArmorProficiency = prop(example.playerCharacter.armorProficiencies, "unarmored");
+        break;
+    }
+    case ArmorCategory.Light: {
+        wornArmorProficiency = prop(example.playerCharacter.armorProficiencies, "light");
+        break;
+    }
+    case ArmorCategory.Medium: {
+        wornArmorProficiency = prop(example.playerCharacter.armorProficiencies, "medium");
+        break;
+    }
+    case ArmorCategory.Heavy: {
+        wornArmorProficiency = prop(example.playerCharacter.armorProficiencies, "heavy");
+        break;
+    }
+    default: {
+        wornArmorProficiency = Proficiencies.Untrained;
+    }
+    }
+    const acProficiency: ProficiencyProps = {
+        title: "AC",
+        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Dexterity, example.playerCharacter.abilityScores),
+        proficiency: wornArmorProficiency,
+        level: example.playerCharacter.level,
+        itemBonus: example.playerCharacter.wornArmor.ACBonus,
+        is10base: true,
+        isACBase: true,
+        dexCap: example.playerCharacter.wornArmor.DexCap,
+    };
+    const fortitudeSave: ProficiencyProps = {
+        title: "Fortitude",
+        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Constitution, example.playerCharacter.abilityScores),
+        proficiency: example.playerCharacter.saves.fortitude,
+        level: example.playerCharacter.level,
+        itemBonus: Bonus.GetBonusFor("fortitude", BonusType.Item, example.playerCharacter.bonuses),
+    };
+    const willSave: ProficiencyProps = {
+        title: "Will",
+        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Wisdom, example.playerCharacter.abilityScores),
+        proficiency: example.playerCharacter.saves.will,
+        level: example.playerCharacter.level,
+        itemBonus: Bonus.GetBonusFor("wisdom", BonusType.Item, example.playerCharacter.bonuses),
+    };
+    const reflexSave: ProficiencyProps = {
+        title: "Reflex",
+        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Dexterity, example.playerCharacter.abilityScores),
+        proficiency: example.playerCharacter.saves.reflex,
+        level: example.playerCharacter.level,
+        itemBonus: Bonus.GetBonusFor("dexterity", BonusType.Item, example.playerCharacter.bonuses),
+    };
+    const perception: ProficiencyProps = {
+        title: "Perception",
+        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Wisdom, example.playerCharacter.abilityScores),
+        proficiency: example.playerCharacter.perceptionProficiency,
+        level: example.playerCharacter.level,
+        itemBonus: Bonus.GetBonusFor("perception", BonusType.Item, example.playerCharacter.bonuses),
+        descriptor: example.playerCharacter.senses,
+    };
+    const weapon0 = example.playerCharacter.weapons[0];
+    const weapons: WeaponViewProps[] = [
+        {
+            title: weapon0.title,
+            abilityModifier: GetAbilityModifierFromScores(weapon0.ability, example.playerCharacter.abilityScores),
+            proficiency: GetProficiencyForWeapon(weapon0, example.playerCharacter.weaponProficiencies),
+            itemBonus: weapon0.toHitBonus,
+            damageDice: weapon0.damageDice,
+            damageAbilityModifier: GetAbilityModifierFromScores(weapon0.damageAbilityModifier, example.playerCharacter.abilityScores),
+            damageType: weapon0.damageType,
+            weaponTraits: weapon0.weaponTraits,
+        }
+    ];
 
     return (
         <View style={styles.container}>
@@ -55,24 +133,22 @@ export default function App() {
                     scores={example.playerCharacter.abilityScores}
                     languages={example.playerCharacter.languages}
                     characterMetadata={characterMetadata}
-                    classDCProficiency={
-                        example.playerCharacter.class.proficiency
-                    }
-                    acProficiency={example.playerCharacter.ac}
+                    classDCProficiency={classDCProficiency}
+                    acProficiency={acProficiency}
                     level={example.playerCharacter.level}
-                    armorProficiency={example.playerCharacter.armorProficiency}
+                    armorProficiency={example.playerCharacter.armorProficiencies}
                     shieldProps={example.playerCharacter.shield}
-                    saves={example.playerCharacter.saves}
-                    hitPoints={example.playerCharacter.hitPoints}
+                    saves={{fortitude: fortitudeSave, reflex: reflexSave, will: willSave}}
+                    hitPoints={example.playerCharacter.hitPoint}
                     resistances={example.playerCharacter.resistances}
                     immunities={example.playerCharacter.immunities}
                     conditions={example.playerCharacter.conditions}
-                    perception={example.playerCharacter.perception}
+                    perception={perception}
                     movement={example.playerCharacter.movement}
                     weaponProficiencies={
                         example.playerCharacter.weaponProficiencies
                     }
-                    weapons={example.playerCharacter.weapons}
+                    weapons={weapons}
                 />
                 <FeatsAndInventoryPage
                     ancestryFeatsAndAbilities={

@@ -1,6 +1,6 @@
-enum ArmorGroup {
-    Leather,
-    Composite,
-    Chain,
-    Plate,
+export enum ArmorGroup {
+    Leather = "Leather",
+    Composite = "Composite",
+    Chain = "Chain",
+    Plate = "Plate",
 }

@@ -19,7 +19,7 @@ import { Skill } from "./Skill";
 import { MovementProps } from "./MovementProps";
 import OtherMovements from "./OtherMovements";
 import WeaponDamageSection from "./Weapons/WeaponDamageSection";
-import { WeaponViewProps } from "./Weapons/Weapon";
+import { WeaponViewProps } from "./Weapons/WeaponViewProps";
 import { SavesProp } from "./SavesProps";
 
 var width: number = Dimensions.get("window").width; //full width
@@ -79,17 +79,17 @@ export default class MainPage extends Component<Props, State> {
                     armorPenalty={this.props.acProficiency.armorPenalty}
                 />
                 <ArmorProficiencies
-                    unarmoredProficiency={
-                        this.props.armorProficiency.unarmoredProficiency
+                    unarmored={
+                        this.props.armorProficiency.unarmored
                     }
-                    lightArmorProficiency={
-                        this.props.armorProficiency.lightArmorProficiency
+                    light={
+                        this.props.armorProficiency.light
                     }
-                    mediumArmorProficiency={
-                        this.props.armorProficiency.mediumArmorProficiency
+                    medium={
+                        this.props.armorProficiency.medium
                     }
-                    heavyArmorProficiency={
-                        this.props.armorProficiency.heavyArmorProficiency
+                    heavy={
+                        this.props.armorProficiency.heavy
                     }
                 />
                 <Shield
