@@ -18,7 +18,7 @@ export default class Weapons extends Component<Props, State> {
                 {/* Need to use a SectionList of Strikes and SpellAttack here. */}
                 <ProficiencyView
                     title={this.props.weapons[0].title}
-                    keyAbilityModifier={this.props.weapons[0].abilityModifier}
+                    keyAbility={this.props.weapons[0].abilityModifier}
                     proficiency={this.props.weapons[0].proficiency}
                     level={this.props.level}
                     itemBonus={this.props.weapons[0].itemBonus}

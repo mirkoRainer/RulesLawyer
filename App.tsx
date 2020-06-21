@@ -34,7 +34,7 @@ export default function App() {
     };
     const classDCProficiency: ProficiencyProps = {
         title: "Class DC",
-        keyAbilityModifier: GetAbilityModifierFromScores(example.playerCharacter.class.keyAbility, example.playerCharacter.abilityScores),
+        keyAbility: GetAbilityModifierFromScores(example.playerCharacter.class.keyAbility, example.playerCharacter.abilityScores),
         proficiency: example.playerCharacter.class.proficiency,
         level: example.playerCharacter.level,
         itemBonus: Bonus.GetBonusFor("classDc", BonusType.Item, example.playerCharacter.bonuses),
@@ -65,7 +65,7 @@ export default function App() {
     }
     const acProficiency: ProficiencyProps = {
         title: "AC",
-        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Dexterity, example.playerCharacter.abilityScores),
+        keyAbility: GetAbilityModifierFromScores(Ability.Dexterity, example.playerCharacter.abilityScores),
         proficiency: wornArmorProficiency,
         level: example.playerCharacter.level,
         itemBonus: example.playerCharacter.wornArmor.ACBonus,
@@ -75,28 +75,28 @@ export default function App() {
     };
     const fortitudeSave: ProficiencyProps = {
         title: "Fortitude",
-        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Constitution, example.playerCharacter.abilityScores),
+        keyAbility: GetAbilityModifierFromScores(Ability.Constitution, example.playerCharacter.abilityScores),
         proficiency: example.playerCharacter.saves.fortitude,
         level: example.playerCharacter.level,
         itemBonus: Bonus.GetBonusFor("fortitude", BonusType.Item, example.playerCharacter.bonuses),
     };
     const willSave: ProficiencyProps = {
         title: "Will",
-        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Wisdom, example.playerCharacter.abilityScores),
+        keyAbility: GetAbilityModifierFromScores(Ability.Wisdom, example.playerCharacter.abilityScores),
         proficiency: example.playerCharacter.saves.will,
         level: example.playerCharacter.level,
         itemBonus: Bonus.GetBonusFor("wisdom", BonusType.Item, example.playerCharacter.bonuses),
     };
     const reflexSave: ProficiencyProps = {
         title: "Reflex",
-        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Dexterity, example.playerCharacter.abilityScores),
+        keyAbility: GetAbilityModifierFromScores(Ability.Dexterity, example.playerCharacter.abilityScores),
         proficiency: example.playerCharacter.saves.reflex,
         level: example.playerCharacter.level,
         itemBonus: Bonus.GetBonusFor("dexterity", BonusType.Item, example.playerCharacter.bonuses),
     };
     const perception: ProficiencyProps = {
         title: "Perception",
-        keyAbilityModifier: GetAbilityModifierFromScores(Ability.Wisdom, example.playerCharacter.abilityScores),
+        keyAbility: GetAbilityModifierFromScores(Ability.Wisdom, example.playerCharacter.abilityScores),
         proficiency: example.playerCharacter.perceptionProficiency,
         level: example.playerCharacter.level,
         itemBonus: Bonus.GetBonusFor("perception", BonusType.Item, example.playerCharacter.bonuses),
@@ -110,7 +110,7 @@ export default function App() {
             proficiency: GetProficiencyForWeapon(weapon0, example.playerCharacter.weaponProficiencies),
             itemBonus: weapon0.toHitBonus,
             damageDice: weapon0.damageDice,
-            damageAbilityModifier: GetAbilityModifierFromScores(weapon0.damageAbilityModifier, example.playerCharacter.abilityScores),
+            damageAbilityModifier: GetAbilityModifierFromScores(weapon0.damageAbilityModifier, example.playerCharacter.abilityScores).modifier,
             damageType: weapon0.damageType,
             weaponTraits: weapon0.weaponTraits,
         }
@@ -175,7 +175,7 @@ export default function App() {
                         example.playerCharacter.spellAttackProficiency
                     }
                     spellcastingAbilityModifier={
-                        example.playerCharacter.spellcastingAbilityModifier
+                        GetAbilityModifierFromScores(example.playerCharacter.spellcastingAbilityModifier, example.playerCharacter.abilityScores)
                     }
                     currentLevel={example.playerCharacter.level}
                     bonuses={example.playerCharacter.bonuses}

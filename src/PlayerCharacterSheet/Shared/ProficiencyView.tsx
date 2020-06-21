@@ -3,10 +3,11 @@ import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import ProficiencyArrayView from "./ProficiencyArrayView";
 import { Proficiencies, GetProficiencyValue } from "./PF2eCoreLib/Proficiencies";
+import { AbilityModifierWithName } from "./PF2eCoreLib/AbilityScores";
 
 export interface ProficiencyProps {
     title: string;
-    keyAbilityModifier: number;
+    keyAbility: AbilityModifierWithName;
     proficiency: Proficiencies;
     level: number;
     itemBonus: number;
@@ -38,12 +39,12 @@ export default class ProficiencyView extends Component<
 
         const keyModifier = this.props.isACBase ? (
             <Text style={styles.acBase}>
-                Dex:{this.props.keyAbilityModifier} Cap:
+                Dex:{this.props.keyAbility.modifier} Cap:
                 {this.props.dexCap !== undefined ? this.props.dexCap : 0}
             </Text>
         ) : (
             <Text style={styles.acBase}>
-                Ability Modifier: {this.props.keyAbilityModifier}
+                {this.props.keyAbility.name}: {this.props.keyAbility.modifier}
             </Text>
         );
 
@@ -65,7 +66,7 @@ export default class ProficiencyView extends Component<
             this.props.descriptor !== undefined ? (
                 <Text style={styles.container}>{this.props.descriptor}</Text>
             ) : undefined;
-        const total = this.props.keyAbilityModifier + this.props.level + this.props.itemBonus + GetProficiencyValue(this.props.proficiency);
+        const total = this.props.keyAbility.modifier + this.props.level + this.props.itemBonus + GetProficiencyValue(this.props.proficiency);
         const totalView = this.props.is10base ? (
             <Text style={styles.total}>
                 {10 + total}

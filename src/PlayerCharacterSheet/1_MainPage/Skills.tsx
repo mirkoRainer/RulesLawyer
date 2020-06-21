@@ -14,7 +14,7 @@ export default class Skills extends Component<Props, State> {
     renderItem = ({ item }: { item: Skill }) => (
         <ProficiencyView
             title={item.name}
-            keyAbilityModifier={item.abilityModifier}
+            keyAbility={item.abilityModifier}
             proficiency={item.proficiency}
             level={this.props.level}
             itemBonus={item.itemBonus}

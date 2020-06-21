@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import ProficiencyView from "../Shared/ProficiencyView";
 import { Proficiencies } from "../Shared/PF2eCoreLib/Proficiencies";
+import { AbilityModifierWithName } from "../Shared/PF2eCoreLib/AbilityScores";
 
 interface Props {
     proficiency: Proficiencies;
-    keySpellcastingAbilityModifier: number;
+    keySpellcastingAbility: AbilityModifierWithName;
     level: number;
     spellAttackItemBonus: number;
     spellDCItemBonus: number;
@@ -21,8 +22,8 @@ export default class SpellAttackDCView extends Component<Props, State> {
                 <ProficiencyView
                     title={"Spell Attack"}
                     proficiency={this.props.proficiency}
-                    keyAbilityModifier={
-                        this.props.keySpellcastingAbilityModifier
+                    keyAbility={
+                        this.props.keySpellcastingAbility
                     }
                     level={this.props.level}
                     itemBonus={this.props.spellAttackItemBonus}
@@ -30,8 +31,8 @@ export default class SpellAttackDCView extends Component<Props, State> {
                 <ProficiencyView
                     title={"Spell DC"}
                     proficiency={this.props.proficiency}
-                    keyAbilityModifier={
-                        this.props.keySpellcastingAbilityModifier
+                    keyAbility={
+                        this.props.keySpellcastingAbility
                     }
                     level={this.props.level}
                     itemBonus={this.props.spellDCItemBonus}

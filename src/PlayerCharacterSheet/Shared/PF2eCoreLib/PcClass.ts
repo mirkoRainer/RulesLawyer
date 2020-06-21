@@ -1,5 +1,6 @@
 import { Dictionary } from "../Dictionary";
 import { Proficiencies } from "./Proficiencies";
+import { Ability } from "./Ability";
 
 interface PcClass {
     Name: string;

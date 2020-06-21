@@ -74,7 +74,7 @@ export const example = {
         skills: [
             {
                 name: "Acrobatics",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Dexterity, modifier: 3},
                 proficiency: Proficiencies.Legendary,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -82,7 +82,7 @@ export const example = {
             },
             {
                 name: "Arcana",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Intelligence, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -90,7 +90,7 @@ export const example = {
             },
             {
                 name: "Athletics",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Strength, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -98,7 +98,7 @@ export const example = {
             },
             {
                 name: "Crafting",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Intelligence, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -106,7 +106,7 @@ export const example = {
             },
             {
                 name: "Deception",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Charisma, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -114,7 +114,7 @@ export const example = {
             },
             {
                 name: "Diplomacy",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Charisma, modifier: 3},
                 proficiency: Proficiencies.Untrained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -122,7 +122,7 @@ export const example = {
             },
             {
                 name: "Intimidation",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Charisma, modifier: 3},
                 proficiency: Proficiencies.Expert,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -131,7 +131,7 @@ export const example = {
             {
                 name: "Lore",
                 loreDescriptor: "Golarion",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Intelligence, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -139,7 +139,7 @@ export const example = {
             },
             {
                 name: "Medicine",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Wisdom, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -147,7 +147,7 @@ export const example = {
             },
             {
                 name: "Nature",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Wisdom, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -155,7 +155,7 @@ export const example = {
             },
             {
                 name: "Occultism",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Intelligence, modifier: 3},
                 proficiency: Proficiencies.Master,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -163,7 +163,7 @@ export const example = {
             },
             {
                 name: "Performance",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Charisma, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -171,7 +171,7 @@ export const example = {
             },
             {
                 name: "Religion",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Wisdom, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -179,7 +179,7 @@ export const example = {
             },
             {
                 name: "Society",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Intelligence, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -187,7 +187,7 @@ export const example = {
             },
             {
                 name: "Stealth",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Dexterity, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -195,14 +195,14 @@ export const example = {
             },
             {
                 name: "Survival",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Wisdom, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: false,
             },
             {
                 name: "Thievery",
-                abilityModifier: 3,
+                abilityModifier: { name: Ability.Dexterity, modifier: 3},
                 proficiency: Proficiencies.Trained,
                 itemBonus: 1,
                 hasArmorPenalty: true,
@@ -421,7 +421,7 @@ export const example = {
                     "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
             },
         ],
-        spellcastingAbilityModifier: 2,
+        spellcastingAbilityModifier: Ability.Wisdom,
         spellAttackProficiency: Proficiencies.Trained,
         spellAttackItemBonus: 1,
         spellDCItemBonus: 2,

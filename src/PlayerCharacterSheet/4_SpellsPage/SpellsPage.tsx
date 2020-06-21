@@ -10,10 +10,11 @@ import Spells from "./Spells";
 import { Proficiencies } from "../Shared/PF2eCoreLib/Proficiencies";
 import { Bonus, iBonus } from "../Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../Shared/PF2eCoreLib/BonusTypes";
+import { AbilityModifierWithName } from "../Shared/PF2eCoreLib/AbilityScores";
 
 interface Props {
     spellAttackProficiency: Proficiencies;
-    spellcastingAbilityModifier: number;
+    spellcastingAbilityModifier: AbilityModifierWithName;
     currentLevel: number;
     bonuses: iBonus[];
     magicTraditions: MagicTraditionProps;
@@ -30,7 +31,7 @@ export default class SpellsPage extends Component<Props, State> {
                 <Text h4> Spells Page </Text>
                 <SpellAttackAndDCView
                     proficiency={this.props.spellAttackProficiency}
-                    keySpellcastingAbilityModifier={
+                    keySpellcastingAbility={
                         this.props.spellcastingAbilityModifier
                     }
                     level={this.props.currentLevel}

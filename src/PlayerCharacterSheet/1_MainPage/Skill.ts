@@ -1,9 +1,10 @@
 import { Proficiencies } from "../Shared/PF2eCoreLib/Proficiencies";
+import { AbilityModifierWithName } from "../Shared/PF2eCoreLib/AbilityScores";
 
 export interface Skill {
     name: string;
     loreDescriptor?: string;
-    abilityModifier: number;
+    abilityModifier: AbilityModifierWithName;
     proficiency: Proficiencies;
     itemBonus: number;
     hasArmorPenalty: boolean;

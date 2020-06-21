@@ -62,8 +62,8 @@ export default class MainPage extends Component<Props, State> {
                 <ProficiencyView
                     title={"Class DC"}
                     proficiency={this.props.classDCProficiency.proficiency}
-                    keyAbilityModifier={
-                        this.props.classDCProficiency.keyAbilityModifier
+                    keyAbility={
+                        this.props.classDCProficiency.keyAbility
                     }
                     is10base={this.props.classDCProficiency.is10base}
                     itemBonus={this.props.classDCProficiency.itemBonus}
@@ -71,8 +71,8 @@ export default class MainPage extends Component<Props, State> {
                 />
                 <ProficiencyView
                     title={"AC"}
-                    keyAbilityModifier={
-                        this.props.acProficiency.keyAbilityModifier
+                    keyAbility={
+                        this.props.acProficiency.keyAbility
                     }
                     proficiency={this.props.acProficiency.proficiency}
                     level={this.props.level}
@@ -101,8 +101,8 @@ export default class MainPage extends Component<Props, State> {
                 />
                 <ProficiencyView
                     title={"Fortitude"}
-                    keyAbilityModifier={
-                        this.props.saves.fortitude.keyAbilityModifier
+                    keyAbility={
+                        this.props.saves.fortitude.keyAbility
                     }
                     proficiency={this.props.saves.fortitude.proficiency}
                     level={this.props.level}
@@ -110,8 +110,8 @@ export default class MainPage extends Component<Props, State> {
                 />
                 <ProficiencyView
                     title={"Reflex"}
-                    keyAbilityModifier={
-                        this.props.saves.reflex.keyAbilityModifier
+                    keyAbility={
+                        this.props.saves.reflex.keyAbility
                     }
                     proficiency={this.props.saves.reflex.proficiency}
                     level={this.props.level}
@@ -119,8 +119,8 @@ export default class MainPage extends Component<Props, State> {
                 />
                 <ProficiencyView
                     title={"Will"}
-                    keyAbilityModifier={
-                        this.props.saves.will.keyAbilityModifier
+                    keyAbility={
+                        this.props.saves.will.keyAbility
                     }
                     proficiency={this.props.saves.will.proficiency}
                     level={this.props.level}
@@ -142,8 +142,8 @@ export default class MainPage extends Component<Props, State> {
                 <Conditions conditions={this.props.conditions} />
                 <ProficiencyView
                     title={"Perception"}
-                    keyAbilityModifier={
-                        this.props.perception.keyAbilityModifier
+                    keyAbility={
+                        this.props.perception.keyAbility
                     }
                     proficiency={this.props.perception.proficiency}
                     level={this.props.level}

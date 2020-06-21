@@ -1,3 +1,5 @@
+import { Ability } from "./Ability";
+
 interface IAncestry {
     Name: string;
     HitPoints: number;

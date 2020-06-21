@@ -5,12 +5,17 @@ export interface AbilityScore {
     amount: number;
 }
 
+export interface AbilityModifierWithName {
+    name: string;
+    modifier: number;
+}
+
 export function GetAbilityModifierFromScores(
     ability: Ability,
     abilityScores: AbilityScore[]
-): number {
+): AbilityModifierWithName {
     if (abilityScores.length <= 0) {
-        return 0;
+        return { name: ability.toString(),modifier: 0};
     }
     let abilityScore: number | undefined = abilityScores.find(
         (score) => score.ability === ability
@@ -19,7 +24,7 @@ export function GetAbilityModifierFromScores(
         abilityScore !== undefined
             ? CalculateAbilityScoreModifier(abilityScore)
             : 0;
-    return abilityModifier;
+    return { name: ability.toString(),modifier: abilityModifier} ;
 }
 
 export function CalculateAbilityScoreModifier(abilityScore: number): number {

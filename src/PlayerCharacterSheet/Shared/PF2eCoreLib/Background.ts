@@ -1,3 +1,5 @@
+import { Ability } from "./Ability";
+
 interface Background {
     Name: string;
     AbilityBoostOptions: Ability[];

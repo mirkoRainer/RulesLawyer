@@ -1,7 +1,9 @@
 import {
     AbilityScore,
     GetAbilityModifierFromScores,
+    AbilityModifierWithName,
 } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
+import { Ability } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/Ability";
 
 describe("Ability Scores", () => {
     describe("GetAbilityModifierFromScores", () => {
@@ -14,11 +16,12 @@ describe("Ability Scores", () => {
                 { amount: 12, ability: Ability.Wisdom },
                 { amount: 12, ability: Ability.Charisma },
             ];
-            let actual: number = GetAbilityModifierFromScores(
+            let actual: AbilityModifierWithName = GetAbilityModifierFromScores(
                 Ability.Strength,
                 abilityScores
             );
-            expect(actual).toBe(1);
+            expect(actual.modifier).toBe(1);
+            expect(actual.name).toBe("Strength");
         });
         it("calculates the ability modifier for a requested Score", () => {
             let abilityScores: AbilityScore[] = [
@@ -29,11 +32,12 @@ describe("Ability Scores", () => {
                 { amount: 12, ability: Ability.Wisdom },
                 { amount: 12, ability: Ability.Charisma },
             ];
-            let actual: number = GetAbilityModifierFromScores(
+            let actual: AbilityModifierWithName = GetAbilityModifierFromScores(
                 Ability.Strength,
                 abilityScores
             );
-            expect(actual).toBe(4);
+            expect(actual.modifier).toBe(4);
+            expect(actual.name).toBe("Strength");
         });
     });
 });
