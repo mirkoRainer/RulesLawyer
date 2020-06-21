@@ -25,7 +25,5 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         alignContent: "stretch",
     },
-    text: {
-        backgroundColor: "green",
-    },
+    text: {},
 });

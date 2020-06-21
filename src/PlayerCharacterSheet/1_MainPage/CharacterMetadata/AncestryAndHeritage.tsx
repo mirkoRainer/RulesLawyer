@@ -33,7 +33,5 @@ const styles = StyleSheet.create({
         alignContent: "stretch",
         alignSelf: "stretch",
     },
-    text: {
-        backgroundColor: "green",
-    },
+    text: {},
 });

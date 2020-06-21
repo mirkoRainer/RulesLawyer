@@ -22,18 +22,14 @@ export default class SpellAttackDCView extends Component<Props, State> {
                 <ProficiencyView
                     title={"Spell Attack"}
                     proficiency={this.props.proficiency}
-                    keyAbility={
-                        this.props.keySpellcastingAbility
-                    }
+                    keyAbility={this.props.keySpellcastingAbility}
                     level={this.props.level}
                     itemBonus={this.props.spellAttackItemBonus}
                 />
                 <ProficiencyView
                     title={"Spell DC"}
                     proficiency={this.props.proficiency}
-                    keyAbility={
-                        this.props.keySpellcastingAbility
-                    }
+                    keyAbility={this.props.keySpellcastingAbility}
                     level={this.props.level}
                     itemBonus={this.props.spellDCItemBonus}
                 />
@@ -51,7 +47,6 @@ const styles = StyleSheet.create({
     text: {
         flex: 1,
         width: 100,
-        backgroundColor: "green",
     },
     header: {
         flex: 1,

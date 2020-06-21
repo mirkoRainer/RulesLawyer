@@ -45,6 +45,5 @@ const styles = StyleSheet.create({
     text: {
         flex: 1,
         width: 100,
-        backgroundColor: "green",
     },
 });
