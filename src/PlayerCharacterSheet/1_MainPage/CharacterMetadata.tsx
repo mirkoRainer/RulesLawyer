@@ -34,8 +34,6 @@ interface Props {
 interface State {}
 
 export default class CharacterMetadata extends Component<Props, State> {
-    public static defaultProps = {};
-
     render() {
         return (
             <View style={styles.container}>

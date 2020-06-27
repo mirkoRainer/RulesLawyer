@@ -1,8 +1,9 @@
 import { Ability } from "./Ability";
+import { prop } from "./TypescriptEvolution";
 
 export interface AbilityScore {
     ability: Ability;
-    amount: number;
+    score: number;
 }
 
 export interface AbilityModifierWithName {
@@ -10,21 +11,25 @@ export interface AbilityModifierWithName {
     modifier: number;
 }
 
+export type AbilityScoreArray = {
+    strength: AbilityScore;
+    dexterity: AbilityScore;
+    constitution: AbilityScore;
+    intelligence: AbilityScore;
+    wisdom: AbilityScore;
+    charisma: AbilityScore;
+}
+
 export function GetAbilityModifierFromScores(
-    ability: Ability,
-    abilityScores: AbilityScore[]
+    ability: keyof AbilityScoreArray,
+    abilityScores: AbilityScoreArray
 ): AbilityModifierWithName {
-    if (abilityScores.length <= 0) {
-        return { name: ability.toString(),modifier: 0};
-    }
-    let abilityScore: number | undefined = abilityScores.find(
-        (score) => score.ability === ability
-    )?.amount;
+    let abilityScore: AbilityScore = abilityScores[ability];
     const abilityModifier =
         abilityScore !== undefined
-            ? CalculateAbilityScoreModifier(abilityScore)
+            ? CalculateAbilityScoreModifier(abilityScore.score)
             : 0;
-    return { name: ability.toString(),modifier: abilityModifier} ;
+    return { name: ability,modifier: abilityModifier} ;
 }
 
 export function CalculateAbilityScoreModifier(abilityScore: number): number {

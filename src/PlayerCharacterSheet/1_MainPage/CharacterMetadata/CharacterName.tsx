@@ -1,12 +1,12 @@
-import React, { Component, useState } from "react";
-import { View, StyleSheet, Text, TextInputComponent, TextInput, Button, ShadowPropTypesIOS } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, TextInput, Button, Dimensions } from "react-native";
 import Modal from "react-native-modal";
+import { PlayerCharacterActionTypes, CHANGE_CHARACTER_NAME } from "../../../store/CharacterStoreActionTypes";
+import PlayerCharacterStore from "../../../store/CharacterStore";
 
 interface Props {
     characterName: string;
 }
-
-interface State {}
 
 const CharacterName: React.FC<Props> = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -24,15 +24,38 @@ const CharacterName: React.FC<Props> = (props) => {
             lastTap = now;
         }
     };
+
+    function changeCharacterName(text: string) {
+        PlayerCharacterStore.dispatch({
+            type: CHANGE_CHARACTER_NAME,
+            payload: text
+        }
+        );
+    }
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text} onPress={handleDoubleTap} >
+            <Text style={styles.text} onPress={handleDoubleTap} onLongPress={toggleModal} >
                 {" "}
                 Character Name: {props.characterName}{" "}
             </Text>
-            <Modal isVisible={isModalVisible}>
-                <View style={styles.modal}>
-                    <TextInput></TextInput>
+            <Modal 
+                isVisible={isModalVisible}
+                avoidKeyboard={true}
+                onBackdropPress={() => setModalVisible(false)}
+                onSwipeComplete={() => setModalVisible(false)}
+                swipeDirection={"left"}
+                style={styles.modal}
+            >
+                <View style={styles.modalContainer}>
+                    <Text style={styles.modalText}>Editing Character Name:</Text>
+                    <TextInput 
+                        style={styles.modalTextInput}
+                        placeholder={"Character Name"} 
+                        onChangeText={changeCharacterName}
+                    >
+                        {props.characterName}
+                    </TextInput>
                     <Button title="Done" onPress={toggleModal} />
                 </View>
             </Modal>
@@ -45,12 +68,29 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: "black",
         borderWidth: 2,
-        alignContent: "stretch",
-        alignSelf: "stretch",
     },
-    text: {},
+    text:{},
+    modalContainer: {
+        justifyContent: "center",
+        backgroundColor: "white"
+    },
+    modalText: {
+        justifyContent: "center",
+        textAlign: "center"
+    },
+    modalTextInput: {
+        justifyContent: "center",
+        textAlign: "center",
+        borderBottomColor: "black",
+        borderBottomWidth: 2,
+        width: "100%",
+        fontSize: 32,
+        backgroundColor: "#e4dada"
+    },
     modal: {
-        flex: 1
+        // backgroundColor: "white",
+        maxHeight: Dimensions.get("window").height / 4,
+        top: "30%"
     }
 });
 
