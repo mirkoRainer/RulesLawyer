@@ -1,11 +1,11 @@
 import "react-native-gesture-handler";
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import CharacterSheet from "./src/PlayerCharacterSheet/CharacterSheet";
+import CharacterSheet from "./src/scenes/CharacterSheet";
 import { Header } from "react-native-elements";
 import {NavigationContainer, StackActions} from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import MainMenu from "./src/MainMenu";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import MainMenu from "./src/scenes/MainMenu";
 
 interface Props {}
 
@@ -19,22 +19,22 @@ export type RootStackParamList = {
 
 export default class App extends Component<Props, State> {
     render(){
-        const Stack = createStackNavigator<RootStackParamList>();
+        const Drawer = createDrawerNavigator<RootStackParamList>();
 
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="MainMenu">
-                    <Stack.Screen 
+                <Drawer.Navigator initialRouteName="MainMenu">
+                    <Drawer.Screen 
                         name="MainMenu"
                         component={MainMenu}
                         options={{ title: "Main Menu" }}
                     />
-                    <Stack.Screen 
+                    <Drawer.Screen 
                         name="CharacterSheet"
                         component={CharacterSheet}
                         options={{title: "Character Sheet"}}
                     />
-                </Stack.Navigator>
+                </Drawer.Navigator>
             </NavigationContainer>
         );
     }

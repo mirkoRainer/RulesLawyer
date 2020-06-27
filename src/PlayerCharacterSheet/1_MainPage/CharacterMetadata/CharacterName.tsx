@@ -13,18 +13,6 @@ const CharacterName: React.FC<Props> = (props) => {
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
-
-    let lastTap = 0;
-    const handleDoubleTap = () => {
-        const now = Date.now();
-        const DOUBLE_TAP_DELAY = 300;
-        if (lastTap && (now - lastTap) < DOUBLE_TAP_DELAY) {
-            setModalVisible(!isModalVisible);
-        } else {
-            lastTap = now;
-        }
-    };
-
     function changeCharacterName(text: string) {
         PlayerCharacterStore.dispatch({
             type: CHANGE_CHARACTER_NAME,
@@ -35,7 +23,7 @@ const CharacterName: React.FC<Props> = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text} onPress={handleDoubleTap} onLongPress={toggleModal} >
+            <Text style={styles.text} onLongPress={toggleModal} >
                 {" "}
                 Character Name: {props.characterName}{" "}
             </Text>

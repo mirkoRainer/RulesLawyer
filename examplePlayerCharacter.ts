@@ -420,7 +420,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
                     "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
         },
     ],
-    spellcastingAbilityModifier: Ability.Wisdom,
+    spellcastingAbilityModifier: "wisdom",
     spellAttackProficiency: Proficiencies.Trained,
     spellAttackItemBonus: 1,
     spellDCItemBonus: 2,

@@ -1,4 +1,6 @@
 import { AbilityScoreArray } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "./src/PlayerCharacterSheet/Shared/PF2eCoreLib/Proficiencies";
+import { iClass } from "./src/PlayerCharacterSheet/1_MainPage/CharacterMetadata/Class";
 
 
 export interface PlayerCharacterDTO {
@@ -12,7 +14,7 @@ export interface PlayerCharacterDTO {
     traits:                      string[];
     ancestry:                    Ancestry;
     background:                  Background;
-    class:                       Class;
+    class:                       iClass;
     abilityScores:               AbilityScoreArray;
     languages:                   string[];
     wornArmor:                   WornArmor;
@@ -25,7 +27,7 @@ export interface PlayerCharacterDTO {
     movement:                    Movement;
     weaponProficiencies:         WeaponProficiencies;
     weapons:                     Weapon[];
-    perceptionProficiency:       string;
+    perceptionProficiency:       Proficiencies;
     senses:                      string;
     resistances:                 string;
     immunities:                  string;
@@ -40,8 +42,8 @@ export interface PlayerCharacterDTO {
     personalityData:             PersonalityData;
     campaignNotesData:           CampaignNotesData;
     actions:                     Action[];
-    spellcastingAbilityModifier: string;
-    spellAttackProficiency:      string;
+    spellcastingAbilityModifier: keyof AbilityScoreArray;
+    spellAttackProficiency:      Proficiencies;
     spellAttackItemBonus:        number;
     spellDCItemBonus:            number;
     bonuses:                     Bonus[];
@@ -229,7 +231,7 @@ export interface WeaponDTO {
     ability:               string;
     toHitBonus:            number;
     damageDice:            string;
-    damageAbilityModifier: string;
+    damageAbilityModifier: keyof AbilityScoreArray;
     damageType:            string;
     weaponTraits:          string;
 }
