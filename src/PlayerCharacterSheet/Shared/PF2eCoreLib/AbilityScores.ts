@@ -18,7 +18,7 @@ export type AbilityScoreArray = {
     intelligence: AbilityScore;
     wisdom: AbilityScore;
     charisma: AbilityScore;
-}
+};
 
 export function GetAbilityModifierFromScores(
     ability: keyof AbilityScoreArray,
@@ -29,10 +29,36 @@ export function GetAbilityModifierFromScores(
         abilityScore !== undefined
             ? CalculateAbilityScoreModifier(abilityScore.score)
             : 0;
-    return { name: ability,modifier: abilityModifier} ;
+    return { name: ability, modifier: abilityModifier };
 }
 
 export function CalculateAbilityScoreModifier(abilityScore: number): number {
     let result = (abilityScore - 10) / 2;
     return Math.floor(result);
+}
+
+export function GetAbilityScoreAbbreviation(abilityScoreName: string) {
+    switch (abilityScoreName) {
+        case "strength": {
+            return "STR";
+        }
+        case "dexterity": {
+            return "DEX";
+        }
+        case "constitution": {
+            return "CON";
+        }
+        case "intelligence": {
+            return "INT";
+        }
+        case "wisdom": {
+            return "WIS";
+        }
+        case "charisma": {
+            return "CHA";
+        }
+        default: {
+            return "FREE";
+        }
+    }
 }

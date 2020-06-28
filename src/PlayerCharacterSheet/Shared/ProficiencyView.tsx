@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import ProficiencyArrayView from "./ProficiencyArrayView";
-import { Proficiencies, GetProficiencyValue } from "./PF2eCoreLib/Proficiencies";
-import { AbilityModifierWithName } from "./PF2eCoreLib/AbilityScores";
+import {
+    Proficiencies,
+    GetProficiencyValue,
+} from "./PF2eCoreLib/Proficiencies";
+import {
+    AbilityModifierWithName,
+    GetAbilityScoreAbbreviation,
+} from "./PF2eCoreLib/AbilityScores";
 
 export interface ProficiencyProps {
     title: string;
@@ -44,13 +50,8 @@ export default class ProficiencyView extends Component<
             </Text>
         ) : (
             <Text style={styles.acBase}>
-                {this.props.keyAbility.name}: {this.props.keyAbility.modifier}
-            </Text>
-        );
-
-        const proficiencyBonus = (
-            <Text style={styles.profBonus}>
-                Level {this.props.level}
+                {GetAbilityScoreAbbreviation(this.props.keyAbility.name)}:{" "}
+                {this.props.keyAbility.modifier}
             </Text>
         );
         const itemBonus =
@@ -66,15 +67,15 @@ export default class ProficiencyView extends Component<
             this.props.descriptor !== undefined ? (
                 <Text style={styles.container}>{this.props.descriptor}</Text>
             ) : undefined;
-        const total = this.props.keyAbility.modifier + this.props.level + this.props.itemBonus + GetProficiencyValue(this.props.proficiency);
+        const total =
+            this.props.keyAbility.modifier +
+            this.props.level +
+            this.props.itemBonus +
+            GetProficiencyValue(this.props.proficiency);
         const totalView = this.props.is10base ? (
-            <Text style={styles.total}>
-                {10 + total}
-            </Text>
+            <Text style={styles.total}>{10 + total}</Text>
         ) : (
-            <Text style={styles.total}>
-                {total}
-            </Text>
+            <Text style={styles.total}>{total}</Text>
         );
         return (
             <>
@@ -84,7 +85,6 @@ export default class ProficiencyView extends Component<
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
                     {keyModifier}
-                    {proficiencyBonus}
                     <ProficiencyArrayView
                         proficiency={this.props.proficiency}
                     />
@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
     title: {
         flex: 3,
         alignSelf: "center",
-        textAlign: "center"
+        textAlign: "center",
     },
     total: {
         flex: 1,
         fontWeight: "bold",
         fontSize: 16,
         alignSelf: "center",
-        textAlign: "center"
+        textAlign: "center",
     },
     equals: {
         flex: 2,
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     itemBonus: {
         flex: 3,
         alignSelf: "center",
+        textAlign: "center",
     },
     equalSign: {
         flex: 1,

@@ -7,7 +7,7 @@ export interface ArmorProficiencyProps {
     unarmored: Proficiencies;
     light: Proficiencies;
     medium: Proficiencies;
-    heavy : Proficiencies;
+    heavy: Proficiencies;
 }
 
 export interface State {}
@@ -21,27 +21,19 @@ export default class ArmorProficiencies extends Component<
             <View style={styles.container}>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Unarmored</Text>
-                    <ProficiencyArrayView
-                        proficiency={this.props.unarmored}
-                    />
+                    <ProficiencyArrayView proficiency={this.props.unarmored} />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Light Armor</Text>
-                    <ProficiencyArrayView
-                        proficiency={this.props.light}
-                    />
+                    <ProficiencyArrayView proficiency={this.props.light} />
                 </View>
                 <View style={styles.armorEntry}>
-                    <Text style={styles.text}>Medium Armor</Text>
-                    <ProficiencyArrayView                     
-                        proficiency={this.props.medium}
-                    /> 
+                    <Text style={styles.text}>Med. Armor</Text>
+                    <ProficiencyArrayView proficiency={this.props.medium} />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Heavy Armor</Text>
-                    <ProficiencyArrayView
-                        proficiency={this.props.heavy}
-                    />
+                    <ProficiencyArrayView proficiency={this.props.heavy} />
                 </View>
             </View>
         );

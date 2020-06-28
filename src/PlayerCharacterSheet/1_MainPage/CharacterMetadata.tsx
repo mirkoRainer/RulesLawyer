@@ -37,9 +37,6 @@ export default class CharacterMetadata extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text h3 style={styles.header}>
-                    Character Metadata
-                </Text>
                 <View style={styles.rowContainer}>
                     <CharacterName
                         characterName={
