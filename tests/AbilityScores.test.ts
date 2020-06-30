@@ -3,8 +3,8 @@ import {
     GetAbilityModifierFromScores,
     AbilityModifierWithName,
     AbilityScoreArray,
-} from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
-import { Ability } from "../src/PlayerCharacterSheet/Shared/PF2eCoreLib/Ability";
+} from "../src/scenes/Shared/PF2eCoreLib/AbilityScores";
+import { Ability } from "../src/scenes/Shared/PF2eCoreLib/Ability";
 
 describe("Ability Scores", () => {
     describe("GetAbilityModifierFromScores", () => {

@@ -1,106 +1,103 @@
 import React, { useState, Component } from "react";
-import { StyleSheet, View, ScrollView, Alert, Animated } from "react-native";
+import { StyleSheet, View, ScrollView, Alert, Animated, Button } from "react-native";
 import { Header } from "react-native-elements";
-import MainPage from "../PlayerCharacterSheet/1_MainPage/MainPage";
-import FeatsAndInventoryPage from "../PlayerCharacterSheet/2_FeatsAndInventoryPage/FeatsAndInventoryPage";
-import StoryAndActionsPage from "../PlayerCharacterSheet/3_StoryAndActionsPage/StoryAndActionsPage";
-import SpellsPage from "../PlayerCharacterSheet/4_SpellsPage/SpellsPage";
-import { CharacterMetadataProps } from "../PlayerCharacterSheet/1_MainPage/CharacterMetadata";
-import { ProficiencyProps } from "../PlayerCharacterSheet/Shared/ProficiencyView";
-import { GetAbilityModifierFromScores } from "../PlayerCharacterSheet/Shared/PF2eCoreLib/AbilityScores";
-import { Bonus } from "../PlayerCharacterSheet/Shared/PF2eCoreLib/Bonus";
-import { BonusType } from "../PlayerCharacterSheet/Shared/PF2eCoreLib/BonusTypes";
-import { prop } from "../PlayerCharacterSheet/Shared/PF2eCoreLib/TypescriptEvolution";
-import { Proficiencies } from "../PlayerCharacterSheet/Shared/PF2eCoreLib/Proficiencies";
+import MainPage from "./PlayerCharacterSheet/1_MainPage/MainPage";
+import FeatsAndInventoryPage from "./PlayerCharacterSheet/2_FeatsAndInventoryPage/FeatsAndInventoryPage";
+import StoryAndActionsPage from "./PlayerCharacterSheet/3_StoryAndActionsPage/StoryAndActionsPage";
+import SpellsPage from "./PlayerCharacterSheet/4_SpellsPage/SpellsPage";
+import { CharacterMetadataProps } from "./PlayerCharacterSheet/1_MainPage/CharacterMetadata";
+import { ProficiencyProps } from "./Shared/ProficiencyView";
+import { GetAbilityModifierFromScores } from "./Shared/PF2eCoreLib/AbilityScores";
+import { Bonus } from "./Shared/PF2eCoreLib/Bonus";
+import { BonusType } from "./Shared/PF2eCoreLib/BonusTypes";
+import { prop } from "./Shared/PF2eCoreLib/TypescriptEvolution";
+import { Proficiencies } from "./Shared/PF2eCoreLib/Proficiencies";
 import {
     WeaponViewProps,
     GetProficiencyForWeapon,
-} from "../PlayerCharacterSheet/1_MainPage/Weapons/WeaponViewProps";
-import { ArmorCategory } from "../PlayerCharacterSheet/Shared/PF2eCoreLib/ArmorCategory";
-import PlayerCharacterStore from "../store/CharacterStore";
-import { Provider } from "react-redux";
-import { RootStackParamList } from "../../App";
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import { PlayerCharacterDTO } from "../../PlayerCharacter";
-import { RectButton } from "react-native-gesture-handler";
+} from "./PlayerCharacterSheet/1_MainPage/Weapons/WeaponViewProps";
+import { ArmorCategory } from "./Shared/PF2eCoreLib/ArmorCategory";
+import { RootDrawerParamList } from "../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import ProficiencyCalculator from "../PlayerCharacterSheet/Shared/ProficiencyCalculator";
+import { Provider, connect } from "react-redux";
+import { PlayerCharacterDTO } from "./Shared/PF2eCoreLib/PlayerCharacter";
+import { Dispatch, bindActionCreators, ActionCreator, ActionCreatorsMapObject } from "redux";
+import { AppActions } from "../store/actions/StoreActionTypes";
+import { startChangePlayerName, startChangeCharacterName } from "../store/actions/Actions";
+import Store, { CharacterSheetState } from "../store/Store";
+import {ThunkDispatch} from "redux-thunk";
 
-type CharacterSheetNavigationProps = DrawerNavigationProp<RootStackParamList, "CharacterSheet">;
 
-interface Props {
+type CharacterSheetNavigationProps = DrawerNavigationProp<RootDrawerParamList, "CharacterSheet">;
+
+interface OwnProps {
     navigation: CharacterSheetNavigationProps;
 }
 
-interface State {
-    playerCharacter: PlayerCharacterDTO;
-}
+interface OwnState {}
 
-export default function CharacterSheet(props: Props) {
-    const playerCharacter = PlayerCharacterStore.getState();
-    const [state, setState] = useState(playerCharacter);
-    PlayerCharacterStore.subscribe(() => {
-        setState(PlayerCharacterStore.getState());
-    });
+type Props = OwnProps & LinkStateProps & LinkDispatchProps
 
-    function characterMetadata(): CharacterMetadataProps {
+
+const CharacterSheet: React.FC<Props> = (props: Props) => {
+    const characterMetadata = (): CharacterMetadataProps => {
         return {
-            characterName: playerCharacter.name,
-            playerName: playerCharacter.playerName,
-            ancestry: playerCharacter.ancestry.name,
-            heritage: playerCharacter.ancestry.heritage,
-            level: playerCharacter.level,
-            experiencePoints: playerCharacter.experiencePoints,
-            background: playerCharacter.background.name,
-            pcClass: playerCharacter.class.name,
-            subclass: playerCharacter.class.subClass,
-            alignment: playerCharacter.alignment,
-            deity: playerCharacter.deity,
-            traits: playerCharacter.traits,
+            characterName: props.playerCharacter.name,
+            playerName: props.playerCharacter.playerName,
+            ancestry: props.playerCharacter.ancestry.name,
+            heritage: props.playerCharacter.ancestry.heritage,
+            level: props.playerCharacter.level,
+            experiencePoints: props.playerCharacter.experiencePoints,
+            background: props.playerCharacter.background.name,
+            pcClass: props.playerCharacter.class.name,
+            subclass: props.playerCharacter.class.subClass,
+            alignment: props.playerCharacter.alignment,
+            deity: props.playerCharacter.deity,
+            traits: props.playerCharacter.traits,
         };
-    }
-    function classDCProficiency(): ProficiencyProps  {
+    };
+    const classDCProficiency = (): ProficiencyProps  => {
         return {
             title: "Class DC",
             keyAbility: GetAbilityModifierFromScores(
-                playerCharacter.class.keyAbility,
-                playerCharacter.abilityScores
+                props.playerCharacter.class.keyAbility,
+                props.playerCharacter.abilityScores
             ),
-            proficiency: playerCharacter.class.proficiency,
-            level: playerCharacter.level,
+            proficiency: props.playerCharacter.class.proficiency,
+            level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
                 "classDc",
                 BonusType.Item,
-                playerCharacter.bonuses
+                props.playerCharacter.bonuses
             ),
             is10base: true,
         };
-    }
-    function wornArmorProficiency(): Proficiencies {
-        switch (playerCharacter.wornArmor.Category) {
+    };
+    const wornArmorProficiency = (): Proficiencies => {
+        switch (props.playerCharacter.wornArmor.Category) {
         case ArmorCategory.Unarmored: {
             return prop(
-                playerCharacter.armorProficiencies,
+                props.playerCharacter.armorProficiencies,
                 "unarmored"
             );
             break;
         }
         case ArmorCategory.Light: {
             return prop(
-                playerCharacter.armorProficiencies,
+                props.playerCharacter.armorProficiencies,
                 "light"
             );
             break;
         }
         case ArmorCategory.Medium: {
             return prop(
-                playerCharacter.armorProficiencies,
+                props.playerCharacter.armorProficiencies,
                 "medium"
             );
         }
         case ArmorCategory.Heavy: {
             return prop(
-                playerCharacter.armorProficiencies,
+                props.playerCharacter.armorProficiencies,
                 "heavy"
             );
         }
@@ -108,191 +105,211 @@ export default function CharacterSheet(props: Props) {
             return Proficiencies.Untrained;
         }
         }
-    }
-    function acProficiency(): ProficiencyProps  {
+    };
+    const acProficiency = (): ProficiencyProps  => {
         return {
             title: "AC",
             keyAbility: GetAbilityModifierFromScores(
                 "dexterity",
-                playerCharacter.abilityScores
+                props.playerCharacter.abilityScores
             ),
             proficiency: wornArmorProficiency(),
-            level: playerCharacter.level,
-            itemBonus: playerCharacter.wornArmor.ACBonus,
+            level: props.playerCharacter.level,
+            itemBonus: props.playerCharacter.wornArmor.ACBonus,
             is10base: true,
             isACBase: true,
-            dexCap: playerCharacter.wornArmor.DexCap,
+            dexCap: props.playerCharacter.wornArmor.DexCap,
         };
-    }
-    function fortitudeSave(): ProficiencyProps {
+    };
+    const fortitudeSave = (): ProficiencyProps => {
         return {
             title: "Fortitude",
             keyAbility: GetAbilityModifierFromScores(
                 "constitution",
-                playerCharacter.abilityScores
+                props.playerCharacter.abilityScores
             ),
-            proficiency: playerCharacter.saves.fortitude,
-            level: playerCharacter.level,
+            proficiency: props.playerCharacter.saves.fortitude,
+            level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
                 "fortitude",
                 BonusType.Item,
-                playerCharacter.bonuses
+                props.playerCharacter.bonuses
             ),
         };
-    }
-    function willSave(): ProficiencyProps {
+    };
+    const willSave = (): ProficiencyProps => {
         return {
             title: "Will",
             keyAbility: GetAbilityModifierFromScores(
                 "wisdom",
-                playerCharacter.abilityScores
+                props.playerCharacter.abilityScores
             ),
-            proficiency: playerCharacter.saves.will,
-            level: playerCharacter.level,
+            proficiency: props.playerCharacter.saves.will,
+            level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
                 "wisdom",
                 BonusType.Item,
-                playerCharacter.bonuses
+                props.playerCharacter.bonuses
             ),
         };
-    }
-    function reflexSave(): ProficiencyProps {
+    };
+    const reflexSave = (): ProficiencyProps => {
         return {
             title: "Reflex",
             keyAbility: GetAbilityModifierFromScores(
                 "dexterity",
-                playerCharacter.abilityScores
+                props.playerCharacter.abilityScores
             ),
-            proficiency: playerCharacter.saves.reflex,
-            level: playerCharacter.level,
+            proficiency: props.playerCharacter.saves.reflex,
+            level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
                 "dexterity",
                 BonusType.Item,
-                playerCharacter.bonuses
+                props.playerCharacter.bonuses
             ),
         };
-    }
-    function perception(): ProficiencyProps {
+    };
+    const perception = (): ProficiencyProps => {
         return {
             title: "Perception",
             keyAbility: GetAbilityModifierFromScores(
                 "wisdom",
-                playerCharacter.abilityScores
+                props.playerCharacter.abilityScores
             ),
-            proficiency: playerCharacter.perceptionProficiency,
-            level: playerCharacter.level,
+            proficiency: props.playerCharacter.perceptionProficiency,
+            level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
                 "perception",
                 BonusType.Item,
-                playerCharacter.bonuses
+                props.playerCharacter.bonuses
             ),
-            descriptor: playerCharacter.senses,
+            descriptor: props.playerCharacter.senses,
         };
-    }
-    function weapons(): WeaponViewProps[] { 
-        const weapon0 = playerCharacter.weapons[0];
+    };
+    const weapons = (): WeaponViewProps[] => { 
+        const weapon0 = props.playerCharacter.weapons[0];
         return [
             {
                 title: weapon0.title,
                 abilityModifier: GetAbilityModifierFromScores(
                     weapon0.ability,
-                    playerCharacter.abilityScores
+                    props.playerCharacter.abilityScores
                 ),
                 proficiency: GetProficiencyForWeapon(
                     weapon0,
-                    playerCharacter.weaponProficiencies
+                    props.playerCharacter.weaponProficiencies
                 ),
                 itemBonus: weapon0.toHitBonus,
                 damageDice: weapon0.damageDice,
                 damageAbilityModifier: GetAbilityModifierFromScores(
                     weapon0.damageAbilityModifier,
-                    playerCharacter.abilityScores
+                    props.playerCharacter.abilityScores
                 ).modifier,
                 damageType: weapon0.damageType,
                 weaponTraits: weapon0.weaponTraits,
             },
         ];
-    }
-    function headerText(): string {
-        const pcClass = playerCharacter.class;
-        const name = playerCharacter.name;
-        return  name + " - " + pcClass.subClass + " " + pcClass.name + " Lvl:" + playerCharacter.level;
-    }
+    };
+    const headerText = (): string => {
+        const pcClass = props.playerCharacter.class;
+        const name = props.playerCharacter.name;
+        return  name + " - " + pcClass.subClass + " " + pcClass.name + " Lvl:" + props.playerCharacter.level;
+    };
 
     return (
-        <Provider store={PlayerCharacterStore}>
-            <View style={styles.container}>
-                <Header centerComponent={{ text: headerText(), style: { color: "#fff" }}} />
-                <ScrollView>
-                    <MainPage
-                        skills={playerCharacter.skills}
-                        scores={playerCharacter.abilityScores}
-                        languages={playerCharacter.languages}
-                        characterMetadata={characterMetadata()}
-                        classDCProficiency={classDCProficiency()}
-                        acProficiency={acProficiency()}
-                        level={playerCharacter.level}
-                        armorProficiency={
-                            playerCharacter.armorProficiencies
-                        }
-                        shieldProps={playerCharacter.shield}
-                        saves={{
-                            fortitude: fortitudeSave(),
-                            reflex: reflexSave(),
-                            will: willSave(),
-                        }}
-                        hitPoints={playerCharacter.hitPoint}
-                        resistances={playerCharacter.resistances}
-                        immunities={playerCharacter.immunities}
-                        weaknesses={playerCharacter.weakness}
-                        conditions={playerCharacter.conditions}
-                        perception={perception()}
-                        movements={playerCharacter.movement}
-                        weaponProficiencies={
-                            playerCharacter.weaponProficiencies
-                        }
-                        weapons={weapons()}
-                    />
-                    <FeatsAndInventoryPage
-                        ancestryFeatsAndAbilities={
-                            playerCharacter.ancestryFeatsAndAbilities
-                        }
-                        skillFeats={playerCharacter.skillFeats}
-                        generalFeats={playerCharacter.generalFeats}
-                        classFeatsAndAbilities={
-                            playerCharacter.classFeatsAndAbilities
-                        }
-                        bonusFeats={playerCharacter.bonusFeats}
-                    />
-                    <StoryAndActionsPage
-                        bioData={playerCharacter.biographicalData}
-                        personalityData={playerCharacter.personalityData}
-                        campaignNotesData={
-                            playerCharacter.campaignNotesData
-                        }
-                        actions={playerCharacter.actions}
-                    />
-                    <SpellsPage
-                        spellAttackProficiency={
-                            playerCharacter.spellAttackProficiency
-                        }
-                        spellcastingAbilityModifier={GetAbilityModifierFromScores(
-                            playerCharacter.spellcastingAbilityModifier,
-                            playerCharacter.abilityScores
-                        )}
-                        currentLevel={playerCharacter.level}
-                        bonuses={playerCharacter.bonuses}
-                        /* Need to calculate the bonus total from the bonuses given */
-                        spellSlots={playerCharacter.spellSlots}
-                        magicTraditions={playerCharacter.magicTraditions}
-                        spells={playerCharacter.spells}
-                    />
-                </ScrollView>
-            </View>
-        </Provider>
+        <View style={styles.container}>
+            <Header centerComponent={{ text: headerText(), style: { color: "#eee" }}} />
+            <ScrollView>
+                <MainPage
+                    skills={props.playerCharacter.skills}
+                    scores={props.playerCharacter.abilityScores}
+                    languages={props.playerCharacter.languages}
+                    characterMetadata={characterMetadata()}
+                    classDCProficiency={classDCProficiency()}
+                    acProficiency={acProficiency()}
+                    level={props.playerCharacter.level}
+                    armorProficiency={
+                        props.playerCharacter.armorProficiencies
+                    }
+                    shieldProps={props.playerCharacter.shield}
+                    saves={{
+                        fortitude: fortitudeSave(),
+                        reflex: reflexSave(),
+                        will: willSave(),
+                    }}
+                    hitPoints={props.playerCharacter.hitPoint}
+                    resistances={props.playerCharacter.resistances}
+                    immunities={props.playerCharacter.immunities}
+                    weaknesses={props.playerCharacter.weakness}
+                    conditions={props.playerCharacter.conditions}
+                    perception={perception()}
+                    movements={props.playerCharacter.movement}
+                    weaponProficiencies={
+                        props.playerCharacter.weaponProficiencies
+                    }
+                    weapons={weapons()}
+                />
+                <FeatsAndInventoryPage
+                    ancestryFeatsAndAbilities={
+                        props.playerCharacter.ancestryFeatsAndAbilities
+                    }
+                    skillFeats={props.playerCharacter.skillFeats}
+                    generalFeats={props.playerCharacter.generalFeats}
+                    classFeatsAndAbilities={
+                        props.playerCharacter.classFeatsAndAbilities
+                    }
+                    bonusFeats={props.playerCharacter.bonusFeats}
+                />
+                <StoryAndActionsPage
+                    bioData={props.playerCharacter.biographicalData}
+                    personalityData={props.playerCharacter.personalityData}
+                    campaignNotesData={
+                        props.playerCharacter.campaignNotesData
+                    }
+                    actions={props.playerCharacter.actions}
+                />
+                <SpellsPage
+                    spellAttackProficiency={
+                        props.playerCharacter.spellAttackProficiency
+                    }
+                    spellcastingAbilityModifier={GetAbilityModifierFromScores(
+                        props.playerCharacter.spellcastingAbilityModifier,
+                        props.playerCharacter.abilityScores
+                    )}
+                    currentLevel={props.playerCharacter.level}
+                    bonuses={props.playerCharacter.bonuses}
+                    spellSlots={props.playerCharacter.spellSlots}
+                    magicTraditions={props.playerCharacter.magicTraditions}
+                    spells={props.playerCharacter.spells}
+                />
+            </ScrollView>
+        </View>
     );
-    
+};
+
+// base state
+interface LinkStateProps { 
+    playerCharacter: PlayerCharacterDTO,
 }
+//all actions to be dispatched
+interface LinkDispatchProps { 
+    startChangeCharacterName: (name: string) => void;
+    startChangePlayerName: (name: string) => void;
+ }
+
+const mapStateToProps = (state: CharacterSheetState, ownProps: OwnProps): LinkStateProps => ({
+    playerCharacter: state.playerCharacter,
+});
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: OwnProps): LinkDispatchProps => ({
+    startChangePlayerName: bindActionCreators(startChangePlayerName, dispatch),
+    startChangeCharacterName: bindActionCreators(startChangeCharacterName, dispatch)
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CharacterSheet);
 
 const styles = StyleSheet.create({
     container: {
