@@ -1,5 +1,5 @@
-import React, { useState, Component } from "react";
-import { StyleSheet, View, ScrollView, Alert, Animated, Button } from "react-native";
+import React from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { Header } from "react-native-elements";
 import MainPage from "./PlayerCharacterSheet/1_MainPage/MainPage";
 import FeatsAndInventoryPage from "./PlayerCharacterSheet/2_FeatsAndInventoryPage/FeatsAndInventoryPage";
@@ -19,12 +19,12 @@ import {
 import { ArmorCategory } from "./Shared/PF2eCoreLib/ArmorCategory";
 import { RootDrawerParamList } from "../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { Provider, connect } from "react-redux";
+import { connect } from "react-redux";
 import { PlayerCharacterDTO } from "./Shared/PF2eCoreLib/PlayerCharacter";
-import { Dispatch, bindActionCreators, ActionCreator, ActionCreatorsMapObject } from "redux";
+import { bindActionCreators } from "redux";
 import { AppActions } from "../store/actions/StoreActionTypes";
 import { startChangePlayerName, startChangeCharacterName } from "../store/actions/Actions";
-import Store, { CharacterSheetState } from "../store/Store";
+import { CharacterSheetState } from "../store/Store";
 import {ThunkDispatch} from "redux-thunk";
 
 

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TextInput, Button, Dimensions } from "react-native";
-import Modal from "react-native-modal";
-import { StoreActionTypes, CHANGE_CHARACTER_NAME } from "../../../../store/actions/StoreActionTypes";
-import Store from "../../../../store/Store";
 
 interface Props {
     characterName: string;
