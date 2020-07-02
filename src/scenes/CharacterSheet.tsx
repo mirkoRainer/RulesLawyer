@@ -22,8 +22,8 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
 import { PlayerCharacterDTO } from "./Shared/PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
-import { AppActions } from "../store/actions/StoreActionTypes";
-import { startChangePlayerName, startChangeCharacterName } from "../store/actions/Actions";
+import { AppActions } from "../store/actions/AllActionTypesAggregated";
+import { startChangePlayerName, startChangeCharacterName } from "../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { CharacterSheetState } from "../store/Store";
 import {ThunkDispatch} from "redux-thunk";
 

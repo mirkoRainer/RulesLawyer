@@ -1,4 +1,5 @@
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, AppActions, PlayerCharacterActionTypes } from "./StoreActionTypes";
+import { AppActions } from "../AllActionTypesAggregated";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 
 const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  

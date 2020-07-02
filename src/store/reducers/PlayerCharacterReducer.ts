@@ -1,5 +1,5 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME,  PlayerCharacterActionTypes } from "../actions/StoreActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { PlayerCharacterDTO } from "../../scenes/Shared/PF2eCoreLib/PlayerCharacter";
 
 const defaultState: PlayerCharacterDTO = examplePlayerCharacter;

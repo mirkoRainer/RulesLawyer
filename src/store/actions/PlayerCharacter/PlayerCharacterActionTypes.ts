@@ -5,7 +5,7 @@ export const CHANGE_PLAYER_NAME = "CHANGE_PLAYER_NAME";
 
 export interface ChangeCharacterNameAction extends Action<string> {
     type: typeof CHANGE_CHARACTER_NAME;
-    name: string
+    name: string;
 }
 
 export interface ChangePlayerNameAction extends Action<string> {
@@ -15,5 +15,3 @@ export interface ChangePlayerNameAction extends Action<string> {
 
 export type PlayerCharacterActionTypes = ChangeCharacterNameAction | ChangePlayerNameAction; // | SomeOtherAction
 
-//aggregate all the App ones.
-export type AppActions = PlayerCharacterActionTypes;

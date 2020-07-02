@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from "redux";
 import { playerCharacterReducer } from "./reducers/PlayerCharacterReducer";
+import { modalsReducer } from "./reducers/ModalsReducer";
 
 const rootReducer = combineReducers({
-    playerCharacter: playerCharacterReducer
+    playerCharacter: playerCharacterReducer,
+    modals: modalsReducer
 });
 
 export type CharacterSheetState = ReturnType<typeof rootReducer>;
