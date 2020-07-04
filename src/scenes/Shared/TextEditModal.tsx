@@ -1,51 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { Modal, Picker, View, Text, StyleSheet, TextInput} from "react-native";
-import { Icon, Input } from "react-native-elements";
+import React from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    TextInput,
+    ModalBaseProps,
+} from "react-native";
+import Modal from "react-native-modal";
+import { Icon } from "react-native-elements";
+import { bindActionCreators } from "redux";
+import { AppActions } from "../../store/actions/AllActionTypesAggregated";
+import { ThunkDispatch } from "redux-thunk";
+import { startToggleTextEditModal } from "../../store/actions/Modals/ModalsActions";
+import { connect } from "react-redux";
+import { TextEditModalState } from "../../store/ModalsState";
+import { CharacterSheetState } from "../../store/Store";
 
+type OwnProps = {};
 
-type Props = {
-    visible: boolean;
-    title: string;
-    onClose:() => void;
-    onSelect: (value: string) => void;
-    value?: string;
-}
+type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
-const TextEditModal: React.FC<Props> = ({
-    visible,
-    title,
-    onClose,
-    onSelect,
-    value
-}) => {
-    const [textValue, setTextValue] = useState<string>("Value");
-
-    useEffect(() => {
-        if (value) {
-            setTextValue(value);
-        }
-    }, [value]);
-
-    const changeCharacterName = () => {
-
-    };
-
+const TextEditModal: React.FC<Props> = (props) => {
     return (
-        <Modal animated transparent visible={visible} animationType="fade" >
+        <Modal
+            animationIn="fadeIn"
+            animationOut="zoomOut"
+            avoidKeyboard={true}
+            isVisible={props.modalState.visible}
+            onBackdropPress={props.toggleModal}
+            style={styles.modal}
+        >
             <View style={styles.container}>
                 <View style={styles.pickerContainer}>
                     <View style={styles.header}>
-                        <Icon name="close" onPress={onClose}/>
-                        <Text>{title || "Placeholder"}</Text>
+                        <Icon name="close" onPress={props.toggleModal} />
+                        <Text>{props.modalState.title || "Placeholder"}</Text>
                         <Icon name="check" />
                     </View>
                     <View>
-                        <TextInput 
+                        <TextInput
                             style={styles.modalTextInput}
-                            placeholder={"Character Name"} 
-                            onChangeText={changeCharacterName}
+                            placeholder={"Character Name"}
+                            onChangeText={(value) => {
+                                console.log(
+                                    "Text edit modal text has changed!"
+                                );
+                                console.log(value);
+                            }}
                         >
-                            {value}
+                            {props.modalState.value}
                         </TextInput>
                     </View>
                 </View>
@@ -54,27 +57,56 @@ const TextEditModal: React.FC<Props> = ({
     );
 };
 
+interface LinkDispatchProps {
+    toggleModal: () => void;
+}
+
+interface LinkStateProps {
+    modalState: TextEditModalState & ModalBaseProps;
+}
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>,
+    ownProps: OwnProps
+): LinkDispatchProps => {
+    return {
+        toggleModal: bindActionCreators(startToggleTextEditModal, dispatch),
+    };
+};
+
+const mapStateToProps = (
+    state: CharacterSheetState,
+    ownProps: OwnProps
+): LinkStateProps => ({
+    modalState: state.modals.textEditModal,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextEditModal);
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: "center",
-        justifyContent: "flex-end",
-        backgroundColor: "rgba(0,0,0,0.5)"
+        justifyContent: "center",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        height: 100,
     },
     pickerContainer: {
-        height: 200,
+        height: 100,
         width: "100%",
-        backgroundColor: "white"
+        backgroundColor: "white",
     },
     header: {
         justifyContent: "space-between",
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: "#eee",
-        padding: 10
+        padding: 10,
     },
     text: {
         alignSelf: "center",
+    },
+    modal: {
+        height: 200,
     },
     modalTextInput: {
         justifyContent: "center",
@@ -83,8 +115,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         width: "100%",
         fontSize: 32,
-        backgroundColor: "#e4dada"
+        backgroundColor: "#e4dada",
     },
 });
-
-export default TextEditModal;

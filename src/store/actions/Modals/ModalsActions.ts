@@ -1,7 +1,9 @@
-import { ActionCreator, Dispatch } from "redux";
-import { ModalActionTypes, TOGGLE_TEXTEDIT_MODAL, TOGGLE_NUMBERPICKER_MODAL } from "./ModalsActionTypes";
-import { Action } from "../../../scenes/PlayerCharacterSheet/3_StoryAndActionsPage/ActionsAndActivities";
-import { Modal } from "react-native";
+import { Dispatch, ActionCreator } from "redux";
+import {
+    ModalActionTypes,
+    TOGGLE_TEXTEDIT_MODAL,
+    TOGGLE_NUMBERPICKER_MODAL,
+} from "./ModalsActionTypes";
 import { AppActions } from "../AllActionTypesAggregated";
 
 const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({

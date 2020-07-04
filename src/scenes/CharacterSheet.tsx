@@ -23,12 +23,18 @@ import { connect } from "react-redux";
 import { PlayerCharacterDTO } from "./Shared/PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../store/actions/AllActionTypesAggregated";
-import { startChangePlayerName, startChangeCharacterName } from "../store/actions/PlayerCharacter/PlayerCharacterActions";
+import {
+    startChangePlayerName,
+    startChangeCharacterName,
+} from "../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { CharacterSheetState } from "../store/Store";
-import {ThunkDispatch} from "redux-thunk";
+import { ThunkDispatch } from "redux-thunk";
+import TextEditModal from "./Shared/TextEditModal";
 
-
-type CharacterSheetNavigationProps = DrawerNavigationProp<RootDrawerParamList, "CharacterSheet">;
+type CharacterSheetNavigationProps = DrawerNavigationProp<
+    RootDrawerParamList,
+    "CharacterSheet"
+>;
 
 interface OwnProps {
     navigation: CharacterSheetNavigationProps;
@@ -36,8 +42,7 @@ interface OwnProps {
 
 interface OwnState {}
 
-type Props = OwnProps & LinkStateProps & LinkDispatchProps
-
+type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
 const CharacterSheet: React.FC<Props> = (props: Props) => {
     const characterMetadata = (): CharacterMetadataProps => {
@@ -56,7 +61,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             traits: props.playerCharacter.traits,
         };
     };
-    const classDCProficiency = (): ProficiencyProps  => {
+    const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
             keyAbility: GetAbilityModifierFromScores(
@@ -75,38 +80,29 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     };
     const wornArmorProficiency = (): Proficiencies => {
         switch (props.playerCharacter.wornArmor.Category) {
-        case ArmorCategory.Unarmored: {
-            return prop(
-                props.playerCharacter.armorProficiencies,
-                "unarmored"
-            );
-            break;
-        }
-        case ArmorCategory.Light: {
-            return prop(
-                props.playerCharacter.armorProficiencies,
-                "light"
-            );
-            break;
-        }
-        case ArmorCategory.Medium: {
-            return prop(
-                props.playerCharacter.armorProficiencies,
-                "medium"
-            );
-        }
-        case ArmorCategory.Heavy: {
-            return prop(
-                props.playerCharacter.armorProficiencies,
-                "heavy"
-            );
-        }
-        default: {
-            return Proficiencies.Untrained;
-        }
+            case ArmorCategory.Unarmored: {
+                return prop(
+                    props.playerCharacter.armorProficiencies,
+                    "unarmored"
+                );
+                break;
+            }
+            case ArmorCategory.Light: {
+                return prop(props.playerCharacter.armorProficiencies, "light");
+                break;
+            }
+            case ArmorCategory.Medium: {
+                return prop(props.playerCharacter.armorProficiencies, "medium");
+            }
+            case ArmorCategory.Heavy: {
+                return prop(props.playerCharacter.armorProficiencies, "heavy");
+            }
+            default: {
+                return Proficiencies.Untrained;
+            }
         }
     };
-    const acProficiency = (): ProficiencyProps  => {
+    const acProficiency = (): ProficiencyProps => {
         return {
             title: "AC",
             keyAbility: GetAbilityModifierFromScores(
@@ -186,7 +182,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             descriptor: props.playerCharacter.senses,
         };
     };
-    const weapons = (): WeaponViewProps[] => { 
+    const weapons = (): WeaponViewProps[] => {
         const weapon0 = props.playerCharacter.weapons[0];
         return [
             {
@@ -213,12 +209,25 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const headerText = (): string => {
         const pcClass = props.playerCharacter.class;
         const name = props.playerCharacter.name;
-        return  name + " - " + pcClass.subClass + " " + pcClass.name + " Lvl:" + props.playerCharacter.level;
+        return (
+            name +
+            " - " +
+            pcClass.subClass +
+            " " +
+            pcClass.name +
+            " Lvl:" +
+            props.playerCharacter.level
+        );
     };
 
     return (
         <View style={styles.container}>
-            <Header centerComponent={{ text: headerText(), style: { color: "#eee" }}} />
+            <Header
+                centerComponent={{
+                    text: headerText(),
+                    style: { color: "#eee" },
+                }}
+            />
             <ScrollView>
                 <MainPage
                     skills={props.playerCharacter.skills}
@@ -228,9 +237,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     classDCProficiency={classDCProficiency()}
                     acProficiency={acProficiency()}
                     level={props.playerCharacter.level}
-                    armorProficiency={
-                        props.playerCharacter.armorProficiencies
-                    }
+                    armorProficiency={props.playerCharacter.armorProficiencies}
                     shieldProps={props.playerCharacter.shield}
                     saves={{
                         fortitude: fortitudeSave(),
@@ -263,9 +270,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 <StoryAndActionsPage
                     bioData={props.playerCharacter.biographicalData}
                     personalityData={props.playerCharacter.personalityData}
-                    campaignNotesData={
-                        props.playerCharacter.campaignNotesData
-                    }
+                    campaignNotesData={props.playerCharacter.campaignNotesData}
                     actions={props.playerCharacter.actions}
                 />
                 <SpellsPage
@@ -283,33 +288,40 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     spells={props.playerCharacter.spells}
                 />
             </ScrollView>
+            <TextEditModal />
         </View>
     );
 };
 
 // base state
-interface LinkStateProps { 
-    playerCharacter: PlayerCharacterDTO,
+interface LinkStateProps {
+    playerCharacter: PlayerCharacterDTO;
 }
 //all actions to be dispatched
-interface LinkDispatchProps { 
+interface LinkDispatchProps {
     startChangeCharacterName: (name: string) => void;
     startChangePlayerName: (name: string) => void;
- }
+}
 
-const mapStateToProps = (state: CharacterSheetState, ownProps: OwnProps): LinkStateProps => ({
+const mapStateToProps = (
+    state: CharacterSheetState,
+    ownProps: OwnProps
+): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: OwnProps): LinkDispatchProps => ({
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>,
+    ownProps: OwnProps
+): LinkDispatchProps => ({
     startChangePlayerName: bindActionCreators(startChangePlayerName, dispatch),
-    startChangeCharacterName: bindActionCreators(startChangeCharacterName, dispatch)
+    startChangeCharacterName: bindActionCreators(
+        startChangeCharacterName,
+        dispatch
+    ),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CharacterSheet);
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterSheet);
 
 const styles = StyleSheet.create({
     container: {
