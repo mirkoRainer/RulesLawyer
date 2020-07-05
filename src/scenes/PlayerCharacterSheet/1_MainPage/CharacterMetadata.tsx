@@ -11,6 +11,8 @@ import ExperiencePoints from "./CharacterMetadata/ExperiencePoints";
 import Traits from "./CharacterMetadata/Traits";
 import Alignment from "./CharacterMetadata/Alignment";
 import Deity from "./CharacterMetadata/Deity";
+import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 
 export interface CharacterMetadataProps {
     characterName: string;
@@ -22,6 +24,8 @@ export interface CharacterMetadataProps {
     background: string;
     pcClass: string;
     subclass: string;
+    classKeyAbility: keyof AbilityScoreArray;
+    classProficiency: Proficiencies;
     alignment: string;
     deity: string;
     traits: string[];
@@ -66,8 +70,14 @@ export default class CharacterMetadata extends Component<Props, State> {
                         background={this.props.characterMetadata.background}
                     />
                     <Class
-                        pcClass={this.props.characterMetadata.pcClass}
+                        name={this.props.characterMetadata.pcClass}
                         subClass={this.props.characterMetadata.subclass}
+                        keyAbility={
+                            this.props.characterMetadata.classKeyAbility
+                        }
+                        proficiency={
+                            this.props.characterMetadata.classProficiency
+                        }
                     />
                 </View>
                 <View style={styles.rowContainer}>

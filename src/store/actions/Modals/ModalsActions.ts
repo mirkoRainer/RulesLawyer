@@ -5,13 +5,13 @@ import {
     TOGGLE_NUMBERPICKER_MODAL,
 } from "./ModalsActionTypes";
 import { AppActions } from "../AllActionTypesAggregated";
+import { TextEditModalState } from "../../ModalsState";
 
-const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({
+const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (
+    newModalState: TextEditModalState
+): ModalActionTypes => ({
     type: TOGGLE_TEXTEDIT_MODAL,
-});
-
-const ToggleNumberPickerModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({
-    type: TOGGLE_NUMBERPICKER_MODAL,
+    payload: newModalState,
 });
 
 export const startToggleTextEditModal = () => {
@@ -19,6 +19,10 @@ export const startToggleTextEditModal = () => {
         dispatch(ToggleTextEditModal());
     };
 };
+
+const ToggleNumberPickerModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({
+    type: TOGGLE_NUMBERPICKER_MODAL,
+});
 
 export const startToggleNumberPickerModal = () => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {

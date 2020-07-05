@@ -56,6 +56,8 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             background: props.playerCharacter.background.name,
             pcClass: props.playerCharacter.class.name,
             subclass: props.playerCharacter.class.subClass,
+            classKeyAbility: props.playerCharacter.class.keyAbility,
+            classProficiency: props.playerCharacter.class.proficiency,
             alignment: props.playerCharacter.alignment,
             deity: props.playerCharacter.deity,
             traits: props.playerCharacter.traits,

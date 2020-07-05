@@ -8,6 +8,7 @@ export type TextEditModalState = {
     title: string;
     value: string;
     onSelect: () => void;
+    onTextChange: (value: string) => void;
 };
 export type NumberPickerModalState = {
     title: string;

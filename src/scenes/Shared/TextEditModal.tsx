@@ -33,20 +33,14 @@ const TextEditModal: React.FC<Props> = (props) => {
             <View style={styles.container}>
                 <View style={styles.pickerContainer}>
                     <View style={styles.header}>
-                        <Icon name="close" onPress={props.toggleModal} />
-                        <Text>{props.modalState.title || "Placeholder"}</Text>
+                        <Text>{props.modalState.title || "Edit:"}</Text>
                         <Icon name="check" />
                     </View>
                     <View>
                         <TextInput
                             style={styles.modalTextInput}
-                            placeholder={"Character Name"}
-                            onChangeText={(value) => {
-                                console.log(
-                                    "Text edit modal text has changed!"
-                                );
-                                console.log(value);
-                            }}
+                            placeholder={"Type Here"}
+                            onChangeText={props.modalState.onTextChange}
                         >
                             {props.modalState.value}
                         </TextInput>

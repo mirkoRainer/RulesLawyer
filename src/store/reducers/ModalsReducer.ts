@@ -11,10 +11,14 @@ import {
 } from "../actions/Modals/ModalsActionTypes";
 
 const textEditDefaultState: TextEditModalState & ModalBaseProps = {
-    title: "Edit Text",
+    title: "",
     value: "value",
     onSelect: () => {
         console.log("Text Edit Selected");
+    },
+    onTextChange: (value) => {
+        console.log("text value changed");
+        console.log(value);
     },
     visible: false,
     animated: true,
@@ -61,6 +65,7 @@ const modalsReducer = (
                     visible: !state.textEditModal.visible,
                 },
             };
+            console.log(action);
             return newState;
         default:
             return state;
