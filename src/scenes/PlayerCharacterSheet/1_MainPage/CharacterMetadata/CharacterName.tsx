@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { bindActionCreators } from "redux";
-import { startTextEditModalForCharacterName } from "../../../../store/actions/Modals/ModalsActions";
+import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
+import { CHANGE_CHARACTER_NAME } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 interface OwnProps {
     characterName: string;
@@ -12,13 +13,17 @@ interface OwnProps {
 
 type Props = OwnProps & LinkDispatchProps;
 
+
+
 const CharacterName: React.FC<Props> = (props) => {
+    const changeName = () => {
+        props.startTextEditModal(CHANGE_CHARACTER_NAME);
+    };
     return (
         <View style={styles.container}>
             <Text
                 style={styles.text}
-                onPress={props.toggleModal}
-                onLongPress={props.toggleModal}
+                onPress={changeName}
             >
                 {" "}
                 Character Name: {props.characterName}{" "}
@@ -28,7 +33,7 @@ const CharacterName: React.FC<Props> = (props) => {
 };
 
 interface LinkDispatchProps {
-    toggleModal: () => void;
+    startTextEditModal: (propertyToChange: string) => void;
 }
 
 const mapDispatchToProps = (
@@ -36,7 +41,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        toggleModal: bindActionCreators(startTextEditModalForCharacterName, dispatch),
+        startTextEditModal: bindActionCreators(startTextEditModal, dispatch),
     };
 };
 

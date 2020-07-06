@@ -7,14 +7,13 @@ export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (n
     name 
 });
 
-const ChangePlayerName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({ 
+export const ChangePlayerName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({ 
     type: CHANGE_PLAYER_NAME, 
     name 
 });
 
 export const startChangeCharacterName = (name: string) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
-        console.log("Changing the name of the character.");
         dispatch(ChangeCharacterName(name));
     };
 };
