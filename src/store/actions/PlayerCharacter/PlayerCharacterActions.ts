@@ -2,7 +2,7 @@ import { AppActions } from "../AllActionTypesAggregated";
 import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 
-const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
+export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
     type: CHANGE_CHARACTER_NAME, 
     name 
 });
@@ -14,6 +14,7 @@ const ChangePlayerName: ActionCreator<PlayerCharacterActionTypes> = (name: strin
 
 export const startChangeCharacterName = (name: string) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        console.log("Changing the name of the character.");
         dispatch(ChangeCharacterName(name));
     };
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { bindActionCreators } from "redux";
-import { startToggleTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
+import { startTextEditModalForCharacterName } from "../../../../store/actions/Modals/ModalsActions";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
@@ -36,7 +36,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        toggleModal: bindActionCreators(startToggleTextEditModal, dispatch),
+        toggleModal: bindActionCreators(startTextEditModalForCharacterName, dispatch),
     };
 };
 

@@ -82,26 +82,26 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     };
     const wornArmorProficiency = (): Proficiencies => {
         switch (props.playerCharacter.wornArmor.Category) {
-            case ArmorCategory.Unarmored: {
-                return prop(
-                    props.playerCharacter.armorProficiencies,
-                    "unarmored"
-                );
-                break;
-            }
-            case ArmorCategory.Light: {
-                return prop(props.playerCharacter.armorProficiencies, "light");
-                break;
-            }
-            case ArmorCategory.Medium: {
-                return prop(props.playerCharacter.armorProficiencies, "medium");
-            }
-            case ArmorCategory.Heavy: {
-                return prop(props.playerCharacter.armorProficiencies, "heavy");
-            }
-            default: {
-                return Proficiencies.Untrained;
-            }
+        case ArmorCategory.Unarmored: {
+            return prop(
+                props.playerCharacter.armorProficiencies,
+                "unarmored"
+            );
+            break;
+        }
+        case ArmorCategory.Light: {
+            return prop(props.playerCharacter.armorProficiencies, "light");
+            break;
+        }
+        case ArmorCategory.Medium: {
+            return prop(props.playerCharacter.armorProficiencies, "medium");
+        }
+        case ArmorCategory.Heavy: {
+            return prop(props.playerCharacter.armorProficiencies, "heavy");
+        }
+        default: {
+            return Proficiencies.Untrained;
+        }
         }
     };
     const acProficiency = (): ProficiencyProps => {

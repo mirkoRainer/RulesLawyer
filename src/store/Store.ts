@@ -10,5 +10,6 @@ const rootReducer = combineReducers({
 
 export type CharacterSheetState = ReturnType<typeof rootReducer>;
 
-const Store = createStore(rootReducer, applyMiddleware(thunk));
+const Store = createStore(rootReducer, 
+    applyMiddleware(thunk));
 export default Store;

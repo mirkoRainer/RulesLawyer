@@ -8,6 +8,7 @@ import {
     ModalActionTypes,
     TOGGLE_NUMBERPICKER_MODAL,
     TOGGLE_TEXTEDIT_MODAL,
+    UPDATE_TEXT_MODAL_STATE,
 } from "../actions/Modals/ModalsActionTypes";
 
 const textEditDefaultState: TextEditModalState & ModalBaseProps = {
@@ -48,27 +49,32 @@ const modalsReducer = (
 ): ModalState => {
     let newState: ModalState;
     switch (action.type) {
-        case TOGGLE_NUMBERPICKER_MODAL:
-            newState = {
-                ...state,
-                numberPickerModal: {
-                    ...state.numberPickerModal,
-                    visible: !state.numberPickerModal.visible,
-                },
-            };
-            return newState;
-        case TOGGLE_TEXTEDIT_MODAL:
-            newState = {
-                ...state,
-                textEditModal: {
-                    ...state.textEditModal,
-                    visible: !state.textEditModal.visible,
-                },
-            };
-            console.log(action);
-            return newState;
-        default:
-            return state;
+    case TOGGLE_NUMBERPICKER_MODAL:
+        newState = {
+            ...state,
+            numberPickerModal: {
+                ...state.numberPickerModal,
+                visible: !state.numberPickerModal.visible,
+            },
+        };
+        return newState;
+    case TOGGLE_TEXTEDIT_MODAL:
+        newState = {
+            ...state,
+            textEditModal: {
+                ...state.textEditModal,
+                visible: !state.textEditModal.visible,
+            },
+        };
+        return newState;
+    case UPDATE_TEXT_MODAL_STATE:
+        newState = {
+            ...state,
+            textEditModal: action.payload
+        };
+        return newState;
+    default:
+        return state;
     }
 };
 

@@ -34,7 +34,7 @@ const TextEditModal: React.FC<Props> = (props) => {
                 <View style={styles.pickerContainer}>
                     <View style={styles.header}>
                         <Text>{props.modalState.title || "Edit:"}</Text>
-                        <Icon name="check" />
+                        <Icon name="check" onPress={props.toggleModal} />
                     </View>
                     <View>
                         <TextInput
