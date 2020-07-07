@@ -12,11 +12,11 @@ export default class AncestryAndHeritage extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>
+                <Text style={{ ...styles.text, ...styles.container }}>
                     {" "}
                     Ancestry: {this.props.ancestry}{" "}
                 </Text>
-                <Text style={styles.text}>
+                <Text style={{ ...styles.text, ...styles.container }}>
                     {" "}
                     Heritage: {this.props.heritage}{" "}
                 </Text>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderColor: "black",
-        borderWidth: 2,
+        borderWidth: 1,
         alignContent: "stretch",
         alignSelf: "stretch",
     },
