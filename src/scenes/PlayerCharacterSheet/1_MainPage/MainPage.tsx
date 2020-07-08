@@ -126,7 +126,6 @@ export default class MainPage extends Component<Props, State> {
                     level={this.props.level}
                     itemBonus={this.props.saves.will.itemBonus}
                 />
-                <Text style={styles.notes}>Notes: </Text>
                 <HitPoints
                     max={this.props.hitPoints.max}
                     current={this.props.hitPoints.current}

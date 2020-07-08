@@ -41,6 +41,7 @@ const TextEditModal: React.FC<Props> = (props) => {
                             style={styles.modalTextInput}
                             placeholder={"Type Here"}
                             onChangeText={props.modalState.onTextChange}
+                            multiline={true}
                         >
                             {props.modalState.value}
                         </TextInput>
@@ -82,12 +83,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "rgba(0,0,0,0.5)",
-        height: 100,
+        height: "30%",
     },
     pickerContainer: {
-        height: 100,
+        height: "100%",
         width: "100%",
         backgroundColor: "white",
+        justifyContent: "center"
     },
     header: {
         justifyContent: "space-between",
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     modal: {
-        height: 200,
+        overflow: "scroll"
     },
     modalTextInput: {
         justifyContent: "center",

@@ -4,8 +4,6 @@ import { Text } from "react-native-elements";
 import CharacterName from "./CharacterMetadata/CharacterName";
 import PlayerName from "./CharacterMetadata/PlayerName";
 import AncestryAndHeritage from "./CharacterMetadata/AncestryAndHeritage";
-import Background from "./CharacterMetadata/Background";
-import Class from "./CharacterMetadata/Class";
 import Level from "./CharacterMetadata/Level";
 import ExperiencePoints from "./CharacterMetadata/ExperiencePoints";
 import Traits from "./CharacterMetadata/Traits";
@@ -13,6 +11,10 @@ import Alignment from "./CharacterMetadata/Alignment";
 import Deity from "./CharacterMetadata/Deity";
 import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
+import { Background } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import BackgroundView from "./CharacterMetadata/BackgroundView";
+import ClassView from "./CharacterMetadata/ClassView";
+
 
 export interface CharacterMetadataProps {
     characterName: string;
@@ -21,7 +23,7 @@ export interface CharacterMetadataProps {
     heritage: string;
     level: number;
     experiencePoints: number;
-    background: string;
+    background: Background;
     pcClass: string;
     subclass: string;
     classKeyAbility: keyof AbilityScoreArray;
@@ -35,62 +37,60 @@ interface Props {
     characterMetadata: CharacterMetadataProps;
 }
 
-interface State {}
+const CharacterMetadata: React.FC<Props> = (props) => {
 
-export default class CharacterMetadata extends Component<Props, State> {
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.rowContainer}>
-                    <CharacterName
-                        characterName={
-                            this.props.characterMetadata.characterName
-                        }
-                    />
-                    <PlayerName
-                        playerName={this.props.characterMetadata.playerName}
-                    />
-                </View>
-                <View style={styles.rowContainer}>
-                    <AncestryAndHeritage
-                        ancestry={this.props.characterMetadata.ancestry}
-                        heritage={this.props.characterMetadata.heritage}
-                    />
-                    <View style={styles.container}>
-                        <Level level={this.props.characterMetadata.level} />
-                        <ExperiencePoints
-                            experiencePoints={
-                                this.props.characterMetadata.experiencePoints
-                            }
-                        />
-                    </View>
-                </View>
-                <View style={styles.rowContainer}>
-                    <Background
-                        background={this.props.characterMetadata.background}
-                    />
-                    <Class
-                        name={this.props.characterMetadata.pcClass}
-                        subClass={this.props.characterMetadata.subclass}
-                        keyAbility={
-                            this.props.characterMetadata.classKeyAbility
-                        }
-                        proficiency={
-                            this.props.characterMetadata.classProficiency
-                        }
-                    />
-                </View>
-                <View style={styles.rowContainer}>
-                    <Alignment
-                        alignment={this.props.characterMetadata.alignment}
-                    />
-                    <Deity deity={this.props.characterMetadata.deity} />
-                </View>
-                <Traits traits={this.props.characterMetadata.traits} />
+    return (
+        <View style={styles.container}>
+            <View style={styles.rowContainer}>
+                <CharacterName
+                    characterName={
+                        props.characterMetadata.characterName
+                    }
+                />
+                <PlayerName
+                    playerName={props.characterMetadata.playerName}
+                />
             </View>
-        );
-    }
-}
+            <View style={styles.rowContainer}>
+                <AncestryAndHeritage
+                    ancestry={props.characterMetadata.ancestry}
+                    heritage={props.characterMetadata.heritage}
+                />
+                <View style={styles.container}>
+                    <Level level={props.characterMetadata.level} />
+                    <ExperiencePoints
+                        experiencePoints={
+                            props.characterMetadata.experiencePoints
+                        }
+                    />
+                </View>
+            </View>
+            <View style={styles.rowContainer}>
+                <BackgroundView
+                    background={props.characterMetadata.background}
+                />
+                <ClassView
+                    name={props.characterMetadata.pcClass}
+                    subClass={props.characterMetadata.subclass}
+                    keyAbility={
+                        props.characterMetadata.classKeyAbility
+                    }
+                    proficiency={
+                        props.characterMetadata.classProficiency
+                    }
+                />
+            </View>
+            <View style={styles.rowContainer}>
+                <Alignment
+                    alignment={props.characterMetadata.alignment}
+                />
+                <Deity deity={props.characterMetadata.deity} />
+            </View>
+            <Traits traits={props.characterMetadata.traits} />
+        </View>
+    );
+    
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -104,3 +104,5 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
     },
 });
+
+export default CharacterMetadata;

@@ -1,6 +1,6 @@
 import { AbilityScoreArray } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
-import { iClass } from "../../PlayerCharacterSheet/1_MainPage/CharacterMetadata/Class";
+import { iClass } from "../../PlayerCharacterSheet/1_MainPage/CharacterMetadata/ClassView";
 
 
 export interface PlayerCharacterDTO {
@@ -53,6 +53,28 @@ export interface PlayerCharacterDTO {
     spells:                      Spell[];
 }
 
+interface Background {
+    name: string
+}
+
+interface Movement {
+    landSpeed: number;
+    burrowSpeed: number;
+    climbSpeed: number;
+    flySpeed: number;
+}
+
+interface CampaignNotesData {
+    notes: string;
+    allies: string;
+    enemies: string;
+    organizations: string;
+}
+
+export interface Ancestry {
+    name: string;
+    heritage: string;
+}
 export interface AbilityScoreDTO {
     amount:  number;
     ability: string;

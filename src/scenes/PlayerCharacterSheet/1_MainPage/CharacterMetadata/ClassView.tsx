@@ -1,26 +1,30 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { State } from "react-native-gesture-handler";
-import { ThunkDispatch } from "redux-thunk";
+import { Proficiencies } from "../../../Shared/PF2eCoreLib/Proficiencies";
+import { Ability } from "../../../Shared/PF2eCoreLib/Ability";
+import { AbilityScoreArray } from "../../../Shared/PF2eCoreLib/AbilityScores";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { CHANGE_DEITY } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
-const Deity: React.FC<Props> = (props) => {
-    const changeDeity = () => {
-        props.startTextEditModal(CHANGE_DEITY);
-    };
+const ClassView: React.FC<Props> = (props) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text} onPress={changeDeity}> Deity: {props.deity} </Text>
+            <Text style={styles.text}>
+                {" "}
+                    Class: {props.name} ({props.subClass})
+            </Text>
         </View>
     );
 };
 
-interface OwnProps {
-    deity: string;
+export interface OwnProps {
+    name:        string;
+    subClass:    string;
+    proficiency: Proficiencies;
+    keyAbility:  keyof AbilityScoreArray;
 }
 
 type Props = OwnProps & LinkDispatchProps;
@@ -38,7 +42,7 @@ const mapDispatchToProps = (
     };
 };
 
-export default connect(null, mapDispatchToProps)(Deity);
+export default connect(null, mapDispatchToProps)(ClassView);
 
 const styles = StyleSheet.create({
     container: {

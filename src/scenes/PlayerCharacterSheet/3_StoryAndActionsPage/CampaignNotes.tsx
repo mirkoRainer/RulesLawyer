@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { bindActionCreators } from "redux";
+import { startTextEditModal } from "../../../store/actions/Modals/ModalsActions";
+import { connect } from "react-redux";
+import { CHANGE_NOTES } from "../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 export interface CampaignNotesData {
     notes: string;
@@ -8,49 +14,64 @@ export interface CampaignNotesData {
     organizations: string;
 }
 
-interface Props {
+interface OwnProps {
     campaignNotesData: CampaignNotesData;
 }
-
-interface State {}
-
-export default class CampaignNotes extends Component<Props, State> {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.header}> Campaign Notes </Text>
-                <View style={styles.rowContainerFlex2}>
-                    <Text style={styles.sectionLabel}>Notes</Text>
-                    <Text style={styles.text}>
-                        {" "}
-                        {this.props.campaignNotesData.notes}{" "}
-                    </Text>
-                </View>
-                <View style={styles.rowContainerFlex1}>
-                    <Text style={styles.sectionLabel}>Allies</Text>
-                    <Text style={styles.text}>
-                        {" "}
-                        {this.props.campaignNotesData.allies}{" "}
-                    </Text>
-                </View>
-                <View style={styles.rowContainerFlex1}>
-                    <Text style={styles.sectionLabel}>Enemies</Text>
-                    <Text style={styles.text}>
-                        {" "}
-                        {this.props.campaignNotesData.enemies}{" "}
-                    </Text>
-                </View>
-                <View style={styles.rowContainerFlex1}>
-                    <Text style={styles.sectionLabel}>Organizations</Text>
-                    <Text style={styles.text}>
-                        {" "}
-                        {this.props.campaignNotesData.organizations}{" "}
-                    </Text>
-                </View>
+const CampaignNotes: React.FC<Props> = (props) => {
+    const changeNotes = () => {
+        props.startTextEditModal(CHANGE_NOTES);
+    };
+    return (
+        <View style={styles.container}>
+            <Text style={styles.header}> Campaign Notes </Text>
+            <View style={styles.rowContainerFlex2}>
+                <Text style={styles.sectionLabel} onPress={changeNotes}>Notes</Text>
+                <Text style={styles.text} onPress={changeNotes}>
+                    {" "}
+                    {props.campaignNotesData.notes}{" "}
+                </Text>
             </View>
-        );
-    }
+            <View style={styles.rowContainerFlex1}>
+                <Text style={styles.sectionLabel}>Allies</Text>
+                <Text style={styles.text}>
+                    {" "}
+                    {props.campaignNotesData.allies}{" "}
+                </Text>
+            </View>
+            <View style={styles.rowContainerFlex1}>
+                <Text style={styles.sectionLabel}>Enemies</Text>
+                <Text style={styles.text}>
+                    {" "}
+                    {props.campaignNotesData.enemies}{" "}
+                </Text>
+            </View>
+            <View style={styles.rowContainerFlex1}>
+                <Text style={styles.sectionLabel}>Organizations</Text>
+                <Text style={styles.text}>
+                    {" "}
+                    {props.campaignNotesData.organizations}{" "}
+                </Text>
+            </View>
+        </View>
+    );
+};
+
+type Props = OwnProps & LinkDispatchProps;
+
+interface LinkDispatchProps {
+    startTextEditModal: (propertyToChange: string) => void;
 }
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>,
+    ownProps: OwnProps
+): LinkDispatchProps => {
+    return {
+        startTextEditModal: bindActionCreators(startTextEditModal, dispatch),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(CampaignNotes);
 
 const styles = StyleSheet.create({
     container: {

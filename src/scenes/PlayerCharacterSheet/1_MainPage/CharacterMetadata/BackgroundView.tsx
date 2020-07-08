@@ -1,26 +1,32 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { State } from "react-native-gesture-handler";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { CHANGE_DEITY } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_BACKGROUND } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { Background } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
 
-const Deity: React.FC<Props> = (props) => {
-    const changeDeity = () => {
-        props.startTextEditModal(CHANGE_DEITY);
+const BackgroundView: React.FC<Props> = (props) => {
+    const changeBackground = () => {
+        props.startTextEditModal(CHANGE_BACKGROUND);
     };
     return (
         <View style={styles.container}>
-            <Text style={styles.text} onPress={changeDeity}> Deity: {props.deity} </Text>
+            <Text 
+                style={styles.text}
+                onPress={changeBackground}    
+            >
+                {" "}
+                    Background: {props.background.name}
+            </Text>
         </View>
     );
 };
 
 interface OwnProps {
-    deity: string;
+    background: Background;
 }
 
 type Props = OwnProps & LinkDispatchProps;
@@ -38,17 +44,15 @@ const mapDispatchToProps = (
     };
 };
 
-export default connect(null, mapDispatchToProps)(Deity);
+export default connect(null, mapDispatchToProps)(BackgroundView);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderColor: "black",
         borderWidth: 2,
-        alignSelf: "stretch",
         alignContent: "stretch",
+        alignSelf: "stretch",
     },
-    text: {
-        flex: 1,
-    },
+    text: {},
 });

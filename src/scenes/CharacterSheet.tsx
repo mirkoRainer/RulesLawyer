@@ -53,7 +53,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             heritage: props.playerCharacter.ancestry.heritage,
             level: props.playerCharacter.level,
             experiencePoints: props.playerCharacter.experiencePoints,
-            background: props.playerCharacter.background.name,
+            background: props.playerCharacter.background,
             pcClass: props.playerCharacter.class.name,
             subclass: props.playerCharacter.class.subClass,
             classKeyAbility: props.playerCharacter.class.keyAbility,

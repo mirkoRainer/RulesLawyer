@@ -7,9 +7,8 @@ import {
 } from "./ModalsActionTypes";
 import { AppActions } from "../AllActionTypesAggregated";
 import { TextEditModalState } from "../../ModalsState";
-import { ChangeCharacterName, startChangePlayerName, startChangeCharacterName, ChangePlayerName } from "../PlayerCharacter/PlayerCharacterActions";
 import { CharacterSheetState } from "../../Store";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME } from "../PlayerCharacter/PlayerCharacterActionTypes";
+import { ModalStateSwitch } from "./ModalStateSwitch";
 
 const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({ type: TOGGLE_TEXTEDIT_MODAL });
 
@@ -22,29 +21,7 @@ const UpdateTextEditModalState: ActionCreator<ModalActionTypes> = (
 
 export const startTextEditModal = (propertyToChange: string, index?: number) => {
     return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
-        let newModalState = getState().modals.textEditModal;
-        switch (propertyToChange) {
-        case CHANGE_CHARACTER_NAME:
-            newModalState = {
-                title: "Character Name:",
-                value: getState().playerCharacter.name,
-                onSelect: () => dispatch(ToggleTextEditModal()),
-                onTextChange: (value: string) => { 
-                    dispatch(ChangeCharacterName(value));
-                }
-            };
-            break;
-        case CHANGE_PLAYER_NAME:
-            newModalState = {
-                title: "Player Name:",
-                value: getState().playerCharacter.playerName,
-                onSelect: () => {},
-                onTextChange: (value: string) => {
-                    dispatch(ChangePlayerName(value));
-                }
-            };
-            break;
-        }
+        let newModalState: TextEditModalState = ModalStateSwitch(propertyToChange, getState(), dispatch);
         dispatch(UpdateTextEditModalState(newModalState));
         dispatch(ToggleTextEditModal());
     };
