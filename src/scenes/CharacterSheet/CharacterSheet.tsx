@@ -12,10 +12,6 @@ import { Bonus } from "../Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../Shared/PF2eCoreLib/BonusTypes";
 import { prop } from "../Shared/PF2eCoreLib/TypescriptEvolution";
 import { Proficiencies } from "../Shared/PF2eCoreLib/Proficiencies";
-import {
-    WeaponViewProps,
-    GetProficiencyForWeapon,
-} from "./CharacterSheet/1_MainPage/Weapons/WeaponViewProps";
 import { ArmorCategory } from "../Shared/PF2eCoreLib/ArmorCategory";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
@@ -30,6 +26,7 @@ import {
 import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import TextEditModal from "../Shared/TextEditModal";
+import { WeaponViewProps, GetProficiencyForWeapon } from "./1_MainPage/Components/Weapons/WeaponViewProps";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,

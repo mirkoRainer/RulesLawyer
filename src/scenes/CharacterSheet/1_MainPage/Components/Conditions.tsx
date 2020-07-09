@@ -32,7 +32,7 @@ interface LinkDispatchProps {
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: OwnProps
+    ownProps: ConditionsProps
 ): LinkDispatchProps => {
     return {
         startTextEditModal: bindActionCreators(startTextEditModal, dispatch),

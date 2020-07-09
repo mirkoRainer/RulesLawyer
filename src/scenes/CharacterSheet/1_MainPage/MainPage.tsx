@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, SnapshotViewIOSProps } from "react-native";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
-import AbilityScores from "./Components/AbilityScoresView";
+import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Dimensions } from "react-native";
 import { AbilityScore, AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
@@ -10,20 +10,16 @@ import ArmorProficiencies, {
 } from "./Components/ArmorClass/ArmorProficiencies";
 import Shield, { ShieldProps } from "./Components/ArmorClass/Shield";
 import HitPoints, { HitPointProps } from "./Components/HitPoints/HitPoints";
-import Weapons from "./Weapons/Weapons";
-import WeaponProficiencies, {
-    WeaponProficiencyProps,
-} from "./Weapons/WeaponProficiencies";
 import Skills from "./Components/Skills";
 import { Skill } from "./Components/Skill";
 import { MovementProps } from "./Components/MovementProps";
-import OtherMovements from "./Components/OtherMovements";
-import WeaponDamageSection from "./Weapons/WeaponDamageSection";
-import { WeaponViewProps } from "./Weapons/WeaponViewProps";
 import { SavesProp } from "./Components/SavesProps";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
 import Conditions from "./Components/Conditions";
 import Movements from "./Components/Movements";
+import WeaponProficiencies, { WeaponProficiencyProps } from "./Components/Weapons/WeaponProficiencies";
+import { WeaponViewProps } from "./Components/Weapons/WeaponViewProps";
+import Weapons from "./Components/Weapons/Weapons";
 
 var width: number = Dimensions.get("window").width; //full width
 

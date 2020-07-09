@@ -1,6 +1,7 @@
 import { Bonus } from "../src/scenes/Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../src/scenes/Shared/PF2eCoreLib/BonusTypes";
-import { example } from "../examplePlayerCharacter";
+import { examplePlayerCharacter } from "../examplePlayerCharacter";
+
 
 describe("Bonus", () => {
     describe("GetBonusFor", () => {
@@ -54,9 +55,9 @@ describe("Bonus", () => {
             });
         });
         it("returns the highest number applied to the requested property for specificied type", () => {
-            var actual = Bonus.GetBonusFor("classDc", BonusType.Item, example.playerCharacter.bonuses);
+            var actual = Bonus.GetBonusFor("classDc", BonusType.Item, examplePlayerCharacter.bonuses);
             expect(actual).toBe(3);
-            actual = Bonus.GetBonusFor("nothing", BonusType.Circumstance, example.playerCharacter.bonuses);
+            actual = Bonus.GetBonusFor("nothing", BonusType.Circumstance, examplePlayerCharacter.bonuses);
             expect(actual).toBe(0);
         });
     });

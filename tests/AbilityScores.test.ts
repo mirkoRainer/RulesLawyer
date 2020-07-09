@@ -1,21 +1,19 @@
 import {
-    AbilityScore,
     GetAbilityModifierFromScores,
     AbilityModifierWithName,
     AbilityScoreArray,
 } from "../src/scenes/Shared/PF2eCoreLib/AbilityScores";
-import { Ability } from "../src/scenes/Shared/PF2eCoreLib/Ability";
 
 describe("Ability Scores", () => {
     describe("GetAbilityModifierFromScores", () => {
         it("appropriately calculates modifier based on score", () => {
             let abilityScores: AbilityScoreArray = {
-                strength: { score: 12, ability: Ability.Strength },
-                dexterity: { score: 12, ability: Ability.Dexterity },
-                constitution: { score: 12, ability: Ability.Constitution },
-                intelligence: { score: 12, ability: Ability.Intelligence },
-                wisdom: { score: 12, ability: Ability.Wisdom },
-                charisma: { score: 12, ability: Ability.Charisma },
+                strength: { score: 12, ability: "strength" },
+                dexterity: { score: 12, ability: "dexterity" },
+                constitution: { score: 12, ability: "constitution" },
+                intelligence: { score: 12, ability: "intelligence" },
+                wisdom: { score: 12, ability: "wisdom" },
+                charisma: { score: 12, ability: "charisma" },
             };
             let actual: AbilityModifierWithName = GetAbilityModifierFromScores(
                 "strength",
@@ -26,12 +24,12 @@ describe("Ability Scores", () => {
         });
         it("calculates the ability modifier for a requested Score", () => {
             let abilityScores: AbilityScoreArray = {
-                strength: { score: 18, ability: Ability.Strength },
-                dexterity: { score: 12, ability: Ability.Dexterity },
-                constitution: { score: 12, ability: Ability.Constitution },
-                intelligence: { score: 12, ability: Ability.Intelligence },
-                wisdom: { score: 12, ability: Ability.Wisdom },
-                charisma: { score: 12, ability: Ability.Charisma },
+                strength: { score: 18, ability: "strength" },
+                dexterity: { score: 12, ability: "dexterity" },
+                constitution: { score: 12, ability: "constitution" },
+                intelligence: { score: 12, ability: "intelligence" },
+                wisdom: { score: 12, ability: "wisdom" },
+                charisma: { score: 12, ability: "charisma" },
             };
             let actual: AbilityModifierWithName = GetAbilityModifierFromScores(
                 "strength",

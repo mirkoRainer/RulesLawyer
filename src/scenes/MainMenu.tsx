@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { RootDrawerParamList } from "../../App";
 
-type MainMenuNavigationProps = DrawerNavigationProp<RootStackParamList, "MainMenu">;
+type MainMenuNavigationProps = DrawerNavigationProp<RootDrawerParamList, "MainMenu">;
 interface Props {
     navigation: MainMenuNavigationProps;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import ProficiencyView from "../../../Shared/ProficiencyView";
 import WeaponDamageSection from "./WeaponDamageSection";
 import { WeaponViewProps } from "./WeaponViewProps";
+import ProficiencyView from "../../../../Shared/ProficiencyView";
 
 interface Props {
     weapons: WeaponViewProps[];

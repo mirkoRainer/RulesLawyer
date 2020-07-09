@@ -1,5 +1,5 @@
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_LANGUAGES, CHANGE_DEITY, CHANGE_TRAITS, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_SPEED, CHANGE_OTHERSPEEDS, CHANGE_RESISTANCES } from "./PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
@@ -7,7 +7,7 @@ export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (n
     name 
 });
 export const startChangeCharacterName = (name: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeCharacterName(name));
     };
 };
@@ -17,7 +17,7 @@ export const ChangePlayerName: ActionCreator<PlayerCharacterActionTypes> = (name
     name 
 });
 export const startChangePlayerName = (name: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangePlayerName(name));
     };
 };
@@ -27,7 +27,7 @@ export const ChangeAncestry: ActionCreator<PlayerCharacterActionTypes> = (ancest
     ancestry 
 });
 export const stateChangeAncestry = (ancestry: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeAncestry(ancestry));
     };
 };
@@ -37,7 +37,7 @@ export const ChangeHeritage: ActionCreator<PlayerCharacterActionTypes> = (herita
     heritage 
 });
 export const stateChangeHeritage = (heritage: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeHeritage(heritage));
     };
 };
@@ -47,7 +47,7 @@ export const ChangeBackground: ActionCreator<PlayerCharacterActionTypes> = (Back
     Background 
 });
 export const stateChangeBackground = (Background: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeBackground(Background));
     };
 };
@@ -57,7 +57,7 @@ export const ChangeClass: ActionCreator<PlayerCharacterActionTypes> = (Class: st
     Class 
 });
 export const stateChangeClass = (Class: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeClass(Class));
     };
 };
@@ -67,7 +67,7 @@ export const ChangeSubClass: ActionCreator<PlayerCharacterActionTypes> = (SubCla
     SubClass 
 });
 export const stateChangeSubClass = (SubClass: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeSubClass(SubClass));
     };
 };
@@ -77,7 +77,7 @@ export const ChangeAlignment: ActionCreator<PlayerCharacterActionTypes> = (Align
     Alignment 
 });
 export const stateChangeAlignment = (Alignment: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeAlignment(Alignment));
     };
 };
@@ -87,7 +87,7 @@ export const ChangeDeity: ActionCreator<PlayerCharacterActionTypes> = (Deity: st
     Deity 
 });
 export const stateChangeDeity = (Deity: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeDeity(Deity));
     };
 };
@@ -97,7 +97,7 @@ export const ChangeNotes: ActionCreator<PlayerCharacterActionTypes> = (Notes: st
     Notes 
 });
 export const stateChangeNotes = (Notes: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeNotes(Notes));
     };
 };
@@ -107,7 +107,7 @@ export const ChangeResistances: ActionCreator<PlayerCharacterActionTypes> = (Res
     Resistances 
 });
 export const stateChangeResistances = (Resistances: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeResistances(Resistances));
     };
 };
@@ -117,7 +117,7 @@ export const ChangeImmunities: ActionCreator<PlayerCharacterActionTypes> = (Immu
     Immunities 
 });
 export const stateChangeImmunities = (Immunities: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeImmunities(Immunities));
     };
 };
@@ -127,7 +127,7 @@ export const ChangeWeaknesses: ActionCreator<PlayerCharacterActionTypes> = (Weak
     Weaknesses 
 });
 export const stateChangeWeaknesses = (Weaknesses: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeWeaknesses(Weaknesses));
     };
 };
@@ -137,7 +137,7 @@ export const ChangeConditions: ActionCreator<PlayerCharacterActionTypes> = (Cond
     Conditions 
 });
 export const stateChangeConditions = (Conditions: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeConditions(Conditions));
     };
 };
@@ -147,7 +147,7 @@ export const ChangeSenses: ActionCreator<PlayerCharacterActionTypes> = (Senses: 
     Senses 
 });
 export const stateChangeSenses = (Senses: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeSenses(Senses));
     };
 };

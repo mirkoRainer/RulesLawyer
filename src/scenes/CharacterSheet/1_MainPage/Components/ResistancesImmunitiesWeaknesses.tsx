@@ -39,7 +39,7 @@ interface LinkDispatchProps {
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: OwnProps
+    ownProps: ResistancesImmunitiesWeaknessesProps
 ): LinkDispatchProps => {
     return {
         startTextEditModal: bindActionCreators(startTextEditModal, dispatch),

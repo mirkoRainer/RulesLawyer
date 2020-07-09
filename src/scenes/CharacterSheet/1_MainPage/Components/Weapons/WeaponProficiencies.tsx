@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
-import { Proficiencies } from "../../../Shared/PF2eCoreLib/Proficiencies";
 import { OtherWeaponProficiency } from "./OtherWeaponProficiency";
+import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
+import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 
 export interface WeaponProficiencyProps {
     unarmed: Proficiencies;

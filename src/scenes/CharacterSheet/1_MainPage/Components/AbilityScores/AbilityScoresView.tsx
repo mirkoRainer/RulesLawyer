@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, FlatList } from "react-native";
-import { AbilityScoreArray } from "../../../Shared/PF2eCoreLib/AbilityScores";
-import AbilityScoreView from "./AbilityScores/AbilityScoreView";
+import { AbilityScoreArray } from "../../../../Shared/PF2eCoreLib/AbilityScores";
+import AbilityScoreView from "./AbilityScoreView";
 
 export interface Props {
     abilityScores: AbilityScoreArray;

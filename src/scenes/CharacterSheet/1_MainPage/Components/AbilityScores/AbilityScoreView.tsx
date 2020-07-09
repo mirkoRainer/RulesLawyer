@@ -4,29 +4,27 @@ import { Text, StyleSheet, View } from "react-native";
 import {
     AbilityScore,
     CalculateAbilityScoreModifier,
+    GetAbilityScoreAbbreviation,
 } from "../../../../Shared/PF2eCoreLib/AbilityScores";
 
-export interface State {}
+const AbilityScoreView: React.FC<AbilityScore> = (props) => {
+    let formattedModifierString: string;
+    const modifier = CalculateAbilityScoreModifier(props.score);
+    formattedModifierString = modifier > 0 ? ("+" + modifier) : (modifier.toString());
+    const abilityName = GetAbilityScoreAbbreviation(props.ability);
 
-export default class AbilityScoreView extends Component<AbilityScore, State> {
-    FormatAbilityScoreModifierString(): string {
-        const modifier = CalculateAbilityScoreModifier(this.props.score);
-        if (modifier > 0) return "+" + modifier;
-        return modifier.toString();
-    }
+    return (
+        <View style={styles.container}>
+            <Text style={styles.ability}>{abilityName}:</Text>
+            <Text style={styles.score}>{props.score}</Text>
+            <Text style={styles.modifier}>
+                {formattedModifierString}
+            </Text>
+        </View>
+    );
+};
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.ability}>{this.props.ability}:</Text>
-                <Text style={styles.score}>{this.props.score}</Text>
-                <Text style={styles.modifier}>
-                    {this.FormatAbilityScoreModifierString()}
-                </Text>
-            </View>
-        );
-    }
-}
+export default AbilityScoreView;
 
 const styles = StyleSheet.create({
     container: {
