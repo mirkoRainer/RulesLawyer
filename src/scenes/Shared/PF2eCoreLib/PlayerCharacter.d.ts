@@ -1,6 +1,6 @@
 import { AbilityScoreArray } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
-import { iClass } from "../../PlayerCharacterSheet/1_MainPage/CharacterMetadata/ClassView";
+import { iClass } from "../../CharacterSheet/1_MainPage/Components/CharacterMetadata/ClassView";
 
 
 export interface PlayerCharacterDTO {

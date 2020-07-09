@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainMenu from "./src/scenes/MainMenu";
-import CharacterSheet from "./src/scenes/CharacterSheet";
+import CharacterSheet from "./src/scenes/CharacterSheet/CharacterSheet";
 import Store from "./src/store/Store";
 import { Provider } from "react-redux";
 

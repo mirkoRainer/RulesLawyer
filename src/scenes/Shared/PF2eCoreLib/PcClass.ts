@@ -1,4 +1,4 @@
-import { Dictionary } from "../Dictionary";
+import { Dictionary } from "../Misc/Dictionary";
 import { Proficiencies } from "./Proficiencies";
 import { Ability } from "./Ability";
 
