@@ -1,21 +1,43 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { startToggleNumberPickerModal } from "../../../../../store/actions/Modals/ModalsActions";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-interface Props {
+const Level: React.FC<Props> = (props) => {
+    const changeLevel = () => {
+        props.startPickerModal();
+    };
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.text} onPress={changeLevel}> Level: {props.level} </Text>
+        </View>
+    );
+};
+
+interface OwnProps {
     level: number;
 }
 
-interface State {}
+type Props = OwnProps & LinkDispatchProps ;
 
-export default class Level extends Component<Props, State> {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}> Level: {this.props.level} </Text>
-            </View>
-        );
-    }
+interface LinkDispatchProps {
+    startPickerModal: () => void;
 }
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>,
+    ownProps: OwnProps
+): LinkDispatchProps => {
+    return {
+        startPickerModal: bindActionCreators(startToggleNumberPickerModal, dispatch),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Level);
 
 const styles = StyleSheet.create({
     container: {

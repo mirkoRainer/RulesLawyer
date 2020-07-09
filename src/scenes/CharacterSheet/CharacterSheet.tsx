@@ -25,8 +25,9 @@ import {
 } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
-import TextEditModal from "../Shared/TextEditModal";
+import TextEditModal from "../Shared/Modals/TextEditModal";
 import { WeaponViewProps, GetProficiencyForWeapon } from "./1_MainPage/Components/Weapons/WeaponViewProps";
+import NumberPickerModal from "../Shared/Modals/NumberPickerModal";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -288,6 +289,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 />
             </ScrollView>
             <TextEditModal />
+            <NumberPickerModal />
         </View>
     );
 };

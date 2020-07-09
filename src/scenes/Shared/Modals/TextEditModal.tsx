@@ -9,12 +9,12 @@ import {
 import Modal from "react-native-modal";
 import { Icon } from "react-native-elements";
 import { bindActionCreators } from "redux";
-import { AppActions } from "../../store/actions/AllActionTypesAggregated";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
-import { startToggleTextEditModal } from "../../store/actions/Modals/ModalsActions";
+import { startToggleTextEditModal } from "../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { TextEditModalState } from "../../store/ModalsState";
-import { CharacterSheetState } from "../../store/Store";
+import { TextEditModalState } from "../../../store/ModalsState";
+import { CharacterSheetState } from "../../../store/Store";
 
 type OwnProps = {};
 

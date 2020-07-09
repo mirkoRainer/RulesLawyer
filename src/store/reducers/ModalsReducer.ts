@@ -35,7 +35,7 @@ const numberPickerDefaultState: NumberPickerModalState & ModalBaseProps = {
     onSelect: () => {
         console.log("Picker Selected!");
     },
-    visible: false,
+    visible: true,
 };
 
 const defaultState: ModalState = {
