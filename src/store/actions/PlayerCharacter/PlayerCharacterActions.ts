@@ -1,5 +1,5 @@
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES } from "./PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
@@ -151,4 +151,15 @@ export const stateChangeSenses = (Senses: string) => {
         dispatch(ChangeSenses(Senses));
     };
 };
+
+export const ChangeLevel: ActionCreator<PlayerCharacterActionTypes> = (Level: number): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_LEVEL,
+    Level 
+});
+export const stateChangeLevel = (Level: string) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeLevel(Level));
+    };
+};
+
 

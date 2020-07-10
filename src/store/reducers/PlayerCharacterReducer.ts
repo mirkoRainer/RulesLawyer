@@ -1,5 +1,5 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { PlayerCharacterDTO } from "../../scenes/Shared/PF2eCoreLib/PlayerCharacter";
 
 const defaultState: PlayerCharacterDTO = examplePlayerCharacter;
@@ -115,7 +115,12 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
             senses: action.Senses
         };
         return newState;
-    
+    case CHANGE_LEVEL:
+        newState = {
+            ...state,
+            level: action.Level
+        };
+        return newState;
     default:
         return state;
     }

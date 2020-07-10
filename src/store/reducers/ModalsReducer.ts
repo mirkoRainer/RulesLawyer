@@ -2,14 +2,17 @@ import { ModalBaseProps } from "react-native";
 import {
     ModalState,
     TextEditModalState,
-    NumberPickerModalState,
+    PickerModalState,
 } from "../ModalsState";
 import {
     ModalActionTypes,
-    TOGGLE_NUMBERPICKER_MODAL,
+    TOGGLE_PICKER_MODAL,
     TOGGLE_TEXTEDIT_MODAL,
     UPDATE_TEXT_MODAL_STATE,
+    UPDATE_PICKER_MODAL_STATE,
+    CHANGE_PICKER_SELECTION,
 } from "../actions/Modals/ModalsActionTypes";
+import { ReactText } from "react";
 
 const textEditDefaultState: TextEditModalState & ModalBaseProps = {
     title: "",
@@ -27,20 +30,17 @@ const textEditDefaultState: TextEditModalState & ModalBaseProps = {
     transparent: true,
 };
 
-const numberPickerDefaultState: NumberPickerModalState & ModalBaseProps = {
-    title: "Pick a Number",
-    max: 10,
-    min: 1,
-    value: 5,
-    onSelect: () => {
-        console.log("Picker Selected!");
-    },
-    visible: true,
+const PickerDefaultState: PickerModalState & ModalBaseProps = {
+    title: "Make a selection:",
+    items: [],
+    currentSelection: "",
+    onSelect: (itemValue, index) => {},
+    visible: false,
 };
 
 const defaultState: ModalState = {
     textEditModal: textEditDefaultState,
-    numberPickerModal: numberPickerDefaultState,
+    pickerModal: PickerDefaultState,
 };
 
 const modalsReducer = (
@@ -49,13 +49,19 @@ const modalsReducer = (
 ): ModalState => {
     let newState: ModalState;
     switch (action.type) {
-    case TOGGLE_NUMBERPICKER_MODAL:
+    case TOGGLE_PICKER_MODAL:
         newState = {
             ...state,
-            numberPickerModal: {
-                ...state.numberPickerModal,
-                visible: !state.numberPickerModal.visible,
+            pickerModal: {
+                ...state.pickerModal,
+                visible: !state.pickerModal.visible,
             },
+        };
+        return newState;
+    case UPDATE_PICKER_MODAL_STATE:
+        newState = {
+            ...state,
+            pickerModal: action.payload
         };
         return newState;
     case TOGGLE_TEXTEDIT_MODAL:
@@ -71,6 +77,15 @@ const modalsReducer = (
         newState = {
             ...state,
             textEditModal: action.payload
+        };
+        return newState;
+    case CHANGE_PICKER_SELECTION:
+        newState = {
+            ...state,
+            pickerModal: {
+                ...state.pickerModal,
+                currentSelection: action.PickerSelection
+            }
         };
         return newState;
     default:

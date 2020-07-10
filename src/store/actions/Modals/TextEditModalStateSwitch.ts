@@ -5,8 +5,8 @@ import { Dispatch } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
 import { ModalState, TextEditModalState } from "../../ModalsState";
 
-export const ModalStateSwitch = (propertyToChange: string, state: CharacterSheetState, dispatch: Dispatch<AppActions>): TextEditModalState => {
-    switch (propertyToChange) {
+export const TextEditModalStateSwitch = (actionType: string, state: CharacterSheetState, dispatch: Dispatch<AppActions>): TextEditModalState => {
+    switch (actionType) {
     case CHANGE_CHARACTER_NAME:
         return {
             title: "Character Name:",

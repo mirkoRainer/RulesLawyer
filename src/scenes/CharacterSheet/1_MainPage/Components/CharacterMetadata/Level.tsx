@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { startToggleNumberPickerModal } from "../../../../../store/actions/Modals/ModalsActions";
+import { startTogglePickerModal, startPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { CHANGE_LEVEL } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 const Level: React.FC<Props> = (props) => {
     const changeLevel = () => {
-        props.startPickerModal();
+        props.startPickerModal(CHANGE_LEVEL, props.level);
     };
 
     return (
@@ -25,7 +26,7 @@ interface OwnProps {
 type Props = OwnProps & LinkDispatchProps ;
 
 interface LinkDispatchProps {
-    startPickerModal: () => void;
+    startPickerModal: (actionType: string, level: number) => void;
 }
 
 const mapDispatchToProps = (
@@ -33,7 +34,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        startPickerModal: bindActionCreators(startToggleNumberPickerModal, dispatch),
+        startPickerModal: bindActionCreators(startPickerModalSelection, dispatch),
     };
 };
 

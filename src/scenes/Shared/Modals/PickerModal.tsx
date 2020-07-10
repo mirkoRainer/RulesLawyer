@@ -11,9 +11,9 @@ import { Icon } from "react-native-elements";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
-import { startToggleTextEditModal, startToggleNumberPickerModal } from "../../../store/actions/Modals/ModalsActions";
+import { startTogglePickerModal } from "../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { TextEditModalState, NumberPickerModalState } from "../../../store/ModalsState";
+import { PickerModalState } from "../../../store/ModalsState";
 import { CharacterSheetState } from "../../../store/Store";
 
 type OwnProps = {};
@@ -21,6 +21,10 @@ type OwnProps = {};
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
 const PickerModal: React.FC<Props> = (props) => {
+    let items = props.modalState.items.map((value, index) => {
+        return <Picker.Item value={value} key={value} label={value.toString()} />;
+    });
+
     return (
         <Modal
             animationIn="fadeIn"
@@ -38,11 +42,10 @@ const PickerModal: React.FC<Props> = (props) => {
                     </View>
                     <View>
                         <Picker
-                            selectedValue={props.modalState.value}
+                            selectedValue={props.modalState.currentSelection}
                             onValueChange={props.modalState.onSelect}
                         >
-                            <Picker.Item label="5" value={5} />
-                            <Picker.Item label="10" value={10} />
+                            {items}
                         </Picker>
                     </View>
                 </View>
@@ -56,7 +59,7 @@ interface LinkDispatchProps {
 }
 
 interface LinkStateProps {
-    modalState: NumberPickerModalState & ModalBaseProps;
+    modalState: PickerModalState & ModalBaseProps;
 }
 
 const mapDispatchToProps = (
@@ -64,7 +67,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        toggleModal: bindActionCreators(startToggleNumberPickerModal, dispatch),
+        toggleModal: bindActionCreators(startTogglePickerModal, dispatch),
     };
 };
 
@@ -72,7 +75,7 @@ const mapStateToProps = (
     state: CharacterSheetState,
     ownProps: OwnProps
 ): LinkStateProps => ({
-    modalState: state.modals.numberPickerModal,
+    modalState: state.modals.pickerModal,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PickerModal);

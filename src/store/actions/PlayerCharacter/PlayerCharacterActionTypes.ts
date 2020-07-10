@@ -90,6 +90,12 @@ export interface ChangeSensesAction extends Action<string> {
     Senses: string;
 }
 
+export const CHANGE_LEVEL = "CHANGE_LEVEL";
+export interface ChangeLevelAction extends Action<string> {
+    type: typeof CHANGE_LEVEL;
+    Level: number;
+}
 
-export type PlayerCharacterActionTypes = ChangeAlignmentAction | ChangeAncestryAction | ChangeBackgroundAction | ChangeCharacterNameAction | ChangeClassAction | ChangeConditionsAction | ChangeDeityAction | ChangeHeritageAction | ChangeImmunitiesAction |  ChangeNotesAction | ChangePlayerNameAction | ChangeResistancesAction | ChangeSensesAction |  ChangeSubClassAction | ChangeWeaknessesAction; // | SomeOtherAction
+
+export type PlayerCharacterActionTypes = ChangeAlignmentAction | ChangeAncestryAction | ChangeBackgroundAction | ChangeCharacterNameAction | ChangeClassAction | ChangeConditionsAction | ChangeDeityAction | ChangeHeritageAction | ChangeImmunitiesAction |  ChangeNotesAction | ChangePlayerNameAction | ChangeResistancesAction | ChangeSensesAction |  ChangeSubClassAction | ChangeWeaknessesAction | ChangeLevelAction; // | SomeOtherAction
 

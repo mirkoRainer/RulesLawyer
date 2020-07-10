@@ -1,8 +1,9 @@
 import { ModalProps } from "react-native";
+import { ReactText } from "react";
 
 export type ModalState = {
     textEditModal: TextEditModalState & ModalProps;
-    numberPickerModal: NumberPickerModalState & ModalProps;
+    pickerModal: PickerModalState & ModalProps;
 };
 export type TextEditModalState = {
     title: string;
@@ -10,10 +11,9 @@ export type TextEditModalState = {
     onSelect: () => void;
     onTextChange: (value: string) => void;
 };
-export type NumberPickerModalState = {
+export type PickerModalState = {
     title: string;
-    max: number;
-    min: number;
-    value: number;
-    onSelect: () => void;
+    items: ReactText[];
+    currentSelection: ReactText;
+    onSelect: (itemValue: ReactText, itemIndex: number) => void;
 };

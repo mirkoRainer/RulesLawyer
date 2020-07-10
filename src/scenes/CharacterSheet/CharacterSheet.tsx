@@ -27,7 +27,7 @@ import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import { WeaponViewProps, GetProficiencyForWeapon } from "./1_MainPage/Components/Weapons/WeaponViewProps";
-import NumberPickerModal from "../Shared/Modals/NumberPickerModal";
+import NumberPickerModal from "../Shared/Modals/PickerModal";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,

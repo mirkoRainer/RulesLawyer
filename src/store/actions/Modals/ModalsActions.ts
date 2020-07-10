@@ -2,31 +2,19 @@ import { Dispatch, ActionCreator } from "redux";
 import {
     ModalActionTypes,
     TOGGLE_TEXTEDIT_MODAL,
-    TOGGLE_NUMBERPICKER_MODAL,
+    TOGGLE_PICKER_MODAL,
     UPDATE_TEXT_MODAL_STATE,
+    UPDATE_PICKER_MODAL_STATE,
+    CHANGE_PICKER_SELECTION,
 } from "./ModalsActionTypes";
 import { AppActions } from "../AllActionTypesAggregated";
-import { TextEditModalState } from "../../ModalsState";
+import { TextEditModalState, PickerModalState } from "../../ModalsState";
 import { CharacterSheetState } from "../../Store";
-import { ModalStateSwitch } from "./ModalStateSwitch";
+import { TextEditModalStateSwitch } from "./TextEditModalStateSwitch";
+import { PickerModalStateSwitch } from "./PickerModalStateSwitch";
+import { ReactText } from "react";
 
 const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({ type: TOGGLE_TEXTEDIT_MODAL });
-
-const UpdateTextEditModalState: ActionCreator<ModalActionTypes> = (
-    newModalState: TextEditModalState
-): ModalActionTypes => ({
-    type: UPDATE_TEXT_MODAL_STATE,
-    payload: newModalState
-});
-
-export const startTextEditModal = (propertyToChange: string, index?: number) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
-        let newModalState: TextEditModalState = ModalStateSwitch(propertyToChange, getState(), dispatch);
-        dispatch(UpdateTextEditModalState(newModalState));
-        dispatch(ToggleTextEditModal());
-    };
-
-};
 
 export const startToggleTextEditModal = () => {
     return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
@@ -35,12 +23,50 @@ export const startToggleTextEditModal = () => {
 
 };
 
-const ToggleNumberPickerModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({
-    type: TOGGLE_NUMBERPICKER_MODAL,
+const UpdateTextEditModalState: ActionCreator<ModalActionTypes> = (
+    newModalState: TextEditModalState
+): ModalActionTypes => ({
+    type: UPDATE_TEXT_MODAL_STATE,
+    payload: newModalState
 });
 
-export const startToggleNumberPickerModal = () => {
+export const startTextEditModal = (actionType: string, index?: number) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
+        let newModalState: TextEditModalState = TextEditModalStateSwitch(actionType, getState(), dispatch);
+        dispatch(UpdateTextEditModalState(newModalState));
+        dispatch(ToggleTextEditModal());
+    };
+};
+
+
+const TogglePickerModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({
+    type: TOGGLE_PICKER_MODAL,
+});
+
+export const startTogglePickerModal = () => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
-        dispatch(ToggleNumberPickerModal());
+        dispatch(TogglePickerModal());
+    };
+};
+
+const UpdatePickerModalState: ActionCreator<ModalActionTypes> = (
+    newModalState: PickerModalState
+): ModalActionTypes => ({
+    type: UPDATE_PICKER_MODAL_STATE,
+    payload: newModalState
+});
+
+export const ChangePickerSelection: ActionCreator<ModalActionTypes> = (
+    newSelection: ReactText
+): ModalActionTypes => ({
+    type: CHANGE_PICKER_SELECTION,
+    PickerSelection: newSelection
+});
+
+export const startPickerModalSelection = (actionType: string, value: number) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
+        let newModalState: PickerModalState = PickerModalStateSwitch(actionType, getState(), dispatch);
+        dispatch(UpdatePickerModalState(newModalState));
+        dispatch(TogglePickerModal());
     };
 };
