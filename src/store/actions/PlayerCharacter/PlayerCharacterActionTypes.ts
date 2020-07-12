@@ -1,4 +1,5 @@
 import { Action } from "redux";
+import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -96,6 +97,20 @@ export interface ChangeLevelAction extends Action<string> {
     Level: number;
 }
 
+export const CHANGE_EXPERIENCE_POINTS = "CHANGE_EXPERIENCE_POINTS";
+export interface ChangeExperiencePointsAction extends Action<string> {
+    type: typeof CHANGE_EXPERIENCE_POINTS;
+    ExperiencePoints: number;
+}
 
-export type PlayerCharacterActionTypes = ChangeAlignmentAction | ChangeAncestryAction | ChangeBackgroundAction | ChangeCharacterNameAction | ChangeClassAction | ChangeConditionsAction | ChangeDeityAction | ChangeHeritageAction | ChangeImmunitiesAction |  ChangeNotesAction | ChangePlayerNameAction | ChangeResistancesAction | ChangeSensesAction |  ChangeSubClassAction | ChangeWeaknessesAction | ChangeLevelAction; // | SomeOtherAction
+
+export const CHANGE_ABILITY_SCORE = "CHANGE_ABILITY_SCORE";
+export interface ChangeAbilityScoreAction extends Action<string> {
+    type: typeof CHANGE_ABILITY_SCORE;
+    AbilityScore: AbilityScore;
+}
+
+
+
+export type PlayerCharacterActionTypes = ChangeAlignmentAction | ChangeAncestryAction | ChangeBackgroundAction | ChangeCharacterNameAction | ChangeClassAction | ChangeConditionsAction | ChangeDeityAction | ChangeHeritageAction | ChangeImmunitiesAction |  ChangeNotesAction | ChangePlayerNameAction | ChangeResistancesAction | ChangeSensesAction |  ChangeSubClassAction | ChangeWeaknessesAction | ChangeLevelAction | ChangeAbilityScoreAction | ChangeExperiencePointsAction; // | SomeOtherAction
 

@@ -20,6 +20,10 @@ export type AbilityScoreArray = {
     charisma: AbilityScore;
 };
 
+export function UpdateAbilityScore(newAbilityScore: AbilityScore, existingAbilityScores: AbilityScoreArray): AbilityScoreArray {
+    return existingAbilityScores;
+}
+
 export function GetAbilityModifierFromScores(
     ability: keyof AbilityScoreArray,
     abilityScores: AbilityScoreArray
