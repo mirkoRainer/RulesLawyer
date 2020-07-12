@@ -55,6 +55,7 @@ const modalsReducer = (
             pickerModal: {
                 ...state.pickerModal,
                 visible: !state.pickerModal.visible,
+                currentSelection: action.value
             },
         };
         return newState;

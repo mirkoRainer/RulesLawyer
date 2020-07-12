@@ -13,6 +13,7 @@ export interface ToggleTextEditModalAction extends Action<string> {
 
 export interface TogglePickerModalAction extends Action<string> {
     type: typeof TOGGLE_PICKER_MODAL;
+    value: number;
 }
 
 export interface UpdateTextModalStateAction extends Action<string> {

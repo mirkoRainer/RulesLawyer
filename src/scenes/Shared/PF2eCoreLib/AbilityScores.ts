@@ -21,6 +21,7 @@ export type AbilityScoreArray = {
 };
 
 export function UpdateAbilityScore(newAbilityScore: AbilityScore, existingAbilityScores: AbilityScoreArray): AbilityScoreArray {
+    existingAbilityScores[newAbilityScore.ability] = newAbilityScore;
     return existingAbilityScores;
 }
 
