@@ -112,5 +112,24 @@ export interface ChangeAbilityScoreAction extends Action<string> {
 
 
 
-export type PlayerCharacterActionTypes = ChangeAlignmentAction | ChangeAncestryAction | ChangeBackgroundAction | ChangeCharacterNameAction | ChangeClassAction | ChangeConditionsAction | ChangeDeityAction | ChangeHeritageAction | ChangeImmunitiesAction |  ChangeNotesAction | ChangePlayerNameAction | ChangeResistancesAction | ChangeSensesAction |  ChangeSubClassAction | ChangeWeaknessesAction | ChangeLevelAction | ChangeAbilityScoreAction | ChangeExperiencePointsAction; // | SomeOtherAction
+export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
+                                        |   ChangeAncestryAction 
+                                        |   ChangeBackgroundAction 
+                                        |   ChangeCharacterNameAction 
+                                        |   ChangeClassAction 
+                                        |   ChangeConditionsAction 
+                                        |   ChangeDeityAction 
+                                        |   ChangeHeritageAction 
+                                        |   ChangeImmunitiesAction 
+                                        |   ChangeNotesAction 
+                                        |   ChangePlayerNameAction 
+                                        |   ChangeResistancesAction 
+                                        |   ChangeSensesAction 
+                                        |   ChangeSubClassAction 
+                                        |   ChangeWeaknessesAction 
+                                        |   ChangeLevelAction 
+                                        |   ChangeExperiencePointsAction 
+                                        |   ChangeAbilityScoreAction; // | SomeOtherAction
+
+
 

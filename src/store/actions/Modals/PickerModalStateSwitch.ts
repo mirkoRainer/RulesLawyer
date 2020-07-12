@@ -2,7 +2,7 @@ import { PickerModalState } from "../../ModalsState";
 import { CharacterSheetState } from "../../Store";
 import { Dispatch, ReactText } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS } from "../PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE } from "../PlayerCharacter/PlayerCharacterActionTypes";
 import { ChangeLevel, ChangeExperiencePoints } from "../PlayerCharacter/PlayerCharacterActions";
 import { ChangePickerSelection } from "./ModalsActions";
 

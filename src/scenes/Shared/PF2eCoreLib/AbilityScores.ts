@@ -21,8 +21,9 @@ export type AbilityScoreArray = {
 };
 
 export function UpdateAbilityScore(newAbilityScore: AbilityScore, existingAbilityScores: AbilityScoreArray): AbilityScoreArray {
-    existingAbilityScores[newAbilityScore.ability] = newAbilityScore;
-    return existingAbilityScores;
+    let scores = existingAbilityScores;
+    scores[newAbilityScore.ability] = newAbilityScore;
+    return scores;
 }
 
 export function GetAbilityModifierFromScores(

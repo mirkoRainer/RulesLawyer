@@ -129,6 +129,7 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
         };
         return newState;
     case CHANGE_ABILITY_SCORE:
+
         newState = {
             ...state,
             abilityScores: UpdateAbilityScore(action.AbilityScore, state.abilityScores)

@@ -13,6 +13,8 @@ import { CharacterSheetState } from "../../Store";
 import { TextEditModalStateSwitch } from "./TextEditModalStateSwitch";
 import { PickerModalStateSwitch } from "./PickerModalStateSwitch";
 import { ReactText } from "react";
+import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
+import { ChangeAbilityScore } from "../PlayerCharacter/PlayerCharacterActions";
 
 const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({ type: TOGGLE_TEXTEDIT_MODAL });
 
@@ -69,5 +71,21 @@ export const startPickerModalSelection = (actionType: string, value: number) => 
         let newModalState: PickerModalState = PickerModalStateSwitch(actionType, getState(), dispatch);
         dispatch(UpdatePickerModalState(newModalState));
         dispatch(TogglePickerModal(value));
+    };
+};
+export const startPickerForAbilityScore = (actionType: string, abilityScore: AbilityScore) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
+        let newModalState: PickerModalState = {
+            title: "Editing " + abilityScore.ability,
+            items: Array.from(new Array(30), (x, i) => i + 1),
+            currentSelection: getState().modals.pickerModal.currentSelection,
+            onSelect: (value: ReactText, index: number) => {
+                let newAbilityScore: AbilityScore = { ability: abilityScore.ability, score: <number>value };
+                dispatch(ChangeAbilityScore(newAbilityScore));
+                dispatch(ChangePickerSelection(value));
+            }
+        };
+        dispatch(UpdatePickerModalState(newModalState));
+        dispatch(TogglePickerModal(abilityScore.score));
     };
 };

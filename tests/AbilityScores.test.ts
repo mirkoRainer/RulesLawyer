@@ -41,7 +41,7 @@ describe("Ability Scores", () => {
             expect(actual.name).toBe("strength");
         });
     });
-    describe("UpdateAbilitySCore", () => {
+    describe("UpdateAbilityScore", () => {
         it("assigns the new ability score to the appropriate ability entry", () => {
             let abilityScores: AbilityScoreArray = {
                 strength: { score: 18, ability: "strength" },
