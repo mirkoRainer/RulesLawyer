@@ -106,7 +106,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return {
             title: "AC",
             keyAbility: GetAbilityModifierFromScores(
-                "dexterity",
+                "Dexterity",
                 props.playerCharacter.abilityScores
             ),
             proficiency: wornArmorProficiency(),
@@ -121,7 +121,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return {
             title: "Fortitude",
             keyAbility: GetAbilityModifierFromScores(
-                "constitution",
+                "Constitution",
                 props.playerCharacter.abilityScores
             ),
             proficiency: props.playerCharacter.saves.fortitude,
@@ -137,13 +137,13 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return {
             title: "Will",
             keyAbility: GetAbilityModifierFromScores(
-                "wisdom",
+                "Wisdom",
                 props.playerCharacter.abilityScores
             ),
             proficiency: props.playerCharacter.saves.will,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
-                "wisdom",
+                "Wisdom",
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
@@ -153,13 +153,13 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return {
             title: "Reflex",
             keyAbility: GetAbilityModifierFromScores(
-                "dexterity",
+                "Dexterity",
                 props.playerCharacter.abilityScores
             ),
             proficiency: props.playerCharacter.saves.reflex,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
-                "dexterity",
+                "Dexterity",
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
@@ -169,7 +169,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return {
             title: "Perception",
             keyAbility: GetAbilityModifierFromScores(
-                "wisdom",
+                "Wisdom",
                 props.playerCharacter.abilityScores
             ),
             proficiency: props.playerCharacter.perceptionProficiency,

@@ -2,7 +2,7 @@ import { Dictionary } from "../Misc/Dictionary";
 import { Proficiencies } from "./Proficiencies";
 import { Ability } from "./Ability";
 
-interface PcClass {
+export interface PcClass {
     Name: string;
     TypicalMembers: string;
     RolePlayingSuggestions: string;

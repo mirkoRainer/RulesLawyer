@@ -21,19 +21,19 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
     background: {
         name: "Emancipated",
     },
-    class: {
+    pcClass: {
         name: "Druid",
         subClass: "Wild Order",
         proficiency: Proficiencies.Master,
-        keyAbility: "wisdom",
+        keyAbility: "Wisdom"
     },
     abilityScores: {
-        strength: { score: 10, ability: "strength" },
-        dexterity: { score: 16, ability: "dexterity" },
-        constitution: { score: 20, ability: "constitution" },
-        intelligence: { score: 6, ability: "intelligence" },
-        wisdom: { score: 18, ability: "wisdom" },
-        charisma: { score: 8, ability: "charisma" },
+        Strength: { score: 10, ability: "Strength" },
+        Dexterity: { score: 16, ability: "Dexterity" },
+        Constitution: { score: 20, ability: "Constitution" },
+        Intelligence: { score: 6, ability: "Intelligence" },
+        Wisdom: { score: 18, ability: "Wisdom" },
+        Charisma: { score: 8, ability: "Charisma" },
     },
     languages: [" Common", " Dwarf", " Goblin"],
     wornArmor: {
@@ -73,7 +73,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
     skills: [
         {
             name: "Acrobatics",
-            abilityModifier: { name: "dexterity", modifier: 3},
+            abilityModifier: { name: "Dexterity", modifier: 3},
             proficiency: Proficiencies.Legendary,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -81,7 +81,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Arcana",
-            abilityModifier: { name: "intelligence", modifier: 3},
+            abilityModifier: { name: "Intelligence", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -89,7 +89,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Athletics",
-            abilityModifier: { name: "strength", modifier: 3},
+            abilityModifier: { name: "Strength", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -97,7 +97,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Crafting",
-            abilityModifier: { name: "intelligence", modifier: 3},
+            abilityModifier: { name: "Intelligence", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -105,7 +105,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Deception",
-            abilityModifier: { name: "charisma", modifier: 3},
+            abilityModifier: { name: "Charisma", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -113,7 +113,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Diplomacy",
-            abilityModifier: { name: "charisma", modifier: 3},
+            abilityModifier: { name: "Charisma", modifier: 3},
             proficiency: Proficiencies.Untrained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -121,7 +121,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Intimidation",
-            abilityModifier: { name: "charisma", modifier: 3},
+            abilityModifier: { name: "Charisma", modifier: 3},
             proficiency: Proficiencies.Expert,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -130,7 +130,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         {
             name: "Lore",
             loreDescriptor: "Golarion",
-            abilityModifier: { name: "intelligence", modifier: 3},
+            abilityModifier: { name: "Intelligence", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -138,7 +138,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Medicine",
-            abilityModifier: { name: "wisdom", modifier: 3},
+            abilityModifier: { name: "Wisdom", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -146,7 +146,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Nature",
-            abilityModifier: { name: "wisdom", modifier: 3},
+            abilityModifier: { name: "Wisdom", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -154,7 +154,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Occultism",
-            abilityModifier: { name: "intelligence", modifier: 3},
+            abilityModifier: { name: "Intelligence", modifier: 3},
             proficiency: Proficiencies.Master,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -162,7 +162,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Performance",
-            abilityModifier: { name: "charisma", modifier: 3},
+            abilityModifier: { name: "Charisma", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -170,7 +170,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Religion",
-            abilityModifier: { name: "wisdom", modifier: 3},
+            abilityModifier: { name: "Wisdom", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -178,7 +178,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Society",
-            abilityModifier: { name: "intelligence", modifier: 3},
+            abilityModifier: { name: "Intelligence", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -186,7 +186,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Stealth",
-            abilityModifier: { name: "dexterity", modifier: 3},
+            abilityModifier: { name: "Dexterity", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -194,14 +194,14 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         },
         {
             name: "Survival",
-            abilityModifier: { name: "wisdom", modifier: 3},
+            abilityModifier: { name: "Wisdom", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: false,
         },
         {
             name: "Thievery",
-            abilityModifier: { name: "dexterity", modifier: 3},
+            abilityModifier: { name: "Dexterity", modifier: 3},
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -241,16 +241,16 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
     weapons: [
         {
             title: "+1 ShortSword",
-            ability: "strength",
+            ability: "Strength",
             toHitBonus: 1,
             damageDice: "1d6",
-            damageAbilityModifier: "strength",
+            damageAbilityModifier: "Strength",
             damageType: "Piercing",
             weaponTraits: "Agile, Finesse, Versatile",
         },
         {
             title: "Longbow",
-            ability: "dexterity",
+            ability: "Dexterity",
             toHitBonus: 0,
             damageDice: "1d8",
             damageAbilityModifier: Ability.Free,
@@ -420,7 +420,7 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
                     "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
         },
     ],
-    spellcastingAbilityModifier: "wisdom",
+    spellcastingAbilityModifier: "Wisdom",
     spellAttackProficiency: Proficiencies.Trained,
     spellAttackItemBonus: 1,
     spellDCItemBonus: 2,

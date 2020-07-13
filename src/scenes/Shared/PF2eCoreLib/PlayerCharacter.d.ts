@@ -1,6 +1,5 @@
 import { AbilityScoreArray } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
-import { iClass } from "../../CharacterSheet/1_MainPage/Components/CharacterMetadata/ClassView";
 
 
 export interface PlayerCharacterDTO {
@@ -13,8 +12,8 @@ export interface PlayerCharacterDTO {
     deity:                       string;
     traits:                      string[];
     ancestry:                    Ancestry;
+    pcClass:                     iClass;
     background:                  Background;
-    class:                       iClass;
     abilityScores:               AbilityScoreArray;
     languages:                   string[];
     wornArmor:                   WornArmor;
@@ -51,6 +50,13 @@ export interface PlayerCharacterDTO {
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlot[];
     spells:                      Spell[];
+}
+
+interface iClass {
+    name: string;
+    subClass: string;
+    proficiency: Proficiencies;
+    keyAbility: keyof AbilityScoreArray;
 }
 
 interface Background {
@@ -138,13 +144,6 @@ export interface CampaignNotesDataDTO {
     allies:        string;
     enemies:       string;
     organizations: string;
-}
-
-export interface ClassDTO {
-    name:        string;
-    subClass:    string;
-    proficiency: string;
-    keyAbility:  string;
 }
 
 export interface HitPointDTO {
@@ -267,7 +266,7 @@ export interface WornArmorDTO {
     dexCap:              number;
     checkPenalty:        Bonus;
     speedPenalty:        Bonus;
-    strengthRequirement: number;
+    StrengthRequirement: number;
     bulk:                number;
     wornBulk:            number;
     group:               string;

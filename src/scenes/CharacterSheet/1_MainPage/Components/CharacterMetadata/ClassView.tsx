@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
-import { Ability } from "../../../../Shared/PF2eCoreLib/Ability";
 import { AbilityScoreArray } from "../../../../Shared/PF2eCoreLib/AbilityScores";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";

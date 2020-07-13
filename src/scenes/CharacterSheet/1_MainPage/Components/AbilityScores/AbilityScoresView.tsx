@@ -10,42 +10,42 @@ export interface State {}
 
 export default class AbilityScores extends Component<Props, State> {
     render() {
-        const strength = this.props.abilityScores["strength"];
-        const dexterity = this.props.abilityScores["dexterity"];
-        const constitution = this.props.abilityScores["constitution"];
-        const intelligence = this.props.abilityScores["intelligence"];
-        const wisdom = this.props.abilityScores["wisdom"];
-        const charisma = this.props.abilityScores["charisma"];
+        const Strength = this.props.abilityScores["Strength"];
+        const Dexterity = this.props.abilityScores["Dexterity"];
+        const Constitution = this.props.abilityScores["Constitution"];
+        const Intelligence = this.props.abilityScores["Intelligence"];
+        const Wisdom = this.props.abilityScores["Wisdom"];
+        const Charisma = this.props.abilityScores["Charisma"];
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Ability Scores</Text>
                 <View style={styles.rowContainer}>
                     <View style={styles.borderlessContainer}>
                         <AbilityScoreView
-                            ability={strength.ability}
-                            score={strength.score}
+                            ability={Strength.ability}
+                            score={Strength.score}
                         />
                         <AbilityScoreView
-                            ability={dexterity.ability}
-                            score={dexterity.score}
+                            ability={Dexterity.ability}
+                            score={Dexterity.score}
                         />
                         <AbilityScoreView
-                            ability={constitution.ability}
-                            score={constitution.score}
+                            ability={Constitution.ability}
+                            score={Constitution.score}
                         />
                     </View>
                     <View style={styles.borderlessContainer}>
                         <AbilityScoreView
-                            ability={intelligence.ability}
-                            score={intelligence.score}
+                            ability={Intelligence.ability}
+                            score={Intelligence.score}
                         />
                         <AbilityScoreView
-                            ability={wisdom.ability}
-                            score={wisdom.score}
+                            ability={Wisdom.ability}
+                            score={Wisdom.score}
                         />
                         <AbilityScoreView
-                            ability={charisma.ability}
-                            score={charisma.score}
+                            ability={Charisma.ability}
+                            score={Charisma.score}
                         />
                     </View>
                 </View>

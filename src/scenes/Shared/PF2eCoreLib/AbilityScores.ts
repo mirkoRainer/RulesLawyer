@@ -12,12 +12,12 @@ export interface AbilityModifierWithName {
 }
 
 export type AbilityScoreArray = {
-    strength: AbilityScore;
-    dexterity: AbilityScore;
-    constitution: AbilityScore;
-    intelligence: AbilityScore;
-    wisdom: AbilityScore;
-    charisma: AbilityScore;
+    Strength: AbilityScore;
+    Dexterity: AbilityScore;
+    Constitution: AbilityScore;
+    Intelligence: AbilityScore;
+    Wisdom: AbilityScore;
+    Charisma: AbilityScore;
 };
 
 export function UpdateAbilityScore(newAbilityScore: AbilityScore, existingAbilityScores: AbilityScoreArray): AbilityScoreArray {
@@ -45,22 +45,22 @@ export function CalculateAbilityScoreModifier(abilityScore: number): number {
 
 export function GetAbilityScoreAbbreviation(abilityScoreName: string) {
     switch (abilityScoreName) {
-    case "strength": {
+    case "Strength": {
         return "STR";
     }
-    case "dexterity": {
+    case "Dexterity": {
         return "DEX";
     }
-    case "constitution": {
+    case "Constitution": {
         return "CON";
     }
-    case "intelligence": {
+    case "Intelligence": {
         return "INT";
     }
-    case "wisdom": {
+    case "Wisdom": {
         return "WIS";
     }
-    case "charisma": {
+    case "Charisma": {
         return "CHA";
     }
     default: {

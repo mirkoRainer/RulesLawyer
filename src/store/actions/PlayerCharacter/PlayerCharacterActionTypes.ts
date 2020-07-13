@@ -1,5 +1,6 @@
 import { Action } from "redux";
 import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../scenes/Shared/PF2eCoreLib/Proficiencies";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -110,7 +111,11 @@ export interface ChangeAbilityScoreAction extends Action<string> {
     AbilityScore: AbilityScore;
 }
 
-
+export const CHANGE_CLASS_DC_PROFICIENCY = "CHANGE_CLASS_DC_PROFICIENCY";
+export interface ChangeClassDCProficiency extends Action<string> {
+    type: typeof CHANGE_CLASS_DC_PROFICIENCY;
+    Proficiency: Proficiencies;
+}
 
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
                                         |   ChangeAncestryAction 
@@ -129,7 +134,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeWeaknessesAction 
                                         |   ChangeLevelAction 
                                         |   ChangeExperiencePointsAction 
-                                        |   ChangeAbilityScoreAction; // | SomeOtherAction
+                                        |   ChangeAbilityScoreAction
+                                        |   ChangeClassDCProficiency; // | SomeOtherAction
 
 
 

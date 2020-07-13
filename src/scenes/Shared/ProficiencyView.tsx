@@ -38,7 +38,7 @@ export default class ProficiencyView extends Component<
 
     render() {
         const tenBase = this.props.is10base ? (
-            <Text style={styles.tenBase}>Base: 10</Text>
+            <Text style={styles.tenBase}>10 + </Text>
         ) : (
             <Text style={styles.noTenBase}></Text>
         );
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     tenBase: {
-        flex: 3,
+        flex: 1,
         alignSelf: "center",
     },
     noTenBase: {},
