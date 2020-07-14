@@ -1,5 +1,5 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { PlayerCharacterDTO } from "../../scenes/Shared/PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../scenes/Shared/PF2eCoreLib/AbilityScores";
 
@@ -44,24 +44,6 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
             background: {
                 ...state.background,
                 name: action.Background
-            } 
-        };
-        return newState;
-    case CHANGE_CLASS:
-        newState = {
-            ...state,
-            class:{
-                ...state.class,
-                name: action.Class  
-            } 
-        };
-        return newState;
-    case CHANGE_SUBCLASS:
-        newState = {
-            ...state,
-            class: {
-                ...state.class,
-                subClass: action.SubClass
             } 
         };
         return newState;
@@ -129,10 +111,18 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
         };
         return newState;
     case CHANGE_ABILITY_SCORE:
-
         newState = {
             ...state,
             abilityScores: UpdateAbilityScore(action.AbilityScore, state.abilityScores)
+        };
+        return newState;
+    case CHANGE_CLASS_DC_PROFICIENCY:
+        newState = {
+            ...state,
+            pcClass: {
+                ...state.pcClass,
+                proficiency: action.Proficiency
+            }
         };
         return newState;
     default:

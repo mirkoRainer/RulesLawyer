@@ -8,6 +8,7 @@ export interface ArmorProficiencyProps {
     light: Proficiencies;
     medium: Proficiencies;
     heavy: Proficiencies;
+    onProficiencyPress: () => void;
 }
 
 export interface State {}
@@ -21,19 +22,19 @@ export default class ArmorProficiencies extends Component<
             <View style={styles.container}>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Unarmored</Text>
-                    <ProficiencyArrayView proficiency={this.props.unarmored} />
+                    <ProficiencyArrayView proficiency={this.props.unarmored} onPress={()=>{}} />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Light Armor</Text>
-                    <ProficiencyArrayView proficiency={this.props.light} />
+                    <ProficiencyArrayView proficiency={this.props.light} onPress={()=>{}}/>
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Med. Armor</Text>
-                    <ProficiencyArrayView proficiency={this.props.medium} />
+                    <ProficiencyArrayView proficiency={this.props.medium} onPress={()=>{}}/>
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Heavy Armor</Text>
-                    <ProficiencyArrayView proficiency={this.props.heavy} />
+                    <ProficiencyArrayView proficiency={this.props.heavy} onPress={()=>{}}/>
                 </View>
             </View>
         );

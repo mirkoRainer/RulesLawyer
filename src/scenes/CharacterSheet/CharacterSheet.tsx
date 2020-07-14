@@ -52,10 +52,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             level: props.playerCharacter.level,
             experiencePoints: props.playerCharacter.experiencePoints,
             background: props.playerCharacter.background,
-            pcClass: props.playerCharacter.class.name,
-            subclass: props.playerCharacter.class.subClass,
-            classKeyAbility: props.playerCharacter.class.keyAbility,
-            classProficiency: props.playerCharacter.class.proficiency,
+            pcClass: props.playerCharacter.pcClass.name,
+            subclass: props.playerCharacter.pcClass.subClass,
+            classKeyAbility: props.playerCharacter.pcClass.keyAbility,
+            classProficiency: props.playerCharacter.pcClass.proficiency,
             alignment: props.playerCharacter.alignment,
             deity: props.playerCharacter.deity,
             traits: props.playerCharacter.traits,
@@ -65,10 +65,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return {
             title: "Class DC",
             keyAbility: GetAbilityModifierFromScores(
-                props.playerCharacter.class.keyAbility,
+                props.playerCharacter.pcClass.keyAbility,
                 props.playerCharacter.abilityScores
             ),
-            proficiency: props.playerCharacter.class.proficiency,
+            proficiency: props.playerCharacter.pcClass.proficiency,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
                 "classDc",
@@ -76,6 +76,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 props.playerCharacter.bonuses
             ),
             is10base: true,
+            onProficiencyPress: () => {}
         };
     };
     const wornArmorProficiency = (): Proficiencies => {
@@ -115,6 +116,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             is10base: true,
             isACBase: true,
             dexCap: props.playerCharacter.wornArmor.DexCap,
+            onProficiencyPress: () => {}
         };
     };
     const fortitudeSave = (): ProficiencyProps => {
@@ -131,6 +133,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
+            onProficiencyPress: () => {}
         };
     };
     const willSave = (): ProficiencyProps => {
@@ -147,6 +150,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
+            onProficiencyPress: () => {}
         };
     };
     const reflexSave = (): ProficiencyProps => {
@@ -163,6 +167,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
+            onProficiencyPress: () => {}
         };
     };
     const perception = (): ProficiencyProps => {
@@ -180,6 +185,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 props.playerCharacter.bonuses
             ),
             descriptor: props.playerCharacter.senses,
+            onProficiencyPress: () => {}
         };
     };
     const weapons = (): WeaponViewProps[] => {
@@ -207,7 +213,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         ];
     };
     const headerText = (): string => {
-        const pcClass = props.playerCharacter.class;
+        const pcClass = props.playerCharacter.pcClass;
         const name = props.playerCharacter.name;
         return (
             name +

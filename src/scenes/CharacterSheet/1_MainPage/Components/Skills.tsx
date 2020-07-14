@@ -6,6 +6,7 @@ import { Skill } from "./Skill";
 interface Props {
     skills: Skill[];
     level: number;
+    onProficiencyPress: () => void;
 }
 
 interface State {}
@@ -19,6 +20,7 @@ export default class Skills extends Component<Props, State> {
             level={this.props.level}
             itemBonus={item.itemBonus}
             armorPenalty={item.hasArmorPenalty ? item.armorPenalty : 0}
+            onProficiencyPress={this.props.onProficiencyPress}
         />
     );
     keyExtractor = (item: Skill) => item.name;

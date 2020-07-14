@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { startTogglePickerModal, startPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
+import { startTogglePickerModal, startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -34,7 +34,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        startPickerModal: bindActionCreators(startPickerModalSelection, dispatch),
+        startPickerModal: bindActionCreators(startNumberPickerModalSelection, dispatch),
     };
 };
 

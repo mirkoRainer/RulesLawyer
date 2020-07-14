@@ -41,7 +41,7 @@ export const startTextEditModal = (actionType: string, index?: number) => {
 };
 
 
-const TogglePickerModal: ActionCreator<ModalActionTypes> = (value: number): ModalActionTypes => ({
+const TogglePickerModal: ActionCreator<ModalActionTypes> = (value: ReactText): ModalActionTypes => ({
     type: TOGGLE_PICKER_MODAL,
     value: value
 });
@@ -66,7 +66,14 @@ export const ChangePickerSelection: ActionCreator<ModalActionTypes> = (
     PickerSelection: newSelection
 });
 
-export const startPickerModalSelection = (actionType: string, value: number) => {
+export const startNumberPickerModalSelection = (actionType: string, value: number) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
+        let newModalState: PickerModalState = PickerModalStateSwitch(actionType, getState(), dispatch);
+        dispatch(UpdatePickerModalState(newModalState));
+        dispatch(TogglePickerModal(value));
+    };
+};
+export const startStringPickerModalSelection = (actionType: string, value: string) => {
     return (dispatch: Dispatch<AppActions>, getState: () => CharacterSheetState) => {
         let newModalState: PickerModalState = PickerModalStateSwitch(actionType, getState(), dispatch);
         dispatch(UpdatePickerModalState(newModalState));

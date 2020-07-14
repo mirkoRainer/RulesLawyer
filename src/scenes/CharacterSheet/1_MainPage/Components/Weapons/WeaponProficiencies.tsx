@@ -9,6 +9,7 @@ export interface WeaponProficiencyProps {
     simple: Proficiencies;
     martial: Proficiencies;
     others: OtherWeaponProficiency[];
+    onProficiencyPress: () => void;
 }
 
 interface State {}
@@ -24,15 +25,15 @@ export default class WeaponProficiencies extends Component<
             <View style={styles.container}>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Unarmed</Text>
-                    <ProficiencyArrayView proficiency={this.props.unarmed} />
+                    <ProficiencyArrayView proficiency={this.props.unarmed} onPress={this.props.onProficiencyPress}/>
                 </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Simple</Text>
-                    <ProficiencyArrayView proficiency={this.props.simple} />
+                    <ProficiencyArrayView proficiency={this.props.simple} onPress={this.props.onProficiencyPress}/>
                 </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Martial</Text>
-                    <ProficiencyArrayView proficiency={this.props.martial} />
+                    <ProficiencyArrayView proficiency={this.props.martial} onPress={this.props.onProficiencyPress}/>
                 </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Other</Text>
@@ -41,6 +42,7 @@ export default class WeaponProficiencies extends Component<
                     */}
                     <ProficiencyArrayView
                         proficiency={this.props.others[0].proficiency}
+                        onPress={this.props.onProficiencyPress}
                     />
                 </View>
             </View>

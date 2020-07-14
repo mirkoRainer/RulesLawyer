@@ -55,7 +55,7 @@ export const TextEditModalStateSwitch = (actionType: string, state: CharacterShe
     case CHANGE_CLASS:
         return {
             title: "Class:",
-            value: state.playerCharacter.class.name,
+            value: state.playerCharacter.pcClass.name,
             onSelect: () => {},
             onTextChange: (value: string) => {
                 dispatch(ChangeClass(value));
@@ -64,7 +64,7 @@ export const TextEditModalStateSwitch = (actionType: string, state: CharacterShe
     case CHANGE_SUBCLASS:
         return {
             title: "SubClass:",
-            value: state.playerCharacter.class.subClass,
+            value: state.playerCharacter.pcClass.subClass,
             onSelect: () => {},
             onTextChange: (value: string) => {
                 dispatch(ChangeSubClass(value));

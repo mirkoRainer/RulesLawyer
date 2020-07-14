@@ -1,9 +1,9 @@
 export enum Proficiencies {
-    Untrained = "U",
-    Trained = "T",
-    Expert = "E",
-    Master = "M",
-    Legendary = "L",
+    Untrained = "Untrained",
+    Trained = "Trained",
+    Expert = "Expert",
+    Master = "Master",
+    Legendary = "Legendary",
 }
 
 export function GetProficiencyValue(proficiency: Proficiencies) {

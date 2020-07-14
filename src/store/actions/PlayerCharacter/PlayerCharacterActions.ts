@@ -190,6 +190,7 @@ export const ChangeClassDCProficiency: ActionCreator<PlayerCharacterActionTypes>
     Proficiency: ClassDCProficiency 
 });
 export const startChangeClassDCProficiency = (ClassDCProficiency: Proficiencies) => {
+    console.debug("startChangeClassDCProficiency");
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeClassDCProficiency(ClassDCProficiency));
     };

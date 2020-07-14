@@ -22,13 +22,11 @@ export interface ProficiencyProps {
     dexCap?: number;
     descriptor?: string;
     armorPenalty?: number;
+    onProficiencyPress: (proficiency: Proficiencies) => void;
 }
 
-interface State {}
-
 export default class ProficiencyView extends Component<
-    ProficiencyProps,
-    State
+    ProficiencyProps
 > {
     public static defaultProps = {
         is10base: false,
@@ -78,7 +76,7 @@ export default class ProficiencyView extends Component<
             <Text style={styles.total}>{total}</Text>
         );
         return (
-            <>
+            <View>
                 <View style={styles.container}>
                     <Text style={styles.title}>{this.props.title}:</Text>
                     {totalView}
@@ -87,11 +85,12 @@ export default class ProficiencyView extends Component<
                     {keyModifier}
                     <ProficiencyArrayView
                         proficiency={this.props.proficiency}
+                        onPress={this.props.onProficiencyPress}
                     />
                     {itemBonus}
                 </View>
                 {descriptor}
-            </>
+            </View>
         );
     }
 }

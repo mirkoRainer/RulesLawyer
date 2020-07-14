@@ -25,6 +25,7 @@ export default class SpellAttackDCView extends Component<Props, State> {
                     keyAbility={this.props.keySpellcastingAbility}
                     level={this.props.level}
                     itemBonus={this.props.spellAttackItemBonus}
+                    onProficiencyPress={() => {}}
                 />
                 <ProficiencyView
                     title={"Spell DC"}
@@ -32,6 +33,7 @@ export default class SpellAttackDCView extends Component<Props, State> {
                     keyAbility={this.props.keySpellcastingAbility}
                     level={this.props.level}
                     itemBonus={this.props.spellDCItemBonus}
+                    onProficiencyPress={() => {}}
                 />
             </View>
         );

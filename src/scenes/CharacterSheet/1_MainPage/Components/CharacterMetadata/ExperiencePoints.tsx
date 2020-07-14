@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
-import { startTextEditModal, startPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
+import { startTextEditModal, startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { CHANGE_EXPERIENCE_POINTS } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
@@ -38,7 +38,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        startPickerModal: bindActionCreators(startPickerModalSelection, dispatch),
+        startPickerModal: bindActionCreators(startNumberPickerModalSelection, dispatch),
     };
 };
 

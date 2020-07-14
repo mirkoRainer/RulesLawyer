@@ -1,21 +1,26 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Text, CheckBox, Switch } from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { Proficiencies } from "./PF2eCoreLib/Proficiencies";
+import { TouchableOpacity } from "react-native";
 
 interface Props {
     proficiency: Proficiencies;
+    onPress: (proficiency: Proficiencies) => void;
 }
 
-interface State {}
 
-export default class ProficiencyArrayView extends Component<Props, State> {
-    render() {
-        return (
-            <View style={styles.container}>
+const ProficiencyArrayView: React.FC<Props> = (props) => {
+    const handlePress = () => {
+        console.debug("handlePress in ProficiencyArrayView");
+        props.onPress(props.proficiency);
+    };
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity onPress={handlePress} style={styles.container}>
                 <Text
                     style={
-                        ["T", "E", "M", "L"].includes(
-                            this.props.proficiency.toString()
+                        ["Trained", "Expert", "Master", "Legendary"].includes(
+                            props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -25,8 +30,8 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 </Text>
                 <Text
                     style={
-                        ["E", "M", "L"].includes(
-                            this.props.proficiency.toString()
+                        ["Expert", "Master", "Legendary"].includes(
+                            props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -36,8 +41,8 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 </Text>
                 <Text
                     style={
-                        ["M", "L"].includes(
-                            this.props.proficiency.toString()
+                        ["Master", "Legendary"].includes(
+                            props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -47,8 +52,8 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 </Text>
                 <Text
                     style={
-                        ["L"].includes(
-                            this.props.proficiency.toString()
+                        ["Legendary"].includes(
+                            props.proficiency.toString()
                         )
                             ? styles.profTextTrue
                             : styles.profTextFalse
@@ -56,10 +61,12 @@ export default class ProficiencyArrayView extends Component<Props, State> {
                 >
                     L
                 </Text>
-            </View>
-        );
-    }
-}
+            </TouchableOpacity>
+        </View>
+    );
+};
+
+export default ProficiencyArrayView;
 
 const styles = StyleSheet.create({
     container: {
