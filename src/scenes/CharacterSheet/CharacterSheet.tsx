@@ -16,7 +16,7 @@ import { ArmorCategory } from "../Shared/PF2eCoreLib/ArmorCategory";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
-import { PlayerCharacterDTO } from "../Shared/PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import {
@@ -302,7 +302,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
 
 // base state
 interface LinkStateProps {
-    playerCharacter: PlayerCharacterDTO;
+    playerCharacter: PlayerCharacter;
 }
 //all actions to be dispatched
 interface LinkDispatchProps {

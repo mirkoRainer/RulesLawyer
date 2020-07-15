@@ -8,7 +8,6 @@ export interface ArmorProficiencyProps {
     light: Proficiencies;
     medium: Proficiencies;
     heavy: Proficiencies;
-    onProficiencyPress: () => void;
 }
 
 export interface State {}

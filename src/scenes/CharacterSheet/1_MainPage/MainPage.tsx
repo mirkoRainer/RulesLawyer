@@ -17,7 +17,6 @@ import { SavesProp } from "./Components/SavesProps";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
 import Conditions from "./Components/Conditions";
 import Movements from "./Components/Movements";
-import WeaponProficiencies, { WeaponProficiencyProps } from "./Components/Weapons/WeaponProficiencies";
 import { WeaponViewProps } from "./Components/Weapons/WeaponViewProps";
 import Weapons from "./Components/Weapons/Weapons";
 import { ThunkDispatch } from "redux-thunk";
@@ -28,6 +27,7 @@ import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 import { CHANGE_CLASS_DC_PROFICIENCY } from "../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { WeaponProficiencies } from "../../Shared/PF2eCoreLib/PlayerCharacter";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -49,7 +49,7 @@ interface OwnProps {
     conditions: string;
     perception: ProficiencyProps;
     movements: MovementProps;
-    weaponProficiencies: WeaponProficiencyProps;
+    weaponProficiencies: WeaponProficiencies;
     weapons: WeaponViewProps[];
 }
 
@@ -59,6 +59,11 @@ const MainPage: React.FC<Props> = (props) => {
         props.startClassDCModal(props.classDCProficiency.proficiency);
         props.startStringPickerModal(CHANGE_CLASS_DC_PROFICIENCY, props.classDCProficiency.proficiency.toString());
     };
+    const changeArmorClassProficiency = () => {
+        console.debug("changeArmorClassProficiency on MainPage");
+
+    };
+    
     
     return (
         <View style={styles.container}>
@@ -167,15 +172,14 @@ const MainPage: React.FC<Props> = (props) => {
                 movements={props.movements}
             />
             <Text style={styles.text}>Weapon Proficiencies</Text>
-            <WeaponProficiencies
-                unarmed={props.weaponProficiencies.unarmed}
-                simple={props.weaponProficiencies.simple}
-                martial={props.weaponProficiencies.martial}
-                others={
+            <WeaponProficienciesView
+                Unarmed={props.weaponProficiencies}
+                Simple={props.weaponProficiencies.simple}
+                Martial={props.weaponProficiencies.martial}
+                Others={
                     props.weaponProficiencies.others
                     /* Others should have a description and proficiency. */
                 }
-                onProficiencyPress={() => {}}
             />
             <Weapons
                 weapons={props.weapons}

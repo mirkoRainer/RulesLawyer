@@ -117,6 +117,7 @@ export interface ChangeClassDCProficiency extends Action<string> {
     Proficiency: Proficiencies;
 }
 
+
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
                                         |   ChangeAncestryAction 
                                         |   ChangeBackgroundAction 

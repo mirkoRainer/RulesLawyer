@@ -3,20 +3,10 @@ import { View, StyleSheet, Text } from "react-native";
 import { OtherWeaponProficiency } from "./OtherWeaponProficiency";
 import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
+import { WeaponProficiencies } from "../../../../Shared/PF2eCoreLib/PlayerCharacter";
 
-export interface WeaponProficiencyProps {
-    unarmed: Proficiencies;
-    simple: Proficiencies;
-    martial: Proficiencies;
-    others: OtherWeaponProficiency[];
-    onProficiencyPress: () => void;
-}
-
-interface State {}
-
-export default class WeaponProficiencies extends Component<
-    WeaponProficiencyProps,
-    State
+export default class WeaponProficienciesView extends Component<
+    WeaponProficiencies
 > {
     public static defaultProps = {};
 
@@ -25,15 +15,15 @@ export default class WeaponProficiencies extends Component<
             <View style={styles.container}>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Unarmed</Text>
-                    <ProficiencyArrayView proficiency={this.props.unarmed} onPress={this.props.onProficiencyPress}/>
+                    <ProficiencyArrayView proficiency={this.props.Unarmed}/>
                 </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Simple</Text>
-                    <ProficiencyArrayView proficiency={this.props.simple} onPress={this.props.onProficiencyPress}/>
+                    <ProficiencyArrayView proficiency={this.props.Simple}/>
                 </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Martial</Text>
-                    <ProficiencyArrayView proficiency={this.props.martial} onPress={this.props.onProficiencyPress}/>
+                    <ProficiencyArrayView proficiency={this.props.Martial}/>
                 </View>
                 <View style={styles.weaponProf}>
                     <Text style={styles.text}>Other</Text>
@@ -41,8 +31,8 @@ export default class WeaponProficiencies extends Component<
                     TODO: Need to convert an array of "others" into a flat list. 
                     */}
                     <ProficiencyArrayView
-                        proficiency={this.props.others[0].proficiency}
-                        onPress={this.props.onProficiencyPress}
+                        proficiency={this.props.Others[0] ? this.props.Others[0].proficiency : Proficiencies.Untrained }
+                    
                     />
                 </View>
             </View>

@@ -2,7 +2,6 @@ import { AppActions } from "../AllActionTypesAggregated";
 import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
-import { Ability } from "../../../scenes/Shared/PF2eCoreLib/Ability";
 import { Proficiencies } from "../../../scenes/Shared/PF2eCoreLib/Proficiencies";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
@@ -160,7 +159,7 @@ export const ChangeLevel: ActionCreator<PlayerCharacterActionTypes> = (Level: nu
     Level 
 });
 export const stateChangeLevel = (Level: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeLevel(Level));
     };
 };
@@ -170,7 +169,7 @@ export const ChangeExperiencePoints: ActionCreator<PlayerCharacterActionTypes> =
     ExperiencePoints 
 });
 export const startChangeExperiencePoints = (ExperiencePoints: number) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeExperiencePoints(ExperiencePoints));
     };
 };
@@ -180,7 +179,7 @@ export const ChangeAbilityScore: ActionCreator<PlayerCharacterActionTypes> = (Ab
     AbilityScore 
 });
 export const startChangeAbilityScore = (AbilityScore: AbilityScore) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeAbilityScore(AbilityScore));
     };
 };
@@ -191,7 +190,7 @@ export const ChangeClassDCProficiency: ActionCreator<PlayerCharacterActionTypes>
 });
 export const startChangeClassDCProficiency = (ClassDCProficiency: Proficiencies) => {
     console.debug("startChangeClassDCProficiency");
-    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+    return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeClassDCProficiency(ClassDCProficiency));
     };
 };

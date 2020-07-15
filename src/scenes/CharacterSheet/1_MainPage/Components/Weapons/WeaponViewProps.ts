@@ -1,7 +1,8 @@
 import { AbilityModifierWithName } from "../../../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
 import { Ability } from "../../../../Shared/PF2eCoreLib/Ability";
-import { WeaponProficiencyProps } from "./WeaponProficiencies";
+import { WeaponProficiencyProps } from "./WeaponProficienciesView";
+import { Weapon } from "../../../../Shared/PF2eCoreLib/PlayerCharacter";
 
 
 export interface WeaponViewProps {
@@ -11,16 +12,6 @@ export interface WeaponViewProps {
     itemBonus: number;
     damageDice: string;
     damageAbilityModifier: number;
-    damageType: string;
-    weaponTraits: string;
-}
-
-export interface Weapon {
-    title: string;
-    ability: Ability;
-    toHitBonus: number;
-    damageDice: string;
-    damageAbilityModifier: Ability;
     damageType: string;
     weaponTraits: string;
 }

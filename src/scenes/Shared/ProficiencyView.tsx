@@ -10,6 +10,7 @@ import {
     AbilityModifierWithName,
     GetAbilityScoreAbbreviation,
 } from "./PF2eCoreLib/AbilityScores";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export interface ProficiencyProps {
     title: string;
@@ -22,7 +23,6 @@ export interface ProficiencyProps {
     dexCap?: number;
     descriptor?: string;
     armorPenalty?: number;
-    onProficiencyPress: (proficiency: Proficiencies) => void;
 }
 
 export default class ProficiencyView extends Component<
@@ -75,6 +75,10 @@ export default class ProficiencyView extends Component<
         ) : (
             <Text style={styles.total}>{total}</Text>
         );
+        const handlePress = () => {
+            console.debug("handlePress in ProficiencyView");
+            this.props.onProficiencyPress(this.props.proficiency);
+        };
         return (
             <View>
                 <View style={styles.container}>
@@ -83,10 +87,13 @@ export default class ProficiencyView extends Component<
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
                     {keyModifier}
-                    <ProficiencyArrayView
-                        proficiency={this.props.proficiency}
-                        onPress={this.props.onProficiencyPress}
-                    />
+                    <View style={styles.touchable}>
+                        <TouchableWithoutFeedback onPress={handlePress} >
+                            <ProficiencyArrayView
+                                proficiency={this.props.proficiency}
+                            />
+                        </TouchableWithoutFeedback>
+                    </View>
                     {itemBonus}
                 </View>
                 {descriptor}
@@ -146,5 +153,8 @@ const styles = StyleSheet.create({
     equalSign: {
         flex: 1,
         alignSelf: "center",
+    },
+    touchable: {
+        flex: 4,
     },
 });

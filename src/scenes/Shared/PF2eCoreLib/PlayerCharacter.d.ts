@@ -1,8 +1,12 @@
 import { AbilityScoreArray } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
+import { iBonus } from "./Bonus";
+import { SpellListEntry } from "../../CharacterSheet/4_SpellsPage/Components/Spell";
+import { ArmorCategory } from "./ArmorCategory";
+import { Ability } from "./Ability";
 
 
-export interface PlayerCharacterDTO {
+export interface PlayerCharacter {
     metadata:                    Metadata;
     level:                       number;
     experiencePoints:            number;
@@ -45,11 +49,11 @@ export interface PlayerCharacterDTO {
     spellAttackProficiency:      Proficiencies;
     spellAttackItemBonus:        number;
     spellDCItemBonus:            number;
-    bonuses:                     Bonus[];
+    bonuses:                     iBonus[];
     penalties:                   any[];
     magicTraditions:             MagicTraditions;
-    spellSlots:                  SpellSlot[];
-    spells:                      Spell[];
+    spellSlots:                  SpellSlotProps[];
+    spells:                      SpellListEntry[];
 }
 
 interface iClass {
@@ -81,12 +85,12 @@ export interface Ancestry {
     name: string;
     heritage: string;
 }
-export interface AbilityScoreDTO {
+export interface AbilityScore {
     amount:  number;
     ability: string;
 }
 
-export interface ActionDTO {
+export interface Action {
     name:             string;
     numberOfActions:  number;
     traits:           string[];
@@ -96,33 +100,28 @@ export interface ActionDTO {
     trigger?:         string;
 }
 
-export interface AncestryDTO {
+export interface Ancestry {
     name:     string;
     heritage: string;
 }
 
-export interface AncestryFeatsAndAbilityDTO {
+export interface AncestryFeatsAndAbility {
     title:       string;
-    description: Description;
+    description: string;
 }
 
-export enum Description {
-    DwarfStuff = "Dwarf Stuff",
-    OtherDwarfStuff = "other Dwarf Stuff",
+export interface ArmorProficiencies {
+    unarmored: Proficiencies;
+    light:     Proficiencies;
+    medium:    Proficiencies;
+    heavy:     Proficiencies;
 }
 
-export interface ArmorProficienciesDTO {
-    unarmored: string;
-    light:     string;
-    medium:    string;
-    heavy:     string;
-}
-
-export interface BackgroundDTO {
+export interface Background {
     name: string;
 }
 
-export interface BiographicalDataDTO {
+export interface BiographicalData {
     ethnicity:   string;
     nationality: string;
     birthplace:  string;
@@ -133,20 +132,20 @@ export interface BiographicalDataDTO {
     appearance:  string;
 }
 
-export interface BonusDTO {
+export interface Bonus {
     type:      string;
     appliesTo: string;
     amount:    number;
 }
 
-export interface CampaignNotesDataDTO {
+export interface CampaignNotesData {
     notes:         string;
     allies:        string;
     enemies:       string;
     organizations: string;
 }
 
-export interface HitPointDTO {
+export interface HitPoint {
     max:       number;
     current:   number;
     temporary: number;
@@ -154,11 +153,11 @@ export interface HitPointDTO {
     wounded:   number;
 }
 
-export interface InventoryDTO {
+export interface Inventory {
     items: Item[];
 }
 
-export interface ItemDTO {
+export interface Item {
     itemName: string;
     bulk:     number;
     invested: boolean;
@@ -166,7 +165,7 @@ export interface ItemDTO {
     readied:  boolean;
 }
 
-export interface MagicTraditionsDTO {
+export interface MagicTraditions {
     prepared:    boolean;
     spontaneous: boolean;
     arcane:      boolean;
@@ -178,14 +177,14 @@ export interface MagicTraditionsDTO {
 export interface Metadata {
 }
 
-export interface MovementDTO {
+export interface Movement {
     landSpeed:   number;
     burrowSpeed: number;
     climbSpeed:  number;
     flySpeed:    number;
 }
 
-export interface PersonalityDataDTO {
+export interface PersonalityData {
     attitude:     string;
     beliefs:      string;
     likes:        string;
@@ -193,13 +192,13 @@ export interface PersonalityDataDTO {
     catchphrases: string;
 }
 
-export interface SavesDTO {
-    fortitude: string;
-    reflex:    string;
-    will:      string;
+export interface Saves {
+    fortitude: Proficiencies;
+    reflex:    Proficiencies;
+    will:      Proficiencies;
 }
 
-export interface ShieldDTO {
+export interface Shield {
     hasShield:      boolean;
     acBonus:        number;
     hardness:       number;
@@ -208,7 +207,7 @@ export interface ShieldDTO {
     breakThreshold: number;
 }
 
-export interface SkillDTO {
+export interface Skill {
     name:            string;
     abilityModifier: AbilityModifier;
     proficiency:     string;
@@ -218,38 +217,38 @@ export interface SkillDTO {
     loreDescriptor?: string;
 }
 
-export interface AbilityModifierDTO {
+export interface AbilityModifier {
     name:     string;
     modifier: number;
 }
 
-export interface SpellSlotDTO {
+export interface SpellSlot {
     spellLevel: string;
     maximum:    number;
     current:    number;
 }
 
-export interface SpellDTO {
+export interface Spell {
     spellType:   string;
     spellNames?: string[];
     data?:       any[];
 }
 
-export interface WeaponProficienciesDTO {
-    unarmed: string;
-    simple:  string;
-    martial: string;
-    others:  Other[];
+export interface WeaponProficiencies {
+    Unarmed: Proficiencies;
+    Simple:  Proficiencies;
+    Martial: Proficiencies;
+    Others:  OtherWeaponProficiencies[];
 }
 
-export interface OtherDTO {
+export interface OtherWeaponProficiencies {
     description: string;
-    proficiency: string;
+    proficiency: Proficiencies;
 }
 
-export interface WeaponDTO {
+export interface Weapon {
     title:                 string;
-    ability:               string;
+    ability:               keyof AbilityScoreArray;
     toHitBonus:            number;
     damageDice:            string;
     damageAbilityModifier: keyof AbilityScoreArray;
@@ -257,25 +256,25 @@ export interface WeaponDTO {
     weaponTraits:          string;
 }
 
-export interface WornArmorDTO {
-    name:                string;
-    category:            string;
-    level:               number;
-    price:               Price;
-    acBonus:             number;
-    dexCap:              number;
-    checkPenalty:        Bonus;
-    speedPenalty:        Bonus;
+export interface WornArmor {
+    Name:                string;
+    Category:            ArmorCategory;
+    Level:               number;
+    Price:               Price;
+    ACBonus:             number;
+    DexCap:              number;
+    CheckPenalty:        Bonus;
+    SpeedPenalty:        Bonus;
     StrengthRequirement: number;
-    bulk:                number;
-    wornBulk:            number;
-    group:               string;
-    traits:              any[];
+    Bulk:                number;
+    WornBulk:            number;
+    Group:               string;
+    Traits:              any[];
 }
 
-export interface PriceDTO {
-    copper:   number;
-    silver:   number;
-    gold:     number;
-    platinum: number;
+export interface Price {
+    Copper:   number;
+    Silver:   number;
+    Gold:     number;
+    Platinum: number;
 }

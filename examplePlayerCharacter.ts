@@ -3,9 +3,9 @@ import { BonusType } from "./src/scenes/Shared/PF2eCoreLib/BonusTypes";
 import { Ability } from "./src/scenes/Shared/PF2eCoreLib/Ability";
 import { ArmorCategory } from "./src/scenes/Shared/PF2eCoreLib/ArmorCategory";
 import { ArmorGroup } from "./src/scenes/Shared/PF2eCoreLib/ArmorGroup";
-import { PlayerCharacterDTO } from "./src/scenes/Shared/PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter } from "./src/scenes/Shared/PF2eCoreLib/PlayerCharacter";
 
-export const examplePlayerCharacter: PlayerCharacterDTO = {
+export const examplePlayerCharacter: PlayerCharacter = {
     metadata: {},
     level: 1,
     experiencePoints: 100,
@@ -231,10 +231,10 @@ export const examplePlayerCharacter: PlayerCharacterDTO = {
         flySpeed: 0,
     },
     weaponProficiencies: {
-        unarmed: Proficiencies.Trained,
-        simple: Proficiencies.Trained,
-        martial: Proficiencies.Untrained,
-        others: [
+        Unarmed: Proficiencies.Trained,
+        Simple: Proficiencies.Trained,
+        Martial: Proficiencies.Untrained,
+        Others: [
             { description: "brass knuckles", proficiency: Proficiencies.Expert }
         ]
     },
