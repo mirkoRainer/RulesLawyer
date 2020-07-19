@@ -1,6 +1,5 @@
 import {
     GetAbilityModifierFromScores,
-    AbilityModifierWithName,
     AbilityScoreArray,
     AbilityScore,
     UpdateAbilityScore,
@@ -17,12 +16,11 @@ describe("Ability Scores", () => {
                 Wisdom: { score: 12, ability: "Wisdom" },
                 Charisma: { score: 12, ability: "Charisma" },
             };
-            let actual: AbilityModifierWithName = GetAbilityModifierFromScores(
+            let actual: number = GetAbilityModifierFromScores(
                 "Strength",
                 abilityScores
             );
-            expect(actual.modifier).toBe(1);
-            expect(actual.name).toBe("Strength");
+            expect(actual).toBe(1);
         });
         it("calculates the ability modifier for a requested Score", () => {
             let abilityScores: AbilityScoreArray = {
@@ -33,12 +31,11 @@ describe("Ability Scores", () => {
                 Wisdom: { score: 12, ability: "Wisdom" },
                 Charisma: { score: 12, ability: "Charisma" },
             };
-            let actual: AbilityModifierWithName = GetAbilityModifierFromScores(
+            let actual: number = GetAbilityModifierFromScores(
                 "Strength",
                 abilityScores
             );
-            expect(actual.modifier).toBe(4);
-            expect(actual.name).toBe("Strength");
+            expect(actual).toBe(4);
         });
     });
     describe("UpdateAbilityScore", () => {

@@ -6,11 +6,6 @@ export interface AbilityScore {
     score: number;
 }
 
-export interface AbilityModifierWithName {
-    name: string;
-    modifier: number;
-}
-
 export type AbilityScoreArray = {
     Strength: AbilityScore;
     Dexterity: AbilityScore;
@@ -27,15 +22,18 @@ export function UpdateAbilityScore(newAbilityScore: AbilityScore, existingAbilit
 }
 
 export function GetAbilityModifierFromScores(
-    ability: keyof AbilityScoreArray,
+    ability: keyof AbilityScoreArray | undefined,
     abilityScores: AbilityScoreArray
-): AbilityModifierWithName {
-    let abilityScore: AbilityScore = abilityScores[ability];
-    const abilityModifier =
-        abilityScore !== undefined
-            ? CalculateAbilityScoreModifier(abilityScore.score)
-            : 0;
-    return { name: ability, modifier: abilityModifier };
+): number {
+    if (ability) {
+        let abilityScore: AbilityScore = abilityScores[ability];
+        const abilityModifier =
+            abilityScore !== undefined
+                ? CalculateAbilityScoreModifier(abilityScore.score)
+                : 0;
+        return abilityModifier;
+    }
+    return 0;
 }
 
 export function CalculateAbilityScoreModifier(abilityScore: number): number {

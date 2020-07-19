@@ -1,13 +1,12 @@
-import { AbilityModifierWithName } from "../../../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
 import { Ability } from "../../../../Shared/PF2eCoreLib/Ability";
-import { WeaponProficiencyProps } from "./WeaponProficienciesView";
-import { Weapon } from "../../../../Shared/PF2eCoreLib/PlayerCharacter";
+import { Weapon, WeaponProficiencies } from "../../../../Shared/PF2eCoreLib/PlayerCharacter";
+import { AbilityScore } from "../../../../Shared/PF2eCoreLib/AbilityScores";
 
 
 export interface WeaponViewProps {
     title: string;
-    abilityModifier: AbilityModifierWithName;
+    abilityModifier: AbilityScore;
     proficiency: Proficiencies;
     itemBonus: number;
     damageDice: string;
@@ -16,7 +15,7 @@ export interface WeaponViewProps {
     weaponTraits: string;
 }
 
-export function GetProficiencyForWeapon(weapon: Weapon, proficiencies: WeaponProficiencyProps) : Proficiencies {
+export function GetProficiencyForWeapon(weapon: Weapon, proficiencies: WeaponProficiencies) : Proficiencies {
     //TODO!
     return Proficiencies.Trained;
 }

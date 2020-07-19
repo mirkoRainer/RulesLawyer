@@ -73,7 +73,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
     skills: [
         {
             name: "Acrobatics",
-            abilityModifier: { name: "Dexterity", modifier: 3},
+            ability: "Dexterity",
             proficiency: Proficiencies.Legendary,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -81,7 +81,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Arcana",
-            abilityModifier: { name: "Intelligence", modifier: 3},
+            ability: "Intelligence",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -89,7 +89,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Athletics",
-            abilityModifier: { name: "Strength", modifier: 3},
+            ability: "Strength",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -97,7 +97,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Crafting",
-            abilityModifier: { name: "Intelligence", modifier: 3},
+            ability: "Intelligence",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -105,7 +105,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Deception",
-            abilityModifier: { name: "Charisma", modifier: 3},
+            ability: "Charisma",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -113,7 +113,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Diplomacy",
-            abilityModifier: { name: "Charisma", modifier: 3},
+            ability: "Charisma",
             proficiency: Proficiencies.Untrained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -121,7 +121,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Intimidation",
-            abilityModifier: { name: "Charisma", modifier: 3},
+            ability: "Charisma",
             proficiency: Proficiencies.Expert,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -130,7 +130,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         {
             name: "Lore",
             loreDescriptor: "Golarion",
-            abilityModifier: { name: "Intelligence", modifier: 3},
+            ability: "Intelligence",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -138,7 +138,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Medicine",
-            abilityModifier: { name: "Wisdom", modifier: 3},
+            ability: "Wisdom",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -146,7 +146,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Nature",
-            abilityModifier: { name: "Wisdom", modifier: 3},
+            ability: "Wisdom",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -154,7 +154,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Occultism",
-            abilityModifier: { name: "Intelligence", modifier: 3},
+            ability: "Intelligence",
             proficiency: Proficiencies.Master,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -162,7 +162,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Performance",
-            abilityModifier: { name: "Charisma", modifier: 3},
+            ability: "Charisma",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -170,7 +170,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Religion",
-            abilityModifier: { name: "Wisdom", modifier: 3},
+            ability: "Wisdom",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -178,7 +178,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Society",
-            abilityModifier: { name: "Intelligence", modifier: 3},
+            ability: "Intelligence",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -186,7 +186,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Stealth",
-            abilityModifier: { name: "Dexterity", modifier: 3},
+            ability: "Dexterity",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -194,14 +194,14 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Survival",
-            abilityModifier: { name: "Wisdom", modifier: 3},
+            ability: "Wisdom",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: false,
         },
         {
             name: "Thievery",
-            abilityModifier: { name: "Dexterity", modifier: 3},
+            ability: "Dexterity",
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -247,15 +247,17 @@ export const examplePlayerCharacter: PlayerCharacter = {
             damageAbilityModifier: "Strength",
             damageType: "Piercing",
             weaponTraits: "Agile, Finesse, Versatile",
+            weaponCategory: "Simple"
         },
         {
             title: "Longbow",
             ability: "Dexterity",
             toHitBonus: 0,
             damageDice: "1d8",
-            damageAbilityModifier: Ability.Free,
+            damageAbilityModifier: undefined,
             damageType: "Piercing",
             weaponTraits: "Volley 30ft",
+            weaponCategory: "Martial"
         }
     ],
     perceptionProficiency: Proficiencies.Trained,

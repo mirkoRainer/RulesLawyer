@@ -21,19 +21,19 @@ export default class ArmorProficiencies extends Component<
             <View style={styles.container}>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Unarmored</Text>
-                    <ProficiencyArrayView proficiency={this.props.unarmored} onPress={()=>{}} />
+                    <ProficiencyArrayView proficiency={this.props.unarmored} />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Light Armor</Text>
-                    <ProficiencyArrayView proficiency={this.props.light} onPress={()=>{}}/>
+                    <ProficiencyArrayView proficiency={this.props.light} />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Med. Armor</Text>
-                    <ProficiencyArrayView proficiency={this.props.medium} onPress={()=>{}}/>
+                    <ProficiencyArrayView proficiency={this.props.medium} />
                 </View>
                 <View style={styles.armorEntry}>
                     <Text style={styles.text}>Heavy Armor</Text>
-                    <ProficiencyArrayView proficiency={this.props.heavy} onPress={()=>{}}/>
+                    <ProficiencyArrayView proficiency={this.props.heavy} />
                 </View>
             </View>
         );

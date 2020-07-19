@@ -7,12 +7,16 @@ import MainMenu from "./src/scenes/MainMenu";
 import CharacterSheet from "./src/scenes/CharacterSheet/CharacterSheet";
 import Store from "./src/store/Store";
 import { Provider } from "react-redux";
+import ExportPDFView from "./src/scenes/ExportPDFView";
+import ShareCharacterScreen from "./src/scenes/ShareCharacterScreen";
 
 
 //https://reactnavigation.org/docs/typescript/
 export type RootDrawerParamList = {
     MainMenu: undefined;
     CharacterSheet: undefined;
+    ExportPDFView: undefined;
+    ShareCharacter: undefined;
 }
 
 export default class App extends Component {
@@ -28,10 +32,20 @@ export default class App extends Component {
                             component={MainMenu}
                             options={{ title: "Main Menu" }}
                         />
+                        <Drawer.Screen
+                            name="ExportPDFView"
+                            component={ExportPDFView}
+                            options={{title: "Export PDF"}}
+                        />
                         <Drawer.Screen 
                             name="CharacterSheet"
                             component={CharacterSheet}
                             options={{title: "Character Sheet"}}
+                        />
+                        <Drawer.Screen
+                            name="ShareCharacter"
+                            component={ShareCharacterScreen}
+                            options={{title: "Share Your Build"}}
                         />
                     </Drawer.Navigator>
                 </NavigationContainer>

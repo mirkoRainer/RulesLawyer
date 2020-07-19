@@ -64,10 +64,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
-            keyAbility: GetAbilityModifierFromScores(
-                props.playerCharacter.pcClass.keyAbility,
-                props.playerCharacter.abilityScores
-            ),
+            keyAbility: props.playerCharacter.abilityScores[props.playerCharacter.pcClass.keyAbility],
             proficiency: props.playerCharacter.pcClass.proficiency,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
@@ -76,7 +73,6 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 props.playerCharacter.bonuses
             ),
             is10base: true,
-            onProficiencyPress: () => {}
         };
     };
     const wornArmorProficiency = (): Proficiencies => {
@@ -106,26 +102,19 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const acProficiency = (): ProficiencyProps => {
         return {
             title: "AC",
-            keyAbility: GetAbilityModifierFromScores(
-                "Dexterity",
-                props.playerCharacter.abilityScores
-            ),
+            keyAbility: props.playerCharacter.abilityScores.Dexterity,
             proficiency: wornArmorProficiency(),
             level: props.playerCharacter.level,
             itemBonus: props.playerCharacter.wornArmor.ACBonus,
             is10base: true,
             isACBase: true,
             dexCap: props.playerCharacter.wornArmor.DexCap,
-            onProficiencyPress: () => {}
         };
     };
     const fortitudeSave = (): ProficiencyProps => {
         return {
             title: "Fortitude",
-            keyAbility: GetAbilityModifierFromScores(
-                "Constitution",
-                props.playerCharacter.abilityScores
-            ),
+            keyAbility: props.playerCharacter.abilityScores.Constitution,
             proficiency: props.playerCharacter.saves.fortitude,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
@@ -133,16 +122,12 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
-            onProficiencyPress: () => {}
         };
     };
     const willSave = (): ProficiencyProps => {
         return {
             title: "Will",
-            keyAbility: GetAbilityModifierFromScores(
-                "Wisdom",
-                props.playerCharacter.abilityScores
-            ),
+            keyAbility: props.playerCharacter.abilityScores.Wisdom,
             proficiency: props.playerCharacter.saves.will,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
@@ -150,16 +135,12 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
-            onProficiencyPress: () => {}
         };
     };
     const reflexSave = (): ProficiencyProps => {
         return {
             title: "Reflex",
-            keyAbility: GetAbilityModifierFromScores(
-                "Dexterity",
-                props.playerCharacter.abilityScores
-            ),
+            keyAbility: props.playerCharacter.abilityScores.Dexterity,
             proficiency: props.playerCharacter.saves.reflex,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
@@ -167,16 +148,12 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 BonusType.Item,
                 props.playerCharacter.bonuses
             ),
-            onProficiencyPress: () => {}
         };
     };
     const perception = (): ProficiencyProps => {
         return {
             title: "Perception",
-            keyAbility: GetAbilityModifierFromScores(
-                "Wisdom",
-                props.playerCharacter.abilityScores
-            ),
+            keyAbility: props.playerCharacter.abilityScores.Wisdom,
             proficiency: props.playerCharacter.perceptionProficiency,
             level: props.playerCharacter.level,
             itemBonus: Bonus.GetBonusFor(
@@ -185,7 +162,6 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 props.playerCharacter.bonuses
             ),
             descriptor: props.playerCharacter.senses,
-            onProficiencyPress: () => {}
         };
     };
     const weapons = (): WeaponViewProps[] => {
@@ -193,10 +169,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         return [
             {
                 title: weapon0.title,
-                abilityModifier: GetAbilityModifierFromScores(
-                    weapon0.ability,
-                    props.playerCharacter.abilityScores
-                ),
+                abilityModifier: props.playerCharacter.abilityScores[weapon0.ability],
                 proficiency: GetProficiencyForWeapon(
                     weapon0,
                     props.playerCharacter.weaponProficiencies
@@ -206,7 +179,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 damageAbilityModifier: GetAbilityModifierFromScores(
                     weapon0.damageAbilityModifier,
                     props.playerCharacter.abilityScores
-                ).modifier,
+                ),
                 damageType: weapon0.damageType,
                 weaponTraits: weapon0.weaponTraits,
             },
@@ -283,10 +256,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     spellAttackProficiency={
                         props.playerCharacter.spellAttackProficiency
                     }
-                    spellcastingAbilityModifier={GetAbilityModifierFromScores(
-                        props.playerCharacter.spellcastingAbilityModifier,
-                        props.playerCharacter.abilityScores
-                    )}
+                    spellcastingAbilityModifier={props.playerCharacter.abilityScores[props.playerCharacter.spellcastingAbilityModifier]}
                     currentLevel={props.playerCharacter.level}
                     bonuses={props.playerCharacter.bonuses}
                     spellSlots={props.playerCharacter.spellSlots}

@@ -22,7 +22,6 @@ export default class Weapons extends Component<Props, State> {
                     proficiency={this.props.weapons[0].proficiency}
                     level={this.props.level}
                     itemBonus={this.props.weapons[0].itemBonus}
-                    onProficiencyPress={()=>{}}
                 />
                 <WeaponDamageSection
                     damageDice={this.props.weapons[0].damageDice}

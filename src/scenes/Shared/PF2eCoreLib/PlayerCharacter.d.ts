@@ -1,4 +1,4 @@
-import { AbilityScoreArray } from "./AbilityScores";
+import { AbilityScoreArray, AbilityModifierWithName } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
 import { iBonus } from "./Bonus";
 import { SpellListEntry } from "../../CharacterSheet/4_SpellsPage/Components/Spell";
@@ -84,10 +84,6 @@ interface CampaignNotesData {
 export interface Ancestry {
     name: string;
     heritage: string;
-}
-export interface AbilityScore {
-    amount:  number;
-    ability: string;
 }
 
 export interface Action {
@@ -209,8 +205,8 @@ export interface Shield {
 
 export interface Skill {
     name:            string;
-    abilityModifier: AbilityModifier;
-    proficiency:     string;
+    ability:         keyof AbilityScoreArray;
+    proficiency:     Proficiencies;
     itemBonus:       number;
     hasArmorPenalty: boolean;
     armorPenalty?:   number;
@@ -251,9 +247,10 @@ export interface Weapon {
     ability:               keyof AbilityScoreArray;
     toHitBonus:            number;
     damageDice:            string;
-    damageAbilityModifier: keyof AbilityScoreArray;
+    damageAbilityModifier?: keyof AbilityScoreArray;
     damageType:            string;
     weaponTraits:          string;
+    weaponCategory:        keyof WeaponProficiencies;
 }
 
 export interface WornArmor {

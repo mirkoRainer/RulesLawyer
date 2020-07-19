@@ -7,14 +7,16 @@ import {
     GetProficiencyValue,
 } from "./PF2eCoreLib/Proficiencies";
 import {
-    AbilityModifierWithName,
     GetAbilityScoreAbbreviation,
+    AbilityScoreArray,
+    AbilityScore,
+    CalculateAbilityScoreModifier,
 } from "./PF2eCoreLib/AbilityScores";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export interface ProficiencyProps {
     title: string;
-    keyAbility: AbilityModifierWithName;
+    keyAbility: AbilityScore;
     proficiency: Proficiencies;
     level: number;
     itemBonus: number;
@@ -35,6 +37,7 @@ export default class ProficiencyView extends Component<
     };
 
     render() {
+        const modifier = CalculateAbilityScoreModifier(this.props.keyAbility.score);
         const tenBase = this.props.is10base ? (
             <Text style={styles.tenBase}>10 + </Text>
         ) : (
@@ -43,13 +46,13 @@ export default class ProficiencyView extends Component<
 
         const keyModifier = this.props.isACBase ? (
             <Text style={styles.acBase}>
-                Dex:{this.props.keyAbility.modifier} Cap:
+                DEX:{modifier} Cap:
                 {this.props.dexCap !== undefined ? this.props.dexCap : 0}
             </Text>
         ) : (
             <Text style={styles.acBase}>
-                {GetAbilityScoreAbbreviation(this.props.keyAbility.name)}:{" "}
-                {this.props.keyAbility.modifier}
+                {GetAbilityScoreAbbreviation(this.props.keyAbility.ability.toString())}:{" "}
+                {modifier}
             </Text>
         );
         const itemBonus =
@@ -66,7 +69,7 @@ export default class ProficiencyView extends Component<
                 <Text style={styles.container}>{this.props.descriptor}</Text>
             ) : undefined;
         const total =
-            this.props.keyAbility.modifier +
+            CalculateAbilityScoreModifier(this.props.keyAbility.score)+
             this.props.level +
             this.props.itemBonus +
             GetProficiencyValue(this.props.proficiency);
@@ -75,10 +78,6 @@ export default class ProficiencyView extends Component<
         ) : (
             <Text style={styles.total}>{total}</Text>
         );
-        const handlePress = () => {
-            console.debug("handlePress in ProficiencyView");
-            this.props.onProficiencyPress(this.props.proficiency);
-        };
         return (
             <View>
                 <View style={styles.container}>
@@ -88,7 +87,7 @@ export default class ProficiencyView extends Component<
                     {tenBase}
                     {keyModifier}
                     <View style={styles.touchable}>
-                        <TouchableWithoutFeedback onPress={handlePress} >
+                        <TouchableWithoutFeedback >
                             <ProficiencyArrayView
                                 proficiency={this.props.proficiency}
                             />

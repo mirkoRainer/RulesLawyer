@@ -10,8 +10,6 @@ import ArmorProficiencies, {
 } from "./Components/ArmorClass/ArmorProficiencies";
 import Shield, { ShieldProps } from "./Components/ArmorClass/Shield";
 import HitPoints, { HitPointProps } from "./Components/HitPoints/HitPoints";
-import Skills from "./Components/Skills";
-import { Skill } from "./Components/Skill";
 import { MovementProps } from "./Components/MovementProps";
 import { SavesProp } from "./Components/SavesProps";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
@@ -27,7 +25,9 @@ import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 import { CHANGE_CLASS_DC_PROFICIENCY } from "../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { WeaponProficiencies } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import { WeaponProficiencies, Skill } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import WeaponProficienciesView from "./Components/Weapons/WeaponProficienciesView";
+import SkillsView from "./Components/SkillsView";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -54,17 +54,6 @@ interface OwnProps {
 }
 
 const MainPage: React.FC<Props> = (props) => {
-    const changeClassDCProficiency = () => {
-        console.debug("changeClassDCProficiency on MainPage");
-        props.startClassDCModal(props.classDCProficiency.proficiency);
-        props.startStringPickerModal(CHANGE_CLASS_DC_PROFICIENCY, props.classDCProficiency.proficiency.toString());
-    };
-    const changeArmorClassProficiency = () => {
-        console.debug("changeArmorClassProficiency on MainPage");
-
-    };
-    
-    
     return (
         <View style={styles.container}>
             <CharacterMetadata
@@ -80,7 +69,6 @@ const MainPage: React.FC<Props> = (props) => {
                 is10base={props.classDCProficiency.is10base}
                 itemBonus={props.classDCProficiency.itemBonus}
                 level={props.level}
-                onProficiencyPress={changeClassDCProficiency}
             />
             <ProficiencyView
                 title={"AC"}
@@ -94,7 +82,6 @@ const MainPage: React.FC<Props> = (props) => {
                 isACBase={true}
                 dexCap={props.acProficiency.dexCap}
                 armorPenalty={props.acProficiency.armorPenalty}
-                onProficiencyPress={()=>{}}
             />
             <ArmorProficiencies
                 unarmored={
@@ -109,7 +96,6 @@ const MainPage: React.FC<Props> = (props) => {
                 heavy={
                     props.armorProficiency.heavy
                 }
-                onProficiencyPress={()=>{}}
             />
             <Shield
                 shieldProps={props.shieldProps}
@@ -122,7 +108,6 @@ const MainPage: React.FC<Props> = (props) => {
                 proficiency={props.saves.fortitude.proficiency}
                 level={props.level}
                 itemBonus={props.saves.fortitude.itemBonus}
-                onProficiencyPress={()=>{}}
             />
             <ProficiencyView
                 title={"Reflex"}
@@ -132,7 +117,6 @@ const MainPage: React.FC<Props> = (props) => {
                 proficiency={props.saves.reflex.proficiency}
                 level={props.level}
                 itemBonus={props.saves.reflex.itemBonus}
-                onProficiencyPress={()=>{}}
             />
             <ProficiencyView
                 title={"Will"}
@@ -142,7 +126,6 @@ const MainPage: React.FC<Props> = (props) => {
                 proficiency={props.saves.will.proficiency}
                 level={props.level}
                 itemBonus={props.saves.will.itemBonus}
-                onProficiencyPress={()=>{}}
             />
             <HitPoints
                 max={props.hitPoints.max}
@@ -166,18 +149,17 @@ const MainPage: React.FC<Props> = (props) => {
                 level={props.level}
                 itemBonus={props.perception.itemBonus}
                 descriptor={props.perception.descriptor}
-                onProficiencyPress={() => {}}
             />
             <Movements 
                 movements={props.movements}
             />
             <Text style={styles.text}>Weapon Proficiencies</Text>
             <WeaponProficienciesView
-                Unarmed={props.weaponProficiencies}
-                Simple={props.weaponProficiencies.simple}
-                Martial={props.weaponProficiencies.martial}
+                Unarmed={props.weaponProficiencies.Unarmed}
+                Simple={props.weaponProficiencies.Simple}
+                Martial={props.weaponProficiencies.Martial}
                 Others={
-                    props.weaponProficiencies.others
+                    props.weaponProficiencies.Others
                     /* Others should have a description and proficiency. */
                 }
             />
@@ -186,7 +168,7 @@ const MainPage: React.FC<Props> = (props) => {
                 level={props.level}
             />
             <Text style={styles.text}>Skillz</Text>
-            <Skills skills={props.skills} level={1} onProficiencyPress={()=>{}}/>
+            <SkillsView skills={props.skills} level={1} />
             <Text style={styles.text}>
                     Languages: {props.languages.toString()}
             </Text>

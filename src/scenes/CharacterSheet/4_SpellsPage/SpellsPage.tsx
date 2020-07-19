@@ -10,11 +10,11 @@ import Spells from "./Components/Spells";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 import { Bonus, iBonus } from "../../Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../../Shared/PF2eCoreLib/BonusTypes";
-import { AbilityModifierWithName } from "../../Shared/PF2eCoreLib/AbilityScores";
+import { AbilityScore } from "../../Shared/PF2eCoreLib/AbilityScores";
 
 interface Props {
     spellAttackProficiency: Proficiencies;
-    spellcastingAbilityModifier: AbilityModifierWithName;
+    spellcastingAbilityModifier: AbilityScore;
     currentLevel: number;
     bonuses: iBonus[];
     magicTraditions: MagicTraditionProps;
