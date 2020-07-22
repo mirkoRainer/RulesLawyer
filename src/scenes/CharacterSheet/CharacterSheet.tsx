@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Header } from "react-native-elements";
 import MainPage from "./1_MainPage/MainPage";
@@ -198,6 +198,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             props.playerCharacter.level
         );
     };
+
+    useEffect(() => {
+        props.navigation.setOptions({ title: (props.playerCharacter.name + " the " + props.playerCharacter.pcClass.name) });
+    });
 
     return (
         <View style={styles.container}>
