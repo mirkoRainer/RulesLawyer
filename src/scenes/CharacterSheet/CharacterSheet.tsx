@@ -149,7 +149,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 props.playerCharacter.bonuses
             ),
         };
-    };
+    }; 
     const perception = (): ProficiencyProps => {
         return {
             title: "Perception",
@@ -203,9 +203,14 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         props.navigation.setOptions({ title: (props.playerCharacter.name + " the " + props.playerCharacter.pcClass.name) });
     });
 
+    const toggleNavigation = (): void => {
+        props.navigation.toggleDrawer();
+    };
+
     return (
         <View style={styles.container}>
             <Header
+                leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
                 centerComponent={{
                     text: headerText(),
                     style: { color: "#eee" },
