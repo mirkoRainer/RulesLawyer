@@ -5,7 +5,7 @@ import MainPage from "./1_MainPage/MainPage";
 import FeatsAndInventoryPage from "./2_FeatsAndInventoryPage/FeatsAndInventoryPage";
 import StoryAndActionsPage from "./3_StoryAndActionsPage/StoryAndActionsPage";
 import SpellsPage from "./4_SpellsPage/SpellsPage";
-import { CharacterMetadataProps } from "./1_MainPage/Components/CharacterMetadata";
+import { CharacterMetadataProps } from "./3_StoryAndActionsPage/Components/CharacterMetadata";
 import { ProficiencyProps } from "../Shared/ProficiencyView";
 import { GetAbilityModifierFromScores } from "../Shared/PF2eCoreLib/AbilityScores";
 import { Bonus } from "../Shared/PF2eCoreLib/Bonus";
@@ -39,8 +39,6 @@ type CharacterSheetNavigationProps = DrawerNavigationProp<
 interface OwnProps {
     navigation: CharacterSheetNavigationProps;
 }
-
-interface OwnState {}
 
 type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
@@ -90,7 +88,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     text: headerText(),
                     style: { color: "#eee" },
                 }}
-                rightComponent={{icon: "build", color: "#eee"}}
+                rightComponent={{icon: "build", color: "#eee", onPress: goToBuildPage}}
             />
             <Tab.Navigator 
                 tabBarOptions={{
@@ -111,22 +109,22 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 />
                 <Tab.Screen 
                     name="Encounter" 
-                    component={StoryAndActionsPage}
+                    component={MainPage}
                     options={{ tabBarLabel: "Encounter" }}
                 />
                 <Tab.Screen 
                     name="Exploration" 
-                    component={SpellsPage} 
+                    component={MainPage} 
                     options={{ tabBarLabel: "Exploration" }}
                 />
                 <Tab.Screen 
                     name="Downtime" 
-                    component={SpellsPage} 
+                    component={MainPage} 
                     options={{ tabBarLabel: "Downtime" }}
                 />
                 <Tab.Screen 
                     name="Inventory" 
-                    component={SpellsPage} 
+                    component={FeatsAndInventoryPage} 
                     options={{ tabBarLabel: "Inventory" }}
                 />
                 <Tab.Screen 

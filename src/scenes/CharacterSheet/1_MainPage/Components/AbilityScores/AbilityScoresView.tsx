@@ -18,7 +18,6 @@ export default class AbilityScores extends Component<Props, State> {
         const Charisma = this.props.abilityScores["Charisma"];
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Ability Scores</Text>
                 <View style={styles.rowContainer}>
                     <View style={styles.borderlessContainer}>
                         <AbilityScoreView

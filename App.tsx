@@ -13,6 +13,7 @@ import SaveView from "./src/scenes/SaveView";
 import OpenCharacterView from "./src/scenes/OpenCharacterView";
 import BugReportView from "./src/scenes/BugReportView";
 import AboutView from "./src/scenes/AboutView";
+import Build from "./src/scenes/CharacterSheet/Build/Build";
 
 
 //https://reactnavigation.org/docs/typescript/
@@ -52,12 +53,12 @@ export default class App extends Component {
                         /> 
                         */}
                         <Drawer.Screen 
-                            name="CharacterSheet"
-                            component={CharacterSheet}
-                            // options={}
+                            name="Build"
+                            component={Build}
+                            options={{ title: "Build Character" }}
                         />
                         <Drawer.Screen 
-                            name="Build"
+                            name="CharacterSheet"
                             component={CharacterSheet}
                             // options={}
                         />

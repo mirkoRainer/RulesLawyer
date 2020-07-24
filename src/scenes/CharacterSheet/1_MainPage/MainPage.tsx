@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
+import CharacterMetadata, { CharacterMetadataProps } from "../3_StoryAndActionsPage/Components/CharacterMetadata";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Dimensions } from "react-native";
 import { GetAbilityModifierFromScores } from "../../Shared/PF2eCoreLib/AbilityScores";
@@ -23,7 +23,6 @@ import { PlayerCharacter } from "../../Shared/PF2eCoreLib/PlayerCharacter";
 import WeaponProficienciesView from "./Components/Weapons/WeaponProficienciesView";
 import SkillsView from "./Components/SkillsView";
 import { CharacterSheetState } from "../../../store/Store";
-import { OwnProps } from "./Components/CharacterMetadata/ClassView";
 import { Bonus } from "../../Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../../Shared/PF2eCoreLib/BonusTypes";
 import { ArmorCategory } from "../../Shared/PF2eCoreLib/ArmorCategory";
@@ -34,24 +33,6 @@ import { ScrollView } from "react-native-gesture-handler";
 var width: number = Dimensions.get("window").width; //full width
 
 const MainPage: React.FC<Props> = (props) => {
-    const characterMetadata = (): CharacterMetadataProps => {
-        return {
-            characterName: props.playerCharacter.name,
-            playerName: props.playerCharacter.playerName,
-            ancestry: props.playerCharacter.ancestry.name,
-            heritage: props.playerCharacter.ancestry.heritage,
-            level: props.playerCharacter.level,
-            experiencePoints: props.playerCharacter.experiencePoints,
-            background: props.playerCharacter.background,
-            pcClass: props.playerCharacter.pcClass.name,
-            subclass: props.playerCharacter.pcClass.subClass,
-            classKeyAbility: props.playerCharacter.pcClass.keyAbility,
-            classProficiency: props.playerCharacter.pcClass.proficiency,
-            alignment: props.playerCharacter.alignment,
-            deity: props.playerCharacter.deity,
-            traits: props.playerCharacter.traits,
-        };
-    };
     const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
@@ -179,10 +160,6 @@ const MainPage: React.FC<Props> = (props) => {
     return (
         <View style={styles.container}>
             <ScrollView>
-
-                <CharacterMetadata
-                    characterMetadata={characterMetadata()}
-                />
                 <AbilityScores abilityScores={props.playerCharacter.abilityScores} />
                 <ProficiencyView
                     title={"Class DC"}
