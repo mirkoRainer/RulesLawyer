@@ -5,34 +5,45 @@ import BiographicalView, { BiographicalData } from "./Components/BiographicalVie
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import ActionsAndActivities, { Action } from "./Components/ActionsAndActivities";
+import { CharacterSheetState } from "../../../store/Store";
+import { connect } from "react-redux";
+import { ScrollView } from "react-native-gesture-handler";
 
-interface Props {
+const StoryAndActionsPage: React.FC<Props> = (props) => {
+    return (
+        <ScrollView>
+            <View style={styles.container}>
+                <Text h4> Story and Actions Page </Text>
+                {/*CharacterSketch placeholder*/}
+                <BiographicalView bioData={props.bioData} />
+                <Personality personalityData={props.personalityData} />
+                <CampaignNotes
+                    campaignNotesData={props.campaignNotesData}
+                />
+                <ActionsAndActivities actions={props.actions} />
+            </View>
+        </ScrollView>
+    );
+};
+
+interface LinkStateProps {
     bioData: BiographicalData;
     personalityData: PersonalityData;
     campaignNotesData: CampaignNotesData;
     actions: Action[];
 }
+ type Props = LinkStateProps;
 
-interface State {}
+const mapStateToProps = (
+    state: CharacterSheetState
+): LinkStateProps => ({
+    bioData: state.playerCharacter.biographicalData,
+    personalityData: state.playerCharacter.personalityData,
+    campaignNotesData: state.playerCharacter.campaignNotesData,
+    actions: state.playerCharacter.actions
+});
 
-export default class StoryAndActionsPage extends Component<Props, State> {
-    public static defaultProps = {};
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text h4> Story and Actions Page </Text>
-                {/*CharacterSketch placeholder*/}
-                <BiographicalView bioData={this.props.bioData} />
-                <Personality personalityData={this.props.personalityData} />
-                <CampaignNotes
-                    campaignNotesData={this.props.campaignNotesData}
-                />
-                <ActionsAndActivities actions={this.props.actions} />
-            </View>
-        );
-    }
-}
+export default connect(mapStateToProps, null)(StoryAndActionsPage);
 
 const styles = StyleSheet.create({
     container: {

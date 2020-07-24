@@ -11,8 +11,48 @@ import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 import { Bonus, iBonus } from "../../Shared/PF2eCoreLib/Bonus";
 import { BonusType } from "../../Shared/PF2eCoreLib/BonusTypes";
 import { AbilityScore } from "../../Shared/PF2eCoreLib/AbilityScores";
+import { CharacterSheetState } from "../../../store/Store";
+import { connect } from "react-redux";
+import { ScrollView } from "react-native-gesture-handler";
 
-interface Props {
+const SpellsPage: React.FC<Props> = (props) => {
+    return (
+        <View style={styles.container}>
+            <ScrollView> 
+                <Text h4> Spells Page </Text>
+                <SpellAttackAndDCView
+                    proficiency={props.spellAttackProficiency}
+                    keySpellcastingAbility={
+                        props.spellcastingAbilityModifier
+                    }
+                    level={props.currentLevel}
+                    spellAttackItemBonus={Bonus.GetBonusFor(
+                        "SpellAttack",
+                        BonusType.Item,
+                        props.bonuses
+                    )}
+                    spellDCItemBonus={Bonus.GetBonusFor(
+                        "SpellDC",
+                        BonusType.Item,
+                        props.bonuses
+                    )}
+                />
+                <MagicTraditions
+                    prepared={props.magicTraditions.prepared}
+                    spontaneous={props.magicTraditions.spontaneous}
+                    arcane={props.magicTraditions.arcane}
+                    primal={props.magicTraditions.primal}
+                    divine={props.magicTraditions.divine}
+                    occult={props.magicTraditions.occult}
+                />
+                <SpellSlots spellSlots={props.spellSlots} />
+                <Spells spells={props.spells} />
+            </ScrollView>
+        </View>
+    );
+};
+
+interface LinkStateProps {
     spellAttackProficiency: Proficiencies;
     spellcastingAbilityModifier: AbilityScore;
     currentLevel: number;
@@ -22,44 +62,21 @@ interface Props {
     spells: SpellListEntry[];
 }
 
-interface State {}
+type Props = LinkStateProps;
 
-export default class SpellsPage extends Component<Props, State> {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text h4> Spells Page </Text>
-                <SpellAttackAndDCView
-                    proficiency={this.props.spellAttackProficiency}
-                    keySpellcastingAbility={
-                        this.props.spellcastingAbilityModifier
-                    }
-                    level={this.props.currentLevel}
-                    spellAttackItemBonus={Bonus.GetBonusFor(
-                        "SpellAttack",
-                        BonusType.Item,
-                        this.props.bonuses
-                    )}
-                    spellDCItemBonus={Bonus.GetBonusFor(
-                        "SpellDC",
-                        BonusType.Item,
-                        this.props.bonuses
-                    )}
-                />
-                <MagicTraditions
-                    prepared={this.props.magicTraditions.prepared}
-                    spontaneous={this.props.magicTraditions.spontaneous}
-                    arcane={this.props.magicTraditions.arcane}
-                    primal={this.props.magicTraditions.primal}
-                    divine={this.props.magicTraditions.divine}
-                    occult={this.props.magicTraditions.occult}
-                />
-                <SpellSlots spellSlots={this.props.spellSlots} />
-                <Spells spells={this.props.spells} />
-            </View>
-        );
-    }
-}
+const mapStateToProps = (
+    state: CharacterSheetState
+): LinkStateProps => ({
+    spellAttackProficiency: state.playerCharacter.spellAttackProficiency,
+    spellcastingAbilityModifier: state.playerCharacter.abilityScores[state.playerCharacter.spellcastingAbilityModifier],
+    currentLevel: state.playerCharacter.level,
+    bonuses: state.playerCharacter.bonuses,
+    magicTraditions: state.playerCharacter.magicTraditions,
+    spellSlots: state.playerCharacter.spellSlots,
+    spells: state.playerCharacter.spells
+});
+
+export default connect(mapStateToProps, null)(SpellsPage);
 
 const styles = StyleSheet.create({
     container: {

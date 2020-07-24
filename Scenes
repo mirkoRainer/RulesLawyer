@@ -7,7 +7,7 @@ Main Menu
     Load Character -> LoadCharacterScene
 
 LoadCharacterScene
-    List of ADventureres (Select)
+    List of Adventurers (Select)
         Copy
         Delete
         Share
@@ -117,8 +117,6 @@ CharacterScene:
             Ability Boosts
             Class Feat
             Skill Feat
-
-
         About
         Defense
         Offense

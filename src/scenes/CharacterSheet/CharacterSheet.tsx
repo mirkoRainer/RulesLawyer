@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Platform } from "react-native";
 import { Header } from "react-native-elements";
 import MainPage from "./1_MainPage/MainPage";
 import FeatsAndInventoryPage from "./2_FeatsAndInventoryPage/FeatsAndInventoryPage";
@@ -28,7 +28,7 @@ import { ThunkDispatch } from "redux-thunk";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import { WeaponViewProps, GetProficiencyForWeapon } from "./1_MainPage/Components/Weapons/WeaponViewProps";
 import NumberPickerModal from "../Shared/Modals/PickerModal";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator, BottomTabBarOptions, BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
@@ -45,10 +45,13 @@ interface OwnState {}
 type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
 export type CharacterSheetTabParamList = {
-    MainPage: undefined;
-    FeatsAndInventoryPage: undefined;
-    StoryAndActionsPage: undefined;
-    SpellsPage: undefined;
+    About: undefined;
+    Encounter: undefined;
+    Exploration: undefined;
+    Downtime: undefined;
+    Inventory: undefined;
+    Spells: undefined;
+    Companions: undefined;
 }
 
 const CharacterSheet: React.FC<Props> = (props: Props) => {
@@ -73,6 +76,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const toggleNavigation = (): void => {
         props.navigation.toggleDrawer();
     };
+    const goToBuildPage = (): void => {
+        props.navigation.navigate("Build");
+    };
+
     const Tab = createBottomTabNavigator<CharacterSheetTabParamList>();
 
     return (
@@ -83,46 +90,53 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     text: headerText(),
                     style: { color: "#eee" },
                 }}
+                rightComponent={{icon: "build", color: "#eee"}}
             />
-            <Tab.Navigator tabBarOptions={{activeTintColor: "tomato", inactiveTintColor: "grey"}} initialRouteName={"MainPage"}>
+            <Tab.Navigator 
+                tabBarOptions={{
+                    activeTintColor: "tomato",
+                    inactiveTintColor: "grey",
+                    showLabel: (Platform.OS !== "android"),
+                    labelStyle: {
+                        fontSize: 14
+                    },
+                    keyboardHidesTabBar: true,
+                }} 
+                initialRouteName={"About"}
+            >
                 <Tab.Screen 
-                    name="MainPage" 
-                    component={MainPage}
+                    name="About" 
+                    component={StoryAndActionsPage}
+                    options={{ tabBarLabel: "Story" }}
                 />
-                <Tab.Screen name="FeatsAndInventoryPage" component={FeatsAndInventoryPage} />
+                <Tab.Screen 
+                    name="Encounter" 
+                    component={StoryAndActionsPage}
+                    options={{ tabBarLabel: "Encounter" }}
+                />
+                <Tab.Screen 
+                    name="Exploration" 
+                    component={SpellsPage} 
+                    options={{ tabBarLabel: "Exploration" }}
+                />
+                <Tab.Screen 
+                    name="Downtime" 
+                    component={SpellsPage} 
+                    options={{ tabBarLabel: "Downtime" }}
+                />
+                <Tab.Screen 
+                    name="Inventory" 
+                    component={SpellsPage} 
+                    options={{ tabBarLabel: "Inventory" }}
+                />
+                <Tab.Screen 
+                    name="Spells" 
+                    component={SpellsPage} 
+                    options={{ tabBarLabel: "Spells" }}
+                />
             </Tab.Navigator>
-            {/* <ScrollView>
-                <FeatsAndInventoryPage
-                    ancestryFeatsAndAbilities={
-                        props.playerCharacter.ancestryFeatsAndAbilities
-                    }
-                    skillFeats={props.playerCharacter.skillFeats}
-                    generalFeats={props.playerCharacter.generalFeats}
-                    classFeatsAndAbilities={
-                        props.playerCharacter.classFeatsAndAbilities
-                    }
-                    bonusFeats={props.playerCharacter.bonusFeats}
-                />
-                <StoryAndActionsPage
-                    bioData={props.playerCharacter.biographicalData}
-                    personalityData={props.playerCharacter.personalityData}
-                    campaignNotesData={props.playerCharacter.campaignNotesData}
-                    actions={props.playerCharacter.actions}
-                />
-                <SpellsPage
-                    spellAttackProficiency={
-                        props.playerCharacter.spellAttackProficiency
-                    }
-                    spellcastingAbilityModifier={props.playerCharacter.abilityScores[props.playerCharacter.spellcastingAbilityModifier]}
-                    currentLevel={props.playerCharacter.level}
-                    bonuses={props.playerCharacter.bonuses}
-                    spellSlots={props.playerCharacter.spellSlots}
-                    magicTraditions={props.playerCharacter.magicTraditions}
-                    spells={props.playerCharacter.spells}
-                />
-            </ScrollView>
             <TextEditModal />
-            <NumberPickerModal /> */}
+            <NumberPickerModal />
         </View>
     );
 };

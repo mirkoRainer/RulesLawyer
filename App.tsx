@@ -19,6 +19,7 @@ import AboutView from "./src/scenes/AboutView";
 export type RootDrawerParamList = {
     MainMenu: undefined;
     CharacterSheet: undefined;
+    Build: undefined;
     ExportPDFView: undefined;
     ShareCharacterView: undefined;
     SaveView: undefined;
@@ -52,6 +53,11 @@ export default class App extends Component {
                         */}
                         <Drawer.Screen 
                             name="CharacterSheet"
+                            component={CharacterSheet}
+                            // options={}
+                        />
+                        <Drawer.Screen 
+                            name="Build"
                             component={CharacterSheet}
                             // options={}
                         />
