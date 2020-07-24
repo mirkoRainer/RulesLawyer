@@ -1,23 +1,13 @@
 import React from "react";
 import { View, Text } from "react-native";
-
-port { Header } 
-
- "react-native-elements";
+import { Header } from "react-native-elements";
 
 type Props = {};
 
-e
-ort const B
-ld: React.FC<P
-ps> = (props) => {
+export const Build: React.FC<Props> = (props) => {
     return(
-  
-    <View>
-   
-      
-  
-       <Header
+        <View>
+            <Header
                 leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
                 centerComponent={{
                     text: headerText(),
