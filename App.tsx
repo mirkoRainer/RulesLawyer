@@ -38,7 +38,9 @@ export default class App extends Component {
                         <Drawer.Screen 
                             name="MainMenu"
                             component={MainMenu}
-                            options={{ title: "Main Menu" }}
+                            options={{
+                                title: "Main Menu"
+                            }}
                         />
                         {/* 
                         Not implemented yet

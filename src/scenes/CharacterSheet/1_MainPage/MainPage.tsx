@@ -3,19 +3,14 @@ import { View, Text, StyleSheet } from "react-native";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Dimensions } from "react-native";
-import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
+import { GetAbilityModifierFromScores } from "../../Shared/PF2eCoreLib/AbilityScores";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
-import ArmorProficiencies, {
-    ArmorProficiencyProps,
-} from "./Components/ArmorClass/ArmorProficiencies";
-import Shield, { ShieldProps } from "./Components/ArmorClass/Shield";
-import HitPoints, { HitPointProps } from "./Components/HitPoints/HitPoints";
-import { MovementProps } from "./Components/MovementProps";
-import { SavesProp } from "./Components/SavesProps";
+import ArmorProficiencies from "./Components/ArmorClass/ArmorProficiencies";
+import Shield from "./Components/ArmorClass/Shield";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
 import Conditions from "./Components/Conditions";
 import Movements from "./Components/Movements";
-import { WeaponViewProps } from "./Components/Weapons/WeaponViewProps";
+import { WeaponViewProps, GetProficiencyForWeapon } from "./Components/Weapons/WeaponViewProps";
 import Weapons from "./Components/Weapons/Weapons";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
@@ -24,163 +19,293 @@ import { startStringPickerModalSelection } from "../../../store/actions/Modals/M
 import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
-import { CHANGE_CLASS_DC_PROFICIENCY } from "../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { WeaponProficiencies, Skill } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter } from "../../Shared/PF2eCoreLib/PlayerCharacter";
 import WeaponProficienciesView from "./Components/Weapons/WeaponProficienciesView";
 import SkillsView from "./Components/SkillsView";
+import { CharacterSheetState } from "../../../store/Store";
+import { OwnProps } from "./Components/CharacterMetadata/ClassView";
+import { Bonus } from "../../Shared/PF2eCoreLib/Bonus";
+import { BonusType } from "../../Shared/PF2eCoreLib/BonusTypes";
+import { ArmorCategory } from "../../Shared/PF2eCoreLib/ArmorCategory";
+import { prop } from "../../Shared/PF2eCoreLib/TypescriptEvolution";
+import HitPoints from "./Components/HitPoints/HitPoints";
 
 var width: number = Dimensions.get("window").width; //full width
 
-interface OwnProps {
-    skills: Skill[];
-    languages: string[];
-    scores: AbilityScoreArray;
-    characterMetadata: CharacterMetadataProps;
-    classDCProficiency: ProficiencyProps;
-    acProficiency: ProficiencyProps;
-    level: number;
-    armorProficiency: ArmorProficiencyProps;
-    shieldProps: ShieldProps;
-    saves: SavesProp;
-    hitPoints: HitPointProps;
-    resistances: string;
-    immunities: string;
-    weaknesses: string;
-    conditions: string;
-    perception: ProficiencyProps;
-    movements: MovementProps;
-    weaponProficiencies: WeaponProficiencies;
-    weapons: WeaponViewProps[];
-}
-
 const MainPage: React.FC<Props> = (props) => {
+    const characterMetadata = (): CharacterMetadataProps => {
+        return {
+            characterName: props.playerCharacter.name,
+            playerName: props.playerCharacter.playerName,
+            ancestry: props.playerCharacter.ancestry.name,
+            heritage: props.playerCharacter.ancestry.heritage,
+            level: props.playerCharacter.level,
+            experiencePoints: props.playerCharacter.experiencePoints,
+            background: props.playerCharacter.background,
+            pcClass: props.playerCharacter.pcClass.name,
+            subclass: props.playerCharacter.pcClass.subClass,
+            classKeyAbility: props.playerCharacter.pcClass.keyAbility,
+            classProficiency: props.playerCharacter.pcClass.proficiency,
+            alignment: props.playerCharacter.alignment,
+            deity: props.playerCharacter.deity,
+            traits: props.playerCharacter.traits,
+        };
+    };
+    const classDCProficiency = (): ProficiencyProps => {
+        return {
+            title: "Class DC",
+            keyAbility: props.playerCharacter.abilityScores[props.playerCharacter.pcClass.keyAbility],
+            proficiency: props.playerCharacter.pcClass.proficiency,
+            level: props.playerCharacter.level,
+            itemBonus: Bonus.GetBonusFor(
+                "classDc",
+                BonusType.Item,
+                props.playerCharacter.bonuses
+            ),
+            is10base: true,
+        };
+    };
+    const wornArmorProficiency = (): Proficiencies => {
+        switch (props.playerCharacter.wornArmor.Category) {
+        case ArmorCategory.Unarmored: {
+            return prop(
+                props.playerCharacter.armorProficiencies,
+                "unarmored"
+            );
+            break;
+        }
+        case ArmorCategory.Light: {
+            return prop(props.playerCharacter.armorProficiencies, "light");
+            break;
+        }
+        case ArmorCategory.Medium: {
+            return prop(props.playerCharacter.armorProficiencies, "medium");
+        }
+        case ArmorCategory.Heavy: {
+            return prop(props.playerCharacter.armorProficiencies, "heavy");
+        }
+        default: {
+            return Proficiencies.Untrained;
+        }
+        }
+    };
+    const acProficiency = (): ProficiencyProps => {
+        return {
+            title: "AC",
+            keyAbility: props.playerCharacter.abilityScores.Dexterity,
+            proficiency: wornArmorProficiency(),
+            level: props.playerCharacter.level,
+            itemBonus: props.playerCharacter.wornArmor.ACBonus,
+            is10base: true,
+            isACBase: true,
+            dexCap: props.playerCharacter.wornArmor.DexCap,
+        };
+    };
+    const fortitudeSave = (): ProficiencyProps => {
+        return {
+            title: "Fortitude",
+            keyAbility: props.playerCharacter.abilityScores.Constitution,
+            proficiency: props.playerCharacter.saves.fortitude,
+            level: props.playerCharacter.level,
+            itemBonus: Bonus.GetBonusFor(
+                "fortitude",
+                BonusType.Item,
+                props.playerCharacter.bonuses
+            ),
+        };
+    };
+    const willSave = (): ProficiencyProps => {
+        return {
+            title: "Will",
+            keyAbility: props.playerCharacter.abilityScores.Wisdom,
+            proficiency: props.playerCharacter.saves.will,
+            level: props.playerCharacter.level,
+            itemBonus: Bonus.GetBonusFor(
+                "Wisdom",
+                BonusType.Item,
+                props.playerCharacter.bonuses
+            ),
+        };
+    };
+    const reflexSave = (): ProficiencyProps => {
+        return {
+            title: "Reflex",
+            keyAbility: props.playerCharacter.abilityScores.Dexterity,
+            proficiency: props.playerCharacter.saves.reflex,
+            level: props.playerCharacter.level,
+            itemBonus: Bonus.GetBonusFor(
+                "Dexterity",
+                BonusType.Item,
+                props.playerCharacter.bonuses
+            ),
+        };
+    }; 
+    const perception = (): ProficiencyProps => {
+        return {
+            title: "Perception",
+            keyAbility: props.playerCharacter.abilityScores.Wisdom,
+            proficiency: props.playerCharacter.perceptionProficiency,
+            level: props.playerCharacter.level,
+            itemBonus: Bonus.GetBonusFor(
+                "perception",
+                BonusType.Item,
+                props.playerCharacter.bonuses
+            ),
+            descriptor: props.playerCharacter.senses,
+        };
+    };
+    const weapons = (): WeaponViewProps[] => {
+        const weapon0 = props.playerCharacter.weapons[0];
+        return [
+            {
+                title: weapon0.title,
+                abilityModifier: props.playerCharacter.abilityScores[weapon0.ability],
+                proficiency: GetProficiencyForWeapon(
+                    weapon0,
+                    props.playerCharacter.weaponProficiencies
+                ),
+                itemBonus: weapon0.toHitBonus,
+                damageDice: weapon0.damageDice,
+                damageAbilityModifier: GetAbilityModifierFromScores(
+                    weapon0.damageAbilityModifier,
+                    props.playerCharacter.abilityScores
+                ),
+                damageType: weapon0.damageType,
+                weaponTraits: weapon0.weaponTraits,
+            },
+        ];
+    };
     return (
         <View style={styles.container}>
             <CharacterMetadata
-                characterMetadata={props.characterMetadata}
+                characterMetadata={characterMetadata()}
             />
-            <AbilityScores abilityScores={props.scores} />
+            <AbilityScores abilityScores={props.playerCharacter.abilityScores} />
             <ProficiencyView
                 title={"Class DC"}
-                proficiency={props.classDCProficiency.proficiency}
+                proficiency={classDCProficiency().proficiency}
                 keyAbility={
-                    props.classDCProficiency.keyAbility
+                    classDCProficiency().keyAbility
                 }
-                is10base={props.classDCProficiency.is10base}
-                itemBonus={props.classDCProficiency.itemBonus}
-                level={props.level}
+                is10base={classDCProficiency().is10base}
+                itemBonus={classDCProficiency().itemBonus}
+                level={props.playerCharacter.level}
             />
             <ProficiencyView
                 title={"AC"}
                 keyAbility={
-                    props.acProficiency.keyAbility
+                    acProficiency().keyAbility
                 }
-                proficiency={props.acProficiency.proficiency}
-                level={props.level}
-                itemBonus={props.acProficiency.itemBonus}
-                is10base={props.acProficiency.is10base}
+                proficiency={acProficiency().proficiency}
+                level={props.playerCharacter.level}
+                itemBonus={acProficiency().itemBonus}
+                is10base={acProficiency().is10base}
                 isACBase={true}
-                dexCap={props.acProficiency.dexCap}
-                armorPenalty={props.acProficiency.armorPenalty}
+                dexCap={acProficiency().dexCap}
+                armorPenalty={acProficiency().armorPenalty}
             />
             <ArmorProficiencies
                 unarmored={
-                    props.armorProficiency.unarmored
+                    props.playerCharacter.armorProficiencies.unarmored
                 }
                 light={
-                    props.armorProficiency.light
+                    props.playerCharacter.armorProficiencies.light
                 }
                 medium={
-                    props.armorProficiency.medium
+                    props.playerCharacter.armorProficiencies.medium
                 }
                 heavy={
-                    props.armorProficiency.heavy
+                    props.playerCharacter.armorProficiencies.heavy
                 }
             />
             <Shield
-                shieldProps={props.shieldProps}
+                shieldProps={props.playerCharacter.shield}
             />
             <ProficiencyView
                 title={"Fortitude"}
                 keyAbility={
-                    props.saves.fortitude.keyAbility
+                    props.playerCharacter.abilityScores.Constitution
                 }
-                proficiency={props.saves.fortitude.proficiency}
-                level={props.level}
-                itemBonus={props.saves.fortitude.itemBonus}
+                proficiency={props.playerCharacter.saves.fortitude}
+                level={props.playerCharacter.level}
+                itemBonus={fortitudeSave().itemBonus}
             />
             <ProficiencyView
                 title={"Reflex"}
                 keyAbility={
-                    props.saves.reflex.keyAbility
+                    props.playerCharacter.abilityScores.Dexterity
                 }
-                proficiency={props.saves.reflex.proficiency}
-                level={props.level}
-                itemBonus={props.saves.reflex.itemBonus}
+                proficiency={props.playerCharacter.saves.reflex}
+                level={props.playerCharacter.level}
+                itemBonus={reflexSave().itemBonus}
             />
             <ProficiencyView
                 title={"Will"}
                 keyAbility={
-                    props.saves.will.keyAbility
+                    props.playerCharacter.abilityScores.Wisdom
                 }
-                proficiency={props.saves.will.proficiency}
-                level={props.level}
-                itemBonus={props.saves.will.itemBonus}
+                proficiency={props.playerCharacter.saves.will}
+                level={props.playerCharacter.level}
+                itemBonus={willSave().itemBonus}
             />
             <HitPoints
-                max={props.hitPoints.max}
-                current={props.hitPoints.current}
-                temporary={props.hitPoints.temporary}
-                dying={props.hitPoints.dying}
-                wounded={props.hitPoints.wounded}
+                max={props.playerCharacter.hitPoint.max}
+                current={props.playerCharacter.hitPoint.current}
+                temporary={props.playerCharacter.hitPoint.temporary}
+                dying={props.playerCharacter.hitPoint.dying}
+                wounded={props.playerCharacter.hitPoint.wounded}
             />
             <ResistancesImmunitiesWeaknesses 
-                resistances={props.resistances}
-                immunities={props.immunities}
-                weaknesses={props.weaknesses}
+                resistances={props.playerCharacter.resistances}
+                immunities={props.playerCharacter.immunities}
+                weaknesses={props.playerCharacter.weakness}
             />
-            <Conditions conditions={props.conditions} />
+            <Conditions conditions={props.playerCharacter.conditions} />
             <ProficiencyView
                 title={"Perception"}
                 keyAbility={
-                    props.perception.keyAbility
+                    props.playerCharacter.abilityScores.Wisdom
                 }
-                proficiency={props.perception.proficiency}
-                level={props.level}
-                itemBonus={props.perception.itemBonus}
-                descriptor={props.perception.descriptor}
+                proficiency={props.playerCharacter.perceptionProficiency}
+                level={props.playerCharacter.level}
+                itemBonus={perception().itemBonus}
+                descriptor={perception().descriptor}
             />
             <Movements 
-                movements={props.movements}
+                movements={props.playerCharacter.movement}
             />
             <Text style={styles.text}>Weapon Proficiencies</Text>
             <WeaponProficienciesView
-                Unarmed={props.weaponProficiencies.Unarmed}
-                Simple={props.weaponProficiencies.Simple}
-                Martial={props.weaponProficiencies.Martial}
+                Unarmed={props.playerCharacter.weaponProficiencies.Unarmed}
+                Simple={props.playerCharacter.weaponProficiencies.Simple}
+                Martial={props.playerCharacter.weaponProficiencies.Martial}
                 Others={
-                    props.weaponProficiencies.Others
+                    props.playerCharacter.weaponProficiencies.Others
                     /* Others should have a description and proficiency. */
                 }
             />
             <Weapons
-                weapons={props.weapons}
-                level={props.level}
+                weapons={weapons()}
+                level={props.playerCharacter.level}
             />
             <Text style={styles.text}>Skillz</Text>
-            <SkillsView skills={props.skills} level={1} />
+            <SkillsView skills={props.playerCharacter.skills} level={1} />
             <Text style={styles.text}>
-                    Languages: {props.languages.toString()}
+                    Languages: {props.playerCharacter.languages.toString()}
             </Text>
         </View>
     );
 };
 
-type Props = OwnProps & LinkDispatchProps;
+type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
     startClassDCModal: (newProficiency: Proficiencies) => void;
     startStringPickerModal: (type: string, value: string) => void;
+}
+
+interface LinkStateProps {
+    playerCharacter: PlayerCharacter;
 }
 
 const mapDispatchToProps = (
@@ -191,7 +316,12 @@ const mapDispatchToProps = (
     };
 };
 
-export default connect(null, mapDispatchToProps)(MainPage);
+const mapStateToProps = (
+    state: CharacterSheetState): LinkStateProps => ({
+    playerCharacter: state.playerCharacter,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 
 const styles = StyleSheet.create({
     container: {
