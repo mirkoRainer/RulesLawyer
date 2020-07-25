@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
-import ActionView from "./ActionView";
-
-export interface Action {
-    name: string;
-    numberOfActions: number; // 0 is a free action; 0.5 is a reaction;
-    traits: string[];
-    bookAbbreviation: string;
-    pageNumber: number;
-    description: string;
-    trigger?: string;
-}
+import ActionView from "../../Story/Components/ActionView";
+import { Action } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
 
 interface Props {
     actions: Action[];

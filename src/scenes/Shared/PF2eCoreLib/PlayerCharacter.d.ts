@@ -1,7 +1,7 @@
 import { AbilityScoreArray, AbilityModifierWithName } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
 import { iBonus } from "./Bonus";
-import { SpellListEntry } from "../../CharacterSheet/4_SpellsPage/Components/Spell";
+import { SpellListEntry } from "../../CharacterSheet/Spells/Components/Spell";
 import { ArmorCategory } from "./ArmorCategory";
 import { Ability } from "./Ability";
 

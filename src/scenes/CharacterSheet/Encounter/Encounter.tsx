@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import CharacterMetadata, { CharacterMetadataProps } from "../3_StoryAndActionsPage/Components/CharacterMetadata";
+import CharacterMetadata, { CharacterMetadataProps } from "../Story/Components/CharacterMetadata";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Dimensions } from "react-native";
 import { GetAbilityModifierFromScores } from "../../Shared/PF2eCoreLib/AbilityScores";
@@ -19,7 +19,7 @@ import { startStringPickerModalSelection } from "../../../store/actions/Modals/M
 import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
-import { PlayerCharacter } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter, Action } from "../../Shared/PF2eCoreLib/PlayerCharacter";
 import WeaponProficienciesView from "./Components/Weapons/WeaponProficienciesView";
 import SkillsView from "./Components/SkillsView";
 import { CharacterSheetState } from "../../../store/Store";
@@ -29,10 +29,11 @@ import { ArmorCategory } from "../../Shared/PF2eCoreLib/ArmorCategory";
 import { prop } from "../../Shared/PF2eCoreLib/TypescriptEvolution";
 import HitPoints from "./Components/HitPoints/HitPoints";
 import { ScrollView } from "react-native-gesture-handler";
+import ActionsAndActivities from "./Components/ActionsAndActivities";
 
 var width: number = Dimensions.get("window").width; //full width
 
-const MainPage: React.FC<Props> = (props) => {
+const Encounter: React.FC<Props> = (props) => {
     const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
@@ -273,6 +274,7 @@ const MainPage: React.FC<Props> = (props) => {
                 <Text style={styles.text}>
                     Languages: {props.playerCharacter.languages.toString()}
                 </Text>
+                <ActionsAndActivities actions={props.actions} />
             </ScrollView>
         </View>
     );
@@ -287,6 +289,7 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
+    actions: Action[];
 }
 
 const mapDispatchToProps = (
@@ -300,9 +303,10 @@ const mapDispatchToProps = (
 const mapStateToProps = (
     state: CharacterSheetState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
+    actions: state.playerCharacter.actions
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Encounter);
 
 const styles = StyleSheet.create({
     container: {

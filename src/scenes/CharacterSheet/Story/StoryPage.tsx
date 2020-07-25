@@ -4,7 +4,7 @@ import { Text, Image } from "react-native-elements";
 import BiographicalView, { BiographicalData } from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
-import ActionsAndActivities, { Action } from "./Components/ActionsAndActivities";
+import ActionsAndActivities, { Action } from "../Encounter/Components/ActionsAndActivities";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,7 +13,7 @@ import CharacterMetadata, { CharacterMetadataProps } from "./Components/Characte
 import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 
-const StoryAndActionsPage: React.FC<Props> = (props) => {
+const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
     const characterMetadata = (): CharacterMetadataProps => {
         return {
@@ -46,7 +46,6 @@ const StoryAndActionsPage: React.FC<Props> = (props) => {
                 <CampaignNotes
                     campaignNotesData={props.campaignNotesData}
                 />
-                <ActionsAndActivities actions={props.actions} />
             </View>
         </ScrollView>
     );
@@ -56,7 +55,6 @@ interface LinkStateProps {
     bioData: BiographicalData;
     personalityData: PersonalityData;
     campaignNotesData: CampaignNotesData;
-    actions: Action[];
     characterName: string;
     playerName: string;
     ancestry: string;
@@ -94,10 +92,9 @@ const mapStateToProps = (
     bioData: state.playerCharacter.biographicalData,
     personalityData: state.playerCharacter.personalityData,
     campaignNotesData: state.playerCharacter.campaignNotesData,
-    actions: state.playerCharacter.actions,
 });
 
-export default connect(mapStateToProps, null)(StoryAndActionsPage);
+export default connect(mapStateToProps, null)(StoryPage);
 
 const styles = StyleSheet.create({
     container: {

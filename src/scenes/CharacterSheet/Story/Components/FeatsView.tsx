@@ -7,7 +7,7 @@ import { CharacterSheetState } from "../../../store/Store";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-const FeatsAndInventoryPage: React.FC<Props> = (props) => {
+const FeatsView: React.FC<Props> = (props) => {
     const renderItem = ({ item }: { item: FeatAndAbilityEntry }) => (
         <View style={styles.featContainer}>
             <Text style={styles.featTitle}>{item.title}: </Text>
@@ -75,7 +75,7 @@ const mapStateToProps = (
     bonusFeats: state.playerCharacter.bonusFeats
 });
 
-export default connect(mapStateToProps, null)(FeatsAndInventoryPage);
+export default connect(mapStateToProps, null)(FeatsView);
 
 const styles = StyleSheet.create({
     container: {

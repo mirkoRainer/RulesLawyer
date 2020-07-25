@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
-import CharacterName from "../../1_MainPage/Components/CharacterMetadata/CharacterName";
-import PlayerName from "../../1_MainPage/Components/CharacterMetadata/PlayerName";
-import AncestryAndHeritage from "../../1_MainPage/Components/CharacterMetadata/AncestryAndHeritage";
-import Level from "../../1_MainPage/Components/CharacterMetadata/Level";
-import ExperiencePoints from "../../1_MainPage/Components/CharacterMetadata/ExperiencePoints";
-import Traits from "../../1_MainPage/Components/CharacterMetadata/Traits";
-import Alignment from "../../1_MainPage/Components/CharacterMetadata/Alignment";
-import Deity from "../../1_MainPage/Components/CharacterMetadata/Deity";
+import CharacterName from "../../Encounter/Components/CharacterMetadata/CharacterName";
+import PlayerName from "../../Encounter/Components/CharacterMetadata/PlayerName";
+import AncestryAndHeritage from "../../Encounter/Components/CharacterMetadata/AncestryAndHeritage";
+import Level from "../../Encounter/Components/CharacterMetadata/Level";
+import ExperiencePoints from "../../Encounter/Components/CharacterMetadata/ExperiencePoints";
+import Traits from "../../Encounter/Components/CharacterMetadata/Traits";
+import Alignment from "../../Encounter/Components/CharacterMetadata/Alignment";
+import Deity from "../../Encounter/Components/CharacterMetadata/Deity";
 import { AbilityScoreArray } from "../../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../Shared/PF2eCoreLib/Proficiencies";
 import { Background } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
-import BackgroundView from "../../1_MainPage/Components/CharacterMetadata/BackgroundView";
-import ClassView from "../../1_MainPage/Components/CharacterMetadata/ClassView";
+import BackgroundView from "../../Encounter/Components/CharacterMetadata/BackgroundView";
+import ClassView from "../../Encounter/Components/CharacterMetadata/ClassView";
 
 
 export interface CharacterMetadataProps {

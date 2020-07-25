@@ -13,7 +13,7 @@ import SaveView from "./src/scenes/SaveView";
 import OpenCharacterView from "./src/scenes/OpenCharacterView";
 import BugReportView from "./src/scenes/BugReportView";
 import AboutView from "./src/scenes/AboutView";
-import Build from "./src/scenes/CharacterSheet/Build/Build";
+import Build from "./src/scenes/Build/Build";
 
 
 //https://reactnavigation.org/docs/typescript/

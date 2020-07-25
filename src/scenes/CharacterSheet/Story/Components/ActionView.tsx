@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, ViewPropTypes } from "react-native";
-import { Action } from "./ActionsAndActivities";
+import { Action } from "../../Encounter/Components/ActionsAndActivities";
 
 interface Props {
     action: Action;
@@ -15,17 +15,17 @@ export default class ActionView extends Component<Props, State> {
         const reactionSymbol = "↺";
         let actionTypeIndicator = "";
         switch (this.props.action.numberOfActions) {
-            case 0:
-                actionTypeIndicator = freeActionSymbol;
-                break;
-            case 0.5:
-                actionTypeIndicator = reactionSymbol;
-                break;
-            default:
-                actionTypeIndicator = actionSymbol.repeat(
-                    this.props.action.numberOfActions
-                );
-                break;
+        case 0:
+            actionTypeIndicator = freeActionSymbol;
+            break;
+        case 0.5:
+            actionTypeIndicator = reactionSymbol;
+            break;
+        default:
+            actionTypeIndicator = actionSymbol.repeat(
+                this.props.action.numberOfActions
+            );
+            break;
         }
 
         const traits =

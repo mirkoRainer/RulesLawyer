@@ -2,14 +2,14 @@
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { Header } from "react-native-elements";
-import { RootDrawerParamList } from "../../../../App";
+import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { PlayerCharacter } from "../../Shared/PF2eCoreLib/PlayerCharacter";
-import { CharacterSheetState } from "../../../store/Store";
+import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
+import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
-import { startChangePlayerName, startChangeCharacterName } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { startChangePlayerName, startChangeCharacterName } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { connect } from "react-redux";
 
 type BuildNavigationProps = DrawerNavigationProp<
