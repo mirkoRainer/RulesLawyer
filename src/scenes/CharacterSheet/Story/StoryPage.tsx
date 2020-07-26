@@ -12,6 +12,7 @@ import { Background } from "../../Shared/PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
 import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
+import AbilityScores from "../Encounter/Components/AbilityScores/AbilityScoresView";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -40,8 +41,12 @@ const StoryPage: React.FC<Props> = (props) => {
                 <CharacterMetadata
                     characterMetadata={characterMetadata()}
                 />
+                <AbilityScores abilityScores={props.playerCharacter.abilityScores} />
                 {/*CharacterSketch placeholder*/}
                 <BiographicalView bioData={props.bioData} />
+                <Text style={styles.text}>
+                    Languages: {props.languages.toString()}
+                </Text>
                 <Personality personalityData={props.personalityData} />
                 <CampaignNotes
                     campaignNotesData={props.campaignNotesData}
@@ -69,6 +74,7 @@ interface LinkStateProps {
     alignment: string;
     deity: string;
     traits: string[];
+    languages: string[];
 }
  type Props = LinkStateProps;
 
@@ -92,6 +98,7 @@ const mapStateToProps = (
     bioData: state.playerCharacter.biographicalData,
     personalityData: state.playerCharacter.personalityData,
     campaignNotesData: state.playerCharacter.campaignNotesData,
+    languages: state.playerCharacter.languages
 });
 
 export default connect(mapStateToProps, null)(StoryPage);

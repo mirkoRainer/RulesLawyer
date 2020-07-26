@@ -30,253 +30,62 @@ import { prop } from "../../Shared/PF2eCoreLib/TypescriptEvolution";
 import HitPoints from "./Components/HitPoints/HitPoints";
 import { ScrollView } from "react-native-gesture-handler";
 import ActionsAndActivities from "./Components/ActionsAndActivities";
+import EncounterDefense from "./EncounterDefense";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import EncounterOffense from "./EncounterOffense";
+import EncounterSkills from "./EncounterSkills";
+import EncounterMisc from "./EncounterMisc";
+import { NavigationContainer } from "@react-navigation/native";
 
 var width: number = Dimensions.get("window").width; //full width
 
+export type EncounterTabParamList = {
+    Attack: undefined;
+    Defend: undefined;
+    Skills: undefined;
+    Other: undefined;
+}
+
 const Encounter: React.FC<Props> = (props) => {
-    const classDCProficiency = (): ProficiencyProps => {
-        return {
-            title: "Class DC",
-            keyAbility: props.playerCharacter.abilityScores[props.playerCharacter.pcClass.keyAbility],
-            proficiency: props.playerCharacter.pcClass.proficiency,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "classDc",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-            is10base: true,
-        };
-    };
-    const wornArmorProficiency = (): Proficiencies => {
-        switch (props.playerCharacter.wornArmor.Category) {
-        case ArmorCategory.Unarmored: {
-            return prop(
-                props.playerCharacter.armorProficiencies,
-                "unarmored"
-            );
-            break;
-        }
-        case ArmorCategory.Light: {
-            return prop(props.playerCharacter.armorProficiencies, "light");
-            break;
-        }
-        case ArmorCategory.Medium: {
-            return prop(props.playerCharacter.armorProficiencies, "medium");
-        }
-        case ArmorCategory.Heavy: {
-            return prop(props.playerCharacter.armorProficiencies, "heavy");
-        }
-        default: {
-            return Proficiencies.Untrained;
-        }
-        }
-    };
-    const acProficiency = (): ProficiencyProps => {
-        return {
-            title: "AC",
-            keyAbility: props.playerCharacter.abilityScores.Dexterity,
-            proficiency: wornArmorProficiency(),
-            level: props.playerCharacter.level,
-            itemBonus: props.playerCharacter.wornArmor.ACBonus,
-            is10base: true,
-            isACBase: true,
-            dexCap: props.playerCharacter.wornArmor.DexCap,
-        };
-    };
-    const fortitudeSave = (): ProficiencyProps => {
-        return {
-            title: "Fortitude",
-            keyAbility: props.playerCharacter.abilityScores.Constitution,
-            proficiency: props.playerCharacter.saves.fortitude,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "fortitude",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-        };
-    };
-    const willSave = (): ProficiencyProps => {
-        return {
-            title: "Will",
-            keyAbility: props.playerCharacter.abilityScores.Wisdom,
-            proficiency: props.playerCharacter.saves.will,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "Wisdom",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-        };
-    };
-    const reflexSave = (): ProficiencyProps => {
-        return {
-            title: "Reflex",
-            keyAbility: props.playerCharacter.abilityScores.Dexterity,
-            proficiency: props.playerCharacter.saves.reflex,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "Dexterity",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-        };
-    }; 
-    const perception = (): ProficiencyProps => {
-        return {
-            title: "Perception",
-            keyAbility: props.playerCharacter.abilityScores.Wisdom,
-            proficiency: props.playerCharacter.perceptionProficiency,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "perception",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-            descriptor: props.playerCharacter.senses,
-        };
-    };
-    const weapons = (): WeaponViewProps[] => {
-        const weapon0 = props.playerCharacter.weapons[0];
-        return [
-            {
-                title: weapon0.title,
-                abilityModifier: props.playerCharacter.abilityScores[weapon0.ability],
-                proficiency: GetProficiencyForWeapon(
-                    weapon0,
-                    props.playerCharacter.weaponProficiencies
-                ),
-                itemBonus: weapon0.toHitBonus,
-                damageDice: weapon0.damageDice,
-                damageAbilityModifier: GetAbilityModifierFromScores(
-                    weapon0.damageAbilityModifier,
-                    props.playerCharacter.abilityScores
-                ),
-                damageType: weapon0.damageType,
-                weaponTraits: weapon0.weaponTraits,
-            },
-        ];
-    };
+    const Tab = createBottomTabNavigator<EncounterTabParamList>();
+
     return (
-        <View style={styles.container}>
-            <ScrollView>
-                <AbilityScores abilityScores={props.playerCharacter.abilityScores} />
-                <ProficiencyView
-                    title={"Class DC"}
-                    proficiency={classDCProficiency().proficiency}
-                    keyAbility={
-                        classDCProficiency().keyAbility
-                    }
-                    is10base={classDCProficiency().is10base}
-                    itemBonus={classDCProficiency().itemBonus}
-                    level={props.playerCharacter.level}
+        <NavigationContainer independent={true}>
+            <Tab.Navigator 
+                tabBarOptions={{
+                    activeTintColor: "tomato",
+                    inactiveTintColor: "grey",
+                    showLabel: true,
+                    labelStyle: {
+                        fontSize: 14
+                    },
+                    keyboardHidesTabBar: true, 
+                    tabStyle: styles.tab,
+                }} 
+                initialRouteName={"Attack"}
+            >
+                <Tab.Screen 
+                    name="Attack" 
+                    component={EncounterOffense}
+                    options={{ tabBarLabel: "Your Turn" }}
                 />
-                <ProficiencyView
-                    title={"AC"}
-                    keyAbility={
-                        acProficiency().keyAbility
-                    }
-                    proficiency={acProficiency().proficiency}
-                    level={props.playerCharacter.level}
-                    itemBonus={acProficiency().itemBonus}
-                    is10base={acProficiency().is10base}
-                    isACBase={true}
-                    dexCap={acProficiency().dexCap}
-                    armorPenalty={acProficiency().armorPenalty}
+                <Tab.Screen 
+                    name="Defend" 
+                    component={EncounterDefense}
+                    options={{ tabBarLabel: "Their Turn" }}
                 />
-                <ArmorProficiencies
-                    unarmored={
-                        props.playerCharacter.armorProficiencies.unarmored
-                    }
-                    light={
-                        props.playerCharacter.armorProficiencies.light
-                    }
-                    medium={
-                        props.playerCharacter.armorProficiencies.medium
-                    }
-                    heavy={
-                        props.playerCharacter.armorProficiencies.heavy
-                    }
+                <Tab.Screen 
+                    name="Skills" 
+                    component={EncounterSkills}
+                    options={{ tabBarLabel: "Skillz" }}
                 />
-                <Shield
-                    shieldProps={props.playerCharacter.shield}
+                <Tab.Screen 
+                    name="Other" 
+                    component={EncounterMisc}
+                    options={{ tabBarLabel: "Other" }}
                 />
-                <ProficiencyView
-                    title={"Fortitude"}
-                    keyAbility={
-                        props.playerCharacter.abilityScores.Constitution
-                    }
-                    proficiency={props.playerCharacter.saves.fortitude}
-                    level={props.playerCharacter.level}
-                    itemBonus={fortitudeSave().itemBonus}
-                />
-                <ProficiencyView
-                    title={"Reflex"}
-                    keyAbility={
-                        props.playerCharacter.abilityScores.Dexterity
-                    }
-                    proficiency={props.playerCharacter.saves.reflex}
-                    level={props.playerCharacter.level}
-                    itemBonus={reflexSave().itemBonus}
-                />
-                <ProficiencyView
-                    title={"Will"}
-                    keyAbility={
-                        props.playerCharacter.abilityScores.Wisdom
-                    }
-                    proficiency={props.playerCharacter.saves.will}
-                    level={props.playerCharacter.level}
-                    itemBonus={willSave().itemBonus}
-                />
-                <HitPoints
-                    max={props.playerCharacter.hitPoint.max}
-                    current={props.playerCharacter.hitPoint.current}
-                    temporary={props.playerCharacter.hitPoint.temporary}
-                    dying={props.playerCharacter.hitPoint.dying}
-                    wounded={props.playerCharacter.hitPoint.wounded}
-                />
-                <ResistancesImmunitiesWeaknesses 
-                    resistances={props.playerCharacter.resistances}
-                    immunities={props.playerCharacter.immunities}
-                    weaknesses={props.playerCharacter.weakness}
-                />
-                <Conditions conditions={props.playerCharacter.conditions} />
-                <ProficiencyView
-                    title={"Perception"}
-                    keyAbility={
-                        props.playerCharacter.abilityScores.Wisdom
-                    }
-                    proficiency={props.playerCharacter.perceptionProficiency}
-                    level={props.playerCharacter.level}
-                    itemBonus={perception().itemBonus}
-                    descriptor={perception().descriptor}
-                />
-                <Movements 
-                    movements={props.playerCharacter.movement}
-                />
-                <Text style={styles.text}>Weapon Proficiencies</Text>
-                <WeaponProficienciesView
-                    Unarmed={props.playerCharacter.weaponProficiencies.Unarmed}
-                    Simple={props.playerCharacter.weaponProficiencies.Simple}
-                    Martial={props.playerCharacter.weaponProficiencies.Martial}
-                    Others={
-                        props.playerCharacter.weaponProficiencies.Others
-                    /* Others should have a description and proficiency. */
-                    }
-                />
-                <Weapons
-                    weapons={weapons()}
-                    level={props.playerCharacter.level}
-                />
-                <Text style={styles.text}>Skillz</Text>
-                <SkillsView skills={props.playerCharacter.skills} level={1} />
-                <Text style={styles.text}>
-                    Languages: {props.playerCharacter.languages.toString()}
-                </Text>
-                <ActionsAndActivities actions={props.actions} />
-            </ScrollView>
-        </View>
+            </Tab.Navigator>
+        </ NavigationContainer>
     );
 };
 
@@ -289,7 +98,7 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
-    actions: Action[];
+    
 }
 
 const mapDispatchToProps = (
@@ -303,7 +112,6 @@ const mapDispatchToProps = (
 const mapStateToProps = (
     state: CharacterSheetState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
-    actions: state.playerCharacter.actions
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Encounter);
@@ -326,4 +134,14 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         flex: 1,
     },
+    header: {
+        flex: 1,
+        textAlign: "center",
+        fontSize: 22
+    },
+    tab: {
+        flex: 1,
+        alignSelf: "flex-end",
+        height: 30,
+    }
 });

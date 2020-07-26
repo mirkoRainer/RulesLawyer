@@ -86,13 +86,8 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     },
                     keyboardHidesTabBar: true,
                 }} 
-                initialRouteName={"Story"}
+                initialRouteName={"Encounter"}
             >
-                <Tab.Screen 
-                    name="Story" 
-                    component={StoryPage}
-                    options={{ tabBarLabel: "Story" }}
-                />
                 <Tab.Screen 
                     name="Encounter" 
                     component={Encounter}
@@ -117,6 +112,11 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     name="Spells" 
                     component={SpellsPage} 
                     options={{ tabBarLabel: "Spells" }}
+                />
+                <Tab.Screen 
+                    name="Story" 
+                    component={StoryPage}
+                    options={{ tabBarLabel: "Story" }}
                 />
             </Tab.Navigator>
             <TextEditModal />
