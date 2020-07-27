@@ -4,7 +4,6 @@ import { Text, Image } from "react-native-elements";
 import BiographicalView, { BiographicalData } from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
-import ActionsAndActivities, { Action } from "../Encounter/Components/ActionsAndActivities";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,6 +12,7 @@ import CharacterMetadata, { CharacterMetadataProps } from "./Components/Characte
 import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
 import AbilityScores from "../Encounter/Components/AbilityScores/AbilityScoresView";
+import { Ability } from "../../Shared/PF2eCoreLib/Ability";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -41,7 +41,7 @@ const StoryPage: React.FC<Props> = (props) => {
                 <CharacterMetadata
                     characterMetadata={characterMetadata()}
                 />
-                <AbilityScores abilityScores={props.playerCharacter.abilityScores} />
+                <AbilityScores abilityScores={props.abilityScores} />
                 {/*CharacterSketch placeholder*/}
                 <BiographicalView bioData={props.bioData} />
                 <Text style={styles.text}>
@@ -75,6 +75,7 @@ interface LinkStateProps {
     deity: string;
     traits: string[];
     languages: string[];
+    abilityScores: AbilityScoreArray;
 }
  type Props = LinkStateProps;
 
@@ -98,7 +99,8 @@ const mapStateToProps = (
     bioData: state.playerCharacter.biographicalData,
     personalityData: state.playerCharacter.personalityData,
     campaignNotesData: state.playerCharacter.campaignNotesData,
-    languages: state.playerCharacter.languages
+    languages: state.playerCharacter.languages,
+    abilityScores: state.playerCharacter.abilityScores
 });
 
 export default connect(mapStateToProps, null)(StoryPage);

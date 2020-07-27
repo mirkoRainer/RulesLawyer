@@ -11,6 +11,7 @@ import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startChangePlayerName, startChangeCharacterName } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { connect } from "react-redux";
+import { ScrollView } from "react-native-gesture-handler";
 
 type BuildNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -47,7 +48,7 @@ export const Build: React.FC<Props> = (props) => {
     };
 
     return(
-        <View>
+        <>
             <Header
                 leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
                 centerComponent={{
@@ -56,8 +57,10 @@ export const Build: React.FC<Props> = (props) => {
                 }}
                 rightComponent={{icon: "perm-identity", color: "#eee", onPress: goToCharacterSheet}}
             />
-            <Text>Build Page</Text>
-        </View>
+            <ScrollView>
+                <Text>Build Page</Text>
+            </ScrollView>
+        </>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, ViewPropTypes } from "react-native";
-import { Action } from "../../Encounter/Components/ActionsAndActivities";
+import { Action } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
 
 interface Props {
     action: Action;

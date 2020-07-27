@@ -3,8 +3,8 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { Text } from "react-native-elements";
 import { FeatAndAbilityEntry } from "./FeatAndAbilityEntry";
 import { connect } from "react-redux";
-import { CharacterSheetState } from "../../../store/Store";
 import { ScrollView } from "react-native-gesture-handler";
+import { CharacterSheetState } from "../../../../store/Store";
 
 
 const FeatsView: React.FC<Props> = (props) => {
