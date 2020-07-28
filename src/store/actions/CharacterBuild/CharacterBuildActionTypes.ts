@@ -1,4 +1,5 @@
 import { Ancestries } from "../../../scenes/Shared/PF2eCoreLib/Ancestries";
+import { Action } from "redux";
 
 export const CHANGE_BUILD_ANCESTRY = "CHANGE_BUILD_ANCESTRY";
 export interface ChangeBuildAncestry extends Action<string> {

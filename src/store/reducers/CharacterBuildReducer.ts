@@ -50,5 +50,7 @@ export const characterBuildReducer = (
             Ancestry: action.Ancestry
         };
         return newState;
+    default:
+        return state;
     }
 };

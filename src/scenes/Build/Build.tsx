@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { Header } from "react-native-elements";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
@@ -12,6 +12,7 @@ import { bindActionCreators } from "redux";
 import { startChangePlayerName, startChangeCharacterName } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
+import { CharacterBuildState } from "../../store/CharacterBuildState";
 
 type BuildNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -47,6 +48,10 @@ export const Build: React.FC<Props> = (props) => {
         );
     };
 
+    const openAncestrySelectionView = (): void => {
+        console.log("openAncestrySelectionView");
+    };
+
     return(
         <>
             <Header
@@ -59,12 +64,17 @@ export const Build: React.FC<Props> = (props) => {
             />
             <ScrollView>
                 <Text>Build Page</Text>
+                <View style={styles.horizontal}>
+                    <Text style={styles.centered}>Ancestry:</Text>
+                    <Button title={props.buildState.Ancestry.toString()} onPress={openAncestrySelectionView}/>
+                </View>
             </ScrollView>
         </>
     );
 };
 
 interface LinkStateProps {
+    buildState: CharacterBuildState;
     playerCharacter: PlayerCharacter;
 }
 //all actions to be dispatched
@@ -75,7 +85,8 @@ const mapStateToProps = (
     state: CharacterSheetState,
     ownProps: OwnProps
 ): LinkStateProps => ({
-    playerCharacter: state.playerCharacter,
+    buildState: state.characterBuild,
+    playerCharacter: state.playerCharacter 
 });
 
 const mapDispatchToProps = (
@@ -86,3 +97,18 @@ const mapDispatchToProps = (
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Build);
+
+const styles = StyleSheet.create({
+    horizontal: {
+        flexDirection: "row",
+        flex: 1,
+        alignSelf: "center"
+    },
+    button: {
+        flex: 1
+    },
+    centered: {
+        justifyContent: "center",
+        alignSelf: "center"
+    }
+});
