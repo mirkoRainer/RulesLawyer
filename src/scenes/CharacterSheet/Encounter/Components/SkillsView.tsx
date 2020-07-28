@@ -14,9 +14,9 @@ interface OwnProps {
 type Props = OwnProps & LinkStateProps;
 
 const SkillsView: React.FC<Props> = (props) => {
-    const renderItem = ({ item }: { item: Skill }) => (
+    const renderItem = (item: Skill) => (
         <ProficiencyView
-            title={item.name}
+            title={item.name.toString()}
             keyAbility={props.abilityScores[item.ability]}
             proficiency={item.proficiency}
             level={props.level}
@@ -24,15 +24,14 @@ const SkillsView: React.FC<Props> = (props) => {
             armorPenalty={item.hasArmorPenalty ? item.armorPenalty : 0}
         />
     );
-    const keyExtractor = (item: Skill) => item.name;
+    const skills: JSX.Element[] = [];
+    props.skills.forEach(skill => {
+        skills.push(renderItem(skill));
+    });
 
     return (
         <View style={styles.container}>
-            <FlatList<Skill>
-                data={props.skills}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
-            ></FlatList>
+            {skills}
         </View>
     );
 };
