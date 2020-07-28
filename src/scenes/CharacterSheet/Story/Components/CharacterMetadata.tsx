@@ -6,7 +6,7 @@ import PlayerName from "../../Encounter/Components/CharacterMetadata/PlayerName"
 import AncestryAndHeritage from "../../Encounter/Components/CharacterMetadata/AncestryAndHeritage";
 import Level from "../../Encounter/Components/CharacterMetadata/Level";
 import ExperiencePoints from "../../Encounter/Components/CharacterMetadata/ExperiencePoints";
-import Traits from "../../Encounter/Components/CharacterMetadata/Traits";
+import TraitsView from "../../Encounter/Components/CharacterMetadata/Traits";
 import Alignment from "../../Encounter/Components/CharacterMetadata/Alignment";
 import Deity from "../../Encounter/Components/CharacterMetadata/Deity";
 import { AbilityScoreArray } from "../../../Shared/PF2eCoreLib/AbilityScores";
@@ -86,7 +86,7 @@ const CharacterMetadata: React.FC<Props> = (props) => {
                 />
                 <Deity deity={props.characterMetadata.deity} />
             </View>
-            <Traits traits={props.characterMetadata.traits} />
+            <TraitsView traits={props.characterMetadata.traits} />
         </View>
     );
     

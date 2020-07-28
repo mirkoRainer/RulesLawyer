@@ -4,6 +4,7 @@ import { iBonus } from "./Bonus";
 import { SpellListEntry } from "../../CharacterSheet/Spells/Components/Spell";
 import { ArmorCategory } from "./ArmorCategory";
 import { Ability } from "./Ability";
+import { Traits } from "./Traits";
 
 
 export interface PlayerCharacter {
@@ -286,7 +287,7 @@ export interface WornArmor {
     Bulk:                number;
     WornBulk:            number;
     Group:               string;
-    Traits:              any[];
+    Traits:              Traits[];
 }
 
 export interface Price {

@@ -7,7 +7,7 @@ interface Props {
 
 interface State {}
 
-export default class Traits extends Component<Props, State> {
+export default class TraitsView extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>

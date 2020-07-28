@@ -4,6 +4,7 @@ import { Proficiencies } from "../scenes/Shared/PF2eCoreLib/Proficiencies";
 import { Ancestries } from "../scenes/Shared/PF2eCoreLib/Ancestries";
 import { Backgrounds } from "../scenes/Shared/PF2eCoreLib/Backgrounds";
 import { Classes } from "../scenes/Shared/PF2eCoreLib/Classes";
+import { Traits } from "../scenes/Shared/PF2eCoreLib/Traits";
 
 export type CharacterBuildState = {
     Ancestry: keyof Ancestries;
@@ -49,11 +50,16 @@ type ChoicePrerequisite = {
     abilityScore?: keyof AbilityScoreArray;
     choice?: BuildChoice;
     skillProficiency?: SkillProficiencyPreReq;
+    trait: TraitPrerequisite;
     meetsPreReqs: () => boolean;
 }
 
 type SkillProficiencyPreReq = {
     skill: keyof Skills;
     proficiency: Proficiencies;
+}
+
+type TraitPrerequisite = {
+    traits: keyof Traits[];
 }
 
