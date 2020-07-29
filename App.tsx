@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React, { Component, Dispatch } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Button } from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainMenu from "./src/scenes/MainMenu";
@@ -14,7 +14,9 @@ import OpenCharacterView from "./src/scenes/OpenCharacterView";
 import BugReportView from "./src/scenes/BugReportView";
 import AboutView from "./src/scenes/AboutView";
 import Build from "./src/scenes/Build/Build";
-
+import * as FileSystem from "expo-file-system";
+import {Asset} from "expo-asset";
+import connect, { sql } from "@databases/expo";
 
 //https://reactnavigation.org/docs/typescript/
 export type RootDrawerParamList = {
@@ -29,7 +31,24 @@ export type RootDrawerParamList = {
     AboutView: undefined;
 }
 
+
+async function openDatabaseIShipWithApp() {
+    const internalDbName = "dbInStorage.sqlite"; // Call whatever you want
+    const sqlDir = FileSystem.documentDirectory + "SQLite/";
+    if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
+        await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
+        const asset = Asset.fromModule(require("./assets/pf2e.db"));
+        await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
+    }
+}
+
+export const db = connect("dbInStorage.sqlite");
+
 export default class App extends Component {
+    async componentDidMount(){
+        await openDatabaseIShipWithApp();
+    }
+
     render(){
         const Drawer = createDrawerNavigator<RootDrawerParamList>();
 

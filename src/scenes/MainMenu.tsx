@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { RootDrawerParamList } from "../../App";
+import { RootDrawerParamList, db } from "../../App";
+import { sql } from "@databases/expo";
 
 type MainMenuNavigationProps = DrawerNavigationProp<RootDrawerParamList, "MainMenu">;
 interface Props {
@@ -12,6 +13,11 @@ interface State {}
 export default class MainMenu extends Component<Props, State> {
     public static defaultProps = {};
 
+    checkDB = () => {
+        console.log("Printing out DB entries for ancestries");
+        db.query(sql`SELECT * FROM ancestries`).then(e => {console.log(e);});
+    }
+    
     render() {
         return (
             <View style={styles.container}>
@@ -20,6 +26,10 @@ export default class MainMenu extends Component<Props, State> {
                     <Button 
                         onPress={() => this.props.navigation.openDrawer() } 
                         title={"Swipe from left side or press me"} 
+                    />
+                    <Button 
+                        onPress={this.checkDB}
+                        title={"Check DB"}
                     />
                 </View>
             </View>

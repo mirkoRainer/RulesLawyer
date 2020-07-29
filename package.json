@@ -8,6 +8,7 @@
         "eject": "expo eject"
     },
     "dependencies": {
+        "@databases/expo": "^4.0.0",
         "@react-native-community/masked-view": "0.1.10",
         "@react-native-community/picker": "1.6.0",
         "@react-navigation/bottom-tabs": "^5.7.2",
