@@ -3787,6 +3787,11 @@ expo-splash-screen@^0.3.1:
   dependencies:
     "@expo/configure-splash-screen" "~0.1.0"
 
+expo-sqlite-orm@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/expo-sqlite-orm/-/expo-sqlite-orm-1.5.4.tgz#fd2aa3c76981b86325d833534f1d51a119f1c3f6"
+  integrity sha512-fQY2BgZcrteSOeBR6R1V8FCSJuR4UauYRGGDxNYjwt0cpa8tOQOi3s6Mr9DliLgpOiGqe6tZT66rkFupbAQt0Q==
+
 expo-sqlite@~8.2.1:
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/expo-sqlite/-/expo-sqlite-8.2.1.tgz#69bbbe46dbb51cc80b0bccd71741925f2b52b2c0"

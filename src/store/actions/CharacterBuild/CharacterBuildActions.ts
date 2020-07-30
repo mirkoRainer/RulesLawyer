@@ -1,5 +1,5 @@
 import { CharacterBuildActionTypes, CHANGE_BUILD_ANCESTRY } from "./CharacterBuildActionTypes";
-import { Ancestries } from "../../../scenes/Shared/PF2eCoreLib/Ancestries";
+import { Ancestries } from "../../../PF2eCoreLib/Ancestries";
 import { ActionCreator } from "redux";
 import { Dispatch } from "react";
 import { AppActions } from "../AllActionTypesAggregated";

@@ -1,8 +1,8 @@
 import { AppActions } from "../AllActionTypesAggregated";
 import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
-import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
-import { Proficiencies } from "../../../scenes/Shared/PF2eCoreLib/Proficiencies";
+import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
     type: CHANGE_CHARACTER_NAME, 

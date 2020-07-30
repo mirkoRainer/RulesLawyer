@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
-import { Skill, PlayerCharacter } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
-import { AbilityScoreArray } from "../../../Shared/PF2eCoreLib/AbilityScores";
+import { Skill, PlayerCharacter } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { CharacterSheetState } from "../../../../store/Store";
 import { connect } from "react-redux";
 

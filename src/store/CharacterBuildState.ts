@@ -1,10 +1,10 @@
-import { AbilityScoreArray } from "../scenes/Shared/PF2eCoreLib/AbilityScores";
-import { Skills } from "../scenes/Shared/PF2eCoreLib/PlayerCharacter";
-import { Proficiencies } from "../scenes/Shared/PF2eCoreLib/Proficiencies";
-import { Ancestries } from "../scenes/Shared/PF2eCoreLib/Ancestries";
-import { Backgrounds } from "../scenes/Shared/PF2eCoreLib/Backgrounds";
-import { Classes } from "../scenes/Shared/PF2eCoreLib/Classes";
-import { Traits } from "../scenes/Shared/PF2eCoreLib/Traits";
+import { AbilityScoreArray } from "../PF2eCoreLib/AbilityScores";
+import { Skills } from "../PF2eCoreLib/PlayerCharacter";
+import { Proficiencies } from "../PF2eCoreLib/Proficiencies";
+import { Ancestries } from "../PF2eCoreLib/Ancestries";
+import { Backgrounds } from "../PF2eCoreLib/Backgrounds";
+import { Classes } from "../PF2eCoreLib/Classes";
+import { Traits } from "../PF2eCoreLib/Traits";
 
 export type CharacterBuildState = {
     Ancestry: keyof Ancestries;

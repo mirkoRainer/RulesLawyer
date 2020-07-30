@@ -1,4 +1,4 @@
-import { RulebookEntry } from "../../../Shared/PF2eCoreLib/RulebookEntry";
+import { RulebookEntry } from "../../../../PF2eCoreLib/RulebookEntry";
 
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";

@@ -4,7 +4,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import { Header } from "react-native-elements";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";

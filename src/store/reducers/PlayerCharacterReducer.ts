@@ -1,7 +1,7 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
 import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { PlayerCharacter } from "../../scenes/Shared/PF2eCoreLib/PlayerCharacter";
-import { UpdateAbilityScore } from "../../scenes/Shared/PF2eCoreLib/AbilityScores";
+import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
+import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 

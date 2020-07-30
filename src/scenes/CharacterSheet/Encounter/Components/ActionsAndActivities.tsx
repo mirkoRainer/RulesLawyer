@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import ActionView from "../../Story/Components/ActionView";
-import { Action } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
+import { Action } from "../../../../PF2eCoreLib/PlayerCharacter";
 
 interface Props {
     actions: Action[];

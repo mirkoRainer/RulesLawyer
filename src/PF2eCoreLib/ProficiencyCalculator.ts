@@ -1,4 +1,4 @@
-import { Dictionary } from "../Misc/Dictionary";
+import { Dictionary } from "../scenes/Shared/Misc/Dictionary";
 
 export default class ProficiencyCalculator {
     proficiencies: Dictionary<number> = {

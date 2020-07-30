@@ -13,7 +13,7 @@ import { CharacterSheetState } from "../../Store";
 import { TextEditModalStateSwitch } from "./TextEditModalStateSwitch";
 import { PickerModalStateSwitch } from "./PickerModalStateSwitch";
 import { ReactText } from "react";
-import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
+import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { ChangeAbilityScore } from "../PlayerCharacter/PlayerCharacterActions";
 
 const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({ type: TOGGLE_TEXTEDIT_MODAL });

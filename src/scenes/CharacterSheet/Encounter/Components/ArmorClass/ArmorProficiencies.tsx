@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
-import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
+import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 
 export interface ArmorProficiencyProps {
     unarmored: Proficiencies;

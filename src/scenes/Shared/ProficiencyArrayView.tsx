@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
-import { Proficiencies } from "./PF2eCoreLib/Proficiencies";
+import { Proficiencies } from "../../PF2eCoreLib/Proficiencies";
 import { TouchableOpacity } from "react-native";
 
 interface Props {

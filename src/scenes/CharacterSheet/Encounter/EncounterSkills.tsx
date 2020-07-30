@@ -1,12 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { Skill } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import { Skill } from "../../../PF2eCoreLib/PlayerCharacter";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import SkillsView from "./Components/SkillsView";
-import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
+import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { ScrollView } from "react-native-gesture-handler";
 
 const EncounterSkills: React.FC<Props> = (props) => {

@@ -4,7 +4,7 @@ import { Header } from "react-native-elements";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
-import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import {

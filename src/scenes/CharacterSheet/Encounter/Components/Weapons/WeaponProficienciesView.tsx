@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { OtherWeaponProficiency } from "./OtherWeaponProficiency";
-import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
+import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
-import { WeaponProficiencies } from "../../../../Shared/PF2eCoreLib/PlayerCharacter";
+import { WeaponProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter";
 
 export default class WeaponProficienciesView extends Component<
     WeaponProficiencies

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
-import { Proficiencies } from "../../../Shared/PF2eCoreLib/Proficiencies";
-import { AbilityScore } from "../../../Shared/PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
+import { AbilityScore } from "../../../../PF2eCoreLib/AbilityScores";
 
 interface Props {
     proficiency: Proficiencies;

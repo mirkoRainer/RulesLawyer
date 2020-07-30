@@ -5,14 +5,14 @@ import {
     AbilityScore,
     CalculateAbilityScoreModifier,
     GetAbilityScoreAbbreviation,
-} from "../../../../Shared/PF2eCoreLib/AbilityScores";
+} from "../../../../../PF2eCoreLib/AbilityScores";
 import { CHANGE_ABILITY_SCORE } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startTextEditModal, startPickerForAbilityScore } from "../../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { Ability } from "../../../../Shared/PF2eCoreLib/Ability";
+import { Ability } from "../../../../../PF2eCoreLib/Ability";
 import { startChangeAbilityScore } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 
 const AbilityScoreView: React.FC<Props> = (props) => {

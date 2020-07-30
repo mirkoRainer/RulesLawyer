@@ -1,5 +1,5 @@
-import { Bonus } from "../src/scenes/Shared/PF2eCoreLib/Bonus";
-import { BonusType } from "../src/scenes/Shared/PF2eCoreLib/BonusTypes";
+import { Bonus } from "../src/PF2eCoreLib/Bonus";
+import { BonusType } from "../src/PF2eCoreLib/BonusTypes";
 import { examplePlayerCharacter } from "../examplePlayerCharacter";
 
 

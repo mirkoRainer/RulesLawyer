@@ -1,9 +1,9 @@
 import { CharacterBuildActionTypes, CHANGE_BUILD_ANCESTRY } from "../actions/CharacterBuild/CharacterBuildActionTypes";
 import { CharacterBuildState } from "../CharacterBuildState";
-import { GetAvailableBuildChoices } from "../../scenes/Shared/PF2eCoreLib/CharacterBuild";
-import { Ancestries } from "../../scenes/Shared/PF2eCoreLib/Ancestries";
-import { Backgrounds } from "../../scenes/Shared/PF2eCoreLib/Backgrounds";
-import { Classes } from "../../scenes/Shared/PF2eCoreLib/Classes";
+import { GetAvailableBuildChoices } from "../../PF2eCoreLib/CharacterBuild";
+import { Ancestries } from "../../PF2eCoreLib/Ancestries";
+import { Backgrounds } from "../../PF2eCoreLib/Backgrounds";
+import { Classes } from "../../PF2eCoreLib/Classes";
 
 const ancestry: keyof Ancestries = "Dwarf";
 const background: keyof Backgrounds= "Acolyte";

@@ -1,7 +1,7 @@
-import { Proficiencies } from "../../../../Shared/PF2eCoreLib/Proficiencies";
-import { Ability } from "../../../../Shared/PF2eCoreLib/Ability";
-import { Weapon, WeaponProficiencies } from "../../../../Shared/PF2eCoreLib/PlayerCharacter";
-import { AbilityScore } from "../../../../Shared/PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
+import { Ability } from "../../../../../PF2eCoreLib/Ability";
+import { Weapon, WeaponProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { AbilityScore } from "../../../../../PF2eCoreLib/AbilityScores";
 
 
 export interface WeaponViewProps {

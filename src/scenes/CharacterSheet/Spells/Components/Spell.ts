@@ -1,4 +1,4 @@
-import { RulebookEntry } from "../../../Shared/PF2eCoreLib/RulebookEntry";
+import { RulebookEntry } from "../../../../PF2eCoreLib/RulebookEntry";
 
 export interface SpellListEntry {
     spellType: string;

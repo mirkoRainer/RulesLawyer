@@ -9,9 +9,9 @@ import ExperiencePoints from "../../Encounter/Components/CharacterMetadata/Exper
 import TraitsView from "../../Encounter/Components/CharacterMetadata/Traits";
 import Alignment from "../../Encounter/Components/CharacterMetadata/Alignment";
 import Deity from "../../Encounter/Components/CharacterMetadata/Deity";
-import { AbilityScoreArray } from "../../../Shared/PF2eCoreLib/AbilityScores";
-import { Proficiencies } from "../../../Shared/PF2eCoreLib/Proficiencies";
-import { Background } from "../../../Shared/PF2eCoreLib/PlayerCharacter";
+import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
+import { Background } from "../../../../PF2eCoreLib/PlayerCharacter";
 import BackgroundView from "../../Encounter/Components/CharacterMetadata/BackgroundView";
 import ClassView from "../../Encounter/Components/CharacterMetadata/ClassView";
 

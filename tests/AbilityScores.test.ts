@@ -3,7 +3,7 @@ import {
     AbilityScoreArray,
     AbilityScore,
     UpdateAbilityScore,
-} from "../src/scenes/Shared/PF2eCoreLib/AbilityScores";
+} from "../src/PF2eCoreLib/AbilityScores";
 
 describe("Ability Scores", () => {
     describe("GetAbilityModifierFromScores", () => {

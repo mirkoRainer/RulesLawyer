@@ -5,13 +5,13 @@ import ProficiencyArrayView from "./ProficiencyArrayView";
 import {
     Proficiencies,
     GetProficiencyValue,
-} from "./PF2eCoreLib/Proficiencies";
+} from "../../PF2eCoreLib/Proficiencies";
 import {
     GetAbilityScoreAbbreviation,
     AbilityScoreArray,
     AbilityScore,
     CalculateAbilityScoreModifier,
-} from "./PF2eCoreLib/AbilityScores";
+} from "../../PF2eCoreLib/AbilityScores";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export interface ProficiencyProps {

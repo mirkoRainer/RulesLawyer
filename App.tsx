@@ -32,21 +32,21 @@ export type RootDrawerParamList = {
 }
 
 
-async function openDatabaseIShipWithApp() {
-    const internalDbName = "dbInStorage.sqlite"; // Call whatever you want
-    const sqlDir = FileSystem.documentDirectory + "SQLite/";
-    if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
-        await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
+async function copyDBFromBundleToDocumentDirectory() {
+    const dbName = "pf2e.sqlite"; 
+    const sqlDirectory = FileSystem.documentDirectory + "SQLite/";
+    if (!(await FileSystem.getInfoAsync(sqlDirectory + dbName)).exists) {
+        await FileSystem.makeDirectoryAsync(sqlDirectory, {intermediates: true});
         const asset = Asset.fromModule(require("./assets/pf2e.db"));
-        await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
+        await FileSystem.downloadAsync(asset.uri, sqlDirectory + dbName);
     }
 }
 
-export const db = connect("dbInStorage.sqlite");
+export const db = connect("pf2e.sqlite");
 
 export default class App extends Component {
     async componentDidMount(){
-        await openDatabaseIShipWithApp();
+        await copyDBFromBundleToDocumentDirectory();
     }
 
     render(){

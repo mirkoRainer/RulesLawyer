@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
-import { PlayerCharacter } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
+import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
@@ -10,8 +10,8 @@ import { startStringPickerModalSelection } from "../../../store/actions/Modals/M
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
-import { Bonus } from "../../Shared/PF2eCoreLib/Bonus";
-import { BonusType } from "../../Shared/PF2eCoreLib/BonusTypes";
+import { Bonus } from "../../../PF2eCoreLib/Bonus";
+import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import Conditions from "./Components/Conditions";
 
 const EncounterMisc: React.FC<Props> = (props) => {

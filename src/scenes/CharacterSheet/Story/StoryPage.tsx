@@ -7,12 +7,12 @@ import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
-import { Background } from "../../Shared/PF2eCoreLib/PlayerCharacter";
+import { Background } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
-import { AbilityScoreArray } from "../../Shared/PF2eCoreLib/AbilityScores";
-import { Proficiencies } from "../../Shared/PF2eCoreLib/Proficiencies";
+import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import AbilityScores from "../Encounter/Components/AbilityScores/AbilityScoresView";
-import { Ability } from "../../Shared/PF2eCoreLib/Ability";
+import { Ability } from "../../../PF2eCoreLib/Ability";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;

@@ -1,6 +1,6 @@
 import { Action } from "redux";
-import { AbilityScore } from "../../../scenes/Shared/PF2eCoreLib/AbilityScores";
-import { Proficiencies } from "../../../scenes/Shared/PF2eCoreLib/Proficiencies";
+import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
+import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
