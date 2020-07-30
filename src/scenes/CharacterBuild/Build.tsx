@@ -27,8 +27,30 @@ interface OwnProps {
 type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
 export type BuildStackParamList = {
-    AncestrySelect: undefined;
     BuildOverview: undefined;
+    AncestrySelect: undefined;
+    BackgroundSelect: undefined;
+    ClassSelect: undefined;
+    Level1: undefined;
+    Level2: undefined;
+    Level3: undefined;
+    Level4: undefined;
+    Level5: undefined;
+    Level6: undefined;
+    Level7: undefined;
+    Level8: undefined;
+    Level9: undefined;
+    Level10: undefined;
+    Level11: undefined;
+    Level12: undefined;
+    Level13: undefined;
+    Level14: undefined;
+    Level15: undefined;
+    Level16: undefined;
+    Level17: undefined;
+    Level18: undefined;
+    Level19: undefined;
+    Level20: undefined;
 }
 
 export const Build: React.FC<Props> = (props) => {
@@ -66,7 +88,6 @@ export const Build: React.FC<Props> = (props) => {
                 }}
                 rightComponent={{icon: "perm-identity", color: "#eee", onPress: goToCharacterSheet}}
             />
-
             <View style={styles.horizontal}>
                 <NavigationContainer independent={true} >
                     <Stack.Navigator initialRouteName={"BuildOverview"}>
