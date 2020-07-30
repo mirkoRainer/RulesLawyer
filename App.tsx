@@ -13,7 +13,7 @@ import SaveView from "./src/scenes/SaveView";
 import OpenCharacterView from "./src/scenes/OpenCharacterView";
 import BugReportView from "./src/scenes/BugReportView";
 import AboutView from "./src/scenes/AboutView";
-import Build from "./src/scenes/Build/Build";
+import Build from "./src/scenes/CharacterBuild/Build";
 import * as FileSystem from "expo-file-system";
 import {Asset} from "expo-asset";
 import connect, { sql } from "@databases/expo";
