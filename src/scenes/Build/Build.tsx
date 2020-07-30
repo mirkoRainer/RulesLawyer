@@ -1,18 +1,19 @@
 /* eslint-disable linebreak-style */
-import React, { useEffect } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { Header } from "react-native-elements";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
+import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
 import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
-import { bindActionCreators } from "redux";
-import { startChangePlayerName, startChangeCharacterName } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { connect } from "react-redux";
-import { ScrollView } from "react-native-gesture-handler";
 import { CharacterBuildState } from "../../store/CharacterBuildState";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Header } from "react-native-elements";
+import { AncestrySelectView } from "./Components/AncestrySelectView";
+import { BuildOverview } from "./Components/BuildOverview";
 
 type BuildNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -24,6 +25,11 @@ interface OwnProps {
 }
 
 type Props = OwnProps & LinkStateProps & LinkDispatchProps;
+
+export type BuildStackParamList = {
+    AncestrySelect: undefined;
+    BuildOverview: undefined;
+}
 
 export const Build: React.FC<Props> = (props) => {
     const toggleNavigation = (): void => {
@@ -48,9 +54,7 @@ export const Build: React.FC<Props> = (props) => {
         );
     };
 
-    const openAncestrySelectionView = (): void => {
-        console.log("openAncestrySelectionView");
-    };
+    const Stack = createStackNavigator<BuildStackParamList>();
 
     return(
         <>
@@ -62,13 +66,23 @@ export const Build: React.FC<Props> = (props) => {
                 }}
                 rightComponent={{icon: "perm-identity", color: "#eee", onPress: goToCharacterSheet}}
             />
-            <ScrollView>
-                <Text>Build Page</Text>
-                <View style={styles.horizontal}>
-                    <Text style={styles.centered}>Ancestry:</Text>
-                    <Button title={props.buildState.Ancestry.toString()} onPress={openAncestrySelectionView}/>
-                </View>
-            </ScrollView>
+
+            <View style={styles.horizontal}>
+                <NavigationContainer independent={true} >
+                    <Stack.Navigator initialRouteName={"BuildOverview"}>
+                        <Stack.Screen name="BuildOverview" component={BuildOverview} />
+                        <Stack.Screen name="AncestrySelect" component={AncestrySelectView} />
+                    </Stack.Navigator>
+                    <View>
+                        {
+                            //create a side navigator that indicates build step and status
+                        }
+                        <Text>ABC's</Text>
+                        <Text>Lvl 1</Text>
+                    </View>
+                </NavigationContainer>
+
+            </View>
         </>
     );
 };
@@ -82,16 +96,12 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (
-    state: CharacterSheetState,
-    ownProps: OwnProps
-): LinkStateProps => ({
+    state: CharacterSheetState): LinkStateProps => ({
     buildState: state.characterBuild,
     playerCharacter: state.playerCharacter 
 });
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: OwnProps
 ): LinkDispatchProps => ({
 
 });
