@@ -18,36 +18,35 @@ import { ScrollView } from "react-native-gesture-handler";
 const SpellsPage: React.FC<Props> = (props) => {
     return (
         <View style={styles.container}>
-            <ScrollView> 
-                <Text h4> Spells Page </Text>
-                <SpellAttackAndDCView
-                    proficiency={props.spellAttackProficiency}
-                    keySpellcastingAbility={
-                        props.spellcastingAbilityModifier
-                    }
-                    level={props.currentLevel}
-                    spellAttackItemBonus={Bonus.GetBonusFor(
-                        "SpellAttack",
-                        BonusType.Item,
-                        props.bonuses
-                    )}
-                    spellDCItemBonus={Bonus.GetBonusFor(
-                        "SpellDC",
-                        BonusType.Item,
-                        props.bonuses
-                    )}
-                />
-                <MagicTraditions
-                    prepared={props.magicTraditions.prepared}
-                    spontaneous={props.magicTraditions.spontaneous}
-                    arcane={props.magicTraditions.arcane}
-                    primal={props.magicTraditions.primal}
-                    divine={props.magicTraditions.divine}
-                    occult={props.magicTraditions.occult}
-                />
-                <SpellSlots spellSlots={props.spellSlots} />
-                <Spells spells={props.spells} />
-            </ScrollView>
+
+            <Text h4> Spells Page </Text>
+            <SpellAttackAndDCView
+                proficiency={props.spellAttackProficiency}
+                keySpellcastingAbility={
+                    props.spellcastingAbilityModifier
+                }
+                level={props.currentLevel}
+                spellAttackItemBonus={Bonus.GetBonusFor(
+                    "SpellAttack",
+                    BonusType.Item,
+                    props.bonuses
+                )}
+                spellDCItemBonus={Bonus.GetBonusFor(
+                    "SpellDC",
+                    BonusType.Item,
+                    props.bonuses
+                )}
+            />
+            <MagicTraditions
+                prepared={props.magicTraditions.prepared}
+                spontaneous={props.magicTraditions.spontaneous}
+                arcane={props.magicTraditions.arcane}
+                primal={props.magicTraditions.primal}
+                divine={props.magicTraditions.divine}
+                occult={props.magicTraditions.occult}
+            />
+            <SpellSlots spellSlots={props.spellSlots} />
+            <Spells spells={props.spells} />
         </View>
     );
 };
