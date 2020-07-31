@@ -7,12 +7,13 @@ import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
-import { Background } from "../../../PF2eCoreLib/PlayerCharacter";
+import { Background, Weapon, WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import AbilityScores from "../Encounter/Components/AbilityScores/AbilityScoresView";
+import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Ability } from "../../../PF2eCoreLib/Ability";
+import WeaponProficienciesView from "./Components/WeaponProficienciesView";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -42,6 +43,16 @@ const StoryPage: React.FC<Props> = (props) => {
                     characterMetadata={characterMetadata()}
                 />
                 <AbilityScores abilityScores={props.abilityScores} />
+                <Text h4>Weapon Proficiencies</Text>
+                <WeaponProficienciesView
+                    Unarmed={props.weaponProficiencies.Unarmed}
+                    Simple={props.weaponProficiencies.Simple}
+                    Martial={props.weaponProficiencies.Martial}
+                    Others={
+                        props.weaponProficiencies.Others
+                    /* Others should have a description and proficiency. */
+                    }
+                />
                 {/*CharacterSketch placeholder*/}
                 <BiographicalView bioData={props.bioData} />
                 <Text style={styles.text}>
@@ -76,6 +87,7 @@ interface LinkStateProps {
     traits: string[];
     languages: string[];
     abilityScores: AbilityScoreArray;
+    weaponProficiencies: WeaponProficiencies;
 }
  type Props = LinkStateProps;
 
@@ -100,7 +112,8 @@ const mapStateToProps = (
     personalityData: state.playerCharacter.personalityData,
     campaignNotesData: state.playerCharacter.campaignNotesData,
     languages: state.playerCharacter.languages,
-    abilityScores: state.playerCharacter.abilityScores
+    abilityScores: state.playerCharacter.abilityScores,
+    weaponProficiencies: state.playerCharacter.weaponProficiencies
 });
 
 export default connect(mapStateToProps, null)(StoryPage);

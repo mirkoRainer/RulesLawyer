@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import OtherMovements from "./OtherMovements";
-import { MovementProps } from "./MovementProps";
 
 interface Props {
     movements: MovementProps;

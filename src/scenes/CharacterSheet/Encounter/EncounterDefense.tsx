@@ -1,56 +1,26 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-elements";
 import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
-import { Action, bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
-import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { startStringPickerModalSelection } from "../../../store/actions/Modals/ModalsActions";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
-import Encounter from "./Encounter";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
-import ArmorProficiencies from "./Components/ArmorClass/ArmorProficiencies";
 import Shield from "./Components/ArmorClass/Shield";
-import { ArmorCategory } from "../../../PF2eCoreLib/ArmorCategory";
-import { prop } from "../../../PF2eCoreLib/TypescriptEvolution";
 import HitPoints from "./Components/HitPoints/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
 import { ScrollView } from "react-native-gesture-handler";
+import { wornArmorProficiency } from "./Components/ArmorClass/ArmorClassHelper";
 
 const EncounterDefense: React.FC<Props> = (props) => {
-    const wornArmorProficiency = (): Proficiencies => {
-        switch (props.playerCharacter.wornArmor.Category) {
-        case ArmorCategory.Unarmored: {
-            return prop(
-                props.playerCharacter.armorProficiencies,
-                "unarmored"
-            );
-            break;
-        }
-        case ArmorCategory.Light: {
-            return prop(props.playerCharacter.armorProficiencies, "light");
-            break;
-        }
-        case ArmorCategory.Medium: {
-            return prop(props.playerCharacter.armorProficiencies, "medium");
-        }
-        case ArmorCategory.Heavy: {
-            return prop(props.playerCharacter.armorProficiencies, "heavy");
-        }
-        default: {
-            return Proficiencies.Untrained;
-        }
-        }
-    };
     const acProficiency = (): ProficiencyProps => {
         return {
             title: "AC",
             keyAbility: props.playerCharacter.abilityScores.Dexterity,
-            proficiency: wornArmorProficiency(),
+            proficiency: wornArmorProficiency(props.playerCharacter.armorProficiencies, props.playerCharacter.wornArmor.Category),
             level: props.playerCharacter.level,
             itemBonus: props.playerCharacter.wornArmor.ACBonus,
             is10base: true,
@@ -99,8 +69,8 @@ const EncounterDefense: React.FC<Props> = (props) => {
     }; 
     
     return (
-        <ScrollView>
-            <Text style={styles.header}>Defense</Text>
+        <View>
+            <Text h2>Defense</Text>
             <ProficiencyView
                 title={"AC"}
                 keyAbility={
@@ -156,7 +126,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 immunities={props.playerCharacter.immunities}
                 weaknesses={props.playerCharacter.weakness}
             />
-        </ScrollView>
+        </View>
     );
 };
 
@@ -171,7 +141,7 @@ interface LinkStateProps {
 }
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => {
+): LinkDispatchProps => {
     return {
 
     };
@@ -184,15 +154,3 @@ const mapStateToProps = (
 
 export default connect(mapStateToProps, mapDispatchToProps)(EncounterDefense);
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        borderColor: "black",
-        borderWidth: 1,
-    },
-    header: {
-        flex: .1,
-        textAlign: "center",
-        fontSize: 22
-    }
-});
