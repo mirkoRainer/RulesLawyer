@@ -2,32 +2,16 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-elements";
 import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
-import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
-import Shield from "./Components/ArmorClass/Shield";
 import HitPoints from "./Components/HitPoints/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
-import { ScrollView } from "react-native-gesture-handler";
-import { wornArmorProficiency } from "./Components/ArmorClass/ArmorClassHelper";
+import ACView from "./Components/ArmorClass/ACView";
 
 const EncounterDefense: React.FC<Props> = (props) => {
-    const acProficiency = (): ProficiencyProps => {
-        return {
-            title: "AC",
-            keyAbility: props.playerCharacter.abilityScores.Dexterity,
-            proficiency: wornArmorProficiency(props.playerCharacter.armorProficiencies, props.playerCharacter.wornArmor.Category),
-            level: props.playerCharacter.level,
-            itemBonus: props.playerCharacter.wornArmor.ACBonus,
-            is10base: true,
-            isACBase: true,
-            dexCap: props.playerCharacter.wornArmor.DexCap,
-        };
-    };
     const fortitudeSave = (): ProficiencyProps => {
         return {
             title: "Fortitude",
@@ -69,24 +53,16 @@ const EncounterDefense: React.FC<Props> = (props) => {
     }; 
     
     return (
-        <View>
+        <View style={styles.container}>
             <Text h2>Defense</Text>
-            <ProficiencyView
-                title={"AC"}
-                keyAbility={
-                    acProficiency().keyAbility
-                }
-                proficiency={acProficiency().proficiency}
-                level={props.playerCharacter.level}
-                itemBonus={acProficiency().itemBonus}
-                is10base={acProficiency().is10base}
-                isACBase={true}
-                dexCap={acProficiency().dexCap}
-                armorPenalty={acProficiency().armorPenalty}
+            <HitPoints
+                max={props.playerCharacter.hitPoint.max}
+                current={props.playerCharacter.hitPoint.current}
+                temporary={props.playerCharacter.hitPoint.temporary}
+                dying={props.playerCharacter.hitPoint.dying}
+                wounded={props.playerCharacter.hitPoint.wounded}
             />
-            <Shield
-                shieldProps={props.playerCharacter.shield}
-            />
+            <ACView />
             <ProficiencyView
                 title={"Fortitude"}
                 keyAbility={
@@ -114,13 +90,6 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 level={props.playerCharacter.level}
                 itemBonus={willSave().itemBonus}
             />
-            <HitPoints
-                max={props.playerCharacter.hitPoint.max}
-                current={props.playerCharacter.hitPoint.current}
-                temporary={props.playerCharacter.hitPoint.temporary}
-                dying={props.playerCharacter.hitPoint.dying}
-                wounded={props.playerCharacter.hitPoint.wounded}
-            />
             <ResistancesImmunitiesWeaknesses 
                 resistances={props.playerCharacter.resistances}
                 immunities={props.playerCharacter.immunities}
@@ -129,6 +98,16 @@ const EncounterDefense: React.FC<Props> = (props) => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        borderColor: "black",
+        borderWidth: 2,
+        alignContent: "stretch",
+        alignSelf: "stretch",
+    },
+});
 
 type Props = LinkDispatchProps & LinkStateProps;
 
