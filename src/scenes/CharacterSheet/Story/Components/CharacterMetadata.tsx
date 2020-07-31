@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
-import CharacterName from "../../Encounter/Components/CharacterMetadata/CharacterName";
-import PlayerName from "../../Encounter/Components/CharacterMetadata/PlayerName";
-import AncestryAndHeritage from "../../Encounter/Components/CharacterMetadata/AncestryAndHeritage";
-import Level from "../../Encounter/Components/CharacterMetadata/Level";
-import ExperiencePoints from "../../Encounter/Components/CharacterMetadata/ExperiencePoints";
-import TraitsView from "../../Encounter/Components/CharacterMetadata/Traits";
-import Alignment from "../../Encounter/Components/CharacterMetadata/Alignment";
-import Deity from "../../Encounter/Components/CharacterMetadata/Deity";
+import CharacterName from "./CharacterMetadata/CharacterName";
+import PlayerName from "./CharacterMetadata/PlayerName";
+import AncestryAndHeritage from "./CharacterMetadata/AncestryAndHeritage";
+import Level from "./CharacterMetadata/Level";
+import ExperiencePoints from "./CharacterMetadata/ExperiencePoints";
+import TraitsView from "./CharacterMetadata/Traits";
+import Alignment from "./CharacterMetadata/Alignment";
+import Deity from "./CharacterMetadata/Deity";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import { Background } from "../../../../PF2eCoreLib/PlayerCharacter";
-import BackgroundView from "../../Encounter/Components/CharacterMetadata/BackgroundView";
-import ClassView from "../../Encounter/Components/CharacterMetadata/ClassView";
+import BackgroundView from "./CharacterMetadata/BackgroundView";
+import ClassView from "./CharacterMetadata/ClassView";
 
 
 export interface CharacterMetadataProps {

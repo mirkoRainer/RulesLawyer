@@ -1,17 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import CharacterMetadata, { CharacterMetadataProps } from "../Story/Components/CharacterMetadata";
-import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
+import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import { GetAbilityModifierFromScores } from "../../../PF2eCoreLib/AbilityScores";
-import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
-import ArmorProficiencies from "./Components/ArmorClass/ArmorProficiencies";
-import Shield from "./Components/ArmorClass/Shield";
-import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
-import Conditions from "./Components/Conditions";
-import Movements from "./Components/Movements";
-import { WeaponViewProps, GetProficiencyForWeapon } from "./Components/Weapons/WeaponViewProps";
-import Weapons from "./Components/Weapons/Weapons";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -19,17 +8,8 @@ import { startStringPickerModalSelection } from "../../../store/actions/Modals/M
 import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { PlayerCharacter, Action } from "../../../PF2eCoreLib/PlayerCharacter";
-import WeaponProficienciesView from "./Components/Weapons/WeaponProficienciesView";
-import SkillsView from "./Components/SkillsView";
+import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
 import { CharacterSheetState } from "../../../store/Store";
-import { Bonus } from "../../../PF2eCoreLib/Bonus";
-import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
-import { ArmorCategory } from "../../../PF2eCoreLib/ArmorCategory";
-import { prop } from "../../../PF2eCoreLib/TypescriptEvolution";
-import HitPoints from "./Components/HitPoints/HitPoints";
-import { ScrollView } from "react-native-gesture-handler";
-import ActionsAndActivities from "./Components/ActionsAndActivities";
 import EncounterDefense from "./EncounterDefense";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EncounterOffense from "./EncounterOffense";
@@ -46,7 +26,7 @@ export type EncounterTabParamList = {
     Other: undefined;
 }
 
-const Encounter: React.FC<Props> = (props) => {
+const Encounter: React.FC<Props> = () => {
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
 
     return (

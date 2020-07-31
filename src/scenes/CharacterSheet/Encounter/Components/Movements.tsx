@@ -7,6 +7,15 @@ interface Props {
     movements: MovementProps;
 }
 
+export interface MovementProps {
+    landSpeed: number;
+    burrowSpeed?: number;
+    climbSpeed?: number;
+    flySpeed?: number;
+    swimSpeed?: number;
+}
+
+
 interface State {}
 
 export default class Movements extends Component<Props, State> {
