@@ -79,7 +79,7 @@ export default class ProficiencyView extends Component<
             <Text style={styles.total}>{total}</Text>
         );
         return (
-            <View>
+            <View style={styles.flex1}>
                 <View style={styles.container}>
                     <Text style={styles.title}>{this.props.title}:</Text>
                     {totalView}
@@ -87,11 +87,9 @@ export default class ProficiencyView extends Component<
                     {tenBase}
                     {keyModifier}
                     <View style={styles.touchable}>
-                        <TouchableWithoutFeedback >
-                            <ProficiencyArrayView
-                                proficiency={this.props.proficiency}
-                            />
-                        </TouchableWithoutFeedback>
+                        <ProficiencyArrayView
+                            proficiency={this.props.proficiency}
+                        />
                     </View>
                     {itemBonus}
                 </View>
@@ -102,6 +100,9 @@ export default class ProficiencyView extends Component<
 }
 
 const styles = StyleSheet.create({
+    flex1: {
+        flex: 1
+    },
     container: {
         flex: 1,
         flexDirection: "row",

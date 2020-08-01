@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Shield, { ShieldProps } from "./Shield";
 import { GetProficiencyValue } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
+import ResistancesImmunitiesWeaknesses from "../ResistancesImmunitiesWeaknesses";
 
 
 const ACView: React.FC<Props> = (props) => {
@@ -45,9 +46,16 @@ const ACView: React.FC<Props> = (props) => {
                 <Text>Armor: +{props.wornArmor.ACBonus}</Text>
                 <ProficiencyArrayView proficiency={wornProficiency} />
             </View>
-            <Shield
-                shieldProps={props.shield}
-            />
+            <View style={styles.horizontal}>
+                <Shield
+                    shieldProps={props.shield}
+                />
+                <ResistancesImmunitiesWeaknesses 
+                    resistances={props.resistances}
+                    immunities={props.immunities}
+                    weaknesses={props.weaknesses}
+                />
+            </View>
         </View>
     );
 };
@@ -77,6 +85,9 @@ interface LinkStateProps {
     wornArmor: WornArmor;
     level: number;
     shield: ShieldProps;
+    resistances: string;
+    immunities: string;
+    weaknesses: string;
 }
 
 const mapDispatchToProps = (
@@ -92,7 +103,10 @@ const mapStateToProps = (
     armorProficiencies: state.playerCharacter.armorProficiencies,
     wornArmor: state.playerCharacter.wornArmor,
     level: state.playerCharacter.level,
-    shield: state.playerCharacter.shield
+    shield: state.playerCharacter.shield,
+    resistances: state.playerCharacter.resistances,
+    immunities: state.playerCharacter.immunities,
+    weaknesses: state.playerCharacter.weakness
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ACView);

@@ -90,11 +90,6 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 level={props.playerCharacter.level}
                 itemBonus={willSave().itemBonus}
             />
-            <ResistancesImmunitiesWeaknesses 
-                resistances={props.playerCharacter.resistances}
-                immunities={props.playerCharacter.immunities}
-                weaknesses={props.playerCharacter.weakness}
-            />
         </View>
     );
 };
