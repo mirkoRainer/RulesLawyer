@@ -37,16 +37,17 @@ const ACView: React.FC<Props> = (props) => {
             GetProficiencyValue(wornProficiency);
 
     return(
-        <View style={styles.container}>
+        <View style={{flex: 2}}>
             <View style={styles.horizontal}>
-                <Text h4>AC</Text>
-                <Text h4>{total}</Text>
-                <Text> = 10 + DEX:{modifier} Cap:
-                    {props.wornArmor.DexCap !== undefined ? props.wornArmor.DexCap : 0}</Text>
-                <Text>Armor: +{props.wornArmor.ACBonus}</Text>
-                <ProficiencyArrayView proficiency={wornProficiency} />
+                <Text h3 style={{paddingLeft: 10}}>AC</Text>
+                <Text h3 style={{paddingRight: 10}}>{total}</Text>
+                <View style={{ flex: 1}}>
+                    <Text style={{...styles.container, fontSize: 18}}> = 10 + DEX: {modifier} Cap: 
+                        {props.wornArmor.DexCap !== undefined ? props.wornArmor.DexCap : 0} Armor: +{props.wornArmor.ACBonus}</Text>
+                    <ProficiencyArrayView proficiency={wornProficiency} />
+                </View>
             </View>
-            <View style={styles.horizontal}>
+            <View style={{...styles.horizontal, flex: 2}}>
                 <Shield
                     shieldProps={props.shield}
                 />

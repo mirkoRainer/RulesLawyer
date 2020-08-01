@@ -54,7 +54,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
     
     return (
         <View style={styles.container}>
-            <Text h2>Defense</Text>
+            <Text h2 style={{ alignSelf: "center"}}>Defense</Text>
             <HitPoints
                 max={props.playerCharacter.hitPoint.max}
                 current={props.playerCharacter.hitPoint.current}

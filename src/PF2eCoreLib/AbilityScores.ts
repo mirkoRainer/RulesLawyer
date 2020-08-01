@@ -1,5 +1,3 @@
-import { Ability } from "./Ability";
-import { prop } from "./TypescriptEvolution";
 
 export interface AbilityScore {
     ability: keyof AbilityScoreArray;
