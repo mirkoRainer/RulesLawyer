@@ -26,10 +26,20 @@ const ACView: React.FC<Props> = (props) => {
             dexCap: props.wornArmor.DexCap,
         };
     };
-
-    const modifier = CalculateAbilityScoreModifier(props.dexterity.score);
+    const calculatedDexModifier = CalculateAbilityScoreModifier(props.dexterity.score);
+    const modifier = props.wornArmor.DexCap >= calculatedDexModifier ? calculatedDexModifier : props.wornArmor.DexCap;
     const wornProficiency = getWornArmorProficiency(props.armorProficiencies, props.wornArmor.Category);
-    const dexOrCap: string = props.wornArmor.DexCap >= modifier ? `DEX:${modifier}` : `DEX CAP:${props.wornArmor.DexCap}`;
+    const dexOrCap = () => {
+        if (props.wornArmor.DexCap >= calculatedDexModifier){
+            return (
+                <Text style={styles.calculatorText}>DEX:</Text>
+            );
+        } else { 
+            return (
+                <Text style={{...styles.calculatorText, flex: 1.85}}>DEX CAP:</Text>
+            );
+        } 
+    }; 
     const total =
             10 +
             modifier +
@@ -46,7 +56,17 @@ const ACView: React.FC<Props> = (props) => {
                     <ProficiencyArrayView proficiency={wornProficiency} />
                 </Layout>
             </Layout>
-            <Text style={{...styles.container, fontSize: 18}}> 10 + {dexOrCap} + Armor:{props.wornArmor.ACBonus} + Prof:{GetProficiencyValue(wornProficiency)} + Level:{props.level}</Text>
+            <Layout style={{...styles.horizontal, alignItems: "center", paddingHorizontal:5}}>
+                <Text style={{...styles.calculatorNumber}}>10 + </Text>
+                {dexOrCap()} 
+                <Text style={styles.calculatorNumber}>{modifier} + </Text>
+                <Text style={{...styles.calculatorText, flex: 1.3}}>Armor:</Text>
+                <Text style={styles.calculatorNumber}>{props.wornArmor.ACBonus} + </Text>
+                <Text style={styles.calculatorText}>Prof:</Text>
+                <Text style={styles.calculatorNumber}>{GetProficiencyValue(wornProficiency)} + </Text>
+                <Text style={{...styles.calculatorText, flex: 1.1}}>Level:</Text>
+                <Text style={{...styles.calculatorNumber, flex: .65}}>{props.level}</Text>
+            </Layout>
         </Layout>
     );
 };
@@ -61,6 +81,18 @@ const styles = StyleSheet.create({
     },
     centered: {
         alignSelf: "center"
+    },
+    calculatorText: {
+        flex: 1,
+        fontSize: 14,
+        alignSelf: "center",
+        textAlign: "center"
+    },
+    calculatorNumber: {
+        flex: 1,
+        fontSize: 18,
+        alignSelf: "center",
+        textAlign: "center",
     }
 });
 
