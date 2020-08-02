@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
 import ProficiencyView, { ProficiencyProps } from "../../../../Shared/ProficiencyView";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { CharacterSheetState } from "../../../../../store/Store";
@@ -11,6 +10,7 @@ import Shield, { ShieldProps } from "./Shield";
 import { GetProficiencyValue } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import ResistancesImmunitiesWeaknesses from "../ResistancesImmunitiesWeaknesses";
+import { Layout, Text } from "@ui-kitten/components";
 
 
 const ACView: React.FC<Props> = (props) => {
@@ -29,6 +29,7 @@ const ACView: React.FC<Props> = (props) => {
 
     const modifier = CalculateAbilityScoreModifier(props.dexterity.score);
     const wornProficiency = getWornArmorProficiency(props.armorProficiencies, props.wornArmor.Category);
+    const dexOrCap: string = props.wornArmor.DexCap >= modifier ? `DEX:${modifier}` : `DEX CAP:${props.wornArmor.DexCap}`;
     const total =
             10 +
             modifier +
@@ -37,27 +38,16 @@ const ACView: React.FC<Props> = (props) => {
             GetProficiencyValue(wornProficiency);
 
     return(
-        <View style={{flex: 2}}>
-            <View style={styles.horizontal}>
-                <Text h3 style={{paddingLeft: 10}}>AC</Text>
-                <Text h3 style={{paddingRight: 10}}>{total}</Text>
-                <View style={{ flex: 1}}>
-                    <Text style={{...styles.container, fontSize: 18}}> = 10 + DEX: {modifier} Cap: 
-                        {props.wornArmor.DexCap !== undefined ? props.wornArmor.DexCap : 0} Armor: +{props.wornArmor.ACBonus}</Text>
+        <Layout style={{flex: 1}}>
+            <Layout style={styles.horizontal}>
+                <Text style={{paddingLeft: 10}} category='h5'>AC</Text>
+                <Text style={{paddingRight: 10, alignSelf: "center"}} category='h3'>{total}</Text>
+                <Layout style={{ flex: 1}}>
                     <ProficiencyArrayView proficiency={wornProficiency} />
-                </View>
-            </View>
-            <View style={{...styles.horizontal, flex: 2}}>
-                <Shield
-                    shieldProps={props.shield}
-                />
-                <ResistancesImmunitiesWeaknesses 
-                    resistances={props.resistances}
-                    immunities={props.immunities}
-                    weaknesses={props.weaknesses}
-                />
-            </View>
-        </View>
+                </Layout>
+            </Layout>
+            <Text style={{...styles.container, fontSize: 18}}> 10 + {dexOrCap} + Armor:{props.wornArmor.ACBonus} + Prof:{GetProficiencyValue(wornProficiency)} + Level:{props.level}</Text>
+        </Layout>
     );
 };
 
@@ -85,10 +75,6 @@ interface LinkStateProps {
     armorProficiencies: ArmorProficiencies;
     wornArmor: WornArmor;
     level: number;
-    shield: ShieldProps;
-    resistances: string;
-    immunities: string;
-    weaknesses: string;
 }
 
 const mapDispatchToProps = (
@@ -104,10 +90,7 @@ const mapStateToProps = (
     armorProficiencies: state.playerCharacter.armorProficiencies,
     wornArmor: state.playerCharacter.wornArmor,
     level: state.playerCharacter.level,
-    shield: state.playerCharacter.shield,
-    resistances: state.playerCharacter.resistances,
-    immunities: state.playerCharacter.immunities,
-    weaknesses: state.playerCharacter.weakness
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ACView);

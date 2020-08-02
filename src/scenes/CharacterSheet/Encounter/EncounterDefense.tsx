@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-elements";
+import { StyleSheet } from "react-native";
 import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
@@ -10,6 +9,8 @@ import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import HitPoints from "./Components/HitPoints/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Components/ResistancesImmunitiesWeaknesses";
 import ACView from "./Components/ArmorClass/ACView";
+import { Layout, Text } from "@ui-kitten/components";
+import Shield, { ShieldProps } from "./Components/ArmorClass/Shield";
 
 const EncounterDefense: React.FC<Props> = (props) => {
     const fortitudeSave = (): ProficiencyProps => {
@@ -53,8 +54,8 @@ const EncounterDefense: React.FC<Props> = (props) => {
     }; 
     
     return (
-        <View style={styles.container}>
-            <Text h2 style={{ alignSelf: "center"}}>Defense</Text>
+        <Layout style={styles.container}>
+            <Text style={{ alignSelf: "center"}} category='h2'>Defense</Text>
             <HitPoints
                 max={props.playerCharacter.hitPoint.max}
                 current={props.playerCharacter.hitPoint.current}
@@ -63,6 +64,14 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 wounded={props.playerCharacter.hitPoint.wounded}
             />
             <ACView />
+            <Shield
+                shieldProps={props.shield}
+            />
+            <ResistancesImmunitiesWeaknesses 
+                resistances={props.resistances}
+                immunities={props.immunities}
+                weaknesses={props.weaknesses}
+            />
             <ProficiencyView
                 title={"Fortitude"}
                 keyAbility={
@@ -90,7 +99,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 level={props.playerCharacter.level}
                 itemBonus={willSave().itemBonus}
             />
-        </View>
+        </Layout>
     );
 };
 
@@ -112,6 +121,10 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
+    shield: ShieldProps;
+    resistances: string;
+    immunities: string;
+    weaknesses: string;
 }
 
 const mapDispatchToProps = (
@@ -124,6 +137,10 @@ const mapDispatchToProps = (
 const mapStateToProps = (
     state: CharacterSheetState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
+    shield: state.playerCharacter.shield,
+    resistances: state.playerCharacter.resistances,
+    immunities: state.playerCharacter.immunities,
+    weaknesses: state.playerCharacter.weakness
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EncounterDefense);

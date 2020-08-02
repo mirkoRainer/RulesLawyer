@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 export interface HitPointProps {
     max: number;
@@ -14,32 +15,39 @@ interface State {}
 export default class HitPoints extends Component<HitPointProps, State> {
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.text2}>
-                    HP: {this.props.current}/{this.props.max}:
-                    Temp: {this.props.temporary}
-                </Text>
-                <Text style={styles.text}>Dying {this.props.dying}</Text>
-                <Text style={styles.text}>Wounded {this.props.wounded}</Text>
-            </View>
+            <Layout style={{ padding: 10, flex: 0.65 }}>
+                <Layout style={styles.container}>
+                    <Text style={styles.subHeader} category='h6'> HP: </Text>
+                    <Text style={styles.subHeader} category='h6'> Temp: </Text>
+                    <Text style={styles.subHeader} category='h6'>Dying:</Text>
+                    <Text style={styles.subHeader} category='h6'>Wounded:</Text>
+                </Layout>
+                <Layout style={styles.container}>
+                    <Text style={styles.text}> {this.props.current}/{this.props.max} </Text>
+                    <Text style={styles.text}> {this.props.temporary} </Text>
+                    <Text style={styles.text}>{this.props.dying}</Text>
+                    <Text style={styles.text}>{this.props.wounded}</Text>
+                </Layout>
+            </Layout>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.5,
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
-        alignContent: "stretch",
-        alignSelf: "stretch",
     },
     text: {
         flex: 1,
+        textAlign: "center",
         alignSelf: "center",
+        justifyContent: "flex-start",
+        fontSize: 22
     },
-    text2: {
+    subHeader: {
         flex: 2,
-        alignSelf: "center",
-    },
+        justifyContent: "flex-end",
+        textAlign: "center",
+        alignSelf: "center"
+    }
 });

@@ -59,7 +59,7 @@ export default class App extends Component {
         return (
             <Provider store={Store}>
                 <IconRegistry icons={EvaIconsPack} />
-                <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
+                <ApplicationProvider {...eva} theme={{...eva.dark, ...theme}}>
                     <AppNavigator />
                 </ApplicationProvider>
             </Provider>
