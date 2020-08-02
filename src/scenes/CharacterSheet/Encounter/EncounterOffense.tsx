@@ -8,11 +8,11 @@ import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
-import Movements from "./Components/Movements";
-import Weapons from "./Components/Weapons/Weapons";
-import { WeaponViewProps, GetProficiencyForWeapon } from "./Components/Weapons/WeaponViewProps";
+import Movements from "./Offense/Movements";
+import Weapons from "./Offense/Weapons/Weapons";
+import { WeaponViewProps, GetProficiencyForWeapon } from "./Offense/Weapons/WeaponViewProps";
 import { GetAbilityModifierFromScores } from "../../../PF2eCoreLib/AbilityScores";
-import ActionsAndActivities from "./Components/ActionsAndActivities";
+import ActionsAndActivities from "./Offense/ActionsAndActivities";
 import { ScrollView } from "react-native-gesture-handler";
 
 const EncounterOffense: React.FC<Props> = (props) => {

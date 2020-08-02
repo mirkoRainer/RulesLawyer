@@ -5,7 +5,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
-import SkillsView from "./Components/SkillsView";
+import SkillsView from "./Skills/SkillsView";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { ScrollView } from "react-native-gesture-handler";
 

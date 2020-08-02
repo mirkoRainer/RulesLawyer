@@ -48,7 +48,7 @@ const ACView: React.FC<Props> = (props) => {
             GetProficiencyValue(wornProficiency);
 
     return(
-        <Layout style={{flex: 1}}>
+        <Layout style={styles.container}>
             <Layout style={styles.horizontal}>
                 <Text style={{paddingLeft: 10}} category='h5'>AC</Text>
                 <Text style={{paddingRight: 10, alignSelf: "center"}} category='h3'>{total}</Text>
@@ -57,7 +57,7 @@ const ACView: React.FC<Props> = (props) => {
                 </Layout>
             </Layout>
             <Layout style={{...styles.horizontal, alignItems: "center", paddingHorizontal:5}}>
-                <Text style={{...styles.calculatorNumber}}>10 + </Text>
+                <Text style={{...styles.calculatorNumber}} category='s1'>10 + </Text>
                 {dexOrCap()} 
                 <Text style={styles.calculatorNumber}>{modifier} + </Text>
                 <Text style={{...styles.calculatorText, flex: 1.3}}>Armor:</Text>
@@ -73,11 +73,14 @@ const ACView: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        justifyContent: "space-around"
     },
     horizontal: {
         flex: 1,
-        flexDirection: "row"
+        alignSelf: "center",
+        flexDirection: "row",
+        borderWidth: 1
     },
     centered: {
         alignSelf: "center"
@@ -90,7 +93,6 @@ const styles = StyleSheet.create({
     },
     calculatorNumber: {
         flex: 1,
-        fontSize: 18,
         alignSelf: "center",
         textAlign: "center",
     }

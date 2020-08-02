@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
-import Conditions from "./Components/Conditions";
+import Conditions from "./Conditions";
 
 const EncounterMisc: React.FC<Props> = (props) => {
     const classDCProficiency = (): ProficiencyProps => {

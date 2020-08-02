@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
+import {  StyleSheet } from "react-native";
 import ProficiencyArrayView from "./ProficiencyArrayView";
 import {
     Proficiencies,
@@ -12,7 +11,7 @@ import {
     AbilityScore,
     CalculateAbilityScoreModifier,
 } from "../../PF2eCoreLib/AbilityScores";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Layout, Text } from "@ui-kitten/components";
 
 export interface ProficiencyProps {
     title: string;
@@ -79,22 +78,22 @@ export default class ProficiencyView extends Component<
             <Text style={styles.total}>{total}</Text>
         );
         return (
-            <View style={styles.flex1}>
-                <View style={styles.container}>
+            <Layout style={styles.flex1}>
+                <Layout style={styles.container}>
                     <Text style={styles.title}>{this.props.title}:</Text>
                     {totalView}
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
                     {keyModifier}
-                    <View style={styles.touchable}>
+                    <Layout style={styles.touchable}>
                         <ProficiencyArrayView
                             proficiency={this.props.proficiency}
                         />
-                    </View>
+                    </Layout>
                     {itemBonus}
-                </View>
+                </Layout>
                 {descriptor}
-            </View>
+            </Layout>
         );
     }
 }

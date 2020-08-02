@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import { OwnProps } from "../../Story/Components/CharacterMetadata/ClassView";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { Layout, Text } from "@ui-kitten/components";
+import { CharacterSheetState } from "../../../../store/Store";
 
 const ResistancesImmunitiesWeaknesses: React.FC<Props> = (props) => {
     const resistancesDisplay: string = props.resistances;
@@ -17,50 +18,59 @@ const ResistancesImmunitiesWeaknesses: React.FC<Props> = (props) => {
     const changeWeaknesses = () => {props.startTextEditModal(CHANGE_WEAKNESSES);};
 
     return (
-        <View style={styles.container}>
-            <Text onPress={changeResistances}>Resistances: {resistancesDisplay}</Text>
-            <Text onPress={changeImmunities}>Immunities: {immunitiesDisplay}</Text>
-            <Text onPress={changeWeaknesses}>Weaknesses: {weaknessesDisplay}</Text>
-        </View>
+        <Layout style={styles.container}>
+            <Text category='h6' onPress={changeResistances}>Resistances: </Text>
+            <Text category='p1' onPress={changeResistances}>{resistancesDisplay}</Text>
+            <Text category='h6' onPress={changeImmunities}>Immunities: </Text>
+            <Text category='p1' onPress={changeImmunities}>{immunitiesDisplay}</Text>
+            <Text category='h6' onPress={changeWeaknesses}>Weaknesses: </Text>
+            <Text category='p1' onPress={changeWeaknesses}>{weaknessesDisplay}</Text>
+        </Layout>
     );
 };
 
-export interface ResistancesImmunitiesWeaknessesProps {
+interface LinkStateProps {
     resistances: string;
     immunities: string;
     weaknesses: string;
 }
 
-type Props = ResistancesImmunitiesWeaknessesProps & LinkDispatchProps;
+type Props = LinkStateProps & LinkDispatchProps;
 
 interface LinkDispatchProps {
     startTextEditModal: (propertyToChange: string) => void;
 }
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: ResistancesImmunitiesWeaknessesProps
+    dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
         startTextEditModal: bindActionCreators(startTextEditModal, dispatch),
     };
 };
 
+const mapStateToProps = (
+    state: CharacterSheetState): LinkStateProps => ({
+    resistances: state.playerCharacter.resistances,
+    immunities: state.playerCharacter.immunities,
+    weaknesses: state.playerCharacter.weakness
+});
+
 export default connect(null, mapDispatchToProps)(ResistancesImmunitiesWeaknesses);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
         alignContent: "stretch",
         alignSelf: "stretch",
     },
+    horizontal: {
+        flex: 1,
+        flexDirection: "row",
+        flexGrow: 1
+    },
     text: {
         flex: 1,
-        alignSelf: "center",
-    },
-    text2: {
-        flex: 2,
         alignSelf: "center",
     },
 });

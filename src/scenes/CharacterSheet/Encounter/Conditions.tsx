@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import { OwnProps } from "../../Story/Components/CharacterMetadata/ClassView";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { OwnProps } from "../Story/Components/CharacterMetadata/ClassView";
 import { bindActionCreators } from "redux";
-import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
+import { startTextEditModal } from "../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { CHANGE_CONDITIONS } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_CONDITIONS } from "../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 const Conditions: React.FC<Props> = (props) => {
     const conditions: string = props.conditions;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { OtherWeaponProficiency } from "../../Encounter/Components/Weapons/OtherWeaponProficiency";
+import { OtherWeaponProficiency } from "../../Encounter/Offense/Weapons/OtherWeaponProficiency";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { WeaponProficiencies } from "../../../../PF2eCoreLib/PlayerCharacter";
