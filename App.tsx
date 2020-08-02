@@ -17,6 +17,8 @@ import Build from "./src/scenes/CharacterBuild/Build";
 import * as FileSystem from "expo-file-system";
 import {Asset} from "expo-asset";
 import connect, { sql } from "@databases/expo";
+import * as eva from "@eva-design/eva";
+import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
 
 //https://reactnavigation.org/docs/typescript/
 export type RootDrawerParamList = {
@@ -54,16 +56,17 @@ export default class App extends Component {
 
         return (
             <Provider store={Store}>
-                <NavigationContainer>
-                    <Drawer.Navigator initialRouteName="CharacterSheet">
-                        <Drawer.Screen 
-                            name="MainMenu"
-                            component={MainMenu}
-                            options={{
-                                title: "Main Menu"
-                            }}
-                        />
-                        {/* 
+                <ApplicationProvider {...eva} theme={eva.light}>
+                    <NavigationContainer>
+                        <Drawer.Navigator initialRouteName="CharacterSheet">
+                            <Drawer.Screen 
+                                name="MainMenu"
+                                component={MainMenu}
+                                options={{
+                                    title: "Main Menu"
+                                }}
+                            />
+                            {/* 
                         Not implemented yet
                         <Drawer.Screen
                             name="ExportPDFView"
@@ -71,45 +74,46 @@ export default class App extends Component {
                             options={{title: "Export PDF"}}
                         /> 
                         */}
-                        <Drawer.Screen 
-                            name="Build"
-                            component={Build}
-                            options={{ title: "Build Character" }}
-                        />
-                        <Drawer.Screen 
-                            name="CharacterSheet"
-                            component={CharacterSheet}
+                            <Drawer.Screen 
+                                name="Build"
+                                component={Build}
+                                options={{ title: "Build Character" }}
+                            />
+                            <Drawer.Screen 
+                                name="CharacterSheet"
+                                component={CharacterSheet}
                             // options={}
-                        />
-                        {/* 
+                            />
+                            {/* 
                         Not implemented yet
                         <Drawer.Screen
                             name="ShareCharacterView"
                             component={ShareCharacterScreen}
                             options={{title: "Share Your Build"}}
                         /> */}
-                        <Drawer.Screen
-                            name="SaveView"
-                            component={SaveView}
-                            options={{title: "Save As"}}
-                        />
-                        <Drawer.Screen
-                            name="OpenCharacterView"
-                            component={OpenCharacterView}
-                            options={{title: "Load Character"}}
-                        />
-                        <Drawer.Screen
-                            name="BugReportView"
-                            component={BugReportView}
-                            options={{title: "Bug Report"}}
-                        />
-                        <Drawer.Screen
-                            name="AboutView"
-                            component={AboutView}
-                            options={{title: "About"}}
-                        />
-                    </Drawer.Navigator>
-                </NavigationContainer>
+                            <Drawer.Screen
+                                name="SaveView"
+                                component={SaveView}
+                                options={{title: "Save As"}}
+                            />
+                            <Drawer.Screen
+                                name="OpenCharacterView"
+                                component={OpenCharacterView}
+                                options={{title: "Load Character"}}
+                            />
+                            <Drawer.Screen
+                                name="BugReportView"
+                                component={BugReportView}
+                                options={{title: "Bug Report"}}
+                            />
+                            <Drawer.Screen
+                                name="AboutView"
+                                component={AboutView}
+                                options={{title: "About"}}
+                            />
+                        </Drawer.Navigator>
+                    </NavigationContainer>
+                </ApplicationProvider>
             </Provider>
         );
     }
