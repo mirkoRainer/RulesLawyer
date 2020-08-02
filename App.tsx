@@ -21,6 +21,7 @@ import * as eva from "@eva-design/eva";
 import { ApplicationProvider, Layout, Text, IconRegistry } from "@ui-kitten/components";
 import { default as theme } from "./custom-theme.json";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { AppNavigator } from "./src/AppNavigator";
 
 //https://reactnavigation.org/docs/typescript/
 export type RootDrawerParamList = {
@@ -54,68 +55,12 @@ export default class App extends Component {
     }
 
     render(){
-        const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
         return (
             <Provider store={Store}>
                 <IconRegistry icons={EvaIconsPack} />
                 <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-                    <NavigationContainer>
-                        <Drawer.Navigator initialRouteName="CharacterSheet">
-                            <Drawer.Screen 
-                                name="MainMenu"
-                                component={MainMenu}
-                                options={{
-                                    title: "Main Menu"
-                                }}
-                            />
-                            {/* 
-                        Not implemented yet
-                        <Drawer.Screen
-                            name="ExportPDFView"
-                            component={ExportPDFView}
-                            options={{title: "Export PDF"}}
-                        /> 
-                        */}
-                            <Drawer.Screen 
-                                name="Build"
-                                component={Build}
-                                options={{ title: "Build Character" }}
-                            />
-                            <Drawer.Screen 
-                                name="CharacterSheet"
-                                component={CharacterSheet}
-                            // options={}
-                            />
-                            {/* 
-                        Not implemented yet
-                        <Drawer.Screen
-                            name="ShareCharacterView"
-                            component={ShareCharacterScreen}
-                            options={{title: "Share Your Build"}}
-                        /> */}
-                            <Drawer.Screen
-                                name="SaveView"
-                                component={SaveView}
-                                options={{title: "Save As"}}
-                            />
-                            <Drawer.Screen
-                                name="OpenCharacterView"
-                                component={OpenCharacterView}
-                                options={{title: "Load Character"}}
-                            />
-                            <Drawer.Screen
-                                name="BugReportView"
-                                component={BugReportView}
-                                options={{title: "Bug Report"}}
-                            />
-                            <Drawer.Screen
-                                name="AboutView"
-                                component={AboutView}
-                                options={{title: "About"}}
-                            />
-                        </Drawer.Navigator>
-                    </NavigationContainer>
+                    <AppNavigator />
                 </ApplicationProvider>
             </Provider>
         );
