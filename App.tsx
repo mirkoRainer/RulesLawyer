@@ -18,8 +18,9 @@ import * as FileSystem from "expo-file-system";
 import {Asset} from "expo-asset";
 import connect, { sql } from "@databases/expo";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
+import { ApplicationProvider, Layout, Text, IconRegistry } from "@ui-kitten/components";
 import { default as theme } from "./custom-theme.json";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 
 //https://reactnavigation.org/docs/typescript/
 export type RootDrawerParamList = {
@@ -57,6 +58,7 @@ export default class App extends Component {
 
         return (
             <Provider store={Store}>
+                <IconRegistry icons={EvaIconsPack} />
                 <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
                     <NavigationContainer>
                         <Drawer.Navigator initialRouteName="CharacterSheet">
