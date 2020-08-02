@@ -1,49 +1,100 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { Text, Layout } from "@ui-kitten/components";
+import { AbilityScore } from "../../../../../PF2eCoreLib/AbilityScores";
+import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { CharacterSheetState } from "../../../../../store/Store";
+import { connect } from "react-redux";
 
 export interface ShieldProps {
     hasShield: boolean;
-    acBonus: number;
-    hardness: number;
-    maxHP: number;
-    breakThreshold: number;
-    currentHP: number;
+    acBonus?: number;
+    hardness?: number;
+    maxHP?: number;
+    breakThreshold?: number;
+    currentHP?: number;
 }
 
-interface Props {
-    shieldProps: ShieldProps;
-}
 
-export interface State {}
+const Shield: React.FC<Props> = (props) => {
+    const shieldView = props.shield.hasShield ? (
+        <Layout style={styles.container}>
+            <Text style={styles.title} category='h6'>Shield</Text>
+            <Layout style={styles.column}>
+                <Text style={styles.text}>Bonus:</Text>
+                <Text style={styles.number}>+{props.shield.acBonus!}</Text>
+            </Layout>
+            <Layout style={styles.column}>
+                <Text style={styles.text}>HP:</Text>
+                <Text style={styles.number}>{props.shield.currentHP!}/{props.shield.maxHP!}</Text>
+            </Layout>
+            <Layout style={styles.column}>
+                <Text style={styles.text}>BT:</Text>
+                <Text style={styles.number}>{props.shield.breakThreshold!}</Text>
+            </Layout>
+            <Layout style={styles.column}>
+                <Text style={styles.text}>Hardness:</Text>
+                <Text style={styles.number}> {props.shield.hardness!}</Text>
+            </Layout>
+        </Layout>
+    ) : (
+        <Layout></Layout>
+    );
 
-export default class Shield extends Component<Props, State> {
-    render() {
-        const shieldView = this.props.shieldProps.hasShield ? (
-            <View style={styles.container}>
-                <Text style={styles.text}>Shield Bonus: +{this.props.shieldProps.acBonus}</Text>
-                <Text style={styles.text}>Hardness: {this.props.shieldProps.hardness}</Text>
-                <Text style={styles.text}>Max HP: {this.props.shieldProps.maxHP}</Text>
-                <Text style={styles.text}>BT: {this.props.shieldProps.breakThreshold}</Text>
-                <Text style={styles.text}>
-                    Current HP: {this.props.shieldProps.currentHP}
-                </Text>
-            </View>
-        ) : (
-            <View></View>
-        );
-
-        return shieldView;
-    }
-}
+    return shieldView;
+};
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: .75,
         flexDirection: "row",
+        justifyContent: "space-between",
+        paddingHorizontal: 10
+    },
+    title: {
+        flex: 1,
+        textAlign: "center",
+        alignSelf: "center",
     },
     text: {
         flex: 1,
-        alignSelf: "stretch",
-        textAlign: "center",
+        fontSize: 14,
+        alignSelf: "center",
+        alignContent: "flex-end"
+        // justifyContent: "flex-end"
     },
+    number: {
+        flex: 1.5,
+        fontSize: 18,
+        alignSelf: "center"
+    },
+    column: { 
+        flex: 1, 
+        justifyContent: "space-around", 
+        paddingVertical: 5 
+    }
 });
+
+type Props = LinkDispatchProps & LinkStateProps;
+
+interface LinkDispatchProps {
+
+}
+
+interface LinkStateProps {
+    shield: ShieldProps;
+}
+
+const mapDispatchToProps = (
+): LinkDispatchProps => {
+    return {
+
+    };
+};
+
+const mapStateToProps = (
+    state: CharacterSheetState): LinkStateProps => ({
+    shield: state.playerCharacter.shield
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shield);

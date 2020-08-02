@@ -1,24 +1,13 @@
 import "react-native-gesture-handler";
-import React, { Component, Dispatch } from "react";
-import { StyleSheet, Button } from "react-native";
-import {NavigationContainer} from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import MainMenu from "./src/scenes/MainMenu";
-import CharacterSheet from "./src/scenes/CharacterSheet/CharacterSheet";
+import React, { Component } from "react";
+import { StyleSheet } from "react-native";
 import Store from "./src/store/Store";
 import { Provider } from "react-redux";
-import ExportPDFView from "./src/scenes/ExportPDFView";
-import ShareCharacterScreen from "./src/scenes/ShareCharacterScreen";
-import SaveView from "./src/scenes/SaveView";
-import OpenCharacterView from "./src/scenes/OpenCharacterView";
-import BugReportView from "./src/scenes/BugReportView";
-import AboutView from "./src/scenes/AboutView";
-import Build from "./src/scenes/CharacterBuild/Build";
 import * as FileSystem from "expo-file-system";
 import {Asset} from "expo-asset";
-import connect, { sql } from "@databases/expo";
+import connect from "@databases/expo";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider, Layout, Text, IconRegistry } from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { default as theme } from "./custom-theme.json";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { AppNavigator } from "./src/AppNavigator";
@@ -69,11 +58,4 @@ export default class App extends Component {
 
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
+
