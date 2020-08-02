@@ -1,7 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
+import {  StyleSheet } from "react-native";
 import { Proficiencies } from "../../PF2eCoreLib/Proficiencies";
-import { TouchableOpacity } from "react-native";
+import {Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     proficiency: Proficiencies;
@@ -10,7 +10,7 @@ interface Props {
 
 const ProficiencyArrayView: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text
                 style={
                     ["Trained", "Expert", "Master", "Legendary"].includes(
@@ -55,7 +55,7 @@ const ProficiencyArrayView: React.FC<Props> = (props) => {
             >
                     L
             </Text>
-        </View>
+        </Layout>
     );
 };
 
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
+        justifyContent: "space-evenly",
         alignSelf: "stretch",
         alignItems: "center",
     },
@@ -72,10 +73,9 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 12,
         backgroundColor: "black",
-        color: "white",
         textAlign: "center",
         justifyContent: "center",
-        borderColor: "black",
+        borderColor: "white",
         borderWidth: 1,
     },
     profTextFalse: {
@@ -84,6 +84,5 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         borderColor: "black",
-        borderWidth: 1,
     },
 });

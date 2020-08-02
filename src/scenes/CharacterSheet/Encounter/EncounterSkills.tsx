@@ -1,21 +1,20 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { Skill } from "../../../PF2eCoreLib/PlayerCharacter";
-import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import SkillsView from "./Skills/SkillsView";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { ScrollView } from "react-native-gesture-handler";
+import {Layout, Text} from "@ui-kitten/components";
 
 const EncounterSkills: React.FC<Props> = (props) => {
     
     return (
-        <ScrollView>
-            <Text style={styles.header}>Skillz</Text>
+        <Layout style={styles.container}>
+            <Text style={styles.header} category='h2'>Skillz</Text>
             <SkillsView skills={props.skills} level={props.level} abilityScores={props.abilityScores} />
-        </ScrollView>
+        </Layout>
     );
 };
 
@@ -50,12 +49,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(EncounterSkills);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 1,
     },
     header: {
-        flex: 1,
+        flex: .1,
         textAlign: "center",
-        fontSize: 22
     }
 });

@@ -32,6 +32,7 @@ export default class SpellAttackDCView extends Component<Props, State> {
                     keyAbility={this.props.keySpellcastingAbility}
                     level={this.props.level}
                     itemBonus={this.props.spellDCItemBonus}
+                    is10base={true}
                 />
             </View>
         );

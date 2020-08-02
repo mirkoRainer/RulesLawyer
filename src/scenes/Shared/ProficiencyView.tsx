@@ -50,7 +50,7 @@ export default class ProficiencyView extends Component<
             </Text>
         ) : (
             <Text style={styles.acBase}>
-                {GetAbilityScoreAbbreviation(this.props.keyAbility.ability.toString())}:{" "}
+                {GetAbilityScoreAbbreviation(this.props.keyAbility.ability.toString())}{" "}
                 {modifier}
             </Text>
         );
@@ -80,7 +80,7 @@ export default class ProficiencyView extends Component<
         return (
             <Layout style={styles.flex1}>
                 <Layout style={styles.container}>
-                    <Text style={styles.title}>{this.props.title}:</Text>
+                    <Text style={this.props.is10base ? styles.title10 : styles.title}>{this.props.title}</Text>
                     {totalView}
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
@@ -116,6 +116,11 @@ const styles = StyleSheet.create({
         width: 100,
     },
     title: {
+        flex: 4,
+        alignSelf: "center",
+        textAlign: "center",
+    },
+    title10: {
         flex: 3,
         alignSelf: "center",
         textAlign: "center",
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     tenBase: {
-        flex: 1,
+        flex: 2,
         alignSelf: "center",
     },
     noTenBase: {},

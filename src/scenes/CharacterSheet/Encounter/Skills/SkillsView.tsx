@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
 import { Skill, PlayerCharacter } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { CharacterSheetState } from "../../../../store/Store";
 import { connect } from "react-redux";
+import { Layout } from "@ui-kitten/components";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface OwnProps {
     skills: Skill[];
@@ -30,9 +32,11 @@ const SkillsView: React.FC<Props> = (props) => {
     });
 
     return (
-        <View style={styles.container}>
-            {skills}
-        </View>
+        <Layout style={styles.container}>
+            <ScrollView>
+                {skills}
+            </ScrollView>
+        </Layout>
     );
 };
 
