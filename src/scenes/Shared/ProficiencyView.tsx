@@ -68,20 +68,20 @@ export default class ProficiencyView extends Component<
             ) : undefined;
         const total =
             CalculateAbilityScoreModifier(this.props.keyAbility.score)+
-            this.props.level +
             this.props.itemBonus +
-            GetProficiencyValue(this.props.proficiency);
+            GetProficiencyValue(this.props.proficiency, this.props.level);
         const totalView = this.props.is10base ? (
-            <Text style={styles.total}>{10 + total}</Text>
+            <Text style={styles.total} category='h5'>{10 + total}</Text>
         ) : (
-            <Text style={styles.total}>{total}</Text>
+            <Text style={styles.total} category='h5'>{total > 0 ? "+" : ""}{total}</Text>
         );
         return (
             <Layout style={styles.flex1}>
-                <Layout style={styles.container}>
-                    <Text style={this.props.is10base ? styles.title10 : styles.title} category='p1'>{this.props.title}</Text>
-                    {totalView}
-                    <Text style={styles.equalSign}> = </Text>
+                <Layout style={styles.horizontal}>
+                    <Text style={this.props.is10base ? styles.title10 : styles.title} category='h5'>{this.props.title}</Text>
+                    {totalView} 
+                </Layout>
+                <Layout style={styles.horizontal}>
                     {tenBase}
                     {keyModifier}
                     <Layout style={styles.touchable}>
@@ -100,14 +100,14 @@ export default class ProficiencyView extends Component<
 const styles = StyleSheet.create({
     flex1: {
         flex: 1,
+        paddingHorizontal: 10
     },
-    container: {
+    horizontal: {
         flex: 1,
         flexDirection: "row",
         alignContent: "stretch",
         alignSelf: "stretch",
         justifyContent: "space-evenly",
-        paddingHorizontal: 5
     },
     descriptor: {
         flex: 1,
@@ -119,18 +119,16 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 4,
-        alignSelf: "center",
-        textAlign: "center",
+        // alignSelf: "center",
+        // textAlign: "center",
     },
     title10: {
         flex: 3,
-        alignSelf: "center",
-        textAlign: "center",
+        // alignSelf: "center",
+        // textAlign: "center",
     },
     total: {
         flex: 1,
-        fontWeight: "bold",
-        fontSize: 16,
         alignSelf: "center",
         textAlign: "center",
     },

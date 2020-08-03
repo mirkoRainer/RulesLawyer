@@ -115,7 +115,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             name: "Diplomacy",
             ability: "Charisma",
             proficiency: Proficiencies.Untrained,
-            itemBonus: 1,
+            itemBonus: 0,
             hasArmorPenalty: true,
             armorPenalty: 0,
         },

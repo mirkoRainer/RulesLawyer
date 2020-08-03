@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { MovementProps } from "./MovementProps";
+import {  StyleSheet } from "react-native";
+import { MovementProps } from "./Movements";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     movements: MovementProps;
@@ -23,12 +24,14 @@ export default class OtherMovements extends Component<Props, State> {
             ? `Fly ${this.props.movements.flySpeed}, `
             : "";
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
+                <Text category='h6'>
+                    Other Movement
+                </Text>
                 <Text>
-                    Other:{" "}
                     {`${climb}${fly}${swim}${burrow}`}
                 </Text>
-            </View>
+            </Layout>
         );
     }
 }

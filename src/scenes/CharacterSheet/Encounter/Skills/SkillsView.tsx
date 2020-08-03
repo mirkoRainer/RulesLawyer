@@ -5,7 +5,7 @@ import { Skill, PlayerCharacter } from "../../../../PF2eCoreLib/PlayerCharacter"
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { CharacterSheetState } from "../../../../store/Store";
 import { connect } from "react-redux";
-import { Layout } from "@ui-kitten/components";
+import { Layout, Divider } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
 
 interface OwnProps {
@@ -17,14 +17,17 @@ type Props = OwnProps & LinkStateProps;
 
 const SkillsView: React.FC<Props> = (props) => {
     const renderItem = (item: Skill) => (
-        <ProficiencyView
-            title={item.name.toString()}
-            keyAbility={props.abilityScores[item.ability]}
-            proficiency={item.proficiency}
-            level={props.level}
-            itemBonus={item.itemBonus}
-            armorPenalty={item.hasArmorPenalty ? item.armorPenalty : 0}
-        />
+        <Layout>
+            <ProficiencyView
+                title={item.name.toString()}
+                keyAbility={props.abilityScores[item.ability]}
+                proficiency={item.proficiency}
+                level={props.level}
+                itemBonus={item.itemBonus}
+                armorPenalty={item.hasArmorPenalty ? item.armorPenalty : 0}
+            />
+            <Divider />
+        </Layout>
     );
     const skills: JSX.Element[] = [];
     props.skills.forEach(skill => {
@@ -33,6 +36,7 @@ const SkillsView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
+            <Divider />
             <ScrollView>
                 {skills}
             </ScrollView>
@@ -56,8 +60,6 @@ export default connect(mapStateToProps, null)(SkillsView);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
     },
     text: {
         flex: 1,
