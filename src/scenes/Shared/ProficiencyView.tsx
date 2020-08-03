@@ -20,7 +20,6 @@ export interface ProficiencyProps {
     level: number;
     itemBonus: number;
     is10base?: boolean;
-    isACBase?: boolean;
     dexCap?: number;
     descriptor?: string;
     armorPenalty?: number;
@@ -43,16 +42,16 @@ export default class ProficiencyView extends Component<
             <Text style={styles.noTenBase}></Text>
         );
 
-        const keyModifier = this.props.isACBase ? (
-            <Text style={styles.acBase}>
-                DEX:{modifier} Cap:
-                {this.props.dexCap !== undefined ? this.props.dexCap : 0}
-            </Text>
-        ) : (
-            <Text style={styles.acBase}>
-                {GetAbilityScoreAbbreviation(this.props.keyAbility.ability.toString())}{" "}
-                {modifier}
-            </Text>
+        const keyModifier = (
+            <React.Fragment>
+                <Text style={styles.modifierText} category='p1'>
+                    {GetAbilityScoreAbbreviation(this.props.keyAbility.ability.toString())}{" "}
+                </Text>
+                <Text category='p1' style={styles.modifierNumber}>
+                    {modifier}
+                </Text>
+
+            </React.Fragment>
         );
         const itemBonus =
             this.props.itemBonus !== null ? (
@@ -65,7 +64,7 @@ export default class ProficiencyView extends Component<
 
         const descriptor =
             this.props.descriptor !== undefined ? (
-                <Text style={styles.container}>{this.props.descriptor}</Text>
+                <Text style={styles.descriptor}>{this.props.descriptor}</Text>
             ) : undefined;
         const total =
             CalculateAbilityScoreModifier(this.props.keyAbility.score)+
@@ -80,7 +79,7 @@ export default class ProficiencyView extends Component<
         return (
             <Layout style={styles.flex1}>
                 <Layout style={styles.container}>
-                    <Text style={this.props.is10base ? styles.title10 : styles.title}>{this.props.title}</Text>
+                    <Text style={this.props.is10base ? styles.title10 : styles.title} category='p1'>{this.props.title}</Text>
                     {totalView}
                     <Text style={styles.equalSign}> = </Text>
                     {tenBase}
@@ -100,16 +99,19 @@ export default class ProficiencyView extends Component<
 
 const styles = StyleSheet.create({
     flex1: {
-        flex: 1
+        flex: 1,
     },
     container: {
         flex: 1,
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
         alignContent: "stretch",
         alignSelf: "stretch",
         justifyContent: "space-evenly",
+        paddingHorizontal: 5
+    },
+    descriptor: {
+        flex: 1,
+        paddingHorizontal: 15
     },
     text: {
         flex: 3,
@@ -141,9 +143,16 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     noTenBase: {},
-    acBase: {
-        flex: 3,
+    modifierText: {
+        flex: 1.5,
         alignSelf: "center",
+    },
+    modifierNumber: {
+        flex: 1,
+        alignSelf: "center",
+        justifyContent: "flex-end",
+        textAlign: "right",
+        paddingRight: 10
     },
     profBonus: {
         flex: 2,

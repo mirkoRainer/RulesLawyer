@@ -7,54 +7,58 @@ interface Props {
     proficiency: Proficiencies;
 }
 
-
 const ProficiencyArrayView: React.FC<Props> = (props) => {
+    let trainedStyle;
+    let expertStyle;
+    let masterStyle;
+    let legendaryStyle;
+    let trainedCategory;
+    let expertCategory;
+    let masterCategory;
+    let legendaryCategory;
+
+    if (["Trained", "Expert", "Master", "Legendary"].includes(
+        props.proficiency.toString()
+    )) {
+        trainedStyle = styles.profTextTrue;
+    } else {
+        trainedStyle = styles.profTextFalse;
+        trainedCategory = "primary";
+    }
+
+    if (["Expert", "Master", "Legendary"].includes(
+        props.proficiency.toString()
+    )) {
+        expertStyle = styles.profTextTrue;
+    } else {
+        expertStyle = styles.profTextFalse;
+        expertCategory = "primary";
+    }
+
+    if (["Master", "Legendary"].includes(
+        props.proficiency.toString()
+    )) {
+        masterStyle =  styles.profTextTrue;
+    } else {
+        masterStyle = styles.profTextFalse;
+        masterCategory = "primary";
+    }
+
+    if (["Legendary"].includes(
+        props.proficiency.toString()
+    )) {
+        legendaryStyle = styles.profTextTrue;
+    } else {
+        legendaryStyle = styles.profTextFalse;
+        legendaryCategory = "primary";
+    }
+
     return (
         <Layout style={styles.container}>
-            <Text
-                style={
-                    ["Trained", "Expert", "Master", "Legendary"].includes(
-                        props.proficiency.toString()
-                    )
-                        ? styles.profTextTrue
-                        : styles.profTextFalse
-                }
-            >
-                    T
-            </Text>
-            <Text
-                style={
-                    ["Expert", "Master", "Legendary"].includes(
-                        props.proficiency.toString()
-                    )
-                        ? styles.profTextTrue
-                        : styles.profTextFalse
-                }
-            >
-                    E
-            </Text>
-            <Text
-                style={
-                    ["Master", "Legendary"].includes(
-                        props.proficiency.toString()
-                    )
-                        ? styles.profTextTrue
-                        : styles.profTextFalse
-                }
-            >
-                    M
-            </Text>
-            <Text
-                style={
-                    ["Legendary"].includes(
-                        props.proficiency.toString()
-                    )
-                        ? styles.profTextTrue
-                        : styles.profTextFalse
-                }
-            >
-                    L
-            </Text>
+            <Text style={trainedStyle} category={trainedCategory}>T</Text>
+            <Text style={expertStyle} category={expertCategory}>E</Text>
+            <Text style={masterStyle} category={masterCategory}>M</Text>
+            <Text style={legendaryStyle} category={legendaryCategory}>L</Text>
         </Layout>
     );
 };

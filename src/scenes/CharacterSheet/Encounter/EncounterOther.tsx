@@ -13,8 +13,9 @@ import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView"
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import Conditions from "./Conditions";
+import { Layout, Divider } from "@ui-kitten/components";
 
-const EncounterMisc: React.FC<Props> = (props) => {
+const EncounterOther: React.FC<Props> = (props) => {
     const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
@@ -31,7 +32,7 @@ const EncounterMisc: React.FC<Props> = (props) => {
     };
     
     return (
-        <ScrollView>
+        <Layout style={{flex: 1}}>
             <ProficiencyView
                 title={"Class DC"}
                 proficiency={classDCProficiency().proficiency}
@@ -42,8 +43,9 @@ const EncounterMisc: React.FC<Props> = (props) => {
                 itemBonus={classDCProficiency().itemBonus}
                 level={props.playerCharacter.level}
             />
+            <Divider />
             <Conditions conditions={props.playerCharacter.conditions} />
-        </ScrollView>
+        </Layout>
     );
 };
 
@@ -69,7 +71,7 @@ const mapStateToProps = (
     playerCharacter: state.playerCharacter,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EncounterMisc);
+export default connect(mapStateToProps, mapDispatchToProps)(EncounterOther);
 
 const styles = StyleSheet.create({
     container: {

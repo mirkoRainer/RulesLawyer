@@ -1,8 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { PlayerCharacter, Action } from "../../../PF2eCoreLib/PlayerCharacter";
-import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
@@ -14,6 +12,7 @@ import { WeaponViewProps, GetProficiencyForWeapon } from "./Offense/Weapons/Weap
 import { GetAbilityModifierFromScores } from "../../../PF2eCoreLib/AbilityScores";
 import ActionsAndActivities from "./Offense/ActionsAndActivities";
 import { ScrollView } from "react-native-gesture-handler";
+import { Divider, Layout } from "@ui-kitten/components";
 
 const EncounterOffense: React.FC<Props> = (props) => {
     const perception = (): ProficiencyProps => {
@@ -53,7 +52,7 @@ const EncounterOffense: React.FC<Props> = (props) => {
     };
     
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <ScrollView>
                 <ProficiencyView
                     title={"Perception"}
@@ -65,16 +64,19 @@ const EncounterOffense: React.FC<Props> = (props) => {
                     itemBonus={perception().itemBonus}
                     descriptor={perception().descriptor}
                 />
+                <Divider />
                 <Movements 
                     movements={props.playerCharacter.movement}
                 />
+                <Divider />
                 <ActionsAndActivities actions={props.actions} />
+                <Divider />
                 <Weapons
                     weapons={weapons()}
                     level={props.playerCharacter.level}
                 />
             </ScrollView>
-        </View>
+        </Layout>
     );
 };
 

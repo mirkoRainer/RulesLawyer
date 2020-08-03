@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { OwnProps } from "../Story/Components/CharacterMetadata/ClassView";
@@ -14,9 +15,9 @@ const Conditions: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_CONDITIONS);
     };    
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text onPress={changeConditions}>Conditions: {conditions}</Text>
-        </View>
+        </Layout>
     );
 };
 

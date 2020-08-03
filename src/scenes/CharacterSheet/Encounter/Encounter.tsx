@@ -14,7 +14,7 @@ import EncounterDefense from "./EncounterDefense";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EncounterOffense from "./EncounterOffense";
 import EncounterSkills from "./EncounterSkills";
-import EncounterMisc from "./EncounterMisc";
+import EncounterOther from "./EncounterOther";
 import { NavigationContainer } from "@react-navigation/native";
 
 var width: number = Dimensions.get("window").width; //full width
@@ -61,7 +61,7 @@ const Encounter: React.FC<Props> = () => {
                 />
                 <Tab.Screen 
                     name="Other" 
-                    component={EncounterMisc}
+                    component={EncounterOther}
                     options={{ tabBarLabel: "Other" }}
                 />
             </Tab.Navigator>
