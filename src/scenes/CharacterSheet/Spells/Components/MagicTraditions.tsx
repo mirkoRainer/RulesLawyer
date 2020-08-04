@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import MagicTradition from "./MagicTradition";
+import { Layout, Text } from "@ui-kitten/components";
 
 export interface MagicTraditionProps {
     prepared: boolean;
@@ -21,9 +22,9 @@ export default class MagicTraditions extends Component<
 
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.header}> Magic Traditions </Text>
-                <View style={styles.rowContainer}>
+                <Layout style={styles.rowContainer}>
                     <MagicTradition
                         traditionName={"Spontaneous"}
                         hasTradition={this.props.spontaneous}
@@ -32,8 +33,8 @@ export default class MagicTraditions extends Component<
                         traditionName={"Prepared"}
                         hasTradition={this.props.prepared}
                     />
-                </View>
-                <View style={styles.rowContainer}>
+                </Layout>
+                <Layout style={styles.rowContainer}>
                     <MagicTradition
                         traditionName={"Arcane"}
                         hasTradition={this.props.arcane}
@@ -50,8 +51,8 @@ export default class MagicTraditions extends Component<
                         traditionName={"Primal"}
                         hasTradition={this.props.primal}
                     />
-                </View>
-            </View>
+                </Layout>
+            </Layout>
         );
     }
 }

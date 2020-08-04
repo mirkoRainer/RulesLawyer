@@ -16,33 +16,11 @@ import Conditions from "./Conditions";
 import { Layout, Divider } from "@ui-kitten/components";
 
 const EncounterOther: React.FC<Props> = (props) => {
-    const classDCProficiency = (): ProficiencyProps => {
-        return {
-            title: "Class DC",
-            keyAbility: props.playerCharacter.abilityScores[props.playerCharacter.pcClass.keyAbility],
-            proficiency: props.playerCharacter.pcClass.proficiency,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "classDc",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-            is10base: true,
-        };
-    };
+
     
     return (
         <Layout style={{flex: 1}}>
-            <ProficiencyView
-                title={"Class DC"}
-                proficiency={classDCProficiency().proficiency}
-                keyAbility={
-                    classDCProficiency().keyAbility
-                }
-                is10base={classDCProficiency().is10base}
-                itemBonus={classDCProficiency().itemBonus}
-                level={props.playerCharacter.level}
-            />
+
             <Divider />
             <Conditions conditions={props.playerCharacter.conditions} />
         </Layout>

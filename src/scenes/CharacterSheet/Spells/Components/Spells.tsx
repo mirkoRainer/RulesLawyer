@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, FlatList, SectionList } from "react-native";
+import { StyleSheet, SectionList } from "react-native";
 import SpellView from "./SpellView";
 import { Spell, SpellListEntry } from "./Spell";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     spells: SpellListEntry[];
@@ -13,7 +14,7 @@ export default class Spells extends Component<Props, State> {
     keyExtractor = (item: Spell) => item.name;
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.header}> Spells </Text>
                 <SectionList
                     style={styles.flatContainer}
@@ -35,7 +36,7 @@ export default class Spells extends Component<Props, State> {
                         </Text>
                     )}
                 />
-            </View>
+            </Layout>
         );
     }
 }

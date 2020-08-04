@@ -22,6 +22,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
         <ScrollView>
             <Layout style={styles.container}>
                 <Text style={{ alignSelf: "center"}} category='h2'>Defense</Text>
+                <Divider />
                 <HitPoints
                     max={props.playerCharacter.hitPoint.max}
                     current={props.playerCharacter.hitPoint.current}
@@ -37,6 +38,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 <SavesView />
                 <Divider />
                 <ResistancesImmunitiesWeaknesses />
+                <Divider />
             </Layout>
         </ScrollView>
     );

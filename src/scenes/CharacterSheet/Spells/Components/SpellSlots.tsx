@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import SpellSlotView, { SpellSlotProps } from "./SpellSlotView";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     spellSlots: SpellSlotProps[];
@@ -12,9 +13,9 @@ export default class SpellSlots extends Component<Props, State> {
     keyExtractor = (item: SpellSlotProps) => item.spellLevel;
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.header}> Spell Slots </Text>
-                <View style={styles.rowContainer}>
+                <Layout style={styles.rowContainer}>
                     <SpellSlotView
                         /* Focus Points */
                         spellLevel={this.props.spellSlots[0].spellLevel}
@@ -82,8 +83,8 @@ export default class SpellSlots extends Component<Props, State> {
                         maximum={this.props.spellSlots[10].maximum}
                         current={this.props.spellSlots[10].current}
                     />
-                </View>
-            </View>
+                </Layout>
+            </Layout>
         );
     }
 }

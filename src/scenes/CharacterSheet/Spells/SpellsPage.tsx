@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
+import { StyleSheet } from "react-native";
 import SpellAttackAndDCView from "./Components/SpellAttackAndDCView";
 import MagicTraditions, { MagicTraditionProps } from "./Components/MagicTraditions";
 import SpellSlots from "./Components/SpellSlots";
 import { SpellSlotProps } from "./Components/SpellSlotView";
-import { Spell, SpellListEntry } from "./Components/Spell";
+import { SpellListEntry } from "./Components/Spell";
 import Spells from "./Components/Spells";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { Bonus, iBonus } from "../../../PF2eCoreLib/Bonus";
@@ -13,13 +12,12 @@ import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { ScrollView } from "react-native-gesture-handler";
+import { Layout, Text } from "@ui-kitten/components";
 
 const SpellsPage: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
-
-            <Text h4> Spells Page </Text>
+        <Layout style={styles.container}>
+            <Text category='h4'> Spells Page </Text>
             <SpellAttackAndDCView
                 proficiency={props.spellAttackProficiency}
                 keySpellcastingAbility={
@@ -47,7 +45,7 @@ const SpellsPage: React.FC<Props> = (props) => {
             />
             <SpellSlots spellSlots={props.spellSlots} />
             <Spells spells={props.spells} />
-        </View>
+        </Layout>
     );
 };
 

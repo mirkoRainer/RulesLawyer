@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {  StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     hasTradition: boolean;
@@ -11,10 +12,10 @@ interface State {}
 export default class MagicTradition extends Component<Props, State> {
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.text}>{this.props.traditionName}</Text>
-                <View style={styles.rowContainer}>
-                    <View style={styles.buffer} />
+                <Layout style={styles.rowContainer}>
+                    <Layout style={styles.buffer} />
                     <Text
                         style={
                             this.props.hasTradition
@@ -24,9 +25,9 @@ export default class MagicTradition extends Component<Props, State> {
                     >
                         X
                     </Text>
-                    <View style={styles.buffer} />
-                </View>
-            </View>
+                    <Layout style={styles.buffer} />
+                </Layout>
+            </Layout>
         );
     }
 }

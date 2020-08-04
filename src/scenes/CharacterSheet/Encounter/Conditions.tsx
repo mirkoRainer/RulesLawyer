@@ -16,7 +16,8 @@ const Conditions: React.FC<Props> = (props) => {
     };    
     return (
         <Layout style={styles.container}>
-            <Text onPress={changeConditions}>Conditions: {conditions}</Text>
+            <Text onPress={changeConditions} category='h6'>Conditions:</Text>
+            <Text onPress={changeConditions}>{conditions}</Text>
         </Layout>
     );
 };

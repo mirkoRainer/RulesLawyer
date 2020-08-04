@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 type Props = {};
 
 export const Inventory: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text>Inventory Page</Text>
-        </View>
+        </Layout>
     );
 };
 

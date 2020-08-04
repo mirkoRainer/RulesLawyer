@@ -13,6 +13,7 @@ import { GetAbilityModifierFromScores } from "../../../PF2eCoreLib/AbilityScores
 import ActionsAndActivities from "./Offense/ActionsAndActivities";
 import { ScrollView } from "react-native-gesture-handler";
 import { Divider, Layout } from "@ui-kitten/components";
+import ClassDC from "./Offense/ClassDC";
 
 const EncounterOffense: React.FC<Props> = (props) => {
     const perception = (): ProficiencyProps => {
@@ -50,10 +51,14 @@ const EncounterOffense: React.FC<Props> = (props) => {
             },
         ];
     };
+
+
     
     return (
         <Layout style={styles.container}>
             <ScrollView>
+                <ClassDC />
+                <Divider />
                 <ProficiencyView
                     title={"Perception"}
                     keyAbility={

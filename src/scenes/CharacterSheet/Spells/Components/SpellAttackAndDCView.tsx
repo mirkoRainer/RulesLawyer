@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import { AbilityScore } from "../../../../PF2eCoreLib/AbilityScores";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     proficiency: Proficiencies;
@@ -17,7 +18,7 @@ interface State {}
 export default class SpellAttackDCView extends Component<Props, State> {
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.header}> Spell Attack </Text>
                 <ProficiencyView
                     title={"Spell Attack"}
@@ -34,7 +35,7 @@ export default class SpellAttackDCView extends Component<Props, State> {
                     itemBonus={this.props.spellDCItemBonus}
                     is10base={true}
                 />
-            </View>
+            </Layout>
         );
     }
 }

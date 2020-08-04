@@ -1,12 +1,12 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
+import { StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 type Props = {}
 
 export const Downtime: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text h4>
                 Downtime!
             </Text>
@@ -19,7 +19,7 @@ export const Downtime: React.FC<Props> = (props) => {
             <Text>Treat Disease</Text>
             <Text>Create Forgery</Text>
             <Text>Subsist</Text>
-        </View>
+        </Layout>
     );
 };
 

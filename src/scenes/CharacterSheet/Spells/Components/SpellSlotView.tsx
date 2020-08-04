@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {  StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 export interface SpellSlotProps {
     maximum: number;
@@ -18,7 +19,7 @@ export default class SpellSlotView extends Component<SpellSlotProps, State> {
     focusPoint = this.props.focus ? { flex: 3.9 } : {};
     view =
         this.props.maximum === 0 ? (
-            <View
+            <Layout
                 style={{
                     ...styles.spellSlotUnavailable,
                     ...styles.bordered,
@@ -31,9 +32,9 @@ export default class SpellSlotView extends Component<SpellSlotProps, State> {
                     {this.props.spellLevel}{" "}
                 </Text>
                 <Text style={styles.text}> - </Text>
-            </View>
+            </Layout>
         ) : (
-            <View
+            <Layout
                 style={{
                     ...this.spellSlotStyle,
                     ...styles.bordered,
@@ -46,7 +47,7 @@ export default class SpellSlotView extends Component<SpellSlotProps, State> {
                     {this.props.spellLevel}{" "}
                 </Text>
                 <Text style={styles.text}> {this.props.maximum} </Text>
-            </View>
+            </Layout>
         );
 
     render() {

@@ -1,8 +1,9 @@
 import { RulebookEntry } from "../../../../PF2eCoreLib/RulebookEntry";
 
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { Spell } from "./Spell";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     spell: Spell;
@@ -15,9 +16,9 @@ export default class SpellView extends Component<Props, State> {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.spellName}> {this.props.spell.name} </Text>
-            </View>
+            </Layout>
         );
     }
 }

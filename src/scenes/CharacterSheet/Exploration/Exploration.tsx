@@ -1,13 +1,13 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
+import {  StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 
 type Props = {}
 
 export const Exploration: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text h4>
                 Exploration!
             </Text>
@@ -20,7 +20,7 @@ export const Exploration: React.FC<Props> = (props) => {
             <Text>Repeat a Spell</Text>
             <Text>Scout</Text>
             <Text>Search</Text>
-        </View>
+        </Layout>
     );
 };
 
