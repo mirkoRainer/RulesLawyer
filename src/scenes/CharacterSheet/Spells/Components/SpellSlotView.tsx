@@ -14,30 +14,18 @@ interface State {}
 export default class SpellSlotView extends Component<SpellSlotProps, State> {
     spellSlotStyle =
         this.props.current === 0
-            ? { ...styles.outOfSpells, ...styles.bordered }
-            : { ...styles.text, ...styles.bordered };
+            ? { ...styles.outOfSpells, ...styles.spellSlot }
+            : { ...styles.text, ...styles.spellSlot };
     focusPoint = this.props.focus ? { flex: 3.9 } : {};
     view =
         this.props.maximum === 0 ? (
-            <Layout
-                style={{
-                    ...styles.spellSlotUnavailable,
-                    ...styles.bordered,
-                    ...this.focusPoint,
-                }}
-            >
-                <Text style={styles.text}> - </Text>
-                <Text style={{ ...styles.text, ...styles.spellLevel }}>
-                    {" "}
-                    {this.props.spellLevel}{" "}
-                </Text>
-                <Text style={styles.text}> - </Text>
+            <Layout>
             </Layout>
         ) : (
             <Layout
                 style={{
                     ...this.spellSlotStyle,
-                    ...styles.bordered,
+                    ...styles.spellSlot,
                     ...this.focusPoint,
                 }}
             >
@@ -61,14 +49,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     spellLevel: {
-        fontWeight: "bold",
         justifyContent: "center",
-        fontSize: 12,
     },
-    bordered: {
-        borderColor: "black",
-        borderWidth: 1,
+    spellSlot: {
         flex: 3,
+        width: 50
     },
     outOfSpells: {
         backgroundColor: "lightgray",

@@ -15,7 +15,6 @@ export default class Spells extends Component<Props, State> {
     render() {
         return (
             <Layout style={styles.container}>
-                <Text style={styles.header}> Spells </Text>
                 <SectionList
                     style={styles.flatContainer}
                     sections={this.props.spells}
@@ -44,8 +43,6 @@ export default class Spells extends Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 1,
     },
     flatContainer: {
         flex: 1,
@@ -54,8 +51,6 @@ const styles = StyleSheet.create({
     rowContainer: {
         flex: 1,
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 1,
     },
     text: {
         flex: 1,

@@ -23,7 +23,6 @@ export default class MagicTraditions extends Component<
     render() {
         return (
             <Layout style={styles.container}>
-                <Text style={styles.header}> Magic Traditions </Text>
                 <Layout style={styles.rowContainer}>
                     <MagicTradition
                         traditionName={"Spontaneous"}
@@ -33,8 +32,6 @@ export default class MagicTraditions extends Component<
                         traditionName={"Prepared"}
                         hasTradition={this.props.prepared}
                     />
-                </Layout>
-                <Layout style={styles.rowContainer}>
                     <MagicTradition
                         traditionName={"Arcane"}
                         hasTradition={this.props.arcane}
@@ -59,14 +56,11 @@ export default class MagicTraditions extends Component<
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
+        flex: .17,
+        padding: 5
     },
     rowContainer: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 1,
         flexDirection: "row",
     },
     text: {
@@ -74,8 +68,6 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        fontSize: 16,
-        fontWeight: "bold",
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",

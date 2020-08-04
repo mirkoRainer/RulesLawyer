@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import { AbilityScore } from "../../../../PF2eCoreLib/AbilityScores";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Divider } from "@ui-kitten/components";
 
 interface Props {
     proficiency: Proficiencies;
@@ -19,7 +19,6 @@ export default class SpellAttackDCView extends Component<Props, State> {
     render() {
         return (
             <Layout style={styles.container}>
-                <Text style={styles.header}> Spell Attack </Text>
                 <ProficiencyView
                     title={"Spell Attack"}
                     proficiency={this.props.proficiency}
@@ -27,6 +26,7 @@ export default class SpellAttackDCView extends Component<Props, State> {
                     level={this.props.level}
                     itemBonus={this.props.spellAttackItemBonus}
                 />
+                <Divider />
                 <ProficiencyView
                     title={"Spell DC"}
                     proficiency={this.props.proficiency}
@@ -43,19 +43,9 @@ export default class SpellAttackDCView extends Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
     },
     text: {
         flex: 1,
         width: 100,
-    },
-    header: {
-        flex: 1,
-        fontSize: 16,
-        fontWeight: "bold",
-        alignContent: "center",
-        justifyContent: "center",
-        alignSelf: "center",
-    },
+    }
 });

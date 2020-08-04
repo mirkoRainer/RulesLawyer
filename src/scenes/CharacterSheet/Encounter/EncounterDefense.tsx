@@ -21,7 +21,6 @@ const EncounterDefense: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
             <ScrollView>
-                <Text style={{ alignSelf: "center"}} category='h2'>Defense</Text>
                 <Divider />
                 <HitPoints
                     max={props.playerCharacter.hitPoint.max}

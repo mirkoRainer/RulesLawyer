@@ -12,12 +12,22 @@ import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Divider } from "@ui-kitten/components";
+import { ScrollView } from "react-native-gesture-handler";
 
 const SpellsPage: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
-            <Text category='h4'> Spells Page </Text>
+            <Divider />
+            <MagicTraditions
+                prepared={props.magicTraditions.prepared}
+                spontaneous={props.magicTraditions.spontaneous}
+                arcane={props.magicTraditions.arcane}
+                primal={props.magicTraditions.primal}
+                divine={props.magicTraditions.divine}
+                occult={props.magicTraditions.occult}
+            />
+            <Divider />
             <SpellAttackAndDCView
                 proficiency={props.spellAttackProficiency}
                 keySpellcastingAbility={
@@ -35,15 +45,9 @@ const SpellsPage: React.FC<Props> = (props) => {
                     props.bonuses
                 )}
             />
-            <MagicTraditions
-                prepared={props.magicTraditions.prepared}
-                spontaneous={props.magicTraditions.spontaneous}
-                arcane={props.magicTraditions.arcane}
-                primal={props.magicTraditions.primal}
-                divine={props.magicTraditions.divine}
-                occult={props.magicTraditions.occult}
-            />
+            <Divider />
             <SpellSlots spellSlots={props.spellSlots} />
+            <Divider />
             <Spells spells={props.spells} />
         </Layout>
     );
@@ -78,8 +82,6 @@ export default connect(mapStateToProps, null)(SpellsPage);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
         alignSelf: "stretch",
         alignContent: "stretch",
     },

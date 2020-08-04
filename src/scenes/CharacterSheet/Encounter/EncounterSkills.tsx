@@ -12,7 +12,6 @@ const EncounterSkills: React.FC<Props> = (props) => {
     
     return (
         <Layout style={styles.container}>
-            <Text style={styles.header} category='h2'>Skillz</Text>
             <SkillsView skills={props.skills} level={props.level} abilityScores={props.abilityScores} />
         </Layout>
     );
