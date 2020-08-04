@@ -16,6 +16,7 @@ import EncounterOffense from "./EncounterOffense";
 import EncounterSkills from "./EncounterSkills";
 import EncounterOther from "./EncounterOther";
 import { NavigationContainer } from "@react-navigation/native";
+import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -28,10 +29,20 @@ export type EncounterTabParamList = {
 
 const Encounter: React.FC<Props> = () => {
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
-
+    const BottomTabBar = ({ navigation, state }) => (
+        <BottomNavigation
+            selectedIndex={state.index}
+            onSelect={index => navigation.navigate(state.routeNames[index])}>
+            <BottomNavigationTab title='Your Turn'/>
+            <BottomNavigationTab title='Their Turn'/>
+            <BottomNavigationTab title='Skillz'/>
+            <BottomNavigationTab title='Other'/>
+        </BottomNavigation>
+    );
     return (
         <NavigationContainer independent={true}>
             <Tab.Navigator 
+                tabBar={props => <BottomTabBar {...props}/>}
                 tabBarOptions={{
                     activeTintColor: "tomato",
                     inactiveTintColor: "grey",
