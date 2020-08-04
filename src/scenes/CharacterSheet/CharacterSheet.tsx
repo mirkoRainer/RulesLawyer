@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { Header } from "react-native-elements";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
@@ -22,6 +22,8 @@ import { Inventory } from "./Inventory/Inventory";
 import SpellsPage from "./Spells/SpellsPage";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import PickerModal from "../Shared/Modals/PickerModal";
+import Conditions from "./Encounter/Conditions";
+import { BottomNavigation, BottomNavigationTab, Layout, Text } from "@ui-kitten/components";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -49,10 +51,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
         const pcClass = props.playerCharacter.pcClass;
         const name = props.playerCharacter.name;
         return (
-            <View >
+            <Layout >
                 <Text style={styles.headerText}>{name + " - " + pcClass.subClass + " " + pcClass.name + " Lvl:" + props.playerCharacter.level}</Text>
                 <Text style={styles.headerText} >{props.playerCharacter.background.name + " " + props.playerCharacter.ancestry.heritage}</Text>
-            </View>
+            </Layout>
         );
     };
 
@@ -68,15 +70,28 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     };
 
     const Tab = createBottomTabNavigator<CharacterSheetTabParamList>();
-
+    const BottomTabBar = ({ navigation, state }) => (
+        <BottomNavigation
+            selectedIndex={state.index}
+            onSelect={index => navigation.navigate(state.routeNames[index])}>
+            <BottomNavigationTab title='Encounter'/>
+            <BottomNavigationTab title='Exploration'/>
+            <BottomNavigationTab title='Downtime'/>
+            <BottomNavigationTab title='Inventory'/>
+            <BottomNavigationTab title='Story'/>
+        </BottomNavigation>
+    );
+    
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Header
                 leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
                 centerComponent={headerText()}
                 rightComponent={{icon: "build", color: "#eee", onPress: goToBuildPage}}
             />
+            <Conditions conditions={props.playerCharacter.conditions} />
             <Tab.Navigator 
+                tabBar={props => <BottomTabBar {...props}/>}
                 tabBarOptions={{
                     activeTintColor: "tomato",
                     inactiveTintColor: "grey",
@@ -109,11 +124,6 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     options={{ tabBarLabel: "Inventory" }}
                 />
                 <Tab.Screen 
-                    name="Spells" 
-                    component={SpellsPage} 
-                    options={{ tabBarLabel: "Spells" }}
-                />
-                <Tab.Screen 
                     name="Story" 
                     component={StoryPage}
                     options={{ tabBarLabel: "Story" }}
@@ -121,7 +131,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             </Tab.Navigator>
             <TextEditModal />
             <PickerModal />
-        </View>
+        </Layout>
     );
 };
 
@@ -155,7 +165,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        backgroundColor: "#fff",
         // alignItems: "center",
         // justifyContent: "center",
     },

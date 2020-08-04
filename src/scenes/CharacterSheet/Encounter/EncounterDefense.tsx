@@ -19,8 +19,8 @@ const EncounterDefense: React.FC<Props> = (props) => {
 
     
     return (
-        <ScrollView>
-            <Layout style={styles.container}>
+        <Layout style={styles.container}>
+            <ScrollView>
                 <Text style={{ alignSelf: "center"}} category='h2'>Defense</Text>
                 <Divider />
                 <HitPoints
@@ -39,13 +39,14 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 <Divider />
                 <ResistancesImmunitiesWeaknesses />
                 <Divider />
-            </Layout>
-        </ScrollView>
+            </ScrollView>
+        </Layout>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1
     },
 });
 

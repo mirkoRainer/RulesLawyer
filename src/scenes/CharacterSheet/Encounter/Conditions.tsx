@@ -45,9 +45,11 @@ export default connect(null, mapDispatchToProps)(Conditions);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignContent: "stretch",
+        flex: .08,
+        alignContent: "center",
+        alignItems: "center",
         alignSelf: "stretch",
+        flexDirection: "row"
     },
     text: {
         flex: 1,

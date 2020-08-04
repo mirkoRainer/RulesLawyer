@@ -22,7 +22,6 @@ const EncounterOther: React.FC<Props> = (props) => {
         <Layout style={{flex: 1}}>
 
             <Divider />
-            <Conditions conditions={props.playerCharacter.conditions} />
         </Layout>
     );
 };

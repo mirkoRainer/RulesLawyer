@@ -17,6 +17,7 @@ import EncounterSkills from "./EncounterSkills";
 import EncounterOther from "./EncounterOther";
 import { NavigationContainer } from "@react-navigation/native";
 import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
+import SpellsPage from "../Spells/SpellsPage";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -36,7 +37,7 @@ const Encounter: React.FC<Props> = () => {
             <BottomNavigationTab title='Your Turn'/>
             <BottomNavigationTab title='Their Turn'/>
             <BottomNavigationTab title='Skillz'/>
-            <BottomNavigationTab title='Other'/>
+            <BottomNavigationTab title='Spells'/>
         </BottomNavigation>
     );
     return (
@@ -72,8 +73,8 @@ const Encounter: React.FC<Props> = () => {
                 />
                 <Tab.Screen 
                     name="Other" 
-                    component={EncounterOther}
-                    options={{ tabBarLabel: "Other" }}
+                    component={SpellsPage}
+                    options={{ tabBarLabel: "Spells" }}
                 />
             </Tab.Navigator>
         </ NavigationContainer>
