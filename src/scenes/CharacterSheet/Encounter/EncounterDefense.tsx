@@ -12,30 +12,33 @@ import ACView from "./Defense/ArmorClass/ACView";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import Shield, { ShieldProps } from "./Defense/ArmorClass/Shield";
 import SavesView from "./Defense/SavesView";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 const EncounterDefense: React.FC<Props> = (props) => {
 
     
     return (
-        <Layout style={styles.container}>
-            <Text style={{ alignSelf: "center"}} category='h2'>Defense</Text>
-            <HitPoints
-                max={props.playerCharacter.hitPoint.max}
-                current={props.playerCharacter.hitPoint.current}
-                temporary={props.playerCharacter.hitPoint.temporary}
-                dying={props.playerCharacter.hitPoint.dying}
-                wounded={props.playerCharacter.hitPoint.wounded}
-            />
-            <Divider />
-            <ACView />
-            <Divider />
-            <Shield />
-            <Divider />
-            <ResistancesImmunitiesWeaknesses />
-            <Divider />
-            <SavesView />
-        </Layout>
+        <ScrollView>
+            <Layout style={styles.container}>
+                <Text style={{ alignSelf: "center"}} category='h2'>Defense</Text>
+                <HitPoints
+                    max={props.playerCharacter.hitPoint.max}
+                    current={props.playerCharacter.hitPoint.current}
+                    temporary={props.playerCharacter.hitPoint.temporary}
+                    dying={props.playerCharacter.hitPoint.dying}
+                    wounded={props.playerCharacter.hitPoint.wounded}
+                />
+                <Divider />
+                <ACView />
+                <Divider />
+                <Shield />
+                <Divider />
+                <SavesView />
+                <Divider />
+                <ResistancesImmunitiesWeaknesses />
+            </Layout>
+        </ScrollView>
     );
 };
 

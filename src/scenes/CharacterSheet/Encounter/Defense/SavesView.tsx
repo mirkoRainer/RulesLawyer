@@ -55,7 +55,6 @@ const SavesView: React.FC<Props> = (props) => {
     
     return(
         <Layout style={{flex:1}}>
-            <Text style={styles.centered} category='h5'>Saves</Text>
             <ProficiencyView
                 title={"Fortitude"}
                 keyAbility={

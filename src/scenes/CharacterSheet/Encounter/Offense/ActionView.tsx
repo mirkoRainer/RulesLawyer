@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, ViewPropTypes } from "react-native";
+import { StyleSheet } from "react-native";
 import { Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Layout, Text, Divider } from "@ui-kitten/components";
 
 interface Props {
     action: Action;
@@ -30,7 +31,7 @@ export default class ActionView extends Component<Props, State> {
 
         const traits =
             this.props.action.traits.length === 0 ? (
-                <View style={styles.text}></View>
+                <Layout style={styles.text}></Layout>
             ) : (
                 <Text style={styles.text}>
                     <Text style={styles.header}>Traits: </Text>
@@ -41,28 +42,28 @@ export default class ActionView extends Component<Props, State> {
             );
 
         const trigger = this.props.action.trigger ? (
-            <View style={styles.rowContainer}>
+            <Layout style={styles.rowContainer}>
                 <Text>
                     <Text style={styles.header}>{"Trigger: "}</Text>
                     <Text style={styles.text}>{this.props.action.trigger}</Text>
                 </Text>
-            </View>
+            </Layout>
         ) : (
-            <View></View>
+            <Layout></Layout>
         );
 
         return (
-            <View style={styles.container}>
-                <View style={styles.rowContainer}>
+            <Layout style={styles.container}>
+                <Layout style={styles.rowContainer}>
                     <Text style={styles.header}>{this.props.action.name}</Text>
                     <Text style={styles.header}>
                         Actions: {actionTypeIndicator}
                     </Text>
-                </View>
-                <View style={styles.rowContainer}>
+                </Layout>
+                <Layout style={styles.rowContainer}>
                     <Text style={styles.text}></Text>
                     {traits}
-                </View>
+                </Layout>
                 {trigger}
                 <Text>
                     <Text style={styles.header}>Description: </Text>
@@ -70,13 +71,14 @@ export default class ActionView extends Component<Props, State> {
                         {this.props.action.description}
                     </Text>
                 </Text>
-                <View style={styles.rulebook}>
+                <Layout style={styles.rulebook}>
                     <Text style={styles.headerJustifyRight}>
                         {this.props.action.bookAbbreviation}:
                     </Text>
                     <Text> pg. {this.props.action.pageNumber}</Text>
-                </View>
-            </View>
+                </Layout>
+                <Divider />
+            </Layout>
         );
     }
 }
@@ -90,8 +92,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
+        padding: 5
     },
     rowContainer: {
         flex: 1,

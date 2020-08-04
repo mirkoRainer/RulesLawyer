@@ -22,7 +22,6 @@ const ACView: React.FC<Props> = (props) => {
             level: props.level,
             itemBonus: props.wornArmor.ACBonus,
             is10base: true,
-            isACBase: true,
             dexCap: props.wornArmor.DexCap,
         };
     };
@@ -45,7 +44,7 @@ const ACView: React.FC<Props> = (props) => {
             modifier +
             props.level +
             props.wornArmor.ACBonus +
-            GetProficiencyValue(wornProficiency);
+            GetProficiencyValue(wornProficiency, props.level);
 
     return(
         <Layout style={styles.container}>
@@ -63,7 +62,7 @@ const ACView: React.FC<Props> = (props) => {
                 <Text style={{...styles.calculatorText, flex: 1.3}}>Armor:</Text>
                 <Text style={styles.calculatorNumber}>{props.wornArmor.ACBonus} + </Text>
                 <Text style={styles.calculatorText}>Prof:</Text>
-                <Text style={styles.calculatorNumber}>{GetProficiencyValue(wornProficiency)} + </Text>
+                <Text style={styles.calculatorNumber}>{GetProficiencyValue(wornProficiency, props.level)} + </Text>
                 <Text style={{...styles.calculatorText, flex: 1.1}}>Level:</Text>
                 <Text style={{...styles.calculatorNumber, flex: .65}}>{props.level}</Text>
             </Layout>
@@ -74,13 +73,13 @@ const ACView: React.FC<Props> = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        padding: 5
     },
     horizontal: {
         flex: 1,
         alignSelf: "center",
         flexDirection: "row",
-        borderWidth: 1
     },
     centered: {
         alignSelf: "center"

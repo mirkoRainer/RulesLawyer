@@ -19,12 +19,18 @@ const ResistancesImmunitiesWeaknesses: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
-            <Text category='h6' onPress={changeResistances}>Resistances: </Text>
-            <Text category='p1' onPress={changeResistances}>{resistancesDisplay}</Text>
-            <Text category='h6' onPress={changeImmunities}>Immunities: </Text>
-            <Text category='p1' onPress={changeImmunities}>{immunitiesDisplay}</Text>
-            <Text category='h6' onPress={changeWeaknesses}>Weaknesses: </Text>
-            <Text category='p1' onPress={changeWeaknesses}>{weaknessesDisplay}</Text>
+            <Layout style={styles.horizontal}>
+                <Layout style={styles.container}>
+                    <Text style={styles.text} category='h6' onPress={changeResistances}>Resistances: </Text>
+                    <Text style={styles.text} category='p1' onPress={changeResistances}>{resistancesDisplay}</Text>
+                </Layout>
+                <Layout style={styles.container}>
+                    <Text style={styles.text} category='h6' onPress={changeImmunities}>Immunities: </Text>
+                    <Text style={styles.text} category='p1' onPress={changeImmunities}>{immunitiesDisplay}</Text>
+                </Layout>
+            </Layout>
+            <Text style={styles.text} category='h6' onPress={changeWeaknesses}>Weaknesses: </Text>
+            <Text style={styles.text} category='p1' onPress={changeWeaknesses}>{weaknessesDisplay}</Text>
         </Layout>
     );
 };
@@ -56,13 +62,14 @@ const mapStateToProps = (
     weaknesses: state.playerCharacter.weakness
 });
 
-export default connect(null, mapDispatchToProps)(ResistancesImmunitiesWeaknesses);
+export default connect(mapStateToProps, mapDispatchToProps)(ResistancesImmunitiesWeaknesses);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: "stretch",
         alignSelf: "stretch",
+        padding: 5
     },
     horizontal: {
         flex: 1,

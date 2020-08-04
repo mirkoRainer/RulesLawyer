@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignContent: "stretch",
         alignSelf: "stretch",
+        padding: 5
     },
     container: {
         flex: 1

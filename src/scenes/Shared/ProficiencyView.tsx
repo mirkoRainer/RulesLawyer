@@ -100,7 +100,7 @@ export default class ProficiencyView extends Component<
 const styles = StyleSheet.create({
     flex1: {
         flex: 1,
-        paddingHorizontal: 10
+        padding: 5
     },
     horizontal: {
         flex: 1,

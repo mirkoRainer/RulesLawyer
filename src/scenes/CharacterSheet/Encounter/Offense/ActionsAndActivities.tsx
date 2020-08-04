@@ -1,39 +1,37 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, FlatList } from "react-native";
-import ActionView from "../../Story/Components/ActionView";
+import {  StyleSheet, FlatList } from "react-native";
+import ActionView from "./ActionView";
 import { Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Layout, Text, Divider } from "@ui-kitten/components";
 
 interface Props {
     actions: Action[];
 }
+const ActionsAndActivities: React.FC<Props> = (props) => {
+    const renderItem = (item: Action) => <ActionView action={item} />;
 
-interface State {}
+    const actions: JSX.Element[] = [];
+    props.actions.forEach(action => {
+        actions.push(renderItem(action));
+    });
 
-export default class ActionsAndActivities extends Component<Props, State> {
-    renderItem = ({ item }: { item: Action }) => <ActionView action={item} />;
-    keyExtractor = (item: Action) => item.name;
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.header}>
+    return (
+        <Layout style={styles.container}>
+            <Text style={styles.header} category='h5'>
                     Actions // Activities // Reactions
-                </Text>
-                <FlatList<Action>
-                    data={this.props.actions}
-                    renderItem={this.renderItem}
-                    keyExtractor={this.keyExtractor}
-                ></FlatList>
-            </View>
-        );
-    }
-}
+            </Text>
+            <Divider />
+            {actions}
+        </Layout>
+    );
+};
+
+export default ActionsAndActivities;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
+        paddingVertical: 5
     },
     text: {
         flex: 1,
@@ -41,10 +39,9 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        fontSize: 16,
-        fontWeight: "bold",
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",
+        paddingBottom: 5
     },
 });
