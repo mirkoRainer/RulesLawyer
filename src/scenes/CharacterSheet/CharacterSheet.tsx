@@ -22,7 +22,7 @@ import { Inventory } from "./Inventory/Inventory";
 import SpellsPage from "./Spells/SpellsPage";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import PickerModal from "../Shared/Modals/PickerModal";
-import Conditions from "./Encounter/Conditions";
+import Conditions from "./Conditions";
 import { BottomNavigation, BottomNavigationTab, Layout, Text, TopNavigation, Icon, TopNavigationAction } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import {  StyleSheet } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Icon, Button } from "@ui-kitten/components";
 
 export interface SpellSlotProps {
     maximum: number;
@@ -11,49 +11,69 @@ export interface SpellSlotProps {
 
 interface State {}
 
-export default class SpellSlotView extends Component<SpellSlotProps, State> {
-    spellSlotStyle =
-        this.props.current === 0
+const SpellSlotView: React.FC<SpellSlotProps> = (props) => {
+    const spellSlotStyle =
+        props.current === 0
             ? { ...styles.outOfSpells, ...styles.spellSlot }
-            : { ...styles.text, ...styles.spellSlot };
-    focusPoint = this.props.focus ? { flex: 3.9 } : {};
-    view =
-        this.props.maximum === 0 ? (
+            : { ...styles.spellSlot };
+    const focusPoint = props.focus ? { flex: 3.9 } : {};
+    const UpIcon = (props) => (
+        <Icon {...props} name='arrow-ios-upward-outline'/>
+    );
+    const DownIcon = (props) => (
+        <Icon {...props} name='arrow-ios-downward-outline'/>
+    );
+    const view =
+        props.maximum === 0 ? (
             <Layout>
             </Layout>
         ) : (
             <Layout
                 style={{
-                    ...this.spellSlotStyle,
+                    ...spellSlotStyle,
                     ...styles.spellSlot,
-                    ...this.focusPoint,
+                    ...focusPoint,
                 }}
             >
-                <Text style={styles.text}> {this.props.current} </Text>
-                <Text style={{ ...styles.text, ...styles.spellLevel }}>
-                    {" "}
-                    {this.props.spellLevel}{" "}
+                <Button
+                    style={styles.button}
+                    appearance='ghost'
+                    accessoryRight={UpIcon}
+                    size='small'
+                >{props.current.toString()}</Button>
+                <Text style={{ ...styles.text, ...styles.spellLevel }} category='h6'>
+                    {props.spellLevel}
                 </Text>
-                <Text style={styles.text}> {this.props.maximum} </Text>
+                <Button
+                    style={styles.button}
+                    appearance='ghost'
+                    accessoryRight={DownIcon}
+                    size='small'
+                >{props.maximum.toString()}</Button>
             </Layout>
         );
 
-    render() {
-        return this.view;
-    }
-}
+    return view;
+};
+
+export default SpellSlotView;
 
 const styles = StyleSheet.create({
     text: {
-        flex: 3,
+        flex: 1,
         textAlign: "center",
+        alignSelf: "flex-start",
+        alignContent: "flex-start",
     },
     spellLevel: {
+        flex: 1,
         justifyContent: "center",
+        alignSelf: "center",
     },
     spellSlot: {
-        flex: 3,
-        width: 50
+        flex: 1,
+        width: 55,
+        borderLeftWidth: 1
     },
     outOfSpells: {
         backgroundColor: "lightgray",
@@ -61,4 +81,10 @@ const styles = StyleSheet.create({
     spellSlotUnavailable: {
         backgroundColor: "darkgray",
     },
+    button: {
+    },
+    horizontal: {
+        flex: 1,
+        flexDirection: "row"
+    }
 });

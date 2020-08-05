@@ -10,6 +10,7 @@ export const Downtime: React.FC<Props> = (props) => {
             <Text h4>
                 Downtime!
             </Text>
+            <Text>Prepare Spells</Text>
             <Text>Cost of Living</Text>
             <Text>Buying and Selling</Text>
             <Text>long-term rest</Text>

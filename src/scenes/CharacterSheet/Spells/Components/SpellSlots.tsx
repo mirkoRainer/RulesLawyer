@@ -16,7 +16,7 @@ export default class SpellSlots extends Component<Props, State> {
         return (
             <Layout style={styles.container}>
                 <Layout style={styles.rowContainer}>
-                    <ScrollView horizontal={true} alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1, justifyContent: "center"}} >
+                    <ScrollView horizontal={true} contentContainerStyle={{ flexGrow: 1, justifyContent: "center"}} >
                         <SpellSlotView
                         /* Focus Points */
                             spellLevel={this.props.spellSlots[0].spellLevel}
@@ -24,70 +24,60 @@ export default class SpellSlots extends Component<Props, State> {
                             current={this.props.spellSlots[0].current}
                             focus={true}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 1st Level */
                             spellLevel={this.props.spellSlots[1].spellLevel}
                             maximum={this.props.spellSlots[1].maximum}
                             current={this.props.spellSlots[1].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 2nd Level */
                             spellLevel={this.props.spellSlots[2].spellLevel}
                             maximum={this.props.spellSlots[2].maximum}
                             current={this.props.spellSlots[2].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 3rd Level */
                             spellLevel={this.props.spellSlots[3].spellLevel}
                             maximum={this.props.spellSlots[3].maximum}
                             current={this.props.spellSlots[3].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 4th Level */
                             spellLevel={this.props.spellSlots[4].spellLevel}
                             maximum={this.props.spellSlots[4].maximum}
                             current={this.props.spellSlots[4].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 5th Level */
                             spellLevel={this.props.spellSlots[5].spellLevel}
                             maximum={this.props.spellSlots[5].maximum}
                             current={this.props.spellSlots[5].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 6th Level */
                             spellLevel={this.props.spellSlots[6].spellLevel}
                             maximum={this.props.spellSlots[6].maximum}
                             current={this.props.spellSlots[6].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 7th Level */
                             spellLevel={this.props.spellSlots[7].spellLevel}
                             maximum={this.props.spellSlots[7].maximum}
                             current={this.props.spellSlots[7].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 8th Level */
                             spellLevel={this.props.spellSlots[8].spellLevel}
                             maximum={this.props.spellSlots[8].maximum}
                             current={this.props.spellSlots[8].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 9th Level */
                             spellLevel={this.props.spellSlots[9].spellLevel}
                             maximum={this.props.spellSlots[9].maximum}
                             current={this.props.spellSlots[9].current}
                         />
-                        <Divider />
                         <SpellSlotView
                         /* 10th Level */
                             spellLevel={this.props.spellSlots[10].spellLevel}

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Divider } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
-import { OwnProps } from "../Story/Components/CharacterMetadata/ClassView";
+import { AppActions } from "../../store/actions/AllActionTypesAggregated";
+import { OwnProps } from "./Story/Components/CharacterMetadata/ClassView";
 import { bindActionCreators } from "redux";
-import { startTextEditModal } from "../../../store/actions/Modals/ModalsActions";
+import { startTextEditModal } from "../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { CHANGE_CONDITIONS } from "../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_CONDITIONS } from "../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 const Conditions: React.FC<Props> = (props) => {
     const conditions: string = props.conditions;
@@ -17,7 +17,7 @@ const Conditions: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
             <Text onPress={changeConditions} category='h6'>Conditions:</Text>
-            <Text onPress={changeConditions}>{conditions}</Text>
+            <Text style={styles.text} onPress={changeConditions}>{conditions}</Text>
         </Layout>
     );
 };
@@ -49,11 +49,13 @@ const styles = StyleSheet.create({
         alignContent: "center",
         alignItems: "center",
         alignSelf: "stretch",
-        flexDirection: "row"
+        flexDirection: "row",
+        paddingHorizontal: 10
     },
     text: {
         flex: 1,
         alignSelf: "center",
+        paddingHorizontal: 10
     },
     text2: {
         flex: 2,

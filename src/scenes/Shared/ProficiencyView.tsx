@@ -50,7 +50,6 @@ export default class ProficiencyView extends Component<
                 <Text category='p1' style={styles.modifierNumber}>
                     {modifier}
                 </Text>
-
             </React.Fragment>
         );
         const itemBonus =

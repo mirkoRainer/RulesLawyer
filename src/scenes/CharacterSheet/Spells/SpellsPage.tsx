@@ -39,14 +39,14 @@ const SpellsPage: React.FC<Props> = (props) => {
             <Divider />
             <SpellSlots spellSlots={props.spellSlots} />
             <Divider />
-            <MagicTraditions
+            {/* <MagicTraditions
                 prepared={props.magicTraditions.prepared}
                 spontaneous={props.magicTraditions.spontaneous}
                 arcane={props.magicTraditions.arcane}
                 primal={props.magicTraditions.primal}
                 divine={props.magicTraditions.divine}
                 occult={props.magicTraditions.occult}
-            />
+            /> */}
             <Divider />
             <Spells spells={props.spells} />
         </Layout>
