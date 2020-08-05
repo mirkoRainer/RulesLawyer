@@ -29,11 +29,11 @@ export const AppNavigator: React.FC<Props> = (props) => {
                 {/* 
                         Not implemented yet
                         <Drawer.Screen
-                            name="ExportPDFView"
-                            component={ExportPDFView}
-                            options={{title: "Export PDF"}}
+                        name="ExportPDFView"
+                        component={ExportPDFView}
+                        options={{title: "Export PDF"}}
                         /> 
-                        */}
+                    */}
                 <Drawer.Screen 
                     name="Build"
                     component={Build}
@@ -47,10 +47,10 @@ export const AppNavigator: React.FC<Props> = (props) => {
                 {/* 
                         Not implemented yet
                         <Drawer.Screen
-                            name="ShareCharacterView"
-                            component={ShareCharacterScreen}
-                            options={{title: "Share Your Build"}}
-                        /> */}
+                        name="ShareCharacterView"
+                        component={ShareCharacterScreen}
+                        options={{title: "Share Your Build"}}
+                    /> */}
                 <Drawer.Screen
                     name="SaveView"
                     component={SaveView}

@@ -23,7 +23,8 @@ import SpellsPage from "./Spells/SpellsPage";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import PickerModal from "../Shared/Modals/PickerModal";
 import Conditions from "./Encounter/Conditions";
-import { BottomNavigation, BottomNavigationTab, Layout, Text } from "@ui-kitten/components";
+import { BottomNavigation, BottomNavigationTab, Layout, Text, TopNavigation, Icon, TopNavigationAction } from "@ui-kitten/components";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -47,13 +48,13 @@ export type CharacterSheetTabParamList = {
 }
 
 const CharacterSheet: React.FC<Props> = (props: Props) => {
-    const headerText = () => {
-        const pcClass = props.playerCharacter.pcClass;
-        const name = props.playerCharacter.name;
+    const pcClass = props.playerCharacter.pcClass;
+    const name = props.playerCharacter.name;
+    const headerSubText = () => {
         return (
-            <Layout >
-                <Text style={styles.headerText}>{name + " - " + pcClass.subClass + " " + pcClass.name + " Lvl:" + props.playerCharacter.level}</Text>
-                <Text style={styles.headerText} >{props.playerCharacter.background.name + " " + props.playerCharacter.ancestry.heritage}</Text>
+            <Layout>
+                <Text category='p2'>{pcClass.subClass + " " + pcClass.name + " Lvl:" + props.playerCharacter.level}</Text>
+                <Text category='p2'>{props.playerCharacter.background.name + " " + props.playerCharacter.ancestry.heritage}</Text>
             </Layout>
         );
     };
@@ -81,57 +82,74 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             <BottomNavigationTab title='Story'/>
         </BottomNavigation>
     );
+    const MenuIcon = (props) => (
+        <Icon {...props} name='menu-outline'/>
+    );
+    const InfoIcon = (props) => (
+        <Icon {...props} name='info'/>
+    );
+    const renderMenuAction = () => (
+        <TopNavigationAction icon={MenuIcon} onPress={toggleNavigation}/>
+    );
+    const renderBuildAction = () => (
+        <TopNavigationAction icon={InfoIcon} onPress={goToBuildPage}/>
+    );
     
     return (
-        <Layout style={styles.container}>
-            <Header
-                leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
-                centerComponent={headerText()}
-                rightComponent={{icon: "build", color: "#eee", onPress: goToBuildPage}}
-            />
-            <Conditions conditions={props.playerCharacter.conditions} />
-            <Tab.Navigator 
-                tabBar={props => <BottomTabBar {...props}/>}
-                tabBarOptions={{
-                    activeTintColor: "tomato",
-                    inactiveTintColor: "grey",
-                    showLabel: true,
-                    labelStyle: {
-                        fontSize: 14
-                    },
-                    keyboardHidesTabBar: true,
-                }} 
-                initialRouteName={"Encounter"}
-            >
-                <Tab.Screen 
-                    name="Encounter" 
-                    component={Encounter}
-                    options={{ tabBarLabel: "Encounter" }}
+        <SafeAreaView style={{flex:1, backgroundColor: "#aaa"}}>
+            <Layout style={styles.container}>
+                <TopNavigation
+                    alignment='center'
+                    title={name}
+                    subtitle={headerSubText}
+                    accessoryRight={renderBuildAction}
+                    accessoryLeft={renderMenuAction}
                 />
-                <Tab.Screen 
-                    name="Exploration" 
-                    component={Exploration} 
-                    options={{ tabBarLabel: "Exploration" }}
-                />
-                <Tab.Screen 
-                    name="Downtime" 
-                    component={Downtime} 
-                    options={{ tabBarLabel: "Downtime" }}
-                />
-                <Tab.Screen 
-                    name="Inventory" 
-                    component={Inventory} 
-                    options={{ tabBarLabel: "Inventory" }}
-                />
-                <Tab.Screen 
-                    name="Story" 
-                    component={StoryPage}
-                    options={{ tabBarLabel: "Story" }}
-                />
-            </Tab.Navigator>
-            <TextEditModal />
-            <PickerModal />
-        </Layout>
+                <Conditions conditions={props.playerCharacter.conditions} />
+                <Tab.Navigator 
+                    tabBar={props => <BottomTabBar {...props}/>}
+                    tabBarOptions={{
+                        activeTintColor: "tomato",
+                        inactiveTintColor: "grey",
+                        showLabel: true,
+                        labelStyle: {
+                            fontSize: 14
+                        },
+                        keyboardHidesTabBar: true,
+                    }} 
+                    initialRouteName={"Encounter"}
+                >
+                    <Tab.Screen 
+                        name="Encounter" 
+                        component={Encounter}
+                        options={{ tabBarLabel: "Encounter" }}
+                    />
+                    <Tab.Screen 
+                        name="Exploration" 
+                        component={Exploration} 
+                        options={{ tabBarLabel: "Exploration" }}
+                    />
+                    <Tab.Screen 
+                        name="Downtime" 
+                        component={Downtime} 
+                        options={{ tabBarLabel: "Downtime" }}
+                    />
+                    <Tab.Screen 
+                        name="Inventory" 
+                        component={Inventory} 
+                        options={{ tabBarLabel: "Inventory" }}
+                    />
+                    <Tab.Screen 
+                        name="Story" 
+                        component={StoryPage}
+                        options={{ tabBarLabel: "Story" }}
+                    />
+                </Tab.Navigator>
+                <TextEditModal />
+                <PickerModal />
+            </Layout>
+        </SafeAreaView>
+
     );
 };
 
@@ -170,7 +188,6 @@ const styles = StyleSheet.create({
     },
     leftAction: {
         flex: 1,
-        backgroundColor: "#497AFC",
         justifyContent: "center",
     },
     actionText: {
@@ -181,6 +198,5 @@ const styles = StyleSheet.create({
     },
     headerText: {
         flex: 1,
-        color: "#eee"
     }
 });

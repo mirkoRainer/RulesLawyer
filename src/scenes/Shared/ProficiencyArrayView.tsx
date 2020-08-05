@@ -21,36 +21,36 @@ const ProficiencyArrayView: React.FC<Props> = (props) => {
         props.proficiency.toString()
     )) {
         trainedStyle = styles.profTextTrue;
+        trainedCategory = "success";
     } else {
         trainedStyle = styles.profTextFalse;
-        trainedCategory = "primary";
     }
 
     if (["Expert", "Master", "Legendary"].includes(
         props.proficiency.toString()
     )) {
         expertStyle = styles.profTextTrue;
+        expertCategory = "success";
     } else {
         expertStyle = styles.profTextFalse;
-        expertCategory = "primary";
     }
 
     if (["Master", "Legendary"].includes(
         props.proficiency.toString()
     )) {
         masterStyle =  styles.profTextTrue;
+        masterCategory = "success";
     } else {
         masterStyle = styles.profTextFalse;
-        masterCategory = "primary";
     }
 
     if (["Legendary"].includes(
         props.proficiency.toString()
     )) {
         legendaryStyle = styles.profTextTrue;
+        legendaryCategory = "success";
     } else {
         legendaryStyle = styles.profTextFalse;
-        legendaryCategory = "primary";
     }
 
     return (

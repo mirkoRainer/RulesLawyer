@@ -17,7 +17,7 @@ type Props = OwnProps & LinkStateProps;
 
 const SkillsView: React.FC<Props> = (props) => {
     const renderItem = (item: Skill) => (
-        <Layout>
+        <Layout key={item.name}>
             <ProficiencyView
                 title={item.name.toString()}
                 keyAbility={props.abilityScores[item.ability]}

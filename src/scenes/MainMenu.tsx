@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { RootDrawerParamList, db } from "../../App";
 import { sql } from "@databases/expo";
+import { Layout, Text, Button } from "@ui-kitten/components";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type MainMenuNavigationProps = DrawerNavigationProp<RootDrawerParamList, "MainMenu">;
 interface Props {
@@ -20,19 +22,24 @@ export default class MainMenu extends Component<Props, State> {
     
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}> Main! </Text>
-                <View style={styles.button}>
-                    <Button 
-                        onPress={() => this.props.navigation.openDrawer() } 
-                        title={"Swipe from left side or press me"} 
-                    />
-                    <Button 
-                        onPress={this.checkDB}
-                        title={"Check DB"}
-                    />
-                </View>
-            </View>
+            <SafeAreaView>
+                <Layout style={styles.container}>
+                    <Text style={styles.text}> Main! </Text>
+                    <Layout style={styles.button}>
+                        <Button 
+                            onPress={() => this.props.navigation.openDrawer() } 
+                        >
+                            {"Swipe from left side or press me"} 
+
+                        </Button>
+                        <Button 
+                            onPress={this.checkDB}
+                        >
+                            {"Check DB"}
+                        </Button>
+                    </Layout>
+                </Layout>
+            </SafeAreaView>
         );
     }
 }

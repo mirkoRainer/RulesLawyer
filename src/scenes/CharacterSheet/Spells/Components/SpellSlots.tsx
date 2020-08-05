@@ -16,7 +16,7 @@ export default class SpellSlots extends Component<Props, State> {
         return (
             <Layout style={styles.container}>
                 <Layout style={styles.rowContainer}>
-                    <ScrollView horizontal={true} contentContainerStyle={{ flexGrow: 1, justifyContent: "center"}} >
+                    <ScrollView horizontal={true} alwaysBounceHorizontal={false} contentContainerStyle={{ flexGrow: 1, justifyContent: "center"}} >
                         <SpellSlotView
                         /* Focus Points */
                             spellLevel={this.props.spellSlots[0].spellLevel}
@@ -103,7 +103,7 @@ export default class SpellSlots extends Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: .7,
+        flex: .5,
         padding: 5
     },
     flatContainer: {

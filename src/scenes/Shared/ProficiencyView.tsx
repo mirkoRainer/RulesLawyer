@@ -84,12 +84,12 @@ export default class ProficiencyView extends Component<
                 <Layout style={styles.horizontal}>
                     {tenBase}
                     {keyModifier}
+                    {itemBonus}
                     <Layout style={styles.touchable}>
                         <ProficiencyArrayView
                             proficiency={this.props.proficiency}
                         />
                     </Layout>
-                    {itemBonus}
                 </Layout>
                 {descriptor}
             </Layout>
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignContent: "stretch",
         alignSelf: "stretch",
-        justifyContent: "space-evenly",
+        justifyContent: "space-around",
+        paddingHorizontal: 10
     },
     descriptor: {
         flex: 1,

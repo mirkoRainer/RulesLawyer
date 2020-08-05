@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Header } from "react-native-elements";
 import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type BuildNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -79,7 +80,7 @@ export const Build: React.FC<Props> = (props) => {
     const Stack = createStackNavigator<BuildStackParamList>();
 
     return(
-        <>
+        <SafeAreaView>
             <Header
                 leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
                 centerComponent={{
@@ -104,7 +105,7 @@ export const Build: React.FC<Props> = (props) => {
                 </NavigationContainer>
 
             </View>
-        </>
+        </SafeAreaView>
     );
 };
 
