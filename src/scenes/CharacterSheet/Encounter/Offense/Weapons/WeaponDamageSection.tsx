@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     damageDice: string; // should be a dice class
@@ -9,38 +10,42 @@ interface Props {
     traits: string;
 }
 
-interface State {}
 
-export default class WeaponDamageSection extends Component<Props, State> {
-    public static defaultProps = {};
+const WeaponDamageSection: React.FC<Props> = (props) => {
+    const damageText = props.abilityModifier >= 0 ? `${props.damageDice}+${props.abilityModifier}` : `${props.damageDice}-${props.abilityModifier}`;
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}> {this.props.damageDice} </Text>
-                <Text style={styles.text}> {this.props.abilityModifier} </Text>
-                <Text style={styles.text}> {this.props.damageType} </Text>
-                <Text style={styles.text}> {this.props.other} </Text>
-                <Text style={styles.text3}> {this.props.traits} </Text>
-            </View>
-        );
-    }
-}
+    return (
+        <Layout style={styles.container}>
+            <Text style={styles.text}> {props.other} </Text>
+            <Text style={styles.text}> {props.traits} </Text>
+            <Layout style={styles.damageContainer}>
+                <Text style={styles.text} category='h6'>Damage</Text>
+                <Layout style={styles.damageText}>
+                    <Text style={styles.text}> {damageText} </Text>
+                    <Text style={styles.text}> {props.damageType} </Text>
+                </Layout>
+            </Layout>
+        </Layout>
+    );
+};
+
+export default WeaponDamageSection;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
+        padding: 10
+    },
+    damageContainer: {
+        flex: 3,
+    },
+    damageText: {
+        flex: 1,
+        flexDirection: "row"
     },
     text: {
         flex: 1,
-        width: 100,
         textAlign: "center"
-    },
-    text3: {
-        flex: 3,
-        width: 100,
-        textAlign: "right"
     },
 });

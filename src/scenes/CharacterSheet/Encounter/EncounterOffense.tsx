@@ -7,7 +7,7 @@ import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView"
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import Movements from "./Offense/Movements";
-import Weapons from "./Offense/Weapons/Weapons";
+import StrikesView from "./Offense/Weapons/StrikesView";
 import { WeaponViewProps, GetProficiencyForWeapon } from "./Offense/Weapons/WeaponViewProps";
 import { GetAbilityModifierFromScores } from "../../../PF2eCoreLib/AbilityScores";
 import ActionsAndActivities from "./Offense/ActionsAndActivities";
@@ -75,8 +75,7 @@ const EncounterOffense: React.FC<Props> = (props) => {
                 />
                 <Divider />
                 <ActionsAndActivities actions={props.actions} />
-                <Divider />
-                <Weapons
+                <StrikesView
                     weapons={weapons()}
                     level={props.playerCharacter.level}
                 />

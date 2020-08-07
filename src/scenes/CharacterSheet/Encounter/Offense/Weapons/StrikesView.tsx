@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import WeaponDamageSection from "./WeaponDamageSection";
 import { WeaponViewProps } from "./WeaponViewProps";
 import ProficiencyView from "../../../../Shared/ProficiencyView";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
     weapons: WeaponViewProps[];
@@ -11,10 +12,11 @@ interface Props {
 
 interface State {}
 
-export default class Weapons extends Component<Props, State> {
+export default class StrikesView extends Component<Props, State> {
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
+                <Text category='h4' style={styles.title}>Strikes</Text>
                 {/* Need to use a SectionList of Strikes and SpellAttack here. */}
                 <ProficiencyView
                     title={this.props.weapons[0].title}
@@ -32,7 +34,7 @@ export default class Weapons extends Component<Props, State> {
                     other={""}
                     traits={this.props.weapons[0].weaponTraits}
                 />
-            </View>
+            </Layout>
         );
     }
 }
@@ -40,11 +42,9 @@ export default class Weapons extends Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
     },
-    text: {
+    title: {
         flex: 1,
-        width: 100,
-    },
+        textAlign: "center"
+    }
 });
