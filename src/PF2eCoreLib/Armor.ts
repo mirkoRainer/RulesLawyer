@@ -1,6 +1,7 @@
 import { Bonus } from "./Bonus";
 import { ArmorCategory } from "./ArmorCategory";
 import { ArmorGroup } from "./ArmorGroup";
+import { Traits } from "./Traits";
 
 interface Armor {
     Name: string;

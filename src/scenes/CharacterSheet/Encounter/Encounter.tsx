@@ -14,7 +14,6 @@ import EncounterDefense from "./EncounterDefense";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EncounterOffense from "./EncounterOffense";
 import EncounterSkills from "./EncounterSkills";
-import EncounterOther from "./EncounterOther";
 import { NavigationContainer } from "@react-navigation/native";
 import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
 import SpellsPage from "../Spells/SpellsPage";

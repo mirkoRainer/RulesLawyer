@@ -1,4 +1,5 @@
 import { Ability } from "./Ability";
+import { Traits } from "./Traits";
 
 interface IAncestry {
     Name: string;

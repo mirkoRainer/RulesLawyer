@@ -3,7 +3,6 @@ import React from "react";
 import {StyleSheet } from "react-native";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
 import { CharacterSheetState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
@@ -16,6 +15,7 @@ import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Layout, Text } from "@ui-kitten/components";
+import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 
 
 type BuildNavigationProps = DrawerNavigationProp<
