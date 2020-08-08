@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { State } from "react-native-gesture-handler";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -13,9 +13,9 @@ const Deity: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_DEITY);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={styles.text} onPress={changeDeity}> Deity: {props.deity} </Text>
-        </View>
+        </Layout>
     );
 };
 

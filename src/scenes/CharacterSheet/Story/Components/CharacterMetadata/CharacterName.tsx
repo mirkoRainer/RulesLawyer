@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {  StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../../store/actions/Modals/ModalsActions";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import { CHANGE_CHARACTER_NAME } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { Layout, Text } from "@ui-kitten/components";
 
 interface OwnProps {
     characterName: string;
@@ -20,7 +21,7 @@ const CharacterName: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_CHARACTER_NAME);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text
                 style={styles.text}
                 onPress={changeName}
@@ -28,7 +29,7 @@ const CharacterName: React.FC<Props> = (props) => {
                 {" "}
                 Character Name: {props.characterName}{" "}
             </Text>
-        </View>
+        </Layout>
     );
 };
 

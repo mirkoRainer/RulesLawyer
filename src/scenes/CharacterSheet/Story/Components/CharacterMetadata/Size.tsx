@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { Component } from "react";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 interface Props {}
 
@@ -8,13 +10,13 @@ interface State {}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: 'black',
+        borderColor: "black",
         borderWidth: 2,
-        alignSelf: 'stretch',
-        alignContent: 'stretch',
+        alignSelf: "stretch",
+        alignContent: "stretch",
     },
     text: {
-        backgroundColor: 'green',
+        backgroundColor: "green",
     },
 });
 
@@ -23,9 +25,9 @@ export default class Size extends Component<Props, State> {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.text}> Size </Text>
-            </View>
+            </Layout>
         );
     }
 }

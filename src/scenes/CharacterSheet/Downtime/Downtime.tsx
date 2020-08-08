@@ -7,7 +7,7 @@ type Props = {}
 export const Downtime: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
-            <Text h4>
+            <Text category='h4'>
                 Downtime!
             </Text>
             <Text>Prepare Spells</Text>

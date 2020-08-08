@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 interface Props {
     traits: string[];
@@ -10,12 +12,12 @@ interface State {}
 export default class TraitsView extends Component<Props, State> {
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.text}>
                     {" "}
                     Traits: {this.props.traits.join(",")}{" "}
                 </Text>
-            </View>
+            </Layout>
         );
     }
 }

@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 type Props = {}
 
 const BugReportView: React.FC<Props> = (props) => {
     return(    
-        <View>
+        <Layout>
             <Text>Report a Bug please !!!!!!!!!</Text>
-        </View>);
+        </Layout>);
 };
 
 export default BugReportView;

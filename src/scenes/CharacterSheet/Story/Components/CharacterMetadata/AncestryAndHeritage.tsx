@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../../store/actions/Modals/ModalsActions";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
@@ -22,7 +23,7 @@ const AncestryAndHeritage: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_HERITAGE);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text 
                 style={{ ...styles.text, ...styles.container }}
                 onPress={changeAncestry}
@@ -37,7 +38,7 @@ const AncestryAndHeritage: React.FC<Props> = (props) => {
                 {" "}
                     Heritage: {props.heritage}{" "}
             </Text>
-        </View>
+        </Layout>
     );
 };
 

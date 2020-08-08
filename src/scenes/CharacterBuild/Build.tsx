@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
 import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { PlayerCharacter } from "../Shared/PF2eCoreLib/PlayerCharacter";
@@ -15,6 +15,8 @@ import { Header } from "react-native-elements";
 import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 type BuildNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -89,22 +91,22 @@ export const Build: React.FC<Props> = (props) => {
                 }}
                 rightComponent={{icon: "perm-identity", color: "#eee", onPress: goToCharacterSheet}}
             />
-            <View style={styles.horizontal}>
+            <Layout style={styles.horizontal}>
                 <NavigationContainer independent={true} >
                     <Stack.Navigator initialRouteName={"BuildOverview"}>
                         <Stack.Screen name="BuildOverview" component={BuildOverview} />
                         <Stack.Screen name="AncestrySelect" component={AncestrySelectView} />
                     </Stack.Navigator>
-                    <View>
+                    <Layout>
                         {
                             //create a side navigator that indicates build step and status
                         }
                         <Text>ABC's</Text>
                         <Text>Lvl 1</Text>
-                    </View>
+                    </Layout>
                 </NavigationContainer>
 
-            </View>
+            </Layout>
         </SafeAreaView>
     );
 };

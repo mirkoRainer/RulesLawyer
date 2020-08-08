@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import {StyleSheet } from "react-native";
 import ProficiencyView, { ProficiencyProps } from "../../../../Shared/ProficiencyView";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { CharacterSheetState } from "../../../../../store/Store";

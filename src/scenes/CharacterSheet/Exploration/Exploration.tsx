@@ -8,7 +8,7 @@ type Props = {}
 export const Exploration: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
-            <Text h4>
+            <Text category='h4'>
                 Exploration!
             </Text>
             <Text>Avoid Notice</Text>

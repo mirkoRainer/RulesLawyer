@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 import { AbilityScoreArray } from "../../../../../PF2eCoreLib/AbilityScores";
 import AbilityScoreView from "./AbilityScoreView";
 
@@ -17,9 +19,9 @@ export default class AbilityScores extends Component<Props, State> {
         const Wisdom = this.props.abilityScores["Wisdom"];
         const Charisma = this.props.abilityScores["Charisma"];
         return (
-            <View style={styles.container}>
-                <View style={styles.rowContainer}>
-                    <View style={styles.borderlessContainer}>
+            <Layout style={styles.container}>
+                <Layout style={styles.rowContainer}>
+                    <Layout style={styles.borderlessContainer}>
                         <AbilityScoreView
                             ability={Strength.ability}
                             score={Strength.score}
@@ -32,8 +34,8 @@ export default class AbilityScores extends Component<Props, State> {
                             ability={Constitution.ability}
                             score={Constitution.score}
                         />
-                    </View>
-                    <View style={styles.borderlessContainer}>
+                    </Layout>
+                    <Layout style={styles.borderlessContainer}>
                         <AbilityScoreView
                             ability={Intelligence.ability}
                             score={Intelligence.score}
@@ -46,9 +48,9 @@ export default class AbilityScores extends Component<Props, State> {
                             ability={Charisma.ability}
                             score={Charisma.score}
                         />
-                    </View>
-                </View>
-            </View>
+                    </Layout>
+                </Layout>
+            </Layout>
         );
     }
 }

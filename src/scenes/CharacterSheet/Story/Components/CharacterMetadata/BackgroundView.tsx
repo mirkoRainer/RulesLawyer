@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -13,7 +14,7 @@ const BackgroundView: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_BACKGROUND);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text 
                 style={styles.text}
                 onPress={changeBackground}    
@@ -21,7 +22,7 @@ const BackgroundView: React.FC<Props> = (props) => {
                 {" "}
                     Background: {props.background.name}
             </Text>
-        </View>
+        </Layout>
     );
 };
 

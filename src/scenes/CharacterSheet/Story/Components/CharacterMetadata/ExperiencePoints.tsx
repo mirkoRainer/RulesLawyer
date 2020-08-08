@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -14,12 +15,12 @@ const ExperiencePoints: React.FC<Props> = (props) => {
     };
     
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={styles.text} onPress={changeExperiencePoints}>
                 {" "}
                     ExperiencePoints: {props.experiencePoints}{" "}
             </Text>
-        </View>
+        </Layout>
     );
 };
 

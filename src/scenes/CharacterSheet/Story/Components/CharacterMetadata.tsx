@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
+import { StyleSheet } from "react-native";
+import {Layout,Text} from "@ui-kitten/components";
 import CharacterName from "./CharacterMetadata/CharacterName";
 import PlayerName from "./CharacterMetadata/PlayerName";
 import AncestryAndHeritage from "./CharacterMetadata/AncestryAndHeritage";
@@ -40,8 +40,8 @@ interface Props {
 const CharacterMetadata: React.FC<Props> = (props) => {
 
     return (
-        <View style={styles.container}>
-            <View style={styles.rowContainer}>
+        <Layout style={styles.container}>
+            <Layout style={styles.rowContainer}>
                 <CharacterName
                     characterName={
                         props.characterMetadata.characterName
@@ -50,22 +50,22 @@ const CharacterMetadata: React.FC<Props> = (props) => {
                 <PlayerName
                     playerName={props.characterMetadata.playerName}
                 />
-            </View>
-            <View style={styles.rowContainer}>
+            </Layout>
+            <Layout style={styles.rowContainer}>
                 <AncestryAndHeritage
                     ancestry={props.characterMetadata.ancestry}
                     heritage={props.characterMetadata.heritage}
                 />
-                <View style={styles.container}>
+                <Layout style={styles.container}>
                     <Level level={props.characterMetadata.level} />
                     <ExperiencePoints
                         experiencePoints={
                             props.characterMetadata.experiencePoints
                         }
                     />
-                </View>
-            </View>
-            <View style={styles.rowContainer}>
+                </Layout>
+            </Layout>
+            <Layout style={styles.rowContainer}>
                 <BackgroundView
                     background={props.characterMetadata.background}
                 />
@@ -79,15 +79,15 @@ const CharacterMetadata: React.FC<Props> = (props) => {
                         props.characterMetadata.classProficiency
                     }
                 />
-            </View>
-            <View style={styles.rowContainer}>
+            </Layout>
+            <Layout style={styles.rowContainer}>
                 <Alignment
                     alignment={props.characterMetadata.alignment}
                 />
                 <Deity deity={props.characterMetadata.deity} />
-            </View>
+            </Layout>
             <TraitsView traits={props.characterMetadata.traits} />
-        </View>
+        </Layout>
     );
     
 };

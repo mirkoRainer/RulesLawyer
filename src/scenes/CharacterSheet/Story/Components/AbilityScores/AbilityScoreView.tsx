@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 // eslint-disable-next-line no-unused-vars
 import {
     AbilityScore,
@@ -12,6 +12,8 @@ import { AppActions } from "../../../../../store/actions/AllActionTypesAggregate
 import { bindActionCreators } from "redux";
 import { startTextEditModal, startPickerForAbilityScore } from "../../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
+import { Layout, Text } from "@ui-kitten/components";
+
 import { Ability } from "../../../../../PF2eCoreLib/Ability";
 import { startChangeAbilityScore } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 
@@ -25,13 +27,13 @@ const AbilityScoreView: React.FC<Props> = (props) => {
         props.startPickerModal(CHANGE_ABILITY_SCORE, abilityScore);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={styles.ability}>{abilityName}:</Text>
             <Text style={styles.score} onPress={changeAbilityScore}>{props.score}</Text>
             <Text style={styles.modifier} onPress={changeAbilityScore}>
                 {formattedModifierString}
             </Text>
-        </View>
+        </Layout>
     );
 };
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -12,7 +13,7 @@ const Alignment: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_ALIGNMENT);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text 
                 style={styles.text}
                 onPress={changeAlignment}
@@ -20,7 +21,7 @@ const Alignment: React.FC<Props> = (props) => {
                 {" "}
                     Alignment: {props.alignment}{" "}
             </Text>
-        </View>
+        </Layout>
     );
 };
 

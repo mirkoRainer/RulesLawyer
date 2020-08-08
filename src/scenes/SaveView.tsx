@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 
 type Props = {}
 
 const SaveView: React.FC<Props> = (props) => {
     return(    
-        <View>
+        <Layout>
             <Text>Save !!!!!!!!!</Text>
-        </View>);
+        </Layout>);
 };
 
 export default SaveView;

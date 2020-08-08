@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text, Image } from "react-native-elements";
+import { StyleSheet } from "react-native";
 import BiographicalView, { BiographicalData } from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
@@ -14,6 +13,7 @@ import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Ability } from "../../../PF2eCoreLib/Ability";
 import WeaponProficienciesView from "./Components/WeaponProficienciesView";
+import { Layout, Text } from "@ui-kitten/components";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -36,34 +36,37 @@ const StoryPage: React.FC<Props> = (props) => {
         };
     };
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Text h4>{titleText}</Text>
-                <CharacterMetadata
-                    characterMetadata={characterMetadata()}
-                />
-                <AbilityScores abilityScores={props.abilityScores} />
-                <Text h4>Weapon Proficiencies</Text>
-                <WeaponProficienciesView
-                    Unarmed={props.weaponProficiencies.Unarmed}
-                    Simple={props.weaponProficiencies.Simple}
-                    Martial={props.weaponProficiencies.Martial}
-                    Others={
-                        props.weaponProficiencies.Others
-                    /* Others should have a description and proficiency. */
-                    }
-                />
-                {/*CharacterSketch placeholder*/}
-                <BiographicalView bioData={props.bioData} />
-                <Text style={styles.text}>
+        <Layout>
+            <ScrollView>
+                <Layout style={styles.container}>
+                    <Text category='h3'>{titleText}</Text>
+                    <CharacterMetadata
+                        characterMetadata={characterMetadata()}
+                    />
+                    <AbilityScores abilityScores={props.abilityScores} />
+                    <Text category='h4'>Weapon Proficiencies</Text>
+                    <WeaponProficienciesView
+                        Unarmed={props.weaponProficiencies.Unarmed}
+                        Simple={props.weaponProficiencies.Simple}
+                        Martial={props.weaponProficiencies.Martial}
+                        Others={
+                            props.weaponProficiencies.Others
+                            /* Others should have a description and proficiency. */
+                        }
+                    />
+                    {/*CharacterSketch placeholder*/}
+                    <BiographicalView bioData={props.bioData} />
+                    <Text style={styles.text}>
                     Languages: {props.languages.toString()}
-                </Text>
-                <Personality personalityData={props.personalityData} />
-                <CampaignNotes
-                    campaignNotesData={props.campaignNotesData}
-                />
-            </View>
-        </ScrollView>
+                    </Text>
+                    <Personality personalityData={props.personalityData} />
+                    <CampaignNotes
+                        campaignNotesData={props.campaignNotesData}
+                    />
+                </Layout>
+            </ScrollView>
+        </Layout>
+
     );
 };
 

@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 type Props = {};
 
 export const LevelView: React.FC<Props> = (props) => {
     return(
-        <View>
+        <Layout>
             <Text style={styles.centered}>LevelView</Text>
-        </View>
+        </Layout>
     );
 };
 

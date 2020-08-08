@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -22,37 +23,37 @@ const CampaignNotes: React.FC<Props> = (props) => {
         props.startTextEditModal(CHANGE_NOTES);
     };
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={styles.header}> Campaign Notes </Text>
-            <View style={styles.rowContainerFlex2}>
+            <Layout style={styles.rowContainerFlex2}>
                 <Text style={styles.sectionLabel} onPress={changeNotes}>Notes</Text>
                 <Text style={styles.text} onPress={changeNotes}>
                     {" "}
                     {props.campaignNotesData.notes}{" "}
                 </Text>
-            </View>
-            <View style={styles.rowContainerFlex1}>
+            </Layout>
+            <Layout style={styles.rowContainerFlex1}>
                 <Text style={styles.sectionLabel}>Allies</Text>
                 <Text style={styles.text}>
                     {" "}
                     {props.campaignNotesData.allies}{" "}
                 </Text>
-            </View>
-            <View style={styles.rowContainerFlex1}>
+            </Layout>
+            <Layout style={styles.rowContainerFlex1}>
                 <Text style={styles.sectionLabel}>Enemies</Text>
                 <Text style={styles.text}>
                     {" "}
                     {props.campaignNotesData.enemies}{" "}
                 </Text>
-            </View>
-            <View style={styles.rowContainerFlex1}>
+            </Layout>
+            <Layout style={styles.rowContainerFlex1}>
                 <Text style={styles.sectionLabel}>Organizations</Text>
                 <Text style={styles.text}>
                     {" "}
                     {props.campaignNotesData.organizations}{" "}
                 </Text>
-            </View>
-        </View>
+            </Layout>
+        </Layout>
     );
 };
 

@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 type Props = {};
 
 export const AncestrySelectView: React.FC<Props> = (props) => {
     return(
-        <View>
+        <Layout>
             <Text>Ancestry Select</Text>
-        </View>
+        </Layout>
     );
 };
 

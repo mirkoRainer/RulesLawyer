@@ -1,12 +1,10 @@
 import React from "react";
 import {
-    View,
-    Text,
     StyleSheet,
     ModalBaseProps,
 } from "react-native";
+import { Layout, Text, Modal } from "@ui-kitten/components";
 import {Picker} from "@react-native-community/picker";
-import Modal from "react-native-modal";
 import { Icon } from "react-native-elements";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
@@ -27,29 +25,24 @@ const PickerModal: React.FC<Props> = (props) => {
 
     return (
         <Modal
-            animationIn="fadeIn"
-            animationOut="zoomOut"
-            avoidKeyboard={true}
-            isVisible={props.modalState.visible}
+            visible={props.modalState.visible}
             onBackdropPress={props.toggleModal}
             style={styles.modal}
         >
-            <View style={styles.container}>
-                <View style={styles.pickerContainer}>
-                    <View style={styles.header}>
-                        <Text>{props.modalState.title || "Edit:"}</Text>
-                        <Icon name="check" onPress={props.toggleModal} />
-                    </View>
-                    <View>
-                        <Picker
-                            selectedValue={props.modalState.currentSelection}
-                            onValueChange={props.modalState.onSelect}
-                        >
-                            {items}
-                        </Picker>
-                    </View>
-                </View>
-            </View>
+            <Layout style={styles.pickerContainer}>
+                <Layout style={styles.header}>
+                    <Text>{props.modalState.title || "Edit:"}</Text>
+                    <Icon name="check" onPress={props.toggleModal} />
+                </Layout>
+                <Layout>
+                    <Picker
+                        selectedValue={props.modalState.currentSelection}
+                        onValueChange={props.modalState.onSelect}
+                    >
+                        {items}
+                    </Picker>
+                </Layout>
+            </Layout>
         </Modal>
     );
 };
@@ -84,20 +77,17 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(0,0,0,0.5)",
-        height: "30%",
+        flex: 1
     },
     pickerContainer: {
         height: "100%",
         width: "100%",
-        backgroundColor: "white",
         justifyContent: "center"
     },
     header: {
         justifyContent: "space-between",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#eee",
         padding: 10,
     },
     text: {
@@ -105,14 +95,5 @@ const styles = StyleSheet.create({
     },
     modal: {
         overflow: "scroll"
-    },
-    modalTextInput: {
-        justifyContent: "center",
-        textAlign: "center",
-        borderBottomColor: "black",
-        borderBottomWidth: 2,
-        width: "100%",
-        fontSize: 32,
-        backgroundColor: "#e4dada",
     },
 });

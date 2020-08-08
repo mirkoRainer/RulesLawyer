@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 import { startTogglePickerModal, startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
@@ -13,9 +15,9 @@ const Level: React.FC<Props> = (props) => {
     };
 
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={styles.text} onPress={changeLevel}> Level: {props.level} </Text>
-        </View>
+        </Layout>
     );
 };
 

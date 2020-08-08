@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 export interface PersonalityData {
     attitude: string;
@@ -20,44 +22,44 @@ export default class Personality extends Component<Props, State> {
 
     render() {
         return (
-            <View style={styles.container}>
+            <Layout style={styles.container}>
                 <Text style={styles.header}>Personality</Text>
-                <View style={styles.rowContainerFlex3}>
+                <Layout style={styles.rowContainerFlex3}>
                     <Text style={styles.sectionLabel}>Attitude</Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.attitude}{" "}
                     </Text>
-                </View>
-                <View style={styles.rowContainerFlex3}>
+                </Layout>
+                <Layout style={styles.rowContainerFlex3}>
                     <Text style={styles.sectionLabel}>Beliefs</Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.beliefs}{" "}
                     </Text>
-                </View>
-                <View style={styles.rowContainerFlex3}>
+                </Layout>
+                <Layout style={styles.rowContainerFlex3}>
                     <Text style={styles.sectionLabel}>Likes</Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.likes}{" "}
                     </Text>
-                </View>
-                <View style={styles.rowContainerFlex3}>
+                </Layout>
+                <Layout style={styles.rowContainerFlex3}>
                     <Text style={styles.sectionLabel}>Dislikes</Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.dislikes}{" "}
                     </Text>
-                </View>
-                <View style={styles.rowContainerFlex3}>
+                </Layout>
+                <Layout style={styles.rowContainerFlex3}>
                     <Text style={styles.sectionLabel}>Catchphrases</Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.catchphrases}{" "}
                     </Text>
-                </View>
-            </View>
+                </Layout>
+            </Layout>
         );
     }
 }

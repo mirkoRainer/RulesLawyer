@@ -1,12 +1,10 @@
 import React from "react";
+import { Layout, Text, Modal } from "@ui-kitten/components";
 import {
-    View,
-    Text,
     StyleSheet,
     TextInput,
     ModalBaseProps,
 } from "react-native";
-import Modal from "react-native-modal";
 import { Icon } from "react-native-elements";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
@@ -23,31 +21,25 @@ type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 const TextEditModal: React.FC<Props> = (props) => {
     return (
         <Modal
-            animationIn="fadeIn"
-            animationOut="zoomOut"
-            avoidKeyboard={true}
-            isVisible={props.modalState.visible}
+            visible={props.modalState.visible}
             onBackdropPress={props.toggleModal}
             style={styles.modal}
+            backdropStyle={styles.backdrop}
         >
-            <View style={styles.container}>
-                <View style={styles.pickerContainer}>
-                    <View style={styles.header}>
-                        <Text>{props.modalState.title || "Edit:"}</Text>
-                        <Icon name="check" onPress={props.toggleModal} />
-                    </View>
-                    <View>
-                        <TextInput
-                            style={styles.modalTextInput}
-                            placeholder={"Type Here"}
-                            onChangeText={props.modalState.onTextChange}
-                            multiline={true}
-                        >
-                            {props.modalState.value}
-                        </TextInput>
-                    </View>
-                </View>
-            </View>
+            <Layout style={styles.header}>
+                <Text>{props.modalState.title || "Edit:"}</Text>
+                <Icon name="check" onPress={props.toggleModal} />
+            </Layout>
+            <Layout>
+                <TextInput
+                    style={styles.modalTextInput}
+                    placeholder={"Type Here"}
+                    onChangeText={props.modalState.onTextChange}
+                    multiline={true}
+                >
+                    {props.modalState.value}
+                </TextInput>
+            </Layout>
         </Modal>
     );
 };
@@ -83,19 +75,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "rgba(0,0,0,0.5)",
-        height: "30%",
+        flex: 1
+    },
+    backdrop: {
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     pickerContainer: {
-        height: "100%",
-        width: "100%",
-        backgroundColor: "white",
         justifyContent: "center"
     },
     header: {
         justifyContent: "space-between",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#eee",
         padding: 10,
     },
     text: {
@@ -107,10 +98,10 @@ const styles = StyleSheet.create({
     modalTextInput: {
         justifyContent: "center",
         textAlign: "center",
-        borderBottomColor: "black",
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         width: "100%",
         fontSize: 32,
+        padding: 10,
         backgroundColor: "#e4dada",
     },
 });

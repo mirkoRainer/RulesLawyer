@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 export interface ArmorProficiencyProps {
     unarmored: Proficiencies;
@@ -18,24 +20,24 @@ export default class ArmorProficiencies extends Component<
 > {
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.armorEntry}>
+            <Layout style={styles.container}>
+                <Layout style={styles.armorEntry}>
                     <Text style={styles.text}>Unarmored</Text>
                     <ProficiencyArrayView proficiency={this.props.unarmored} />
-                </View>
-                <View style={styles.armorEntry}>
+                </Layout>
+                <Layout style={styles.armorEntry}>
                     <Text style={styles.text}>Light Armor</Text>
                     <ProficiencyArrayView proficiency={this.props.light} />
-                </View>
-                <View style={styles.armorEntry}>
+                </Layout>
+                <Layout style={styles.armorEntry}>
                     <Text style={styles.text}>Med. Armor</Text>
                     <ProficiencyArrayView proficiency={this.props.medium} />
-                </View>
-                <View style={styles.armorEntry}>
+                </Layout>
+                <Layout style={styles.armorEntry}>
                     <Text style={styles.text}>Heavy Armor</Text>
                     <ProficiencyArrayView proficiency={this.props.heavy} />
-                </View>
-            </View>
+                </Layout>
+            </Layout>
         );
     }
 }

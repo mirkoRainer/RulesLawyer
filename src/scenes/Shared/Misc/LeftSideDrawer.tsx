@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import { Layout, Text } from "@ui-kitten/components";
+
 import {
-    View,
-    Text,
-    Button,
     StyleSheet
 } from "react-native";
 
@@ -10,9 +9,9 @@ import {
 class LeftSideDrawer extends Component{
     render(){
         return(
-            <View style={styles.main}>
+            <Layout style={styles.main}>
                 <Text>SideMenu</Text>
-            </View>
+            </Layout>
         );
     }
 }

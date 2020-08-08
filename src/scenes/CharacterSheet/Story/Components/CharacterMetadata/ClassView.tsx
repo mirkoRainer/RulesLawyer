@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { AbilityScoreArray } from "../../../../../PF2eCoreLib/AbilityScores";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
@@ -10,12 +11,12 @@ import { connect } from "react-redux";
 
 const ClassView: React.FC<Props> = (props) => {
     return (
-        <View style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={styles.text}>
                 {" "}
                     Class: {props.name} ({props.subClass})
             </Text>
-        </View>
+        </Layout>
     );
 };
 

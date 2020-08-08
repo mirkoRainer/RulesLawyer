@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {StyleSheet } from "react-native";
 import { OtherWeaponProficiency } from "../../Encounter/Offense/Weapons/OtherWeaponProficiency";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { WeaponProficiencies } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Layout, Text } from "@ui-kitten/components";
+
 
 export default class WeaponProficienciesView extends Component<
     WeaponProficiencies
@@ -12,20 +14,20 @@ export default class WeaponProficienciesView extends Component<
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.weaponProf}>
+            <Layout style={styles.container}>
+                <Layout style={styles.weaponProf}>
                     <Text style={styles.text}>Unarmed</Text>
                     <ProficiencyArrayView proficiency={this.props.Unarmed}/>
-                </View>
-                <View style={styles.weaponProf}>
+                </Layout>
+                <Layout style={styles.weaponProf}>
                     <Text style={styles.text}>Simple</Text>
                     <ProficiencyArrayView proficiency={this.props.Simple}/>
-                </View>
-                <View style={styles.weaponProf}>
+                </Layout>
+                <Layout style={styles.weaponProf}>
                     <Text style={styles.text}>Martial</Text>
                     <ProficiencyArrayView proficiency={this.props.Martial}/>
-                </View>
-                <View style={styles.weaponProf}>
+                </Layout>
+                <Layout style={styles.weaponProf}>
                     <Text style={styles.text}>Other</Text>
                     {/* 
                     TODO: Need to convert an array of "others" into a flat list. 
@@ -34,8 +36,8 @@ export default class WeaponProficienciesView extends Component<
                         proficiency={this.props.Others[0] ? this.props.Others[0].proficiency : Proficiencies.Untrained }
                     
                     />
-                </View>
-            </View>
+                </Layout>
+            </Layout>
         );
     }
 }
