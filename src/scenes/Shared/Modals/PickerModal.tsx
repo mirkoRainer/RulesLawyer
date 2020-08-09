@@ -2,9 +2,9 @@ import React from "react";
 import {
     StyleSheet,
     ModalBaseProps,
+    Picker,
 } from "react-native";
 import { Layout, Text, Modal } from "@ui-kitten/components";
-import {Picker} from "@react-native-community/picker";
 import { Icon } from "react-native-elements";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";

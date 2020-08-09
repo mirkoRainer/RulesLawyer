@@ -3,7 +3,7 @@ import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, CHANGE_ANCESTRY, CHANGE_HERI
 import { ChangeCharacterName, ChangePlayerName, ChangeAncestry, ChangeHeritage, ChangeBackground, ChangeClass, ChangeSubClass, ChangeAlignment, ChangeDeity, ChangeNotes, ChangeResistances, ChangeImmunities, ChangeWeaknesses, ChangeConditions, ChangeSenses } from "../PlayerCharacter/PlayerCharacterActions";
 import { Dispatch } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
-import { ModalState, TextEditModalState } from "../../ModalsState";
+import { TextEditModalState } from "../../ModalsState";
 
 export const TextEditModalStateSwitch = (actionType: string, state: CharacterSheetState, dispatch: Dispatch<AppActions>): TextEditModalState => {
     switch (actionType) {

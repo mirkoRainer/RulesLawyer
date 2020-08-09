@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { RootDrawerParamList } from "../App";
+import { RootDrawerParamList } from "./RootDrawerParamList";
 import MainMenu from "./scenes/MainMenu";
 import Build from "./scenes/CharacterBuild/Build";
 import CharacterSheet from "./scenes/CharacterSheet/CharacterSheet";

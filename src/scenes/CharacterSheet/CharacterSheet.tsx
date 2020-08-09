@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Header } from "react-native-elements";
-import { RootDrawerParamList } from "../../../App";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
 import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
@@ -25,6 +24,7 @@ import PickerModal from "../Shared/Modals/PickerModal";
 import Conditions from "./Conditions";
 import { BottomNavigation, BottomNavigationTab, Layout, Text, TopNavigation, Icon, TopNavigationAction } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { RootDrawerParamList } from "../../RootDrawerParamList";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -82,10 +82,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             <BottomNavigationTab title='Story'/>
         </BottomNavigation>
     );
-    const MenuIcon = (props) => (
+    const MenuIcon = (props: any) => (
         <Icon {...props} name='menu-outline'/>
     );
-    const InfoIcon = (props) => (
+    const InfoIcon = (props : any) => (
         <Icon {...props} name='info'/>
     );
     const renderMenuAction = () => (
@@ -96,7 +96,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     );
     
     return (
-        <SafeAreaView style={{flex:1, backgroundColor: "#aaa"}}>
+        <SafeAreaView style={{flex:1}}>
             <Layout style={styles.container}>
                 <TopNavigation
                     alignment='center'

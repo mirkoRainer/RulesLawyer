@@ -3,11 +3,13 @@ import { playerCharacterReducer } from "./reducers/PlayerCharacterReducer";
 import { modalsReducer } from "./reducers/ModalsReducer";
 import thunk from "redux-thunk";
 import { characterBuildReducer } from "./reducers/CharacterBuildReducer";
+import { themeReducer } from "./reducers/ThemeReducer";
 
 const rootReducer = combineReducers({
     playerCharacter: playerCharacterReducer,
     modals: modalsReducer,
-    characterBuild: characterBuildReducer
+    characterBuild: characterBuildReducer,
+    theme: themeReducer
 });
 
 export type CharacterSheetState = ReturnType<typeof rootReducer>;

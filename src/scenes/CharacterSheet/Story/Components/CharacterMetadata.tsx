@@ -41,45 +41,39 @@ const CharacterMetadata: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
+            <CharacterName
+                characterName={
+                    props.characterMetadata.characterName
+                }
+            />
+            <PlayerName
+                playerName={props.characterMetadata.playerName}
+            />
             <Layout style={styles.rowContainer}>
-                <CharacterName
-                    characterName={
-                        props.characterMetadata.characterName
-                    }
-                />
-                <PlayerName
-                    playerName={props.characterMetadata.playerName}
-                />
-            </Layout>
-            <Layout style={styles.rowContainer}>
-                <AncestryAndHeritage
-                    ancestry={props.characterMetadata.ancestry}
-                    heritage={props.characterMetadata.heritage}
-                />
-                <Layout style={styles.container}>
-                    <Level level={props.characterMetadata.level} />
-                    <ExperiencePoints
-                        experiencePoints={
-                            props.characterMetadata.experiencePoints
-                        }
-                    />
-                </Layout>
-            </Layout>
-            <Layout style={styles.rowContainer}>
-                <BackgroundView
-                    background={props.characterMetadata.background}
-                />
-                <ClassView
-                    name={props.characterMetadata.pcClass}
-                    subClass={props.characterMetadata.subclass}
-                    keyAbility={
-                        props.characterMetadata.classKeyAbility
-                    }
-                    proficiency={
-                        props.characterMetadata.classProficiency
+                <Level level={props.characterMetadata.level} />
+                <ExperiencePoints
+                    experiencePoints={
+                        props.characterMetadata.experiencePoints
                     }
                 />
             </Layout>
+            <AncestryAndHeritage
+                ancestry={props.characterMetadata.ancestry}
+                heritage={props.characterMetadata.heritage}
+            />
+            <BackgroundView
+                background={props.characterMetadata.background}
+            />
+            <ClassView
+                name={props.characterMetadata.pcClass}
+                subClass={props.characterMetadata.subclass}
+                keyAbility={
+                    props.characterMetadata.classKeyAbility
+                }
+                proficiency={
+                    props.characterMetadata.classProficiency
+                }
+            />
             <Layout style={styles.rowContainer}>
                 <Alignment
                     alignment={props.characterMetadata.alignment}

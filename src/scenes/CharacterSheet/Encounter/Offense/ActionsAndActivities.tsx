@@ -8,7 +8,7 @@ interface Props {
     actions: Action[];
 }
 const ActionsAndActivities: React.FC<Props> = (props) => {
-    const renderItem = (item: Action) => <ActionView action={item} />;
+    const renderItem = (item: Action) => <ActionView action={item} key={item.name} />;
 
     const actions: JSX.Element[] = [];
     props.actions.forEach(action => {

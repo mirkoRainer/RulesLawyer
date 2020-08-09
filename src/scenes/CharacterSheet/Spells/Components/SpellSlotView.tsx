@@ -17,10 +17,10 @@ const SpellSlotView: React.FC<SpellSlotProps> = (props) => {
             ? { ...styles.outOfSpells, ...styles.spellSlot }
             : { ...styles.spellSlot };
     const focusPoint = props.focus ? { flex: 3.9 } : {};
-    const UpIcon = (props) => (
+    const UpIcon = (props: any) => (
         <Icon {...props} name='arrow-ios-upward-outline'/>
     );
-    const DownIcon = (props) => (
+    const DownIcon = (props: any) => (
         <Icon {...props} name='arrow-ios-downward-outline'/>
     );
     const view =

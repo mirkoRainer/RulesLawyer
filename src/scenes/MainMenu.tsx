@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { RootDrawerParamList, db } from "../../App";
 import { sql } from "@databases/expo";
 import { Layout, Text, Button } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { RootDrawerParamList } from "../RootDrawerParamList";
+import { db } from "../db/db";
 
 type MainMenuNavigationProps = DrawerNavigationProp<RootDrawerParamList, "MainMenu">;
 interface Props {
