@@ -1,28 +1,41 @@
 import React from "react";
 import {  StyleSheet } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, Divider } from "@ui-kitten/components";
+import AvoidNoticeActivity from "./Components/AvoidNoticeActivity";
+import DefendActivity from "./Components/DefendActivity";
+import DetectMagicActivity from "./Components/DetectMagicActivity";
+import FollowTheExpertActivity from "./Components/FollowTheExpertActivity";
+import HustleActivity from "./Components/HustleActivity";
+import InvestigateActivity from "./Components/InvestigateActivity";
+import RepeatASpellActivity from "./Components/RepeatASpellActivity";
+import ScoutActivity from "./Components/ScoutActivity";
+import SearchActivity from "./Components/SearchActivity";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 type Props = {}
 
-export const Exploration: React.FC<Props> = (props) => {
+const Exploration: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
-            <Text category='h4'>
-                Exploration!
-            </Text>
-            <Text>Avoid Notice</Text>
-            <Text>Defend</Text>
-            <Text>Detect Magic</Text>
-            <Text>Follow the Expert</Text>
-            <Text>Hustle</Text>
-            <Text>Investigate</Text>
-            <Text>Repeat a Spell</Text>
-            <Text>Scout</Text>
-            <Text>Search</Text>
+
+            <Divider />
+            <ScrollView>
+                <AvoidNoticeActivity />
+                <DefendActivity />
+                <DetectMagicActivity />
+                <FollowTheExpertActivity />
+                <HustleActivity /> 
+                <InvestigateActivity />
+                <RepeatASpellActivity />
+                <ScoutActivity />
+                <SearchActivity />
+            </ScrollView>
         </Layout>
     );
 };
+
+export default Exploration;
 
 const styles = StyleSheet.create({
     container: {
@@ -30,4 +43,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    title: {
+        flex: .08
+    }
 });

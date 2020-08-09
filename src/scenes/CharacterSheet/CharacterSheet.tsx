@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { Header } from "react-native-elements";
+import { Header, Divider } from "react-native-elements";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
 import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
@@ -15,7 +15,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Encounter from "./Encounter/Encounter";
 import StoryPage from "./Story/StoryPage";
-import { Exploration } from "./Exploration/Exploration";
+import Exploration from "./Exploration/Exploration";
 import { Downtime } from "./Downtime/Downtime";
 import { Inventory } from "./Inventory/Inventory";
 import SpellsPage from "./Spells/SpellsPage";
@@ -105,7 +105,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     accessoryRight={renderBuildAction}
                     accessoryLeft={renderMenuAction}
                 />
-                <Conditions conditions={props.playerCharacter.conditions} />
+                <Divider />
                 <Tab.Navigator 
                     tabBar={props => <BottomTabBar {...props}/>}
                     tabBarOptions={{

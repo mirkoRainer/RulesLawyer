@@ -1,25 +1,29 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
+import PrepareSpellsActivity from "./Components/PrepareSpellsActivity";
+import { Divider } from "@ui-kitten/components";
+import BribeAContactActivity from "./Components/BribeAContactActivity";
 
 type Props = {}
 
 export const Downtime: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
-            <Text category='h4'>
-                Downtime!
-            </Text>
-            <Text>Prepare Spells</Text>
-            <Text>Cost of Living</Text>
-            <Text>Buying and Selling</Text>
-            <Text>long-term rest</Text>
-            <Text>Retraining</Text>
-            <Text>Craft</Text>
-            <Text>Earn income (Crafting Lore Performance)</Text>
-            <Text>Treat Disease</Text>
-            <Text>Create Forgery</Text>
-            <Text>Subsist</Text>
+            <Divider />
+            <ScrollView>
+                <PrepareSpellsActivity />
+                <BribeAContactActivity />
+                <Text>Cost of Living</Text>
+                <Text>Buying and Selling</Text>
+                <Text>long-term rest</Text>
+                <Text>Retraining</Text>
+                <Text>Craft</Text>
+                <Text>Earn income (Crafting Lore Performance)</Text>
+                <Text>Treat Disease</Text>
+                <Text>Create Forgery</Text>
+                <Text>Subsist</Text>
+            </ScrollView>
         </Layout>
     );
 };

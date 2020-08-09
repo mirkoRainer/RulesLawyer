@@ -17,6 +17,8 @@ import EncounterSkills from "./EncounterSkills";
 import { NavigationContainer } from "@react-navigation/native";
 import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
 import SpellsPage from "../Spells/SpellsPage";
+import { Layout } from "@ui-kitten/components";
+import Conditions from "../Conditions";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -27,7 +29,7 @@ export type EncounterTabParamList = {
     Other: undefined;
 }
 
-const Encounter: React.FC<Props> = () => {
+const Encounter: React.FC<Props> = (props) => {
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
     const BottomTabBar = ({ navigation, state }) => (
         <BottomNavigation
@@ -40,43 +42,46 @@ const Encounter: React.FC<Props> = () => {
         </BottomNavigation>
     );
     return (
-        <NavigationContainer independent={true}>
-            <Tab.Navigator 
-                tabBar={props => <BottomTabBar {...props}/>}
-                tabBarOptions={{
-                    activeTintColor: "tomato",
-                    inactiveTintColor: "grey",
-                    showLabel: true,
-                    labelStyle: {
-                        fontSize: 14
-                    },
-                    keyboardHidesTabBar: true, 
-                    tabStyle: styles.tab,
-                }} 
-                initialRouteName={"Attack"}
-            >
-                <Tab.Screen 
-                    name="Attack" 
-                    component={EncounterOffense}
-                    options={{ tabBarLabel: "Your Turn" }}
-                />
-                <Tab.Screen 
-                    name="Defend" 
-                    component={EncounterDefense}
-                    options={{ tabBarLabel: "Their Turn" }}
-                />
-                <Tab.Screen 
-                    name="Skills" 
-                    component={EncounterSkills}
-                    options={{ tabBarLabel: "Skillz" }}
-                />
-                <Tab.Screen 
-                    name="Other" 
-                    component={SpellsPage}
-                    options={{ tabBarLabel: "Spells" }}
-                />
-            </Tab.Navigator>
-        </ NavigationContainer>
+        <Layout style={{flex:1}}>
+            <Conditions conditions={props.playerCharacter.conditions} />
+            <NavigationContainer independent={true}>
+                <Tab.Navigator 
+                    tabBar={props => <BottomTabBar {...props}/>}
+                    tabBarOptions={{
+                        activeTintColor: "tomato",
+                        inactiveTintColor: "grey",
+                        showLabel: true,
+                        labelStyle: {
+                            fontSize: 14
+                        },
+                        keyboardHidesTabBar: true, 
+                        tabStyle: styles.tab,
+                    }} 
+                    initialRouteName={"Attack"}
+                >
+                    <Tab.Screen 
+                        name="Attack" 
+                        component={EncounterOffense}
+                        options={{ tabBarLabel: "Your Turn" }}
+                    />
+                    <Tab.Screen 
+                        name="Defend" 
+                        component={EncounterDefense}
+                        options={{ tabBarLabel: "Their Turn" }}
+                    />
+                    <Tab.Screen 
+                        name="Skills" 
+                        component={EncounterSkills}
+                        options={{ tabBarLabel: "Skillz" }}
+                    />
+                    <Tab.Screen 
+                        name="Other" 
+                        component={SpellsPage}
+                        options={{ tabBarLabel: "Spells" }}
+                    />
+                </Tab.Navigator>
+            </ NavigationContainer>
+        </Layout>
     );
 };
 
@@ -89,7 +94,6 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
-    
 }
 
 const mapDispatchToProps = (
