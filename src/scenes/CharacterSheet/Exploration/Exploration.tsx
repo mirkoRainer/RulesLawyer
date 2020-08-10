@@ -17,9 +17,7 @@ type Props = {}
 
 const Exploration: React.FC<Props> = (props) => {
     return (
-        <Layout style={styles.container}>
-
-            <Divider />
+        <Layout>
             <ScrollView>
                 <AvoidNoticeActivity />
                 <DefendActivity />
