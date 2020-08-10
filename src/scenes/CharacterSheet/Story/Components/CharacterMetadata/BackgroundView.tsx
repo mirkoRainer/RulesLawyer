@@ -50,8 +50,6 @@ export default connect(null, mapDispatchToProps)(BackgroundView);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
         alignContent: "stretch",
         alignSelf: "stretch",
     },

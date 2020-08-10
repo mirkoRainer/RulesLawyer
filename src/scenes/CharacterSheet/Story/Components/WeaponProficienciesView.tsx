@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
     },
     weaponProf: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 1,
         justifyContent: "center",
     },
     text: {

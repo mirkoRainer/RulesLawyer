@@ -60,8 +60,6 @@ export default connect(null, mapDispatchToProps)(AncestryAndHeritage);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 1,
         alignContent: "stretch",
         alignSelf: "stretch",
     },

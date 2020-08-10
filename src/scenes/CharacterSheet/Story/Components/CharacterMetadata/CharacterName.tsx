@@ -51,8 +51,6 @@ export default connect(null, mapDispatchToProps)(CharacterName);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
     },
     text: {},
 });

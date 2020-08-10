@@ -77,8 +77,6 @@ export default connect(null, mapDispatchToProps)(CampaignNotes);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: "black",
-        borderWidth: 2,
     },
     header: {
         flex: 1,
@@ -91,8 +89,6 @@ const styles = StyleSheet.create({
     rowContainer: {
         flex: 1,
         flexDirection: "row",
-        borderColor: "black",
-        borderWidth: 2,
     },
     text: {
         flex: 1,
