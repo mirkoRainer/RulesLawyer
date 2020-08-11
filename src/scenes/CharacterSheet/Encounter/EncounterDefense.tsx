@@ -23,9 +23,9 @@ const EncounterDefense: React.FC<Props> = (props) => {
             <ScrollView>
                 <Divider />
                 <HitPoints
-                    max={props.playerCharacter.hitPoint.max}
-                    current={props.playerCharacter.hitPoint.current}
-                    temporary={props.playerCharacter.hitPoint.temporary}
+                    max={props.playerCharacter.hitPoint.maxHitPoints}
+                    current={props.playerCharacter.hitPoint.currentHitPoints}
+                    temporary={props.playerCharacter.hitPoint.temporaryHitPoints}
                     dying={props.playerCharacter.hitPoint.dying}
                     wounded={props.playerCharacter.hitPoint.wounded}
                 />

@@ -117,6 +117,14 @@ export interface ChangeClassDCProficiency extends Action<string> {
     Proficiency: Proficiencies;
 }
 
+export const CHANGE_HIT_POINTS = "CHANGE_HIT_POINTS";
+export interface ChangeHitPointsAction extends Action<string> {
+    type: typeof CHANGE_HIT_POINTS;
+    HitPointDelta: number;
+    RemovesWounded: boolean;
+}
+
+
 
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
                                         |   ChangeAncestryAction 
@@ -136,7 +144,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeLevelAction 
                                         |   ChangeExperiencePointsAction 
                                         |   ChangeAbilityScoreAction
-                                        |   ChangeClassDCProficiency; // | SomeOtherAction
+                                        |   ChangeClassDCProficiency
+                                        |   ChangeHitPointsAction; // | SomeOtherAction
 
 
 

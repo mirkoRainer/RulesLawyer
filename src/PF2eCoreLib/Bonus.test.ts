@@ -1,6 +1,6 @@
-import { Bonus } from "../src/PF2eCoreLib/Bonus";
-import { BonusType } from "../src/PF2eCoreLib/BonusTypes";
-import { examplePlayerCharacter } from "../examplePlayerCharacter";
+import { Bonus } from "./Bonus";
+import { BonusType } from "./BonusTypes";
+import { examplePlayerCharacter } from "../../examplePlayerCharacter";
 
 
 describe("Bonus", () => {

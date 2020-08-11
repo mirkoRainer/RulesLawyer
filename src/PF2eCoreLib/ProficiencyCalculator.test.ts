@@ -1,4 +1,4 @@
-import ProficiencyCalculator from "../src/PF2eCoreLib/ProficiencyCalculator";
+import ProficiencyCalculator from "./ProficiencyCalculator";
 
 describe("ProficiencyCalculator", () => {
     describe("calculateProficiencyBonus", () => {

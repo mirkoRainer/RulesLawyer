@@ -5,6 +5,7 @@ import { SpellListEntry } from "../scenes/CharacterSheet/Spells/Components/Spell
 import { ArmorCategory } from "./ArmorCategory";
 import { Ability } from "./Ability";
 import { Traits } from "./Traits";
+import { HealthData } from "./HealthData";
 
 
 export interface PlayerCharacter {
@@ -27,7 +28,7 @@ export interface PlayerCharacter {
     armorProficiencies:          ArmorProficiencies;
     skills:                      Skill[];
     ancestryFeatsAndAbilities:   AncestryFeatsAndAbility[];
-    hitPoint:                    HitPoint;
+    hitPoint:                    HealthData;
     movement:                    Movement;
     weaponProficiencies:         WeaponProficiencies;
     weapons:                     Weapon[];
@@ -140,14 +141,6 @@ export interface CampaignNotesData {
     allies:        string;
     enemies:       string;
     organizations: string;
-}
-
-export interface HitPoint {
-    max:       number;
-    current:   number;
-    temporary: number;
-    dying:     number;
-    wounded:   number;
 }
 
 export interface Inventory {

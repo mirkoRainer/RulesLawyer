@@ -25,7 +25,7 @@ const Shield: React.FC<Props> = (props) => {
                 <Text style={styles.number}>+{props.shield.acBonus!}</Text>
             </Layout>
             <Layout style={styles.column}>
-                <Text style={styles.text}>HP:</Text>
+                <Text style={styles.text}>Shield HP:</Text>
                 <Text style={styles.number}>{props.shield.currentHP!}/{props.shield.maxHP!}</Text>
             </Layout>
             <Layout style={styles.column}>
