@@ -10,10 +10,11 @@ describe("HitPoints", () => {
                     maxHitPoints: 30,
                     currentHitPoints: 24,
                     temporaryHitPoints: 0,
+                    maxDying: 4,
                     dying: 0,
                     wounded: 0
                 };
-
+                
                 expect(ResolveHitPoints(mockHealthData, 3).currentHitPoints).toBe(27);
                 expect(ResolveHitPoints(mockHealthData, 12).currentHitPoints).toBe(30);
             });
@@ -22,6 +23,7 @@ describe("HitPoints", () => {
                     maxHitPoints: 30,
                     currentHitPoints: 0,
                     temporaryHitPoints: 0,
+                    maxDying: 4,
                     dying: 2,
                     wounded: 0
                 };
