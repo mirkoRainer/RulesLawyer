@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text, Button, ButtonGroup } from "@ui-kitten/components";
 import { floor } from "react-native-reanimated";
+import { bindActionCreators } from "redux";
+import { startChangeHitPoints } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 
 export interface HitPointProps {
     max: number;
@@ -11,9 +16,9 @@ export interface HitPointProps {
     wounded: number;
 }
 
-const HitPoints: React.FC<HitPointProps> = (props) => {
-    const PlusButton = (amount: number) => (<Button style={styles.plus}>+{amount.toString()}</Button>);
-    const MinusButton = (amount: number) => (<Button style={styles.minus}>-{amount.toString()}</Button>);
+const HitPoints: React.FC<Props> = (props) => {
+    const PlusButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(amount, false);}} style={styles.plus}>+{amount.toString()}</Button>);
+    const MinusButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(-amount, false);}} style={styles.minus}>-{amount.toString()}</Button>);
 
     return (
         <Layout>
@@ -49,7 +54,23 @@ const HitPoints: React.FC<HitPointProps> = (props) => {
     );
 };
 
-export default HitPoints;
+type Props = HitPointProps & LinkDispatchProps;
+    
+
+// base state
+//all actions to be dispatched
+interface LinkDispatchProps {
+    AdjustHitPoints: (delta: number, removesWounded: boolean) => void;
+}
+
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+    AdjustHitPoints: bindActionCreators(startChangeHitPoints, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(HitPoints);
+
 
 const styles = StyleSheet.create({
     container: {

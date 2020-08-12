@@ -2,11 +2,13 @@ import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
 import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
+import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
 const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActionTypes): PlayerCharacter => { 
     let newState: PlayerCharacter;
+    let newHealthData: HealthData;
     switch(action.type) {
     case CHANGE_CHARACTER_NAME:
         newState = { 
@@ -126,10 +128,15 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
         };
         return newState;
     case CHANGE_HIT_POINTS:
+        console.debug("CHANGE_HIT_POINTS");
+        console.debug(`action: ${JSON.stringify(action)}`);
+        newHealthData = ResolveHitPoints(state.hitPoint, action.HitPointDelta, action.RemovesWounded);
+        console.debug(`newHealthData: ${JSON.stringify(newHealthData)}`);
         newState = {
             ...state,
-            hitPoint: ResolveHitPoints(state.hitPoint, action.HitPointDelta)
+            hitPoint: newHealthData
         };
+        console.debug(`result: ${JSON.stringify(newState.hitPoint)}`);
         return newState;
     default:
         return state;
