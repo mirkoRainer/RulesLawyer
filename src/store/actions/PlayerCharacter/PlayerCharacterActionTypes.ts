@@ -124,6 +124,13 @@ export interface ChangeHitPointsAction extends Action<string> {
     RemovesWounded: boolean;
 }
 
+export const CHANGE_TEMPORARY_HITPOINTS = "CHANGE_TEMPORARY_HITPOINTS";
+export interface ChangeTemporaryHitPointsAction extends Action<string> {
+    type: typeof CHANGE_TEMPORARY_HITPOINTS;
+    delta: number;
+}
+
+
 
 
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
@@ -145,7 +152,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeExperiencePointsAction 
                                         |   ChangeAbilityScoreAction
                                         |   ChangeClassDCProficiency
-                                        |   ChangeHitPointsAction; // | SomeOtherAction
+                                        |   ChangeHitPointsAction
+                                        |   ChangeTemporaryHitPointsAction; // | SomeOtherAction
 
 
 
