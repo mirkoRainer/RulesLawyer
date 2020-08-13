@@ -1,5 +1,5 @@
 import React from "react";
-import {  StyleSheet } from "react-native";
+import {  StyleSheet, ScrollView } from "react-native";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import AvoidNoticeActivity from "./Components/AvoidNoticeActivity";
 import DefendActivity from "./Components/DefendActivity";
@@ -10,7 +10,6 @@ import InvestigateActivity from "./Components/InvestigateActivity";
 import RepeatASpellActivity from "./Components/RepeatASpellActivity";
 import ScoutActivity from "./Components/ScoutActivity";
 import SearchActivity from "./Components/SearchActivity";
-import { ScrollView } from "react-native-gesture-handler";
 
 
 type Props = {}

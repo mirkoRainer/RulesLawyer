@@ -2,8 +2,8 @@ import { PickerModalState } from "../../ModalsState";
 import { CharacterSheetState } from "../../Store";
 import { Dispatch, ReactText } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY } from "../PlayerCharacter/PlayerCharacterActionTypes";
-import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency } from "../PlayerCharacter/PlayerCharacterActions";
+import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_TEMPORARY_HITPOINTS } from "../PlayerCharacter/PlayerCharacterActionTypes";
+import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency, ChangeTemporaryHitPoints } from "../PlayerCharacter/PlayerCharacterActions";
 import { ChangePickerSelection } from "./ModalsActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 
@@ -45,6 +45,16 @@ export const PickerModalStateSwitch = (actionType: string, state: CharacterSheet
             onSelect: (value: ReactText, index: number) => {
                 console.debug("onSelect in PickerModalStateSwitch");
                 dispatch(ChangeClassDCProficiency(<Proficiencies>value));
+                dispatch(ChangePickerSelection(value));
+            }
+        };
+    case CHANGE_TEMPORARY_HITPOINTS:
+        return {
+            title: "Temp HP",
+            items: Array.from(new Array(50), (x, i) => i + 1),
+            currentSelection: state.modals.pickerModal.currentSelection,
+            onSelect: (value: ReactText, index: number) => {
+                dispatch(ChangeTemporaryHitPoints(value));
                 dispatch(ChangePickerSelection(value));
             }
         };

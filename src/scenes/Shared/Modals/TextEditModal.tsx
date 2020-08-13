@@ -1,11 +1,9 @@
 import React from "react";
-import { Layout, Text, Modal } from "@ui-kitten/components";
+import { Layout, Text, Modal, Input, Icon, Card, Button } from "@ui-kitten/components";
 import {
     StyleSheet,
-    TextInput,
     ModalBaseProps,
 } from "react-native";
-import { Icon } from "react-native-elements";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
@@ -19,6 +17,10 @@ type OwnProps = {};
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
 const TextEditModal: React.FC<Props> = (props) => {
+    const CheckIcon = (props: any) => (
+        <Icon {...props} name="checkmark-circle-outline" />
+    );
+
     return (
         <Modal
             visible={props.modalState.visible}
@@ -26,20 +28,23 @@ const TextEditModal: React.FC<Props> = (props) => {
             style={styles.modal}
             backdropStyle={styles.backdrop}
         >
-            <Layout style={styles.header}>
-                <Text>{props.modalState.title || "Edit:"}</Text>
-                <Icon name="check" onPress={props.toggleModal} />
-            </Layout>
-            <Layout>
-                <TextInput
-                    style={styles.modalTextInput}
-                    placeholder={"Type Here"}
-                    onChangeText={props.modalState.onTextChange}
-                    multiline={true}
-                >
-                    {props.modalState.value}
-                </TextInput>
-            </Layout>
+            <Card>
+
+                <Layout style={styles.header}>
+                    <Text>{props.modalState.title || "Edit:"}</Text>
+                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
+                </Layout>
+                <Layout>
+                    <Input
+                        style={styles.modalInput}
+                        placeholder={"Type Here"}
+                        onChangeText={props.modalState.onTextChange}
+                        size={"large"}
+                        multiline={true}
+                        value={props.modalState.value}
+                    />
+                </Layout>
+            </Card>
         </Modal>
     );
 };
@@ -74,7 +79,6 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(0,0,0,0.5)",
         flex: 1
     },
     backdrop: {
@@ -95,13 +99,10 @@ const styles = StyleSheet.create({
     modal: {
         overflow: "scroll"
     },
-    modalTextInput: {
+    modalInput: {
         justifyContent: "center",
         textAlign: "center",
-        borderBottomWidth: 1,
         width: "100%",
-        fontSize: 32,
         padding: 10,
-        backgroundColor: "#e4dada",
     },
 });

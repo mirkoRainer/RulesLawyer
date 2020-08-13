@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import BiographicalView, { BiographicalData } from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import { CharacterSheetState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { ScrollView } from "react-native-gesture-handler";
 import { Background, Weapon, WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";

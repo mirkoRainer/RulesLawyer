@@ -144,7 +144,7 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
             ...state,
             hitPoint: {
                 ...state.hitPoint,
-                temporaryHitPoints: state.hitPoint.temporaryHitPoints + action.delta
+                temporaryHitPoints: action.delta
             }
         };
         return newState;

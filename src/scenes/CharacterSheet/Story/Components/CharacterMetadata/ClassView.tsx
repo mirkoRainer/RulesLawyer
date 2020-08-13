@@ -20,7 +20,7 @@ const ClassView: React.FC<Props> = (props) => {
     );
 };
 
-export interface OwnProps {
+interface OwnProps {
     name:        string;
     subClass:    string;
     proficiency: Proficiencies;

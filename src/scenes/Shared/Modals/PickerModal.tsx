@@ -2,10 +2,8 @@ import React from "react";
 import {
     StyleSheet,
     ModalBaseProps,
-    Picker,
 } from "react-native";
-import { Layout, Text, Modal } from "@ui-kitten/components";
-import { Icon } from "react-native-elements";
+import { Layout, Text, Modal, Card, Button, Icon, useTheme, style } from "@ui-kitten/components";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
@@ -13,6 +11,7 @@ import { startTogglePickerModal } from "../../../store/actions/Modals/ModalsActi
 import { connect } from "react-redux";
 import { PickerModalState } from "../../../store/ModalsState";
 import { CharacterSheetState } from "../../../store/Store";
+import {Picker} from "@react-native-community/picker";
 
 type OwnProps = {};
 
@@ -20,29 +19,37 @@ type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
 const PickerModal: React.FC<Props> = (props) => {
     let items = props.modalState.items.map((value, index) => {
-        return <Picker.Item value={value} key={value} label={value.toString()} />;
+        return <Picker.Item value={value} key={value} label={value.toString()}  />;
     });
+    const CheckIcon = (props: any) => (
+        <Icon {...props} name="checkmark-circle-outline" />
+    );
+    const theme = useTheme();
 
     return (
         <Modal
             visible={props.modalState.visible}
             onBackdropPress={props.toggleModal}
             style={styles.modal}
+            backdropStyle={styles.backdrop}
         >
-            <Layout style={styles.pickerContainer}>
-                <Layout style={styles.header}>
-                    <Text>{props.modalState.title || "Edit:"}</Text>
-                    <Icon name="check" onPress={props.toggleModal} />
+            <Card>
+                <Layout style={styles.pickerContainer}>
+                    <Layout style={styles.header}>
+                        <Text>{props.modalState.title || "Edit:"}</Text>
+                        <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
+                    </Layout>
+                    <Layout>
+                        <Picker
+                            selectedValue={props.modalState.currentSelection}
+                            onValueChange={props.modalState.onSelect}
+                            itemStyle={{color: theme["color-primary-500"]}}
+                        >
+                            {items}
+                        </Picker>
+                    </Layout>
                 </Layout>
-                <Layout>
-                    <Picker
-                        selectedValue={props.modalState.currentSelection}
-                        onValueChange={props.modalState.onSelect}
-                    >
-                        {items}
-                    </Picker>
-                </Layout>
-            </Layout>
+            </Card>
         </Modal>
     );
 };
@@ -95,5 +102,8 @@ const styles = StyleSheet.create({
     },
     modal: {
         overflow: "scroll"
+    },    
+    backdrop: {
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
 });

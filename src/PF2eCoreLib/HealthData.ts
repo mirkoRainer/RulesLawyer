@@ -71,7 +71,7 @@ const ResolveTemporaryHitPoints = (healthData: HealthData, harm: number): Health
             currentHitPoints: DecreaseHP(healthData.currentHitPoints, harm)
         };
     }
-    if (healthData.temporaryHitPoints > Math.abs(harm)) {
+    if (healthData.temporaryHitPoints >= Math.abs(harm)) {
         const result = {
             ...healthData,
             temporaryHitPoints: healthData.temporaryHitPoints + harm
