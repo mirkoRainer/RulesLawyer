@@ -2,8 +2,8 @@ import { PickerModalState } from "../../ModalsState";
 import { CharacterSheetState } from "../../Store";
 import { Dispatch, ReactText } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_TEMPORARY_HITPOINTS } from "../PlayerCharacter/PlayerCharacterActionTypes";
-import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency, ChangeTemporaryHitPoints } from "../PlayerCharacter/PlayerCharacterActions";
+import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_TEMPORARY_HITPOINTS, CHANGE_MAX_HITPOINTS } from "../PlayerCharacter/PlayerCharacterActionTypes";
+import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency, ChangeTemporaryHitPoints, ChangeMaxHitPoints } from "../PlayerCharacter/PlayerCharacterActions";
 import { ChangePickerSelection } from "./ModalsActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 
@@ -49,12 +49,24 @@ export const PickerModalStateSwitch = (actionType: string, state: CharacterSheet
             }
         };
     case CHANGE_TEMPORARY_HITPOINTS:
+        console.debug("PickerModalStateSwitch for CHANGE_TEMPORARY_HITPOINTS");
         return {
             title: "Temp HP",
             items: Array.from(new Array(50), (x, i) => i + 1),
             currentSelection: state.modals.pickerModal.currentSelection,
             onSelect: (value: ReactText, index: number) => {
                 dispatch(ChangeTemporaryHitPoints(value));
+                dispatch(ChangePickerSelection(value));
+            }
+        };
+    case CHANGE_MAX_HITPOINTS:
+        console.debug("PickerModalStateSwitch for CHANGE_MAX_HITPOINTS");
+        return {
+            title: "Max HP",
+            items: Array.from(new Array(300), (x, i) => i + 1),
+            currentSelection: state.modals.pickerModal.currentSelection,
+            onSelect: (value: ReactText, index: number) => {
+                dispatch(ChangeMaxHitPoints(value));
                 dispatch(ChangePickerSelection(value));
             }
         };

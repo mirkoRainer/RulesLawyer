@@ -142,6 +142,11 @@ export interface ChangeWoundedAction extends Action<string> {
     WoundedValue: number;
 }
 
+export const CHANGE_MAX_HITPOINTS = "CHANGE_MAX_HITPOINTS";
+export interface ChangeMaxHitPointsAction extends Action<string> {
+    type: typeof CHANGE_MAX_HITPOINTS;
+    MaxHitPoints: number;
+}
 
 
 
@@ -167,7 +172,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeHitPointsAction
                                         |   ChangeTemporaryHitPointsAction
                                         |   ChangeDyingValueAction
-                                        |   ChangeWoundedAction; // | SomeOtherAction
+                                        |   ChangeWoundedAction
+                                        |   ChangeMaxHitPointsAction; // | SomeOtherAction
 
 
 

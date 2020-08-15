@@ -1,5 +1,5 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
@@ -8,167 +8,177 @@ import WoundedView from "../../scenes/CharacterSheet/Encounter/Defense/HealthDat
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
 const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActionTypes): PlayerCharacter => { 
-    let newState: PlayerCharacter;
+    let modifiedState: PlayerCharacter;
     let newHealthData: HealthData;
     switch(action.type) {
     case CHANGE_CHARACTER_NAME:
-        newState = { 
+        modifiedState = { 
             ...state,
             name: action.name
         };
-        return newState;
+        return modifiedState;
     case CHANGE_PLAYER_NAME:
-        newState = {
+        modifiedState = {
             ...state,
             playerName: action.name
         };
-        return newState;
+        return modifiedState;
     case CHANGE_ANCESTRY:
-        newState = {
+        modifiedState = {
             ...state,
             ancestry: {
                 ...state.ancestry,
                 name: action.ancestry
             }
         };
-        return newState;
+        return modifiedState;
     case CHANGE_HERITAGE:
-        newState = {
+        modifiedState = {
             ...state,
             ancestry: {
                 ...state.ancestry,
                 heritage: action.heritage
             }
         };
-        return newState;
+        return modifiedState;
     case CHANGE_BACKGROUND:
-        newState = {
+        modifiedState = {
             ...state,
             background: {
                 ...state.background,
                 name: action.Background
             } 
         };
-        return newState;
+        return modifiedState;
     case CHANGE_ALIGNMENT:
-        newState = {
+        modifiedState = {
             ...state,
             alignment: action.Alignment
         };
-        return newState;
+        return modifiedState;
     case CHANGE_DEITY:
-        newState = {
+        modifiedState = {
             ...state,
             deity: action.Deity
         };
-        return newState;
+        return modifiedState;
     case CHANGE_NOTES:
-        newState = {
+        modifiedState = {
             ...state,
             campaignNotesData: {
                 ...state.campaignNotesData,
                 notes: action.Notes
             } 
         };
-        return newState;
+        return modifiedState;
     case CHANGE_RESISTANCES:
-        newState = {
+        modifiedState = {
             ...state,
             resistances: action.Resistances
         };
-        return newState;
+        return modifiedState;
     case CHANGE_IMMUNITIES:
-        newState = {
+        modifiedState = {
             ...state,
             immunities: action.Immunities
         };
-        return newState;
+        return modifiedState;
     case CHANGE_WEAKNESSES:
-        newState = {
+        modifiedState = {
             ...state,
             weakness: action.Weaknesses
         };
-        return newState;
+        return modifiedState;
     case CHANGE_CONDITIONS:
-        newState = {
+        modifiedState = {
             ...state,
             conditions: action.Conditions
         };
-        return newState;
+        return modifiedState;
     case CHANGE_SENSES:
-        newState = {
+        modifiedState = {
             ...state,
             senses: action.Senses
         };
-        return newState;
+        return modifiedState;
     case CHANGE_LEVEL:
-        newState = {
+        modifiedState = {
             ...state,
             level: action.Level
         };
-        return newState;
+        return modifiedState;
     case CHANGE_EXPERIENCE_POINTS:
-        newState = {
+        modifiedState = {
             ...state,
             experiencePoints: action.ExperiencePoints
         };
-        return newState;
+        return modifiedState;
     case CHANGE_ABILITY_SCORE:
-        newState = {
+        modifiedState = {
             ...state,
             abilityScores: UpdateAbilityScore(action.AbilityScore, state.abilityScores)
         };
-        return newState;
+        return modifiedState;
     case CHANGE_CLASS_DC_PROFICIENCY:
-        newState = {
+        modifiedState = {
             ...state,
             pcClass: {
                 ...state.pcClass,
                 proficiency: action.Proficiency
             }
         };
-        return newState;
+        return modifiedState;
     case CHANGE_HIT_POINTS:
         console.debug("CHANGE_HIT_POINTS");
         console.debug(`action: ${JSON.stringify(action)}`);
         newHealthData = ResolveHitPoints(state.hitPoint, action.HitPointDelta, action.RemovesWounded);
         console.debug(`newHealthData: ${JSON.stringify(newHealthData)}`);
-        newState = {
+        modifiedState = {
             ...state,
             hitPoint: newHealthData
         };
-        console.debug(`result: ${JSON.stringify(newState.hitPoint)}`);
-        return newState;
+        console.debug(`result: ${JSON.stringify(modifiedState.hitPoint)}`);
+        return modifiedState;
     case CHANGE_TEMPORARY_HITPOINTS:
         console.debug("CHANGE_TEMPORARY_HITPOINTS");
-        newState = {
+        modifiedState = {
             ...state,
             hitPoint: {
                 ...state.hitPoint,
                 temporaryHitPoints: action.TemporaryHitPoints
             }
         };
-        return newState;
+        return modifiedState;
     case CHANGE_DYING_VALUE:
         console.debug(`CHANGE_DYING_VALUE in reducer. ${action.DyingValue}`);
-        newState ={
+        modifiedState ={
             ...state,
             hitPoint: {
                 ...state.hitPoint,
                 dying: action.DyingValue
             }
         };
-        return newState;
+        return modifiedState;
     case CHANGE_WOUNDED_VALUE:
         console.debug(`CHANGE_WOUNDED_VALUE in reducer. ${action.WoundedValue}`);
-        newState = {
+        modifiedState = {
             ...state,
             hitPoint: {
                 ...state.hitPoint,
                 wounded: action.WoundedValue
             }
         };
-        return newState;
+        return modifiedState;
+    case CHANGE_MAX_HITPOINTS:
+        console.debug(`CHANGE_MAX_HITPOINTS in reducer. ${action.MaxHitPoints}`);
+        modifiedState = {
+            ...state,
+            hitPoint: {
+                ...state.hitPoint,
+                maxHitPoints: action.MaxHitPoints
+            }
+        };
+        return modifiedState;
     default:
         return state;
     }

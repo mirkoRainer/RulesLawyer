@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout, Text, Button, ButtonGroup } from "@ui-kitten/components";
 import { floor } from "react-native-reanimated";
 import { bindActionCreators } from "redux";
@@ -10,6 +10,8 @@ import { AppActions } from "../../../../../store/actions/AllActionTypesAggregate
 import TemporaryHitPoints from "./TemporaryHitPoints";
 import DyingView from "./DyingView";
 import WoundedView from "./WoundedView";
+import { CHANGE_MAX_HITPOINTS } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 
 export interface HitPointProps {
     max: number;
@@ -23,6 +25,11 @@ const HitPoints: React.FC<Props> = (props) => {
     const PlusHPButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(amount, false);}} style={styles.plus}>+{amount.toString()}</Button>);
     const MinusHPButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(-amount, false);}} style={styles.minus}>-{amount.toString()}</Button>);
 
+    const handleHPTap = () => {
+        console.debug("handleHPTap");
+        props.startPickerModal(CHANGE_MAX_HITPOINTS, props.max);
+    };
+
     return (
         <Layout>
             <Layout style={styles.rowContainer}>
@@ -32,8 +39,10 @@ const HitPoints: React.FC<Props> = (props) => {
                     {MinusHPButton(10)}
                 </ButtonGroup>
                 <Layout>
-                    <Text style={styles.subHeader} category='p1'> HP: </Text>
-                    <Text category='h4' style={styles.text}> {props.current}/{props.max} </Text>
+                    <TouchableOpacity onPress={handleHPTap}>
+                        <Text style={styles.subHeader} category='p1'> HP: </Text>
+                        <Text category='h4' style={styles.text}> {props.current}/{props.max} </Text>
+                    </TouchableOpacity>
                 </Layout>
                 <ButtonGroup style={styles.container} size="tiny" status='info'>
                     {PlusHPButton(10)}
@@ -59,12 +68,15 @@ type Props = HitPointProps & LinkDispatchProps;
 //all actions to be dispatched
 interface LinkDispatchProps {
     AdjustHitPoints: (delta: number, removesWounded: boolean) => void;
+    startPickerModal: (actionType: string, maxHitPoints: number) => void;
 }
 
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
-    AdjustHitPoints: bindActionCreators(startChangeHitPoints, dispatch)
+    AdjustHitPoints: bindActionCreators(startChangeHitPoints, dispatch),
+    startPickerModal: bindActionCreators(startNumberPickerModalSelection, dispatch),
+
 });
 
 export default connect(null, mapDispatchToProps)(HitPoints);

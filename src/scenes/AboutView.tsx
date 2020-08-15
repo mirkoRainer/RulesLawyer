@@ -13,7 +13,6 @@ type Props = LinkDispatchProps & LinkStateProps;
 
 const AboutView: React.FC<Props> = (props) => {
     const toggleTheme = () => {
-        console.debug(`${props.theme} is the current theme`);
         const nextTheme = props.theme === "light" ? "dark" : "light";
         props.toggleDarkMode(nextTheme);
     };

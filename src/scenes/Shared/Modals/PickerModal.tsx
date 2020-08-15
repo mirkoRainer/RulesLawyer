@@ -3,7 +3,7 @@ import {
     StyleSheet,
     ModalBaseProps,
 } from "react-native";
-import { Layout, Text, Modal, Card, Button, Icon, useTheme, style } from "@ui-kitten/components";
+import { Layout, Text, Modal, Card, Button, Icon, useTheme } from "@ui-kitten/components";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
@@ -33,23 +33,21 @@ const PickerModal: React.FC<Props> = (props) => {
             style={styles.modal}
             backdropStyle={styles.backdrop}
         >
-            <Card>
-                <Layout style={styles.pickerContainer}>
-                    <Layout style={styles.header}>
-                        <Text>{props.modalState.title || "Edit:"}</Text>
-                        <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
-                    </Layout>
-                    <Layout>
-                        <Picker
-                            selectedValue={props.modalState.currentSelection}
-                            onValueChange={props.modalState.onSelect}
-                            itemStyle={{color: theme["color-primary-500"]}}
-                        >
-                            {items}
-                        </Picker>
-                    </Layout>
+            <Layout style={styles.pickerContainer}>
+                <Layout style={styles.header}>
+                    <Text>{props.modalState.title || "Edit:"}</Text>
+                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
                 </Layout>
-            </Card>
+                <Layout>
+                    <Picker
+                        selectedValue={props.modalState.currentSelection}
+                        onValueChange={props.modalState.onSelect}
+                        itemStyle={{color: theme["color-primary-500"]}}
+                    >
+                        {items}
+                    </Picker>
+                </Layout>
+            </Layout>
         </Modal>
     );
 };
