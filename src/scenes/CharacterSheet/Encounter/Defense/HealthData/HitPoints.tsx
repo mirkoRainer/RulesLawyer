@@ -30,6 +30,11 @@ const HitPoints: React.FC<Props> = (props) => {
         props.startPickerModal(CHANGE_MAX_HITPOINTS, props.max);
     };
 
+    const maxHP = () => {
+        const delta = props.max - props.current;
+        props.AdjustHitPoints(delta, false);
+    };
+
     return (
         <Layout>
             <Layout style={styles.rowContainer}>
@@ -43,6 +48,7 @@ const HitPoints: React.FC<Props> = (props) => {
                         <Text style={styles.subHeader} category='p1'> HP: </Text>
                         <Text category='h4' style={styles.text}> {props.current}/{props.max} </Text>
                     </TouchableOpacity>
+                    <Button size='tiny' status='basic' onPress={maxHP}>Max</Button>
                 </Layout>
                 <ButtonGroup style={styles.container} size="tiny" status='info'>
                     {PlusHPButton(10)}
