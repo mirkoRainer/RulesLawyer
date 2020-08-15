@@ -1,15 +1,13 @@
-
-
 import React, { Component } from "react";
 import {StyleSheet, TouchableOpacity } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { CHANGE_TEMPORARY_HITPOINTS } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { CharacterSheetState } from "../../../../store/Store";
-import { startNumberPickerModalSelection } from "../../../../store/actions/Modals/ModalsActions";
-import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { CHANGE_TEMPORARY_HITPOINTS } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CharacterSheetState } from "../../../../../store/Store";
+import { startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
+import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 
 const TemporaryHitPoints: React.FC<Props> = (props) => {
     const changeTempHP = () => {

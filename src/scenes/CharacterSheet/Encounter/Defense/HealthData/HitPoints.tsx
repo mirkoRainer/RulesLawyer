@@ -3,11 +3,13 @@ import { StyleSheet } from "react-native";
 import { Layout, Text, Button, ButtonGroup } from "@ui-kitten/components";
 import { floor } from "react-native-reanimated";
 import { bindActionCreators } from "redux";
-import { startChangeHitPoints } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { startChangeHitPoints } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import TemporaryHitPoints from "./TemporaryHitPoints";
+import DyingView from "./DyingView";
+import WoundedView from "./WoundedView";
 
 export interface HitPointProps {
     max: number;
@@ -42,14 +44,8 @@ const HitPoints: React.FC<Props> = (props) => {
             <Layout style={{ padding: 10, flex: 0.65 }}>
                 <Layout style={styles.rowContainer}>
                     <TemporaryHitPoints />
-                    <Layout style={styles.container}>
-                        <Text style={styles.subHeader} category='p1'>Dying:</Text>
-                        <Text category='h4' style={styles.text}>{props.dying}</Text>
-                    </Layout>
-                    <Layout style={styles.container}>
-                        <Text style={styles.subHeader} category='p1'>Wounded:</Text>
-                        <Text category='h4' style={styles.text}>{props.wounded}</Text>
-                    </Layout>
+                    <DyingView />
+                    <WoundedView />
                 </Layout>
             </Layout>
         </Layout>

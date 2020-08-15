@@ -1,8 +1,9 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
+import WoundedView from "../../scenes/CharacterSheet/Encounter/Defense/HealthData/WoundedView";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -144,7 +145,27 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
             ...state,
             hitPoint: {
                 ...state.hitPoint,
-                temporaryHitPoints: action.delta
+                temporaryHitPoints: action.TemporaryHitPoints
+            }
+        };
+        return newState;
+    case CHANGE_DYING_VALUE:
+        console.debug(`CHANGE_DYING_VALUE in reducer. ${action.DyingValue}`);
+        newState ={
+            ...state,
+            hitPoint: {
+                ...state.hitPoint,
+                dying: action.DyingValue
+            }
+        };
+        return newState;
+    case CHANGE_WOUNDED_VALUE:
+        console.debug(`CHANGE_WOUNDED_VALUE in reducer. ${action.WoundedValue}`);
+        newState = {
+            ...state,
+            hitPoint: {
+                ...state.hitPoint,
+                wounded: action.WoundedValue
             }
         };
         return newState;

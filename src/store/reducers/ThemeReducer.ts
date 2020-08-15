@@ -15,7 +15,6 @@ const themeReducer = (state=defaultState, action: ThemeActionTypes): ThemeState 
         console.debug(`newState for Theme set to ${newState.mode}`);
         return newState;
     default:
-        console.debug(`No state change. Default state returned of ${JSON.stringify(state)}`);
         return state;
     }
 };

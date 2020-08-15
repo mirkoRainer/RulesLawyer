@@ -127,7 +127,19 @@ export interface ChangeHitPointsAction extends Action<string> {
 export const CHANGE_TEMPORARY_HITPOINTS = "CHANGE_TEMPORARY_HITPOINTS";
 export interface ChangeTemporaryHitPointsAction extends Action<string> {
     type: typeof CHANGE_TEMPORARY_HITPOINTS;
-    delta: number;
+    TemporaryHitPoints: number;
+}
+
+export const CHANGE_DYING_VALUE = "CHANGE_DYING_VALUE";
+export interface ChangeDyingValueAction extends Action<string> {
+        type: typeof CHANGE_DYING_VALUE;
+        DyingValue: number;
+    }
+    
+export const CHANGE_WOUNDED_VALUE = "CHANGE_WOUNDED_VALUE";
+export interface ChangeWoundedAction extends Action<string> {
+    type: typeof CHANGE_WOUNDED_VALUE;
+    WoundedValue: number;
 }
 
 
@@ -153,7 +165,9 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeAbilityScoreAction
                                         |   ChangeClassDCProficiency
                                         |   ChangeHitPointsAction
-                                        |   ChangeTemporaryHitPointsAction; // | SomeOtherAction
+                                        |   ChangeTemporaryHitPointsAction
+                                        |   ChangeDyingValueAction
+                                        |   ChangeWoundedAction; // | SomeOtherAction
 
 
 
