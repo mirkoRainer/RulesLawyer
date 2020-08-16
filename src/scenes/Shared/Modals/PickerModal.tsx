@@ -29,7 +29,7 @@ const PickerModal: React.FC<Props> = (props) => {
     return (
         <Modal
             visible={props.modalState.visible}
-            onBackdropPress={props.toggleModal}
+            // onBackdropPress={props.toggleModal}
             style={styles.modal}
             backdropStyle={styles.backdrop}
         >

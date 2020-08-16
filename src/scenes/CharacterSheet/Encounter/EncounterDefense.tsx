@@ -10,7 +10,7 @@ import HitPoints from "./Defense/HealthData/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Defense/ResistancesImmunitiesWeaknesses";
 import ACView from "./Defense/ArmorClass/ACView";
 import { Layout, Text, Divider } from "@ui-kitten/components";
-import Shield, { ShieldProps } from "./Defense/Shield/Shield";
+import ShieldView, { ShieldProps } from "./Defense/Shield/ShieldView";
 import SavesView from "./Defense/SavesView";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -32,7 +32,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 <Divider />
                 <ACView />
                 <Divider />
-                <Shield />
+                <ShieldView />
                 <Divider />
                 <SavesView />
                 <Divider />

@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, Text, Modal, Input, Icon, Card, Button } from "@ui-kitten/components";
 import {
     StyleSheet,
-    ModalBaseProps,
 } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { AppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
+
+interface Shield {
+    hasShield:      boolean;
+    acBonus:        number;
+    hardness:       number;
+    maxHP:          number;
+    currentHP:      number;
+    breakThreshold: number;
+}
 
 type OwnProps = {
     visible: boolean
@@ -21,21 +30,41 @@ const ShieldEditModal: React.FC<Props> = (props) => {
     const CheckIcon = (props: any) => (
         <Icon {...props} name="checkmark-circle-outline" />
     );
+    const [input, setInput] = useState(props.shield.acBonus.toString());
+    const changeText = (value: string) => {
+        setInput(value);
+    };
+
+    const changeBonus = () => {
+        const acBonus = input ? parseInt(input) : 0;
+        const newShield: Shield = {
+            ...props.shield,
+            acBonus
+        };
+        props.toggleModal();
+        props.updateShield(newShield);
+    };
 
     return (
         <Modal
             visible={props.visible}
-            onBackdropPress={props.toggleModal}
             style={styles.modal}
             backdropStyle={styles.backdrop}
         >
             <Card>
                 <Layout style={styles.header}>
                     <Text>{"Shield:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
+                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeBonus}/>
                 </Layout>
                 <Layout>
-                    <Text>Edit Shield here</Text>
+                    <Text>Bonus:</Text>
+                    <Input 
+                        placeholder='Shield AC Bonus'
+                        keyboardType='numeric'
+                        value={input}
+                        size='medium'
+                        onChangeText={changeText}
+                    />
                 </Layout>
             </Card>
         </Modal>
@@ -43,10 +72,11 @@ const ShieldEditModal: React.FC<Props> = (props) => {
 };
 
 interface LinkDispatchProps {
+    updateShield: (Shield: Shield) => void;
 }
 
 interface LinkStateProps {
-
+    shield: Shield
 }
 
 const mapDispatchToProps = (
@@ -54,6 +84,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
+        updateShield: bindActionCreators(startChangeShield, dispatch)
     };
 };
 
@@ -61,6 +92,7 @@ const mapStateToProps = (
     state: AppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
+    shield: state.playerCharacter.shield
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShieldEditModal);

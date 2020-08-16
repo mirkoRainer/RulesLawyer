@@ -1,24 +1,14 @@
 import React, { Component, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Text, Layout } from "@ui-kitten/components";
-import { AbilityScore } from "../../../../../PF2eCoreLib/AbilityScores";
-import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
 import ShieldEditModal from "./ShieldEditModal";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
-export interface ShieldProps {
-    hasShield: boolean;
-    acBonus?: number;
-    hardness?: number;
-    maxHP?: number;
-    breakThreshold?: number;
-    currentHP?: number;
-}
+import { Shield } from "../../../../../PF2eCoreLib/PlayerCharacter";
 
 
-const Shield: React.FC<Props> = (props) => {
+const ShieldView: React.FC<Props> = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const modalOn = () => { setModalVisible(true);};
     const modalOff = () => { setModalVisible(false);};
@@ -53,6 +43,31 @@ const Shield: React.FC<Props> = (props) => {
     return shieldView;
 };
 
+
+type Props = LinkDispatchProps & LinkStateProps;
+
+interface LinkDispatchProps {
+    
+}
+
+interface LinkStateProps {
+    shield: Shield;
+}
+
+const mapDispatchToProps = (
+): LinkDispatchProps => {
+    return {
+            
+    };
+};
+    
+const mapStateToProps = (
+    state: AppState): LinkStateProps => ({
+    shield: state.playerCharacter.shield
+});
+        
+export default connect(mapStateToProps, mapDispatchToProps)(ShieldView);
+        
 const styles = StyleSheet.create({
     container: {
         flex: .75,
@@ -83,27 +98,3 @@ const styles = StyleSheet.create({
         paddingVertical: 5 
     }
 });
-
-type Props = LinkDispatchProps & LinkStateProps;
-
-interface LinkDispatchProps {
-
-}
-
-interface LinkStateProps {
-    shield: ShieldProps;
-}
-
-const mapDispatchToProps = (
-): LinkDispatchProps => {
-    return {
-
-    };
-};
-
-const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
-    shield: state.playerCharacter.shield
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Shield);

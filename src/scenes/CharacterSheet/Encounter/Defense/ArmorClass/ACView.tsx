@@ -6,7 +6,7 @@ import { AppState } from "../../../../../store/Store";
 import { AbilityScore, CalculateAbilityScoreModifier } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
-import Shield, { ShieldProps } from "../Shield/Shield";
+import ShieldView, { ShieldProps } from "../Shield/ShieldView";
 import { GetProficiencyValue } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import ResistancesImmunitiesWeaknesses from "../ResistancesImmunitiesWeaknesses";
