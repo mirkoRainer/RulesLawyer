@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Text, Layout } from "@ui-kitten/components";
 import { AbilityScore } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
-import { CharacterSheetState } from "../../../../../store/Store";
+import { AppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
 
 export interface ShieldProps {
@@ -93,7 +93,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     shield: state.playerCharacter.shield
 });
 

@@ -1,6 +1,7 @@
 import { Action } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
+import { ProficiencyActionTypes } from "./ProficiencyActionTypes";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -148,8 +149,6 @@ export interface ChangeMaxHitPointsAction extends Action<string> {
     MaxHitPoints: number;
 }
 
-
-
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
                                         |   ChangeAncestryAction 
                                         |   ChangeBackgroundAction 
@@ -173,7 +172,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeTemporaryHitPointsAction
                                         |   ChangeDyingValueAction
                                         |   ChangeWoundedAction
-                                        |   ChangeMaxHitPointsAction; // | SomeOtherAction
+                                        |   ChangeMaxHitPointsAction
+                                        |   ProficiencyActionTypes; // | SomeOtherAction
 
 
 

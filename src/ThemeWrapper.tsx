@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import * as eva from "@eva-design/eva";
 import { default as customTheme } from "../custom-theme.json";
-import { CharacterSheetState } from "./store/Store";
+import { AppState } from "./store/Store";
 
 const ThemeWrapper: React.FC<Props> = (props) => {
     const toggleTheme = () => {
@@ -44,7 +44,7 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     theme: state.theme.mode
 });
 

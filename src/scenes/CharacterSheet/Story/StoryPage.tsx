@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView } from "react-native";
 import BiographicalView, { BiographicalData } from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
-import { CharacterSheetState } from "../../../store/Store";
+import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { Background, Weapon, WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
@@ -94,7 +94,7 @@ interface LinkStateProps {
  type Props = LinkStateProps;
 
 const mapStateToProps = (
-    state: CharacterSheetState
+    state: AppState
 ): LinkStateProps => ({
     characterName: state.playerCharacter.name,
     playerName: state.playerCharacter.playerName,

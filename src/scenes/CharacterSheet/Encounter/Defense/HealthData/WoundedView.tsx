@@ -5,7 +5,7 @@ import {StyleSheet, TouchableOpacity } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
-import { CharacterSheetState } from "../../../../../store/Store";
+import { AppState } from "../../../../../store/Store";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { startChangeWoundedValue } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { bindActionCreators } from "redux";
@@ -53,7 +53,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     woundedValue: state.playerCharacter.hitPoint.wounded,
     maxDying: state.playerCharacter.hitPoint.maxDying
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
-import { CharacterSheetState } from "../../../store/Store";
+import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
 import { Bonus } from "../../../PF2eCoreLib/Bonus";
@@ -71,7 +71,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
     shield: state.playerCharacter.shield,
     resistances: state.playerCharacter.resistances,

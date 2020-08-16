@@ -10,7 +10,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { startToggleTextEditModal } from "../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { TextEditModalState } from "../../../store/ModalsState";
-import { CharacterSheetState } from "../../../store/Store";
+import { AppState } from "../../../store/Store";
 
 type OwnProps = {};
 
@@ -67,7 +67,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: CharacterSheetState,
+    state: AppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
     modalState: state.modals.textEditModal,

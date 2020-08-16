@@ -1,5 +1,5 @@
 import { PickerModalState } from "../../ModalsState";
-import { CharacterSheetState } from "../../Store";
+import { AppState } from "../../Store";
 import { Dispatch, ReactText } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
 import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_TEMPORARY_HITPOINTS, CHANGE_MAX_HITPOINTS } from "../PlayerCharacter/PlayerCharacterActionTypes";
@@ -7,7 +7,7 @@ import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency, ChangeTe
 import { ChangePickerSelection } from "./ModalsActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 
-export const PickerModalStateSwitch = (actionType: string, state: CharacterSheetState, dispatch: Dispatch<AppActions>): PickerModalState => {
+export const PickerModalStateSwitch = (actionType: string, state: AppState, dispatch: Dispatch<AppActions>): PickerModalState => {
     console.debug("PickerModalStateSwitch Entered");
     switch(actionType) {
     case CHANGE_LEVEL:

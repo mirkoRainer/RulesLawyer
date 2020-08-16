@@ -10,7 +10,7 @@ import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { Bonus, iBonus } from "../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
-import { CharacterSheetState } from "../../../store/Store";
+import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
@@ -66,7 +66,7 @@ interface LinkStateProps {
 type Props = LinkStateProps;
 
 const mapStateToProps = (
-    state: CharacterSheetState
+    state: AppState
 ): LinkStateProps => ({
     spellAttackProficiency: state.playerCharacter.spellAttackProficiency,
     spellcastingAbilityModifier: state.playerCharacter.abilityScores[state.playerCharacter.spellcastingAbilityModifier],

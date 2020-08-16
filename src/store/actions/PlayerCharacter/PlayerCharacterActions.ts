@@ -3,6 +3,7 @@ import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, 
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
+import { CHANGE_ARMOR_CLASS_PROFICIENCY } from "./ProficiencyActionTypes";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
     type: CHANGE_CHARACTER_NAME, 
@@ -246,4 +247,13 @@ export const startChangeMaxHitPoints = (MaxHitPoints: number) => {
     };
 };
 
+export const ChangeArmorClassProficiency: ActionCreator<PlayerCharacterActionTypes> = (ACProficiency: Proficiencies): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_ARMOR_CLASS_PROFICIENCY,
+    ACProficiency 
+});
+export const startChangeArmorClassProficiency = (ACProficiency: Proficiencies) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeArmorClassProficiency(ACProficiency));
+    };
+};
 

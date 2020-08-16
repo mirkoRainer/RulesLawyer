@@ -6,7 +6,7 @@ import { Bonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { PlayerCharacter } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Action } from "redux";
-import { CharacterSheetState } from "../../../../store/Store";
+import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 
 const ClassDC: React.FC<Props> = (props) => {
@@ -59,7 +59,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 

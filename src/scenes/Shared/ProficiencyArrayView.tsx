@@ -2,10 +2,13 @@ import React from "react";
 import {  StyleSheet } from "react-native";
 import { Proficiencies } from "../../PF2eCoreLib/Proficiencies";
 import {Layout, Text } from "@ui-kitten/components";
-
-interface Props {
-    proficiency: Proficiencies;
-}
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../store/actions/AllActionTypesAggregated";
+import { bindActionCreators } from "redux";
+import { startStringPickerModalSelection } from "../../store/actions/Modals/ModalsActions";
+import { connect } from "react-redux";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { PlayerCharacterActionTypes } from "../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 const ProficiencyArrayView: React.FC<Props> = (props) => {
     let trainedStyle;
@@ -53,17 +56,42 @@ const ProficiencyArrayView: React.FC<Props> = (props) => {
         legendaryStyle = styles.profTextFalse;
     }
 
+    const handleProfArrayTap = () => {
+        console.debug("handleProfArrayTap");
+        props.startPickerModal(CHANGE_MAX_HITPOINTS, props.max);
+    };
+
     return (
-        <Layout style={styles.container}>
+        <TouchableOpacity onPress={handleProfArrayTap} style={styles.container}>
             <Text style={trainedStyle} category={trainedCategory}>T</Text>
             <Text style={expertStyle} category={expertCategory}>E</Text>
             <Text style={masterStyle} category={masterCategory}>M</Text>
             <Text style={legendaryStyle} category={legendaryCategory}>L</Text>
-        </Layout>
+        </TouchableOpacity>
     );
 };
 
-export default ProficiencyArrayView;
+type Props = OwnProps & LinkDispatchProps;
+
+interface OwnProps {
+    proficiency: Proficiencies;
+    proficiencyAppliesTo: PlayerCharacterActionTypes
+}
+
+// base state
+//all actions to be dispatched
+interface LinkDispatchProps {
+    startPickerModal: (actionType: string, proficiency: string) => void;
+}
+
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+    startPickerModal: bindActionCreators(startStringPickerModalSelection, dispatch),
+
+});
+
+export default connect(null, mapDispatchToProps)(ProficiencyArrayView);
 
 const styles = StyleSheet.create({
     container: {

@@ -1,11 +1,11 @@
-import { CharacterSheetState } from "../../Store";
+import { AppState } from "../../Store";
 import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES } from "../PlayerCharacter/PlayerCharacterActionTypes";
 import { ChangeCharacterName, ChangePlayerName, ChangeAncestry, ChangeHeritage, ChangeBackground, ChangeClass, ChangeSubClass, ChangeAlignment, ChangeDeity, ChangeNotes, ChangeResistances, ChangeImmunities, ChangeWeaknesses, ChangeConditions, ChangeSenses } from "../PlayerCharacter/PlayerCharacterActions";
 import { Dispatch } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
 import { TextEditModalState } from "../../ModalsState";
 
-export const TextEditModalStateSwitch = (actionType: string, state: CharacterSheetState, dispatch: Dispatch<AppActions>): TextEditModalState => {
+export const TextEditModalStateSwitch = (actionType: string, state: AppState, dispatch: Dispatch<AppActions>): TextEditModalState => {
     switch (actionType) {
     case CHANGE_CHARACTER_NAME:
         return {

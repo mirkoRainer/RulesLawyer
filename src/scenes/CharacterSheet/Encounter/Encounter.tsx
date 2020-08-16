@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
-import { CharacterSheetState } from "../../../store/Store";
+import { AppState } from "../../../store/Store";
 import EncounterDefense from "./EncounterDefense";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import EncounterOffense from "./EncounterOffense";
@@ -105,7 +105,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 

@@ -7,7 +7,7 @@ import { AppActions } from "../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startToggleDarkMode } from "../store/actions/Theme/ThemeActions";
 import { SafeAreaView } from "react-native";
-import { CharacterSheetState } from "../store/Store";
+import { AppState } from "../store/Store";
 
 type Props = LinkDispatchProps & LinkStateProps;
 
@@ -37,7 +37,7 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     theme: state.theme.mode
 });
 

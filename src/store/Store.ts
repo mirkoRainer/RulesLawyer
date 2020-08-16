@@ -1,4 +1,5 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import {combineReducers} from "@reduxjs/toolkit";
 import { playerCharacterReducer } from "./reducers/PlayerCharacterReducer";
 import { modalsReducer } from "./reducers/ModalsReducer";
 import thunk from "redux-thunk";
@@ -12,7 +13,7 @@ const rootReducer = combineReducers({
     theme: themeReducer
 });
 
-export type CharacterSheetState = ReturnType<typeof rootReducer>;
+export type AppState = ReturnType<typeof rootReducer>;
 
 const Store = createStore(rootReducer, 
     applyMiddleware(thunk));

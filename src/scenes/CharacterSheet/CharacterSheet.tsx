@@ -10,7 +10,7 @@ import {
     startChangePlayerName,
     startChangeCharacterName,
 } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { CharacterSheetState } from "../../store/Store";
+import { AppState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Encounter from "./Encounter/Encounter";
@@ -164,7 +164,7 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 

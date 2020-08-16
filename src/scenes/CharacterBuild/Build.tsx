@@ -2,7 +2,7 @@
 import React from "react";
 import {StyleSheet } from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { CharacterSheetState } from "../../store/Store";
+import { AppState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { connect } from "react-redux";
@@ -120,7 +120,7 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (
-    state: CharacterSheetState): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     buildState: state.characterBuild,
     playerCharacter: state.playerCharacter 
 });
