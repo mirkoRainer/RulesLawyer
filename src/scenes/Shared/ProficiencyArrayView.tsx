@@ -56,18 +56,13 @@ const ProficiencyArrayView: React.FC<Props> = (props) => {
         legendaryStyle = styles.profTextFalse;
     }
 
-    const handleProfArrayTap = () => {
-        console.debug("handleProfArrayTap");
-        props.startPickerModal(CHANGE_MAX_HITPOINTS, props.max);
-    };
-
     return (
-        <TouchableOpacity onPress={handleProfArrayTap} style={styles.container}>
+        <Layout style={styles.container}>
             <Text style={trainedStyle} category={trainedCategory}>T</Text>
             <Text style={expertStyle} category={expertCategory}>E</Text>
             <Text style={masterStyle} category={masterCategory}>M</Text>
             <Text style={legendaryStyle} category={legendaryCategory}>L</Text>
-        </TouchableOpacity>
+        </Layout>
     );
 };
 

@@ -1,10 +1,11 @@
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
+import { Action } from "redux";
+import { Saves } from "../../../PF2eCoreLib/PlayerCharacter";
 
-export const CHANGE_ARMOR_CLASS_PROFICIENCY = "CHANGE_ARMOR_CLASS_PROFICIENCY";
-export interface ChangeACProficiencyAction extends Action<string> {
-    type: typeof CHANGE_ARMOR_CLASS_PROFICIENCY;
-    ACProficiency: Proficiencies;
+export const CHANGE_SAVE_PROFICIENCIES = "CHANGE_SAVE_PROFICIENCIES";
+export interface ChangeSaveProficienciesAction extends Action<string> {
+    type: typeof CHANGE_SAVE_PROFICIENCIES;
+    saves: Saves;
 }
 
-
-export type ProficiencyActionTypes = ChangeACProficiencyAction
+export type ProficiencyActionTypes = ChangeSaveProficienciesAction

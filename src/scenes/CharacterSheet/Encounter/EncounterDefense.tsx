@@ -10,7 +10,7 @@ import HitPoints from "./Defense/HealthData/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Defense/ResistancesImmunitiesWeaknesses";
 import ACView from "./Defense/ArmorClass/ACView";
 import { Layout, Text, Divider } from "@ui-kitten/components";
-import Shield, { ShieldProps } from "./Defense/ArmorClass/Shield";
+import Shield, { ShieldProps } from "./Defense/Shield/Shield";
 import SavesView from "./Defense/SavesView";
 import { ScrollView } from "react-native-gesture-handler";
 

@@ -3,7 +3,8 @@ import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, 
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { CHANGE_ARMOR_CLASS_PROFICIENCY } from "./ProficiencyActionTypes";
+import { CHANGE_ARMOR_CLASS_PROFICIENCY, CHANGE_SAVE_PROFICIENCIES } from "./ProficiencyActionTypes";
+import { Saves } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
     type: CHANGE_CHARACTER_NAME, 
@@ -247,13 +248,12 @@ export const startChangeMaxHitPoints = (MaxHitPoints: number) => {
     };
 };
 
-export const ChangeArmorClassProficiency: ActionCreator<PlayerCharacterActionTypes> = (ACProficiency: Proficiencies): PlayerCharacterActionTypes => ({ 
-    type: CHANGE_ARMOR_CLASS_PROFICIENCY,
-    ACProficiency 
+export const ChangeSaveProficiencies: ActionCreator<PlayerCharacterActionTypes> = (saves: Saves): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_SAVE_PROFICIENCIES,
+    saves 
 });
-export const startChangeArmorClassProficiency = (ACProficiency: Proficiencies) => {
+export const startChangeSaveProficiencies = (saves: Saves) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
-        dispatch(ChangeArmorClassProficiency(ACProficiency));
+        dispatch(ChangeSaveProficiencies(saves));
     };
 };
-

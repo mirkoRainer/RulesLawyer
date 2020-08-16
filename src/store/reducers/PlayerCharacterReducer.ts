@@ -4,6 +4,8 @@ import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
 import WoundedView from "../../scenes/CharacterSheet/Encounter/Defense/HealthData/WoundedView";
+import { CHANGE_ARMOR_CLASS_PROFICIENCY, CHANGE_SAVE_PROFICIENCIES } from "../actions/PlayerCharacter/ProficiencyActionTypes";
+import { NativeViewGestureHandler } from "react-native-gesture-handler";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -177,6 +179,13 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
                 ...state.hitPoint,
                 maxHitPoints: action.MaxHitPoints
             }
+        };
+        return modifiedState;
+    case CHANGE_SAVE_PROFICIENCIES:
+        console.debug(`CHANGE_SAVE_PROFICIENCIES in reducer. ${JSON.stringify(action.saves)}`);
+        modifiedState = {
+            ...state,
+            saves: action.saves
         };
         return modifiedState;
     default:

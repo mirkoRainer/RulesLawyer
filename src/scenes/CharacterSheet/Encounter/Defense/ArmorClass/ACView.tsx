@@ -6,7 +6,7 @@ import { AppState } from "../../../../../store/Store";
 import { AbilityScore, CalculateAbilityScoreModifier } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
-import Shield, { ShieldProps } from "./Shield";
+import Shield, { ShieldProps } from "../Shield/Shield";
 import { GetProficiencyValue } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import ResistancesImmunitiesWeaknesses from "../ResistancesImmunitiesWeaknesses";
@@ -31,11 +31,11 @@ const ACView: React.FC<Props> = (props) => {
     const dexOrCap = () => {
         if (props.wornArmor.DexCap >= calculatedDexModifier){
             return (
-                <Text style={styles.calculatorText}>DEX:</Text>
+                <Text style={styles.calculatorText}>DEX</Text>
             );
         } else { 
             return (
-                <Text style={{...styles.calculatorText, flex: 1.85}}>DEX CAP:</Text>
+                <Text style={{...styles.calculatorText, flex: 1.85}}>DEX CAP</Text>
             );
         } 
     }; 
@@ -56,15 +56,15 @@ const ACView: React.FC<Props> = (props) => {
                 </Layout>
             </Layout>
             <Layout style={{...styles.horizontal, alignItems: "center", paddingHorizontal:5}}>
-                <Text style={{...styles.calculatorNumber}} category='s1'>10 + </Text>
+                <Text style={{...styles.calculatorNumber}} category='s1'>10</Text>
+                <Text style={styles.calculatorNumber}>+{modifier}</Text>
                 {dexOrCap()} 
-                <Text style={styles.calculatorNumber}>{modifier} + </Text>
-                <Text style={{...styles.calculatorText, flex: 1.3}}>Armor:</Text>
-                <Text style={styles.calculatorNumber}>{props.wornArmor.ACBonus} + </Text>
-                <Text style={styles.calculatorText}>Prof:</Text>
-                <Text style={styles.calculatorNumber}>{GetProficiencyValue(wornProficiency, props.level)} + </Text>
-                <Text style={{...styles.calculatorText, flex: 1.1}}>Level:</Text>
-                <Text style={{...styles.calculatorNumber, flex: .65}}>{props.level}</Text>
+                <Text style={styles.calculatorNumber}>+{props.wornArmor.ACBonus}</Text>
+                <Text style={{...styles.calculatorText, flex: 1.3}}>Armor</Text>
+                <Text style={styles.calculatorNumber}>+{GetProficiencyValue(wornProficiency, props.level)}</Text>
+                <Text style={styles.calculatorText}>Prof</Text>
+                <Text style={{...styles.calculatorNumber, flex: .65}}>+{props.level}</Text>
+                <Text style={{...styles.calculatorText, flex: 1.1}}>Level</Text>
             </Layout>
         </Layout>
     );

@@ -10,6 +10,12 @@ import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { connect } from "react-redux";
 import { Saves } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { bindActionCreators } from "redux";
+import { startChangeSaveProficiencies, ChangeSaveProficiencies } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { ThunkDispatch } from "redux-thunk";
+import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 
 const SavesView: React.FC<Props> = (props) => {
 
@@ -52,36 +58,84 @@ const SavesView: React.FC<Props> = (props) => {
             ),
         };
     }; 
+
+    const determineNextProficiency = (prof: Proficiencies): Proficiencies => {
+        switch (prof) {
+        case (Proficiencies.Untrained):{
+            return Proficiencies.Trained;
+        }
+        case (Proficiencies.Trained):{
+            return Proficiencies.Expert;
+        }
+        case (Proficiencies.Expert):{
+            return Proficiencies.Master;
+        }
+        case (Proficiencies.Master):{
+            return Proficiencies.Legendary;
+        }
+        case (Proficiencies.Legendary):{
+            return Proficiencies.Untrained;
+        }
+        }
+    };
+
+    const changeFort = () => {
+        const fortProf = props.saves.fortitude;
+        props.changeSaves({
+            ...props.saves,
+            fortitude: determineNextProficiency(fortProf)
+        });
+    };
+    const changeReflex = () => {
+        const reflexProf = props.saves.reflex;
+        props.changeSaves({
+            ...props.saves,
+            reflex: determineNextProficiency(reflexProf)
+        });
+    };
+    const changeWill = () => {
+        const willProf = props.saves.will;
+        props.changeSaves({
+            ...props.saves,
+            will: determineNextProficiency(willProf)
+        });
+    };
     
     return(
         <Layout style={{flex:1}}>
-            <ProficiencyView
-                title={"Fortitude"}
-                keyAbility={
-                    props.constitution
-                }
-                proficiency={props.saves.fortitude}
-                level={props.level}
-                itemBonus={fortitudeSave().itemBonus}
-            />
-            <ProficiencyView
-                title={"Reflex"}
-                keyAbility={
-                    props.dexterity
-                }
-                proficiency={props.saves.reflex}
-                level={props.level}
-                itemBonus={reflexSave().itemBonus}
-            />
-            <ProficiencyView
-                title={"Will"}
-                keyAbility={
-                    props.wisdom
-                }
-                proficiency={props.saves.will}
-                level={props.level}
-                itemBonus={willSave().itemBonus}
-            />
+            <TouchableOpacity onPress={changeFort}>
+                <ProficiencyView
+                    title={"Fortitude"}
+                    keyAbility={
+                        props.constitution
+                    }
+                    proficiency={props.saves.fortitude}
+                    level={props.level}
+                    itemBonus={fortitudeSave().itemBonus}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={changeReflex}>
+                <ProficiencyView
+                    title={"Reflex"}
+                    keyAbility={
+                        props.dexterity
+                    }
+                    proficiency={props.saves.reflex}
+                    level={props.level}
+                    itemBonus={reflexSave().itemBonus}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={changeWill}>
+                <ProficiencyView
+                    title={"Will"}
+                    keyAbility={
+                        props.wisdom
+                    }
+                    proficiency={props.saves.will}
+                    level={props.level}
+                    itemBonus={willSave().itemBonus}
+                />
+            </TouchableOpacity>
         </Layout>
     );
 };
@@ -89,7 +143,7 @@ const SavesView: React.FC<Props> = (props) => {
 type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
-
+    changeSaves: (saves: Saves) => void;
 }
 
 interface LinkStateProps {
@@ -102,9 +156,10 @@ interface LinkStateProps {
 }
 
 const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
-
+        changeSaves: bindActionCreators(startChangeSaveProficiencies, dispatch)
     };
 };
 

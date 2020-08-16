@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Text, Layout } from "@ui-kitten/components";
 import { AbilityScore } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
+import ShieldEditModal from "./ShieldEditModal";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export interface ShieldProps {
     hasShield: boolean;
@@ -17,25 +19,32 @@ export interface ShieldProps {
 
 
 const Shield: React.FC<Props> = (props) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const modalOn = () => { setModalVisible(true);};
+    const modalOff = () => { setModalVisible(false);};
+
     const shieldView = props.shield.hasShield ? (
-        <Layout style={styles.container}>
-            <Text style={styles.title} category='h6'>Shield</Text>
-            <Layout style={styles.column}>
-                <Text style={styles.text}>Bonus:</Text>
-                <Text style={styles.number}>+{props.shield.acBonus!}</Text>
-            </Layout>
-            <Layout style={styles.column}>
-                <Text style={styles.text}>Shield HP:</Text>
-                <Text style={styles.number}>{props.shield.currentHP!}/{props.shield.maxHP!}</Text>
-            </Layout>
-            <Layout style={styles.column}>
-                <Text style={styles.text}>BT:</Text>
-                <Text style={styles.number}>{props.shield.breakThreshold!}</Text>
-            </Layout>
-            <Layout style={styles.column}>
-                <Text style={styles.text}>Hardness:</Text>
-                <Text style={styles.number}> {props.shield.hardness!}</Text>
-            </Layout>
+        <Layout>
+            <TouchableOpacity onPress={modalOn} style={styles.container}>
+                <Text style={styles.title} category='h6'>Shield</Text>
+                <Layout style={styles.column}>
+                    <Text style={styles.text}>Bonus:</Text>
+                    <Text style={styles.number}>+{props.shield.acBonus!}</Text>
+                </Layout>
+                <Layout style={styles.column}>
+                    <Text style={styles.text}>Shield HP:</Text>
+                    <Text style={styles.number}>{props.shield.currentHP!}/{props.shield.maxHP!}</Text>
+                </Layout>
+                <Layout style={styles.column}>
+                    <Text style={styles.text}>BT:</Text>
+                    <Text style={styles.number}>{props.shield.breakThreshold!}</Text>
+                </Layout>
+                <Layout style={styles.column}>
+                    <Text style={styles.text}>Hardness:</Text>
+                    <Text style={styles.number}> {props.shield.hardness!}</Text>
+                </Layout>
+            </TouchableOpacity>
+            <ShieldEditModal visible={modalVisible} toggleModal={modalOff} />
         </Layout>
     ) : (
         <Layout></Layout>
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     title: {
-        flex: 1,
+        flex: 1.5,
         textAlign: "center",
         alignSelf: "center",
     },
