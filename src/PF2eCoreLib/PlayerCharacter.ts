@@ -8,7 +8,7 @@ import { Traits } from "./Traits";
 import { HealthData } from "./HealthData";
 
 
-export interface PlayerCharacter {
+export default interface PlayerCharacter {
     metadata:                    Metadata;
     level:                       number;
     experiencePoints:            number;

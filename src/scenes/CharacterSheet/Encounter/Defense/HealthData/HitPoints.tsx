@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     minus: {
-        flex: 1
+        flex: 1,
+        justifyContent: "center"
     }
 });

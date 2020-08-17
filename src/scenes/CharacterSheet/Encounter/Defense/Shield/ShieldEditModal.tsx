@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Layout, Text, Modal, Input, Icon, Card, Button } from "@ui-kitten/components";
+import { Layout, Text, Input, Icon, Card, Button, Modal } from "@ui-kitten/components";
 import {
-    StyleSheet,
+    StyleSheet
 } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -30,19 +30,70 @@ const ShieldEditModal: React.FC<Props> = (props) => {
     const CheckIcon = (props: any) => (
         <Icon {...props} name="checkmark-circle-outline" />
     );
-    const [input, setInput] = useState(props.shield.acBonus.toString());
-    const changeText = (value: string) => {
-        setInput(value);
+    const [input, setInput] = useState({
+        maxHp: props.shield.maxHP.toString(),
+        acBonus: props.shield.acBonus.toString(),
+        BT: props.shield.breakThreshold.toString(),
+        hardness: props.shield.hardness.toString()
+    });
+
+    const changeBonusText = (value: string) => {
+        setInput({
+            ...input,
+            acBonus: value
+        });
     };
 
-    const changeBonus = () => {
-        const acBonus = input ? parseInt(input) : 0;
-        const newShield: Shield = {
-            ...props.shield,
-            acBonus
-        };
+    const changeMaxHPText = (value: string) => {
+        setInput({
+            ...input,
+            maxHp: value
+        });
+    };
+    const changeBTText = (value: string) => {
+        setInput({
+            ...input,
+            BT: value
+        });
+    };
+    const changeHardnessText = (value: string) => {
+        setInput({
+            ...input,
+            hardness: value
+        });
+    };
+
+    const changeShield = () => {
+        const acBonus = input.acBonus ? parseInt(input.acBonus) : 0;
+        const breakThreshold = input.BT ? parseInt(input.BT) : 0;
+        const hardness = input.hardness ? parseInt(input.hardness) : 0;
+        const maxHP = input.maxHp ?  parseInt(input.maxHp) : 0;
+        let newShield: Shield;
+        if (maxHP < props.shield.currentHP) {
+            const currentHP = maxHP;
+            newShield = {
+                ...props.shield,
+                currentHP,
+                acBonus,
+                breakThreshold,
+                maxHP,
+                hardness
+            };
+        } else {
+            newShield = {
+                ...props.shield,
+                acBonus,
+                breakThreshold,
+                maxHP,
+                hardness
+            };
+        }
         props.toggleModal();
         props.updateShield(newShield);
+    };
+
+    const changeBonusBackdrop = () => {
+        changeShield();
     };
 
     return (
@@ -54,16 +105,40 @@ const ShieldEditModal: React.FC<Props> = (props) => {
             <Card>
                 <Layout style={styles.header}>
                     <Text>{"Shield:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeBonus}/>
+                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeShield}/>
                 </Layout>
                 <Layout>
+                    <Text>Max HP:</Text>
+                    <Input 
+                        placeholder='Max HP'
+                        keyboardType='numeric'
+                        value={input.maxHp}
+                        size='medium'
+                        onChangeText={changeMaxHPText}
+                    />
                     <Text>Bonus:</Text>
                     <Input 
                         placeholder='Shield AC Bonus'
                         keyboardType='numeric'
-                        value={input}
+                        value={input.acBonus}
                         size='medium'
-                        onChangeText={changeText}
+                        onChangeText={changeBonusText}
+                    />
+                    <Text>Break Threshold:</Text>
+                    <Input 
+                        placeholder='Break Threshold'
+                        keyboardType='numeric'
+                        value={input.BT}
+                        size='medium'
+                        onChangeText={changeBTText}
+                    />
+                    <Text>Hardness:</Text>
+                    <Input 
+                        placeholder='Hardness'
+                        keyboardType='numeric'
+                        value={input.hardness}
+                        size='medium'
+                        onChangeText={changeHardnessText}
                     />
                 </Layout>
             </Card>
