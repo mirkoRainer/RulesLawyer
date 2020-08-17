@@ -1,30 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import {StyleSheet } from "react-native";
-import ProficiencyView, { ProficiencyProps } from "../../../../Shared/ProficiencyView";
+import { ProficiencyProps } from "../../../../Shared/ProficiencyView";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { AppState } from "../../../../../store/Store";
 import { AbilityScore, CalculateAbilityScoreModifier } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
-import ShieldView, { ShieldProps } from "../Shield/ShieldView";
 import { GetProficiencyValue } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
-import ResistancesImmunitiesWeaknesses from "../ResistancesImmunitiesWeaknesses";
 import { Layout, Text } from "@ui-kitten/components";
+import WornArmorEditModal from "./WornArmorEditModal";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const ACView: React.FC<Props> = (props) => {
-    const acProficiency = (): ProficiencyProps => {
-        return {
-            title: "AC",
-            keyAbility: props.dexterity,
-            proficiency: getWornArmorProficiency(props.armorProficiencies, props.wornArmor.Category),
-            level: props.level,
-            itemBonus: props.wornArmor.ACBonus,
-            is10base: true,
-            dexCap: props.wornArmor.DexCap,
-        };
-    };
     const calculatedDexModifier = CalculateAbilityScoreModifier(props.dexterity.score);
     const modifier = props.wornArmor.DexCap >= calculatedDexModifier ? calculatedDexModifier : props.wornArmor.DexCap;
     const wornProficiency = getWornArmorProficiency(props.armorProficiencies, props.wornArmor.Category);
@@ -46,26 +35,34 @@ const ACView: React.FC<Props> = (props) => {
             props.wornArmor.ACBonus +
             GetProficiencyValue(wornProficiency, props.level);
 
+    const [modalVisible, setModalVisible] = useState(false);
+    const modalOn = () => { setModalVisible(true);};
+    const modalOff = () => { setModalVisible(false);};
+
     return(
         <Layout style={styles.container}>
-            <Layout style={styles.horizontal}>
-                <Text style={{paddingLeft: 10}} category='h5'>AC</Text>
-                <Text style={{paddingRight: 10, alignSelf: "center"}} category='h3'>{total}</Text>
-                <Layout style={{ flex: 1}}>
-                    <ProficiencyArrayView proficiency={wornProficiency} />
+            <TouchableOpacity onPress={modalOn}>
+                <Layout style={styles.horizontal}>
+                    <Text style={{paddingLeft: 10}} category='h5'>AC</Text>
+                    <Text style={{paddingRight: 10, alignSelf: "center"}} category='h3'>{total}</Text>
+                    <Layout style={{ flex: 1}}>
+                        <ProficiencyArrayView proficiency={wornProficiency} />
+                        <Text category='h6' style={{textAlign: "center"}}>{props.wornArmor.Name}</Text>
+                    </Layout>
                 </Layout>
-            </Layout>
-            <Layout style={{...styles.horizontal, alignItems: "center", paddingHorizontal:5}}>
-                <Text style={{...styles.calculatorNumber}} category='s1'>10</Text>
-                <Text style={styles.calculatorNumber}>+{modifier}</Text>
-                {dexOrCap()} 
-                <Text style={styles.calculatorNumber}>+{props.wornArmor.ACBonus}</Text>
-                <Text style={{...styles.calculatorText, flex: 1.3}}>Armor</Text>
-                <Text style={styles.calculatorNumber}>+{GetProficiencyValue(wornProficiency, props.level)}</Text>
-                <Text style={styles.calculatorText}>Prof</Text>
-                <Text style={{...styles.calculatorNumber, flex: .65}}>+{props.level}</Text>
-                <Text style={{...styles.calculatorText, flex: 1.1}}>Level</Text>
-            </Layout>
+                <Layout style={{...styles.horizontal, alignItems: "center", paddingHorizontal:5}}>
+                    <Text style={{...styles.calculatorNumber}} category='s1'>10</Text>
+                    <Text style={styles.calculatorNumber}>+{modifier}</Text>
+                    {dexOrCap()} 
+                    <Text style={styles.calculatorNumber}>+{props.wornArmor.ACBonus}</Text>
+                    <Text style={{...styles.calculatorText, flex: 1.3}}>Armor</Text>
+                    <Text style={styles.calculatorNumber}>+{GetProficiencyValue(wornProficiency, props.level)}</Text>
+                    <Text style={styles.calculatorText}>Prof</Text>
+                    <Text style={{...styles.calculatorNumber, flex: .65}}>+{props.level}</Text>
+                    <Text style={{...styles.calculatorText, flex: 1.1}}>Level</Text>
+                </Layout>
+            </TouchableOpacity>
+            <WornArmorEditModal visible={modalVisible} toggleModal={modalOff} /> 
         </Layout>
     );
 };
@@ -74,7 +71,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "space-around",
-        padding: 5
+        padding: 5,
+        paddingVertical: 10
     },
     horizontal: {
         flex: 1,

@@ -1,6 +1,6 @@
 import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS, CHANGE_SHIELD } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS, CHANGE_SHIELD, CHANGE_WORN_ARMOR } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
+import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
 import WoundedView from "../../scenes/CharacterSheet/Encounter/Defense/HealthData/WoundedView";
@@ -195,6 +195,12 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
             shield: action.Shield
         };
         return modifiedState;
+    case CHANGE_WORN_ARMOR:
+        console.debug(`CHANGE_WORN_ARMOR in reducer ${JSON.stringify(action.WornArmor)}`);
+        return {
+            ...state,
+            wornArmor: action.WornArmor
+        };
     default:
         return state;
     }

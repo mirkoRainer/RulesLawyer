@@ -4,7 +4,7 @@ import { Layout } from "@ui-kitten/components";
 import ProficiencyView, { ProficiencyProps } from "../../../Shared/ProficiencyView";
 import { Bonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
-import { PlayerCharacter } from "../../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Action } from "redux";
 import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";

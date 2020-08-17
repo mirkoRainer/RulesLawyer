@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter from "../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";

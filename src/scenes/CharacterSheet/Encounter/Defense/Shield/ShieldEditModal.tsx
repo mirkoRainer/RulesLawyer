@@ -9,15 +9,7 @@ import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/
 import { AppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
-
-interface Shield {
-    hasShield:      boolean;
-    acBonus:        number;
-    hardness:       number;
-    maxHP:          number;
-    currentHP:      number;
-    breakThreshold: number;
-}
+import { Shield } from "../../../../../PF2eCoreLib/PlayerCharacter";
 
 type OwnProps = {
     visible: boolean
@@ -90,10 +82,6 @@ const ShieldEditModal: React.FC<Props> = (props) => {
         }
         props.toggleModal();
         props.updateShield(newShield);
-    };
-
-    const changeBonusBackdrop = () => {
-        changeShield();
     };
 
     return (

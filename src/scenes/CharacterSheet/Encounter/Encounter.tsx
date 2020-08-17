@@ -8,7 +8,7 @@ import { startStringPickerModalSelection } from "../../../store/actions/Modals/M
 import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { PlayerCharacter } from "../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter from "../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../store/Store";
 import EncounterDefense from "./EncounterDefense";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";

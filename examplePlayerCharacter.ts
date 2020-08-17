@@ -3,7 +3,7 @@ import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { Ability } from "./src/PF2eCoreLib/Ability";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
-import { PlayerCharacter } from "./src/PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter from "./src/PF2eCoreLib/PlayerCharacter";
 
 export const examplePlayerCharacter: PlayerCharacter = {
     metadata: {},

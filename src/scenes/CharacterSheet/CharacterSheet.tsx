@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { Header, Divider } from "react-native-elements";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
-import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import {

@@ -14,7 +14,7 @@ import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Layout, Text } from "@ui-kitten/components";
-import { PlayerCharacter } from "../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 
 
