@@ -2,18 +2,18 @@ import { ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 
-export const getWornArmorProficiency = (armorProficiencies: ArmorProficiencies, wornArmorCategory: ArmorCategory): Proficiencies => {
+export const getWornArmorProficiency = (armorProficiencies: ArmorProficiencies, wornArmorCategory: keyof ArmorCategory): Proficiencies => {
     switch (wornArmorCategory) {
-    case ArmorCategory.Unarmored: {
+    case "Unarmored": {
         return armorProficiencies.unarmored;
     }
-    case ArmorCategory.Light: {
+    case "Light": {
         return armorProficiencies.light;
     }
-    case ArmorCategory.Medium: {
+    case "Medium": {
         return armorProficiencies.medium;
     }
-    case ArmorCategory.Heavy: {
+    case "Heavy": {
         return armorProficiencies.heavy;
     }
     default: {

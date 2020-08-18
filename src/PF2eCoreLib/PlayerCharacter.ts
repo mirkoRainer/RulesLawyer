@@ -56,7 +56,7 @@ export default interface PlayerCharacter {
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
     spells:                      SpellListEntry[];
-}
+};
 
 interface iClass {
     name: string;
@@ -269,7 +269,7 @@ export interface Weapon {
 
 export interface WornArmor {
     Name:                string;
-    Category:            ArmorCategory;
+    Category:            keyof ArmorCategory;
     Level:               number;
     Price:               Price;
     ACBonus:             number;

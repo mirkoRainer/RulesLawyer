@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Layout, Text, Input, Icon, Card, Button, Modal } from "@ui-kitten/components";
+import React, { useState, useEffect } from "react";
+import { Layout, Text, Input, Icon, Card, Button, Modal, Select, SelectItem, IndexPath } from "@ui-kitten/components";
 import {
     StyleSheet
 } from "react-native";
@@ -10,6 +10,8 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
+import { Dictionary } from "../../../../Shared/Misc/Dictionary";
 
 type OwnProps = {
     visible: boolean
@@ -38,6 +40,21 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         Traits: props.wornArmor.Traits
     });
 
+    const categoryData: Dictionary<keyof ArmorCategory> = {
+        0: "Unarmored",
+        1: "Light",
+        2: "Medium",
+        3: "Heavy"
+    };
+
+    const handleCategorySelect = (index: IndexPath | IndexPath[]) => {
+        const trueIndex = index as IndexPath;
+        setInput({
+            ...input,
+            Category: categoryData[trueIndex.row]
+        });
+    };
+
     const changeArmorName = (Name: string) => {
         setInput({
             ...input,
@@ -62,14 +79,24 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                     <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
                 </Layout>
                 <Layout>
-                    <Text>Name:</Text>
                     <Input 
+                        label={"Name"}
                         placeholder='Armor Name'
                         value={input.Name}
                         size='medium'
                         onChangeText={changeArmorName}
                     />
-                    <Text>Armor Category:</Text>
+                    <Select
+                        value={input.Category}
+                        label={"Armor Category"}
+                        onSelect={handleCategorySelect}
+                        placeholder={"Armor Category"}
+                    >
+                        <SelectItem title={"Unarmored"} />
+                        <SelectItem title={"Light"} />
+                        <SelectItem title={"Medium"} />
+                        <SelectItem title={"Heavy"} />
+                    </Select>
                     <Text>Item Level:</Text>
                     <Text>Price:</Text>
                     <Text>AC Bonus:</Text>

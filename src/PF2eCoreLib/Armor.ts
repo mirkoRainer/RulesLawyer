@@ -3,9 +3,9 @@ import { ArmorCategory } from "./ArmorCategory";
 import { ArmorGroup } from "./ArmorGroup";
 import { Traits } from "./Traits";
 
-interface Armor {
+export interface Armor {
     Name: string;
-    Category: ArmorCategory;
+    Category: keyof ArmorCategory;
     Level: number;
     Price: Coins;
     ACBonus: number;

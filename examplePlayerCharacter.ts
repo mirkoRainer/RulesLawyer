@@ -1,7 +1,5 @@
 import { Proficiencies } from "./src/PF2eCoreLib/Proficiencies";
 import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
-import { Ability } from "./src/PF2eCoreLib/Ability";
-import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
 import PlayerCharacter from "./src/PF2eCoreLib/PlayerCharacter";
 
@@ -38,7 +36,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
     languages: [" Common", " Dwarf", " Goblin"],
     wornArmor: {
         Name: "Leather Armor",
-        Category: ArmorCategory.Light,
+        Category: "Light",
         Level: 0,
         Price: { Copper: 0, Silver: 7, Gold: 0, Platinum: 0 },
         ACBonus: 2,
