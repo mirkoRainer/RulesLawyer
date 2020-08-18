@@ -29,13 +29,13 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         Category: props.wornArmor.Category,
         Level: props.wornArmor.Level,
         Price: props.wornArmor.Price,
-        ACBonus: props.wornArmor.ACBonus,
-        DexCap: props.wornArmor.DexCap,
+        ACBonus: props.wornArmor.ACBonus.toString(),
+        DexCap: props.wornArmor.DexCap.toString(),
+        StrengthRequirement: props.wornArmor.StrengthRequirement.toString(),
+        Bulk: props.wornArmor.Bulk.toString(),
+        WornBulk: props.wornArmor.WornBulk.toString(),
         CheckPenalty: props.wornArmor.CheckPenalty,
         SpeedPenalty: props.wornArmor.SpeedPenalty,
-        StrengthRequirement: props.wornArmor.StrengthRequirement,
-        Bulk: props.wornArmor.Bulk,
-        WornBulk: props.wornArmor.WornBulk,
         Group: props.wornArmor.Group,
         Traits: props.wornArmor.Traits
     });
@@ -55,16 +55,55 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         });
     };
 
+    const handleLevelSelect = (index: IndexPath | IndexPath[]) => {
+        const trueIndex = index as IndexPath;
+        setInput({
+            ...input,
+            Level: trueIndex.row
+        });
+    };
+
     const changeArmorName = (Name: string) => {
         setInput({
             ...input,
             Name
         });
     };
+    const changeACBonus = (ACBonus: string) => {
+        setInput({
+            ...input,
+            ACBonus
+        });
+    };
+    const changeDexCap = (DexCap: string) => {
+        setInput({
+            ...input,
+            DexCap
+        });
+    };
 
+    const numberReg = new RegExp(/^\d+$/);
+    const isNumbersOnly = (input: string): boolean => {
+        return numberReg.test(input);
+    };
+
+    const inputToArmor = (convertFrom: typeof input): WornArmor => {
+        const acBonusIsNumber = isNumbersOnly(input.ACBonus);
+        const ACBonus = acBonusIsNumber ? parseInt(input.ACBonus) : 0;
+        const dexCapIsNumber = isNumbersOnly(input.DexCap);
+        const DexCap = dexCapIsNumber ? parseInt(input.DexCap) : 0;
+        return{
+            ...convertFrom,
+            ACBonus,
+            DexCap,
+            StrengthRequirement: parseInt(input.StrengthRequirement),
+            Bulk: parseInt(input.Bulk),
+            WornBulk: parseInt(input.WornBulk),
+        };
+    };
     const changeWornArmor = () => {
         props.toggleModal();
-        props.updateWornArmor(input);
+        props.updateWornArmor(inputToArmor(input));
     };
 
     return (
@@ -90,17 +129,41 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                         value={input.Category}
                         label={"Armor Category"}
                         onSelect={handleCategorySelect}
-                        placeholder={"Armor Category"}
                     >
                         <SelectItem title={"Unarmored"} />
                         <SelectItem title={"Light"} />
                         <SelectItem title={"Medium"} />
                         <SelectItem title={"Heavy"} />
                     </Select>
+                    <Select
+                        value={input.Level}
+                        label={"Item Level"}
+                        onSelect={handleLevelSelect}
+                        placeholder={"Choose Item Level"}
+                    >
+                        <SelectItem title={0} />
+                        <SelectItem title={1} />
+                        <SelectItem title={2} />
+                    </Select>
+                    <Input 
+                        label={"AC Bonus"}
+                        placeholder='AC Bonus'
+                        value={input.ACBonus.toString()}
+                        size='medium'
+                        keyboardType='numeric'
+                        onChangeText={changeACBonus}
+                    />
+                    <Input 
+                        label={"Dexterity Ca"}
+                        placeholder='DEX Cap'
+                        value={input.DexCap.toString()}
+                        size='medium'
+                        keyboardType='numeric'
+                        onChangeText={changeDexCap}
+                    />
+                    <Text>Dex Cap:</Text>
                     <Text>Item Level:</Text>
                     <Text>Price:</Text>
-                    <Text>AC Bonus:</Text>
-                    <Text>Dex Cap:</Text>
                     <Text>Check Penalty:</Text>
                     <Text>Speed Penalty:</Text>
                     <Text>Strength Requirement:</Text>
