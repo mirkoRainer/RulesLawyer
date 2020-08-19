@@ -8,10 +8,11 @@ import { connect } from "react-redux";
 import { AppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
-import { WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { WornArmor, Price } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { Dictionary } from "../../../../Shared/Misc/Dictionary";
+import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
 
 type OwnProps = {
     visible: boolean
@@ -82,6 +83,13 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         });
     };
 
+    const changePrice = (Price: Price) => {
+        setInput({
+            ...input,
+            Price
+        });
+    };
+
     const numberReg = new RegExp(/^\d+$/);
     const isNumbersOnly = (input: string): boolean => {
         return numberReg.test(input);
@@ -135,6 +143,22 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                         <SelectItem title={"Medium"} />
                         <SelectItem title={"Heavy"} />
                     </Select>
+                    <Input 
+                        label={"AC Bonus"}
+                        placeholder='AC Bonus'
+                        value={input.ACBonus.toString()}
+                        size='medium'
+                        keyboardType='numeric'
+                        onChangeText={changeACBonus}
+                    />
+                    <Input 
+                        label={"Dexterity Cap"}
+                        placeholder='DEX Cap'
+                        value={input.DexCap.toString()}
+                        size='medium'
+                        keyboardType='numeric'
+                        onChangeText={changeDexCap}
+                    />
                     <Select
                         value={input.Level}
                         label={"Item Level"}
@@ -145,25 +169,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                         <SelectItem title={1} />
                         <SelectItem title={2} />
                     </Select>
-                    <Input 
-                        label={"AC Bonus"}
-                        placeholder='AC Bonus'
-                        value={input.ACBonus.toString()}
-                        size='medium'
-                        keyboardType='numeric'
-                        onChangeText={changeACBonus}
-                    />
-                    <Input 
-                        label={"Dexterity Ca"}
-                        placeholder='DEX Cap'
-                        value={input.DexCap.toString()}
-                        size='medium'
-                        keyboardType='numeric'
-                        onChangeText={changeDexCap}
-                    />
-                    <Text>Dex Cap:</Text>
-                    <Text>Item Level:</Text>
-                    <Text>Price:</Text>
+                    <CoinPriceEditor currentPrice={props.wornArmor.Price} updatePrice={changePrice} />
                     <Text>Check Penalty:</Text>
                     <Text>Speed Penalty:</Text>
                     <Text>Strength Requirement:</Text>

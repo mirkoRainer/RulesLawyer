@@ -1,4 +1,4 @@
-interface Coins {
+export interface Coins {
     Copper: number;
     Silver: number;
     Gold: number;
