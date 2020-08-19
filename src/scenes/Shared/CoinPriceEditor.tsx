@@ -1,52 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet
 } from "react-native";
 import { Price } from "../../PF2eCoreLib/PlayerCharacter";
 import { Input, Layout, Text } from "@ui-kitten/components";
+import deepEqual from "deep-equal";
+import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 
 const CoinPriceEditor: React.FC<Props> = (props) => {
-    const [coins, setCoins] = useState({
-        Copper:   props.currentPrice.Copper.toString(),
-        Silver:   props.currentPrice.Silver.toString(),
-        Gold:     props.currentPrice.Gold.toString(),
-        Platinum: props.currentPrice.Platinum.toString()
-    });
 
     return(
         <>
-            <Text category='h6' style={{textAlign:"center"}}>Price</Text>
+            <Text category='h6' style={{textAlign:"center", paddingVertical:5}}>Price</Text>
             <Layout style={{flex: 1, flexDirection: "row"}}>
                 <Layout style={styles.inputColumn} >
                     <Input 
                         label={"PP"}
-                        value={coins.Platinum}
+                        value={props.currentPrice.Platinum}
                         size='medium'
                         keyboardType='numeric'
-                        onChangeText={((text) => {setCoins({...coins,Platinum: text});})}
+                        onChangeText={((text) => {props.updatePrice({...props.currentPrice,Platinum: text});})}
                     />
                     <Input 
                         label={"SP"}
-                        value={coins.Silver}
+                        value={props.currentPrice.Silver}
                         size='medium'
                         keyboardType='numeric'
-                        onChangeText={((text) => {setCoins({...coins,Silver: text});})}
+                        onChangeText={((text) => {props.updatePrice({...props.currentPrice,Silver: text});})}
                     />
                 </Layout>
                 <Layout style={styles.inputColumn}>
                     <Input 
                         label={"GP"}
-                        value={coins.Gold}
+                        value={props.currentPrice.Gold}
                         size='medium'
                         keyboardType='numeric'
-                        onChangeText={((text) => {setCoins({...coins,Gold: text});})}
+                        onChangeText={((text) => {props.updatePrice({...props.currentPrice,Gold: text});})}
                     />
                     <Input 
                         label={"CP"}
-                        value={coins.Copper}
+                        value={props.currentPrice.Copper}
                         size='medium'
                         keyboardType='numeric'
-                        onChangeText={((text) => {setCoins({...coins,Copper: text});})}
+                        onChangeText={((text) => {props.updatePrice({...props.currentPrice,Copper: text});})}
                     />
                 </Layout>
             </Layout>
@@ -55,8 +51,8 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
 };
 
 type Props = {
-    currentPrice: Price;
-    updatePrice: (coins: Price) => void
+    currentPrice: {Copper: string, Silver: string, Gold: string, Platinum: string};
+    updatePrice: (currentPrice: {Copper: string, Silver: string, Gold: string, Platinum: string}) => void
 }
 
 const styles = StyleSheet.create({

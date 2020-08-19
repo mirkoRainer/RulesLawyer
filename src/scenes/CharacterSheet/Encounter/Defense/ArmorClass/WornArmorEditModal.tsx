@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Text, Input, Icon, Card, Button, Modal, Select, SelectItem, IndexPath } from "@ui-kitten/components";
 import {
-    StyleSheet
+    StyleSheet, SafeAreaView
 } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -13,6 +13,9 @@ import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharact
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { Dictionary } from "../../../../Shared/Misc/Dictionary";
 import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
+import { ScrollView } from "react-native-gesture-handler";
+import { isNumbersOnly } from "../../../../Shared/Misc/StringToNumberHelper";
+import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 
 type OwnProps = {
     visible: boolean
@@ -29,7 +32,12 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         Name: props.wornArmor.Name,
         Category: props.wornArmor.Category,
         Level: props.wornArmor.Level,
-        Price: props.wornArmor.Price,
+        Price: {
+            Copper:   props.wornArmor.Price.Copper.toString(),
+            Silver:   props.wornArmor.Price.Silver.toString(),
+            Gold:     props.wornArmor.Price.Gold.toString(),
+            Platinum: props.wornArmor.Price.Platinum.toString()
+        },
         ACBonus: props.wornArmor.ACBonus.toString(),
         DexCap: props.wornArmor.DexCap.toString(),
         StrengthRequirement: props.wornArmor.StrengthRequirement.toString(),
@@ -83,16 +91,18 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         });
     };
 
-    const changePrice = (Price: Price) => {
+    const changePrice = (Price: typeof input.Price) => {
         setInput({
             ...input,
             Price
         });
     };
-
-    const numberReg = new RegExp(/^\d+$/);
-    const isNumbersOnly = (input: string): boolean => {
-        return numberReg.test(input);
+    const changeCheckPenalty = (penaltyAmount: string) => {
+        const CheckPenalty: iBonus = isNumbersOnly(penaltyAmount) ? { ...input.CheckPenalty,  amount: parseInt(penaltyAmount) } : { ...input.CheckPenalty, amount: 0};
+        setInput({
+            ...input,
+            CheckPenalty
+        });
     };
 
     const inputToArmor = (convertFrom: typeof input): WornArmor => {
@@ -100,6 +110,10 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         const ACBonus = acBonusIsNumber ? parseInt(input.ACBonus) : 0;
         const dexCapIsNumber = isNumbersOnly(input.DexCap);
         const DexCap = dexCapIsNumber ? parseInt(input.DexCap) : 0;
+        const Copper = isNumbersOnly(input.Price.Copper) ? parseInt(input.Price.Copper) : 0;
+        const Silver = isNumbersOnly(input.Price.Silver) ? parseInt(input.Price.Silver) : 0;
+        const Gold = isNumbersOnly(input.Price.Gold) ? parseInt(input.Price.Gold) : 0;
+        const Platinum = isNumbersOnly(input.Price.Platinum) ? parseInt(input.Price.Platinum) : 0;
         return{
             ...convertFrom,
             ACBonus,
@@ -107,6 +121,12 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             StrengthRequirement: parseInt(input.StrengthRequirement),
             Bulk: parseInt(input.Bulk),
             WornBulk: parseInt(input.WornBulk),
+            Price: {
+                Copper,
+                Silver,
+                Gold,
+                Platinum
+            },
         };
     };
     const changeWornArmor = () => {
@@ -120,65 +140,75 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             style={styles.modal}
             backdropStyle={styles.backdrop}
         >
-            <Card>
-                <Layout style={styles.header}>
-                    <Text>{"Worn Armor:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
-                </Layout>
-                <Layout>
-                    <Input 
-                        label={"Name"}
-                        placeholder='Armor Name'
-                        value={input.Name}
-                        size='medium'
-                        onChangeText={changeArmorName}
-                    />
-                    <Select
-                        value={input.Category}
-                        label={"Armor Category"}
-                        onSelect={handleCategorySelect}
-                    >
-                        <SelectItem title={"Unarmored"} />
-                        <SelectItem title={"Light"} />
-                        <SelectItem title={"Medium"} />
-                        <SelectItem title={"Heavy"} />
-                    </Select>
-                    <Input 
-                        label={"AC Bonus"}
-                        placeholder='AC Bonus'
-                        value={input.ACBonus.toString()}
-                        size='medium'
-                        keyboardType='numeric'
-                        onChangeText={changeACBonus}
-                    />
-                    <Input 
-                        label={"Dexterity Cap"}
-                        placeholder='DEX Cap'
-                        value={input.DexCap.toString()}
-                        size='medium'
-                        keyboardType='numeric'
-                        onChangeText={changeDexCap}
-                    />
-                    <Select
-                        value={input.Level}
-                        label={"Item Level"}
-                        onSelect={handleLevelSelect}
-                        placeholder={"Choose Item Level"}
-                    >
-                        <SelectItem title={0} />
-                        <SelectItem title={1} />
-                        <SelectItem title={2} />
-                    </Select>
-                    <CoinPriceEditor currentPrice={props.wornArmor.Price} updatePrice={changePrice} />
-                    <Text>Check Penalty:</Text>
-                    <Text>Speed Penalty:</Text>
-                    <Text>Strength Requirement:</Text>
-                    <Text>Bulk:</Text>
-                    <Text>Worn Bulk:</Text>
-                    <Text>Armor Group:</Text>
-                    <Text>Traits:</Text>
-                </Layout>
-            </Card>
+            <ScrollView>
+                <Card style={{width: 300}}>
+                    <Layout style={styles.header}>
+                        <Text>{"Worn Armor:"}</Text>
+                        <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
+                    </Layout>
+                    <Layout>
+                        <Input 
+                            label={"Name"}
+                            placeholder='Armor Name'
+                            value={input.Name}
+                            size='medium'
+                            onChangeText={changeArmorName}
+                        />
+                        <Select
+                            value={input.Category}
+                            label={"Armor Category"}
+                            onSelect={handleCategorySelect}
+                        >
+                            <SelectItem title={"Unarmored"} />
+                            <SelectItem title={"Light"} />
+                            <SelectItem title={"Medium"} />
+                            <SelectItem title={"Heavy"} />
+                        </Select>
+                        <Input 
+                            label={"AC Bonus"}
+                            placeholder='AC Bonus'
+                            value={input.ACBonus}
+                            size='medium'
+                            keyboardType='numeric'
+                            onChangeText={changeACBonus}
+                        />
+                        <Input 
+                            label={"Dexterity Cap"}
+                            placeholder='DEX Cap'
+                            value={input.DexCap}
+                            size='medium'
+                            keyboardType='numeric'
+                            onChangeText={changeDexCap}
+                        />
+                        <Select
+                            value={input.Level}
+                            label={"Item Level"}
+                            onSelect={handleLevelSelect}
+                            placeholder={"Choose Item Level"}
+                        >
+                            <SelectItem title={0} />
+                            <SelectItem title={1} />
+                            <SelectItem title={2} />
+                        </Select>
+                        <CoinPriceEditor currentPrice={input.Price} updatePrice={changePrice} />
+                        <Input 
+                            label={"Check Penalty"}
+                            placeholder='Penalty'
+                            value={input.CheckPenalty.amount.toString()}
+                            size='medium'
+                            keyboardType='numeric'
+                            onChangeText={changeCheckPenalty}
+                        />
+                        <Text>Check Penalty:</Text>
+                        <Text>Speed Penalty:</Text>
+                        <Text>Strength Requirement:</Text>
+                        <Text>Bulk:</Text>
+                        <Text>Worn Bulk:</Text>
+                        <Text>Armor Group:</Text>
+                        <Text>Traits:</Text>
+                    </Layout>
+                </Card>
+            </ScrollView>
         </Modal>
     );
 };

@@ -130,12 +130,6 @@ export interface BiographicalData {
     appearance:  string;
 }
 
-export interface Bonus {
-    type:      string;
-    appliesTo: string;
-    amount:    number;
-}
-
 export interface CampaignNotesData {
     notes:         string;
     allies:        string;
@@ -274,8 +268,8 @@ export interface WornArmor {
     Price:               Price;
     ACBonus:             number;
     DexCap:              number;
-    CheckPenalty:        Bonus;
-    SpeedPenalty:        Bonus;
+    CheckPenalty:        iBonus;
+    SpeedPenalty:        iBonus;
     StrengthRequirement: number;
     Bulk:                number;
     WornBulk:            number;
