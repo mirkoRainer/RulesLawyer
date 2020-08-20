@@ -6,6 +6,7 @@ import { ArmorCategory } from "./ArmorCategory";
 import { Ability } from "./Ability";
 import { Traits } from "./Traits";
 import { HealthData } from "./HealthData";
+import { ArmorGroup } from "./ArmorGroup";
 
 
 export default interface PlayerCharacter {
@@ -273,7 +274,7 @@ export interface WornArmor {
     StrengthRequirement: number;
     Bulk:                number;
     WornBulk:            number;
-    Group:               string;
+    Group:               ArmorGroup;
     Traits:              Traits[];
 }
 

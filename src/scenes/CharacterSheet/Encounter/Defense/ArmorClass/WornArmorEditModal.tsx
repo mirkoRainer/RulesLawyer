@@ -16,6 +16,7 @@ import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
 import { ScrollView } from "react-native-gesture-handler";
 import { isNumbersOnly } from "../../../../Shared/Misc/StringToNumberHelper";
 import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
+import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
 
 type OwnProps = {
     visible: boolean
@@ -43,8 +44,8 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         StrengthRequirement: props.wornArmor.StrengthRequirement.toString(),
         Bulk: props.wornArmor.Bulk.toString(),
         WornBulk: props.wornArmor.WornBulk.toString(),
-        CheckPenalty: props.wornArmor.CheckPenalty,
-        SpeedPenalty: props.wornArmor.SpeedPenalty,
+        CheckPenaltyAmount: props.wornArmor.CheckPenalty.amount.toString(),
+        SpeedPenaltyAmount: props.wornArmor.SpeedPenalty.amount.toString(),
         Group: props.wornArmor.Group,
         Traits: props.wornArmor.Traits
     });
@@ -55,7 +56,6 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         2: "Medium",
         3: "Heavy"
     };
-
     const handleCategorySelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         setInput({
@@ -63,12 +63,27 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             Category: categoryData[trueIndex.row]
         });
     };
-
     const handleLevelSelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         setInput({
             ...input,
             Level: trueIndex.row
+        });
+    };
+
+    const armorGroupData: Dictionary<string> = {
+        0: ArmorGroup.Leather,
+        1: ArmorGroup.Composite,
+        2: ArmorGroup.Chain,
+        3: ArmorGroup.Plate
+    };
+    const handleArmorGroupSelect = (index: IndexPath | IndexPath[]) => {
+        const trueIndex = index as IndexPath;
+        const Group: ArmorGroup = armorGroupData[trueIndex.row] as ArmorGroup;
+        console.debug(`Armor Group: ${Group}`);
+        setInput({
+            ...input,
+            Group
         });
     };
 
@@ -90,21 +105,31 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             DexCap
         });
     };
-
     const changePrice = (Price: typeof input.Price) => {
         setInput({
             ...input,
             Price
         });
     };
-    const changeCheckPenalty = (penaltyAmount: string) => {
-        const CheckPenalty: iBonus = isNumbersOnly(penaltyAmount) ? { ...input.CheckPenalty,  amount: parseInt(penaltyAmount) } : { ...input.CheckPenalty, amount: 0};
+    const changeCheckPenalty = (CheckPenaltyAmount: string) => {
         setInput({
             ...input,
-            CheckPenalty
+            CheckPenaltyAmount
         });
     };
-
+    const changeSpeedPenalty = (SpeedPenaltyAmount: string) => {
+        setInput({
+            ...input,
+            SpeedPenaltyAmount
+        });
+    };
+    const changeStrengthRequirement = (StrengthRequirement: string) => {
+        setInput({
+            ...input,
+            StrengthRequirement
+        });
+    };
+    
     const inputToArmor = (convertFrom: typeof input): WornArmor => {
         const acBonusIsNumber = isNumbersOnly(input.ACBonus);
         const ACBonus = acBonusIsNumber ? parseInt(input.ACBonus) : 0;
@@ -114,6 +139,8 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         const Silver = isNumbersOnly(input.Price.Silver) ? parseInt(input.Price.Silver) : 0;
         const Gold = isNumbersOnly(input.Price.Gold) ? parseInt(input.Price.Gold) : 0;
         const Platinum = isNumbersOnly(input.Price.Platinum) ? parseInt(input.Price.Platinum) : 0;
+        const CheckPenalty: iBonus = isNumbersOnly(input.CheckPenaltyAmount) ? { ...props.wornArmor.CheckPenalty,  amount: parseInt(input.CheckPenaltyAmount) } : { ...props.wornArmor.CheckPenalty, amount: 0};
+        const SpeedPenalty: iBonus = isNumbersOnly(input.SpeedPenaltyAmount) ? { ...props.wornArmor.SpeedPenalty,  amount: parseInt(input.SpeedPenaltyAmount) } : { ...props.wornArmor.SpeedPenalty, amount: 0};
         return{
             ...convertFrom,
             ACBonus,
@@ -127,6 +154,8 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                 Gold,
                 Platinum
             },
+            CheckPenalty,
+            SpeedPenalty
         };
     };
     const changeWornArmor = () => {
@@ -140,13 +169,13 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             style={styles.modal}
             backdropStyle={styles.backdrop}
         >
+            <Layout style={styles.header}>
+                <Text>{"Worn Armor:"}</Text>
+                <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
+            </Layout>
             <ScrollView>
-                <Card style={{width: 300}}>
-                    <Layout style={styles.header}>
-                        <Text>{"Worn Armor:"}</Text>
-                        <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
-                    </Layout>
-                    <Layout>
+                <Layout>
+                    <Card>
                         <Input 
                             label={"Name"}
                             placeholder='Armor Name'
@@ -154,16 +183,6 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                             size='medium'
                             onChangeText={changeArmorName}
                         />
-                        <Select
-                            value={input.Category}
-                            label={"Armor Category"}
-                            onSelect={handleCategorySelect}
-                        >
-                            <SelectItem title={"Unarmored"} />
-                            <SelectItem title={"Light"} />
-                            <SelectItem title={"Medium"} />
-                            <SelectItem title={"Heavy"} />
-                        </Select>
                         <Input 
                             label={"AC Bonus"}
                             placeholder='AC Bonus'
@@ -180,6 +199,29 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                             keyboardType='numeric'
                             onChangeText={changeDexCap}
                         />
+                    </Card>
+                    <Card>
+                        <Select
+                            value={input.Category}
+                            label={"Armor Category"}
+                            onSelect={handleCategorySelect}
+                        >
+                            <SelectItem title={"Unarmored"} />
+                            <SelectItem title={"Light"} />
+                            <SelectItem title={"Medium"} />
+                            <SelectItem title={"Heavy"} />
+                        </Select>
+                        <Select
+                            value={input.Group}
+                            label={"Armor Group"}
+                            onSelect={handleArmorGroupSelect}
+                            placeholder={"Select Armor Group"}
+                        >
+                            <SelectItem title={ArmorGroup[ArmorGroup.Leather]}/>
+                            <SelectItem title={ArmorGroup[ArmorGroup.Composite]}/>
+                            <SelectItem title={ArmorGroup[ArmorGroup.Chain]} />
+                            <SelectItem title={ArmorGroup[ArmorGroup.Plate]}/>
+                        </Select>
                         <Select
                             value={input.Level}
                             label={"Item Level"}
@@ -191,23 +233,39 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                             <SelectItem title={2} />
                         </Select>
                         <CoinPriceEditor currentPrice={input.Price} updatePrice={changePrice} />
+                    </Card>
+                    <Card>
+
                         <Input 
                             label={"Check Penalty"}
                             placeholder='Penalty'
-                            value={input.CheckPenalty.amount.toString()}
+                            value={input.CheckPenaltyAmount}
                             size='medium'
                             keyboardType='numeric'
                             onChangeText={changeCheckPenalty}
                         />
-                        <Text>Check Penalty:</Text>
-                        <Text>Speed Penalty:</Text>
-                        <Text>Strength Requirement:</Text>
-                        <Text>Bulk:</Text>
-                        <Text>Worn Bulk:</Text>
-                        <Text>Armor Group:</Text>
-                        <Text>Traits:</Text>
-                    </Layout>
-                </Card>
+                        <Input 
+                            label={"Speed Penalty"}
+                            placeholder='Penalty'
+                            value={input.SpeedPenaltyAmount}
+                            size='medium'
+                            keyboardType='numeric'
+                            onChangeText={changeSpeedPenalty}
+                        />
+                        <Input 
+                            label={"Strength Requirement"}
+                            placeholder='STR Req'
+                            value={input.StrengthRequirement}
+                            size='medium'
+                            keyboardType='numeric'
+                            onChangeText={changeStrengthRequirement}
+                        />
+                    </Card>
+                    <Text>Bulk:</Text>
+                    <Text>Worn Bulk:</Text>
+                    <Text>Armor Group:</Text>
+                    <Text>Traits:</Text>
+                </Layout>
             </ScrollView>
         </Modal>
     );
@@ -249,7 +307,9 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modal: {
-        overflow: "scroll"
+        flex: 1,
+        width: 300,
+        height: "75%"
     },
     header: {
         justifyContent: "space-between",

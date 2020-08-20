@@ -2,6 +2,7 @@ import { Bonus } from "./Bonus";
 import { ArmorCategory } from "./ArmorCategory";
 import { ArmorGroup } from "./ArmorGroup";
 import { Traits } from "./Traits";
+import { Coins } from "./Coins";
 
 export interface Armor {
     Name: string;
