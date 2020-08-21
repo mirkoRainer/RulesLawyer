@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Text, Input, Icon, Card, Button, Modal, Select, SelectItem, IndexPath } from "@ui-kitten/components";
+import { Layout, Text, Input, Icon, Card, Button, Modal, Select, SelectItem, IndexPath, Divider } from "@ui-kitten/components";
 import {
-    StyleSheet, SafeAreaView
+    StyleSheet, SafeAreaView, KeyboardAvoidingView, Dimensions
 } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -56,7 +56,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         2: "Medium",
         3: "Heavy"
     };
-    const handleCategorySelect = (index: IndexPath | IndexPath[]) => {
+    const handleArmorCategorySelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         setInput({
             ...input,
@@ -70,7 +70,6 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             Level: trueIndex.row
         });
     };
-
     const armorGroupData: Dictionary<string> = {
         0: ArmorGroup.Leather,
         1: ArmorGroup.Composite,
@@ -80,13 +79,11 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
     const handleArmorGroupSelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         const Group: ArmorGroup = armorGroupData[trueIndex.row] as ArmorGroup;
-        console.debug(`Armor Group: ${Group}`);
         setInput({
             ...input,
             Group
         });
     };
-
     const changeArmorName = (Name: string) => {
         setInput({
             ...input,
@@ -129,7 +126,23 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             StrengthRequirement
         });
     };
+    const changeBulk = (Bulk: string) => {
+        setInput({
+            ...input,
+            Bulk
+        });
+    };
+    const changeWornBulk = (WornBulk: string) => {
+        setInput({
+            ...input,
+            WornBulk
+        });
+    };
     
+    const changeWornArmor = () => {
+        props.toggleModal();
+        props.updateWornArmor(inputToArmor(input));
+    };
     const inputToArmor = (convertFrom: typeof input): WornArmor => {
         const acBonusIsNumber = isNumbersOnly(input.ACBonus);
         const ACBonus = acBonusIsNumber ? parseInt(input.ACBonus) : 0;
@@ -158,116 +171,134 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
             SpeedPenalty
         };
     };
-    const changeWornArmor = () => {
-        props.toggleModal();
-        props.updateWornArmor(inputToArmor(input));
-    };
 
     return (
         <Modal
             visible={props.visible}
-            style={styles.modal}
+            style={styles.modalContainer}
             backdropStyle={styles.backdrop}
         >
-            <Layout style={styles.header}>
-                <Text>{"Worn Armor:"}</Text>
-                <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
-            </Layout>
-            <ScrollView>
-                <Layout>
-                    <Card>
-                        <Input 
-                            label={"Name"}
-                            placeholder='Armor Name'
-                            value={input.Name}
-                            size='medium'
-                            onChangeText={changeArmorName}
-                        />
-                        <Input 
-                            label={"AC Bonus"}
-                            placeholder='AC Bonus'
-                            value={input.ACBonus}
-                            size='medium'
-                            keyboardType='numeric'
-                            onChangeText={changeACBonus}
-                        />
-                        <Input 
-                            label={"Dexterity Cap"}
-                            placeholder='DEX Cap'
-                            value={input.DexCap}
-                            size='medium'
-                            keyboardType='numeric'
-                            onChangeText={changeDexCap}
-                        />
-                    </Card>
-                    <Card>
-                        <Select
-                            value={input.Category}
-                            label={"Armor Category"}
-                            onSelect={handleCategorySelect}
-                        >
-                            <SelectItem title={"Unarmored"} />
-                            <SelectItem title={"Light"} />
-                            <SelectItem title={"Medium"} />
-                            <SelectItem title={"Heavy"} />
-                        </Select>
-                        <Select
-                            value={input.Group}
-                            label={"Armor Group"}
-                            onSelect={handleArmorGroupSelect}
-                            placeholder={"Select Armor Group"}
-                        >
-                            <SelectItem title={ArmorGroup[ArmorGroup.Leather]}/>
-                            <SelectItem title={ArmorGroup[ArmorGroup.Composite]}/>
-                            <SelectItem title={ArmorGroup[ArmorGroup.Chain]} />
-                            <SelectItem title={ArmorGroup[ArmorGroup.Plate]}/>
-                        </Select>
-                        <Select
-                            value={input.Level}
-                            label={"Item Level"}
-                            onSelect={handleLevelSelect}
-                            placeholder={"Choose Item Level"}
-                        >
-                            <SelectItem title={0} />
-                            <SelectItem title={1} />
-                            <SelectItem title={2} />
-                        </Select>
-                        <CoinPriceEditor currentPrice={input.Price} updatePrice={changePrice} />
-                    </Card>
-                    <Card>
-
-                        <Input 
-                            label={"Check Penalty"}
-                            placeholder='Penalty'
-                            value={input.CheckPenaltyAmount}
-                            size='medium'
-                            keyboardType='numeric'
-                            onChangeText={changeCheckPenalty}
-                        />
-                        <Input 
-                            label={"Speed Penalty"}
-                            placeholder='Penalty'
-                            value={input.SpeedPenaltyAmount}
-                            size='medium'
-                            keyboardType='numeric'
-                            onChangeText={changeSpeedPenalty}
-                        />
-                        <Input 
-                            label={"Strength Requirement"}
-                            placeholder='STR Req'
-                            value={input.StrengthRequirement}
-                            size='medium'
-                            keyboardType='numeric'
-                            onChangeText={changeStrengthRequirement}
-                        />
-                    </Card>
-                    <Text>Bulk:</Text>
-                    <Text>Worn Bulk:</Text>
-                    <Text>Armor Group:</Text>
-                    <Text>Traits:</Text>
+            <KeyboardAvoidingView 
+                behavior="height" 
+                style={styles.keyboardContainer}
+                contentContainerStyle={styles.keyboardContainer}
+                keyboardVerticalOffset={0}
+                enabled
+            >
+                <Layout style={styles.header}>
+                    <Text>{"Worn Armor:"}</Text>
+                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
                 </Layout>
-            </ScrollView>
+                <ScrollView style={{flex: 1}}>
+                    <Layout>
+                        <Card>
+                            <Input 
+                                label={"Name"}
+                                placeholder='Armor Name'
+                                value={input.Name}
+                                size='medium'
+                                onChangeText={changeArmorName}
+                            />
+                            <Input 
+                                label={"AC Bonus"}
+                                placeholder='AC Bonus'
+                                value={input.ACBonus}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeACBonus}
+                            />
+                            <Input 
+                                label={"Dexterity Cap"}
+                                placeholder='DEX Cap'
+                                value={input.DexCap}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeDexCap}
+                            />
+                        </Card>
+                        <Card>
+                            <Select
+                                value={input.Category}
+                                label={"Armor Category"}
+                                onSelect={handleArmorCategorySelect}
+                            >
+                                <SelectItem title={"Unarmored"} />
+                                <SelectItem title={"Light"} />
+                                <SelectItem title={"Medium"} />
+                                <SelectItem title={"Heavy"} />
+                            </Select>
+                            <Select
+                                value={input.Group}
+                                label={"Armor Group"}
+                                onSelect={handleArmorGroupSelect}
+                                placeholder={"Select Armor Group"}
+                            >
+                                <SelectItem title={ArmorGroup[ArmorGroup.Leather]}/>
+                                <SelectItem title={ArmorGroup[ArmorGroup.Composite]}/>
+                                <SelectItem title={ArmorGroup[ArmorGroup.Chain]} />
+                                <SelectItem title={ArmorGroup[ArmorGroup.Plate]}/>
+                            </Select>
+                            <Select
+                                value={input.Level}
+                                label={"Item Level"}
+                                onSelect={handleLevelSelect}
+                                placeholder={"Choose Item Level"}
+                            >
+                                <SelectItem title={0} />
+                                <SelectItem title={1} />
+                                <SelectItem title={2} />
+                            </Select>
+                            <CoinPriceEditor currentPrice={input.Price} updatePrice={changePrice} />
+                        </Card>
+                        <Card>
+
+                            <Input 
+                                label={"Check Penalty"}
+                                placeholder='Penalty'
+                                value={input.CheckPenaltyAmount}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeCheckPenalty}
+                            />
+                            <Input 
+                                label={"Speed Penalty"}
+                                placeholder='Penalty'
+                                value={input.SpeedPenaltyAmount}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeSpeedPenalty}
+                            />
+                            <Input 
+                                label={"Strength Requirement"}
+                                placeholder='STR Req'
+                                value={input.StrengthRequirement}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeStrengthRequirement}
+                            />
+                            <Input 
+                                label={"Bulk"}
+                                placeholder='Bulk'
+                                value={input.Bulk}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeBulk}
+                            />
+                            <Input 
+                                label={"Worn Bulk"}
+                                placeholder='Worn Bulk'
+                                value={input.WornBulk}
+                                size='medium'
+                                keyboardType='numeric'
+                                onChangeText={changeWornBulk}
+                            />
+                        </Card>
+                        <Text>Traits:</Text>
+                    </Layout>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </Modal>
+
     );
 };
 
@@ -307,9 +338,9 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modal: {
-        flex: 1,
         width: 300,
-        height: "75%"
+        height: "65%",
+        justifyContent: "flex-start"
     },
     header: {
         justifyContent: "space-between",
@@ -317,4 +348,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
     },
+    keyboardContainer: {
+        flex: 1,
+        alignSelf: "center",
+        paddingBottom: 5,
+        width: Dimensions.get("window").width * .8,
+        height: Dimensions.get("window").height * .8,
+    },
+    modalContainer: {
+        flex:1, 
+        height: Dimensions.get("window").height * .8,
+        width: Dimensions.get("window").width,
+        paddingBottom: 10
+    }
 });
