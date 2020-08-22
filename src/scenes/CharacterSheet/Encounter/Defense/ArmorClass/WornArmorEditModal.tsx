@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Text, Input, Icon, Card, Button, Modal, Select, SelectItem, IndexPath, Divider } from "@ui-kitten/components";
+import { Layout, Text, Input, Icon, Card, Button, Select, SelectItem, IndexPath, Divider } from "@ui-kitten/components";
 import {
     StyleSheet, SafeAreaView, KeyboardAvoidingView, Dimensions
 } from "react-native";
+import Modal from "react-native-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { AppState } from "../../../../../store/Store";
@@ -174,31 +175,26 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
 
     return (
         <Modal
-            visible={props.visible}
-            style={styles.modalContainer}
-            backdropStyle={styles.backdrop}
+            isVisible={props.visible}
+            avoidKeyboard={true}
+            style={styles.modal}
+            backdropColor={"rgba(0, 0, 0, 0.5)"}
         >
-            <KeyboardAvoidingView 
-                behavior="height" 
-                style={styles.keyboardContainer}
-                contentContainerStyle={styles.keyboardContainer}
-                keyboardVerticalOffset={0}
-                enabled
-            >
-                <Layout style={styles.header}>
-                    <Text>{"Worn Armor:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
-                </Layout>
-                <ScrollView style={{flex: 1}}>
-                    <Layout>
-                        <Card>
-                            <Input 
-                                label={"Name"}
-                                placeholder='Armor Name'
-                                value={input.Name}
-                                size='medium'
-                                onChangeText={changeArmorName}
-                            />
+            <Layout style={styles.header}>
+                <Text>{"Worn Armor:"}</Text>
+                <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
+            </Layout>
+            <ScrollView>
+                <Layout>
+                    <Card>
+                        <Input 
+                            label={"Name"}
+                            placeholder='Armor Name'
+                            value={input.Name}
+                            size='medium'
+                            onChangeText={changeArmorName}
+                        />
+                        <Layout style={{flex: 1, flexDirection: "row", justifyContent: "space-around", paddingBottom: 10}}>
                             <Input 
                                 label={"AC Bonus"}
                                 placeholder='AC Bonus'
@@ -206,6 +202,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeACBonus}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
                             <Input 
                                 label={"Dexterity Cap"}
@@ -214,44 +211,46 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeDexCap}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
-                        </Card>
-                        <Card>
-                            <Select
-                                value={input.Category}
-                                label={"Armor Category"}
-                                onSelect={handleArmorCategorySelect}
-                            >
-                                <SelectItem title={"Unarmored"} />
-                                <SelectItem title={"Light"} />
-                                <SelectItem title={"Medium"} />
-                                <SelectItem title={"Heavy"} />
-                            </Select>
-                            <Select
-                                value={input.Group}
-                                label={"Armor Group"}
-                                onSelect={handleArmorGroupSelect}
-                                placeholder={"Select Armor Group"}
-                            >
-                                <SelectItem title={ArmorGroup[ArmorGroup.Leather]}/>
-                                <SelectItem title={ArmorGroup[ArmorGroup.Composite]}/>
-                                <SelectItem title={ArmorGroup[ArmorGroup.Chain]} />
-                                <SelectItem title={ArmorGroup[ArmorGroup.Plate]}/>
-                            </Select>
-                            <Select
-                                value={input.Level}
-                                label={"Item Level"}
-                                onSelect={handleLevelSelect}
-                                placeholder={"Choose Item Level"}
-                            >
-                                <SelectItem title={0} />
-                                <SelectItem title={1} />
-                                <SelectItem title={2} />
-                            </Select>
-                            <CoinPriceEditor currentPrice={input.Price} updatePrice={changePrice} />
-                        </Card>
-                        <Card>
-
+                        </Layout>
+                    </Card>
+                    <Card>
+                        <Select
+                            value={input.Category}
+                            label={"Armor Category"}
+                            onSelect={handleArmorCategorySelect}
+                        >
+                            <SelectItem title={"Unarmored"} />
+                            <SelectItem title={"Light"} />
+                            <SelectItem title={"Medium"} />
+                            <SelectItem title={"Heavy"} />
+                        </Select>
+                        <Select
+                            value={input.Group}
+                            label={"Armor Group"}
+                            onSelect={handleArmorGroupSelect}
+                            placeholder={"Select Armor Group"}
+                        >
+                            <SelectItem title={ArmorGroup[ArmorGroup.Leather]}/>
+                            <SelectItem title={ArmorGroup[ArmorGroup.Composite]}/>
+                            <SelectItem title={ArmorGroup[ArmorGroup.Chain]} />
+                            <SelectItem title={ArmorGroup[ArmorGroup.Plate]}/>
+                        </Select>
+                        <Select
+                            value={input.Level}
+                            label={"Item Level"}
+                            onSelect={handleLevelSelect}
+                            placeholder={"Choose Item Level"}
+                        >
+                            <SelectItem title={0} />
+                            <SelectItem title={1} />
+                            <SelectItem title={2} />
+                        </Select>
+                        <CoinPriceEditor currentPrice={input.Price} updatePrice={changePrice} />
+                    </Card>
+                    <Card>
+                        <Layout style={{flex: 1, flexDirection: "row", justifyContent: "space-around", paddingBottom: 10}}>
                             <Input 
                                 label={"Check Penalty"}
                                 placeholder='Penalty'
@@ -259,6 +258,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeCheckPenalty}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
                             <Input 
                                 label={"Speed Penalty"}
@@ -267,15 +267,19 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeSpeedPenalty}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
                             <Input 
-                                label={"Strength Requirement"}
+                                label={"Strength Req."}
                                 placeholder='STR Req'
                                 value={input.StrengthRequirement}
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeStrengthRequirement}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
+                        </Layout>
+                        <Layout style={{flex: 1, flexDirection: "row", justifyContent: "space-around"}}>
                             <Input 
                                 label={"Bulk"}
                                 placeholder='Bulk'
@@ -283,6 +287,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeBulk}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
                             <Input 
                                 label={"Worn Bulk"}
@@ -291,12 +296,14 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 size='medium'
                                 keyboardType='numeric'
                                 onChangeText={changeWornBulk}
+                                style={{flex: 1, paddingHorizontal: 5}}
                             />
-                        </Card>
-                        <Text>Traits:</Text>
-                    </Layout>
-                </ScrollView>
-            </KeyboardAvoidingView>
+                                
+                        </Layout>
+                    </Card>
+                    <Text>Traits:</Text>
+                </Layout>
+            </ScrollView>
         </Modal>
 
     );
@@ -334,12 +341,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         flex: 1
     },
-    backdrop: {
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-    },
     modal: {
         width: 300,
-        height: "65%",
+        height: "75%",
+        marginBottom: 5,
         justifyContent: "flex-start"
     },
     header: {
@@ -348,17 +353,4 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
     },
-    keyboardContainer: {
-        flex: 1,
-        alignSelf: "center",
-        paddingBottom: 5,
-        width: Dimensions.get("window").width * .8,
-        height: Dimensions.get("window").height * .8,
-    },
-    modalContainer: {
-        flex:1, 
-        height: Dimensions.get("window").height * .8,
-        width: Dimensions.get("window").width,
-        paddingBottom: 10
-    }
 });
