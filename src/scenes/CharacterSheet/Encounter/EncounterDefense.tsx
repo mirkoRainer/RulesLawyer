@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import PlayerCharacter from "../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter, { Shield } from "../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
@@ -10,7 +10,7 @@ import HitPoints from "./Defense/HealthData/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Defense/ResistancesImmunitiesWeaknesses";
 import ACView from "./Defense/ArmorClass/ACView";
 import { Layout, Text, Divider } from "@ui-kitten/components";
-import ShieldView, { ShieldProps } from "./Defense/Shield/ShieldView";
+import ShieldView from "./Defense/Shield/ShieldView";
 import SavesView from "./Defense/SavesView";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -57,7 +57,7 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
-    shield: ShieldProps;
+    shield: Shield;
     resistances: string;
     immunities: string;
     weaknesses: string;

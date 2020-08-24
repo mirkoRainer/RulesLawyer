@@ -18,6 +18,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { isNumbersOnly } from "../../../../Shared/Misc/StringToNumberHelper";
 import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
+import { Traits } from "../../../../../PF2eCoreLib/Traits";
+import { TraitSelector } from "../../../../Shared/TraitSelector";
 
 type OwnProps = {
     visible: boolean
@@ -137,6 +139,12 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         setInput({
             ...input,
             WornBulk
+        });
+    };
+    const changeTraits = (traits: (keyof typeof Traits)[]) => {
+        setInput({
+            ...input,
+            Traits: traits
         });
     };
     
@@ -301,7 +309,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                                 
                         </Layout>
                     </Card>
-                    <Text>Traits:</Text>
+                    <TraitSelector onSelection={changeTraits} currentTraits={props.wornArmor.Traits}/>
                 </Layout>
             </ScrollView>
         </Modal>

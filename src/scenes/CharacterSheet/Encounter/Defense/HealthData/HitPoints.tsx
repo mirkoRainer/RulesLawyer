@@ -22,7 +22,9 @@ export interface HitPointProps {
 }
 
 const HitPoints: React.FC<Props> = (props) => {
+    // @ts-ignore
     const PlusHPButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(amount, false);}} style={styles.plus}>+{amount.toString()}</Button>);
+    // @ts-ignore
     const MinusHPButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(-amount, false);}} style={styles.minus}>-{amount.toString()}</Button>);
 
     const handleHPTap = () => {

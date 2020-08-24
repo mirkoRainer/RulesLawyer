@@ -47,7 +47,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         Bulk: 1,
         WornBulk: 1,
         Group: ArmorGroup.Leather,
-        Traits: [],
+        Traits: ["Additive", "Grapple"],
     },
     shield: {
         hasShield: true,
@@ -245,7 +245,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             damageDice: "1d6",
             damageAbilityModifier: "Strength",
             damageType: "Piercing",
-            weaponTraits: "Agile, Finesse, Versatile",
+            weaponTraits: ["Agile", "Finesse", "Versatile"],
             weaponCategory: "Simple"
         },
         {
@@ -255,7 +255,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             damageDice: "1d8",
             damageAbilityModifier: undefined,
             damageType: "Piercing",
-            weaponTraits: "Volley 30ft",
+            weaponTraits: ["Volley30"],
             weaponCategory: "Martial"
         }
     ],
@@ -387,7 +387,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         {
             name: "Shove",
             numberOfActions: 1,
-            traits: ["Attack", "Atheletics"],
+            traits: ["Attack", "Athletics"],
             bookAbbreviation: "CRB",
             pageNumber: 242,
             description:
@@ -404,7 +404,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         {
             name: "Speak out loud",
             numberOfActions: 0,
-            traits: ["Free Action", "Verbal"],
+            traits: ["FreeAction", "Verbal"],
             bookAbbreviation: "CRB",
             pageNumber: 1,
             description: "You speak. Like a dog.",

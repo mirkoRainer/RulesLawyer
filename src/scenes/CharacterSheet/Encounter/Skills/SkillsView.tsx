@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
-import { Skill, PlayerCharacter } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
@@ -49,9 +49,7 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (
-    state: AppState,
-    ownProps: OwnProps
-): LinkStateProps => ({
+    state: AppState): LinkStateProps => ({
     abilityScores: state.playerCharacter.abilityScores,
 });
 

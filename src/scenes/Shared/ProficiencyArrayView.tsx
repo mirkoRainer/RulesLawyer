@@ -70,7 +70,6 @@ type Props = OwnProps & LinkDispatchProps;
 
 interface OwnProps {
     proficiency: Proficiencies;
-    proficiencyAppliesTo: PlayerCharacterActionTypes
 }
 
 // base state

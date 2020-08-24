@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import {StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
+import { Traits } from "../../../../../PF2eCoreLib/Traits";
 
 interface Props {
     damageDice: string; // should be a dice class
     abilityModifier: number;
     damageType: string;
     other: string;
-    traits: string;
+    traits: (keyof typeof Traits)[];
 }
 
 
@@ -17,7 +18,7 @@ const WeaponDamageSection: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
             <Text style={styles.text}> {props.other} </Text>
-            <Text style={styles.text}> {props.traits} </Text>
+            <Text style={styles.text}> {props.traits.toString()} </Text>
             <Layout style={styles.damageContainer}>
                 <Text style={styles.text} category='h6'>Damage</Text>
                 <Layout style={styles.damageText}>

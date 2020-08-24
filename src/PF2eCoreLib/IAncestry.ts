@@ -9,6 +9,6 @@ interface IAncestry {
     AbilityBoosts: Ability[];
     AbilityFlaws: Ability[];
     Languages: Language[];
-    Traits: Traits[];
+    Traits: (keyof typeof Traits)[];
     SpecialAbilities: string[];
 }

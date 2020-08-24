@@ -1,12 +1,12 @@
-import { AbilityScoreArray, AbilityModifierWithName } from "./AbilityScores";
+import { AbilityScoreArray } from "./AbilityScores";
 import { Proficiencies } from "./Proficiencies";
 import { iBonus } from "./Bonus";
 import { SpellListEntry } from "../scenes/CharacterSheet/Spells/Components/Spell";
 import { ArmorCategory } from "./ArmorCategory";
-import { Ability } from "./Ability";
 import { Traits } from "./Traits";
 import { HealthData } from "./HealthData";
 import { ArmorGroup } from "./ArmorGroup";
+import { SpellSlotProps } from "../scenes/CharacterSheet/Spells/Components/SpellSlotView";
 
 
 export default interface PlayerCharacter {
@@ -17,7 +17,7 @@ export default interface PlayerCharacter {
     playerName:                  string;
     alignment:                   string;
     deity:                       string;
-    traits:                      string[];
+    traits:                      (keyof typeof Traits)[];
     ancestry:                    Ancestry;
     pcClass:                     iClass;
     background:                  Background;
@@ -56,28 +56,27 @@ export default interface PlayerCharacter {
     penalties:                   any[];
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
-    spells:                      SpellListEntry[];
-};
+    spells:                      SpellListEntry[]};
 
-interface iClass {
+export interface iClass {
     name: string;
     subClass: string;
     proficiency: Proficiencies;
     keyAbility: keyof AbilityScoreArray;
 }
 
-interface Background {
+export interface Background {
     name: string
 }
 
-interface Movement {
+export interface Movement {
     landSpeed: number;
     burrowSpeed: number;
     climbSpeed: number;
     flySpeed: number;
 }
 
-interface CampaignNotesData {
+export interface CampaignNotesData {
     notes: string;
     allies: string;
     enemies: string;
@@ -92,7 +91,7 @@ export interface Ancestry {
 export interface Action {
     name:             string;
     numberOfActions:  number;
-    traits:           string[];
+    traits:           (keyof typeof Traits)[];
     bookAbbreviation: string;
     pageNumber:       number;
     description:      string;
@@ -258,7 +257,7 @@ export interface Weapon {
     damageDice:            string;
     damageAbilityModifier?: keyof AbilityScoreArray;
     damageType:            string;
-    weaponTraits:          string;
+    weaponTraits:          (keyof typeof Traits)[];
     weaponCategory:        keyof WeaponProficiencies;
 }
 
@@ -275,7 +274,7 @@ export interface WornArmor {
     Bulk:                number;
     WornBulk:            number;
     Group:               ArmorGroup;
-    Traits:              Traits[];
+    Traits:              (keyof typeof Traits)[];
 }
 
 export interface Price {

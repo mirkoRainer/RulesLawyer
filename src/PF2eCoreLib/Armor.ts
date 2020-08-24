@@ -17,5 +17,5 @@ export interface Armor {
     Bulk: number;
     WornBulk: number;
     Group: ArmorGroup;
-    Traits: Traits[];
+    Traits: (keyof typeof Traits)[];
 }

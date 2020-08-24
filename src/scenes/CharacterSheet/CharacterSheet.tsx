@@ -71,6 +71,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     };
 
     const Tab = createBottomTabNavigator<CharacterSheetTabParamList>();
+    // @ts-ignore
     const BottomTabBar = ({ navigation, state }) => (
         <BottomNavigation
             selectedIndex={state.index}

@@ -30,6 +30,7 @@ const ShieldView: React.FC<Props> = (props) => {
         props.updateShield({...props.shield, currentHP: adjustedHP});
     };
 
+    //@ts-ignore
     const PlusHPButton = (amount: number) => (<Button onPress={() => {adjustShieldHP(amount);}} style={styles.plus}>+{amount.toString()}</Button>);
     const MinusHPButton = (amount: number) => (<Button onPress={() => {adjustShieldHP(amount);}} style={styles.minus}>{amount.toString()}</Button>);
 

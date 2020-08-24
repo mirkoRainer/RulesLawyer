@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
-import { OwnProps } from "./Story/Components/CharacterMetadata/ClassView";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";

@@ -3,9 +3,7 @@ import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, 
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
-import WoundedView from "../../scenes/CharacterSheet/Encounter/Defense/HealthData/WoundedView";
-import { CHANGE_ARMOR_CLASS_PROFICIENCY, CHANGE_SAVE_PROFICIENCIES } from "../actions/PlayerCharacter/ProficiencyActionTypes";
-import { NativeViewGestureHandler } from "react-native-gesture-handler";
+import { CHANGE_SAVE_PROFICIENCIES } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 

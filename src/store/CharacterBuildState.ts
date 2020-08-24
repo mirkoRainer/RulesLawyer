@@ -60,6 +60,6 @@ type SkillProficiencyPreReq = {
 }
 
 type TraitPrerequisite = {
-    traits: keyof Traits[];
+    traits: keyof typeof Traits[];
 }
 

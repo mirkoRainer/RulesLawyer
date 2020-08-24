@@ -31,16 +31,19 @@ export type EncounterTabParamList = {
 
 const Encounter: React.FC<Props> = (props) => {
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
-    const BottomTabBar = ({ navigation, state }) => (
-        <BottomNavigation
-            selectedIndex={state.index}
-            onSelect={index => navigation.navigate(state.routeNames[index])}>
-            <BottomNavigationTab title='Your Turn'/>
-            <BottomNavigationTab title='Their Turn'/>
-            <BottomNavigationTab title='Skillz'/>
-            <BottomNavigationTab title='Spells'/>
-        </BottomNavigation>
-    );
+    // @ts-ignore
+    const BottomTabBar = ({ navigation, state }) => {
+        return (
+            <BottomNavigation
+                selectedIndex={state.index}
+                onSelect={index => navigation.navigate(state.routeNames[index])}>
+                <BottomNavigationTab title='Your Turn' />
+                <BottomNavigationTab title='Their Turn' />
+                <BottomNavigationTab title='Skillz' />
+                <BottomNavigationTab title='Spells' />
+            </BottomNavigation>
+        );
+    };
     return (
         <Layout style={{flex:1}}>
             <Conditions conditions={props.playerCharacter.conditions} />
