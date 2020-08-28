@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet} from "react-native";
-import { Layout, Text, Card } from "@ui-kitten/components";
+import { Layout, Text, Card, Icon, Input } from "@ui-kitten/components";
 import { Traits } from "../../PF2eCoreLib/Traits";
 import { Pill } from "./Pill";
 import _ from "lodash";
@@ -45,12 +45,36 @@ export const TraitSelector: React.FC<Props> = (props) => {
             renderInactiveTraits.push(renderTrait(trait, status));
         }
     });
+    
+    const [value, setValue] = React.useState("");
+    const searchIcon = (props: any) => (
+        <Icon {...props} name='search'/>
+    );
+    const searchBar = () => {
+        return (
+            <Input 
+                style={{flex: 1, width: "100%"}}
+                value={value}
+                placeholder='Search Traits'
+                accessoryRight={searchIcon}
+                onChangeText={(nextValue: string) => setValue(nextValue)}
+            />
+        );
+    };
+
     return(
         <Card>
             <Text category='h5'>Traits</Text>
-            <Layout style={{flexWrap: "wrap", flexDirection: "row"}}>
-                {renderActiveTraits}
-                {renderInactiveTraits}
+            <Layout >
+                <Text category='c2'>Tap to remove</Text>
+                <Layout style={styles.traitContainer}>
+                    {renderActiveTraits}
+                </Layout>
+                {searchBar()}
+                <Text category='c2'>Tap to add</Text>
+                <Layout style={styles.traitContainer}>
+                    {renderInactiveTraits.filter(x => value === "" || x.key?.toString().toLowerCase().startsWith(value.toLowerCase()))}
+                </Layout>
             </Layout>
         </Card>
     );
@@ -59,5 +83,10 @@ export const TraitSelector: React.FC<Props> = (props) => {
 const styles = StyleSheet.create({
     centered: {
         alignSelf: "center"
+    },
+    traitContainer: {
+        flexWrap: "wrap", 
+        flexDirection: "row", 
+        paddingVertical: 5
     }
 });
