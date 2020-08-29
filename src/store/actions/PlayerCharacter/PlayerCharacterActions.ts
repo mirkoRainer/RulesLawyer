@@ -30,7 +30,7 @@ export const ChangeAncestry: ActionCreator<PlayerCharacterActionTypes> = (ancest
     type: CHANGE_ANCESTRY, 
     ancestry 
 });
-export const stateChangeAncestry = (ancestry: string) => {
+export const startChangeAncestry = (ancestry: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeAncestry(ancestry));
     };
@@ -40,7 +40,7 @@ export const ChangeHeritage: ActionCreator<PlayerCharacterActionTypes> = (herita
     type: CHANGE_HERITAGE, 
     heritage 
 });
-export const stateChangeHeritage = (heritage: string) => {
+export const startChangeHeritage = (heritage: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeHeritage(heritage));
     };
@@ -50,7 +50,7 @@ export const ChangeBackground: ActionCreator<PlayerCharacterActionTypes> = (Back
     type: CHANGE_BACKGROUND, 
     Background 
 });
-export const stateChangeBackground = (Background: string) => {
+export const startChangeBackground = (Background: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeBackground(Background));
     };
@@ -60,7 +60,7 @@ export const ChangeClass: ActionCreator<PlayerCharacterActionTypes> = (Class: st
     type: CHANGE_CLASS, 
     Class 
 });
-export const stateChangeClass = (Class: string) => {
+export const startChangeClass = (Class: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeClass(Class));
     };
@@ -70,7 +70,7 @@ export const ChangeSubClass: ActionCreator<PlayerCharacterActionTypes> = (SubCla
     type: CHANGE_SUBCLASS, 
     SubClass 
 });
-export const stateChangeSubClass = (SubClass: string) => {
+export const startChangeSubClass = (SubClass: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeSubClass(SubClass));
     };
@@ -80,7 +80,7 @@ export const ChangeAlignment: ActionCreator<PlayerCharacterActionTypes> = (Align
     type: CHANGE_ALIGNMENT,
     Alignment 
 });
-export const stateChangeAlignment = (Alignment: string) => {
+export const startChangeAlignment = (Alignment: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeAlignment(Alignment));
     };
@@ -90,7 +90,7 @@ export const ChangeDeity: ActionCreator<PlayerCharacterActionTypes> = (Deity: st
     type: CHANGE_DEITY,
     Deity 
 });
-export const stateChangeDeity = (Deity: string) => {
+export const startChangeDeity = (Deity: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeDeity(Deity));
     };
@@ -100,7 +100,7 @@ export const ChangeNotes: ActionCreator<PlayerCharacterActionTypes> = (Notes: st
     type: CHANGE_NOTES,
     Notes 
 });
-export const stateChangeNotes = (Notes: string) => {
+export const startChangeNotes = (Notes: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeNotes(Notes));
     };
@@ -110,7 +110,7 @@ export const ChangeResistances: ActionCreator<PlayerCharacterActionTypes> = (Res
     type: CHANGE_RESISTANCES,
     Resistances 
 });
-export const stateChangeResistances = (Resistances: string) => {
+export const startChangeResistances = (Resistances: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeResistances(Resistances));
     };
@@ -120,7 +120,7 @@ export const ChangeImmunities: ActionCreator<PlayerCharacterActionTypes> = (Immu
     type: CHANGE_IMMUNITIES,
     Immunities 
 });
-export const stateChangeImmunities = (Immunities: string) => {
+export const startChangeImmunities = (Immunities: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeImmunities(Immunities));
     };
@@ -130,7 +130,7 @@ export const ChangeWeaknesses: ActionCreator<PlayerCharacterActionTypes> = (Weak
     type: CHANGE_WEAKNESSES,
     Weaknesses 
 });
-export const stateChangeWeaknesses = (Weaknesses: string) => {
+export const startChangeWeaknesses = (Weaknesses: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeWeaknesses(Weaknesses));
     };
@@ -140,7 +140,7 @@ export const ChangeConditions: ActionCreator<PlayerCharacterActionTypes> = (Cond
     type: CHANGE_CONDITIONS,
     Conditions 
 });
-export const stateChangeConditions = (Conditions: string) => {
+export const startChangeConditions = (Conditions: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeConditions(Conditions));
     };
@@ -150,7 +150,7 @@ export const ChangeSenses: ActionCreator<PlayerCharacterActionTypes> = (Senses: 
     type: CHANGE_SENSES,
     Senses 
 });
-export const stateChangeSenses = (Senses: string) => {
+export const startChangeSenses = (Senses: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeSenses(Senses));
     };
@@ -160,7 +160,7 @@ export const ChangeLevel: ActionCreator<PlayerCharacterActionTypes> = (Level: nu
     type: CHANGE_LEVEL,
     Level 
 });
-export const stateChangeLevel = (Level: string) => {
+export const startChangeLevel = (Level: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeLevel(Level));
     };
