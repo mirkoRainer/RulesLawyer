@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {  } from "react";
 import {
     StyleSheet
 } from "react-native";
-import { Price } from "../../PF2eCoreLib/PlayerCharacter";
 import { Input, Layout, Text } from "@ui-kitten/components";
-import deepEqual from "deep-equal";
-import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 
 const CoinPriceEditor: React.FC<Props> = (props) => {
 
