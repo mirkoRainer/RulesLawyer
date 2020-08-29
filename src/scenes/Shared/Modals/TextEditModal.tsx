@@ -41,8 +41,9 @@ const TextEditModal: React.FC<Props> = (props) => {
                         onChangeText={props.modalState.onTextChange}
                         size={"large"}
                         multiline={true}
-                        value={props.modalState.value}
-                    />
+                    >
+                        {props.modalState.value}
+                    </Input>
                 </Layout>
             </Card>
         </Modal>
