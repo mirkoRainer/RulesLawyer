@@ -28,3 +28,23 @@ export function GetProficiencyValue(proficiency: Proficiencies, level: number) {
     }
     }
 }
+
+export const DetermineNextProficiency = (prof: Proficiencies): Proficiencies => {
+    switch (prof) {
+    case (Proficiencies.Untrained):{
+        return Proficiencies.Trained;
+    }
+    case (Proficiencies.Trained):{
+        return Proficiencies.Expert;
+    }
+    case (Proficiencies.Expert):{
+        return Proficiencies.Master;
+    }
+    case (Proficiencies.Master):{
+        return Proficiencies.Legendary;
+    }
+    case (Proficiencies.Legendary):{
+        return Proficiencies.Untrained;
+    }
+    }
+};

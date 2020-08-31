@@ -15,7 +15,7 @@ import { bindActionCreators } from "redux";
 import { startChangeSaveProficiencies, ChangeSaveProficiencies } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
-import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
+import { Proficiencies, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
 
 const SavesView: React.FC<Props> = (props) => {
 
@@ -59,45 +59,27 @@ const SavesView: React.FC<Props> = (props) => {
         };
     }; 
 
-    const determineNextProficiency = (prof: Proficiencies): Proficiencies => {
-        switch (prof) {
-        case (Proficiencies.Untrained):{
-            return Proficiencies.Trained;
-        }
-        case (Proficiencies.Trained):{
-            return Proficiencies.Expert;
-        }
-        case (Proficiencies.Expert):{
-            return Proficiencies.Master;
-        }
-        case (Proficiencies.Master):{
-            return Proficiencies.Legendary;
-        }
-        case (Proficiencies.Legendary):{
-            return Proficiencies.Untrained;
-        }
-        }
-    };
+
 
     const changeFort = () => {
         const fortProf = props.saves.fortitude;
         props.changeSaves({
             ...props.saves,
-            fortitude: determineNextProficiency(fortProf)
+            fortitude: DetermineNextProficiency(fortProf)
         });
     };
     const changeReflex = () => {
         const reflexProf = props.saves.reflex;
         props.changeSaves({
             ...props.saves,
-            reflex: determineNextProficiency(reflexProf)
+            reflex: DetermineNextProficiency(reflexProf)
         });
     };
     const changeWill = () => {
         const willProf = props.saves.will;
         props.changeSaves({
             ...props.saves,
-            will: determineNextProficiency(willProf)
+            will: DetermineNextProficiency(willProf)
         });
     };
     

@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { AppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
-import { WornArmor, Price } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { WornArmor, Price, ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { Dictionary } from "../../../../Shared/Misc/Dictionary";
@@ -20,6 +20,8 @@ import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
 import { TraitSelector } from "../../../../Shared/TraitSelector";
+import { getWornArmorProficiency } from "./ArmorClassHelper";
+import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 
 type OwnProps = {
     visible: boolean
@@ -52,6 +54,8 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
         Group: props.wornArmor.Group,
         Traits: props.wornArmor.Traits
     });
+
+    const wornProficiency: Proficiencies = getWornArmorProficiency(props.armorProficiencies, props.wornArmor.Category);
 
     const categoryData: Dictionary<keyof ArmorCategory> = {
         0: "Unarmored",
@@ -226,7 +230,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                     <Card>
                         <Select
                             value={input.Category}
-                            label={"Armor Category"}
+                            label={"Armor Category (" + wornProficiency +")"}
                             onSelect={handleArmorCategorySelect}
                         >
                             <SelectItem title={"Unarmored"} />
@@ -322,7 +326,8 @@ interface LinkDispatchProps {
 }
 
 interface LinkStateProps {
-    wornArmor: WornArmor
+    wornArmor: WornArmor,
+    armorProficiencies: ArmorProficiencies
 }
 
 const mapDispatchToProps = (
@@ -338,7 +343,8 @@ const mapStateToProps = (
     state: AppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
-    wornArmor: state.playerCharacter.wornArmor
+    wornArmor: state.playerCharacter.wornArmor,
+    armorProficiencies: state.playerCharacter.armorProficiencies
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WornArmorEditModal);
