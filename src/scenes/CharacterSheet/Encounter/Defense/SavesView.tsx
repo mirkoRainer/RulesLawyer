@@ -126,6 +126,7 @@ type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
     changeSaves: (saves: Saves) => void;
+    startTextEditModal: (propertyToChange: string) => void;
 }
 
 interface LinkStateProps {
@@ -141,7 +142,8 @@ const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
-        changeSaves: bindActionCreators(startChangeSaveProficiencies, dispatch)
+        changeSaves: bindActionCreators(startChangeSaveProficiencies, dispatch),
+        startTextEditModal: bindActionCreators(startTextEditModal, dispatch),
     };
 };
 

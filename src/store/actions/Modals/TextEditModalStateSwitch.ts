@@ -6,6 +6,7 @@ import { AppActions } from "../AllActionTypesAggregated";
 import { TextEditModalState } from "../../ModalsState";
 
 export const TextEditModalStateSwitch = (actionType: string, state: AppState, dispatch: Dispatch<AppActions>): TextEditModalState => {
+    console.debug(`TextEditModalStateSwitch with ${JSON.stringify(actionType)}`);
     switch (actionType) {
     case CHANGE_CHARACTER_NAME:
         return {

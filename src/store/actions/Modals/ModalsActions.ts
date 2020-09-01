@@ -33,8 +33,10 @@ const UpdateTextEditModalState: ActionCreator<ModalActionTypes> = (
 });
 
 export const startTextEditModal = (actionType: string, index?: number) => {
+    console.debug(`startTextEditModal with ${JSON.stringify(actionType)}`);
     return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
-        let newModalState: TextEditModalState = TextEditModalStateSwitch(actionType, getState(), dispatch);
+        const newModalState: TextEditModalState = TextEditModalStateSwitch(actionType, getState(), dispatch);
+        console.debug(`newModalState in startTextEditModal: ${JSON.stringify(newModalState)}`);
         dispatch(UpdateTextEditModalState(newModalState));
         dispatch(ToggleTextEditModal());
     };

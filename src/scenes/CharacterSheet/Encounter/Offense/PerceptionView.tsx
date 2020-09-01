@@ -15,6 +15,8 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startChangePerceptionProficiency } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
+import { CHANGE_SENSES } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 const PerceptionView: React.FC<Props> = (props) => {
     const modifier = CalculateAbilityScoreModifier(props.keyAbility.score);
@@ -44,7 +46,7 @@ const PerceptionView: React.FC<Props> = (props) => {
         </Text>);
 
 
-    const senses = (<Text style={styles.descriptor}>{props.senses}</Text>);
+    const senses = (<Text style={styles.descriptor}>Senses: {props.senses}</Text>);
             
     const total =
             CalculateAbilityScoreModifier(props.keyAbility.score)+
@@ -55,6 +57,10 @@ const PerceptionView: React.FC<Props> = (props) => {
     const handleProficiencyChange = () => {
         console.debug("handleProficiencyChange in PerceptionView");
         props.changeProficiency(DetermineNextProficiency(props.proficiency));
+    };
+
+    const handleChangeSenses = () => {
+        props.startTextEditModal(CHANGE_SENSES);
     };
 
     return (
@@ -75,7 +81,7 @@ const PerceptionView: React.FC<Props> = (props) => {
                     </Layout>
                 </Layout>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleChangeSenses}>
                 {senses}
             </TouchableOpacity>
         </Layout>
@@ -87,6 +93,7 @@ type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
     changeProficiency: (newProficiency: Proficiencies) => void;
+    startTextEditModal: (propertyToChange: string) => void;
 }
 
 
@@ -102,7 +109,8 @@ const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
-        changeProficiency: bindActionCreators(startChangePerceptionProficiency, dispatch)
+        changeProficiency: bindActionCreators(startChangePerceptionProficiency, dispatch),
+        startTextEditModal: bindActionCreators(startTextEditModal, dispatch)
     };
 };
 
