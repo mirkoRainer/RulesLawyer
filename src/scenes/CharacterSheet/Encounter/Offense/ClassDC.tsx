@@ -1,42 +1,55 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@ui-kitten/components";
 import ProficiencyView, { ProficiencyProps } from "../../../Shared/ProficiencyView";
-import { Bonus } from "../../../../PF2eCoreLib/Bonus";
+import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
-import PlayerCharacter from "../../../../PF2eCoreLib/PlayerCharacter";
-import { Action } from "redux";
+import PlayerCharacter, { iClass } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Action, bindActionCreators } from "redux";
 import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
+import { startChangeClassDCProficiency } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
+import { Proficiencies, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
 
 const ClassDC: React.FC<Props> = (props) => {
 
     const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
-            keyAbility: props.playerCharacter.abilityScores[props.playerCharacter.pcClass.keyAbility],
-            proficiency: props.playerCharacter.pcClass.proficiency,
-            level: props.playerCharacter.level,
+            keyAbility: props.abilityScores[props.pcClass.keyAbility],
+            proficiency: props.pcClass.proficiency,
+            level: props.level,
             itemBonus: Bonus.GetBonusFor(
                 "classDc",
                 BonusType.Item,
-                props.playerCharacter.bonuses
+                props.bonuses
             ),
             is10base: true,
         };
     };
+
+    const changeProf = () => {
+        const dcProf = props.pcClass.proficiency;
+        props.changeClassDCProficiency(DetermineNextProficiency(dcProf));
+    };
+
     return (
         <Layout>
-            <ProficiencyView
-                title={"Class DC"}
-                proficiency={classDCProficiency().proficiency}
-                keyAbility={
-                    classDCProficiency().keyAbility
-                }
-                is10base={classDCProficiency().is10base}
-                itemBonus={classDCProficiency().itemBonus}
-                level={props.playerCharacter.level}
-            />
+            <TouchableOpacity onPress={changeProf}>
+                <ProficiencyView
+                    title={"Class DC"}
+                    proficiency={classDCProficiency().proficiency}
+                    keyAbility={
+                        classDCProficiency().keyAbility
+                    }
+                    is10base={classDCProficiency().is10base}
+                    itemBonus={classDCProficiency().itemBonus}
+                    level={props.level}
+                />
+            </TouchableOpacity>
         </Layout>
     );
 };
@@ -44,23 +57,30 @@ const ClassDC: React.FC<Props> = (props) => {
 type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
-
+    changeClassDCProficiency: (classDCProficiency: Proficiencies) => void;
 }
 
 interface LinkStateProps {
-    playerCharacter: PlayerCharacter;
+    abilityScores: AbilityScoreArray;
+    pcClass: iClass;
+    level: number;
+    bonuses: iBonus[]
 }
 
 const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
-
+        changeClassDCProficiency: bindActionCreators(startChangeClassDCProficiency, dispatch)
     };
 };
 
 const mapStateToProps = (
     state: AppState): LinkStateProps => ({
-    playerCharacter: state.playerCharacter,
+    abilityScores: state.playerCharacter.abilityScores,
+    pcClass: state.playerCharacter.pcClass,
+    level: state.playerCharacter.level,
+    bonuses: state.playerCharacter.bonuses
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassDC);
