@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { ProficiencyActionTypes } from "./ProficiencyActionTypes";
-import { Shield, WornArmor } from "../../../PF2eCoreLib/PlayerCharacter";
+import { Shield, WornArmor, Movement } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -162,6 +162,11 @@ export interface ChangeWornArmorAction extends Action<string> {
     WornArmor: WornArmor;
 }
 
+export const CHANGE_SPEED = "CHANGE_SPEED";
+export interface ChangeSpeedAction extends Action<string> {
+    type: typeof CHANGE_SPEED;
+    Movements: Movement;
+}
 
 
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
@@ -190,7 +195,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeMaxHitPointsAction
                                         |   ProficiencyActionTypes
                                         |   ChangeShieldAction
-                                        |   ChangeWornArmorAction; // | SomeOtherAction
+                                        |   ChangeWornArmorAction
+                                        |   ChangeSpeedAction; // | SomeOtherAction
 
 
 

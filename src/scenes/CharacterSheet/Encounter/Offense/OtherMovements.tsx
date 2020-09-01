@@ -38,7 +38,10 @@ export default class OtherMovements extends Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 3,
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 5
     },
     text: {
         flex: 1,

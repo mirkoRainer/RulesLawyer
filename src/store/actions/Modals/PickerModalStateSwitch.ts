@@ -2,13 +2,14 @@ import { PickerModalState } from "../../ModalsState";
 import { AppState } from "../../Store";
 import { Dispatch, ReactText } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_TEMPORARY_HITPOINTS, CHANGE_MAX_HITPOINTS } from "../PlayerCharacter/PlayerCharacterActionTypes";
-import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency, ChangeTemporaryHitPoints, ChangeMaxHitPoints } from "../PlayerCharacter/PlayerCharacterActions";
+import { CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_TEMPORARY_HITPOINTS, CHANGE_MAX_HITPOINTS, CHANGE_SPEED } from "../PlayerCharacter/PlayerCharacterActionTypes";
+import { ChangeLevel, ChangeExperiencePoints, ChangeClassDCProficiency, ChangeTemporaryHitPoints, ChangeMaxHitPoints, ChangeSpeed } from "../PlayerCharacter/PlayerCharacterActions";
 import { ChangePickerSelection } from "./ModalsActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
+import { Movement } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const PickerModalStateSwitch = (actionType: string, state: AppState, dispatch: Dispatch<AppActions>): PickerModalState => {
-    console.debug("PickerModalStateSwitch Entered");
+    console.debug(`PickerModalStateSwitch Entered with ${JSON.stringify(actionType)}`);
     switch(actionType) {
     case CHANGE_LEVEL:
         return {
@@ -69,6 +70,22 @@ export const PickerModalStateSwitch = (actionType: string, state: AppState, disp
                 dispatch(ChangeMaxHitPoints(value));
                 dispatch(ChangePickerSelection(value));
             }
+        };
+    case CHANGE_SPEED:
+        console.debug("PickerModalStateSwitch for CHANGE_SPEED");
+        return {
+            title: "Land Speed",
+            items: Array.from(new Array(30), (x, i) => i * 5),
+            currentSelection: state.modals.pickerModal.currentSelection,
+            onSelect: (value: ReactText, index: number) => {
+                const newMovements: Movement = {
+                    ...state.playerCharacter.movement,
+                    landSpeed: parseInt(value.toString())
+                };
+                dispatch(ChangeSpeed(newMovements));
+                dispatch(ChangePickerSelection(value));
+            }
+                
         };
     default: 
         return state.modals.pickerModal;
