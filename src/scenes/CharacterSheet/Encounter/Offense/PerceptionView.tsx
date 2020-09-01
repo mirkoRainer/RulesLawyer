@@ -1,7 +1,7 @@
 import React, { Component, Props } from "react";
 import { StyleSheet } from "react-native";
 import { AbilityScore, CalculateAbilityScoreModifier, GetAbilityScoreAbbreviation } from "../../../../PF2eCoreLib/AbilityScores";
-import { Proficiencies, GetProficiencyValue } from "../../../../PF2eCoreLib/Proficiencies";
+import { Proficiencies, GetProficiencyValue, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
 import { Layout, Text } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { connect } from "react-redux";
@@ -11,6 +11,10 @@ import { ProficiencyProps } from "../../../Shared/ProficiencyView";
 import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { bindActionCreators } from "redux";
+import { startChangePerceptionProficiency } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 
 const PerceptionView: React.FC<Props> = (props) => {
     const modifier = CalculateAbilityScoreModifier(props.keyAbility.score);
@@ -48,9 +52,14 @@ const PerceptionView: React.FC<Props> = (props) => {
             GetProficiencyValue(props.proficiency, props.level);
     const totalView = (<Text style={styles.total} category='h5'>{10 + total}</Text>); 
 
+    const handleProficiencyChange = () => {
+        console.debug("handleProficiencyChange in PerceptionView");
+        props.changeProficiency(DetermineNextProficiency(props.proficiency));
+    };
+
     return (
         <Layout style={styles.flex1}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleProficiencyChange}>
                 <Layout style={styles.horizontal}>
                     <Text style={styles.title10} category='h5'>Perception</Text>
                     {totalView} 
@@ -77,7 +86,7 @@ const PerceptionView: React.FC<Props> = (props) => {
 type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
-
+    changeProficiency: (newProficiency: Proficiencies) => void;
 }
 
 
@@ -90,9 +99,10 @@ interface LinkStateProps {
 }
 
 const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
-
+        changeProficiency: bindActionCreators(startChangePerceptionProficiency, dispatch)
     };
 };
 

@@ -3,7 +3,7 @@ import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, 
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
-import { CHANGE_SAVE_PROFICIENCIES } from "../actions/PlayerCharacter/ProficiencyActionTypes";
+import { CHANGE_SAVE_PROFICIENCIES, CHANGE_PERCEPTION_PROFICIENCY } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -198,6 +198,12 @@ const playerCharacterReducer = (state=defaultState, action: PlayerCharacterActio
         return {
             ...state,
             wornArmor: action.WornArmor
+        };
+    case CHANGE_PERCEPTION_PROFICIENCY:
+        console.debug(`CHANGE_PERCEPTION_PROFICIENCY in reducer ${JSON.stringify(action)}`);
+        return {
+            ...state,
+            perceptionProficiency: action.PerceptionProficiency
         };
     default:
         return state;

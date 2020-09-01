@@ -8,4 +8,12 @@ export interface ChangeSaveProficienciesAction extends Action<string> {
     saves: Saves;
 }
 
-export type ProficiencyActionTypes = ChangeSaveProficienciesAction
+export const CHANGE_PERCEPTION_PROFICIENCY = "CHANGE_PERCEPTION_PROFICIENCY";
+export interface ChangePerceptionProficiencyAction extends Action<string> {
+    type: typeof CHANGE_PERCEPTION_PROFICIENCY;
+    PerceptionProficiency: Proficiencies;
+}
+
+
+export type ProficiencyActionTypes =    ChangeSaveProficienciesAction |
+                                        ChangePerceptionProficiencyAction;

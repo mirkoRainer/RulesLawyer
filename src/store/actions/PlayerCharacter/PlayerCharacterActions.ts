@@ -3,7 +3,7 @@ import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, 
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { CHANGE_SAVE_PROFICIENCIES } from "./ProficiencyActionTypes";
+import { CHANGE_SAVE_PROFICIENCIES, CHANGE_PERCEPTION_PROFICIENCY } from "./ProficiencyActionTypes";
 import { Saves, Shield, WornArmor } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
@@ -275,6 +275,16 @@ export const ChangeWornArmor: ActionCreator<PlayerCharacterActionTypes> = (WornA
 export const startChangeWornArmor = (WornArmor: WornArmor) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeWornArmor(WornArmor));
+    };
+};
+
+export const ChangePerceptionProficiency: ActionCreator<PlayerCharacterActionTypes> = (PerceptionProficiency: Proficiencies): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_PERCEPTION_PROFICIENCY,
+    PerceptionProficiency 
+});
+export const startChangePerceptionProficiency = (PerceptionProficiency: Proficiencies) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangePerceptionProficiency(PerceptionProficiency));
     };
 };
 
