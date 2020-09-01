@@ -14,22 +14,10 @@ import ActionsAndActivities from "./Offense/ActionsAndActivities";
 import { ScrollView } from "react-native-gesture-handler";
 import { Divider, Layout } from "@ui-kitten/components";
 import ClassDC from "./Offense/ClassDC";
+import PerceptionView from "./Offense/PerceptionView";
 
 const EncounterOffense: React.FC<Props> = (props) => {
-    const perception = (): ProficiencyProps => {
-        return {
-            title: "Perception",
-            keyAbility: props.playerCharacter.abilityScores.Wisdom,
-            proficiency: props.playerCharacter.perceptionProficiency,
-            level: props.playerCharacter.level,
-            itemBonus: Bonus.GetBonusFor(
-                "perception",
-                BonusType.Item,
-                props.playerCharacter.bonuses
-            ),
-            descriptor: props.playerCharacter.senses,
-        };
-    };
+
     const weapons = (): WeaponViewProps[] => {
         const weapon0 = props.playerCharacter.weapons[0];
         return [
@@ -59,16 +47,7 @@ const EncounterOffense: React.FC<Props> = (props) => {
             <ScrollView>
                 <ClassDC />
                 <Divider />
-                <ProficiencyView
-                    title={"Perception"}
-                    keyAbility={
-                        props.playerCharacter.abilityScores.Wisdom
-                    }
-                    proficiency={props.playerCharacter.perceptionProficiency}
-                    level={props.playerCharacter.level}
-                    itemBonus={perception().itemBonus}
-                    descriptor={perception().descriptor}
-                />
+                <PerceptionView />
                 <Divider />
                 <Movements 
                     movements={props.playerCharacter.movement}
