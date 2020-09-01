@@ -359,7 +359,8 @@ const styles = StyleSheet.create({
         width: 300,
         height: "75%",
         marginBottom: 5,
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        alignSelf: "center",
     },
     header: {
         justifyContent: "space-between",
