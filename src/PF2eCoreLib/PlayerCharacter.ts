@@ -56,7 +56,7 @@ export default interface PlayerCharacter {
     penalties:                   any[];
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
-    spells:                      SpellListEntry[]};
+    spells:                      SpellListEntry[]}
 
 export interface iClass {
     name: string;
@@ -67,13 +67,6 @@ export interface iClass {
 
 export interface Background {
     name: string
-}
-
-export interface Movement {
-    landSpeed: number;
-    burrowSpeed: number;
-    climbSpeed: number;
-    flySpeed: number;
 }
 
 export interface CampaignNotesData {
@@ -161,11 +154,12 @@ export interface MagicTraditions {
 export interface Metadata {
 }
 
-export interface Movement {
-    landSpeed:   number;
-    burrowSpeed: number;
-    climbSpeed:  number;
-    flySpeed:    number;
+export type Movement = {
+    landSpeed: number;
+    burrowSpeed?: number;
+    climbSpeed?: number;
+    flySpeed?: number;
+    swimSpeed?: number;
 }
 
 export interface PersonalityData {

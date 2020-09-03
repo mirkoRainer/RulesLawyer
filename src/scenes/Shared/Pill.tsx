@@ -26,10 +26,14 @@ export const Pill: React.FC<IProps> = (props): JSX.Element => {
         </Tooltip>
     );
 
+    const handlePress = (value: any) => {
+        props.onPress(value);
+    };
+
     if (props.tooltip) return renderTooltip();
     return (
         <Layout>
-            <Button status={props.status || "basic"} style={styles.pill} size='small' onPress={props.onPress}>{props.text}</Button>
+            <Button status={props.status || "basic"} style={styles.pill} size='small' onPress={handlePress}>{props.text}</Button>
         </Layout>
     );
 };

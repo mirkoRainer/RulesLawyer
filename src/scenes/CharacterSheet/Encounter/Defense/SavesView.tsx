@@ -16,6 +16,7 @@ import { startChangeSaveProficiencies, ChangeSaveProficiencies } from "../../../
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
 import { Proficiencies, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
+import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 
 const SavesView: React.FC<Props> = (props) => {
 

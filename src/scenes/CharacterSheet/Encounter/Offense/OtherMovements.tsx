@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import {  StyleSheet } from "react-native";
-import { MovementProps } from "./Movements";
 import { Layout, Text } from "@ui-kitten/components";
+import { Movement } from "../../../../PF2eCoreLib/PlayerCharacter";
 
 interface Props {
-    movements: MovementProps;
+    movements: Movement;
 }
 
 interface State {}
 
 export default class OtherMovements extends Component<Props, State> {
     render() {
-        const climb = this.props.movements.climbSpeed
+        const climb = this.props.movements.climbSpeed  && this.props.movements.climbSpeed !== 0
             ? `Climb ${this.props.movements.climbSpeed}, `
             : "";
-        const burrow = this.props.movements.burrowSpeed
+        const burrow = this.props.movements.burrowSpeed && this.props.movements.burrowSpeed !== 0
             ? `Burrow ${this.props.movements.burrowSpeed}, `
             : "";
-        const swim = this.props.movements.swimSpeed
+        const swim = this.props.movements.swimSpeed && this.props.movements.swimSpeed !== 0
             ? `Swim ${this.props.movements.swimSpeed}, `
             : "";
-        const fly = this.props.movements.flySpeed
+        const fly = this.props.movements.flySpeed && this.props.movements.flySpeed !== 0
             ? `Fly ${this.props.movements.flySpeed}, `
             : "";
         return (
@@ -29,7 +29,7 @@ export default class OtherMovements extends Component<Props, State> {
                     Other Movement
                 </Text>
                 <Text>
-                    {`${climb}${fly}${swim}${burrow}`}
+                    {climb || burrow || swim || fly ? `${climb}${fly}${swim}${burrow}` : "None"}
                 </Text>
             </Layout>
         );

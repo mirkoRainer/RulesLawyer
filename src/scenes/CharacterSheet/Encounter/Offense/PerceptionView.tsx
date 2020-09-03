@@ -1,4 +1,4 @@
-import React, { Component, Props } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { AbilityScore, CalculateAbilityScoreModifier, GetAbilityScoreAbbreviation } from "../../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies, GetProficiencyValue, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
@@ -6,8 +6,6 @@ import { Layout, Text } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { connect } from "react-redux";
 import { AppState } from "../../../../store/Store";
-import PlayerCharacter from "../../../../PF2eCoreLib/PlayerCharacter";
-import { ProficiencyProps } from "../../../Shared/ProficiencyView";
 import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { TouchableOpacity } from "react-native-gesture-handler";

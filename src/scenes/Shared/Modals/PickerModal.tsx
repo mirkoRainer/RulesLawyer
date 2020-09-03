@@ -18,7 +18,7 @@ type OwnProps = {};
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
 const PickerModal: React.FC<Props> = (props) => {
-    let items = props.modalState.items.map((value, index) => {
+    const items = props.modalState.items.map((value, index) => {
         return <Picker.Item value={value} key={value} label={value.toString()}  />;
     });
     const CheckIcon = (props: any) => (
