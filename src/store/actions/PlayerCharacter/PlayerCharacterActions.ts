@@ -1,10 +1,10 @@
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS, CHANGE_SHIELD, CHANGE_WORN_ARMOR, CHANGE_SPEED } from "./PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS, CHANGE_SHIELD, CHANGE_WORN_ARMOR, CHANGE_SPEED, CHANGE_PF2ACTIONS } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { CHANGE_SAVE_PROFICIENCIES, CHANGE_PERCEPTION_PROFICIENCY } from "./ProficiencyActionTypes";
-import { Saves, Shield, WornArmor, Movement } from "../../../PF2eCoreLib/PlayerCharacter";
+import { Saves, Shield, WornArmor, Movement, PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
     type: CHANGE_CHARACTER_NAME, 
@@ -295,6 +295,16 @@ export const ChangeSpeed: ActionCreator<PlayerCharacterActionTypes> = (Movements
 export const startChangeSpeed = (Movements: Movement) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeSpeed(Movements));
+    };
+};
+
+export const ChangePF2Actions: ActionCreator<PlayerCharacterActionTypes> = (PF2Actions: PF2Action[]): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_PF2ACTIONS,
+    Actions: PF2Actions 
+});
+export const startChangePF2Actions = (PF2Actions: PF2Action[]) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangePF2Actions(PF2Actions));
     };
 };
 

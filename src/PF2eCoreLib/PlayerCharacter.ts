@@ -57,6 +57,7 @@ export default interface PlayerCharacter {
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
     spells:                      SpellListEntry[];
+};
 
 export interface iClass {
     name: string;
