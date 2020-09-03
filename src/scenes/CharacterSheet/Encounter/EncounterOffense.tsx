@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import PlayerCharacter, { Action } from "../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter, { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import ProficiencyView, { ProficiencyProps } from "../../Shared/ProficiencyView";
@@ -71,7 +71,7 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
-    actions: Action[];
+    actions: PF2Action[];
 }
 
 const mapDispatchToProps = (

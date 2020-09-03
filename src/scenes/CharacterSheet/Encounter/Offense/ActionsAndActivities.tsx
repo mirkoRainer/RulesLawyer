@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import {  StyleSheet, FlatList } from "react-native";
 import ActionView from "./ActionView";
-import { Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 
 interface Props {
-    actions: Action[];
+    actions: PF2Action[];
 }
 const ActionsAndActivities: React.FC<Props> = (props) => {
-    const renderItem = (item: Action) => <ActionView action={item} key={item.name} />;
+    const renderItem = (item: PF2Action) => <ActionView action={item} key={item.name} />;
 
     const actions: JSX.Element[] = [];
     props.actions.forEach(action => {

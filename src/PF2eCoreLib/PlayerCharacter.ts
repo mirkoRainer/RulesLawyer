@@ -47,16 +47,16 @@ export default interface PlayerCharacter {
     biographicalData:            BiographicalData;
     personalityData:             PersonalityData;
     campaignNotesData:           CampaignNotesData;
-    actions:                     Action[];
+    actions:                     PF2Action[];
     spellcastingAbilityModifier: keyof AbilityScoreArray;
     spellAttackProficiency:      Proficiencies;
     spellAttackItemBonus:        number;
     spellDCItemBonus:            number;
     bonuses:                     iBonus[];
-    penalties:                   any[];
+    penalties:                   iBonus[];
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
-    spells:                      SpellListEntry[]}
+    spells:                      SpellListEntry[];
 
 export interface iClass {
     name: string;
@@ -81,7 +81,7 @@ export interface Ancestry {
     heritage: string;
 }
 
-export interface Action {
+export interface PF2Action {
     name:             string;
     numberOfActions:  number;
     traits:           (keyof typeof Traits)[];

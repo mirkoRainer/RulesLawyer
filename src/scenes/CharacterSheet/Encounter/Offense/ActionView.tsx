@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 
 interface Props {
-    action: Action;
+    action: PF2Action;
 }
 
 interface State {}
