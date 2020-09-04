@@ -168,9 +168,9 @@ export interface ChangeSpeedAction extends Action<string> {
     Movements: Movement;
 }
 
-export const CHANGE_PF2ACTIONS = "CHANGE_PF2ACTIONS";
+export const CHANGE_PC_ACTIONS = "CHANGE_PC_ACTIONS";
 export interface ChangePF2ActionsAction extends Action<string> {
-    type: typeof CHANGE_PF2ACTIONS;
+    type: typeof CHANGE_PC_ACTIONS;
     Actions: PF2Action[];
 }
 
