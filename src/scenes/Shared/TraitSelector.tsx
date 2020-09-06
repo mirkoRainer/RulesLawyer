@@ -32,7 +32,6 @@ export const TraitSelector: React.FC<Props> = (props) => {
             <Pill key={trait} text={trait} status={status} onPress={onTraitPress}/>
         );
     };
-
     const renderActiveTraits: JSX.Element[] = [];
     const renderInactiveTraits: JSX.Element[] = [];
     Object.keys(Traits).forEach(trait => {

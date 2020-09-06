@@ -72,8 +72,6 @@ const HitPoints: React.FC<Props> = (props) => {
 type Props = HitPointProps & LinkDispatchProps;
     
 
-// base state
-//all actions to be dispatched
 interface LinkDispatchProps {
     AdjustHitPoints: (delta: number, removesWounded: boolean) => void;
     startPickerModal: (actionType: string, maxHitPoints: number) => void;

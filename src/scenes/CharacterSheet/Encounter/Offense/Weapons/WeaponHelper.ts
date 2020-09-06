@@ -5,17 +5,6 @@ import { AbilityScore } from "../../../../../PF2eCoreLib/AbilityScores";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
 
 
-export interface WeaponViewProps {
-    title: string;
-    abilityModifier: AbilityScore;
-    proficiency: Proficiencies;
-    itemBonus: number;
-    damageDice: string;
-    damageAbilityModifier: number;
-    damageType: string;
-    weaponTraits: (keyof typeof Traits)[];
-}
-
 export function GetProficiencyForWeapon(weapon: Weapon, proficiencies: WeaponProficiencies) : Proficiencies {
     //TODO!
     return Proficiencies.Trained;

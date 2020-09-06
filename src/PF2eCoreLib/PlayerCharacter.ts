@@ -89,7 +89,15 @@ export interface PF2Action {
     bookAbbreviation: string;
     pageNumber:       number;
     description:      string;
+    source:           string;
     trigger?:         string;
+    requirements?:    string;
+    critSuccess?:     string;
+    success?:         string;
+    failure?:         string;
+    critFailure?:     string;
+    weapon?:          Weapon;
+    skill?:           Skill;
 }
 
 export interface Ancestry {
