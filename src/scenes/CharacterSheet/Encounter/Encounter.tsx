@@ -19,12 +19,13 @@ import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
 import SpellsPage from "../Spells/SpellsPage";
 import { Layout } from "@ui-kitten/components";
 import Conditions from "../Conditions";
+import { OffenseNavigator } from "./Offense/OffenseNavigation";
 
 var width: number = Dimensions.get("window").width; //full width
 
 export type EncounterTabParamList = {
-    Attack: undefined;
-    Defend: undefined;
+    Offense: undefined;
+    Defense: undefined;
     Skills: undefined;
     Other: undefined;
 }
@@ -60,15 +61,15 @@ const Encounter: React.FC<Props> = (props) => {
                         keyboardHidesTabBar: true, 
                         tabStyle: styles.tab,
                     }} 
-                    initialRouteName={"Attack"}
+                    initialRouteName={"Offense"}
                 >
                     <Tab.Screen 
-                        name="Attack" 
-                        component={EncounterOffense}
+                        name="Offense" 
+                        component={OffenseNavigator}
                         options={{ tabBarLabel: "Your Turn" }}
                     />
                     <Tab.Screen 
-                        name="Defend" 
+                        name="Defense" 
                         component={EncounterDefense}
                         options={{ tabBarLabel: "Their Turn" }}
                     />

@@ -2,16 +2,22 @@ import React, { Component } from "react";
 import {  StyleSheet, FlatList } from "react-native";
 import ActionView from "./ActionView";
 import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { Layout, Text, Divider } from "@ui-kitten/components";
+import { Layout, Text, Divider, Icon, Button } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { AppState } from "../../../../store/Store";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { OffenseStackParamList } from "./OffenseNavigation";
+import { MainOffenseNavigationProps } from "../EncounterOffense";
+
 
 interface OwnProps {
+    navigation: MainOffenseNavigationProps
 }
+
 const ActionsAndActivities: React.FC<Props> = (props) => {
     const renderItem = (item: PF2Action, actionIndex: number) => {
         // create callback for edit Action
@@ -28,11 +34,24 @@ const ActionsAndActivities: React.FC<Props> = (props) => {
         actions.push(renderItem(action, index));
     });
 
+    const InfoIcon = (props : any) => (
+        <Icon {...props} name='info'/>
+    );
+    const handleEditButtonPress = () => {
+        props.navigation.navigate("EditActionsView");
+    };
+    const EditButton = () => (
+        <Button onPress={handleEditButtonPress} appearance='ghost' accessoryLeft={InfoIcon} style={{flex: .05, paddingLeft: 5}}/>
+    );
+
     return (
         <Layout style={styles.container}>
-            <Text style={styles.header} category='h3'>
+            <Layout style={{flex:1, flexDirection: "row"}}>
+                <Text style={styles.header} category='h3'>
                     Actions
-            </Text>
+                </Text>
+                {EditButton()}
+            </Layout>
             <Divider />
             {actions}
         </Layout>
@@ -77,6 +96,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",
-        paddingBottom: 5
+        textAlign: "center",
+        paddingBottom: 5,
     },
 });

@@ -15,9 +15,37 @@ interface Props {
 
 const ActionView: React.FC<Props> = (props) => {
 
-    const [ editing, setEditing ] = React.useState(false);
-    const [ action, setAction ] = React.useState<PF2Action>(props.action);
-    const [ selectedActionCost, setSelectedActionCost ] = React.useState(action.numberOfActions);
+    const actionName = () => {
+        return <Text category='h4' style={{...styles.text, textAlign: "center"}}>{props.action.name}</Text>;
+    };
+
+    const actionCost = (
+        <Text style={{ paddingRight: 5, paddingTop: 10, flex: .324, textAlign: "right"}} category='h5'>
+            {DetermineActionSymbol(props.action.numberOfActions)}
+        </Text>
+    );
+
+    const actionDescription = () => {
+        return (
+            <>
+                <Text style={styles.header} category='h6'>Description: </Text>
+                <Text style={styles.text}>
+                    {props.action.description}
+                </Text>
+            </>
+        );
+    }; 
+
+    const trigger = props.action.trigger ? (
+        <Layout style={styles.rowContainer}>
+            <Text>
+                <Text style={styles.header}>{"Trigger: "}</Text>
+                <Text style={styles.text}>{props.action.trigger}</Text>
+            </Text>
+        </Layout>
+    ) : (
+        <Layout></Layout>
+    );
 
     const traits = () => {
         const renderTraitPill = (trait: string) => {
@@ -26,10 +54,10 @@ const ActionView: React.FC<Props> = (props) => {
             );
         };
         const traitsRendered: JSX.Element[] = []; 
-        action.traits.forEach(trait => {
+        props.action.traits.forEach(trait => {
             traitsRendered.push(renderTraitPill(trait));
         });
-        const render = action.traits.length === 0 ? (
+        const render = props.action.traits.length === 0 ? (
             <Layout></Layout>
         ) : (
             <Layout style={{...styles.rowContainer}}>
@@ -39,93 +67,26 @@ const ActionView: React.FC<Props> = (props) => {
                 </Layout>
             </Layout>
         );
-        const onTraitSelect = (traits: (keyof typeof Traits)[]) => { 
-            setAction({...action, traits});
-            // props.updateAction({...action, traits});
-            // Traits not updating on select/deselect
-        };
-        return !editing ? render : <TraitSelector currentTraits={action.traits} onSelection={onTraitSelect}/>;
+
+        return render;
     };
-
-    const trigger = action.trigger ? (
-        <Layout style={styles.rowContainer}>
-            <Text>
-                <Text style={styles.header}>{"Trigger: "}</Text>
-                <Text style={styles.text}>{action.trigger}</Text>
-            </Text>
-        </Layout>
-    ) : (
-        <Layout></Layout>
-    );
-
-    const actionName = <Text category='h4' style={{...styles.text, flex: 1, textAlign: "center"}}>{action.name}</Text>;
-
-
-    const handleActionCostOnSelect = (index: IndexPath | IndexPath[]) => {
-        const trueIndex = index as IndexPath;
-        const selectedAction = MapIndexToAction(trueIndex.row);
-        setSelectedActionCost(selectedAction);
-    };
-
-    const actionCostSelector = (
-        <Select
-            selectedIndex={MapActionToIndexPath(selectedActionCost) as IndexPath}
-            value={DetermineActionSymbol(selectedActionCost)}
-            onSelect={handleActionCostOnSelect}
-            style={{flex: .7}}
-            label={"Action Cost"}
-            size='small'
-        >
-            <SelectItem title={freeActionSymbol} />
-            <SelectItem title={reactionSymbol} />
-            <SelectItem title={actionSymbol.repeat(1)} />
-            <SelectItem title={actionSymbol.repeat(2)} />
-            <SelectItem title={actionSymbol.repeat(3)} />
-        </Select>
-    );
-
-    const actionCost = editing ? actionCostSelector : <Text style={{ fontWeight: "bold", padding: 5, flex: .25}} category='h5'>
-        {DetermineActionSymbol(action.numberOfActions)}
-    </Text>;
-
-    const actionDescription = editing ? <Input style={styles.text}></Input> : <Text style={styles.text}>
-        {action.description}
-    </Text>;
-
-    const InfoIcon = (props : any) => (
-        <Icon {...props} name='info'/>
-    );
-    const handleEditButtonPress = () => {
-        if (editing) {
-            props.updateAction({ 
-                ...action, 
-                numberOfActions: selectedActionCost 
-            });
-        }
-        setEditing(!editing);
-    };
-    const EditButton = () => (
-        <Button onPress={handleEditButtonPress} appearance='ghost' accessoryRight={InfoIcon} style={{flex: .05}}/>
-    );
 
     return (
         <Layout style={styles.container}>
             <Layout style={styles.rowContainer}>
-                {EditButton()}
-                {actionName}
+                {actionName()}
                 {actionCost}
             </Layout>
             {trigger}
             <Layout style={styles.container}>
-                <Text style={styles.header} category='h6'>Description: </Text>
-                {actionDescription}
+                {actionDescription()}
             </Layout>
             {traits()}
             <Layout style={styles.rulebook}>
                 <Text style={styles.headerJustifyRight}>
-                    {action.bookAbbreviation}:
+                    {props.action.bookAbbreviation}:
                 </Text>
-                <Text style={{flex: .25, alignSelf: "flex-end", padding: 5}}> pg. {action.pageNumber}</Text>
+                <Text style={{flex: .25, alignSelf: "flex-end", padding: 5}}> pg. {props.action.pageNumber}</Text>
             </Layout>
             <Divider />
         </Layout>
