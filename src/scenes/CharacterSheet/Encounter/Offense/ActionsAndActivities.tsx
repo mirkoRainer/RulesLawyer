@@ -20,13 +20,7 @@ interface OwnProps {
 
 const ActionsAndActivities: React.FC<Props> = (props) => {
     const renderItem = (item: PF2Action, actionIndex: number) => {
-        // create callback for edit Action
-        const actionViewCallback = (newAction: PF2Action) => {
-            let actions = props.actions;
-            actions[actionIndex] = newAction;
-            props.updateActions(actions);
-        };
-        return <ActionView action={item} key={item.name} updateAction={actionViewCallback} />;
+        return <ActionView action={item} key={item.name} />;
     };
 
     const actions: JSX.Element[] = [];

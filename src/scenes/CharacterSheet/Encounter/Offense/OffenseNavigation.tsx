@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import EncounterOffense, { MainOffenseNavigationProps } from "../EncounterOffense";
-import { EditActionsView } from "./EditActionsView";
+import EditActionsView from "./EditActionsView";
 import { Icon, TopNavigationAction, TopNavigation, useTheme } from "@ui-kitten/components";
 
 export type OffenseStackParamList = {

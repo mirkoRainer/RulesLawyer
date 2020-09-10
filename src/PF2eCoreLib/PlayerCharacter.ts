@@ -57,7 +57,7 @@ export default interface PlayerCharacter {
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
     spells:                      SpellListEntry[];
-};
+}
 
 export interface iClass {
     name: string;
@@ -86,10 +86,10 @@ export interface PF2Action {
     name:             string;
     numberOfActions:  number;
     traits:           (keyof typeof Traits)[];
-    bookAbbreviation: string;
-    pageNumber:       number;
     description:      string;
     source:           string;
+    bookAbbreviation?: string;
+    pageNumber?:       number;
     trigger?:         string;
     requirements?:    string;
     critSuccess?:     string;

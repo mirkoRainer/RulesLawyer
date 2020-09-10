@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {StyleSheet } from "react-native";
-import { ProficiencyProps } from "../../../../Shared/ProficiencyView";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { AppState } from "../../../../../store/Store";
 import { AbilityScore, CalculateAbilityScoreModifier } from "../../../../../PF2eCoreLib/AbilityScores";

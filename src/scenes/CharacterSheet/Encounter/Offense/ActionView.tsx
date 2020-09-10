@@ -10,7 +10,6 @@ import { Traits } from "../../../../PF2eCoreLib/Traits";
 
 interface Props {
     action: PF2Action;
-    updateAction: (action: PF2Action) => void;
 }
 
 const ActionView: React.FC<Props> = (props) => {
@@ -67,9 +66,13 @@ const ActionView: React.FC<Props> = (props) => {
                 </Layout>
             </Layout>
         );
-
         return render;
     };
+
+    const bookAbbr = () => props.action.bookAbbreviation ? (<Text style={styles.headerJustifyRight}>
+        {props.action.bookAbbreviation}:
+    </Text>) : (<></>) ;
+    const bookPage = () => props.action.pageNumber ? <Text style={{flex: .25, alignSelf: "flex-end", padding: 5}}> pg. {props.action.pageNumber}</Text> : <></>;
 
     return (
         <Layout style={styles.container}>
@@ -83,10 +86,8 @@ const ActionView: React.FC<Props> = (props) => {
             </Layout>
             {traits()}
             <Layout style={styles.rulebook}>
-                <Text style={styles.headerJustifyRight}>
-                    {props.action.bookAbbreviation}:
-                </Text>
-                <Text style={{flex: .25, alignSelf: "flex-end", padding: 5}}> pg. {props.action.pageNumber}</Text>
+                {bookAbbr()}
+                {bookPage()}
             </Layout>
             <Divider />
         </Layout>

@@ -392,6 +392,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             pageNumber: 242,
             description:
                     "You shove your foe away and stuff. You can go too, if you want.",
+            source: "What grants this action"
         },
         {
             name: "Power Attack",
@@ -400,6 +401,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 278,
             description: "Moar damage dice!",
+            source: "What grants this action"
         },
         {
             name: "Speak out loud",
@@ -408,6 +410,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 1,
             description: "You speak. Like a dog.",
+            source: "What grants this action"
         },
         {
             name: "Attack of Opportunity",
@@ -416,9 +419,10 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 142,
             description:
-                    "You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn’t count toward your multiple attack penalty, and your multiple attack penalty doesn’t apply to this Strike.",
+            "You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn’t count toward your multiple attack penalty, and your multiple attack penalty doesn’t apply to this Strike.",
             trigger:
-                    "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
+            "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
+            source: "What grants this action"
         },
     ],
     spellcastingAbilityModifier: "Wisdom",
