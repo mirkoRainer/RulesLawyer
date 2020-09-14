@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { RefreshControl, StyleSheet } from "react-native";
 import PlayerCharacter, { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../store/Store";
 import { connect } from "react-redux";
@@ -11,7 +11,6 @@ import ClassDC from "./Offense/ClassDC";
 import PerceptionView from "./Offense/PerceptionView";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { OffenseStackParamList } from "./Offense/OffenseNavigation";
-
 
 
 const EncounterOffense: React.FC<Props> = (props) => {

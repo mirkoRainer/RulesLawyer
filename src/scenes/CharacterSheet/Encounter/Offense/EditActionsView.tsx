@@ -13,13 +13,23 @@ import { AppState } from "../../../../store/Store";
 import { ScrollView } from "react-native-gesture-handler";
 import { indexOf } from "lodash";
 import EditActionView from "./EditActionView";
+import { NavigationState, useFocusEffect } from "@react-navigation/native";
+import { useState } from "react";
 
-type ActionsNavigationProps = StackNavigationProp<OffenseStackParamList, "EditActionsView">;
+type ActionsNavigationProps = StackNavigationProp<OffenseStackParamList, "EditActionsView">
 interface OwnProps {
     navigation: ActionsNavigationProps
 }
 
 const EditActionsView: React.FC<Props> = (props) => {
+    // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
+    const [ state, setState ] = useState({});
+    useFocusEffect(
+        React.useCallback(() => {
+            setState({});
+        }, [])
+    );
+
     const BackIcon = (props: any) => (
         <Icon {...props} name='arrow-back' />
     );
@@ -31,13 +41,22 @@ const EditActionsView: React.FC<Props> = (props) => {
         actions[index] = newAction;
         props.updateActions(actions);
     };
-    
+
+    const EditButton = (index: number) => {
+        const handleDropDownButton = () => {
+            props.navigation.push("EditActionView", { index, updateAction });
+        };
+        return <Button onPress={handleDropDownButton} style={{flex: .2}}>Edit</Button>;
+    };
     const renderItem = (item: PF2Action) => {
         const index = indexOf(props.actions, item);
-        return (<EditActionView key={`${item.name}+${item.source}+${item.description}`} updateAction={updateAction} index={index}/>);
+        return (<Layout style={{flex: 1, flexDirection: "row", padding: 10}}>
+            {EditButton(indexOf(props.actions, item))}
+            <Text style={{flex: 1, paddingHorizontal: 10, alignSelf: "center"}} category='h4'>{item.name}</Text>
+        </Layout>);
     };
-
-    const actions: JSX.Element[] = [];
+    
+    let actions: JSX.Element[] = [];
     props.actions.forEach((action, index) => {
         actions.push(renderItem(action));
     });
@@ -49,6 +68,7 @@ const EditActionsView: React.FC<Props> = (props) => {
         let actions = props.actions;
         actions.push({ name: "New Action", numberOfActions: 1, traits: [], description: "Description here", source: "Source of the Action" });
         props.updateActions(actions);
+        props.navigation.navigate("EditActionView", { index: props.actions.length, updateAction: updateAction });
     };
 
     return(

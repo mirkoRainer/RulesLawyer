@@ -12,6 +12,8 @@ import { AppState } from "../../../../store/Store";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { OffenseStackParamList } from "./OffenseNavigation";
 import { MainOffenseNavigationProps } from "../EncounterOffense";
+import { useFocusEffect } from "@react-navigation/native";
+import { useState } from "react";
 
 
 interface OwnProps {
@@ -19,6 +21,14 @@ interface OwnProps {
 }
 
 const ActionsAndActivities: React.FC<Props> = (props) => {
+    const [ state, setState ] = useState({});
+
+    useFocusEffect(
+        React.useCallback(() => {
+            setState({});
+        }, [])
+    );
+
     const renderItem = (item: PF2Action, actionIndex: number) => {
         return <ActionView action={item} key={item.name} />;
     };
