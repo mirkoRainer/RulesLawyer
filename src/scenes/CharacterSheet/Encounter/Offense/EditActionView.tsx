@@ -6,16 +6,17 @@ import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { OffenseStackParamList } from "./OffenseNavigation";
-import { BaseRouter } from "@react-navigation/native";
+import { BaseRouter, RouteProp } from "@react-navigation/native";
 import { reactionSymbol, freeActionSymbol, actionSymbol, MapActionToIndexPath, MapIndexToAction, DetermineActionSymbol } from "./ActionHelper";
 import { update } from "lodash";
 import { ScrollView } from "react-native-gesture-handler";
+import { TraitSelector } from "../../../Shared/TraitSelector";
 
 type ActionsNavigationProps = StackNavigationProp<OffenseStackParamList, "EditActionView">
 
 type OwnProps = {
     navigation: ActionsNavigationProps;
-    route: any;
+    route: RouteProp<OffenseStackParamList, "EditActionView">;
 };
 
 const EditActionView: React.FC<Props> = (props) => {
@@ -50,6 +51,7 @@ const EditActionView: React.FC<Props> = (props) => {
             </Select>
         );
     };
+    const updateTraits: (traits: string[]) => void = (traits: string[]) => {updateAction({ ...props.action, traits }, index);};
 
     const Editor = () => {
         return (
@@ -79,17 +81,57 @@ const EditActionView: React.FC<Props> = (props) => {
                         caption={props.action.source ? undefined : "This value is needed"}
                         multiline={true}
                     >{props.action.source}</Input>
-                    <Input label='Action Trigger' ></Input>
-                    <Input label='Requirements' ></Input>
-                    <Input label='Critical Success' ></Input>
-                    <Input label='Success' ></Input>
-                    <Input label='Failure' ></Input>
-                    <Input label='Critical Failure' ></Input>
-                    <Input label='Weapon' ></Input>
+                    {props.action.numberOfActions === 0.5 ?<Input 
+                        label='Trigger' 
+                        onChangeText={(trigger: string) => {trigger !== "" ? updateAction({ ...props.action, trigger }, index) : updateAction({...props.action, trigger: undefined }, index);}}
+                        placeholder='What triggers this reaction?' 
+                        multiline={true}
+                    >{props.action.trigger}</Input> : <></>}
+                    <Input 
+                        label='Requirements' 
+                        onChangeText={(requirements: string) => {requirements !== "" ? updateAction({ ...props.action, requirements }, index) : updateAction({...props.action, requirements: undefined }, index);}}
+                        placeholder='Action requirements?' 
+                        multiline={true}
+                    >{props.action.requirements}</Input>
+                    <Input 
+                        label='Critical Success' 
+                        onChangeText={(critSuccess: string) => {critSuccess !== "" ? updateAction({ ...props.action, critSuccess }, index) : updateAction({...props.action, critSuccess: undefined }, index);}}
+                        placeholder='What happens on a critSuccess?' 
+                        multiline={true}
+                    >{props.action.critSuccess}</Input>
+                    <Input 
+                        label='Success' 
+                        onChangeText={(success: string) => {success !== "" ? updateAction({ ...props.action, success }, index) : updateAction({...props.action, success: undefined }, index);}}
+                        placeholder='What happens on a success?' 
+                        multiline={true}
+                    >{props.action.success}</Input>
+                    <Input 
+                        label='Failure' 
+                        onChangeText={(failure: string) => {failure !== "" ? updateAction({ ...props.action, failure }, index) : updateAction({...props.action, failure: undefined }, index);}}
+                        placeholder='What happens on a failure?' 
+                        multiline={true}
+                    >{props.action.failure}</Input>
+                    <Input 
+                        label='Critical Failure' 
+                        onChangeText={(critFailure: string) => {critFailure !== "" ? updateAction({ ...props.action, critFailure }, index) : updateAction({...props.action, critFailure: undefined }, index);}}
+                        placeholder='What happens on a critFailure?' 
+                        multiline={true}
+                    >{props.action.critFailure}</Input>
+                    <Input 
+                        label='Book Source' 
+                        onChangeText={(bookAbbreviation: string) => {bookAbbreviation !== "" ? updateAction({ ...props.action, bookAbbreviation }, index) : updateAction({...props.action, bookAbbreviation: undefined }, index);}}
+                        placeholder='Book this action can be referenced in' 
+                    >{props.action.bookAbbreviation}</Input>
+                    <Input 
+                        label='Page Number' 
+                        onChangeText={(pageNumber: string) => {pageNumber !== "" && typeof pageNumber === typeof 1? updateAction({ ...props.action, pageNumber: parseInt(pageNumber) }, index) : updateAction({...props.action, pageNumber: undefined }, index);}}
+                        placeholder='Book this action can be referenced in' 
+                        keyboardType='numeric'
+                    >{props.action.pageNumber}</Input>
+                    {/* Select weapon and skill from dropdown */}
+                    <Input label='Weapon' ></Input> 
                     <Input label='Skill' ></Input>
-                    <Input label='Book Reference' ></Input>
-                    <Input label='Page Number' ></Input>
-                    <Input label='Traits' ></Input>
+                    <TraitSelector currentTraits={props.action.traits} onSelection={updateTraits}/>
                 </ScrollView>
             </ Layout>
         );
