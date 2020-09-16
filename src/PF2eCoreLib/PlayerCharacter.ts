@@ -7,6 +7,7 @@ import { Traits } from "./Traits";
 import { HealthData } from "./HealthData";
 import { ArmorGroup } from "./ArmorGroup";
 import { SpellSlotProps } from "../scenes/CharacterSheet/Spells/Components/SpellSlotView";
+import { Guid } from "guid-typescript";
 
 
 export default interface PlayerCharacter {
@@ -56,7 +57,7 @@ export default interface PlayerCharacter {
     penalties:                   iBonus[];
     magicTraditions:             MagicTraditions;
     spellSlots:                  SpellSlotProps[];
-    spells:                      SpellListEntry[];
+    spells:                     SpellListEntry[];
 }
 
 export interface iClass {
@@ -83,6 +84,7 @@ export interface Ancestry {
 }
 
 export interface PF2Action {
+    id:               Guid;
     name:             string;
     numberOfActions:  number;
     traits:           (keyof typeof Traits)[];

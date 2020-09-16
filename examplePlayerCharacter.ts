@@ -2,6 +2,7 @@ import { Proficiencies } from "./src/PF2eCoreLib/Proficiencies";
 import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
 import PlayerCharacter from "./src/PF2eCoreLib/PlayerCharacter";
+import { Guid } from "guid-typescript";
 
 export const examplePlayerCharacter: PlayerCharacter = {
     metadata: {},
@@ -385,6 +386,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
     },
     actions: [
         {
+            id: Guid.create(),
             name: "Shove",
             numberOfActions: 1,
             traits: ["Attack", "Athletics"],
@@ -395,6 +397,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             source: "What grants this action"
         },
         {
+            id: Guid.create(),
             name: "Power Attack",
             numberOfActions: 2,
             traits: ["Attack", "Flourish"],
@@ -404,6 +407,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             source: "What grants this action"
         },
         {
+            id: Guid.create(),
             name: "Speak out loud",
             numberOfActions: 0,
             traits: ["FreeAction", "Verbal"],
@@ -413,6 +417,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             source: "What grants this action"
         },
         {
+            id: Guid.create(),
             name: "Attack of Opportunity",
             numberOfActions: 0.5,
             traits: [],

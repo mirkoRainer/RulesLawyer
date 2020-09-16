@@ -30,7 +30,7 @@ const ActionsAndActivities: React.FC<Props> = (props) => {
     );
 
     const renderItem = (item: PF2Action, actionIndex: number) => {
-        return <ActionView action={item} key={item.name} />;
+        return <ActionView action={item} key={item.id.toString()} />;
     };
 
     const actions: JSX.Element[] = [];

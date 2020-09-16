@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, SectionList } from "react-native";
 import { Input, Layout, Text, Icon, Button, TopNavigationAction, TopNavigation, Select, SelectItem, IndexPath } from "@ui-kitten/components";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { PF2Action, Skill } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -11,6 +11,7 @@ import { reactionSymbol, freeActionSymbol, actionSymbol, MapActionToIndexPath, M
 import { update } from "lodash";
 import { ScrollView } from "react-native-gesture-handler";
 import { TraitSelector } from "../../../Shared/TraitSelector";
+import { SkillSelector } from "../Skills/SkillSelector";
 
 type ActionsNavigationProps = StackNavigationProp<OffenseStackParamList, "EditActionView">
 
@@ -52,7 +53,7 @@ const EditActionView: React.FC<Props> = (props) => {
         );
     };
     const updateTraits: (traits: string[]) => void = (traits: string[]) => {updateAction({ ...props.action, traits }, index);};
-
+    const updateSkill: (skill: Skill | undefined) => void = (skill: Skill | undefined) => {updateAction({ ...props.action, skill }, index);};
     const Editor = () => {
         return (
             <Layout style={{flex: 1, paddingVertical: 10}}>
@@ -130,7 +131,7 @@ const EditActionView: React.FC<Props> = (props) => {
                     >{props.action.pageNumber}</Input>
                     {/* Select weapon and skill from dropdown */}
                     <Input label='Weapon' ></Input> 
-                    <Input label='Skill' ></Input>
+                    <SkillSelector currentSkills={props.skills} onSelect={updateSkill} currentSkillSelected={props.action.skill} />
                     <TraitSelector currentTraits={props.action.traits} onSelection={updateTraits}/>
                 </ScrollView>
             </ Layout>
@@ -152,6 +153,7 @@ type Props = OwnProps & LinkStateProps;
 
 interface LinkStateProps {
     action: PF2Action;
+    skills: Skill[]
 }
 
 const mapStateToProps = (
@@ -159,6 +161,7 @@ const mapStateToProps = (
     ownProps: OwnProps
 ): LinkStateProps => ({
     action: state.playerCharacter.actions[ownProps.route.params.index],
+    skills: state.playerCharacter.skills
 });
 
 

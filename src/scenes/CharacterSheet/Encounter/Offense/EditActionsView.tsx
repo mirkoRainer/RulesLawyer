@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { ScrollView, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { OffenseStackParamList } from "./OffenseNavigation";
 import { Layout, Text, Button, TopNavigationAction, Icon, TopNavigation, Input, Divider } from "@ui-kitten/components";
@@ -10,11 +10,11 @@ import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../../store/Store";
-import { ScrollView } from "react-native-gesture-handler";
 import { indexOf } from "lodash";
 import EditActionView from "./EditActionView";
 import { NavigationState, useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
+import { Guid } from "guid-typescript";
 
 type ActionsNavigationProps = StackNavigationProp<OffenseStackParamList, "EditActionsView">
 interface OwnProps {
@@ -50,8 +50,8 @@ const EditActionsView: React.FC<Props> = (props) => {
     };
     const renderItem = (item: PF2Action) => {
         const index = indexOf(props.actions, item);
-        return (<Layout style={{flex: 1, flexDirection: "row", padding: 10}}>
-            {EditButton(indexOf(props.actions, item))}
+        return (<Layout style={{flex: 1, flexDirection: "row", padding: 10}} key={item.id.toString()}>
+            {EditButton(index)}
             <Text style={{flex: 1, paddingHorizontal: 10, alignSelf: "center"}} category='h4'>{item.name}</Text>
         </Layout>);
     };
@@ -66,9 +66,9 @@ const EditActionsView: React.FC<Props> = (props) => {
     );
     const handleAddNewActionButton = () => {
         let actions = props.actions;
-        actions.push({ name: "New Action", numberOfActions: 1, traits: [], description: "Description here", source: "Source of the Action" });
+        actions.push({ id: Guid.create(), name: "New Action", numberOfActions: 1, traits: [], description: "Description here", source: "Source of the Action" });
         props.updateActions(actions);
-        props.navigation.navigate("EditActionView", { index: props.actions.length, updateAction: updateAction });
+        setState({});
     };
 
     return(
