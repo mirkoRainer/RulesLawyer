@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, SectionList } from "react-native";
 import { Input, Layout, Text, Icon, Button, TopNavigationAction, TopNavigation, Select, SelectItem, IndexPath } from "@ui-kitten/components";
-import { PF2Action, Skill } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { PF2Action, Skill, Weapon } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -12,6 +12,7 @@ import { update } from "lodash";
 import { ScrollView } from "react-native-gesture-handler";
 import { TraitSelector } from "../../../Shared/TraitSelector";
 import { SkillSelector } from "../Skills/SkillSelector";
+import { WeaponSelector } from "./Weapons/WeaponSelector";
 
 type ActionsNavigationProps = StackNavigationProp<OffenseStackParamList, "EditActionView">
 
@@ -56,6 +57,8 @@ const EditActionView: React.FC<Props> = (props) => {
     const updateTraits: (traits: string[]) => void = (traits: string[]) => {updateAction({ ...props.action, traits }, index);};
 
     const updateSkill: (skill: Skill | undefined) => void = (skill: Skill | undefined) => {updateAction({ ...props.action, skill }, index);};
+    
+    const updateWeapon: (skill: Weapon | undefined) => void = (weapon: Weapon | undefined) => {updateAction({ ...props.action, weapon }, index);};
     
     const Editor = () => {
         return (
@@ -132,8 +135,7 @@ const EditActionView: React.FC<Props> = (props) => {
                         placeholder='Book this action can be referenced in' 
                         keyboardType='numeric'
                     >{props.action.pageNumber}</Input>
-                    {/* Select weapon and skill from dropdown */}
-                    <Input label='Weapon' ></Input> 
+                    <WeaponSelector currentWeapons={props.weapons} onSelect={updateWeapon} currentWeaponSelected={props.action.weapon} />
                     <SkillSelector currentSkills={props.skills} onSelect={updateSkill} currentSkillSelected={props.action.skill} />
                     <TraitSelector currentTraits={props.action.traits} onSelection={updateTraits}/>
                 </ScrollView>
@@ -156,7 +158,8 @@ type Props = OwnProps & LinkStateProps;
 
 interface LinkStateProps {
     action: PF2Action;
-    skills: Skill[]
+    skills: Skill[];
+    weapons: Weapon[];
 }
 
 const mapStateToProps = (
@@ -164,7 +167,8 @@ const mapStateToProps = (
     ownProps: OwnProps
 ): LinkStateProps => ({
     action: state.playerCharacter.actions[ownProps.route.params.index],
-    skills: state.playerCharacter.skills
+    skills: state.playerCharacter.skills,
+    weapons: state.playerCharacter.weapons
 });
 
 

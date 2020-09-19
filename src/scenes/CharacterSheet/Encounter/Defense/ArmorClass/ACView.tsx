@@ -5,7 +5,7 @@ import { AppState } from "../../../../../store/Store";
 import { AbilityScore, CalculateAbilityScoreModifier } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
-import { GetProficiencyValue } from "../../../../../PF2eCoreLib/Proficiencies";
+import { GetProficiencyTotalWithLevel } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import { Layout, Text } from "@ui-kitten/components";
 import WornArmorEditModal from "./WornArmorEditModal";
@@ -32,7 +32,7 @@ const ACView: React.FC<Props> = (props) => {
             modifier +
             props.level +
             props.wornArmor.ACBonus +
-            GetProficiencyValue(wornProficiency, props.level);
+            GetProficiencyTotalWithLevel(wornProficiency, props.level);
 
     const [modalVisible, setModalVisible] = useState(false);
     const modalOn = () => { setModalVisible(true);};
@@ -55,7 +55,7 @@ const ACView: React.FC<Props> = (props) => {
                     {dexOrCap()} 
                     <Text style={styles.calculatorNumber}>+{props.wornArmor.ACBonus}</Text>
                     <Text style={{...styles.calculatorText, flex: 1.3}}>Armor</Text>
-                    <Text style={styles.calculatorNumber}>+{GetProficiencyValue(wornProficiency, props.level)}</Text>
+                    <Text style={styles.calculatorNumber}>+{GetProficiencyTotalWithLevel(wornProficiency, props.level)}</Text>
                     <Text style={styles.calculatorText}>Prof</Text>
                     <Text style={{...styles.calculatorNumber, flex: .65}}>+{props.level}</Text>
                     <Text style={{...styles.calculatorText, flex: 1.1}}>Level</Text>

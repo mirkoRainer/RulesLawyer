@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
-import { Proficiencies, GetProficiencyValue } from "../../../../PF2eCoreLib/Proficiencies";
+import { Proficiencies, GetProficiencyTotalWithLevel } from "../../../../PF2eCoreLib/Proficiencies";
 import { AbilityScore, CalculateAbilityScoreModifier, GetAbilityScoreAbbreviation } from "../../../../PF2eCoreLib/AbilityScores";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
@@ -20,11 +20,11 @@ const SpellAttackDCView: React.FC<Props> = (props) => {
     const spellAttackTotal =
             CalculateAbilityScoreModifier(props.keySpellcastingAbility.score)+
             props.spellAttackItemBonus +
-            GetProficiencyValue(props.proficiency, props.level);
+            GetProficiencyTotalWithLevel(props.proficiency, props.level);
     const spellDCTotal =
             CalculateAbilityScoreModifier(props.keySpellcastingAbility.score)+
             props.spellDCItemBonus +
-            GetProficiencyValue(props.proficiency, props.level) +
+            GetProficiencyTotalWithLevel(props.proficiency, props.level) +
             10;
     const spellAttackItemBonus =
             props.spellAttackItemBonus !== null ? (

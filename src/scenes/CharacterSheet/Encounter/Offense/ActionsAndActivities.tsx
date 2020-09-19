@@ -14,6 +14,7 @@ import { OffenseStackParamList } from "./OffenseNavigation";
 import { MainOffenseNavigationProps } from "../EncounterOffense";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
+import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 
 
 interface OwnProps {
@@ -30,7 +31,7 @@ const ActionsAndActivities: React.FC<Props> = (props) => {
     );
 
     const renderItem = (item: PF2Action, actionIndex: number) => {
-        return <ActionView action={item} key={item.id.toString()} />;
+        return <ActionView action={item} key={item.id.toString()} abilityScores={props.abilityScores} level={props.level}/>;
     };
 
     const actions: JSX.Element[] = [];
@@ -70,12 +71,16 @@ interface LinkDispatchProps {
 
 interface LinkStateProps {
     actions: PF2Action[];
+    abilityScores: AbilityScoreArray;
+    level: number;
 }
 
 const mapStateToProps = (
     state: AppState,
 ): LinkStateProps => ({
     actions: state.playerCharacter.actions,
+    abilityScores: state.playerCharacter.abilityScores,
+    level: state.playerCharacter.level
 });
 
 const mapDispatchToProps = (

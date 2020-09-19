@@ -6,7 +6,7 @@ export enum Proficiencies {
     Legendary = "Legendary",
 }
 
-export function GetProficiencyValue(proficiency: Proficiencies, level: number) {
+export function GetProficiencyTotalWithLevel(proficiency: Proficiencies, level: number) {
     switch (proficiency) {
     case (Proficiencies.Untrained):{
         return 0;

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { AbilityScore, CalculateAbilityScoreModifier, GetAbilityScoreAbbreviation } from "../../../../PF2eCoreLib/AbilityScores";
-import { Proficiencies, GetProficiencyValue, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
+import { Proficiencies, GetProficiencyTotalWithLevel, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
 import { Layout, Text } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { connect } from "react-redux";
@@ -49,7 +49,7 @@ const PerceptionView: React.FC<Props> = (props) => {
     const total =
             CalculateAbilityScoreModifier(props.keyAbility.score)+
             itemBonus +
-            GetProficiencyValue(props.proficiency, props.level);
+            GetProficiencyTotalWithLevel(props.proficiency, props.level);
     const totalView = (<Text style={styles.total} category='h5'>{10 + total}</Text>); 
 
     const handleProficiencyChange = () => {

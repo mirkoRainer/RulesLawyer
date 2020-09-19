@@ -3,7 +3,7 @@ import {  StyleSheet } from "react-native";
 import ProficiencyArrayView from "./ProficiencyArrayView";
 import {
     Proficiencies,
-    GetProficiencyValue,
+    GetProficiencyTotalWithLevel,
 } from "../../PF2eCoreLib/Proficiencies";
 import {
     GetAbilityScoreAbbreviation,
@@ -68,7 +68,7 @@ export default class ProficiencyView extends Component<
         const total =
             CalculateAbilityScoreModifier(this.props.keyAbility.score)+
             this.props.itemBonus +
-            GetProficiencyValue(this.props.proficiency, this.props.level);
+            GetProficiencyTotalWithLevel(this.props.proficiency, this.props.level);
         const totalView = this.props.is10base ? (
             <Text style={styles.total} category='h5'>{10 + total}</Text>
         ) : (

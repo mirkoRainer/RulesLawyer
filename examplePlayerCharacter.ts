@@ -235,12 +235,13 @@ export const examplePlayerCharacter: PlayerCharacter = {
         Simple: Proficiencies.Trained,
         Martial: Proficiencies.Untrained,
         Others: [
-            { description: "brass knuckles", proficiency: Proficiencies.Expert }
+            { description: "Brass Knuckles", proficiency: Proficiencies.Expert }
         ]
     },
     weapons: [
         {
-            title: "+1 ShortSword",
+            id: Guid.create(),
+            name: "+1 ShortSword",
             ability: "Strength",
             toHitBonus: 1,
             damageDice: "1d6",
@@ -250,7 +251,8 @@ export const examplePlayerCharacter: PlayerCharacter = {
             weaponCategory: "Simple"
         },
         {
-            title: "Longbow",
+            id: Guid.create(),
+            name: "Longbow",
             ability: "Dexterity",
             toHitBonus: 0,
             damageDice: "1d8",

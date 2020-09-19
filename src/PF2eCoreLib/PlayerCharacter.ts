@@ -256,7 +256,8 @@ export interface OtherWeaponProficiencies {
 }
 
 export interface Weapon {
-    title:                 string;
+    id:                    Guid;
+    name:                 string;
     ability:               keyof AbilityScoreArray;
     toHitBonus:            number;
     damageDice:            string;
