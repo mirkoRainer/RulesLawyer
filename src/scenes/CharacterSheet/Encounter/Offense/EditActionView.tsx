@@ -52,8 +52,11 @@ const EditActionView: React.FC<Props> = (props) => {
             </Select>
         );
     };
+
     const updateTraits: (traits: string[]) => void = (traits: string[]) => {updateAction({ ...props.action, traits }, index);};
+
     const updateSkill: (skill: Skill | undefined) => void = (skill: Skill | undefined) => {updateAction({ ...props.action, skill }, index);};
+    
     const Editor = () => {
         return (
             <Layout style={{flex: 1, paddingVertical: 10}}>
