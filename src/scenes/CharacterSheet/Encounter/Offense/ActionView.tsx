@@ -57,7 +57,7 @@ const ActionView: React.FC<Props> = (props) => {
     const traits = () => {
         const renderTraitPill = (trait: string) => {
             return (
-                <Text style={{textAlign: "center", textAlignVertical: "center"}} key={trait} category='p2'>{trait}, </Text>
+                <Text style={{textAlign: "center", alignSelf: "center" }} key={trait} category='p2'>{trait}, </Text>
             );
         };
         const traitsRendered: JSX.Element[] = []; 
@@ -173,29 +173,46 @@ const ActionView: React.FC<Props> = (props) => {
         );
     };
 
+    const detailedView = () => {
+        return(
+            <Layout>
+                {trigger()}
+                {skill()}
+                {weapon()}
+                <Layout style={styles.container}>
+                    {actionDescription()}
+                    {requirements()}
+                    {criticalSuccess()}
+                    {success()}
+                    {failure()}
+                    {criticalFailure()}
+                </Layout>
+                {traits()}
+                <Layout style={styles.rulebook}>
+                    <Text style={styles.sourceOfAction}>Source: {props.action.source}</Text>
+                    {bookAbbr()}
+                    {bookPage()}
+                </Layout>
+            </Layout>
+        );
+    };
+    const [ showDetails, setShowDetails ] = React.useState(false);
+    
+    const ArrowIcon = (props: any) => (
+        <Icon {...props} name={showDetails ? "arrow-ios-downward-outline" : "arrow-ios-forward-outline"} />
+    );
+    const toggleDetails = () => {
+        setShowDetails(!showDetails);
+    };
+        
     return (
         <Layout style={styles.container}>
             <Layout style={styles.rowContainer}>
+                <Button appearance='ghost' accessoryLeft={ArrowIcon} onPress={toggleDetails}/>
                 {actionName()}
                 {actionCost()}
             </Layout>
-            {trigger()}
-            {skill()}
-            {weapon()}
-            <Layout style={styles.container}>
-                {actionDescription()}
-                {requirements()}
-                {criticalSuccess()}
-                {success()}
-                {failure()}
-                {criticalFailure()}
-            </Layout>
-            {traits()}
-            <Layout style={styles.rulebook}>
-                <Text style={styles.sourceOfAction}>Source: {props.action.source}</Text>
-                {bookAbbr()}
-                {bookPage()}
-            </Layout>
+            {showDetails ? detailedView() : <></>}
             <Divider />
         </Layout>
     );
