@@ -57,7 +57,7 @@ const ActionView: React.FC<Props> = (props) => {
     const traits = () => {
         const renderTraitPill = (trait: string) => {
             return (
-                <Pill key={trait} text={trait} onPress={() => {}}/>
+                <Text style={{textAlign: "center", textAlignVertical: "center"}} key={trait} category='p2'>{trait}, </Text>
             );
         };
         const traitsRendered: JSX.Element[] = []; 
@@ -69,7 +69,7 @@ const ActionView: React.FC<Props> = (props) => {
         ) : (
             <Layout style={{...styles.rowContainer}}>
                 <Text style={{...styles.header, flex: .25}} category='h6'>Traits: </Text>
-                <Layout style={{flex: 1, flexDirection: "row", flexWrap: "wrap"}}>
+                <Layout style={{flex: 1, flexDirection: "row", flexWrap: "wrap", alignContent: "center"}}>
                     {traitsRendered}
                 </Layout>
             </Layout>

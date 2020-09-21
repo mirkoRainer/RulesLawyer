@@ -396,7 +396,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             pageNumber: 242,
             description:
                     "You shove your foe away and stuff. You can go too, if you want.",
-            source: "What grants this action"
+            source: "Skill Action"
         },
         {
             id: Guid.create(),
