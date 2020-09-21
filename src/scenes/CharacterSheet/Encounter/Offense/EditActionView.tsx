@@ -5,7 +5,7 @@ import { PF2Action, Skill, Weapon } from "../../../../PF2eCoreLib/PlayerCharacte
 import { AppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { OffenseStackParamList } from "./OffenseNavigation";
+import { OffenseStackParamList } from "../OffenseNavigation";
 import { BaseRouter, RouteProp } from "@react-navigation/native";
 import { reactionSymbol, freeActionSymbol, actionSymbol, MapActionToIndexPath, MapIndexToAction, DetermineActionSymbol } from "./ActionHelper";
 import { update } from "lodash";

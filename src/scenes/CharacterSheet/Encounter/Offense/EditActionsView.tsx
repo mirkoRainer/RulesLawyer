@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { OffenseStackParamList } from "./OffenseNavigation";
+import { OffenseStackParamList } from "../OffenseNavigation";
 import { Layout, Text, Button, TopNavigationAction, Icon, TopNavigation, Input, Divider } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";

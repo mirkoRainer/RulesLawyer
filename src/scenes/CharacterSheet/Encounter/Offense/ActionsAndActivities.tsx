@@ -10,7 +10,7 @@ import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { AppState } from "../../../../store/Store";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { OffenseStackParamList } from "./OffenseNavigation";
+import { OffenseStackParamList } from "../OffenseNavigation";
 import { MainOffenseNavigationProps } from "../EncounterOffense";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";

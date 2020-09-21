@@ -1,11 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import EncounterOffense, { MainOffenseNavigationProps } from "../EncounterOffense";
-import EditActionsView from "./EditActionsView";
+import EncounterOffense, { MainOffenseNavigationProps } from "./EncounterOffense";
+import EditActionsView from "./Offense/EditActionsView";
 import { Icon, TopNavigationAction, TopNavigation, useTheme } from "@ui-kitten/components";
-import EditActionView from "./EditActionView";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import EditActionView from "./Offense/EditActionView";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export type OffenseStackParamList = {
     MainOffenseView: undefined;

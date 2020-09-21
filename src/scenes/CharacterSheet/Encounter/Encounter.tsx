@@ -19,7 +19,7 @@ import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
 import SpellsPage from "../Spells/SpellsPage";
 import { Layout } from "@ui-kitten/components";
 import Conditions from "../Conditions";
-import { OffenseNavigator } from "./Offense/OffenseNavigation";
+import { OffenseNavigator } from "./OffenseNavigation";
 
 var width: number = Dimensions.get("window").width; //full width
 
