@@ -22,15 +22,19 @@ import { Traits } from "../../../../../PF2eCoreLib/Traits";
 import { TraitSelector } from "../../../../Shared/TraitSelector";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
-
-type OwnProps = {
-    visible: boolean
-    toggleModal: () => void
-};
+import { DefenseStackParamList } from "../../DefenseNavigation";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
-const WornArmorEditModal: React.FC<Props> = (props) => {
+export type EditArmorNavigationProps = StackNavigationProp<DefenseStackParamList, "EditWornArmor">;
+
+interface OwnProps {
+    navigation: EditArmorNavigationProps
+}
+
+
+const EditWornArmor: React.FC<Props> = (props) => {
     const CheckIcon = (props: any) => (
         <Icon {...props} name="checkmark-circle-outline" />
     );
@@ -153,8 +157,8 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
     };
     
     const changeWornArmor = () => {
-        props.toggleModal();
         props.updateWornArmor(inputToArmor(input));
+        props.navigation.navigate("MainDefenseView");
     };
     const inputToArmor = (convertFrom: typeof input): WornArmor => {
         const acBonusIsNumber = isNumbersOnly(input.ACBonus);
@@ -186,12 +190,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
     };
 
     return (
-        <Modal
-            isVisible={props.visible}
-            avoidKeyboard={true}
-            style={styles.modal}
-            backdropColor={"rgba(0, 0, 0, 0.5)"}
-        >
+        <Layout>
             <Layout style={styles.header}>
                 <Text>{"Worn Armor:"}</Text>
                 <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeWornArmor}/>
@@ -316,8 +315,7 @@ const WornArmorEditModal: React.FC<Props> = (props) => {
                     <TraitSelector onSelection={changeTraits} currentTraits={props.wornArmor.Traits}/>
                 </Layout>
             </ScrollView>
-        </Modal>
-
+        </Layout>
     );
 };
 
@@ -347,7 +345,7 @@ const mapStateToProps = (
     armorProficiencies: state.playerCharacter.armorProficiencies
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WornArmorEditModal);
+export default connect(mapStateToProps, mapDispatchToProps)(EditWornArmor);
 
 const styles = StyleSheet.create({
     container: {

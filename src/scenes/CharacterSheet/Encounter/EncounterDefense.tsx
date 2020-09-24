@@ -10,11 +10,13 @@ import { Layout, Divider } from "@ui-kitten/components";
 import ShieldView from "./Defense/Shield/ShieldView";
 import SavesView from "./Defense/SavesView";
 import { ScrollView } from "react-native-gesture-handler";
+import { MainDefenseNavigationProps } from "./DefenseNavigation";
 
+interface OwnProps {
+    navigation: MainDefenseNavigationProps
+}
 
 const EncounterDefense: React.FC<Props> = (props) => {
-
-    
     return (
         <Layout style={styles.container}>
             <ScrollView>
@@ -27,7 +29,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
                     wounded={props.playerCharacter.hitPoint.wounded}
                 />
                 <Divider />
-                <ACView />
+                <ACView navigation={props.navigation}/>
                 <Divider />
                 <ShieldView />
                 <Divider />
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
     },
 });
 
-type Props = LinkDispatchProps & LinkStateProps;
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
 interface LinkDispatchProps {
 

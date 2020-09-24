@@ -20,6 +20,7 @@ import SpellsPage from "../Spells/SpellsPage";
 import { Layout } from "@ui-kitten/components";
 import Conditions from "../Conditions";
 import { OffenseNavigator } from "./OffenseNavigation";
+import { DefenseNavigator } from "./DefenseNavigation";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -70,7 +71,7 @@ const Encounter: React.FC<Props> = (props) => {
                     />
                     <Tab.Screen 
                         name="Defense" 
-                        component={EncounterDefense}
+                        component={DefenseNavigator}
                         options={{ tabBarLabel: "Their Turn" }}
                     />
                     <Tab.Screen 

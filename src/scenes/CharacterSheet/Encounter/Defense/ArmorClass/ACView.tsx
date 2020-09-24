@@ -8,9 +8,13 @@ import { connect } from "react-redux";
 import { GetProficiencyTotalWithLevel } from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import { Layout, Text } from "@ui-kitten/components";
-import WornArmorEditModal from "./WornArmorEditModal";
+import EditWornArmor from "./EditWornArmor";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { MainDefenseNavigationProps } from "../../DefenseNavigation";
 
+interface OwnProps {
+    navigation: MainDefenseNavigationProps
+}
 
 const ACView: React.FC<Props> = (props) => {
     const calculatedDexModifier = CalculateAbilityScoreModifier(props.dexterity.score);
@@ -34,13 +38,13 @@ const ACView: React.FC<Props> = (props) => {
             props.wornArmor.ACBonus +
             GetProficiencyTotalWithLevel(wornProficiency, props.level);
 
-    const [modalVisible, setModalVisible] = useState(false);
-    const modalOn = () => { setModalVisible(true);};
-    const modalOff = () => { setModalVisible(false);};
+    const navigateToWornArmorEditor = () => {
+        props.navigation.navigate("EditWornArmor");
+    };
 
     return(
         <Layout style={styles.container}>
-            <TouchableOpacity onPress={modalOn}>
+            <TouchableOpacity onPress={navigateToWornArmorEditor}>
                 <Layout style={styles.horizontal}>
                     <Text style={{paddingLeft: 10}} category='h5'>AC</Text>
                     <Text style={{paddingRight: 10, alignSelf: "center"}} category='h3'>{total}</Text>
@@ -61,7 +65,6 @@ const ACView: React.FC<Props> = (props) => {
                     <Text style={{...styles.calculatorText, flex: 1.1}}>Level</Text>
                 </Layout>
             </TouchableOpacity>
-            <WornArmorEditModal visible={modalVisible} toggleModal={modalOff} /> 
         </Layout>
     );
 };
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     }
 });
 
-type Props = LinkDispatchProps & LinkStateProps;
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
 interface LinkDispatchProps {
 

@@ -10,7 +10,7 @@ import { Divider, Layout } from "@ui-kitten/components";
 import ClassDC from "./Offense/ClassDC";
 import PerceptionView from "./Offense/PerceptionView";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { OffenseStackParamList } from "./OffenseNavigation";
+import { MainOffenseNavigationProps, OffenseStackParamList } from "./OffenseNavigation";
 
 
 const EncounterOffense: React.FC<Props> = (props) => {
@@ -33,8 +33,6 @@ const EncounterOffense: React.FC<Props> = (props) => {
 };
 
 type Props = OwnProps & LinkDispatchProps & LinkStateProps;
-
-export type MainOffenseNavigationProps = StackNavigationProp<OffenseStackParamList, "MainOffenseView">;
 
 interface OwnProps {
     navigation: MainOffenseNavigationProps
