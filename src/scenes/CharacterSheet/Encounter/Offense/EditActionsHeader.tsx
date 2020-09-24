@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, TopNavigationAction, TopNavigation } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
-import { MainOffenseNavigationProps } from "../EncounterOffense";
+import { MainOffenseNavigationProps } from "../OffenseNavigation";
     
 export const EditActionsHeader: React.FC = () => {
     const navigation = useNavigation<MainOffenseNavigationProps>();

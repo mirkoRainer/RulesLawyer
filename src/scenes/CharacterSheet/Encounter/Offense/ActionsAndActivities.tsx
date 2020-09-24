@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import {  StyleSheet, FlatList } from "react-native";
+import React from "react";
+import {  StyleSheet } from "react-native";
 import ActionView from "./ActionView";
 import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Layout, Text, Divider, Icon, Button } from "@ui-kitten/components";
@@ -9,12 +9,10 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { AppState } from "../../../../store/Store";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { OffenseStackParamList } from "../OffenseNavigation";
-import { MainOffenseNavigationProps } from "../EncounterOffense";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
+import { MainOffenseNavigationProps } from "../OffenseNavigation";
 
 
 interface OwnProps {

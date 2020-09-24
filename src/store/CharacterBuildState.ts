@@ -11,7 +11,7 @@ export type CharacterBuildState = {
     Background: keyof Backgrounds;
     Class: keyof Classes;
     SubClass?: string;
-    ClassBuild: BuildChoices[]; // actually selected options
+    ClassBuild: BuildChoices; // actually selected options
     ChoicesAvailable: BuildChoice[]; // all the various levels and their respective choices
 }
 
