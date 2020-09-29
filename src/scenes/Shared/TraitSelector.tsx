@@ -15,16 +15,16 @@ export const TraitSelector: React.FC<Props> = (props) => {
         const onTraitPress = () => {
             console.debug("onTraitPress");
             console.debug(`trait: ${trait}`);
-            console.debug(`CurrentTraits: ${JSON.stringify(props.currentTraits)}`);
+            console.debug(`CurrentTraits: ${JSON.stringify(props.currentTraits, null, 1)}`);
             if (props.currentTraits.includes(trait)) {
                 // trait is already active so remove the trait
                 _.remove(props.currentTraits, (value) => {return value === trait;});
-                console.debug(`newTraits: ${JSON.stringify(props.currentTraits)}`);
+                console.debug(`newTraits: ${JSON.stringify(props.currentTraits, null, 1)}`);
                 props.onSelection(props.currentTraits);
             } else {                
                 const newTraits = props.currentTraits;
                 newTraits.push(trait);
-                console.debug(`newTraits: ${JSON.stringify(newTraits)}`);
+                console.debug(`newTraits: ${JSON.stringify(newTraits, null, 1)}`);
                 props.onSelection(newTraits);
             }
         };

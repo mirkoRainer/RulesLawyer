@@ -9,7 +9,7 @@ import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { Movement } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const PickerModalStateSwitch = (actionType: string, state: AppState, dispatch: Dispatch<AppActions>): PickerModalState => {
-    console.debug(`PickerModalStateSwitch Entered with ${JSON.stringify(actionType)}`);
+    console.debug(`PickerModalStateSwitch Entered with ${JSON.stringify(actionType, null, 1)}`);
     switch(actionType) {
     case CHANGE_LEVEL:
         return {

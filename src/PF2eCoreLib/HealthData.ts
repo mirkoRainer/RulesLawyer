@@ -10,7 +10,7 @@ export interface HealthData {
 }
 
 export const ResolveHitPoints = (healthData: HealthData, hitPointDelta: number, removesWounded: boolean): HealthData  => {
-    console.debug(`ResolveHitPoints with healtData:${JSON.stringify(healthData)} hitPointDelta: ${hitPointDelta} removesWounded: ${removesWounded}`);
+    console.debug(`ResolveHitPoints with healthData:${JSON.stringify(healthData, null, 1)} hitPointDelta: ${hitPointDelta} removesWounded: ${removesWounded}`);
     let newHealthData: HealthData = {...healthData};
     if (hitPointDelta > 0) {
         newHealthData = AddHitPoints(healthData, hitPointDelta);

@@ -18,7 +18,7 @@ AxiosInstance.get(url)
                 const trait: string | undefined = $(element).attr("title");
                 if (trait) traitsObj.traits.push(trait);
             });
-            const json = JSON.stringify(traitsObj);
+            const json = JSON.stringify(traitsObj, null, 1);
             fs.writeFileSync("./src/PF2eCoreLib/populateData/traits.json", json, "utf8");
         }
     )

@@ -12,7 +12,7 @@ const EncounterSkills: React.FC<Props> = (props) => {
     
     return (
         <Layout style={styles.container}>
-            <SkillsView skills={props.skills} level={props.level} abilityScores={props.abilityScores} />
+            <SkillsView />
         </Layout>
     );
 };
