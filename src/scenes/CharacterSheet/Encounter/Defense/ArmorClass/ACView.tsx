@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {StyleSheet } from "react-native";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
-import { AppState } from "../../../../../store/Store";
+import { EntireAppState } from "../../../../../store/Store";
 import { AbilityScore, CalculateAbilityScoreModifier } from "../../../../../PF2eCoreLib/AbilityScores";
 import { ArmorProficiencies, WornArmor } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
@@ -118,7 +118,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     dexterity: state.playerCharacter.abilityScores.Dexterity,
     armorProficiencies: state.playerCharacter.armorProficiencies,
     wornArmor: state.playerCharacter.wornArmor,

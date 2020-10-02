@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
@@ -74,7 +74,7 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
 ): LinkStateProps => ({
     actions: state.playerCharacter.actions,
     abilityScores: state.playerCharacter.abilityScores,

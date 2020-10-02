@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { indexOf } from "lodash";
 import EditActionView from "./EditActionView";
 import { NavigationState, useFocusEffect } from "@react-navigation/native";
@@ -97,7 +97,7 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
 ): LinkStateProps => ({
     actions: state.playerCharacter.actions,
 });

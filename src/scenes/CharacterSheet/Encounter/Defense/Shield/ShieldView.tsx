@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Text, Layout, Button, ButtonGroup, Toggle } from "@ui-kitten/components";
-import { AppState } from "../../../../../store/Store";
+import { EntireAppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
 import ShieldEditModal from "./ShieldEditModal";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -122,7 +122,7 @@ const mapDispatchToProps = (
 };
     
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     shield: state.playerCharacter.shield
 });
         

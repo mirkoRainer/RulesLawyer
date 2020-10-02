@@ -5,7 +5,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { CHANGE_TEMPORARY_HITPOINTS } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { AppState } from "../../../../../store/Store";
+import { EntireAppState } from "../../../../../store/Store";
 import { startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 
@@ -46,7 +46,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     temporaryHitPoints: state.playerCharacter.hitPoint.temporaryHitPoints,
 });
 

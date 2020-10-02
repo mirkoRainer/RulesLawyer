@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import PlayerCharacter, { Shield } from "../../../PF2eCoreLib/PlayerCharacter";
-import { AppState } from "../../../store/Store";
+import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import HitPoints from "./Defense/HealthData/HitPoints";
 import ResistancesImmunitiesWeaknesses from "./Defense/ResistancesImmunitiesWeaknesses";
@@ -70,7 +70,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
     shield: state.playerCharacter.shield,
     resistances: state.playerCharacter.resistances,

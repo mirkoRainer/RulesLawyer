@@ -4,7 +4,7 @@ import { Layout, Text } from "@ui-kitten/components";
 import { FeatAndAbilityEntry } from "./FeatAndAbilityEntry";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 
 
 const FeatsView: React.FC<Props> = (props) => {
@@ -66,7 +66,7 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
 ): LinkStateProps => ({
     ancestryFeatsAndAbilities: state.playerCharacter.ancestryFeatsAndAbilities,
     skillFeats: state.playerCharacter.skillFeats,

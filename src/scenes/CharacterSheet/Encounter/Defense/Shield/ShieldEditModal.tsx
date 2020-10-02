@@ -6,7 +6,7 @@ import {
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { AppState } from "../../../../../store/Store";
+import { EntireAppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { Shield } from "../../../../../PF2eCoreLib/PlayerCharacter";
@@ -152,7 +152,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
     shield: state.playerCharacter.shield

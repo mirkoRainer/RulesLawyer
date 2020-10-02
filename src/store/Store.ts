@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     theme: themeReducer
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export type EntireAppState = ReturnType<typeof rootReducer>;
 
 const Store = createStore(rootReducer, 
     applyMiddleware(thunk));

@@ -5,7 +5,7 @@ import { Proficiencies, GetProficiencyTotalWithLevel, DetermineNextProficiency }
 import { Layout, Text } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { connect } from "react-redux";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -113,7 +113,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     keyAbility: state.playerCharacter.abilityScores.Wisdom,
     proficiency: state.playerCharacter.perceptionProficiency,
     level: state.playerCharacter.level,

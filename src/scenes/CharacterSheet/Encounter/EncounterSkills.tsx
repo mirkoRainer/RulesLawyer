@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Skill } from "../../../PF2eCoreLib/PlayerCharacter";
-import { AppState } from "../../../store/Store";
+import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import SkillsView from "./Skills/SkillsView";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
@@ -37,7 +37,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     skills: state.playerCharacter.skills,
     level: state.playerCharacter.level,
     abilityScores: state.playerCharacter.abilityScores

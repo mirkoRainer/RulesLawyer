@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
 import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { Layout, Divider } from "@ui-kitten/components";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -76,7 +76,7 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     abilityScores: state.playerCharacter.abilityScores,
     skills: state.playerCharacter.skills,
     level: state.playerCharacter.level

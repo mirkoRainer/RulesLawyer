@@ -9,7 +9,7 @@ import {
 } from "./ModalsActionTypes";
 import { AppActions } from "../AllActionTypesAggregated";
 import { TextEditModalState, PickerModalState } from "../../ModalsState";
-import { AppState } from "../../Store";
+import { EntireAppState } from "../../Store";
 import { TextEditModalStateSwitch } from "./TextEditModalStateSwitch";
 import { PickerModalStateSwitch } from "./PickerModalStateSwitch";
 import { ReactText } from "react";
@@ -19,7 +19,7 @@ import { ChangeAbilityScore } from "../PlayerCharacter/PlayerCharacterActions";
 const ToggleTextEditModal: ActionCreator<ModalActionTypes> = (): ModalActionTypes => ({ type: TOGGLE_TEXTEDIT_MODAL });
 
 export const startToggleTextEditModal = () => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => EntireAppState) => {
         dispatch(ToggleTextEditModal());
     };
 
@@ -34,7 +34,7 @@ const UpdateTextEditModalState: ActionCreator<ModalActionTypes> = (
 
 export const startTextEditModal = (actionType: string, index?: number) => {
     console.debug(`startTextEditModal with ${JSON.stringify(actionType)}`);
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => EntireAppState) => {
         const newModalState: TextEditModalState = TextEditModalStateSwitch(actionType, getState(), dispatch);
         console.debug(`newModalState in startTextEditModal: ${JSON.stringify(newModalState, null, 1)}`);
         dispatch(UpdateTextEditModalState(newModalState));
@@ -69,21 +69,21 @@ export const ChangePickerSelection: ActionCreator<ModalActionTypes> = (
 });
 
 export const startNumberPickerModalSelection = (actionType: string, value: number) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => EntireAppState) => {
         let newModalState: PickerModalState = PickerModalStateSwitch(actionType, getState(), dispatch);
         dispatch(UpdatePickerModalState(newModalState));
         dispatch(TogglePickerModal(value));
     };
 };
 export const startStringPickerModalSelection = (actionType: string, value: string) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => EntireAppState) => {
         let newModalState: PickerModalState = PickerModalStateSwitch(actionType, getState(), dispatch);
         dispatch(UpdatePickerModalState(newModalState));
         dispatch(TogglePickerModal(value));
     };
 };
 export const startPickerForAbilityScore = (actionType: string, abilityScore: AbilityScore) => {
-    return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => EntireAppState) => {
         let newModalState: PickerModalState = {
             title: "Editing " + abilityScore.ability,
             items: Array.from(new Array(30), (x, i) => i + 1),

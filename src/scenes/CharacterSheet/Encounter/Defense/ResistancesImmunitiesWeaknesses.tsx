@@ -7,7 +7,7 @@ import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActio
 import { connect } from "react-redux";
 import { CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { Layout, Text } from "@ui-kitten/components";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 
 const ResistancesImmunitiesWeaknesses: React.FC<Props> = (props) => {
     const resistancesDisplay: string = props.resistances;
@@ -56,7 +56,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     resistances: state.playerCharacter.resistances,
     immunities: state.playerCharacter.immunities,
     weaknesses: state.playerCharacter.weakness

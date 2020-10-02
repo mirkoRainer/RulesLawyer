@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, SectionList } from "react-native";
 import { Input, Layout, Text, Icon, Button, TopNavigationAction, TopNavigation, Select, SelectItem, IndexPath } from "@ui-kitten/components";
 import { PF2Action, Skill, Weapon } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { OffenseStackParamList } from "../OffenseNavigation";
@@ -163,7 +163,7 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
     action: state.playerCharacter.actions[ownProps.route.params.index],

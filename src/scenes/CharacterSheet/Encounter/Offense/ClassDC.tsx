@@ -6,7 +6,7 @@ import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import PlayerCharacter, { iClass } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Action, bindActionCreators } from "redux";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { startChangeClassDCProficiency } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ThunkDispatch } from "redux-thunk";
@@ -76,7 +76,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     abilityScores: state.playerCharacter.abilityScores,
     pcClass: state.playerCharacter.pcClass,
     level: state.playerCharacter.level,

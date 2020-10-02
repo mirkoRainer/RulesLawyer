@@ -5,16 +5,14 @@ import { Proficiencies, GetProficiencyTotalWithLevel } from "../../../../PF2eCor
 import { AbilityScore, CalculateAbilityScoreModifier, GetAbilityScoreAbbreviation } from "../../../../PF2eCoreLib/AbilityScores";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { startToggleDarkMode } from "../../../../store/actions/Theme/ThemeActions";
+import { DarkModeOptions } from "../../../../store/ThemeState";
+import { EntireAppState } from "../../../../store/Store";
 
-interface Props {
-    proficiency: Proficiencies;
-    keySpellcastingAbility: AbilityScore;
-    level: number;
-    spellAttackItemBonus: number;
-    spellDCItemBonus: number;
-}
-
-interface State {}
 
 const SpellAttackDCView: React.FC<Props> = (props) => {
     const spellAttackTotal =
@@ -80,7 +78,34 @@ const SpellAttackDCView: React.FC<Props> = (props) => {
     );
 };
 
-export default SpellAttackDCView;
+type Props = LinkDispatchProps & LinkStateProps
+ 
+interface LinkStateProps {
+    proficiency: Proficiencies;
+    keySpellcastingAbility: AbilityScore;
+    level: number;
+    spellAttackItemBonus: number;
+    spellDCItemBonus: number;
+}
+//all actions to be dispatched
+interface LinkDispatchProps {
+
+}
+
+const mapStateToProps = (
+    state: EntireAppState): LinkStateProps => ({
+    proficiency: state.,
+    keySpellcastingAbility: AbilityScore;
+    level: number;
+    spellAttackItemBonus: number;
+    spellDCItemBonus: number;
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpellAttackDCView);
 
 const styles = StyleSheet.create({
     container: {

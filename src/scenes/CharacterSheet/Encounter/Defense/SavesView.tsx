@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-import { AppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../store/Store";
 import { AbilityScore } from "../../../../PF2eCoreLib/AbilityScores";
 import { Ability } from "../../../../PF2eCoreLib/Ability";
 import { SavesProp } from "./SavesProps";
@@ -149,7 +149,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState): LinkStateProps => ({
+    state: EntireAppState): LinkStateProps => ({
     constitution: state.playerCharacter.abilityScores.Constitution,
     dexterity: state.playerCharacter.abilityScores.Dexterity,
     wisdom: state.playerCharacter.abilityScores.Wisdom,

@@ -6,7 +6,7 @@ import {
 import Modal from "react-native-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { AppState } from "../../../../../store/Store";
+import { EntireAppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { WornArmor, Price, ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter";
@@ -338,7 +338,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
     wornArmor: state.playerCharacter.wornArmor,

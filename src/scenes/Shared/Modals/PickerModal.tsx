@@ -10,7 +10,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { startTogglePickerModal } from "../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { PickerModalState } from "../../../store/ModalsState";
-import { AppState } from "../../../store/Store";
+import { EntireAppState } from "../../../store/Store";
 import {Picker} from "@react-native-community/picker";
 
 type OwnProps = {};
@@ -70,7 +70,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (
-    state: AppState,
+    state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
     modalState: state.modals.pickerModal,
