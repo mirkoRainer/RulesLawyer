@@ -2,33 +2,37 @@ import React, { Component } from "react";
 import { StyleSheet, SectionList } from "react-native";
 import SpellView from "./SpellView";
 import { Spell, SpellListEntry } from "./Spell";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout, Text, useTheme } from "@ui-kitten/components";
 
 interface Props {
     spells: SpellListEntry[];
 }
 
 interface State {}
-export default class Spells extends Component<Props, State> {
-    renderItem = ({ item }: { item: Spell }) => <SpellView spell={item} />;
-    keyExtractor = (item: Spell) => item.name;
-    render() {
+
+const Spells: React.FC<Props> = (props) => {
+    const renderItem = ({ item }: { item: Spell }) => <SpellView spell={item} />;
+    const theme = useTheme();
+    const keyExtractor = (item: Spell) => item.name;
         return (
             <Layout style={styles.container}>
                 <SectionList
                     style={styles.flatContainer}
-                    sections={this.props.spells}
-                    renderItem={this.renderItem}
-                    keyExtractor={this.keyExtractor}
+                    sections={props.spells}
+                    renderItem={renderItem}
+                    keyExtractor={keyExtractor}
                     contentContainerStyle={{
                         flexGrow: 1,
                         justifyContent: "flex-start",
                     }}
-                    renderSectionHeader={({ section: { spellType } }) => (
+                    scrollEnabled={false}
+                    renderSectionHeader={({ section: { spellType, data } }) => (
+                        data.length === 0 ? <></> :
                         <Text
+                            category="h5"
                             style={{
                                 ...styles.header,
-                                ...styles.sectionHeader,
+                                color: theme["color-primary-400"],
                             }}
                         >
                             {spellType}
@@ -37,8 +41,9 @@ export default class Spells extends Component<Props, State> {
                 />
             </Layout>
         );
-    }
 }
+
+export default Spells;
 
 const styles = StyleSheet.create({
     container: {
@@ -57,13 +62,9 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        fontSize: 16,
         fontWeight: "bold",
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",
-    },
-    sectionHeader: {
-        fontSize: 12,
     },
 });

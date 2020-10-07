@@ -7,4 +7,5 @@ export interface SpellListEntry {
 
 export interface Spell {
     name: string;
+    description?: string;
 }

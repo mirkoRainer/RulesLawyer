@@ -518,7 +518,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             spellType: "1st Level",
-            data: [{ name: "Heal"}],
+            data: [{ name: "Heal", description: "you heal people with magic"}],
         },
         {
             spellType: "2nd Level",

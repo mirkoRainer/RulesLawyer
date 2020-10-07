@@ -20,21 +20,21 @@ const SpellsPage: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
             <ScrollView>
-            <Divider />
-            <SpellAttackAndDCView />
-            <Divider />
-            <SpellSlotsView />
-            <Divider />
-            {/* <MagicTraditions
-                prepared={props.magicTraditions.prepared}
-                spontaneous={props.magicTraditions.spontaneous}
-                arcane={props.magicTraditions.arcane}
-                primal={props.magicTraditions.primal}
-                divine={props.magicTraditions.divine}
-                occult={props.magicTraditions.occult}
-            /> */}
-            <Divider />
-            <Spells spells={props.spells} />
+                <Divider />
+                <SpellAttackAndDCView />
+                <Divider />
+                <SpellSlotsView />
+                <Divider />
+                {/* <MagicTraditions
+                    prepared={props.magicTraditions.prepared}
+                    spontaneous={props.magicTraditions.spontaneous}
+                    arcane={props.magicTraditions.arcane}
+                    primal={props.magicTraditions.primal}
+                    divine={props.magicTraditions.divine}
+                    occult={props.magicTraditions.occult}
+                /> */}
+                <Divider />
+                <Spells spells={props.spells} />
             </ScrollView>
         </Layout>
     );
