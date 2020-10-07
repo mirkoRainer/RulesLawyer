@@ -14,6 +14,14 @@ export interface ChangePerceptionProficiencyAction extends Action<string> {
     PerceptionProficiency: Proficiencies;
 }
 
+export const CHANGE_SPELL_PROFICIENCY = "CHANGE_SPELL_PROFICIENCY";
+export interface ChangeSpellProficiencyAction extends Action<string> {
+    type: typeof CHANGE_SPELL_PROFICIENCY;
+    SpellProficiency: Proficiencies;
+}
+
+
 
 export type ProficiencyActionTypes =    ChangeSaveProficienciesAction |
-                                        ChangePerceptionProficiencyAction;
+                                        ChangePerceptionProficiencyAction |
+                                        ChangeSpellProficiencyAction;

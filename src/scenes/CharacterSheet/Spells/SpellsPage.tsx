@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet } from "react-native";
 import SpellAttackAndDCView from "./Components/SpellAttackAndDCView";
 import MagicTraditions, { MagicTraditionProps } from "./Components/MagicTraditions";
-import SpellSlots from "./Components/SpellSlots";
-import { SpellSlotProps } from "./Components/SpellSlotView";
+import SpellSlots from "./Components/SpellSlotsView";
 import { SpellListEntry } from "./Components/Spell";
 import Spells from "./Components/Spells";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
@@ -14,30 +13,17 @@ import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
+import SpellSlotsView from "./Components/SpellSlotsView";
+import { useFocusEffect } from "@react-navigation/native";
 
 const SpellsPage: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
+            <ScrollView>
             <Divider />
-            <SpellAttackAndDCView
-                proficiency={props.spellAttackProficiency}
-                keySpellcastingAbility={
-                    props.spellcastingAbilityModifier
-                }
-                level={props.currentLevel}
-                spellAttackItemBonus={Bonus.GetBonusFor(
-                    "SpellAttack",
-                    BonusType.Item,
-                    props.bonuses
-                )}
-                spellDCItemBonus={Bonus.GetBonusFor(
-                    "SpellDC",
-                    BonusType.Item,
-                    props.bonuses
-                )}
-            />
+            <SpellAttackAndDCView />
             <Divider />
-            <SpellSlots spellSlots={props.spellSlots} />
+            <SpellSlotsView />
             <Divider />
             {/* <MagicTraditions
                 prepared={props.magicTraditions.prepared}
@@ -49,6 +35,7 @@ const SpellsPage: React.FC<Props> = (props) => {
             /> */}
             <Divider />
             <Spells spells={props.spells} />
+            </ScrollView>
         </Layout>
     );
 };
@@ -59,7 +46,6 @@ interface LinkStateProps {
     currentLevel: number;
     bonuses: iBonus[];
     magicTraditions: MagicTraditionProps;
-    spellSlots: SpellSlotProps[];
     spells: SpellListEntry[];
 }
 
@@ -73,7 +59,6 @@ const mapStateToProps = (
     currentLevel: state.playerCharacter.level,
     bonuses: state.playerCharacter.bonuses,
     magicTraditions: state.playerCharacter.magicTraditions,
-    spellSlots: state.playerCharacter.spellSlots,
     spells: state.playerCharacter.spells
 });
 
@@ -83,7 +68,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: "stretch",
-        alignContent: "stretch",
     },
     text: {
         backgroundColor: "yellow",

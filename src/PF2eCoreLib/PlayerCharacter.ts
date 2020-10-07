@@ -6,7 +6,6 @@ import { ArmorCategory } from "./ArmorCategory";
 import { Traits } from "./Traits";
 import { HealthData } from "./HealthData";
 import { ArmorGroup } from "./ArmorGroup";
-import { SpellSlotProps } from "../scenes/CharacterSheet/Spells/Components/SpellSlotView";
 import { Guid } from "guid-typescript";
 
 
@@ -56,7 +55,7 @@ export default interface PlayerCharacter {
     bonuses:                     iBonus[];
     penalties:                   iBonus[];
     magicTraditions:             MagicTraditions;
-    spellSlots:                  SpellSlotProps[];
+    spellSlots:                  SpellSlot[];
     spells:                     SpellListEntry[];
 }
 
@@ -232,9 +231,10 @@ export interface AbilityModifier {
 }
 
 export interface SpellSlot {
+    maximum: number;
+    current: number;
     spellLevel: string;
-    maximum:    number;
-    current:    number;
+    focus?: boolean;
 }
 
 export interface Spell {

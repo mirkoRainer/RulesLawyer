@@ -1,20 +1,28 @@
-import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import React, { Component, useState } from "react";
+import { StyleSheet, TouchableOpacityComponent } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
-import { Proficiencies, GetProficiencyTotalWithLevel } from "../../../../PF2eCoreLib/Proficiencies";
+import { Proficiencies, GetProficiencyTotalWithLevel, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
 import { AbilityScore, CalculateAbilityScoreModifier, GetAbilityScoreAbbreviation } from "../../../../PF2eCoreLib/AbilityScores";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import { startToggleDarkMode } from "../../../../store/actions/Theme/ThemeActions";
-import { DarkModeOptions } from "../../../../store/ThemeState";
 import { EntireAppState } from "../../../../store/Store";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { bindActionCreators } from "redux";
+import { startChangeSpellProficiency } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { useFocusEffect } from "@react-navigation/native";
 
 
 const SpellAttackDCView: React.FC<Props> = (props) => {
+    // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
+    const [ state, setState ] = useState({});
+    useFocusEffect(
+        React.useCallback(() => {
+            setState({});
+        }, [])
+    );
     const spellAttackTotal =
             CalculateAbilityScoreModifier(props.keySpellcastingAbility.score)+
             props.spellAttackItemBonus +
@@ -49,31 +57,45 @@ const SpellAttackDCView: React.FC<Props> = (props) => {
             </Text>
         </React.Fragment>
     );
+    const handleTouch = () => {
+        const newProficiency = DetermineNextProficiency(props.proficiency);
+        props.updateSpellProficiency(newProficiency);
+        setState({});
+    }
+
     return (
         <Layout style={styles.container}>
-            <Layout style={styles.rowContainer}>
-                <Text category='h5' style={styles.title}>Spell Attack</Text>
-                <Layout style={styles.profAndMath}>
-                    <ProficiencyArrayView proficiency={props.proficiency} />
-                    <Layout style={styles.math} >
-                        {spellAttackItemBonus}
-                        {keyModifier}
+            <TouchableOpacity onPress={handleTouch}>
+                <Layout style={styles.rowContainer}>
+                    <Text category="h5" style={styles.title}>
+                        Spell Attack
+                    </Text>
+                    <Layout style={styles.profAndMath}>
+                        <ProficiencyArrayView proficiency={props.proficiency} />
+                        <Layout style={styles.math}>
+                            {spellAttackItemBonus}
+                            {keyModifier}
+                        </Layout>
                     </Layout>
+                    <Text category="h5">+{spellAttackTotal}</Text>
                 </Layout>
-                <Text category='h5'>+{spellAttackTotal}</Text>
-            </Layout>
+            </TouchableOpacity>
             <Divider />
+                <TouchableOpacity onPress={handleTouch}>
             <Layout style={styles.rowContainer}>
-                <Text category='h5' style={styles.title}>Spell DC</Text>
-                <Layout style={styles.profAndMath}>
-                    <ProficiencyArrayView proficiency={props.proficiency} />
-                    <Layout style={styles.math} >
-                        {spellDCItemBonus}
-                        {keyModifier}
+                    <Text category="h5" style={styles.title}>
+                        Spell DC
+                    </Text>
+                    <Layout style={styles.profAndMath}>
+                        <ProficiencyArrayView proficiency={props.proficiency} />
+                        <Layout style={styles.math}>
+                            {spellDCItemBonus}
+                            {keyModifier}
+                        </Layout>
                     </Layout>
-                </Layout>
-                <Text category='h5'>{spellDCTotal}</Text>
+                    <Text category="h5">{spellDCTotal}</Text>
             </Layout>
+                </TouchableOpacity>
         </Layout>
     );
 };
@@ -89,27 +111,29 @@ interface LinkStateProps {
 }
 //all actions to be dispatched
 interface LinkDispatchProps {
-
+    updateSpellProficiency: (newProf: Proficiencies) => void;
 }
 
 const mapStateToProps = (
     state: EntireAppState): LinkStateProps => ({
-    proficiency: state.,
-    keySpellcastingAbility: AbilityScore;
-    level: number;
-    spellAttackItemBonus: number;
-    spellDCItemBonus: number;
+    proficiency: state.playerCharacter.spellAttackProficiency,
+    keySpellcastingAbility: state.playerCharacter.abilityScores[state.playerCharacter.spellcastingAbilityModifier],
+    level: state.playerCharacter.level,
+    spellAttackItemBonus: state.playerCharacter.spellAttackItemBonus,
+    spellDCItemBonus: state.playerCharacter.spellDCItemBonus,
 });
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+        updateSpellProficiency: bindActionCreators(startChangeSpellProficiency, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpellAttackDCView);
 
 const styles = StyleSheet.create({
     container: {
-        flex: .45,
+        flex: 1,
+        padding: 5
     },
     rowContainer: {
         flex: 1,
@@ -117,7 +141,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignContent: "center",
         alignItems: "center",
-        paddingHorizontal: 10
+        padding: 10
     },
     title: {
         flex: 1

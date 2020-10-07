@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { ProficiencyActionTypes } from "./ProficiencyActionTypes";
-import { Shield, WornArmor, Movement, PF2Action, Skill } from "../../../PF2eCoreLib/PlayerCharacter";
+import { Shield, WornArmor, Movement, PF2Action, Skill, SpellSlot } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -180,6 +180,13 @@ export interface ChangeSkillsAction extends Action<string> {
     Skills: Skill[];
 }
 
+export const CHANGE_SPELL_SLOTS = "CHANGE_SPELL_SLOTS";
+export interface ChangeSpellSlotsAction extends Action<string> {
+    type: typeof CHANGE_SPELL_SLOTS;
+    SpellSlots: SpellSlot[];
+}
+
+
 
 export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
                                         |   ChangeAncestryAction 
@@ -210,7 +217,8 @@ export type PlayerCharacterActionTypes =    ChangeAlignmentAction
                                         |   ChangeWornArmorAction
                                         |   ChangeSpeedAction
                                         |   ChangePF2ActionsAction
-                                        |   ChangeSkillsAction; // | SomeOtherAction
+                                        |   ChangeSkillsAction
+                                        |   ChangeSpellSlotsAction; // | SomeOtherAction
 
 
 

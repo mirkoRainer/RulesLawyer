@@ -1,10 +1,10 @@
 import { AppActions } from "../AllActionTypesAggregated";
-import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS, CHANGE_SHIELD, CHANGE_WORN_ARMOR, CHANGE_SPEED, CHANGE_PC_ACTIONS, CHANGE_SKILLS } from "./PlayerCharacterActionTypes";
+import { CHANGE_CHARACTER_NAME, CHANGE_PLAYER_NAME, PlayerCharacterActionTypes, CHANGE_ANCESTRY, CHANGE_HERITAGE, CHANGE_BACKGROUND, CHANGE_CLASS, CHANGE_SUBCLASS, CHANGE_ALIGNMENT, CHANGE_DEITY, CHANGE_NOTES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES, CHANGE_CONDITIONS, CHANGE_SENSES, CHANGE_RESISTANCES, CHANGE_LEVEL, CHANGE_EXPERIENCE_POINTS, CHANGE_ABILITY_SCORE, CHANGE_CLASS_DC_PROFICIENCY, CHANGE_HIT_POINTS, CHANGE_TEMPORARY_HITPOINTS, CHANGE_DYING_VALUE, CHANGE_WOUNDED_VALUE, CHANGE_MAX_HITPOINTS, CHANGE_SHIELD, CHANGE_WORN_ARMOR, CHANGE_SPEED, CHANGE_PC_ACTIONS, CHANGE_SKILLS, CHANGE_SPELL_SLOTS } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { CHANGE_SAVE_PROFICIENCIES, CHANGE_PERCEPTION_PROFICIENCY } from "./ProficiencyActionTypes";
-import { Saves, Shield, WornArmor, Movement, PF2Action, Skill } from "../../../PF2eCoreLib/PlayerCharacter";
+import { CHANGE_SAVE_PROFICIENCIES, CHANGE_PERCEPTION_PROFICIENCY, CHANGE_SPELL_PROFICIENCY } from "./ProficiencyActionTypes";
+import { Saves, Shield, WornArmor, Movement, PF2Action, Skill, SpellSlot } from "../../../PF2eCoreLib/PlayerCharacter";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (name: string): PlayerCharacterActionTypes => ({  
     type: CHANGE_CHARACTER_NAME, 
@@ -315,6 +315,31 @@ export const ChangeSkills: ActionCreator<PlayerCharacterActionTypes> = (Skills: 
 export const startChangeSkills = (Skills: Skill[]) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeSkills(Skills));
+    };
+};
+
+export const ChangeSpellProficiency: ActionCreator<PlayerCharacterActionTypes> = (
+           SpellProficiency: Proficiencies
+       ): PlayerCharacterActionTypes => ({
+           type: CHANGE_SPELL_PROFICIENCY,
+           SpellProficiency,
+       });
+export const startChangeSpellProficiency = (SpellProficiency: Proficiencies) => {
+           return (
+               dispatch: Dispatch<AppActions>,
+               getState: () => AppActions
+           ) => {
+               dispatch(ChangeSpellProficiency(SpellProficiency));
+           };
+       };
+
+export const ChangeSpellSlots: ActionCreator<PlayerCharacterActionTypes> = (SpellSlots: SpellSlot[]): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_SPELL_SLOTS,
+    SpellSlots 
+});
+export const startChangeSpellSlots = (SpellSlots: SpellSlot[]) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeSpellSlots(SpellSlots));
     };
 };
 
