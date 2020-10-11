@@ -18,11 +18,19 @@ import StoryPage from "./Story/StoryPage";
 import Exploration from "./Exploration/Exploration";
 import { Downtime } from "./Downtime/Downtime";
 import { Inventory } from "./Inventory/Inventory";
-import SpellsPage from "./Spells/SpellsPage";
+import SpellsPage from "./Encounter/Spells/SpellsPage";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import PickerModal from "../Shared/Modals/PickerModal";
 import Conditions from "./Conditions";
-import { BottomNavigation, BottomNavigationTab, Layout, Text, TopNavigation, Icon, TopNavigationAction } from "@ui-kitten/components";
+import {
+    BottomNavigation,
+    BottomNavigationTab,
+    Layout,
+    Text,
+    TopNavigation,
+    Icon,
+    TopNavigationAction,
+} from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 
@@ -45,7 +53,7 @@ export type CharacterSheetTabParamList = {
     Inventory: undefined;
     Spells: undefined;
     Companions: undefined;
-}
+};
 
 const CharacterSheet: React.FC<Props> = (props: Props) => {
     const pcClass = props.playerCharacter.pcClass;
@@ -53,14 +61,31 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const headerSubText = () => {
         return (
             <Layout>
-                <Text category='p2'>{pcClass.subClass + " " + pcClass.name + " Lvl:" + props.playerCharacter.level}</Text>
-                <Text category='p2'>{props.playerCharacter.background.name + " " + props.playerCharacter.ancestry.heritage}</Text>
+                <Text category="p2">
+                    {pcClass.subClass +
+                        " " +
+                        pcClass.name +
+                        " Lvl:" +
+                        props.playerCharacter.level}
+                </Text>
+                <Text category="p2">
+                    {props.playerCharacter.background.name +
+                        " " +
+                        props.playerCharacter.ancestry.heritage}
+                </Text>
             </Layout>
         );
     };
 
     useEffect(() => {
-        props.navigation.setOptions({ title: (props.playerCharacter.name + " the " + props.playerCharacter.ancestry.name + " " + props.playerCharacter.pcClass.name) });
+        props.navigation.setOptions({
+            title:
+                props.playerCharacter.name +
+                " the " +
+                props.playerCharacter.ancestry.name +
+                " " +
+                props.playerCharacter.pcClass.name,
+        });
     });
 
     const toggleNavigation = (): void => {
@@ -75,73 +100,70 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const BottomTabBar = ({ navigation, state }) => (
         <BottomNavigation
             selectedIndex={state.index}
-            onSelect={index => navigation.navigate(state.routeNames[index])}>
-            <BottomNavigationTab title='Encounter'/>
-            <BottomNavigationTab title='Exploration'/>
-            <BottomNavigationTab title='Downtime'/>
-            <BottomNavigationTab title='Inventory'/>
-            <BottomNavigationTab title='Story'/>
+            onSelect={(index) => navigation.navigate(state.routeNames[index])}
+        >
+            <BottomNavigationTab title="Encounter" />
+            <BottomNavigationTab title="Exploration" />
+            <BottomNavigationTab title="Downtime" />
+            <BottomNavigationTab title="Inventory" />
+            <BottomNavigationTab title="Story" />
         </BottomNavigation>
     );
-    const MenuIcon = (props: any) => (
-        <Icon {...props} name='menu-outline'/>
-    );
-    const InfoIcon = (props : any) => (
-        <Icon {...props} name='info'/>
-    );
+    const MenuIcon = (props: any) => <Icon {...props} name="menu-outline" />;
+    const InfoIcon = (props: any) => <Icon {...props} name="info" />;
     const renderMenuAction = () => (
-        <TopNavigationAction icon={MenuIcon} onPress={toggleNavigation}/>
+        <TopNavigationAction icon={MenuIcon} onPress={toggleNavigation} />
     );
     const renderBuildAction = () => (
-        <TopNavigationAction icon={InfoIcon} onPress={goToBuildPage}/>
+        <TopNavigationAction icon={InfoIcon} onPress={goToBuildPage} />
     );
-    
+
     return (
-        <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={{ flex: 1 }}>
             <Layout style={styles.container}>
                 <TopNavigation
-                    alignment='center'
+                    alignment="center"
                     title={name}
                     subtitle={headerSubText}
                     accessoryRight={renderBuildAction}
                     accessoryLeft={renderMenuAction}
                 />
                 <Divider />
-                <Tab.Navigator 
-                    tabBar={props => <BottomTabBar {...props}/>}
+                <Tab.Navigator
+                    tabBar={(props) => <BottomTabBar {...props} />}
                     tabBarOptions={{
                         activeTintColor: "tomato",
                         inactiveTintColor: "grey",
                         showLabel: true,
                         labelStyle: {
-                            fontSize: 14
+                            fontSize: 14,
                         },
                         keyboardHidesTabBar: true,
-                    }} 
+                    }}
                     initialRouteName={"Encounter"}
                 >
-                    <Tab.Screen 
-                        name="Encounter" 
+                    <Tab.Screen
+                        name="Encounter"
                         component={Encounter}
                         options={{ tabBarLabel: "Encounter" }}
                     />
-                    <Tab.Screen 
-                        name="Exploration" 
-                        component={Exploration} 
+                    <Tab.Screen
+                        name="Exploration"
+                        component={Exploration}
                         options={{ tabBarLabel: "Exploration" }}
                     />
-                    <Tab.Screen 
-                        name="Downtime" 
-                        component={Downtime} 
+                    <Tab.Screen
+                        name="Downtime"
+                        component={Downtime}
                         options={{ tabBarLabel: "Downtime" }}
                     />
-                    <Tab.Screen 
-                        name="Inventory" 
-                        component={Inventory} 
+                    <Tab.Screen
+                        name="Inventory"
+                        component={Inventory}
                         options={{ tabBarLabel: "Inventory" }}
                     />
-                    <Tab.Screen 
-                        name="Story" 
+                    <Tab.Screen
+                        name="Story"
                         component={StoryPage}
                         options={{ tabBarLabel: "Story" }}
                     />
@@ -150,7 +172,6 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 <PickerModal />
             </Layout>
         </SafeAreaView>
-
     );
 };
 
@@ -164,13 +185,13 @@ interface LinkDispatchProps {
     startChangePlayerName: (name: string) => void;
 }
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
     startChangePlayerName: bindActionCreators(startChangePlayerName, dispatch),
     startChangeCharacterName: bindActionCreators(
         startChangeCharacterName,
@@ -199,5 +220,5 @@ const styles = StyleSheet.create({
     },
     headerText: {
         flex: 1,
-    }
+    },
 });

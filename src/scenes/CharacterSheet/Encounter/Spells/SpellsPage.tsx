@@ -1,20 +1,22 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import SpellAttackAndDCView from "./Components/SpellAttackAndDCView";
-import MagicTraditions, { MagicTraditionProps } from "./Components/MagicTraditions";
-import SpellSlots from "./Components/SpellSlotsView";
-import { SpellListEntry } from "./Components/Spell";
+import { MagicTraditionProps } from "./Components/MagicTraditions";
+import { SpellList } from "./Components/Spell";
 import Spells from "./Components/Spells";
-import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { Bonus, iBonus } from "../../../PF2eCoreLib/Bonus";
-import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
-import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
-import { EntireAppState } from "../../../store/Store";
+import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
+import { iBonus } from "../../../../PF2eCoreLib/Bonus";
+import { AbilityScore } from "../../../../PF2eCoreLib/AbilityScores";
+import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
-import { Layout, Text, Divider } from "@ui-kitten/components";
+import { Layout, Divider } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
 import SpellSlotsView from "./Components/SpellSlotsView";
-import { useFocusEffect } from "@react-navigation/native";
+
+export type SpellViewNavigationProps = StackNavigationProp<
+    SpellsStackParamList,
+    "SpellsView"
+>;
 
 const SpellsPage: React.FC<Props> = (props) => {
     return (
@@ -34,7 +36,7 @@ const SpellsPage: React.FC<Props> = (props) => {
                     occult={props.magicTraditions.occult}
                 /> */}
                 <Divider />
-                <Spells spells={props.spells} />
+                <Spells spells={props.spells} navigation={props.navigation} />
             </ScrollView>
         </Layout>
     );
@@ -46,20 +48,23 @@ interface LinkStateProps {
     currentLevel: number;
     bonuses: iBonus[];
     magicTraditions: MagicTraditionProps;
-    spells: SpellListEntry[];
+    spells: SpellList;
 }
 
-type Props = LinkStateProps;
+type Props = LinkStateProps & {
+    navigation: SpellViewNavigationProps;
+};
 
-const mapStateToProps = (
-    state: EntireAppState
-): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     spellAttackProficiency: state.playerCharacter.spellAttackProficiency,
-    spellcastingAbilityModifier: state.playerCharacter.abilityScores[state.playerCharacter.spellcastingAbilityModifier],
+    spellcastingAbilityModifier:
+        state.playerCharacter.abilityScores[
+            state.playerCharacter.spellcastingAbilityModifier
+        ],
     currentLevel: state.playerCharacter.level,
     bonuses: state.playerCharacter.bonuses,
     magicTraditions: state.playerCharacter.magicTraditions,
-    spells: state.playerCharacter.spells
+    spells: state.playerCharacter.spells,
 });
 
 export default connect(mapStateToProps, null)(SpellsPage);

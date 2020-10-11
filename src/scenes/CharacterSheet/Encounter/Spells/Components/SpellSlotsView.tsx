@@ -3,20 +3,20 @@ import { StyleSheet } from "react-native";
 import SpellSlotView from "./SpellSlotView";
 import { Layout } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
-import { EntireAppState } from "../../../../store/Store";
+import { EntireAppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
-import { SpellSlot } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { startChangeSpellSlots } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { prop } from "../../../../PF2eCoreLib/TypescriptEvolution";
+import { SpellSlot } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { startChangeSpellSlots } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { prop } from "../../../../../PF2eCoreLib/TypescriptEvolution";
 import { useFocusEffect } from "@react-navigation/native";
 
 /*TODO: Need to consider multiple spell casting sources. i.e. Wizard with Cleric dedication.*/
 const SpellSlotsView: React.FC<Props> = (props) => {
     // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
-    const [ state, setState ] = useState({});
+    const [state, setState] = useState({});
     useFocusEffect(
         React.useCallback(() => {
             setState({});
@@ -24,19 +24,28 @@ const SpellSlotsView: React.FC<Props> = (props) => {
     );
     const increase = (index: number) => {
         const newSlots = props.spellSlots;
-        const newCurrent = Math.min(props.spellSlots[index].current + 1, props.spellSlots[index].maximum);
-        newSlots.splice(index, 1, { ...props.spellSlots[index], current: newCurrent });
+        const newCurrent = Math.min(
+            props.spellSlots[index].current + 1,
+            props.spellSlots[index].maximum
+        );
+        newSlots.splice(index, 1, {
+            ...props.spellSlots[index],
+            current: newCurrent,
+        });
         props.updateSpellSlots(newSlots);
         setState({});
-    }
+    };
     const decrease = (index: number) => {
         const newSlots = props.spellSlots;
         const newCurrent = Math.max(props.spellSlots[index].current - 1, 0);
-        newSlots.splice(index, 1, { ...props.spellSlots[index], current: newCurrent });
-        console.log(props.spellSlots[index])
+        newSlots.splice(index, 1, {
+            ...props.spellSlots[index],
+            current: newCurrent,
+        });
+        console.log(props.spellSlots[index]);
         props.updateSpellSlots(newSlots);
         setState({});
-    }
+    };
 
     return (
         <Layout style={styles.container}>

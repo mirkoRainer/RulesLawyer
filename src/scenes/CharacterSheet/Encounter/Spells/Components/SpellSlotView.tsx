@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text, Icon, Button } from "@ui-kitten/components";
-import { SpellSlot } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { SpellSlot } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { useFocusEffect } from "@react-navigation/native";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     increase: (index: number) => void;
     decrease: (index: number) => void;
     index: number;
-}
+};
 
 const SpellSlotView: React.FC<Props> = (props) => {
     const spellSlotStyle =
@@ -18,13 +18,17 @@ const SpellSlotView: React.FC<Props> = (props) => {
             : { ...styles.spellSlot };
     const focusPoint = props.spellSlot.focus ? { flex: 3.9 } : {};
     const UpIcon = (props: any) => (
-        <Icon {...props} name='arrow-ios-upward-outline'/>
+        <Icon {...props} name="arrow-ios-upward-outline" />
     );
     const DownIcon = (props: any) => (
-        <Icon {...props} name='arrow-ios-downward-outline'/>
+        <Icon {...props} name="arrow-ios-downward-outline" />
     );
-    const increase = () => {props.increase(props.index);}
-    const decrease = () => {props.decrease(props.index);}
+    const increase = () => {
+        props.increase(props.index);
+    };
+    const decrease = () => {
+        props.decrease(props.index);
+    };
 
     const view =
         props.spellSlot.maximum === 0 ? (
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: 70,
         borderLeftWidth: 1,
-        padding: 5
+        padding: 5,
     },
     outOfSpells: {
         backgroundColor: "lightgray",
@@ -93,10 +97,9 @@ const styles = StyleSheet.create({
     spellSlotUnavailable: {
         backgroundColor: "darkgray",
     },
-    button: {
-    },
+    button: {},
     horizontal: {
         flex: 1,
-        flexDirection: "row"
-    }
+        flexDirection: "row",
+    },
 });

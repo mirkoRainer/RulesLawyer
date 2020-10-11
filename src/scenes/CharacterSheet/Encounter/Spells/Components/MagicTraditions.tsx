@@ -56,8 +56,8 @@ export default class MagicTraditions extends Component<
 
 const styles = StyleSheet.create({
     container: {
-        flex: .17,
-        padding: 5
+        flex: 0.17,
+        padding: 5,
     },
     rowContainer: {
         flex: 1,

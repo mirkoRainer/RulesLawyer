@@ -29,6 +29,8 @@ import {
     CHANGE_PC_ACTIONS,
     CHANGE_SKILLS,
     CHANGE_SPELL_SLOTS,
+    CHANGE_SPELLS,
+    UPDATE_SPELL,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -331,6 +333,20 @@ const playerCharacterReducer = (
                 ...state,
                 spellSlots: action.SpellSlots,
             };
+        case CHANGE_SPELLS:
+            console.debug(
+                `CHANGE_SPELLS in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                spells: action.Spells,
+            };
+        case UPDATE_SPELL:
+            console.log(
+                `UPDATE_SPELL in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            const updated =
+                state.spells[_.indexOf(state.spells, action.SpellType)];
         default:
             return state;
     }

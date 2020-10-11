@@ -16,11 +16,12 @@ import EncounterOffense from "./EncounterOffense";
 import EncounterSkills from "./EncounterSkills";
 import { NavigationContainer } from "@react-navigation/native";
 import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
-import SpellsPage from "../Spells/SpellsPage";
+import SpellsPage from "./Spells/SpellsPage";
 import { Layout } from "@ui-kitten/components";
 import Conditions from "../Conditions";
 import { OffenseNavigator } from "./OffenseNavigation";
 import { DefenseNavigator } from "./DefenseNavigation";
+import { SpellsNavigator } from "./SpellsNavigation";
 
 var width: number = Dimensions.get("window").width; //full width
 
@@ -28,8 +29,8 @@ export type EncounterTabParamList = {
     Offense: undefined;
     Defense: undefined;
     Skills: undefined;
-    Other: undefined;
-}
+    Spells: undefined;
+};
 
 const Encounter: React.FC<Props> = (props) => {
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
@@ -38,54 +39,57 @@ const Encounter: React.FC<Props> = (props) => {
         return (
             <BottomNavigation
                 selectedIndex={state.index}
-                onSelect={index => navigation.navigate(state.routeNames[index])}>
-                <BottomNavigationTab title='Your Turn' />
-                <BottomNavigationTab title='Their Turn' />
-                <BottomNavigationTab title='Skillz' />
-                <BottomNavigationTab title='Spells' />
+                onSelect={(index) =>
+                    navigation.navigate(state.routeNames[index])
+                }
+            >
+                <BottomNavigationTab title="Your Turn" />
+                <BottomNavigationTab title="Their Turn" />
+                <BottomNavigationTab title="Skillz" />
+                <BottomNavigationTab title="Spells" />
             </BottomNavigation>
         );
     };
     return (
-        <Layout style={{flex:1}}>
+        <Layout style={{ flex: 1 }}>
             <Conditions conditions={props.playerCharacter.conditions} />
             <NavigationContainer independent={true}>
-                <Tab.Navigator 
-                    tabBar={props => <BottomTabBar {...props}/>}
+                <Tab.Navigator
+                    tabBar={(props) => <BottomTabBar {...props} />}
                     tabBarOptions={{
                         activeTintColor: "tomato",
                         inactiveTintColor: "grey",
                         showLabel: true,
                         labelStyle: {
-                            fontSize: 14
+                            fontSize: 14,
                         },
-                        keyboardHidesTabBar: true, 
+                        keyboardHidesTabBar: true,
                         tabStyle: styles.tab,
-                    }} 
+                    }}
                     initialRouteName={"Offense"}
                 >
-                    <Tab.Screen 
-                        name="Offense" 
+                    <Tab.Screen
+                        name="Offense"
                         component={OffenseNavigator}
                         options={{ tabBarLabel: "Your Turn" }}
                     />
-                    <Tab.Screen 
-                        name="Defense" 
+                    <Tab.Screen
+                        name="Defense"
                         component={DefenseNavigator}
                         options={{ tabBarLabel: "Their Turn" }}
                     />
-                    <Tab.Screen 
-                        name="Skills" 
+                    <Tab.Screen
+                        name="Skills"
                         component={EncounterSkills}
                         options={{ tabBarLabel: "Skillz" }}
                     />
-                    <Tab.Screen 
-                        name="Other" 
-                        component={SpellsPage}
+                    <Tab.Screen
+                        name="Spells"
+                        component={SpellsNavigator}
                         options={{ tabBarLabel: "Spells" }}
                     />
                 </Tab.Navigator>
-            </ NavigationContainer>
+            </NavigationContainer>
         </Layout>
     );
 };
@@ -102,15 +106,21 @@ interface LinkStateProps {
 }
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => {
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => {
     return {
-        startClassDCModal: bindActionCreators(startChangeClassDCProficiency, dispatch),
-        startStringPickerModal: bindActionCreators(startStringPickerModalSelection, dispatch)
+        startClassDCModal: bindActionCreators(
+            startChangeClassDCProficiency,
+            dispatch
+        ),
+        startStringPickerModal: bindActionCreators(
+            startStringPickerModalSelection,
+            dispatch
+        ),
     };
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 
@@ -137,11 +147,11 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         textAlign: "center",
-        fontSize: 22
+        fontSize: 22,
     },
     tab: {
         flex: 1,
         alignSelf: "flex-end",
         height: 30,
-    }
+    },
 });

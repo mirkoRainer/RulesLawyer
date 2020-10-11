@@ -2,7 +2,19 @@ import { Action } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { ProficiencyActionTypes } from "./ProficiencyActionTypes";
-import { Shield, WornArmor, Movement, PF2Action, Skill, SpellSlot } from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Shield,
+    WornArmor,
+    Movement,
+    PF2Action,
+    Skill,
+    SpellSlot,
+} from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Spell,
+    SpellList,
+    SpellListEntry,
+} from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -106,7 +118,6 @@ export interface ChangeExperiencePointsAction extends Action<string> {
     ExperiencePoints: number;
 }
 
-
 export const CHANGE_ABILITY_SCORE = "CHANGE_ABILITY_SCORE";
 export interface ChangeAbilityScoreAction extends Action<string> {
     type: typeof CHANGE_ABILITY_SCORE;
@@ -134,10 +145,10 @@ export interface ChangeTemporaryHitPointsAction extends Action<string> {
 
 export const CHANGE_DYING_VALUE = "CHANGE_DYING_VALUE";
 export interface ChangeDyingValueAction extends Action<string> {
-        type: typeof CHANGE_DYING_VALUE;
-        DyingValue: number;
-    }
-    
+    type: typeof CHANGE_DYING_VALUE;
+    DyingValue: number;
+}
+
 export const CHANGE_WOUNDED_VALUE = "CHANGE_WOUNDED_VALUE";
 export interface ChangeWoundedAction extends Action<string> {
     type: typeof CHANGE_WOUNDED_VALUE;
@@ -186,39 +197,51 @@ export interface ChangeSpellSlotsAction extends Action<string> {
     SpellSlots: SpellSlot[];
 }
 
+export const UPDATE_SPELL = "UPDATE_SPELL";
+export interface UpdateSpellAction extends Action<string> {
+    type: typeof UPDATE_SPELL;
+    Spell: Spell;
+    SpellType: keyof SpellList;
+}
 
+export const ADD_SPELL = "ADD_SPELL";
+export interface AddSpellAction extends Action<string> {
+    type: typeof ADD_SPELL;
+    Spell: Spell;
+    SpellType: keyof SpellList;
+}
 
-export type PlayerCharacterActionTypes =    ChangeAlignmentAction 
-                                        |   ChangeAncestryAction 
-                                        |   ChangeBackgroundAction 
-                                        |   ChangeCharacterNameAction 
-                                        |   ChangeClassAction 
-                                        |   ChangeConditionsAction 
-                                        |   ChangeDeityAction 
-                                        |   ChangeHeritageAction 
-                                        |   ChangeImmunitiesAction 
-                                        |   ChangeNotesAction 
-                                        |   ChangePlayerNameAction 
-                                        |   ChangeResistancesAction 
-                                        |   ChangeSensesAction 
-                                        |   ChangeSubClassAction 
-                                        |   ChangeWeaknessesAction 
-                                        |   ChangeLevelAction 
-                                        |   ChangeExperiencePointsAction 
-                                        |   ChangeAbilityScoreAction
-                                        |   ChangeClassDCProficiency
-                                        |   ChangeHitPointsAction
-                                        |   ChangeTemporaryHitPointsAction
-                                        |   ChangeDyingValueAction
-                                        |   ChangeWoundedAction
-                                        |   ChangeMaxHitPointsAction
-                                        |   ProficiencyActionTypes
-                                        |   ChangeShieldAction
-                                        |   ChangeWornArmorAction
-                                        |   ChangeSpeedAction
-                                        |   ChangePF2ActionsAction
-                                        |   ChangeSkillsAction
-                                        |   ChangeSpellSlotsAction; // | SomeOtherAction
-
-
-
+export type PlayerCharacterActionTypes =
+    | ChangeAlignmentAction
+    | ChangeAncestryAction
+    | ChangeBackgroundAction
+    | ChangeCharacterNameAction
+    | ChangeClassAction
+    | ChangeConditionsAction
+    | ChangeDeityAction
+    | ChangeHeritageAction
+    | ChangeImmunitiesAction
+    | ChangeNotesAction
+    | ChangePlayerNameAction
+    | ChangeResistancesAction
+    | ChangeSensesAction
+    | ChangeSubClassAction
+    | ChangeWeaknessesAction
+    | ChangeLevelAction
+    | ChangeExperiencePointsAction
+    | ChangeAbilityScoreAction
+    | ChangeClassDCProficiency
+    | ChangeHitPointsAction
+    | ChangeTemporaryHitPointsAction
+    | ChangeDyingValueAction
+    | ChangeWoundedAction
+    | ChangeMaxHitPointsAction
+    | ProficiencyActionTypes
+    | ChangeShieldAction
+    | ChangeWornArmorAction
+    | ChangeSpeedAction
+    | ChangePF2ActionsAction
+    | ChangeSkillsAction
+    | ChangeSpellSlotsAction
+    | UpdateSpellAction
+    | AddSpellAction; // | SomeOtherAction

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 
 interface Props {
@@ -17,8 +17,8 @@ export default class MagicTradition extends Component<Props, State> {
                     <Text style={styles.text}>{this.props.traditionName}</Text>
                 </Layout>
             );
-        } else { 
-            return (<Layout></Layout>);
+        } else {
+            return <Layout></Layout>;
         }
     }
 }
@@ -26,7 +26,7 @@ export default class MagicTradition extends Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 5
+        padding: 5,
     },
     rowContainer: {
         flex: 1,
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: "center",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
     },
 });

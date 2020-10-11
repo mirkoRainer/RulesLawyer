@@ -24,7 +24,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         name: "Druid",
         subClass: "Wild Order",
         proficiency: Proficiencies.Master,
-        keyAbility: "Wisdom"
+        keyAbility: "Wisdom",
     },
     abilityScores: {
         Strength: { score: 10, ability: "Strength" },
@@ -42,8 +42,12 @@ export const examplePlayerCharacter: PlayerCharacter = {
         Price: { Copper: 0, Silver: 7, Gold: 0, Platinum: 0 },
         ACBonus: 2,
         DexCap: 4,
-        CheckPenalty: {type: BonusType.Armor, appliesTo: "StrAndDexChecks", amount: 0 },
-        SpeedPenalty: {type: BonusType.Armor, appliesTo: "speed", amount: 0 },
+        CheckPenalty: {
+            type: BonusType.Armor,
+            appliesTo: "StrAndDexChecks",
+            amount: 0,
+        },
+        SpeedPenalty: { type: BonusType.Armor, appliesTo: "speed", amount: 0 },
         StrengthRequirement: 12,
         Bulk: 1,
         WornBulk: 1,
@@ -56,18 +60,18 @@ export const examplePlayerCharacter: PlayerCharacter = {
         hardness: 5,
         maxHP: 20,
         currentHP: 15,
-        breakThreshold: 10 
+        breakThreshold: 10,
     },
     saves: {
         fortitude: Proficiencies.Expert,
         reflex: Proficiencies.Trained,
-        will: Proficiencies.Expert
+        will: Proficiencies.Expert,
     },
     armorProficiencies: {
         unarmored: Proficiencies.Trained,
         light: Proficiencies.Trained,
         medium: Proficiencies.Untrained,
-        heavy: Proficiencies.Untrained
+        heavy: Proficiencies.Untrained,
     },
     skills: [
         {
@@ -222,7 +226,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         temporaryHitPoints: 2,
         dying: 0,
         maxDying: 4,
-        wounded: 1
+        wounded: 1,
     },
     movement: {
         landSpeed: 25,
@@ -235,8 +239,11 @@ export const examplePlayerCharacter: PlayerCharacter = {
         Simple: Proficiencies.Trained,
         Martial: Proficiencies.Untrained,
         Others: [
-            { description: "Brass Knuckles", proficiency: Proficiencies.Expert }
-        ]
+            {
+                description: "Brass Knuckles",
+                proficiency: Proficiencies.Expert,
+            },
+        ],
     },
     weapons: [
         {
@@ -248,7 +255,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             damageAbilityModifier: "Strength",
             damageType: "Piercing",
             weaponTraits: ["Agile", "Finesse", "Versatile"],
-            weaponCategory: "Simple"
+            weaponCategory: "Simple",
         },
         {
             id: Guid.create(),
@@ -259,8 +266,8 @@ export const examplePlayerCharacter: PlayerCharacter = {
             damageAbilityModifier: undefined,
             damageType: "Piercing",
             weaponTraits: ["Volley30"],
-            weaponCategory: "Martial"
-        }
+            weaponCategory: "Martial",
+        },
     ],
     perceptionProficiency: Proficiencies.Trained,
     senses: "Low-Light Vision",
@@ -381,7 +388,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
     },
     campaignNotesData: {
         notes:
-                "this is my campaign notes. They are thorough and they help my GM keep track of that various things that we do so he doesn't have to do all the work.",
+            "this is my campaign notes. They are thorough and they help my GM keep track of that various things that we do so he doesn't have to do all the work.",
         allies: "my trusty sword, my trusty dagger, my cat",
         enemies: "World Hungry",
         organizations: "PETA, NRA, PFS, LP",
@@ -395,8 +402,8 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 242,
             description:
-                    "You shove your foe away and stuff. You can go too, if you want.",
-            source: "Skill Action"
+                "You shove your foe away and stuff. You can go too, if you want.",
+            source: "Skill Action",
         },
         {
             id: Guid.create(),
@@ -406,7 +413,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 278,
             description: "Moar damage dice!",
-            source: "What grants this action"
+            source: "What grants this action",
         },
         {
             id: Guid.create(),
@@ -416,7 +423,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 1,
             description: "You speak. Like a dog.",
-            source: "What grants this action"
+            source: "What grants this action",
         },
         {
             id: Guid.create(),
@@ -426,10 +433,10 @@ export const examplePlayerCharacter: PlayerCharacter = {
             bookAbbreviation: "CRB",
             pageNumber: 142,
             description:
-            "You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn’t count toward your multiple attack penalty, and your multiple attack penalty doesn’t apply to this Strike.",
+                "You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn’t count toward your multiple attack penalty, and your multiple attack penalty doesn’t apply to this Strike.",
             trigger:
-            "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
-            source: "What grants this action"
+                "A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it’s using.",
+            source: "What grants this action",
         },
     ],
     spellcastingAbilityModifier: "Wisdom",
@@ -511,50 +518,19 @@ export const examplePlayerCharacter: PlayerCharacter = {
             current: 1,
         },
     ],
-    spells: [
-        {
-            spellType: "Focus",
-            data: [{name: "MantisForm"}]
-        },
-        {
-            spellType: "1st Level",
-            data: [{ name: "Heal", description: "you heal people with magic"}],
-        },
-        {
-            spellType: "2nd Level",
-            data: [],
-        },
-        {
-            spellType: "3rd Level",
-            data: [],
-        },
-        {
-            spellType: "4th Level",
-            data: [],
-        },
-        {
-            spellType: "5th Level",
-            data: [],
-        },
-        {
-            spellType: "6th Level",
-            data: [],
-        },
-        {
-            spellType: "7th Level",
-            data: [],
-        },
-        {
-            spellType: "8th Level",
-            data: [],
-        },
-        {
-            spellType: "9th Level",
-            data: [],
-        },
-        {
-            spellType: "10th Level",
-            data: [],
-        },
-    ],
+    spells: {
+        Focus: [{ name: "MantisForm" }],
+        FirstLevel: [
+            { name: "Heal", description: "you heal people with magic" },
+        ],
+        SecondLevel: [],
+        ThirdLevel: [],
+        FourthLevel: [],
+        FifthLevel: [],
+        SixthLevel: [],
+        SeventhLevel: [],
+        EighthLevel: [],
+        NinthLevel: [],
+        TenthLevel: [],
+    },
 };
