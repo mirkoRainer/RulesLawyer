@@ -40,6 +40,8 @@ import {
     CHANGE_PERCEPTION_PROFICIENCY,
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
+import _ from "lodash";
+import { SpellList } from "../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -333,20 +335,17 @@ const playerCharacterReducer = (
                 ...state,
                 spellSlots: action.SpellSlots,
             };
-        case CHANGE_SPELLS:
-            console.debug(
-                `CHANGE_SPELLS in reducer ${JSON.stringify(action, null, 1)}`
-            );
-            return {
-                ...state,
-                spells: action.Spells,
-            };
         case UPDATE_SPELL:
-            console.log(
+            console.debug(
                 `UPDATE_SPELL in reducer ${JSON.stringify(action, null, 1)}`
             );
-            const updated =
-                state.spells[_.indexOf(state.spells, action.SpellType)];
+            const spells = state.spells;
+            spells[action.SpellType][action.index] = action.Spell;
+            console.debug(`Spells will be: ${JSON.stringify(spells)}`);
+            return {
+                ...state,
+                spells,
+            };
         default:
             return state;
     }

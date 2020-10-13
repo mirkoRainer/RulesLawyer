@@ -467,17 +467,20 @@ export const startChangeSpellSlots = (SpellSlots: SpellSlot[]) => {
 
 export const UpdateSpell: ActionCreator<PlayerCharacterActionTypes> = (
     Spell: Spell,
-    SpellType: keyof SpellList
+    SpellType: keyof SpellList,
+    index: number
 ): PlayerCharacterActionTypes => ({
     type: UPDATE_SPELL,
     Spell,
     SpellType,
+    index,
 });
-export const startChangeUpdateSpell = (
+export const startUpdateSpell = (
     Spell: Spell,
-    SpellType: keyof SpellList
+    SpellType: keyof SpellList,
+    index: number
 ) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
-        dispatch(UpdateSpell(Spell, SpellType));
+        dispatch(UpdateSpell(Spell, SpellType, index));
     };
 };

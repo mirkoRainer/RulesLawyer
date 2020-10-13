@@ -202,6 +202,7 @@ export interface UpdateSpellAction extends Action<string> {
     type: typeof UPDATE_SPELL;
     Spell: Spell;
     SpellType: keyof SpellList;
+    index: number;
 }
 
 export const ADD_SPELL = "ADD_SPELL";

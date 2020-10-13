@@ -63,8 +63,21 @@ const Spells: React.FC<Props> = (props) => {
             },
         ];
     };
-    const renderItem = ({ item, index }: { item: Spell; index: number }) => (
-        <SpellView spell={item} navigation={props.navigation} index={index} />
+    const renderItem = ({
+        item,
+        index,
+        section,
+    }: {
+        item: Spell;
+        index: number;
+        section: SectionListData<Spell>;
+    }) => (
+        <SpellView
+            spell={item}
+            navigation={props.navigation}
+            index={index}
+            spellType={section.spellType.split(" ").join("")}
+        />
     );
     const theme = useTheme();
     const keyExtractor = (item: Spell) => item.name;

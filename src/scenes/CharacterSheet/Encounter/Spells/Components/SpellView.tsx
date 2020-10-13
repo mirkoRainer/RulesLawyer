@@ -1,23 +1,24 @@
-import { RulebookEntry } from "../../../../../PF2eCoreLib/RulebookEntry";
-
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, Button } from "react-native";
-import { Spell } from "./Spell";
+import { Spell, SpellList } from "./Spell";
 import { Layout, Text } from "@ui-kitten/components";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { SpellsStackParamList } from "../../SpellsNavigation";
-import { SpellViewNavigationProps } from "./Spells";
-
-interface Props {
-    spell: Spell;
-    navigation: SpellViewNavigationProps;
-    index: number;
-    spellType: string;
-}
+import { SpellViewNavigationProps } from "../SpellsPage";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
+import { EntireAppState } from "../../../../../store/Store";
+import { startUpdateSpell } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 
 const SpellView: React.FC<Props> = (props) => {
     const handleEditButtonPress = () => {
-        const updateSpell = (spell: Spell) => {};
+        const updateSpell = (
+            spell: Spell,
+            spellType: keyof SpellList,
+            index: number
+        ) => {
+            props.updateSpell(spell, spellType, index);
+        };
         props.navigation.navigate("EditSpellView", {
             index: props.index,
             updateSpell,
@@ -46,7 +47,33 @@ const SpellView: React.FC<Props> = (props) => {
     );
 };
 
-export default SpellView;
+interface OwnProps {
+    spell: Spell;
+    navigation: SpellViewNavigationProps;
+    index: number;
+    spellType: keyof SpellList;
+}
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
+
+interface LinkStateProps {}
+
+interface LinkDispatchProps {
+    updateSpell: (
+        Spell: Spell,
+        SpellType: keyof SpellList,
+        index: number
+    ) => void;
+}
+
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+    updateSpell: bindActionCreators(startUpdateSpell, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpellView);
 
 const styles = StyleSheet.create({
     container: {
