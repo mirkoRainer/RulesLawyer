@@ -13,7 +13,6 @@ import {
 import {
     Spell,
     SpellList,
-    SpellListEntry,
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";

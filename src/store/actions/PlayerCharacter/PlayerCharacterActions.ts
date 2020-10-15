@@ -31,7 +31,6 @@ import {
     CHANGE_PC_ACTIONS,
     CHANGE_SKILLS,
     CHANGE_SPELL_SLOTS,
-    CHANGE_SPELLS,
     UPDATE_SPELL,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
@@ -54,7 +53,6 @@ import {
 import {
     Spell,
     SpellList,
-    SpellListEntry,
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (

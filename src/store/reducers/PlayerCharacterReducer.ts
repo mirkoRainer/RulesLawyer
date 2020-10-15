@@ -29,7 +29,6 @@ import {
     CHANGE_PC_ACTIONS,
     CHANGE_SKILLS,
     CHANGE_SPELL_SLOTS,
-    CHANGE_SPELLS,
     UPDATE_SPELL,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";

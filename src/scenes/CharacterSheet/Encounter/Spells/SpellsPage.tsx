@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 import { Layout, Divider } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
 import SpellSlotsView from "./Components/SpellSlotsView";
+import { SpellsStackParamList } from "../SpellsNavigation";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export type SpellViewNavigationProps = StackNavigationProp<
     SpellsStackParamList,

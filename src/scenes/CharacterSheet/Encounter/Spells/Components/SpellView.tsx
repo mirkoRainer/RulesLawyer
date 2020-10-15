@@ -12,16 +12,9 @@ import { startUpdateSpell } from "../../../../../store/actions/PlayerCharacter/P
 
 const SpellView: React.FC<Props> = (props) => {
     const handleEditButtonPress = () => {
-        const updateSpell = (
-            spell: Spell,
-            spellType: keyof SpellList,
-            index: number
-        ) => {
-            props.updateSpell(spell, spellType, index);
-        };
         props.navigation.navigate("EditSpellView", {
             index: props.index,
-            updateSpell,
+            spellType: props.spellType,
         });
     };
     return (

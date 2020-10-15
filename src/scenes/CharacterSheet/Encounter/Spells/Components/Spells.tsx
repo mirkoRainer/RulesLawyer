@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, SectionList, SectionListData } from "react-native";
 import SpellView from "./SpellView";
-import { Spell, SpellList, SpellListEntry } from "./Spell";
+import { Spell, SpellList } from "./Spell";
 import { Divider, Layout, Text, useTheme, Button } from "@ui-kitten/components";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SpellsStackParamList } from "../../SpellsNavigation";
