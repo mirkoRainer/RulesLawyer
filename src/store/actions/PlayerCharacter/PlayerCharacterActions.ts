@@ -32,6 +32,8 @@ import {
     CHANGE_SKILLS,
     CHANGE_SPELL_SLOTS,
     UPDATE_SPELL,
+    DELETE_SPELL,
+    ADD_SPELL,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
@@ -482,3 +484,26 @@ export const startUpdateSpell = (
         dispatch(UpdateSpell(Spell, SpellType, index));
     };
 };
+
+export const AddSpell: ActionCreator<PlayerCharacterActionTypes> = (Spell: Spell, SpellType: keyof SpellList): PlayerCharacterActionTypes => ({ 
+    type: ADD_SPELL,
+    Spell,
+    SpellType 
+});
+export const startAddSpell = (Spell: Spell, SpellType: keyof SpellList) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(AddSpell(Spell, SpellType));
+    };
+};
+
+export const DeleteSpell: ActionCreator<PlayerCharacterActionTypes> = (index: number, spellType: keyof SpellList): PlayerCharacterActionTypes => ({ 
+    type: DELETE_SPELL,
+    index,
+    spellType
+});
+export const startDeleteSpell = (index: number, spellType: keyof SpellList) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(DeleteSpell(index, spellType));
+    };
+};
+

@@ -211,6 +211,14 @@ export interface AddSpellAction extends Action<string> {
     SpellType: keyof SpellList;
 }
 
+export const DELETE_SPELL = "DELETE_SPELL";
+export interface DeleteSpellAction extends Action<string> {
+    type: typeof DELETE_SPELL;
+    index: number;
+    spellType: keyof SpellList;
+}
+
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -244,4 +252,5 @@ export type PlayerCharacterActionTypes =
     | ChangeSkillsAction
     | ChangeSpellSlotsAction
     | UpdateSpellAction
-    | AddSpellAction; // | SomeOtherAction
+    | AddSpellAction
+    | DeleteSpellAction; // | SomeOtherAction
