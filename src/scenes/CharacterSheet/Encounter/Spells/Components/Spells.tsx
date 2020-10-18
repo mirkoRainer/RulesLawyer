@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SectionList, SectionListData } from "react-native";
+import { StyleSheet, SectionList, SectionListData, Alert, AlertButton } from "react-native";
 import SpellView from "./SpellView";
 import { Spell, SpellList } from "./Spell";
 import { Divider, Layout, Text, useTheme, Button } from "@ui-kitten/components";
@@ -81,7 +81,16 @@ const Spells: React.FC<Props> = (props) => {
     );
     const theme = useTheme();
     const keyExtractor = (item: Spell) => item.name;
-    const handleAddButtonPress = () => {};
+    const handleAddButtonPress = () => {
+        const buttons: AlertButton[] = [];
+        Object.keys(props.spells).forEach(element => {
+            buttons.push({
+                text: element,
+                onPress: () => {},
+            });
+        });
+        Alert.alert("What type of spell?", undefined, buttons);
+    };
     return (
         <Layout style={styles.container}>
             <Layout style={{ flexDirection: "row", padding: 10 }}>

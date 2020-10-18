@@ -1,17 +1,52 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Button, Input, Layout, Text } from "@ui-kitten/components";
+import { Button, Input, Layout, Select, Text } from "@ui-kitten/components";
 import { PropsService } from "@ui-kitten/components/devsupport";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { startDeleteSpell, startUpdateSpell } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";
 import { SpellsStackParamList } from "../SpellsNavigation";
-import { Spell } from "./Components/Spell";
+import { Spell, SpellList } from "./Components/Spell";
 
 export const EditSpellView: React.FC<Props> = (props) => {
-    const handleNameChange = () => {};
+    if (props.spell.name === undefined) {
+        props.navigation.navigate("SpellsView");
+    }
+    const [name, setName] = React.useState(props.spell.name);
+    const [description, setDescription] = React.useState(props.spell.description);
+    const handleNameChange = (value: string) => {
+        setName(value);
+    };
+    const handleDescriptionChange = (value: string) => {
+        setDescription(value);
+    };
+    const saveSpell = () => {
+        
+    };
+    const deleteSpell = () => {
+        Alert.alert(
+            "Really delete?",
+            `Would you like to delete ${props.spell.name}?`, 
+            [
+                {
+                    text: "Yes, I know what I'm doing.",
+                    onPress: () => {
+                        props.deleteSpell(props.route.params.index, props.route.params.spellType);
+                    },
+                },
+                {
+                    text: "No! Don't!",
+                }
+            ]
+        );
+        
+    };
     return (
         <Layout style={{ flex: 1 }}>
             <Text style={styles.centered} category="h1">
@@ -20,19 +55,22 @@ export const EditSpellView: React.FC<Props> = (props) => {
             <Input
                 label={"Spell Name"}
                 placeholder={"Spell Name"}
-                value={props.spell.name}
+                value={name}
                 size="large"
                 onChangeText={handleNameChange}
                 style={{ padding: 5, margin: 5 }}
             />
-            <Button style={{ padding: 10, margin: 5, marginHorizontal: 10 }} />
+            <Layout style={{flexDirection: "row"}}>
+                <Button style={{ padding: 10, margin: 5, marginHorizontal: 10, flex: 1 }} onPress={saveSpell}>Save</Button>
+                <Button style={{ padding: 10, margin: 5, marginHorizontal: 10, flex: 1 }} onPress={deleteSpell} status='danger'>Delete</Button>
+            </Layout>
             <ScrollView>
                 <Input
                     label={"Spell Description"}
                     placeholder={"Describe the magic!"}
-                    value={props.spell.description}
+                    value={description}
                     size="medium"
-                    onChangeText={handleNameChange}
+                    onChangeText={handleDescriptionChange}
                     multiline={true}
                     style={{ padding: 5, margin: 5 }}
                 />
@@ -58,7 +96,10 @@ interface LinkStateProps {
     spell: Spell;
 }
 
-interface LinkDispatchProps {}
+interface LinkDispatchProps {
+    updateSpell: (newSpell: Spell, spellType: keyof SpellList, index: number) => void;
+    deleteSpell: (index: number, spellType: keyof SpellList) => void;
+}
 
 const mapStateToProps = (
     state: EntireAppState,
@@ -72,7 +113,10 @@ const mapStateToProps = (
     };
 };
 
-const mapDispatchToProps = (): LinkDispatchProps => ({});
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+    updateSpell: bindActionCreators(startUpdateSpell, dispatch),
+    deleteSpell: bindActionCreators(startDeleteSpell, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditSpellView);
 
