@@ -15,9 +15,6 @@ import { SpellsStackParamList } from "../SpellsNavigation";
 import { Spell, SpellList } from "./Components/Spell";
 
 export const EditSpellView: React.FC<Props> = (props) => {
-    if (props.spell.name === undefined) {
-        props.navigation.navigate("SpellsView");
-    }
     const [name, setName] = React.useState(props.spell.name);
     const [description, setDescription] = React.useState(props.spell.description);
     const handleNameChange = (value: string) => {
@@ -27,24 +24,6 @@ export const EditSpellView: React.FC<Props> = (props) => {
         setDescription(value);
     };
     const saveSpell = () => {
-        
-    };
-    const deleteSpell = () => {
-        Alert.alert(
-            "Really delete?",
-            `Would you like to delete ${props.spell.name}?`, 
-            [
-                {
-                    text: "Yes, I know what I'm doing.",
-                    onPress: () => {
-                        props.deleteSpell(props.route.params.index, props.route.params.spellType);
-                    },
-                },
-                {
-                    text: "No! Don't!",
-                }
-            ]
-        );
         
     };
     return (
@@ -62,7 +41,6 @@ export const EditSpellView: React.FC<Props> = (props) => {
             />
             <Layout style={{flexDirection: "row"}}>
                 <Button style={{ padding: 10, margin: 5, marginHorizontal: 10, flex: 1 }} onPress={saveSpell}>Save</Button>
-                <Button style={{ padding: 10, margin: 5, marginHorizontal: 10, flex: 1 }} onPress={deleteSpell} status='danger'>Delete</Button>
             </Layout>
             <ScrollView>
                 <Input

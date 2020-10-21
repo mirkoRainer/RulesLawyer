@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, SectionList, SectionListData, Alert, AlertButton } from "react-native";
 import SpellView from "./SpellView";
 import { Spell, SpellList } from "./Spell";
@@ -6,15 +6,22 @@ import { Divider, Layout, Text, useTheme, Button } from "@ui-kitten/components";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SpellsStackParamList } from "../../SpellsNavigation";
 import { SpellViewNavigationProps } from "../SpellsPage";
-
-interface Props {
-    spells: SpellList;
-    navigation: SpellViewNavigationProps;
-}
-
-interface State {}
+import { EntireAppState } from "../../../../../store/Store";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
+import { startAddSpell, startUpdateSpell } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Spells: React.FC<Props> = (props) => {
+    // make sure the screen is always refreshed.
+    const [ state, setState ] = useState({});
+    useFocusEffect(
+        React.useCallback(() => {
+            setState({});
+        }, [])
+    );
     const sections = () => {
         return [
             {
@@ -86,7 +93,7 @@ const Spells: React.FC<Props> = (props) => {
         Object.keys(props.spells).forEach(element => {
             buttons.push({
                 text: element,
-                onPress: () => {},
+                onPress: () => { props.addSpell({ name: "New Spell" }, element as keyof SpellList); setState({}); },
             });
         });
         Alert.alert("What type of spell?", undefined, buttons);
@@ -130,7 +137,31 @@ const Spells: React.FC<Props> = (props) => {
     );
 };
 
-export default Spells;
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
+interface OwnProps {
+    spells: SpellList;
+    navigation: SpellViewNavigationProps;
+}
+
+interface LinkStateProps {
+}
+
+interface LinkDispatchProps {
+    addSpell: (newSpell: Spell, spellType: keyof SpellList) => void;
+}
+
+const mapStateToProps = (
+    state: EntireAppState,
+    props: OwnProps
+): LinkStateProps => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+    addSpell: bindActionCreators(startAddSpell, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spells);
 
 const styles = StyleSheet.create({
     container: {
