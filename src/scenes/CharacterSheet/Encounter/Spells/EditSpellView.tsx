@@ -1,17 +1,14 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Button, Input, Layout, Select, Text } from "@ui-kitten/components";
+import { Button, Icon, Input, Layout, Text } from "@ui-kitten/components";
 import React from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import {
-    startDeleteSpell,
-    startUpdateSpell,
-} from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { startUpdateSpell } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";
 import { SpellsStackParamList } from "../SpellsNavigation";
 import { Spell, SpellList } from "./Components/Spell";
@@ -34,11 +31,26 @@ export const EditSpellView: React.FC<Props> = (props) => {
             props.route.params.index
         );
     };
+    const BackIcon = (props: any) => (
+        <Icon {...props} name="arrow-ios-back-outline" />
+    );
+    const handleBackPress = () => {
+        props.navigation.goBack();
+    };
     return (
         <Layout style={{ flex: 1 }}>
-            <Text style={styles.centered} category="h1">
-                Editing
-            </Text>
+            <Layout style={{ flexDirection: "row", margin: 10 }}>
+                <Button
+                    accessoryLeft={BackIcon}
+                    onPress={handleBackPress}
+                    style={{ flex: 0.25, margin: 10 }}
+                >
+                    Back
+                </Button>
+                <Text style={{ flex: 1 }} category="h1">
+                    Editing
+                </Text>
+            </Layout>
             <Input
                 label={"Spell Name"}
                 placeholder={"Spell Name"}
@@ -124,8 +136,4 @@ const mapDispatchToProps = (
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditSpellView);
 
-const styles = StyleSheet.create({
-    centered: {
-        alignSelf: "center",
-    },
-});
+const styles = StyleSheet.create({});
