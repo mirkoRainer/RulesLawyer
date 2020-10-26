@@ -48,94 +48,92 @@ const SpellSlotsView: React.FC<Props> = (props) => {
     };
 
     return (
-        <Layout style={styles.container}>
-            <Layout style={styles.rowContainer}>
-                <ScrollView
-                    horizontal={true}
-                    contentContainerStyle={{
-                        flexGrow: 1,
-                        justifyContent: "center",
-                    }}
-                >
-                    <SpellSlotView
-                        /* Focus Points */
-                        index={0}
-                        spellSlot={props.spellSlots[0]}
-                        increase={increase}
-                        decrease={decrease}
-                    />
-                    <SpellSlotView
-                        /* 1st Level */
-                        index={1}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[1]}
-                    />
-                    <SpellSlotView
-                        /* 2nd Level */
-                        index={2}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[2]}
-                    />
-                    <SpellSlotView
-                        /* 3rd Level */
-                        index={3}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[3]}
-                    />
-                    <SpellSlotView
-                        /* 4th Level */
-                        index={4}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[4]}
-                    />
-                    <SpellSlotView
-                        /* 5th Level */
-                        index={5}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[5]}
-                    />
-                    <SpellSlotView
-                        /* 6th Level */
-                        index={6}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[6]}
-                    />
-                    <SpellSlotView
-                        /* 7th Level */
-                        index={7}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[7]}
-                    />
-                    <SpellSlotView
-                        /* 8th Level */
-                        index={8}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[8]}
-                    />
-                    <SpellSlotView
-                        /* 9th Level */
-                        index={9}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[9]}
-                    />
-                    <SpellSlotView
-                        /* 10th Level */
-                        index={10}
-                        increase={increase}
-                        decrease={decrease}
-                        spellSlot={props.spellSlots[10]}
-                    />
-                </ScrollView>
-            </Layout>
+        <Layout style={styles.rowContainer}>
+            <ScrollView
+                horizontal={true}
+                contentContainerStyle={{
+                    flexGrow: 1,
+                    justifyContent: "center",
+                }}
+            >
+                <SpellSlotView
+                    /* Focus Points */
+                    index={0}
+                    spellSlot={props.spellSlots[0]}
+                    increase={increase}
+                    decrease={decrease}
+                />
+                <SpellSlotView
+                    /* 1st Level */
+                    index={1}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[1]}
+                />
+                <SpellSlotView
+                    /* 2nd Level */
+                    index={2}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[2]}
+                />
+                <SpellSlotView
+                    /* 3rd Level */
+                    index={3}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[3]}
+                />
+                <SpellSlotView
+                    /* 4th Level */
+                    index={4}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[4]}
+                />
+                <SpellSlotView
+                    /* 5th Level */
+                    index={5}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[5]}
+                />
+                <SpellSlotView
+                    /* 6th Level */
+                    index={6}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[6]}
+                />
+                <SpellSlotView
+                    /* 7th Level */
+                    index={7}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[7]}
+                />
+                <SpellSlotView
+                    /* 8th Level */
+                    index={8}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[8]}
+                />
+                <SpellSlotView
+                    /* 9th Level */
+                    index={9}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[9]}
+                />
+                <SpellSlotView
+                    /* 10th Level */
+                    index={10}
+                    increase={increase}
+                    decrease={decrease}
+                    spellSlot={props.spellSlots[10]}
+                />
+            </ScrollView>
         </Layout>
     );
 };
@@ -165,8 +163,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(SpellSlotsView);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.5,
+        flex: 0.75,
         padding: 5,
+        borderWidth: 1,
     },
     flatContainer: {
         flex: 1,
@@ -175,7 +174,6 @@ const styles = StyleSheet.create({
     rowContainer: {
         flex: 1,
         flexDirection: "row",
-        padding: 5,
     },
     text: {
         flex: 1,

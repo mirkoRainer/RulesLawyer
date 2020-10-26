@@ -1,5 +1,9 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, TouchableOpacityComponent } from "react-native";
+import {
+    StyleSheet,
+    TouchableOpacity,
+    TouchableOpacityComponent,
+} from "react-native";
 import ProficiencyView from "../../../../Shared/ProficiencyView";
 import {
     Proficiencies,
@@ -17,7 +21,7 @@ import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { EntireAppState } from "../../../../../store/Store";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 import { bindActionCreators } from "redux";
 import { startChangeSpellProficiency } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
@@ -73,35 +77,38 @@ const SpellAttackDCView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
-            <TouchableOpacity onPress={handleTouch}>
+            <TouchableOpacity onPress={handleTouch} style={{ flex: 1 }}>
                 <Layout style={styles.rowContainer}>
-                    <Text category="h5" style={styles.title}>
-                        Spell Attack
-                    </Text>
+                    <Layout style={{ ...styles.math, ...styles.title }}>
+                        <Text
+                            category="h5"
+                            style={{ ...styles.title, textAlign: "right" }}
+                        >
+                            Attack
+                        </Text>
+                        <Text
+                            category="h5"
+                            style={{ ...styles.title, textAlign: "right" }}
+                        >
+                            DC
+                        </Text>
+                    </Layout>
                     <Layout style={styles.profAndMath}>
                         <ProficiencyArrayView proficiency={props.proficiency} />
                         <Layout style={styles.math}>
+                            <Text>Spell:</Text>
                             {spellAttackItemBonus}
                             {keyModifier}
                         </Layout>
-                    </Layout>
-                    <Text category="h5">+{spellAttackTotal}</Text>
-                </Layout>
-            </TouchableOpacity>
-            <Divider />
-            <TouchableOpacity onPress={handleTouch}>
-                <Layout style={styles.rowContainer}>
-                    <Text category="h5" style={styles.title}>
-                        Spell DC
-                    </Text>
-                    <Layout style={styles.profAndMath}>
-                        <ProficiencyArrayView proficiency={props.proficiency} />
                         <Layout style={styles.math}>
+                            <Text>DC:</Text>
                             {spellDCItemBonus}
-                            {keyModifier}
                         </Layout>
                     </Layout>
-                    <Text category="h5">{spellDCTotal}</Text>
+                    <Layout>
+                        <Text category="h5">+{spellAttackTotal}</Text>
+                        <Text category="h5">DC{spellDCTotal}</Text>
+                    </Layout>
                 </Layout>
             </TouchableOpacity>
         </Layout>
@@ -147,7 +154,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SpellAttackDCView);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 5,
+        paddingHorizontal: 5,
     },
     rowContainer: {
         flex: 1,
@@ -158,7 +165,8 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     title: {
-        flex: 1,
+        flex: 0.5,
+        flexDirection: "column",
     },
     profAndMath: {
         flex: 1,

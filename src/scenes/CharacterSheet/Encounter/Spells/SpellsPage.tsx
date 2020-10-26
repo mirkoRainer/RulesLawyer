@@ -21,27 +21,7 @@ export type SpellViewNavigationProps = StackNavigationProp<
 >;
 
 const SpellsPage: React.FC<Props> = (props) => {
-    return (
-        <Layout style={styles.container}>
-            <ScrollView>
-                <Divider />
-                <SpellAttackAndDCView />
-                <Divider />
-                <SpellSlotsView />
-                <Divider />
-                {/* <MagicTraditions
-                    prepared={props.magicTraditions.prepared}
-                    spontaneous={props.magicTraditions.spontaneous}
-                    arcane={props.magicTraditions.arcane}
-                    primal={props.magicTraditions.primal}
-                    divine={props.magicTraditions.divine}
-                    occult={props.magicTraditions.occult}
-                /> */}
-                <Divider />
-                <Spells navigation={props.navigation} />
-            </ScrollView>
-        </Layout>
-    );
+    return <Spells navigation={props.navigation} />;
 };
 
 interface LinkStateProps {

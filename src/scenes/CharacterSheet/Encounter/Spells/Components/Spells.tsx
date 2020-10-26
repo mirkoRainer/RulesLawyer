@@ -22,6 +22,8 @@ import {
     startUpdateSpell,
 } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
+import SpellAttackAndDCView from "./SpellAttackAndDCView";
+import SpellSlotsView from "./SpellSlotsView";
 
 const Spells: React.FC<Props> = (props) => {
     // make sure the screen is always refreshed.
@@ -114,39 +116,62 @@ const Spells: React.FC<Props> = (props) => {
     };
     return (
         <Layout style={styles.container}>
-            <Layout style={{ flexDirection: "row", padding: 10 }}>
-                <Text category="h3" style={{ textAlign: "center", flex: 1 }}>
-                    Spells
-                </Text>
-                <Button onPress={handleAddButtonPress}>Add</Button>
+            <Divider />
+            <Layout style={{ flex: 0.5 }}>
+                <SpellAttackAndDCView />
             </Layout>
             <Divider />
-            <SectionList
-                style={styles.flatContainer}
-                sections={sections()}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
-                contentContainerStyle={{
-                    flexGrow: 1,
-                    justifyContent: "flex-start",
-                }}
-                scrollEnabled={false}
-                renderSectionHeader={({ section: { spellType, data } }) =>
-                    data.length === 0 ? (
-                        <></>
-                    ) : (
-                        <Text
-                            category="h5"
-                            style={{
-                                ...styles.header,
-                                color: theme["color-primary-400"],
-                            }}
-                        >
-                            {spellType}
-                        </Text>
-                    )
-                }
-            />
+            <Layout style={{ flex: 0.7 }}>
+                <SpellSlotsView />
+            </Layout>
+            <Divider />
+            {/* <MagicTraditions
+                            prepared={props.magicTraditions.prepared}
+                            spontaneous={props.magicTraditions.spontaneous}
+                            arcane={props.magicTraditions.arcane}
+                            primal={props.magicTraditions.primal}
+                            divine={props.magicTraditions.divine}
+                            occult={props.magicTraditions.occult}
+                        /> */}
+            <Layout style={{ flex: 2 }}>
+                <SectionList
+                    style={styles.flatContainer}
+                    sections={sections()}
+                    renderItem={renderItem}
+                    keyExtractor={keyExtractor}
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                        justifyContent: "flex-start",
+                    }}
+                    scrollEnabled={true}
+                    renderSectionHeader={({ section: { spellType, data } }) =>
+                        data.length === 0 ? (
+                            <></>
+                        ) : (
+                            <Text
+                                category="h5"
+                                style={{
+                                    ...styles.header,
+                                    color: theme["color-primary-400"],
+                                }}
+                            >
+                                {spellType}
+                            </Text>
+                        )
+                    }
+                    ListHeaderComponent={
+                        <Layout style={{ flexDirection: "row", padding: 10 }}>
+                            <Text
+                                category="h3"
+                                style={{ textAlign: "center", flex: 1 }}
+                            >
+                                Spells
+                            </Text>
+                            <Button onPress={handleAddButtonPress}>Add</Button>
+                        </Layout>
+                    }
+                />
+            </Layout>
         </Layout>
     );
 };
@@ -187,7 +212,6 @@ const styles = StyleSheet.create({
     },
     flatContainer: {
         flex: 1,
-        flexGrow: 1,
     },
     rowContainer: {
         flex: 1,
