@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, createRef, RefObject } from "react";
 import { StyleSheet, Button, Animated } from "react-native";
 import { Spell, SpellList } from "./Spell";
 import { Layout, Text } from "@ui-kitten/components";
@@ -16,68 +16,9 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 
 const SpellView: React.FC<Props> = (props) => {
-    const handleEditButtonPress = () => {
-        props.navigation.navigate("EditSpellView", {
-            index: props.index,
-            spellType: props.spellType,
-        });
-    };
-    const handleDeleteButtonPress = () => {
-        props.deleteSpell(props.index, props.spellType);
-    };
-    const renderRightAction = (
-        text: string,
-        color: string,
-        x: number,
-        progress: Animated.AnimatedInterpolation,
-        handlePress: () => void
-    ) => {
-        const trans = progress.interpolate({
-            inputRange: [0, 1],
-            outputRange: [x, 0],
-        });
-        return (
-            <Animated.View
-                style={{ flex: 1, transform: [{ translateX: trans }] }}
-            >
-                <RectButton
-                    style={[styles.rightAction, { backgroundColor: color }]}
-                    onPress={handlePress}
-                >
-                    <Animated.Text style={styles.actionText}>
-                        {text}
-                    </Animated.Text>
-                </RectButton>
-            </Animated.View>
-        );
-    };
-    const renderRightActions = (progress: Animated.AnimatedInterpolation) => (
-        <Layout style={{ width: 192, flexDirection: "row" }}>
-            {renderRightAction(
-                "Edit",
-                "#ffab00",
-                128,
-                progress,
-                handleEditButtonPress
-            )}
-            {renderRightAction(
-                "Delete",
-                "#dd2c00",
-                64,
-                progress,
-                handleDeleteButtonPress
-            )}
-        </Layout>
-    );
-    <Button title="Edit" onPress={handleEditButtonPress} />;
     return (
         <Layout style={styles.container}>
-            <Swipeable friction={2} renderRightActions={renderRightActions}>
-                <Text style={styles.spellName} category="h4">
-                    {" "}
-                    {props.spell.name}{" "}
-                </Text>
-            </Swipeable>
+            <SwipeableSpellHeader {...props}></SwipeableSpellHeader>
             {props.spell.description ? (
                 <Layout style={{ padding: 10 }}>
                     <Text category="h6">Description</Text>
@@ -89,6 +30,85 @@ const SpellView: React.FC<Props> = (props) => {
         </Layout>
     );
 };
+
+class SwipeableSpellHeader extends Component<Props> {
+    private myRef = createRef<Swipeable>();
+    close = () => {
+        const swipeRef = this.myRef.current;
+        swipeRef?.close();
+    };
+    renderRightAction = (
+        text: string,
+        color: string,
+        x: number,
+        progress: Animated.AnimatedInterpolation
+    ) => {
+        const trans = progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: [x, 0],
+        });
+        const handleEditButtonPress = () => {
+            this.close();
+            this.props.navigation.navigate("EditSpellView", {
+                index: this.props.index,
+                spellType: this.props.spellType,
+            });
+        };
+        const handleDeleteButtonPress = () => {
+            this.close();
+            this.props.deleteSpell(this.props.index, this.props.spellType);
+        };
+        return (
+            <Animated.View
+                style={{ flex: 1, transform: [{ translateX: trans }] }}
+            >
+                <RectButton
+                    style={[styles.rightAction, { backgroundColor: color }]}
+                    onPress={
+                        text === "Edit"
+                            ? handleEditButtonPress
+                            : handleDeleteButtonPress
+                    }
+                >
+                    <Animated.Text style={styles.actionText}>
+                        {text}
+                    </Animated.Text>
+                </RectButton>
+            </Animated.View>
+        );
+    };
+    renderRightActions = (progress: Animated.AnimatedInterpolation) => {
+        return (
+            <Layout style={{ width: 192, flexDirection: "row" }}>
+                {this.renderRightAction("Edit", "#ffab00", 128, progress)}
+                {this.renderRightAction("Delete", "#dd2c00", 64, progress)}
+            </Layout>
+        );
+    };
+    _swipeableRow:
+        | string
+        | React.RefObject<Swipeable>
+        | ((instance: Swipeable | null) => void)
+        | null
+        | undefined;
+
+    render() {
+        const { children } = this.props;
+        return (
+            <Swipeable
+                friction={2}
+                renderRightActions={this.renderRightActions}
+                ref={this.myRef}
+            >
+                {children}
+                <Text style={styles.spellName} category="h4">
+                    {" "}
+                    {this.props.spell.name}{" "}
+                </Text>
+            </Swipeable>
+        );
+    }
+}
 
 interface OwnProps {
     spell: Spell;
