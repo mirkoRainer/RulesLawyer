@@ -1,7 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Button, Input, Layout, Select, Text } from "@ui-kitten/components";
-import { PropsService } from "@ui-kitten/components/devsupport";
 import React from "react";
 import { StyleSheet, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -9,14 +8,19 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import { startDeleteSpell, startUpdateSpell } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import {
+    startDeleteSpell,
+    startUpdateSpell,
+} from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";
 import { SpellsStackParamList } from "../SpellsNavigation";
 import { Spell, SpellList } from "./Components/Spell";
 
 export const EditSpellView: React.FC<Props> = (props) => {
     const [name, setName] = React.useState(props.spell.name);
-    const [description, setDescription] = React.useState(props.spell.description);
+    const [description, setDescription] = React.useState(
+        props.spell.description
+    );
     const handleNameChange = (value: string) => {
         setName(value);
     };
@@ -24,7 +28,11 @@ export const EditSpellView: React.FC<Props> = (props) => {
         setDescription(value);
     };
     const saveSpell = () => {
-        
+        props.updateSpell(
+            { name, description },
+            props.route.params.spellType,
+            props.route.params.index
+        );
     };
     return (
         <Layout style={{ flex: 1 }}>
@@ -39,8 +47,22 @@ export const EditSpellView: React.FC<Props> = (props) => {
                 onChangeText={handleNameChange}
                 style={{ padding: 5, margin: 5 }}
             />
-            <Layout style={{flexDirection: "row"}}>
-                <Button style={{ padding: 10, margin: 5, marginHorizontal: 10, flex: 1 }} onPress={saveSpell}>Save</Button>
+            <Layout style={{ flexDirection: "row" }}>
+                <Button
+                    style={{
+                        padding: 10,
+                        margin: 5,
+                        marginHorizontal: 10,
+                        flex: 1,
+                    }}
+                    onPress={saveSpell}
+                    disabled={
+                        props.spell.name === name &&
+                        props.spell.description === description
+                    }
+                >
+                    Save
+                </Button>
             </Layout>
             <ScrollView>
                 <Input
@@ -75,8 +97,11 @@ interface LinkStateProps {
 }
 
 interface LinkDispatchProps {
-    updateSpell: (newSpell: Spell, spellType: keyof SpellList, index: number) => void;
-    deleteSpell: (index: number, spellType: keyof SpellList) => void;
+    updateSpell: (
+        newSpell: Spell,
+        spellType: keyof SpellList,
+        index: number
+    ) => void;
 }
 
 const mapStateToProps = (
@@ -91,9 +116,10 @@ const mapStateToProps = (
     };
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
     updateSpell: bindActionCreators(startUpdateSpell, dispatch),
-    deleteSpell: bindActionCreators(startDeleteSpell, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditSpellView);

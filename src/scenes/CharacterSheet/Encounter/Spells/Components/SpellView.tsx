@@ -8,7 +8,10 @@ import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { EntireAppState } from "../../../../../store/Store";
-import { startUpdateSpell } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import {
+    startDeleteSpell,
+    startUpdateSpell,
+} from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 
@@ -19,26 +22,27 @@ const SpellView: React.FC<Props> = (props) => {
             spellType: props.spellType,
         });
     };
+    const handleDeleteButtonPress = () => {
+        props.deleteSpell(props.index, props.spellType);
+    };
     const renderRightAction = (
         text: string,
         color: string,
         x: number,
-        progress: Animated.AnimatedInterpolation
+        progress: Animated.AnimatedInterpolation,
+        handlePress: () => void
     ) => {
         const trans = progress.interpolate({
             inputRange: [0, 1],
             outputRange: [x, 0],
         });
-        const pressHandler = () => {
-            alert(text);
-        };
         return (
             <Animated.View
                 style={{ flex: 1, transform: [{ translateX: trans }] }}
             >
                 <RectButton
                     style={[styles.rightAction, { backgroundColor: color }]}
-                    onPress={pressHandler}
+                    onPress={handlePress}
                 >
                     <Animated.Text style={styles.actionText}>
                         {text}
@@ -49,9 +53,20 @@ const SpellView: React.FC<Props> = (props) => {
     };
     const renderRightActions = (progress: Animated.AnimatedInterpolation) => (
         <Layout style={{ width: 192, flexDirection: "row" }}>
-            {renderRightAction("More", "#C8C7CD", 192, progress)}
-            {renderRightAction("Flag", "#ffab00", 128, progress)}
-            {renderRightAction("More", "#dd2c00", 64, progress)}
+            {renderRightAction(
+                "Edit",
+                "#ffab00",
+                128,
+                progress,
+                handleEditButtonPress
+            )}
+            {renderRightAction(
+                "Delete",
+                "#dd2c00",
+                64,
+                progress,
+                handleDeleteButtonPress
+            )}
         </Layout>
     );
     <Button title="Edit" onPress={handleEditButtonPress} />;
@@ -91,6 +106,7 @@ interface LinkDispatchProps {
         SpellType: keyof SpellList,
         index: number
     ) => void;
+    deleteSpell: (index: number, spellType: keyof SpellList) => void;
 }
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({});
@@ -99,6 +115,7 @@ const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
     updateSpell: bindActionCreators(startUpdateSpell, dispatch),
+    deleteSpell: bindActionCreators(startDeleteSpell, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpellView);
