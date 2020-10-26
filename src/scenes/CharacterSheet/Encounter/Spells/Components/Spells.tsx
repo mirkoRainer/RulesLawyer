@@ -1,5 +1,11 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, SectionList, SectionListData, Alert, AlertButton } from "react-native";
+import {
+    StyleSheet,
+    SectionList,
+    SectionListData,
+    Alert,
+    AlertButton,
+} from "react-native";
 import SpellView from "./SpellView";
 import { Spell, SpellList } from "./Spell";
 import { Divider, Layout, Text, useTheme, Button } from "@ui-kitten/components";
@@ -11,12 +17,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
-import { startAddSpell, startUpdateSpell } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import {
+    startAddSpell,
+    startUpdateSpell,
+} from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
 
 const Spells: React.FC<Props> = (props) => {
     // make sure the screen is always refreshed.
-    const [ state, setState ] = useState({});
+    const [state, setState] = useState({});
     useFocusEffect(
         React.useCallback(() => {
             setState({});
@@ -80,7 +89,6 @@ const Spells: React.FC<Props> = (props) => {
         section: SectionListData<Spell>;
     }) => (
         <SpellView
-            spell={item}
             navigation={props.navigation}
             index={index}
             spellType={section.spellType.split(" ").join("")}
@@ -90,10 +98,16 @@ const Spells: React.FC<Props> = (props) => {
     const keyExtractor = (item: Spell) => item.name;
     const handleAddButtonPress = () => {
         const buttons: AlertButton[] = [];
-        Object.keys(props.spells).forEach(element => {
+        Object.keys(props.spells).forEach((element) => {
             buttons.push({
                 text: element,
-                onPress: () => { props.addSpell({ name: "New Spell" }, element as keyof SpellList); setState({}); },
+                onPress: () => {
+                    props.addSpell(
+                        { name: "New Spell" },
+                        element as keyof SpellList
+                    );
+                    setState({});
+                },
             });
         });
         Alert.alert("What type of spell?", undefined, buttons);
@@ -139,11 +153,11 @@ const Spells: React.FC<Props> = (props) => {
 
 type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 interface OwnProps {
-    spells: SpellList;
     navigation: SpellViewNavigationProps;
 }
 
 interface LinkStateProps {
+    spells: SpellList;
 }
 
 interface LinkDispatchProps {
@@ -154,10 +168,14 @@ const mapStateToProps = (
     state: EntireAppState,
     props: OwnProps
 ): LinkStateProps => {
-    return {};
+    return {
+        spells: state.playerCharacter.spells,
+    };
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
     addSpell: bindActionCreators(startAddSpell, dispatch),
 });
 

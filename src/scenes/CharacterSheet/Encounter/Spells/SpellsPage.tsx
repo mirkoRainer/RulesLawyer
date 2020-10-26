@@ -38,7 +38,7 @@ const SpellsPage: React.FC<Props> = (props) => {
                     occult={props.magicTraditions.occult}
                 /> */}
                 <Divider />
-                <Spells spells={props.spells} navigation={props.navigation} />
+                <Spells navigation={props.navigation} />
             </ScrollView>
         </Layout>
     );

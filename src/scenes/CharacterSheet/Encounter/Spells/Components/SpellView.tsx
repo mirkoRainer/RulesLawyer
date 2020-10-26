@@ -16,6 +16,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 
 const SpellView: React.FC<Props> = (props) => {
+    if (props.spell === undefined) return <></>; //TODO: Make this better
     return (
         <Layout style={styles.container}>
             <SwipeableSpellHeader {...props}></SwipeableSpellHeader>
@@ -111,14 +112,15 @@ class SwipeableSpellHeader extends Component<Props> {
 }
 
 interface OwnProps {
-    spell: Spell;
     navigation: SpellViewNavigationProps;
     index: number;
     spellType: keyof SpellList;
 }
 type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
-interface LinkStateProps {}
+interface LinkStateProps {
+    spell: Spell;
+}
 
 interface LinkDispatchProps {
     updateSpell: (
@@ -129,7 +131,12 @@ interface LinkDispatchProps {
     deleteSpell: (index: number, spellType: keyof SpellList) => void;
 }
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => ({
+    spell: state.playerCharacter.spells[ownProps.spellType][ownProps.index],
+});
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
