@@ -20,7 +20,7 @@ import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Ability } from "../../../PF2eCoreLib/Ability";
 import WeaponProficienciesView from "./Components/WeaponProficienciesView";
-import { Layout, Text } from "@ui-kitten/components";
+import { Divider, Layout, Text } from "@ui-kitten/components";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -46,14 +46,25 @@ const StoryPage: React.FC<Props> = (props) => {
         <Layout>
             <ScrollView>
                 <Layout style={styles.container}>
-                    <Text category="h3" style={{ textAlign: "center" }}>
+                    <Text
+                        category="h3"
+                        style={{ textAlign: "center", padding: 5 }}
+                    >
                         {titleText}
                     </Text>
+                    <Divider />
                     <CharacterMetadata
                         characterMetadata={characterMetadata()}
                     />
+                    <Divider />
                     <AbilityScores abilityScores={props.abilityScores} />
-                    <Text category="h4">Weapon Proficiencies</Text>
+                    <Divider />
+                    <Text
+                        category="h4"
+                        style={{ textAlign: "center", paddingTop: 10 }}
+                    >
+                        Weapon Proficiencies
+                    </Text>
                     <WeaponProficienciesView
                         Unarmed={props.weaponProficiencies.Unarmed}
                         Simple={props.weaponProficiencies.Simple}
@@ -63,12 +74,16 @@ const StoryPage: React.FC<Props> = (props) => {
                             /* Others should have a description and proficiency. */
                         }
                     />
+                    <Divider />
                     {/*CharacterSketch placeholder*/}
                     <BiographicalView bioData={props.bioData} />
+                    <Divider />
                     <Text style={styles.text}>
                         Languages: {props.languages.toString()}
                     </Text>
+                    <Divider />
                     <Personality personalityData={props.personalityData} />
+                    <Divider />
                     <CampaignNotes
                         campaignNotesData={props.campaignNotesData}
                     />
@@ -133,7 +148,5 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         alignContent: "stretch",
     },
-    text: {
-        backgroundColor: "orange",
-    },
+    text: {},
 });
