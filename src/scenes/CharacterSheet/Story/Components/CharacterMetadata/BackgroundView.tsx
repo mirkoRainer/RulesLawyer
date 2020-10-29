@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
@@ -8,19 +8,23 @@ import { startTextEditModal } from "../../../../../store/actions/Modals/ModalsAc
 import { connect } from "react-redux";
 import { CHANGE_BACKGROUND } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { Background } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import styles from "./CharacterMetadata.styles";
 
-const BackgroundView: React.FC<Props> = (props) => {
+const BackgroundTextView: React.FC<Props> = (props) => {
     const changeBackground = () => {
         props.startTextEditModal(CHANGE_BACKGROUND);
     };
     return (
-        <Layout style={styles.container}>
-            <Text 
-                style={styles.text}
-                onPress={changeBackground}    
+        <Layout style={styles.rowContainer}>
+            <Text
+                style={styles.header}
+                onPress={changeBackground}
+                category="h5"
             >
-                {" "}
-                    Background: {props.background.name}
+                Background:
+            </Text>
+            <Text style={styles.text} onPress={changeBackground} category="h5">
+                {props.background.name}
             </Text>
         </Layout>
     );
@@ -45,13 +49,4 @@ const mapDispatchToProps = (
     };
 };
 
-export default connect(null, mapDispatchToProps)(BackgroundView);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignContent: "stretch",
-        alignSelf: "stretch",
-    },
-    text: {},
-});
+export default connect(null, mapDispatchToProps)(BackgroundTextView);

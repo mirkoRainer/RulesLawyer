@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { CHANGE_PLAYER_NAME } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import styles from "./CharacterMetadata.styles";
+
 interface OwnProps {
     playerName: string;
 }
@@ -19,12 +21,13 @@ class PlayerName extends Component<Props> {
             this.props.startTextEditModal(CHANGE_PLAYER_NAME);
         };
         return (
-            <Layout style={styles.container}>
-                <Text style={styles.text}
-                    onPress={changeName}>
+            <Layout style={styles.rowContainer}>
+                <Text style={styles.header} onPress={changeName} category="h5">
                     {" "}
-                    PlayerName: {this.props.playerName}{" "}
-                    
+                    PlayerName:
+                </Text>
+                <Text style={styles.text} onPress={changeName} category="h5">
+                    {this.props.playerName}{" "}
                 </Text>
             </Layout>
         );
@@ -45,12 +48,3 @@ const mapDispatchToProps = (
 };
 
 export default connect(null, mapDispatchToProps)(PlayerName);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignContent: "stretch",
-        alignSelf: "stretch",
-    },
-    text: {},
-});

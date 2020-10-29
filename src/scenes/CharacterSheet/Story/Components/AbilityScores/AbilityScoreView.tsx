@@ -10,27 +10,40 @@ import { CHANGE_ABILITY_SCORE } from "../../../../../store/actions/PlayerCharact
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
-import { startTextEditModal, startPickerForAbilityScore } from "../../../../../store/actions/Modals/ModalsActions";
+import { startPickerForAbilityScore } from "../../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { Layout, Text } from "@ui-kitten/components";
-
-import { Ability } from "../../../../../PF2eCoreLib/Ability";
-import { startChangeAbilityScore } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 
 const AbilityScoreView: React.FC<Props> = (props) => {
     let formattedModifierString: string;
     const modifier = CalculateAbilityScoreModifier(props.score);
-    formattedModifierString = modifier > 0 ? ("+" + modifier) : (modifier.toString());
+    formattedModifierString =
+        modifier > 0 ? "+" + modifier : modifier.toString();
     const abilityName = GetAbilityScoreAbbreviation(props.ability);
-    const abilityScore: AbilityScore = { ability: props.ability, score: props.score };
+    const abilityScore: AbilityScore = {
+        ability: props.ability,
+        score: props.score,
+    };
     const changeAbilityScore = () => {
         props.startPickerModal(CHANGE_ABILITY_SCORE, abilityScore);
     };
     return (
         <Layout style={styles.container}>
-            <Text style={styles.ability}>{abilityName}:</Text>
-            <Text style={styles.score} onPress={changeAbilityScore}>{props.score}</Text>
-            <Text style={styles.modifier} onPress={changeAbilityScore}>
+            <Text style={styles.ability} category="h5">
+                {abilityName}:
+            </Text>
+            <Text
+                style={styles.score}
+                category="h5"
+                onPress={changeAbilityScore}
+            >
+                {props.score}
+            </Text>
+            <Text
+                style={styles.modifier}
+                category="h5"
+                onPress={changeAbilityScore}
+            >
                 {formattedModifierString}
             </Text>
         </Layout>
@@ -48,7 +61,10 @@ const mapDispatchToProps = (
     ownProps: AbilityScore
 ): LinkDispatchProps => {
     return {
-        startPickerModal: bindActionCreators(startPickerForAbilityScore, dispatch),
+        startPickerModal: bindActionCreators(
+            startPickerForAbilityScore,
+            dispatch
+        ),
     };
 };
 
@@ -66,8 +82,10 @@ const styles = StyleSheet.create({
     score: {
         flex: 2,
         textAlign: "center",
+        fontWeight: "normal",
     },
     modifier: {
+        fontWeight: "normal",
         flex: 2,
         textAlign: "left",
     },

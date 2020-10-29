@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 
 import { AbilityScoreArray } from "../../../../../PF2eCoreLib/AbilityScores";
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: "stretch",
+        padding: 10,
     },
     borderlessContainer: {
         flex: 1,

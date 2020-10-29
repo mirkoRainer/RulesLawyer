@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import BiographicalView, { BiographicalData } from "./Components/BiographicalView";
+import BiographicalView, {
+    BiographicalData,
+} from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { Background, Weapon, WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter";
-import CharacterMetadata, { CharacterMetadataProps } from "./Components/CharacterMetadata";
+import {
+    Background,
+    Weapon,
+    WeaponProficiencies,
+} from "../../../PF2eCoreLib/PlayerCharacter";
+import CharacterMetadata, {
+    CharacterMetadataProps,
+} from "./Components/CharacterMetadata";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
@@ -38,12 +46,14 @@ const StoryPage: React.FC<Props> = (props) => {
         <Layout>
             <ScrollView>
                 <Layout style={styles.container}>
-                    <Text category='h3'>{titleText}</Text>
+                    <Text category="h3" style={{ textAlign: "center" }}>
+                        {titleText}
+                    </Text>
                     <CharacterMetadata
                         characterMetadata={characterMetadata()}
                     />
                     <AbilityScores abilityScores={props.abilityScores} />
-                    <Text category='h4'>Weapon Proficiencies</Text>
+                    <Text category="h4">Weapon Proficiencies</Text>
                     <WeaponProficienciesView
                         Unarmed={props.weaponProficiencies.Unarmed}
                         Simple={props.weaponProficiencies.Simple}
@@ -56,7 +66,7 @@ const StoryPage: React.FC<Props> = (props) => {
                     {/*CharacterSketch placeholder*/}
                     <BiographicalView bioData={props.bioData} />
                     <Text style={styles.text}>
-                    Languages: {props.languages.toString()}
+                        Languages: {props.languages.toString()}
                     </Text>
                     <Personality personalityData={props.personalityData} />
                     <CampaignNotes
@@ -65,7 +75,6 @@ const StoryPage: React.FC<Props> = (props) => {
                 </Layout>
             </ScrollView>
         </Layout>
-
     );
 };
 
@@ -91,11 +100,9 @@ interface LinkStateProps {
     abilityScores: AbilityScoreArray;
     weaponProficiencies: WeaponProficiencies;
 }
- type Props = LinkStateProps;
+type Props = LinkStateProps;
 
-const mapStateToProps = (
-    state: EntireAppState
-): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     characterName: state.playerCharacter.name,
     playerName: state.playerCharacter.playerName,
     ancestry: state.playerCharacter.ancestry.name,
@@ -115,7 +122,7 @@ const mapStateToProps = (
     campaignNotesData: state.playerCharacter.campaignNotesData,
     languages: state.playerCharacter.languages,
     abilityScores: state.playerCharacter.abilityScores,
-    weaponProficiencies: state.playerCharacter.weaponProficiencies
+    weaponProficiencies: state.playerCharacter.weaponProficiencies,
 });
 
 export default connect(mapStateToProps, null)(StoryPage);

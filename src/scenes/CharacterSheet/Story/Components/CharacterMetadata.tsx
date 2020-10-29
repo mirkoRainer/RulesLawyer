@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import {Layout,Text} from "@ui-kitten/components";
+import { Layout, Text } from "@ui-kitten/components";
 import CharacterName from "./CharacterMetadata/CharacterName";
 import PlayerName from "./CharacterMetadata/PlayerName";
 import AncestryAndHeritage from "./CharacterMetadata/AncestryAndHeritage";
@@ -12,9 +12,8 @@ import Deity from "./CharacterMetadata/Deity";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import { Background } from "../../../../PF2eCoreLib/PlayerCharacter";
-import BackgroundView from "./CharacterMetadata/BackgroundView";
-import ClassView from "./CharacterMetadata/ClassView";
-
+import BackgroundTextView from "./CharacterMetadata/BackgroundView";
+import ClassTextView from "./CharacterMetadata/ClassView";
 
 export interface CharacterMetadataProps {
     characterName: string;
@@ -38,52 +37,36 @@ interface Props {
 }
 
 const CharacterMetadata: React.FC<Props> = (props) => {
-
     return (
         <Layout style={styles.container}>
             <CharacterName
-                characterName={
-                    props.characterMetadata.characterName
-                }
+                characterName={props.characterMetadata.characterName}
             />
-            <PlayerName
-                playerName={props.characterMetadata.playerName}
-            />
+            <PlayerName playerName={props.characterMetadata.playerName} />
             <Layout style={styles.rowContainer}>
                 <Level level={props.characterMetadata.level} />
                 <ExperiencePoints
-                    experiencePoints={
-                        props.characterMetadata.experiencePoints
-                    }
+                    experiencePoints={props.characterMetadata.experiencePoints}
                 />
             </Layout>
             <AncestryAndHeritage
                 ancestry={props.characterMetadata.ancestry}
                 heritage={props.characterMetadata.heritage}
             />
-            <BackgroundView
+            <BackgroundTextView
                 background={props.characterMetadata.background}
             />
-            <ClassView
+            <ClassTextView
                 name={props.characterMetadata.pcClass}
                 subClass={props.characterMetadata.subclass}
-                keyAbility={
-                    props.characterMetadata.classKeyAbility
-                }
-                proficiency={
-                    props.characterMetadata.classProficiency
-                }
+                keyAbility={props.characterMetadata.classKeyAbility}
+                proficiency={props.characterMetadata.classProficiency}
             />
-            <Layout style={styles.rowContainer}>
-                <Alignment
-                    alignment={props.characterMetadata.alignment}
-                />
-                <Deity deity={props.characterMetadata.deity} />
-            </Layout>
+            <Alignment alignment={props.characterMetadata.alignment} />
+            <Deity deity={props.characterMetadata.deity} />
             <TraitsView traits={props.characterMetadata.traits} />
         </Layout>
     );
-    
 };
 
 const styles = StyleSheet.create({
