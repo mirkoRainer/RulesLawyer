@@ -78,9 +78,14 @@ const StoryPage: React.FC<Props> = (props) => {
                     {/*CharacterSketch placeholder*/}
                     <BiographicalView bioData={props.bioData} />
                     <Divider />
-                    <Text style={styles.text}>
-                        Languages: {props.languages.toString()}
-                    </Text>
+                    <Layout style={{ alignSelf: "center", padding: 5 }}>
+                        <Text style={styles.sectionLabel} category="h6">
+                            Languages:
+                        </Text>
+                        <Text style={styles.text}>
+                            {props.languages.toString()}
+                        </Text>
+                    </Layout>
                     <Divider />
                     <Personality personalityData={props.personalityData} />
                     <Divider />
@@ -149,4 +154,14 @@ const styles = StyleSheet.create({
         alignContent: "stretch",
     },
     text: {},
+    text: {
+        alignSelf: "center",
+        alignContent: "center",
+        justifyContent: "center",
+    },
+    sectionLabel: {
+        alignSelf: "center",
+        alignContent: "center",
+        justifyContent: "center",
+    },
 });

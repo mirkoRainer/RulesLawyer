@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-
 
 export interface PersonalityData {
     attitude: string;
@@ -15,45 +14,55 @@ interface Props {
     personalityData: PersonalityData;
 }
 
-interface State {}
-
-export default class Personality extends Component<Props, State> {
+export default class Personality extends Component<Props> {
     public static defaultProps = {};
 
     render() {
         return (
             <Layout style={styles.container}>
-                <Text style={styles.header}>Personality</Text>
+                <Text style={styles.header} category="h3">
+                    Personality
+                </Text>
                 <Layout style={styles.rowContainerFlex3}>
-                    <Text style={styles.sectionLabel}>Attitude</Text>
+                    <Text style={styles.sectionLabel} category="h5">
+                        Attitude
+                    </Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.attitude}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
-                    <Text style={styles.sectionLabel}>Beliefs</Text>
+                    <Text style={styles.sectionLabel} category="h5">
+                        Beliefs
+                    </Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.beliefs}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
-                    <Text style={styles.sectionLabel}>Likes</Text>
+                    <Text style={styles.sectionLabel} category="h5">
+                        Likes
+                    </Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.likes}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
-                    <Text style={styles.sectionLabel}>Dislikes</Text>
+                    <Text style={styles.sectionLabel} category="h5">
+                        Dislikes
+                    </Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.dislikes}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
-                    <Text style={styles.sectionLabel}>Catchphrases</Text>
+                    <Text style={styles.sectionLabel} category="h5">
+                        Catchphrases
+                    </Text>
                     <Text style={styles.text}>
                         {" "}
                         {this.props.personalityData.catchphrases}{" "}
@@ -67,8 +76,6 @@ export default class Personality extends Component<Props, State> {
 const styles = StyleSheet.create({
     header: {
         flex: 1,
-        fontSize: 16,
-        fontWeight: "bold",
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",
@@ -80,13 +87,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignSelf: "center",
+        padding: 10,
     },
     sectionLabel: {
+        justifyContent: "center",
+        alignSelf: "flex-start",
         fontWeight: "bold",
+        padding: 5,
+        paddingBottom: 0,
     },
     rowContainerFlex3: {
         flex: 3,
-        borderColor: "black",
-        borderWidth: 1,
     },
 });

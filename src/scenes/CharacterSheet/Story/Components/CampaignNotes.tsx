@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
@@ -24,30 +24,45 @@ const CampaignNotes: React.FC<Props> = (props) => {
     };
     return (
         <Layout style={styles.container}>
-            <Text style={styles.header}> Campaign Notes </Text>
+            <Text style={styles.header} category="h3">
+                {" "}
+                Campaign Notes{" "}
+            </Text>
             <Layout style={styles.rowContainerFlex2}>
-                <Text style={styles.sectionLabel} onPress={changeNotes}>Notes</Text>
+                <Text
+                    style={styles.sectionLabel}
+                    category="h5"
+                    onPress={changeNotes}
+                >
+                    Notes
+                </Text>
                 <Text style={styles.text} onPress={changeNotes}>
                     {" "}
                     {props.campaignNotesData.notes}{" "}
                 </Text>
             </Layout>
             <Layout style={styles.rowContainerFlex1}>
-                <Text style={styles.sectionLabel}>Allies</Text>
+                <Text style={styles.sectionLabel} category="h5">
+                    Allies
+                </Text>
                 <Text style={styles.text}>
                     {" "}
                     {props.campaignNotesData.allies}{" "}
                 </Text>
             </Layout>
             <Layout style={styles.rowContainerFlex1}>
-                <Text style={styles.sectionLabel}>Enemies</Text>
+                <Text style={styles.sectionLabel} category="h5">
+                    Enemies
+                </Text>
                 <Text style={styles.text}>
                     {" "}
                     {props.campaignNotesData.enemies}{" "}
                 </Text>
             </Layout>
             <Layout style={styles.rowContainerFlex1}>
-                <Text style={styles.sectionLabel}>Organizations</Text>
+                <Text style={styles.sectionLabel} category="h5">
+                    Organizations
+                </Text>
                 <Text style={styles.text}>
                     {" "}
                     {props.campaignNotesData.organizations}{" "}
@@ -80,11 +95,10 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        fontSize: 16,
-        fontWeight: "bold",
         alignContent: "center",
         justifyContent: "center",
         alignSelf: "center",
+        padding: 5,
     },
     rowContainer: {
         flex: 1,
@@ -95,9 +109,12 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         alignContent: "center",
         justifyContent: "center",
+        padding: 5,
     },
     sectionLabel: {
         fontWeight: "bold",
+        padding: 5,
+        paddingBottom: 0,
     },
     rowContainerFlex3: {
         flex: 3,
