@@ -21,6 +21,7 @@ import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
 import { Ability } from "../../../PF2eCoreLib/Ability";
 import WeaponProficienciesView from "./Components/WeaponProficienciesView";
 import { Divider, Layout, Text } from "@ui-kitten/components";
+import { StoryNavigationProps } from "./StoryNavigation";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -98,6 +99,10 @@ const StoryPage: React.FC<Props> = (props) => {
     );
 };
 
+interface OwnProps {
+    navigation: StoryNavigationProps;
+}
+
 interface LinkStateProps {
     bioData: BiographicalData;
     personalityData: PersonalityData;
@@ -120,7 +125,7 @@ interface LinkStateProps {
     abilityScores: AbilityScoreArray;
     weaponProficiencies: WeaponProficiencies;
 }
-type Props = LinkStateProps;
+type Props = LinkStateProps & OwnProps;
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     characterName: state.playerCharacter.name,
@@ -153,7 +158,6 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         alignContent: "stretch",
     },
-    text: {},
     text: {
         alignSelf: "center",
         alignContent: "center",

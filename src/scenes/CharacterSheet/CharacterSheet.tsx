@@ -32,6 +32,7 @@ import {
 } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
+import { StoryNavigator } from "./Story/StoryNavigation";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -163,7 +164,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     />
                     <Tab.Screen
                         name="Story"
-                        component={StoryPage}
+                        component={StoryNavigator}
                         options={{ tabBarLabel: "Story" }}
                     />
                 </Tab.Navigator>
