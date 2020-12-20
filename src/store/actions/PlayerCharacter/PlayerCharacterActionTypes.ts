@@ -14,6 +14,7 @@ import {
     Spell,
     SpellList,
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
+import { Traits } from "../../../PF2eCoreLib/Traits";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -218,6 +219,11 @@ export interface DeleteSpellAction extends Action<string> {
     spellType: keyof SpellList;
 }
 
+export const CHANGE_PC_TRAITS = "CHANGE_PC_TRAITS";
+export interface ChangePCTraitsAction extends Action<string> {
+    type: typeof CHANGE_PC_TRAITS;
+    PCTraits: (keyof typeof Traits)[];
+}
 
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
@@ -253,4 +259,5 @@ export type PlayerCharacterActionTypes =
     | ChangeSpellSlotsAction
     | UpdateSpellAction
     | AddSpellAction
-    | DeleteSpellAction; // | SomeOtherAction
+    | DeleteSpellAction
+    | ChangePCTraitsAction; // | SomeOtherAction

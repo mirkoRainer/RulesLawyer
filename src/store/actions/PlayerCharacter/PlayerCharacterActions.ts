@@ -34,6 +34,7 @@ import {
     UPDATE_SPELL,
     DELETE_SPELL,
     ADD_SPELL,
+    CHANGE_PC_TRAITS,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
@@ -56,6 +57,7 @@ import {
     Spell,
     SpellList,
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
+import { Traits } from "../../../PF2eCoreLib/Traits";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (
     name: string
@@ -485,10 +487,13 @@ export const startUpdateSpell = (
     };
 };
 
-export const AddSpell: ActionCreator<PlayerCharacterActionTypes> = (Spell: Spell, SpellType: keyof SpellList): PlayerCharacterActionTypes => ({ 
+export const AddSpell: ActionCreator<PlayerCharacterActionTypes> = (
+    Spell: Spell,
+    SpellType: keyof SpellList
+): PlayerCharacterActionTypes => ({
     type: ADD_SPELL,
     Spell,
-    SpellType 
+    SpellType,
 });
 export const startAddSpell = (Spell: Spell, SpellType: keyof SpellList) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
@@ -496,10 +501,13 @@ export const startAddSpell = (Spell: Spell, SpellType: keyof SpellList) => {
     };
 };
 
-export const DeleteSpell: ActionCreator<PlayerCharacterActionTypes> = (index: number, spellType: keyof SpellList): PlayerCharacterActionTypes => ({ 
+export const DeleteSpell: ActionCreator<PlayerCharacterActionTypes> = (
+    index: number,
+    spellType: keyof SpellList
+): PlayerCharacterActionTypes => ({
     type: DELETE_SPELL,
     index,
-    spellType
+    spellType,
 });
 export const startDeleteSpell = (index: number, spellType: keyof SpellList) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
@@ -507,3 +515,14 @@ export const startDeleteSpell = (index: number, spellType: keyof SpellList) => {
     };
 };
 
+export const ChangePCTraits: ActionCreator<PlayerCharacterActionTypes> = (
+    PCTraits: (keyof typeof Traits)[]
+): PlayerCharacterActionTypes => ({
+    type: CHANGE_PC_TRAITS,
+    PCTraits,
+});
+export const startChangePCTraits = (PC_TRAITS: (keyof typeof Traits)[]) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangePCTraits(PC_TRAITS));
+    };
+};
