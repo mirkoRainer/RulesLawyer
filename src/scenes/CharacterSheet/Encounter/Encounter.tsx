@@ -10,13 +10,10 @@ import { startChangeClassDCProficiency } from "../../../store/actions/PlayerChar
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import PlayerCharacter from "../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
-import EncounterDefense from "./EncounterDefense";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import EncounterOffense from "./EncounterOffense";
 import EncounterSkills from "./EncounterSkills";
 import { NavigationContainer } from "@react-navigation/native";
 import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
-import SpellsPage from "./Spells/SpellsPage";
 import { Layout } from "@ui-kitten/components";
 import Conditions from "../Conditions";
 import { OffenseNavigator } from "./OffenseNavigation";

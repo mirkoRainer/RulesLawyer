@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "@ui-kitten/components";
 import { TraitSelectorNavigationProps } from "../../Shared/TraitSelector";
 import StoryPage from "./StoryPage";
-import TraitSelectorView from "../../Shared/TraitSelectorView";
+import TraitSelectorView from "./TraitSelectorView";
 
 export type StoryStackParamList = {
     MainStoryView: undefined;

@@ -53,7 +53,7 @@ const AbilityScoreView: React.FC<Props> = (props) => {
 type Props = AbilityScore & LinkDispatchProps;
 
 interface LinkDispatchProps {
-    startPickerModal: (actionTytpe: string, abilityScore: AbilityScore) => void;
+    startPickerModal: (actionType: string, abilityScore: AbilityScore) => void;
 }
 
 const mapDispatchToProps = (
