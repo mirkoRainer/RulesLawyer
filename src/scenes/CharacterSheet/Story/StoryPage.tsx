@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import BiographicalView, {
     BiographicalData,
@@ -22,6 +22,7 @@ import { Ability } from "../../../PF2eCoreLib/Ability";
 import WeaponProficienciesView from "./Components/WeaponProficienciesView";
 import { Divider, Layout, Text } from "@ui-kitten/components";
 import { StoryNavigationProps } from "./StoryNavigation";
+import { useFocusEffect } from "@react-navigation/native";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -43,6 +44,13 @@ const StoryPage: React.FC<Props> = (props) => {
             traits: props.traits,
         };
     };
+    // make sure the screen is always refreshed.
+    const [state, setState] = useState({});
+    useFocusEffect(
+        React.useCallback(() => {
+            setState({});
+        }, [])
+    );
     return (
         <Layout>
             <ScrollView>
