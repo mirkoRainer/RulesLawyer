@@ -33,6 +33,7 @@ import {
     ADD_SPELL,
     DELETE_SPELL,
     CHANGE_PC_TRAITS,
+    CHANGE_BIO_DATA,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -372,6 +373,14 @@ const playerCharacterReducer = (
             return {
                 ...state,
                 traits: action.PCTraits,
+            };
+        case CHANGE_BIO_DATA:
+            console.debug(
+                `CHANGE_BIO_DATA in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                biographicalData: action.BioData,
             };
         default:
             return state;

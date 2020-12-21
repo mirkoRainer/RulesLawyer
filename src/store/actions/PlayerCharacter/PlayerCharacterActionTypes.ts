@@ -9,6 +9,7 @@ import {
     PF2Action,
     Skill,
     SpellSlot,
+    BiographicalData,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -225,6 +226,13 @@ export interface ChangePCTraitsAction extends Action<string> {
     PCTraits: (keyof typeof Traits)[];
 }
 
+export const CHANGE_BIO_DATA = "CHANGE_BIO_DATA";
+export interface ChangeBioDataAction extends Action<string> {
+    type: typeof CHANGE_BIO_DATA;
+    BioData: BiographicalData;
+}
+
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -260,4 +268,5 @@ export type PlayerCharacterActionTypes =
     | UpdateSpellAction
     | AddSpellAction
     | DeleteSpellAction
-    | ChangePCTraitsAction; // | SomeOtherAction
+    | ChangePCTraitsAction
+    | ChangeBioDataAction; // | SomeOtherAction

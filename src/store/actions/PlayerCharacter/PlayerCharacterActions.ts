@@ -35,6 +35,7 @@ import {
     DELETE_SPELL,
     ADD_SPELL,
     CHANGE_PC_TRAITS,
+    CHANGE_BIO_DATA,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
@@ -52,6 +53,7 @@ import {
     PF2Action,
     Skill,
     SpellSlot,
+    BiographicalData,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -526,3 +528,15 @@ export const startChangePCTraits = (PC_TRAITS: (keyof typeof Traits)[]) => {
         dispatch(ChangePCTraits(PC_TRAITS));
     };
 };
+
+export const ChangeBioData: ActionCreator<PlayerCharacterActionTypes> = (BioData: BiographicalData): PlayerCharacterActionTypes => ({ 
+    type: CHANGE_BIO_DATA,
+    BioData 
+});
+export const startChangeBioData = (BioData: BiographicalData) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeBioData(BioData));
+    };
+};
+
+
