@@ -10,8 +10,22 @@ export default class WeaponProficienciesView extends Component<
     WeaponProficiencies
 > {
     public static defaultProps = {};
-
+    
     render() {
+        const otherProfs = this.props.Others;
+        let renderOthers: JSX.Element[] = [];
+        otherProfs.forEach(proficiency => {
+            renderOthers.push(
+                <Layout style={styles.weaponProf} key={proficiency.description}>
+                    <Text style={styles.text} category="h6">
+                        {proficiency.description}
+                    </Text>
+                    <ProficiencyArrayView
+                        proficiency={proficiency.proficiency}
+                    />
+                </Layout>
+            );
+        });
         return (
             <Layout style={styles.container}>
                 <Layout style={styles.weaponProf}>
@@ -32,21 +46,7 @@ export default class WeaponProficienciesView extends Component<
                     </Text>
                     <ProficiencyArrayView proficiency={this.props.Martial} />
                 </Layout>
-                <Layout style={styles.weaponProf}>
-                    <Text style={styles.text} category="h6">
-                        Other
-                    </Text>
-                    {/* 
-                    TODO: Need to convert an array of "others" into a flat list. 
-                    */}
-                    <ProficiencyArrayView
-                        proficiency={
-                            this.props.Others[0]
-                                ? this.props.Others[0].proficiency
-                                : Proficiencies.Untrained
-                        }
-                    />
-                </Layout>
+                {renderOthers}
             </Layout>
         );
     }
