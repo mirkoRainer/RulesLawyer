@@ -18,7 +18,6 @@ type TraitNavigationProp = StackNavigationProp<
 >;
 
 const TraitsView: React.FC<Props> = (props) => {
-    console.debug(`${props.traits}`);
     const navigation = useNavigation<TraitNavigationProp>();
     const goToTraitSelector = () => {
         console.debug(`Navigating to TraitSelector with ${props.traits}`);
@@ -39,9 +38,11 @@ const TraitsView: React.FC<Props> = (props) => {
                     Traits:
                 </Text>
                 <ScrollView horizontal={true}>
-                    <Text style={{ ...styles.text }} category="h5">
-                        {props.traits.join(", ")}{" "}
-                    </Text>
+                    <TouchableOpacity onPress={goToTraitSelector}>
+                        <Text style={{ ...styles.text }} category="h5">
+                            {props.traits.join(", ")}{" "}
+                        </Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </Layout>
         </TouchableOpacity>
