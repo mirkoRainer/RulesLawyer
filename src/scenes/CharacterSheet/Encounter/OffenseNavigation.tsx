@@ -1,9 +1,17 @@
 import React from "react";
-import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
+import {
+    createStackNavigator,
+    StackNavigationProp,
+} from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import EncounterOffense from "./EncounterOffense";
 import EditActionsView from "./Offense/EditActionsView";
-import { Icon, TopNavigationAction, TopNavigation, useTheme } from "@ui-kitten/components";
+import {
+    Icon,
+    TopNavigationAction,
+    TopNavigation,
+    useTheme,
+} from "@ui-kitten/components";
 import EditActionView from "./Offense/EditActionView";
 import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
 import { DefenseStackParamList } from "./DefenseNavigation";
@@ -11,21 +19,27 @@ import { DefenseStackParamList } from "./DefenseNavigation";
 export type OffenseStackParamList = {
     MainOffenseView: undefined;
     EditActionsView: undefined;
-    EditActionView: { index: number, updateAction: (updatedAction: PF2Action, index: number) => void};
-}
+    EditActionView: {
+        index: number;
+        updateAction: (updatedAction: PF2Action, index: number) => void;
+    };
+};
 
-export type MainOffenseNavigationProps = StackNavigationProp<OffenseStackParamList, "MainOffenseView">;
+export type MainOffenseNavigationProps = StackNavigationProp<
+    OffenseStackParamList,
+    "MainOffenseView"
+>;
 
 export const OffenseNavigator: React.FC = () => {
     const Stack = createStackNavigator<OffenseStackParamList>();
     const theme = useTheme();
-    return(
+    return (
         <NavigationContainer independent={true}>
-            <Stack.Navigator 
+            <Stack.Navigator
                 initialRouteName="MainOffenseView"
                 headerMode="none"
             >
-                <Stack.Screen 
+                <Stack.Screen
                     name="MainOffenseView"
                     component={EncounterOffense}
                 />

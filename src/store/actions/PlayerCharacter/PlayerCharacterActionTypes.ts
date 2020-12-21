@@ -232,7 +232,6 @@ export interface ChangeBioDataAction extends Action<string> {
     BioData: BiographicalData;
 }
 
-
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction

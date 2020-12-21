@@ -5,32 +5,70 @@ import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { CHANGE_RESISTANCES, CHANGE_IMMUNITIES, CHANGE_WEAKNESSES } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
+import {
+    CHANGE_RESISTANCES,
+    CHANGE_IMMUNITIES,
+    CHANGE_WEAKNESSES,
+} from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { Layout, Text } from "@ui-kitten/components";
 import { EntireAppState } from "../../../../store/Store";
 
 const ResistancesImmunitiesWeaknesses: React.FC<Props> = (props) => {
     const resistancesDisplay: string = props.resistances;
-    const changeResistances = () => {props.startTextEditModal(CHANGE_RESISTANCES);};
+    const changeResistances = () => {
+        props.startTextEditModal(CHANGE_RESISTANCES);
+    };
     const immunitiesDisplay: string = props.immunities;
-    const changeImmunities = () => {props.startTextEditModal(CHANGE_IMMUNITIES);};
+    const changeImmunities = () => {
+        props.startTextEditModal(CHANGE_IMMUNITIES);
+    };
     const weaknessesDisplay: string = props.weaknesses;
-    const changeWeaknesses = () => {props.startTextEditModal(CHANGE_WEAKNESSES);};
+    const changeWeaknesses = () => {
+        props.startTextEditModal(CHANGE_WEAKNESSES);
+    };
 
     return (
         <Layout style={styles.container}>
             <Layout style={styles.horizontal}>
                 <Layout style={styles.container}>
-                    <Text style={styles.text} category='h6' onPress={changeResistances}>Resistances: </Text>
-                    <Text style={styles.text} category='p1' onPress={changeResistances}>{resistancesDisplay}</Text>
+                    <Text
+                        style={styles.text}
+                        category="h6"
+                        onPress={changeResistances}
+                    >
+                        Resistances:{" "}
+                    </Text>
+                    <Text
+                        style={styles.text}
+                        category="p1"
+                        onPress={changeResistances}
+                    >
+                        {resistancesDisplay}
+                    </Text>
                 </Layout>
                 <Layout style={styles.container}>
-                    <Text style={styles.text} category='h6' onPress={changeImmunities}>Immunities: </Text>
-                    <Text style={styles.text} category='p1' onPress={changeImmunities}>{immunitiesDisplay}</Text>
+                    <Text
+                        style={styles.text}
+                        category="h6"
+                        onPress={changeImmunities}
+                    >
+                        Immunities:{" "}
+                    </Text>
+                    <Text
+                        style={styles.text}
+                        category="p1"
+                        onPress={changeImmunities}
+                    >
+                        {immunitiesDisplay}
+                    </Text>
                 </Layout>
             </Layout>
-            <Text style={styles.text} category='h6' onPress={changeWeaknesses}>Weaknesses: </Text>
-            <Text style={styles.text} category='p1' onPress={changeWeaknesses}>{weaknessesDisplay}</Text>
+            <Text style={styles.text} category="h6" onPress={changeWeaknesses}>
+                Weaknesses:{" "}
+            </Text>
+            <Text style={styles.text} category="p1" onPress={changeWeaknesses}>
+                {weaknessesDisplay}
+            </Text>
         </Layout>
     );
 };
@@ -55,26 +93,28 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     resistances: state.playerCharacter.resistances,
     immunities: state.playerCharacter.immunities,
-    weaknesses: state.playerCharacter.weakness
+    weaknesses: state.playerCharacter.weakness,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResistancesImmunitiesWeaknesses);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ResistancesImmunitiesWeaknesses);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: "stretch",
         alignSelf: "stretch",
-        padding: 5
+        padding: 5,
     },
     horizontal: {
         flex: 1,
         flexDirection: "row",
-        flexGrow: 1
+        flexGrow: 1,
     },
     text: {
         flex: 1,

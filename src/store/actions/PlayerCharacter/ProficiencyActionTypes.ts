@@ -20,8 +20,7 @@ export interface ChangeSpellProficiencyAction extends Action<string> {
     SpellProficiency: Proficiencies;
 }
 
-
-
-export type ProficiencyActionTypes =    ChangeSaveProficienciesAction |
-                                        ChangePerceptionProficiencyAction |
-                                        ChangeSpellProficiencyAction;
+export type ProficiencyActionTypes =
+    | ChangeSaveProficienciesAction
+    | ChangePerceptionProficiencyAction
+    | ChangeSpellProficiencyAction;

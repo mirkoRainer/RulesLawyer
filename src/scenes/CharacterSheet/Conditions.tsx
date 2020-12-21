@@ -12,11 +12,15 @@ const Conditions: React.FC<Props> = (props) => {
     const conditions: string = props.conditions;
     const changeConditions = () => {
         props.startTextEditModal(CHANGE_CONDITIONS);
-    };    
+    };
     return (
         <Layout style={styles.container}>
-            <Text onPress={changeConditions} category='h6'>Conditions:</Text>
-            <Text style={styles.text} onPress={changeConditions}>{conditions}</Text>
+            <Text onPress={changeConditions} category="h6">
+                Conditions:
+            </Text>
+            <Text style={styles.text} onPress={changeConditions}>
+                {conditions}
+            </Text>
         </Layout>
     );
 };
@@ -44,17 +48,17 @@ export default connect(null, mapDispatchToProps)(Conditions);
 
 const styles = StyleSheet.create({
     container: {
-        flex: .08,
+        flex: 0.08,
         alignContent: "center",
         alignItems: "center",
         alignSelf: "stretch",
         flexDirection: "row",
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     text: {
         flex: 1,
         alignSelf: "center",
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     text2: {
         flex: 2,

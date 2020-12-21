@@ -7,7 +7,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../RootDrawerParamList";
 import { db } from "../db/db";
 
-type MainMenuNavigationProps = DrawerNavigationProp<RootDrawerParamList, "MainMenu">;
+type MainMenuNavigationProps = DrawerNavigationProp<
+    RootDrawerParamList,
+    "MainMenu"
+>;
 interface Props {
     navigation: MainMenuNavigationProps;
 }
@@ -18,26 +21,23 @@ export default class MainMenu extends Component<Props, State> {
 
     checkDB = () => {
         console.log("Printing out DB entries for ancestries");
-        db.query(sql`SELECT * FROM ancestries`).then(e => {console.log(e);});
-    }
-    
+        db.query(sql`SELECT * FROM ancestries`).then((e) => {
+            console.log(e);
+        });
+    };
+
     render() {
         return (
             <SafeAreaView>
                 <Layout style={styles.container}>
                     <Text style={styles.text}> Main! </Text>
                     <Layout style={styles.button}>
-                        <Button 
-                            onPress={() => this.props.navigation.openDrawer() } 
+                        <Button
+                            onPress={() => this.props.navigation.openDrawer()}
                         >
-                            {"Swipe from left side or press me"} 
-
+                            {"Swipe from left side or press me"}
                         </Button>
-                        <Button 
-                            onPress={this.checkDB}
-                        >
-                            {"Check DB"}
-                        </Button>
+                        <Button onPress={this.checkDB}>{"Check DB"}</Button>
                     </Layout>
                 </Layout>
             </SafeAreaView>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-        alignSelf: "auto"
+        alignSelf: "auto",
     },
     button: {
         flex: 1,

@@ -24,15 +24,14 @@ const ThemeWrapper: React.FC<Props> = (props) => {
     return (
         <React.Fragment>
             <IconRegistry icons={EvaIconsPack} />
-            <ApplicationProvider {...eva} theme={{...theme, ...customTheme}}>
+            <ApplicationProvider {...eva} theme={{ ...theme, ...customTheme }}>
                 <AppNavigator />
             </ApplicationProvider>
         </React.Fragment>
     );
 };
 
-type Props = LinkDispatchProps & LinkStateProps
-    
+type Props = LinkDispatchProps & LinkStateProps;
 
 // base state
 interface LinkStateProps {
@@ -43,14 +42,14 @@ interface LinkDispatchProps {
     toggleDarkMode: (newTheme: keyof DarkModeOptions) => void;
 }
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
-    theme: state.theme.mode
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
+    theme: state.theme.mode,
 });
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
-    toggleDarkMode: bindActionCreators(startToggleDarkMode, dispatch)
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+    toggleDarkMode: bindActionCreators(startToggleDarkMode, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThemeWrapper);

@@ -49,48 +49,48 @@ const modalsReducer = (
 ): ModalState => {
     let newState: ModalState;
     switch (action.type) {
-    case TOGGLE_PICKER_MODAL:
-        newState = {
-            ...state,
-            pickerModal: {
-                ...state.pickerModal,
-                visible: !state.pickerModal.visible,
-                currentSelection: action.value
-            },
-        };
-        return newState;
-    case UPDATE_PICKER_MODAL_STATE:
-        newState = {
-            ...state,
-            pickerModal: action.payload
-        };
-        return newState;
-    case TOGGLE_TEXTEDIT_MODAL:
-        newState = {
-            ...state,
-            textEditModal: {
-                ...state.textEditModal,
-                visible: !state.textEditModal.visible,
-            },
-        };
-        return newState;
-    case UPDATE_TEXT_MODAL_STATE:
-        newState = {
-            ...state,
-            textEditModal: action.payload
-        };
-        return newState;
-    case CHANGE_PICKER_SELECTION:
-        newState = {
-            ...state,
-            pickerModal: {
-                ...state.pickerModal,
-                currentSelection: action.PickerSelection
-            }
-        };
-        return newState;
-    default:
-        return state;
+        case TOGGLE_PICKER_MODAL:
+            newState = {
+                ...state,
+                pickerModal: {
+                    ...state.pickerModal,
+                    visible: !state.pickerModal.visible,
+                    currentSelection: action.value,
+                },
+            };
+            return newState;
+        case UPDATE_PICKER_MODAL_STATE:
+            newState = {
+                ...state,
+                pickerModal: action.payload,
+            };
+            return newState;
+        case TOGGLE_TEXTEDIT_MODAL:
+            newState = {
+                ...state,
+                textEditModal: {
+                    ...state.textEditModal,
+                    visible: !state.textEditModal.visible,
+                },
+            };
+            return newState;
+        case UPDATE_TEXT_MODAL_STATE:
+            newState = {
+                ...state,
+                textEditModal: action.payload,
+            };
+            return newState;
+        case CHANGE_PICKER_SELECTION:
+            newState = {
+                ...state,
+                pickerModal: {
+                    ...state.pickerModal,
+                    currentSelection: action.PickerSelection,
+                },
+            };
+            return newState;
+        default:
+            return state;
     }
 };
 

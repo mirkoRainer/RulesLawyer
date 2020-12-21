@@ -4,9 +4,13 @@ import { Ancestries } from "./Ancestries";
 import { BuildChoice } from "../store/CharacterBuildState";
 import { GetAncestryFeatChoicesFor } from "./AncestryFeats";
 
-export function GetAvailableBuildChoices(Ancestry: keyof Ancestries, Background: keyof Backgrounds, Class: keyof Classes) : BuildChoice[] {
+export function GetAvailableBuildChoices(
+    Ancestry: keyof Ancestries,
+    Background: keyof Backgrounds,
+    Class: keyof Classes
+): BuildChoice[] {
     let buildOptions: BuildChoice[] = [];
     buildOptions.push(...GetAncestryFeatChoicesFor(Ancestry));
 
     return buildOptions;
-} 
+}

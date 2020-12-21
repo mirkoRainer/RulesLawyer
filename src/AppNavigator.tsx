@@ -16,14 +16,14 @@ type Props = {};
 export const AppNavigator: React.FC<Props> = (props) => {
     const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
-    return(
+    return (
         <NavigationContainer>
             <Drawer.Navigator initialRouteName="CharacterSheet">
-                <Drawer.Screen 
+                <Drawer.Screen
                     name="MainMenu"
                     component={MainMenu}
                     options={{
-                        title: "Main Menu"
+                        title: "Main Menu",
                     }}
                 />
                 {/* 
@@ -34,12 +34,12 @@ export const AppNavigator: React.FC<Props> = (props) => {
                         options={{title: "Export PDF"}}
                         /> 
                     */}
-                <Drawer.Screen 
+                <Drawer.Screen
                     name="Build"
                     component={Build}
                     options={{ title: "Build Character" }}
                 />
-                <Drawer.Screen 
+                <Drawer.Screen
                     name="CharacterSheet"
                     component={CharacterSheet}
                     // options={}
@@ -54,22 +54,22 @@ export const AppNavigator: React.FC<Props> = (props) => {
                 <Drawer.Screen
                     name="SaveView"
                     component={SaveView}
-                    options={{title: "Save As"}}
+                    options={{ title: "Save As" }}
                 />
                 <Drawer.Screen
                     name="OpenCharacterView"
                     component={OpenCharacterView}
-                    options={{title: "Load Character"}}
+                    options={{ title: "Load Character" }}
                 />
                 <Drawer.Screen
                     name="BugReportView"
                     component={BugReportView}
-                    options={{title: "Bug Report"}}
+                    options={{ title: "Bug Report" }}
                 />
                 <Drawer.Screen
                     name="AboutView"
                     component={AboutView}
-                    options={{title: "About"}}
+                    options={{ title: "About" }}
                 />
             </Drawer.Navigator>
         </NavigationContainer>
@@ -78,6 +78,6 @@ export const AppNavigator: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     centered: {
-        alignSelf: "center"
-    }
+        alignSelf: "center",
+    },
 });

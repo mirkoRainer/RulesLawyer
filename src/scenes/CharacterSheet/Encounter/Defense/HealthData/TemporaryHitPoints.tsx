@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
@@ -11,14 +11,23 @@ import { AppActions } from "../../../../../store/actions/AllActionTypesAggregate
 
 const TemporaryHitPoints: React.FC<Props> = (props) => {
     const changeTempHP = () => {
-        props.startPickerModal(CHANGE_TEMPORARY_HITPOINTS, props.temporaryHitPoints);
+        props.startPickerModal(
+            CHANGE_TEMPORARY_HITPOINTS,
+            props.temporaryHitPoints
+        );
     };
 
     return (
         <Layout style={styles.container}>
             <TouchableOpacity style={styles.container} onPress={changeTempHP}>
-                <Text style={styles.text} category='p1'> Temp: </Text>
-                <Text category='h4' style={styles.text}> {props.temporaryHitPoints} </Text>
+                <Text style={styles.text} category="p1">
+                    {" "}
+                    Temp:{" "}
+                </Text>
+                <Text category="h4" style={styles.text}>
+                    {" "}
+                    {props.temporaryHitPoints}{" "}
+                </Text>
             </TouchableOpacity>
         </Layout>
     );
@@ -41,12 +50,14 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        startPickerModal: bindActionCreators(startNumberPickerModalSelection, dispatch),
+        startPickerModal: bindActionCreators(
+            startNumberPickerModalSelection,
+            dispatch
+        ),
     };
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     temporaryHitPoints: state.playerCharacter.hitPoint.temporaryHitPoints,
 });
 
@@ -55,8 +66,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TemporaryHitPoints);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center"
+        alignItems: "center",
     },
     text: {},
 });
-

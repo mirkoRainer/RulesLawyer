@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-
 
 interface Props {}
 

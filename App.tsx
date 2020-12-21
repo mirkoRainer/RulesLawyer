@@ -5,10 +5,12 @@ import ThemeWrapper from "./src/ThemeWrapper";
 import { copyDBFromBundleToDocumentDirectory } from "./src/db/db";
 
 export default class App extends Component {
-    async componentDidMount(){
-        await copyDBFromBundleToDocumentDirectory().catch(err => {console.debug(err);});
+    async componentDidMount() {
+        await copyDBFromBundleToDocumentDirectory().catch((err) => {
+            console.debug(err);
+        });
     }
-    render(){
+    render() {
         return (
             <Provider store={Store}>
                 <ThemeWrapper />

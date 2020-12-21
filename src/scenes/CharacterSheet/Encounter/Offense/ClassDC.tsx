@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@ui-kitten/components";
-import ProficiencyView, { ProficiencyProps } from "../../../Shared/ProficiencyView";
+import ProficiencyView, {
+    ProficiencyProps,
+} from "../../../Shared/ProficiencyView";
 import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
-import PlayerCharacter, { iClass } from "../../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter, {
+    iClass,
+} from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Action, bindActionCreators } from "redux";
 import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
@@ -12,10 +16,12 @@ import { startChangeClassDCProficiency } from "../../../../store/actions/PlayerC
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
-import { Proficiencies, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
+import {
+    Proficiencies,
+    DetermineNextProficiency,
+} from "../../../../PF2eCoreLib/Proficiencies";
 
 const ClassDC: React.FC<Props> = (props) => {
-
     const classDCProficiency = (): ProficiencyProps => {
         return {
             title: "Class DC",
@@ -42,9 +48,7 @@ const ClassDC: React.FC<Props> = (props) => {
                 <ProficiencyView
                     title={"Class DC"}
                     proficiency={classDCProficiency().proficiency}
-                    keyAbility={
-                        classDCProficiency().keyAbility
-                    }
+                    keyAbility={classDCProficiency().keyAbility}
                     is10base={classDCProficiency().is10base}
                     itemBonus={classDCProficiency().itemBonus}
                     level={props.level}
@@ -64,23 +68,25 @@ interface LinkStateProps {
     abilityScores: AbilityScoreArray;
     pcClass: iClass;
     level: number;
-    bonuses: iBonus[]
+    bonuses: iBonus[];
 }
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
-        changeClassDCProficiency: bindActionCreators(startChangeClassDCProficiency, dispatch)
+        changeClassDCProficiency: bindActionCreators(
+            startChangeClassDCProficiency,
+            dispatch
+        ),
     };
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     abilityScores: state.playerCharacter.abilityScores,
     pcClass: state.playerCharacter.pcClass,
     level: state.playerCharacter.level,
-    bonuses: state.playerCharacter.bonuses
+    bonuses: state.playerCharacter.bonuses,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassDC);
@@ -94,6 +100,6 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         textAlign: "center",
-        fontSize: 22
-    }
+        fontSize: 22,
+    },
 });

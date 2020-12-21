@@ -529,14 +529,14 @@ export const startChangePCTraits = (PC_TRAITS: (keyof typeof Traits)[]) => {
     };
 };
 
-export const ChangeBioData: ActionCreator<PlayerCharacterActionTypes> = (BioData: BiographicalData): PlayerCharacterActionTypes => ({ 
+export const ChangeBioData: ActionCreator<PlayerCharacterActionTypes> = (
+    BioData: BiographicalData
+): PlayerCharacterActionTypes => ({
     type: CHANGE_BIO_DATA,
-    BioData 
+    BioData,
 });
 export const startChangeBioData = (BioData: BiographicalData) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeBioData(BioData));
     };
 };
-
-

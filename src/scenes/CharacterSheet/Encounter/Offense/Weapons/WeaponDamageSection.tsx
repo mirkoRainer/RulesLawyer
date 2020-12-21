@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
 
@@ -11,16 +11,20 @@ interface Props {
     traits: (keyof typeof Traits)[];
 }
 
-
 const WeaponDamageSection: React.FC<Props> = (props) => {
-    const damageText = props.abilityModifier >= 0 ? `${props.damageDice}+${props.abilityModifier}` : `${props.damageDice}-${props.abilityModifier}`;
+    const damageText =
+        props.abilityModifier >= 0
+            ? `${props.damageDice}+${props.abilityModifier}`
+            : `${props.damageDice}-${props.abilityModifier}`;
 
     return (
         <Layout style={styles.container}>
             <Text style={styles.text}> {props.other} </Text>
             <Text style={styles.text}> {props.traits.toString()} </Text>
             <Layout style={styles.damageContainer}>
-                <Text style={styles.text} category='h6'>Damage</Text>
+                <Text style={styles.text} category="h6">
+                    Damage
+                </Text>
                 <Layout style={styles.damageText}>
                     <Text style={styles.text}> {damageText} </Text>
                     <Text style={styles.text}> {props.damageType} </Text>
@@ -36,17 +40,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        padding: 10
+        padding: 10,
     },
     damageContainer: {
         flex: 3,
     },
     damageText: {
         flex: 1,
-        flexDirection: "row"
+        flexDirection: "row",
     },
     text: {
         flex: 1,
-        textAlign: "center"
+        textAlign: "center",
     },
 });

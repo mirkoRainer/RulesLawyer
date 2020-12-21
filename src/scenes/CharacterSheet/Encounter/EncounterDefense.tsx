@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import PlayerCharacter, { Shield } from "../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
@@ -9,11 +9,10 @@ import ACView from "./Defense/ArmorClass/ACView";
 import { Layout, Divider } from "@ui-kitten/components";
 import ShieldView from "./Defense/Shield/ShieldView";
 import SavesView from "./Defense/SavesView";
-import { ScrollView } from "react-native-gesture-handler";
 import { MainDefenseNavigationProps } from "./DefenseNavigation";
 
 interface OwnProps {
-    navigation: MainDefenseNavigationProps
+    navigation: MainDefenseNavigationProps;
 }
 
 const EncounterDefense: React.FC<Props> = (props) => {
@@ -24,12 +23,14 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 <HitPoints
                     max={props.playerCharacter.hitPoint.maxHitPoints}
                     current={props.playerCharacter.hitPoint.currentHitPoints}
-                    temporary={props.playerCharacter.hitPoint.temporaryHitPoints}
+                    temporary={
+                        props.playerCharacter.hitPoint.temporaryHitPoints
+                    }
                     dying={props.playerCharacter.hitPoint.dying}
                     wounded={props.playerCharacter.hitPoint.wounded}
                 />
                 <Divider />
-                <ACView navigation={props.navigation}/>
+                <ACView navigation={props.navigation} />
                 <Divider />
                 <ShieldView />
                 <Divider />
@@ -44,15 +45,13 @@ const EncounterDefense: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
 });
 
 type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
-interface LinkDispatchProps {
-
-}
+interface LinkDispatchProps {}
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
@@ -62,21 +61,16 @@ interface LinkStateProps {
     weaknesses: string;
 }
 
-const mapDispatchToProps = (
-): LinkDispatchProps => {
-    return {
-
-    };
+const mapDispatchToProps = (): LinkDispatchProps => {
+    return {};
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
     shield: state.playerCharacter.shield,
     resistances: state.playerCharacter.resistances,
     immunities: state.playerCharacter.immunities,
-    weaknesses: state.playerCharacter.weakness
+    weaknesses: state.playerCharacter.weakness,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EncounterDefense);
-

@@ -20,34 +20,48 @@ export const WeaponSelector: React.FC<Props> = (props) => {
             props.onSelect(undefined);
             return;
         }
-        console.debug(`Not undefined so it's ${props.currentWeapons[trueIndex.row - 1]}`);
+        console.debug(
+            `Not undefined so it's ${props.currentWeapons[trueIndex.row - 1]}`
+        );
         props.onSelect(props.currentWeapons[trueIndex.row - 1]);
         return;
     };
 
     const renderSelectItem = (weapon: Weapon | undefined) => {
-        if (!weapon) { return <SelectItem title={"None"} key={undefined}></SelectItem>;}
+        if (!weapon) {
+            return <SelectItem title={"None"} key={undefined}></SelectItem>;
+        }
         const title: string = weapon.name;
-        return <SelectItem title={title} key={weapon.id.toString()}></SelectItem>;
+        return (
+            <SelectItem title={title} key={weapon.id.toString()}></SelectItem>
+        );
     };
-    const weapons = props.currentWeapons.map(x => renderSelectItem(x));
+    const weapons = props.currentWeapons.map((x) => renderSelectItem(x));
     weapons.unshift(renderSelectItem(undefined));
-    const value = props.currentWeaponSelected ? props.currentWeaponSelected.name : "None";
-    const selectedIndex = props.currentWeaponSelected ? new IndexPath(indexOf(getWeaponsFromInventory(), props.currentWeaponSelected!.name) + 1) : new IndexPath(0);
+    const value = props.currentWeaponSelected
+        ? props.currentWeaponSelected.name
+        : "None";
+    const selectedIndex = props.currentWeaponSelected
+        ? new IndexPath(
+              indexOf(
+                  getWeaponsFromInventory(),
+                  props.currentWeaponSelected!.name
+              ) + 1
+          )
+        : new IndexPath(0);
 
-    return(
+    return (
         <>
             <Select
                 label="Weapon"
-                placeholder='Select a Weapon'
+                placeholder="Select a Weapon"
                 selectedIndex={selectedIndex}
                 onSelect={handleWeaponSelect}
                 value={value}
-                style={{paddingBottom: 10}}
+                style={{ paddingBottom: 10 }}
             >
                 {weapons}
             </Select>
         </>
     );
 };
-

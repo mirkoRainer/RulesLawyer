@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 
-
 interface IProps {
-  tooltip?: string;
-  text: string | number;
-  status?: string;
-  onPress: (trait: string) => void;
+    tooltip?: string;
+    text: string | number;
+    status?: string;
+    onPress: (trait: string) => void;
 }
 
 export const Pill: React.FC<IProps> = (props): JSX.Element => {
@@ -21,7 +20,11 @@ export const Pill: React.FC<IProps> = (props): JSX.Element => {
     );
 
     const renderTooltip = (): JSX.Element => (
-        <Tooltip anchor={renderChildren} visible={visible} onBackdropPress={() => setVisible(false)}>
+        <Tooltip
+            anchor={renderChildren}
+            visible={visible}
+            onBackdropPress={() => setVisible(false)}
+        >
             {props.tooltip!}
         </Tooltip>
     );
@@ -33,7 +36,14 @@ export const Pill: React.FC<IProps> = (props): JSX.Element => {
     if (props.tooltip) return renderTooltip();
     return (
         <Layout>
-            <Button status={props.status || "basic"} style={styles.pill} size='small' onPress={handlePress}>{props.text}</Button>
+            <Button
+                status={props.status || "basic"}
+                style={styles.pill}
+                size="small"
+                onPress={handlePress}
+            >
+                {props.text}
+            </Button>
         </Layout>
     );
 };

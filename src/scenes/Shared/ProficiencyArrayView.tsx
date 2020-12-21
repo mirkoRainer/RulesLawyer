@@ -1,7 +1,7 @@
 import React from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Proficiencies } from "../../PF2eCoreLib/Proficiencies";
-import {Layout, Text } from "@ui-kitten/components";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -20,36 +20,34 @@ const ProficiencyArrayView: React.FC<Props> = (props) => {
     let masterCategory;
     let legendaryCategory;
 
-    if (["Trained", "Expert", "Master", "Legendary"].includes(
-        props.proficiency.toString()
-    )) {
+    if (
+        ["Trained", "Expert", "Master", "Legendary"].includes(
+            props.proficiency.toString()
+        )
+    ) {
         trainedStyle = styles.profTextTrue;
         trainedCategory = "success";
     } else {
         trainedStyle = styles.profTextFalse;
     }
 
-    if (["Expert", "Master", "Legendary"].includes(
-        props.proficiency.toString()
-    )) {
+    if (
+        ["Expert", "Master", "Legendary"].includes(props.proficiency.toString())
+    ) {
         expertStyle = styles.profTextTrue;
         expertCategory = "success";
     } else {
         expertStyle = styles.profTextFalse;
     }
 
-    if (["Master", "Legendary"].includes(
-        props.proficiency.toString()
-    )) {
-        masterStyle =  styles.profTextTrue;
+    if (["Master", "Legendary"].includes(props.proficiency.toString())) {
+        masterStyle = styles.profTextTrue;
         masterCategory = "success";
     } else {
         masterStyle = styles.profTextFalse;
     }
 
-    if (["Legendary"].includes(
-        props.proficiency.toString()
-    )) {
+    if (["Legendary"].includes(props.proficiency.toString())) {
         legendaryStyle = styles.profTextTrue;
         legendaryCategory = "success";
     } else {
@@ -58,10 +56,18 @@ const ProficiencyArrayView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
-            <Text style={trainedStyle} category={trainedCategory}>T</Text>
-            <Text style={expertStyle} category={expertCategory}>E</Text>
-            <Text style={masterStyle} category={masterCategory}>M</Text>
-            <Text style={legendaryStyle} category={legendaryCategory}>L</Text>
+            <Text style={trainedStyle} category={trainedCategory}>
+                T
+            </Text>
+            <Text style={expertStyle} category={expertCategory}>
+                E
+            </Text>
+            <Text style={masterStyle} category={masterCategory}>
+                M
+            </Text>
+            <Text style={legendaryStyle} category={legendaryCategory}>
+                L
+            </Text>
         </Layout>
     );
 };
@@ -78,11 +84,13 @@ interface LinkDispatchProps {
     startPickerModal: (actionType: string, proficiency: string) => void;
 }
 
-
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
-    startPickerModal: bindActionCreators(startStringPickerModalSelection, dispatch),
-
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+    startPickerModal: bindActionCreators(
+        startStringPickerModalSelection,
+        dispatch
+    ),
 });
 
 export default connect(null, mapDispatchToProps)(ProficiencyArrayView);

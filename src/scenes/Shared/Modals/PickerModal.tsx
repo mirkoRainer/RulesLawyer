@@ -1,9 +1,14 @@
 import React from "react";
+import { StyleSheet, ModalBaseProps } from "react-native";
 import {
-    StyleSheet,
-    ModalBaseProps,
-} from "react-native";
-import { Layout, Text, Modal, Card, Button, Icon, useTheme } from "@ui-kitten/components";
+    Layout,
+    Text,
+    Modal,
+    Card,
+    Button,
+    Icon,
+    useTheme,
+} from "@ui-kitten/components";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
@@ -11,7 +16,7 @@ import { startTogglePickerModal } from "../../../store/actions/Modals/ModalsActi
 import { connect } from "react-redux";
 import { PickerModalState } from "../../../store/ModalsState";
 import { EntireAppState } from "../../../store/Store";
-import {Picker} from "@react-native-community/picker";
+import { Picker } from "@react-native-community/picker";
 
 type OwnProps = {};
 
@@ -19,7 +24,9 @@ type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
 const PickerModal: React.FC<Props> = (props) => {
     const items = props.modalState.items.map((value, index) => {
-        return <Picker.Item value={value} key={value} label={value.toString()}  />;
+        return (
+            <Picker.Item value={value} key={value} label={value.toString()} />
+        );
     });
     const CheckIcon = (props: any) => (
         <Icon {...props} name="checkmark-circle-outline" />
@@ -36,13 +43,17 @@ const PickerModal: React.FC<Props> = (props) => {
             <Layout style={styles.pickerContainer}>
                 <Layout style={styles.header}>
                     <Text>{props.modalState.title || "Edit:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
+                    <Button
+                        appearance="ghost"
+                        accessoryLeft={CheckIcon}
+                        onPress={props.toggleModal}
+                    />
                 </Layout>
                 <Layout>
                     <Picker
                         selectedValue={props.modalState.currentSelection}
                         onValueChange={props.modalState.onSelect}
-                        itemStyle={{color: theme["color-primary-500"]}}
+                        itemStyle={{ color: theme["color-primary-500"] }}
                     >
                         {items}
                     </Picker>
@@ -82,12 +93,12 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        flex: 1
+        flex: 1,
     },
     pickerContainer: {
         height: "100%",
         width: "100%",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     header: {
         justifyContent: "space-between",
@@ -99,8 +110,8 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     modal: {
-        overflow: "scroll"
-    },    
+        overflow: "scroll",
+    },
     backdrop: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },

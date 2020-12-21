@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Layout, Text, Input, Icon, Card, Button, Modal } from "@ui-kitten/components";
 import {
-    StyleSheet
-} from "react-native";
+    Layout,
+    Text,
+    Input,
+    Icon,
+    Card,
+    Button,
+    Modal,
+} from "@ui-kitten/components";
+import { StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
@@ -12,8 +18,8 @@ import { AppActions } from "../../../../../store/actions/AllActionTypesAggregate
 import { Shield } from "../../../../../PF2eCoreLib/PlayerCharacter";
 
 type OwnProps = {
-    visible: boolean
-    toggleModal: () => void
+    visible: boolean;
+    toggleModal: () => void;
 };
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
@@ -26,32 +32,32 @@ const ShieldEditModal: React.FC<Props> = (props) => {
         maxHp: props.shield.maxHP.toString(),
         acBonus: props.shield.acBonus.toString(),
         BT: props.shield.breakThreshold.toString(),
-        hardness: props.shield.hardness.toString()
+        hardness: props.shield.hardness.toString(),
     });
 
     const changeBonusText = (value: string) => {
         setInput({
             ...input,
-            acBonus: value
+            acBonus: value,
         });
     };
 
     const changeMaxHPText = (value: string) => {
         setInput({
             ...input,
-            maxHp: value
+            maxHp: value,
         });
     };
     const changeBTText = (value: string) => {
         setInput({
             ...input,
-            BT: value
+            BT: value,
         });
     };
     const changeHardnessText = (value: string) => {
         setInput({
             ...input,
-            hardness: value
+            hardness: value,
         });
     };
 
@@ -59,7 +65,7 @@ const ShieldEditModal: React.FC<Props> = (props) => {
         const acBonus = input.acBonus ? parseInt(input.acBonus) : 0;
         const breakThreshold = input.BT ? parseInt(input.BT) : 0;
         const hardness = input.hardness ? parseInt(input.hardness) : 0;
-        const maxHP = input.maxHp ?  parseInt(input.maxHp) : 0;
+        const maxHP = input.maxHp ? parseInt(input.maxHp) : 0;
         let newShield: Shield;
         if (maxHP < props.shield.currentHP) {
             const currentHP = maxHP;
@@ -69,7 +75,7 @@ const ShieldEditModal: React.FC<Props> = (props) => {
                 acBonus,
                 breakThreshold,
                 maxHP,
-                hardness
+                hardness,
             };
         } else {
             newShield = {
@@ -77,7 +83,7 @@ const ShieldEditModal: React.FC<Props> = (props) => {
                 acBonus,
                 breakThreshold,
                 maxHP,
-                hardness
+                hardness,
             };
         }
         props.toggleModal();
@@ -93,39 +99,43 @@ const ShieldEditModal: React.FC<Props> = (props) => {
             <Card>
                 <Layout style={styles.header}>
                     <Text>{"Shield:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={changeShield}/>
+                    <Button
+                        appearance="ghost"
+                        accessoryLeft={CheckIcon}
+                        onPress={changeShield}
+                    />
                 </Layout>
                 <Layout>
                     <Text>Max HP:</Text>
-                    <Input 
-                        placeholder='Max HP'
-                        keyboardType='numeric'
+                    <Input
+                        placeholder="Max HP"
+                        keyboardType="numeric"
                         value={input.maxHp}
-                        size='medium'
+                        size="medium"
                         onChangeText={changeMaxHPText}
                     />
                     <Text>Bonus:</Text>
-                    <Input 
-                        placeholder='Shield AC Bonus'
-                        keyboardType='numeric'
+                    <Input
+                        placeholder="Shield AC Bonus"
+                        keyboardType="numeric"
                         value={input.acBonus}
-                        size='medium'
+                        size="medium"
                         onChangeText={changeBonusText}
                     />
                     <Text>Break Threshold:</Text>
-                    <Input 
-                        placeholder='Break Threshold'
-                        keyboardType='numeric'
+                    <Input
+                        placeholder="Break Threshold"
+                        keyboardType="numeric"
                         value={input.BT}
-                        size='medium'
+                        size="medium"
                         onChangeText={changeBTText}
                     />
                     <Text>Hardness:</Text>
-                    <Input 
-                        placeholder='Hardness'
-                        keyboardType='numeric'
+                    <Input
+                        placeholder="Hardness"
+                        keyboardType="numeric"
                         value={input.hardness}
-                        size='medium'
+                        size="medium"
                         onChangeText={changeHardnessText}
                     />
                 </Layout>
@@ -139,7 +149,7 @@ interface LinkDispatchProps {
 }
 
 interface LinkStateProps {
-    shield: Shield
+    shield: Shield;
 }
 
 const mapDispatchToProps = (
@@ -147,7 +157,7 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        updateShield: bindActionCreators(startChangeShield, dispatch)
+        updateShield: bindActionCreators(startChangeShield, dispatch),
     };
 };
 
@@ -155,7 +165,7 @@ const mapStateToProps = (
     state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => ({
-    shield: state.playerCharacter.shield
+    shield: state.playerCharacter.shield,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShieldEditModal);
@@ -164,13 +174,13 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        flex: 1
+        flex: 1,
     },
     backdrop: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     pickerContainer: {
-        justifyContent: "center"
+        justifyContent: "center",
     },
     header: {
         justifyContent: "space-between",
@@ -182,7 +192,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     modal: {
-        overflow: "scroll"
+        overflow: "scroll",
     },
     modalInput: {
         justifyContent: "center",

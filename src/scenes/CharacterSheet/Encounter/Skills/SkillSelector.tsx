@@ -21,30 +21,50 @@ export const SkillSelector: React.FC<Props> = (props) => {
             props.onSelect(undefined);
             return;
         }
-        console.debug(`Not undefined so it's ${props.currentSkills[trueIndex.row - 1]}`);
+        console.debug(
+            `Not undefined so it's ${props.currentSkills[trueIndex.row - 1]}`
+        );
         props.onSelect(props.currentSkills[trueIndex.row - 1]);
         return;
     };
 
     const renderSelectItem = (skill: Skill | undefined) => {
-        if (!skill) { return <SelectItem title={"None"}></SelectItem>;}
-        const title: string = skill.loreDescriptor? `${skill.name} ${skill.loreDescriptor} (${skill.proficiency})` : `${skill.name} (${skill.proficiency})`;
+        if (!skill) {
+            return <SelectItem title={"None"}></SelectItem>;
+        }
+        const title: string = skill.loreDescriptor
+            ? `${skill.name} ${skill.loreDescriptor} (${skill.proficiency})`
+            : `${skill.name} (${skill.proficiency})`;
         return <SelectItem title={title}></SelectItem>;
     };
-    const skills = props.currentSkills.map(x => renderSelectItem(x));
+    const skills = props.currentSkills.map((x) => renderSelectItem(x));
     skills.unshift(renderSelectItem(undefined));
-    const value = props.currentSkillSelected ? `${props.currentSkills[indexOf(getSkillNamesArray(), props.currentSkillSelected?.name)].name} (${props.currentSkillSelected.proficiency})` : "None";
-    const selectedIndex = props.currentSkillSelected ? new IndexPath(indexOf(getSkillNamesArray(), props.currentSkillSelected?.name) + 1) : new IndexPath(0);
+    const value = props.currentSkillSelected
+        ? `${
+              props.currentSkills[
+                  indexOf(
+                      getSkillNamesArray(),
+                      props.currentSkillSelected?.name
+                  )
+              ].name
+          } (${props.currentSkillSelected.proficiency})`
+        : "None";
+    const selectedIndex = props.currentSkillSelected
+        ? new IndexPath(
+              indexOf(getSkillNamesArray(), props.currentSkillSelected?.name) +
+                  1
+          )
+        : new IndexPath(0);
 
-    return(
+    return (
         <>
             <Select
                 label="Skill"
-                placeholder='Select a Skill'
+                placeholder="Select a Skill"
                 selectedIndex={selectedIndex}
                 onSelect={handleSkillSelect}
                 value={value}
-                style={{paddingBottom: 10}}
+                style={{ paddingBottom: 10 }}
             >
                 {skills}
             </Select>
@@ -54,6 +74,6 @@ export const SkillSelector: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     centered: {
-        alignSelf: "center"
-    }
+        alignSelf: "center",
+    },
 });

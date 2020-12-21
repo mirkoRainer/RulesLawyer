@@ -1,11 +1,10 @@
 import React from "react";
-import {StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { FeatAndAbilityEntry } from "./FeatAndAbilityEntry";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { EntireAppState } from "../../../../store/Store";
-
 
 const FeatsView: React.FC<Props> = (props) => {
     const renderItem = ({ item }: { item: FeatAndAbilityEntry }) => (
@@ -15,35 +14,35 @@ const FeatsView: React.FC<Props> = (props) => {
         </Layout>
     );
     const keyExtractor = (item: FeatAndAbilityEntry) => item.title;
-    
+
     return (
         <Layout style={styles.container}>
             <ScrollView>
-                <Text category='h4'>Ancestry Feats And Abilities</Text>
+                <Text category="h4">Ancestry Feats And Abilities</Text>
                 <FlatList<FeatAndAbilityEntry>
                     keyExtractor={keyExtractor}
                     data={props.ancestryFeatsAndAbilities}
                     renderItem={renderItem}
                 />
-                <Text category='h4'>Skill Feats</Text>
+                <Text category="h4">Skill Feats</Text>
                 <FlatList<FeatAndAbilityEntry>
                     keyExtractor={keyExtractor}
                     data={props.skillFeats}
                     renderItem={renderItem}
                 />
-                <Text category='h4'>General Feats</Text>
+                <Text category="h4">General Feats</Text>
                 <FlatList<FeatAndAbilityEntry>
                     keyExtractor={keyExtractor}
                     data={props.generalFeats}
                     renderItem={renderItem}
                 />
-                <Text category='h4'>Class Feats and Abilities</Text>
+                <Text category="h4">Class Feats and Abilities</Text>
                 <FlatList<FeatAndAbilityEntry>
                     keyExtractor={keyExtractor}
                     data={props.classFeatsAndAbilities}
                     renderItem={renderItem}
                 />
-                <Text category='h4'>Bonus Feats</Text>
+                <Text category="h4">Bonus Feats</Text>
                 <FlatList<FeatAndAbilityEntry>
                     keyExtractor={keyExtractor}
                     data={props.bonusFeats}
@@ -56,7 +55,6 @@ const FeatsView: React.FC<Props> = (props) => {
 
 type Props = LinkStateProps;
 
-
 interface LinkStateProps {
     ancestryFeatsAndAbilities: FeatAndAbilityEntry[];
     skillFeats: FeatAndAbilityEntry[];
@@ -65,14 +63,12 @@ interface LinkStateProps {
     bonusFeats?: FeatAndAbilityEntry[];
 }
 
-const mapStateToProps = (
-    state: EntireAppState,
-): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     ancestryFeatsAndAbilities: state.playerCharacter.ancestryFeatsAndAbilities,
     skillFeats: state.playerCharacter.skillFeats,
     generalFeats: state.playerCharacter.generalFeats,
     classFeatsAndAbilities: state.playerCharacter.classFeatsAndAbilities,
-    bonusFeats: state.playerCharacter.bonusFeats
+    bonusFeats: state.playerCharacter.bonusFeats,
 });
 
 export default connect(mapStateToProps, null)(FeatsView);

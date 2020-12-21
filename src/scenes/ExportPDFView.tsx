@@ -1,12 +1,13 @@
 import React from "react";
 import { Layout, Text } from "@ui-kitten/components";
-type Props = {}
+type Props = {};
 
 const ExportPDFView: React.FC<Props> = (props) => {
-    return(    
+    return (
         <Layout>
             <Text>Export PDF</Text>
-        </Layout>);
+        </Layout>
+    );
 };
 
 export default ExportPDFView;

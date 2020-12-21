@@ -5,7 +5,7 @@ type Props = {};
 
 export const EditWeaponProficiencyView: React.FC<Props> = (props) => {
     // TODO: Finish this!
-    return(
+    return (
         <View>
             <Text style={styles.centered}>EditWeaponProficiencyView</Text>
         </View>
@@ -14,6 +14,6 @@ export const EditWeaponProficiencyView: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     centered: {
-        alignSelf: "center"
-    }
+        alignSelf: "center",
+    },
 });

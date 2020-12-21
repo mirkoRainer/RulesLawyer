@@ -1,6 +1,8 @@
 import React from "react";
 import { RefreshControl, StyleSheet } from "react-native";
-import PlayerCharacter, { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter, {
+    PF2Action,
+} from "../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import Movements from "./Offense/Movements";
@@ -10,11 +12,12 @@ import { Divider, Layout } from "@ui-kitten/components";
 import ClassDC from "./Offense/ClassDC";
 import PerceptionView from "./Offense/PerceptionView";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { MainOffenseNavigationProps, OffenseStackParamList } from "./OffenseNavigation";
-
+import {
+    MainOffenseNavigationProps,
+    OffenseStackParamList,
+} from "./OffenseNavigation";
 
 const EncounterOffense: React.FC<Props> = (props) => {
-    
     return (
         <Layout style={styles.container}>
             <ScrollView>
@@ -22,11 +25,9 @@ const EncounterOffense: React.FC<Props> = (props) => {
                 <Divider />
                 <PerceptionView />
                 <Divider />
-                <Movements 
-                    movements={props.playerCharacter.movement}
-                />
+                <Movements movements={props.playerCharacter.movement} />
                 <Divider />
-                <ActionsAndActivities navigation={props.navigation}/>
+                <ActionsAndActivities navigation={props.navigation} />
             </ScrollView>
         </Layout>
     );
@@ -35,29 +36,23 @@ const EncounterOffense: React.FC<Props> = (props) => {
 type Props = OwnProps & LinkDispatchProps & LinkStateProps;
 
 interface OwnProps {
-    navigation: MainOffenseNavigationProps
+    navigation: MainOffenseNavigationProps;
 }
 
-interface LinkDispatchProps {
-
-}
+interface LinkDispatchProps {}
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
     actions: PF2Action[];
 }
 
-const mapDispatchToProps = (
-): LinkDispatchProps => {
-    return {
-
-    };
+const mapDispatchToProps = (): LinkDispatchProps => {
+    return {};
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
-    actions: state.playerCharacter.actions
+    actions: state.playerCharacter.actions,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EncounterOffense);
@@ -71,6 +66,6 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         textAlign: "center",
-        fontSize: 22
-    }
+        fontSize: 22,
+    },
 });

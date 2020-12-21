@@ -5,21 +5,28 @@ import { EntireAppState } from "../../../../store/Store";
 import { AbilityScore } from "../../../../PF2eCoreLib/AbilityScores";
 import { Ability } from "../../../../PF2eCoreLib/Ability";
 import { SavesProp } from "./SavesProps";
-import ProficiencyView, { ProficiencyProps } from "../../../Shared/ProficiencyView";
+import ProficiencyView, {
+    ProficiencyProps,
+} from "../../../Shared/ProficiencyView";
 import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { connect } from "react-redux";
 import { Saves } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { bindActionCreators } from "redux";
-import { startChangeSaveProficiencies, ChangeSaveProficiencies } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import {
+    startChangeSaveProficiencies,
+    ChangeSaveProficiencies,
+} from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
-import { Proficiencies, DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies";
+import {
+    Proficiencies,
+    DetermineNextProficiency,
+} from "../../../../PF2eCoreLib/Proficiencies";
 import { startTextEditModal } from "../../../../store/actions/Modals/ModalsActions";
 
 const SavesView: React.FC<Props> = (props) => {
-
     const fortitudeSave = (): ProficiencyProps => {
         return {
             title: "Fortitude",
@@ -58,40 +65,36 @@ const SavesView: React.FC<Props> = (props) => {
                 props.bonuses
             ),
         };
-    }; 
-
-
+    };
 
     const changeFort = () => {
         const fortProf = props.saves.fortitude;
         props.changeSaves({
             ...props.saves,
-            fortitude: DetermineNextProficiency(fortProf)
+            fortitude: DetermineNextProficiency(fortProf),
         });
     };
     const changeReflex = () => {
         const reflexProf = props.saves.reflex;
         props.changeSaves({
             ...props.saves,
-            reflex: DetermineNextProficiency(reflexProf)
+            reflex: DetermineNextProficiency(reflexProf),
         });
     };
     const changeWill = () => {
         const willProf = props.saves.will;
         props.changeSaves({
             ...props.saves,
-            will: DetermineNextProficiency(willProf)
+            will: DetermineNextProficiency(willProf),
         });
     };
-    
-    return(
-        <Layout style={{flex:1}}>
+
+    return (
+        <Layout style={{ flex: 1 }}>
             <TouchableOpacity onPress={changeFort}>
                 <ProficiencyView
                     title={"Fortitude"}
-                    keyAbility={
-                        props.constitution
-                    }
+                    keyAbility={props.constitution}
                     proficiency={props.saves.fortitude}
                     level={props.level}
                     itemBonus={fortitudeSave().itemBonus}
@@ -100,9 +103,7 @@ const SavesView: React.FC<Props> = (props) => {
             <TouchableOpacity onPress={changeReflex}>
                 <ProficiencyView
                     title={"Reflex"}
-                    keyAbility={
-                        props.dexterity
-                    }
+                    keyAbility={props.dexterity}
                     proficiency={props.saves.reflex}
                     level={props.level}
                     itemBonus={reflexSave().itemBonus}
@@ -111,9 +112,7 @@ const SavesView: React.FC<Props> = (props) => {
             <TouchableOpacity onPress={changeWill}>
                 <ProficiencyView
                     title={"Will"}
-                    keyAbility={
-                        props.wisdom
-                    }
+                    keyAbility={props.wisdom}
                     proficiency={props.saves.will}
                     level={props.level}
                     itemBonus={willSave().itemBonus}
@@ -148,20 +147,19 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     constitution: state.playerCharacter.abilityScores.Constitution,
     dexterity: state.playerCharacter.abilityScores.Dexterity,
     wisdom: state.playerCharacter.abilityScores.Wisdom,
     level: state.playerCharacter.level,
     saves: state.playerCharacter.saves,
-    bonuses: state.playerCharacter.bonuses
+    bonuses: state.playerCharacter.bonuses,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SavesView);
 
 const styles = StyleSheet.create({
     centered: {
-        alignSelf: "center"
-    }
+        alignSelf: "center",
+    },
 });

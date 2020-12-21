@@ -1,5 +1,5 @@
 import React from "react";
-import {  StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import { Layout, Text, Divider } from "@ui-kitten/components";
 import AvoidNoticeActivity from "./Components/AvoidNoticeActivity";
 import DefendActivity from "./Components/DefendActivity";
@@ -11,8 +11,7 @@ import RepeatASpellActivity from "./Components/RepeatASpellActivity";
 import ScoutActivity from "./Components/ScoutActivity";
 import SearchActivity from "./Components/SearchActivity";
 
-
-type Props = {}
+type Props = {};
 
 const Exploration: React.FC<Props> = (props) => {
     return (
@@ -22,7 +21,7 @@ const Exploration: React.FC<Props> = (props) => {
                 <DefendActivity />
                 <DetectMagicActivity />
                 <FollowTheExpertActivity />
-                <HustleActivity /> 
+                <HustleActivity />
                 <InvestigateActivity />
                 <RepeatASpellActivity />
                 <ScoutActivity />
@@ -41,6 +40,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     title: {
-        flex: .08
-    }
+        flex: 0.08,
+    },
 });

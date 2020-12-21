@@ -4,4 +4,8 @@ import { CharacterBuildActionTypes } from "./CharacterBuild/CharacterBuildAction
 import { ThemeActionTypes } from "./Theme/ThemeActionTypes";
 
 //aggregate all the App ones.
-export type AppActions = PlayerCharacterActionTypes | ModalActionTypes | CharacterBuildActionTypes | ThemeActionTypes;
+export type AppActions =
+    | PlayerCharacterActionTypes
+    | ModalActionTypes
+    | CharacterBuildActionTypes
+    | ThemeActionTypes;

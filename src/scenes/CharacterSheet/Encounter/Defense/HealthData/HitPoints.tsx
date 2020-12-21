@@ -23,9 +23,27 @@ export interface HitPointProps {
 
 const HitPoints: React.FC<Props> = (props) => {
     // @ts-ignore
-    const PlusHPButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(amount, false);}} style={styles.plus}>+{amount.toString()}</Button>);
+    const PlusHPButton = (amount: number) => (
+        <Button
+            onPress={() => {
+                props.AdjustHitPoints(amount, false);
+            }}
+            style={styles.plus}
+        >
+            +{amount.toString()}
+        </Button>
+    );
     // @ts-ignore
-    const MinusHPButton = (amount: number) => (<Button onPress={() => {props.AdjustHitPoints(-amount, false);}} style={styles.minus}>-{amount.toString()}</Button>);
+    const MinusHPButton = (amount: number) => (
+        <Button
+            onPress={() => {
+                props.AdjustHitPoints(-amount, false);
+            }}
+            style={styles.minus}
+        >
+            -{amount.toString()}
+        </Button>
+    );
 
     const handleHPTap = () => {
         console.debug("handleHPTap");
@@ -40,19 +58,31 @@ const HitPoints: React.FC<Props> = (props) => {
     return (
         <Layout>
             <Layout style={styles.rowContainer}>
-                <ButtonGroup style={styles.container} size="tiny" status='danger'>
+                <ButtonGroup
+                    style={styles.container}
+                    size="tiny"
+                    status="danger"
+                >
                     {MinusHPButton(1)}
                     {MinusHPButton(5)}
                     {MinusHPButton(10)}
                 </ButtonGroup>
                 <Layout>
                     <TouchableOpacity onPress={handleHPTap}>
-                        <Text style={styles.subHeader} category='p1'> HP: </Text>
-                        <Text category='h4' style={styles.text}> {props.current}/{props.max} </Text>
+                        <Text style={styles.subHeader} category="p1">
+                            {" "}
+                            HP:{" "}
+                        </Text>
+                        <Text category="h4" style={styles.text}>
+                            {" "}
+                            {props.current}/{props.max}{" "}
+                        </Text>
                     </TouchableOpacity>
-                    <Button size='tiny' status='basic' onPress={maxHP}>Max</Button>
+                    <Button size="tiny" status="basic" onPress={maxHP}>
+                        Max
+                    </Button>
                 </Layout>
-                <ButtonGroup style={styles.container} size="tiny" status='info'>
+                <ButtonGroup style={styles.container} size="tiny" status="info">
                     {PlusHPButton(10)}
                     {PlusHPButton(5)}
                     {PlusHPButton(1)}
@@ -70,27 +100,27 @@ const HitPoints: React.FC<Props> = (props) => {
 };
 
 type Props = HitPointProps & LinkDispatchProps;
-    
 
 interface LinkDispatchProps {
     AdjustHitPoints: (delta: number, removesWounded: boolean) => void;
     startPickerModal: (actionType: string, maxHitPoints: number) => void;
 }
 
-
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
     AdjustHitPoints: bindActionCreators(startChangeHitPoints, dispatch),
-    startPickerModal: bindActionCreators(startNumberPickerModalSelection, dispatch),
-
+    startPickerModal: bindActionCreators(
+        startNumberPickerModalSelection,
+        dispatch
+    ),
 });
 
 export default connect(null, mapDispatchToProps)(HitPoints);
 
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     rowContainer: {
         flex: 0.5,
@@ -106,14 +136,14 @@ const styles = StyleSheet.create({
         flex: 2,
         justifyContent: "flex-end",
         textAlign: "center",
-        alignSelf: "center"
+        alignSelf: "center",
     },
     plus: {
         flex: 1,
-        justifyContent: "center"
+        justifyContent: "center",
     },
     minus: {
         flex: 1,
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
 });

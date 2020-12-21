@@ -1,4 +1,3 @@
-
 export interface AbilityScore {
     ability: keyof AbilityScoreArray;
     score: number;
@@ -13,7 +12,10 @@ export type AbilityScoreArray = {
     Charisma: AbilityScore;
 };
 
-export function UpdateAbilityScore(newAbilityScore: AbilityScore, existingAbilityScores: AbilityScoreArray): AbilityScoreArray {
+export function UpdateAbilityScore(
+    newAbilityScore: AbilityScore,
+    existingAbilityScores: AbilityScoreArray
+): AbilityScoreArray {
     let scores = existingAbilityScores;
     scores[newAbilityScore.ability] = newAbilityScore;
     return scores;
@@ -41,26 +43,26 @@ export function CalculateAbilityScoreModifier(abilityScore: number): number {
 
 export function GetAbilityScoreAbbreviation(abilityScoreName: string) {
     switch (abilityScoreName) {
-    case "Strength": {
-        return "STR";
-    }
-    case "Dexterity": {
-        return "DEX";
-    }
-    case "Constitution": {
-        return "CON";
-    }
-    case "Intelligence": {
-        return "INT";
-    }
-    case "Wisdom": {
-        return "WIS";
-    }
-    case "Charisma": {
-        return "CHA";
-    }
-    default: {
-        return "FREE";
-    }
+        case "Strength": {
+            return "STR";
+        }
+        case "Dexterity": {
+            return "DEX";
+        }
+        case "Constitution": {
+            return "CON";
+        }
+        case "Intelligence": {
+            return "INT";
+        }
+        case "Wisdom": {
+            return "WIS";
+        }
+        case "Charisma": {
+            return "CHA";
+        }
+        default: {
+            return "FREE";
+        }
     }
 }

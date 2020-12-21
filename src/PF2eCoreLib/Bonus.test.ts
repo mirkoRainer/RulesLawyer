@@ -2,7 +2,6 @@ import { Bonus } from "./Bonus";
 import { BonusType } from "./BonusTypes";
 import { examplePlayerCharacter } from "../../examplePlayerCharacter";
 
-
 describe("Bonus", () => {
     describe("GetBonusFor", () => {
         it("outputs bonus total by type", () => {
@@ -55,9 +54,17 @@ describe("Bonus", () => {
             });
         });
         it("returns the highest number applied to the requested property for specificied type", () => {
-            var actual = Bonus.GetBonusFor("classDc", BonusType.Item, examplePlayerCharacter.bonuses);
+            var actual = Bonus.GetBonusFor(
+                "classDc",
+                BonusType.Item,
+                examplePlayerCharacter.bonuses
+            );
             expect(actual).toBe(3);
-            actual = Bonus.GetBonusFor("nothing", BonusType.Circumstance, examplePlayerCharacter.bonuses);
+            actual = Bonus.GetBonusFor(
+                "nothing",
+                BonusType.Circumstance,
+                examplePlayerCharacter.bonuses
+            );
             expect(actual).toBe(0);
         });
     });

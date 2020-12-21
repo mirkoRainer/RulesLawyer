@@ -1,39 +1,59 @@
 import { max } from "react-native-reanimated";
 
 export interface HealthData {
-    maxHitPoints:       number;
-    currentHitPoints:   number;
+    maxHitPoints: number;
+    currentHitPoints: number;
     temporaryHitPoints: number;
-    dying:     number;
+    dying: number;
     maxDying: number;
-    wounded:   number;
+    wounded: number;
 }
 
-export const ResolveHitPoints = (healthData: HealthData, hitPointDelta: number, removesWounded: boolean): HealthData  => {
-    console.debug(`ResolveHitPoints with healthData:${JSON.stringify(healthData, null, 1)} hitPointDelta: ${hitPointDelta} removesWounded: ${removesWounded}`);
-    let newHealthData: HealthData = {...healthData};
+export const ResolveHitPoints = (
+    healthData: HealthData,
+    hitPointDelta: number,
+    removesWounded: boolean
+): HealthData => {
+    console.debug(
+        `ResolveHitPoints with healthData:${JSON.stringify(
+            healthData,
+            null,
+            1
+        )} hitPointDelta: ${hitPointDelta} removesWounded: ${removesWounded}`
+    );
+    let newHealthData: HealthData = { ...healthData };
     if (hitPointDelta > 0) {
         newHealthData = AddHitPoints(healthData, hitPointDelta);
     }
     if (hitPointDelta < 0) {
         newHealthData = SubtractHitPoints(healthData, hitPointDelta);
     }
-    newHealthData = removesWounded ? { ...newHealthData, wounded: 0 } : newHealthData;
+    newHealthData = removesWounded
+        ? { ...newHealthData, wounded: 0 }
+        : newHealthData;
     return newHealthData;
 };
 
 const AddHitPoints = (healthData: HealthData, heal: number): HealthData => {
-    let newHealthData: HealthData = {...healthData};
+    let newHealthData: HealthData = { ...healthData };
     const currentHitPoints = newHealthData.currentHitPoints;
     const maxHitPoints = newHealthData.maxHitPoints;
     if (healthData.dying === 0) {
-        newHealthData.currentHitPoints = IncreaseHP(currentHitPoints, maxHitPoints, heal);
+        newHealthData.currentHitPoints = IncreaseHP(
+            currentHitPoints,
+            maxHitPoints,
+            heal
+        );
         return newHealthData;
     }
     if (healthData.dying > 0 && currentHitPoints === 0) {
         newHealthData.dying = 0;
         newHealthData.wounded += 1;
-        newHealthData.currentHitPoints = IncreaseHP(currentHitPoints, maxHitPoints, heal);
+        newHealthData.currentHitPoints = IncreaseHP(
+            currentHitPoints,
+            maxHitPoints,
+            heal
+        );
         return newHealthData;
     }
     return newHealthData;
@@ -44,37 +64,48 @@ const IncreaseHP = (current: number, max: number, heal: number): number => {
     return Math.min(max, healed);
 };
 
-const SubtractHitPoints = (healthData: HealthData, harm: number): HealthData => {
+const SubtractHitPoints = (
+    healthData: HealthData,
+    harm: number
+): HealthData => {
     const newHealthData = ResolveTemporaryHitPoints(healthData, harm);
     const currentHitPoints = newHealthData.currentHitPoints;
     if (healthData.dying > 0) {
         return {
             ...newHealthData,
-            dying: AdjustDyingCondition(newHealthData, 1).dying
+            dying: AdjustDyingCondition(newHealthData, 1).dying,
         };
     }
     if (healthData.dying === 0) {
-        const newDying = AdjustDyingCondition(newHealthData, healthData.dying + healthData.wounded + 1).dying;
+        const newDying = AdjustDyingCondition(
+            newHealthData,
+            healthData.dying + healthData.wounded + 1
+        ).dying;
         if (newHealthData.temporaryHitPoints > 0) {
             return newHealthData;
         }
-        return newHealthData.currentHitPoints === 0 ?  {...newHealthData, dying: newDying} : { ...newHealthData };
+        return newHealthData.currentHitPoints === 0
+            ? { ...newHealthData, dying: newDying }
+            : { ...newHealthData };
     }
     return newHealthData;
 };
 
-const ResolveTemporaryHitPoints = (healthData: HealthData, harm: number): HealthData => {
+const ResolveTemporaryHitPoints = (
+    healthData: HealthData,
+    harm: number
+): HealthData => {
     if (harm >= 0) return healthData;
     if (healthData.temporaryHitPoints === 0) {
         return {
             ...healthData,
-            currentHitPoints: DecreaseHP(healthData.currentHitPoints, harm)
+            currentHitPoints: DecreaseHP(healthData.currentHitPoints, harm),
         };
     }
     if (healthData.temporaryHitPoints >= Math.abs(harm)) {
         const result = {
             ...healthData,
-            temporaryHitPoints: healthData.temporaryHitPoints + harm
+            temporaryHitPoints: healthData.temporaryHitPoints + harm,
         };
         return result;
     }
@@ -83,7 +114,10 @@ const ResolveTemporaryHitPoints = (healthData: HealthData, harm: number): Health
         return {
             ...healthData,
             temporaryHitPoints: 0,
-            currentHitPoints: DecreaseHP(healthData.currentHitPoints, adjustedHarm)
+            currentHitPoints: DecreaseHP(
+                healthData.currentHitPoints,
+                adjustedHarm
+            ),
         };
     }
     return healthData;
@@ -94,44 +128,46 @@ const DecreaseHP = (current: number, harm: number): number => {
     return Math.max(0, harmed);
 };
 
-export const AdjustDyingCondition = (healthData: HealthData, delta: number): HealthData => {
-    if (healthData.dying + delta >= healthData.maxDying)
-    {
+export const AdjustDyingCondition = (
+    healthData: HealthData,
+    delta: number
+): HealthData => {
+    if (healthData.dying + delta >= healthData.maxDying) {
         return {
             ...healthData,
-            dying: healthData.maxDying
+            dying: healthData.maxDying,
         };
     }
-    if (healthData.dying + delta <= 0)
-    {
+    if (healthData.dying + delta <= 0) {
         return {
             ...healthData,
-            dying: 0
+            dying: 0,
         };
     }
     return {
         ...healthData,
-        dying: healthData.dying + delta
+        dying: healthData.dying + delta,
     };
 };
 
-export const AdjustWoundedCondition = (healthData: HealthData, delta: number): HealthData => {
-    if (healthData.wounded + delta >= healthData.maxDying)
-    {
+export const AdjustWoundedCondition = (
+    healthData: HealthData,
+    delta: number
+): HealthData => {
+    if (healthData.wounded + delta >= healthData.maxDying) {
         return {
             ...healthData,
-            wounded: healthData.maxDying
+            wounded: healthData.maxDying,
         };
     }
-    if (healthData.wounded + delta <= 0)
-    {
+    if (healthData.wounded + delta <= 0) {
         return {
             ...healthData,
-            wounded: 0
+            wounded: 0,
         };
     }
     return {
         ...healthData,
-        wounded: healthData.wounded + delta
+        wounded: healthData.wounded + delta,
     };
 };

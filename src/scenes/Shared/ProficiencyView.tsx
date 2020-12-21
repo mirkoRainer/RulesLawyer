@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import ProficiencyArrayView from "./ProficiencyArrayView";
 import {
     Proficiencies,
@@ -25,9 +25,7 @@ export interface ProficiencyProps {
     armorPenalty?: number;
 }
 
-export default class ProficiencyView extends Component<
-    ProficiencyProps
-> {
+export default class ProficiencyView extends Component<ProficiencyProps> {
     public static defaultProps = {
         is10base: false,
         isACBase: false,
@@ -35,7 +33,9 @@ export default class ProficiencyView extends Component<
     };
 
     render() {
-        const modifier = CalculateAbilityScoreModifier(this.props.keyAbility.score);
+        const modifier = CalculateAbilityScoreModifier(
+            this.props.keyAbility.score
+        );
         const tenBase = this.props.is10base ? (
             <Text style={styles.tenBase}>10 + </Text>
         ) : (
@@ -44,10 +44,12 @@ export default class ProficiencyView extends Component<
 
         const keyModifier = (
             <React.Fragment>
-                <Text style={styles.modifierText} category='p1'>
-                    {GetAbilityScoreAbbreviation(this.props.keyAbility.ability.toString())}{" "}
+                <Text style={styles.modifierText} category="p1">
+                    {GetAbilityScoreAbbreviation(
+                        this.props.keyAbility.ability.toString()
+                    )}{" "}
                 </Text>
-                <Text category='p1' style={styles.modifierNumber}>
+                <Text category="p1" style={styles.modifierNumber}>
                     {modifier}
                 </Text>
             </React.Fragment>
@@ -66,19 +68,34 @@ export default class ProficiencyView extends Component<
                 <Text style={styles.descriptor}>{this.props.descriptor}</Text>
             ) : undefined;
         const total =
-            CalculateAbilityScoreModifier(this.props.keyAbility.score)+
+            CalculateAbilityScoreModifier(this.props.keyAbility.score) +
             this.props.itemBonus +
-            GetProficiencyTotalWithLevel(this.props.proficiency, this.props.level);
+            GetProficiencyTotalWithLevel(
+                this.props.proficiency,
+                this.props.level
+            );
         const totalView = this.props.is10base ? (
-            <Text style={styles.total} category='h5'>{10 + total}</Text>
+            <Text style={styles.total} category="h5">
+                {10 + total}
+            </Text>
         ) : (
-            <Text style={styles.total} category='h5'>{total > 0 ? "+" : ""}{total}</Text>
+            <Text style={styles.total} category="h5">
+                {total > 0 ? "+" : ""}
+                {total}
+            </Text>
         );
         return (
             <Layout style={styles.flex1}>
                 <Layout style={styles.horizontal}>
-                    <Text style={this.props.is10base ? styles.title10 : styles.title} category='h5'>{this.props.title}</Text>
-                    {totalView} 
+                    <Text
+                        style={
+                            this.props.is10base ? styles.title10 : styles.title
+                        }
+                        category="h5"
+                    >
+                        {this.props.title}
+                    </Text>
+                    {totalView}
                 </Layout>
                 <Layout style={styles.horizontal}>
                     {tenBase}
@@ -99,7 +116,7 @@ export default class ProficiencyView extends Component<
 const styles = StyleSheet.create({
     flex1: {
         flex: 1,
-        padding: 5
+        padding: 5,
     },
     horizontal: {
         flex: 1,
@@ -107,11 +124,11 @@ const styles = StyleSheet.create({
         alignContent: "stretch",
         alignSelf: "stretch",
         justifyContent: "space-around",
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     },
     descriptor: {
         flex: 1,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
     },
     text: {
         flex: 3,
@@ -150,7 +167,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         justifyContent: "flex-end",
         textAlign: "right",
-        paddingRight: 10
+        paddingRight: 10,
     },
     profBonus: {
         flex: 2,

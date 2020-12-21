@@ -1,5 +1,9 @@
 import { Action } from "redux";
-import { TextEditModalState, ModalState, PickerModalState } from "../../ModalsState";
+import {
+    TextEditModalState,
+    ModalState,
+    PickerModalState,
+} from "../../ModalsState";
 import { ReactText } from "react";
 
 export const TOGGLE_TEXTEDIT_MODAL = "TOGGLE_TEXTEDIT_MODAL";
@@ -31,7 +35,6 @@ export interface ChangePickerSelectionAction extends Action<string> {
     type: typeof CHANGE_PICKER_SELECTION;
     PickerSelection: ReactText;
 }
-
 
 export type ModalActionTypes =
     | TogglePickerModalAction

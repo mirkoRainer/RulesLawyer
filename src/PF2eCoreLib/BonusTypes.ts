@@ -3,5 +3,5 @@ export enum BonusType {
     Circumstance = "circumstance",
     Status = "status",
     Item = "item",
-    Armor = "armor" // derived from check and speed penalties in Armor rules
+    Armor = "armor", // derived from check and speed penalties in Armor rules
 }

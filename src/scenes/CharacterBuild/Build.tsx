@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import React from "react";
-import {StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { EntireAppState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
@@ -17,11 +17,7 @@ import { Layout, Text } from "@ui-kitten/components";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 
-
-type BuildNavigationProps = DrawerNavigationProp<
-    RootDrawerParamList,
-    "Build"
->;
+type BuildNavigationProps = DrawerNavigationProp<RootDrawerParamList, "Build">;
 
 interface OwnProps {
     navigation: BuildNavigationProps;
@@ -54,7 +50,7 @@ export type BuildStackParamList = {
     Level18: undefined;
     Level19: undefined;
     Level20: undefined;
-}
+};
 
 export const Build: React.FC<Props> = (props) => {
     const toggleNavigation = (): void => {
@@ -81,21 +77,35 @@ export const Build: React.FC<Props> = (props) => {
 
     const Stack = createStackNavigator<BuildStackParamList>();
 
-    return(
+    return (
         <SafeAreaView>
             <Header
-                leftComponent={{ icon: "menu", color: "#eee", onPress: toggleNavigation }}
+                leftComponent={{
+                    icon: "menu",
+                    color: "#eee",
+                    onPress: toggleNavigation,
+                }}
                 centerComponent={{
                     text: headerText(),
                     style: { color: "#eee" },
                 }}
-                rightComponent={{icon: "perm-identity", color: "#eee", onPress: goToCharacterSheet}}
+                rightComponent={{
+                    icon: "perm-identity",
+                    color: "#eee",
+                    onPress: goToCharacterSheet,
+                }}
             />
             <Layout style={styles.horizontal}>
-                <NavigationContainer independent={true} >
+                <NavigationContainer independent={true}>
                     <Stack.Navigator initialRouteName={"BuildOverview"}>
-                        <Stack.Screen name="BuildOverview" component={BuildOverview} />
-                        <Stack.Screen name="AncestrySelect" component={AncestrySelectView} />
+                        <Stack.Screen
+                            name="BuildOverview"
+                            component={BuildOverview}
+                        />
+                        <Stack.Screen
+                            name="AncestrySelect"
+                            component={AncestrySelectView}
+                        />
                     </Stack.Navigator>
                     <Layout>
                         {
@@ -105,7 +115,6 @@ export const Build: React.FC<Props> = (props) => {
                         <Text>Lvl 1</Text>
                     </Layout>
                 </NavigationContainer>
-
             </Layout>
         </SafeAreaView>
     );
@@ -116,19 +125,14 @@ interface LinkStateProps {
     playerCharacter: PlayerCharacter;
 }
 //all actions to be dispatched
-interface LinkDispatchProps {
-}
+interface LinkDispatchProps {}
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     buildState: state.characterBuild,
-    playerCharacter: state.playerCharacter 
+    playerCharacter: state.playerCharacter,
 });
 
-const mapDispatchToProps = (
-): LinkDispatchProps => ({
-
-});
+const mapDispatchToProps = (): LinkDispatchProps => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Build);
 
@@ -136,13 +140,13 @@ const styles = StyleSheet.create({
     horizontal: {
         flexDirection: "row",
         flex: 1,
-        alignSelf: "center"
+        alignSelf: "center",
     },
     button: {
-        flex: 1
+        flex: 1,
     },
     centered: {
         justifyContent: "center",
-        alignSelf: "center"
-    }
+        alignSelf: "center",
+    },
 });

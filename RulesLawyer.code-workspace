@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "RulesLawyer",
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"HITPOINTS",
+			"Swipeable",
+			"descr",
+			"loremaster"
+		],
+		"cSpell.enabled": true,
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"editor.formatOnSave": true,
+		"eslint.format.enable": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"eslint.validate": ["typescript"]
+	}
+}

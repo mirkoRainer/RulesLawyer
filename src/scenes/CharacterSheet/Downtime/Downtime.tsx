@@ -10,7 +10,7 @@ import LongTermRestActivity from "./Components/LongTermRest";
 import RetrainingActivity from "./Components/Retraining";
 import CraftActivity from "./Components/CraftActivity";
 
-type Props = {}
+type Props = {};
 
 export const Downtime: React.FC<Props> = (props) => {
     return (

@@ -4,9 +4,11 @@ import { Dispatch } from "react";
 import { AppActions } from "../AllActionTypesAggregated";
 import { DarkModeOptions } from "../../ThemeState";
 
-export const ToggleDarkMode: ActionCreator<ThemeActionTypes> = (newTheme: keyof DarkModeOptions): ThemeActionTypes => ({ 
+export const ToggleDarkMode: ActionCreator<ThemeActionTypes> = (
+    newTheme: keyof DarkModeOptions
+): ThemeActionTypes => ({
     type: TOGGLE_DARK_MODE,
-    newTheme: newTheme 
+    newTheme: newTheme,
 });
 export const startToggleDarkMode = (currentMode: keyof DarkModeOptions) => {
     console.debug("startToggleDarkMode");

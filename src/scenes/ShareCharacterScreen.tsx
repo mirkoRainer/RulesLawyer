@@ -1,13 +1,14 @@
 import React from "react";
 import { Layout, Text } from "@ui-kitten/components";
 
-type Props = {}
+type Props = {};
 
 const ShareCharacterScreen: React.FC<Props> = (props) => {
-    return(    
+    return (
         <Layout>
             <Text>Share Character from here </Text>
-        </Layout>);
+        </Layout>
+    );
 };
 
 export default ShareCharacterScreen;

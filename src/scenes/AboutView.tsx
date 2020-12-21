@@ -17,10 +17,12 @@ const AboutView: React.FC<Props> = (props) => {
         props.toggleDarkMode(nextTheme);
     };
 
-    return(    
-        <SafeAreaView style={{flex:1}}>
-            <Layout style={{flex: 1}}>
-                <Text style={{flex: 1}} category='h1'>About !!!!!!!!!</Text>
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <Layout style={{ flex: 1 }}>
+                <Text style={{ flex: 1 }} category="h1">
+                    About !!!!!!!!!
+                </Text>
                 <Button onPress={toggleTheme}>Toggle Dark Mode</Button>
             </Layout>
         </SafeAreaView>
@@ -36,14 +38,14 @@ interface LinkDispatchProps {
     toggleDarkMode: (newTheme: keyof DarkModeOptions) => void;
 }
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
-    theme: state.theme.mode
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
+    theme: state.theme.mode,
 });
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatchProps => ({
-    toggleDarkMode: bindActionCreators(startToggleDarkMode, dispatch)
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+    toggleDarkMode: bindActionCreators(startToggleDarkMode, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AboutView);

@@ -1,7 +1,5 @@
-
-
 import React from "react";
-import {StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
@@ -22,9 +20,16 @@ const DyingView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
-            <TouchableOpacity style={styles.container} onPress={handleTapOnDying}>
-                <Text style={styles.text} category='p1'>Dying:</Text>
-                <Text category='h4' style={styles.text}>{props.dyingValue}</Text>
+            <TouchableOpacity
+                style={styles.container}
+                onPress={handleTapOnDying}
+            >
+                <Text style={styles.text} category="p1">
+                    Dying:
+                </Text>
+                <Text category="h4" style={styles.text}>
+                    {props.dyingValue}
+                </Text>
             </TouchableOpacity>
         </Layout>
     );
@@ -48,14 +53,13 @@ const mapDispatchToProps = (
     ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
-        changeDying: bindActionCreators(startChangeDyingValue, dispatch)
+        changeDying: bindActionCreators(startChangeDyingValue, dispatch),
     };
 };
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     dyingValue: state.playerCharacter.hitPoint.dying,
-    maxDying: state.playerCharacter.hitPoint.maxDying
+    maxDying: state.playerCharacter.hitPoint.maxDying,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DyingView);
@@ -63,8 +67,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(DyingView);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center"
+        alignItems: "center",
     },
     text: {},
 });
-

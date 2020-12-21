@@ -49,25 +49,25 @@ export class Bonus {
         const bonusesFor = bonuses.filter(
             (bonus) => bonus.appliesTo.toLowerCase() === bonusFor.toLowerCase()
         );
-        if (bonusesFor.length === 0) return 0; 
+        if (bonusesFor.length === 0) return 0;
         const bonusByType = Bonus.DetermineBonusTotal(bonusesFor);
         let output: number;
         switch (type) {
-        case BonusType.Item: {
-            output = prop(bonusByType, "item");
-            break;
-        }
-        case BonusType.Circumstance: {
-            output = prop(bonusByType, "circumstance");
-            break;
-        }
-        case BonusType.Status: {
-            output = prop(bonusByType, "status");
-            break;
-        }
-        default: {
-            output = 0;
-        }
+            case BonusType.Item: {
+                output = prop(bonusByType, "item");
+                break;
+            }
+            case BonusType.Circumstance: {
+                output = prop(bonusByType, "circumstance");
+                break;
+            }
+            case BonusType.Status: {
+                output = prop(bonusByType, "status");
+                break;
+            }
+            default: {
+                output = 0;
+            }
         }
         return output;
     }

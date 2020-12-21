@@ -9,4 +9,4 @@ export type RootDrawerParamList = {
     OpenCharacterView: undefined;
     BugReportView: undefined;
     AboutView: undefined;
-}
+};

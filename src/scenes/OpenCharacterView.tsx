@@ -1,12 +1,13 @@
 import React from "react";
 import { Layout, Text } from "@ui-kitten/components";
-type Props = {}
+type Props = {};
 
 const OpenCharacterView: React.FC<Props> = (props) => {
-    return(    
+    return (
         <Layout>
             <Text>Open Character!!!!!!!!!</Text>
-        </Layout>);
+        </Layout>
+    );
 };
 
 export default OpenCharacterView;

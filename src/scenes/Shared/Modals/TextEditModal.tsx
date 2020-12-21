@@ -1,9 +1,14 @@
 import React from "react";
-import { Layout, Text, Modal, Input, Icon, Card, Button } from "@ui-kitten/components";
 import {
-    StyleSheet,
-    ModalBaseProps,
-} from "react-native";
+    Layout,
+    Text,
+    Modal,
+    Input,
+    Icon,
+    Card,
+    Button,
+} from "@ui-kitten/components";
+import { StyleSheet, ModalBaseProps } from "react-native";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { ThunkDispatch } from "redux-thunk";
@@ -29,10 +34,13 @@ const TextEditModal: React.FC<Props> = (props) => {
             backdropStyle={styles.backdrop}
         >
             <Card>
-
                 <Layout style={styles.header}>
                     <Text>{props.modalState.title || "Edit:"}</Text>
-                    <Button appearance='ghost' accessoryLeft={CheckIcon} onPress={props.toggleModal}/>
+                    <Button
+                        appearance="ghost"
+                        accessoryLeft={CheckIcon}
+                        onPress={props.toggleModal}
+                    />
                 </Layout>
                 <Layout>
                     <Input
@@ -80,13 +88,13 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
-        flex: 1
+        flex: 1,
     },
     backdrop: {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     pickerContainer: {
-        justifyContent: "center"
+        justifyContent: "center",
     },
     header: {
         justifyContent: "space-between",
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     modal: {
-        overflow: "scroll"
+        overflow: "scroll",
     },
     modalInput: {
         justifyContent: "center",

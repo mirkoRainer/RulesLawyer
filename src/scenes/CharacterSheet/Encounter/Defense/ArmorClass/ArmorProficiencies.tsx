@@ -4,7 +4,6 @@ import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { Layout, Text } from "@ui-kitten/components";
 
-
 export interface ArmorProficiencyProps {
     unarmored: Proficiencies;
     light: Proficiencies;

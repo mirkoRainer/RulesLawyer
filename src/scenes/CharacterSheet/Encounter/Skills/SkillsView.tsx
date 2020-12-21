@@ -16,14 +16,13 @@ import { startToggleDarkMode } from "../../../../store/actions/Theme/ThemeAction
 import { startChangeSkills } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
 
-interface OwnProps {
-}
+interface OwnProps {}
 
 type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
 const SkillsView: React.FC<Props> = (props) => {
     // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
-    const [ state, setState ] = useState({});
+    const [state, setState] = useState({});
     useFocusEffect(
         React.useCallback(() => {
             setState({});
@@ -34,7 +33,10 @@ const SkillsView: React.FC<Props> = (props) => {
         const handleSkillTouch = () => {
             const newProficiency = DetermineNextProficiency(item.proficiency);
             const newSkills = props.skills;
-            newSkills.splice(index, 1, {...item, proficiency: newProficiency });
+            newSkills.splice(index, 1, {
+                ...item,
+                proficiency: newProficiency,
+            });
             props.updateSkills(newSkills);
             setState({});
         };
@@ -47,24 +49,24 @@ const SkillsView: React.FC<Props> = (props) => {
                         proficiency={item.proficiency}
                         level={props.level}
                         itemBonus={item.itemBonus}
-                        armorPenalty={item.hasArmorPenalty ? item.armorPenalty : 0}
+                        armorPenalty={
+                            item.hasArmorPenalty ? item.armorPenalty : 0
+                        }
                     />
                 </TouchableOpacity>
                 <Divider />
             </Layout>
-        );    
+        );
     };
     const skills: JSX.Element[] = [];
-    props.skills.forEach(skill => {
+    props.skills.forEach((skill) => {
         skills.push(renderItem(skill));
     });
 
     return (
         <Layout style={styles.container}>
             <Divider />
-            <ScrollView>
-                {skills}
-            </ScrollView>
+            <ScrollView>{skills}</ScrollView>
         </Layout>
     );
 };
@@ -75,11 +77,10 @@ interface LinkStateProps {
     level: number;
 }
 
-const mapStateToProps = (
-    state: EntireAppState): LinkStateProps => ({
+const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     abilityScores: state.playerCharacter.abilityScores,
     skills: state.playerCharacter.skills,
-    level: state.playerCharacter.level
+    level: state.playerCharacter.level,
 });
 
 interface LinkDispatchProps {
@@ -89,7 +90,7 @@ interface LinkDispatchProps {
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
-    updateSkills: bindActionCreators(startChangeSkills, dispatch)
+    updateSkills: bindActionCreators(startChangeSkills, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillsView);

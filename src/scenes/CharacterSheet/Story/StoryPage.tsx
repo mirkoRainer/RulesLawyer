@@ -1,15 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import BiographicalView, {
-    BiographicalData,
-} from "./Components/BiographicalView";
 import Personality, { PersonalityData } from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import {
     Background,
-    Weapon,
+    BiographicalData,
     WeaponProficiencies,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, {
@@ -18,11 +15,11 @@ import CharacterMetadata, {
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import AbilityScores from "./Components/AbilityScores/AbilityScoresView";
-import { Ability } from "../../../PF2eCoreLib/Ability";
-import WeaponProficienciesView from "./Components/WeaponProficienciesView";
+import { WeaponProficienciesView } from "./Components/WeaponProficienciesView";
 import { Divider, Layout, Text } from "@ui-kitten/components";
 import { StoryNavigationProps } from "./StoryNavigation";
 import { useFocusEffect } from "@react-navigation/native";
+import BiographicalView from "./Components/BiographicalView";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
