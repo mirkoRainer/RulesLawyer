@@ -5,13 +5,14 @@ import {
 } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { useTheme } from "@ui-kitten/components";
-import { TraitSelectorNavigationProps } from "../../Shared/TraitSelector";
 import StoryPage from "./StoryPage";
 import TraitSelectorView from "./TraitSelectorView";
+import { EditWeaponProficiencyView } from "./EditWeaponProficiencyView";
 
 export type StoryStackParamList = {
     MainStoryView: undefined;
     EditTraitsView: undefined;
+    EditWeaponProficiencyView: undefined;
 };
 
 export type StoryNavigationProps = StackNavigationProp<
@@ -29,6 +30,10 @@ export const StoryNavigator: React.FC = () => {
                 <Stack.Screen
                     name="EditTraitsView"
                     component={TraitSelectorView}
+                />
+                <Stack.Screen
+                    name="EditWeaponProficiencyView"
+                    component={EditWeaponProficiencyView}
                 />
             </Stack.Navigator>
         </NavigationContainer>
