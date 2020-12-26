@@ -8,11 +8,13 @@ import { useTheme } from "@ui-kitten/components";
 import StoryPage from "./StoryPage";
 import TraitSelectorView from "./TraitSelectorView";
 import { EditWeaponProficiencyView } from "./EditWeaponProficiencyView";
+import EditBioDataView from "./EditBioDataView";
 
 export type StoryStackParamList = {
     MainStoryView: undefined;
     EditTraitsView: undefined;
     EditWeaponProficiencyView: undefined;
+    EditBioDataView: undefined;
 };
 
 export type StoryNavigationProps = StackNavigationProp<
@@ -22,7 +24,6 @@ export type StoryNavigationProps = StackNavigationProp<
 
 export const StoryNavigator: React.FC = () => {
     const Stack = createStackNavigator<StoryStackParamList>();
-    const theme = useTheme();
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator initialRouteName="MainStoryView" headerMode="none">
@@ -34,6 +35,10 @@ export const StoryNavigator: React.FC = () => {
                 <Stack.Screen
                     name="EditWeaponProficiencyView"
                     component={EditWeaponProficiencyView}
+                />
+                <Stack.Screen
+                    name="EditBioDataView"
+                    component={EditBioDataView}
                 />
             </Stack.Navigator>
         </NavigationContainer>

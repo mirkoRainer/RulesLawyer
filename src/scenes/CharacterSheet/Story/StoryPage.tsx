@@ -82,7 +82,7 @@ const StoryPage: React.FC<Props> = (props) => {
                     />
                     <Divider />
                     {/*CharacterSketch placeholder*/}
-                    <BiographicalView bioData={props.bioData} />
+                    <BiographicalView />
                     <Divider />
                     <Layout style={{ alignSelf: "center", padding: 5 }}>
                         <Text style={styles.sectionLabel} category="h6">
@@ -109,7 +109,6 @@ interface OwnProps {
 }
 
 interface LinkStateProps {
-    bioData: BiographicalData;
     personalityData: PersonalityData;
     campaignNotesData: CampaignNotesData;
     characterName: string;
@@ -147,7 +146,6 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     alignment: state.playerCharacter.alignment,
     deity: state.playerCharacter.deity,
     traits: state.playerCharacter.traits,
-    bioData: state.playerCharacter.biographicalData,
     personalityData: state.playerCharacter.personalityData,
     campaignNotesData: state.playerCharacter.campaignNotesData,
     languages: state.playerCharacter.languages,
