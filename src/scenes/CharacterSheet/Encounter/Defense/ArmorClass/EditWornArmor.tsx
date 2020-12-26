@@ -37,7 +37,7 @@ import { isNumbersOnly } from "../../../../Shared/Misc/StringToNumberHelper";
 import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
-import { TraitSelector } from "../../../../Shared/TraitSelector";
+import TraitSelector from "../../../../Shared/TraitSelector";
 import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { DefenseStackParamList } from "../../DefenseNavigation";
