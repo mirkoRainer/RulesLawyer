@@ -122,14 +122,14 @@ export interface Background {
 }
 
 export interface BiographicalData {
-    ethnicity: string;
-    nationality: string;
-    birthplace: string;
     age: number;
+    appearance: string;
+    birthplace: string;
+    ethnicity: string;
     gender: string;
     height: number;
+    nationality: string;
     weight: number;
-    appearance: string;
 }
 
 export interface CampaignNotesData {
