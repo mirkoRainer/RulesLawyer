@@ -10,7 +10,13 @@ import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { isNumbersOnly } from "../../Shared/Misc/StringToNumberHelper";
 import { useNavigation } from "@react-navigation/native";
-import { BioDataNavigationProp } from "./Components/BiographicalView";
+import { StoryStackParamList } from "./StoryNavigation";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+export type BioDataNavigationProp = StackNavigationProp<
+    StoryStackParamList,
+    "EditBioDataView"
+>;
 
 const EditBioDataView: React.FC<Props> = (props) => {
     const navigation = useNavigation<BioDataNavigationProp>();

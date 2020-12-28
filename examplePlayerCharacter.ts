@@ -34,7 +34,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         Wisdom: { score: 18, ability: "Wisdom" },
         Charisma: { score: 8, ability: "Charisma" },
     },
-    languages: [" Common", " Dwarf", " Goblin"],
+    languages: ["Common", "Dwarf", "Goblin"],
     wornArmor: {
         Name: "Leather Armor",
         Category: "Light",

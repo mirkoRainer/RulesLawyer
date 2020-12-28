@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Layout, Text, useTheme } from "@ui-kitten/components";
+import { Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
@@ -8,14 +8,8 @@ import { connect } from "react-redux";
 import { BiographicalData } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
 import { startChangeBioData } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { StoryStackParamList } from "../StoryNavigation";
 import { useNavigation } from "@react-navigation/native";
-
-export type BioDataNavigationProp = StackNavigationProp<
-    StoryStackParamList,
-    "EditBioDataView"
->;
+import { BioDataNavigationProp } from "../EditBioDataView";
 
 const BiographicalView: React.FC<Props> = (props) => {
     const navigation = useNavigation<BioDataNavigationProp>();

@@ -36,6 +36,7 @@ import {
     ADD_SPELL,
     CHANGE_PC_TRAITS,
     CHANGE_BIO_DATA,
+    CHANGE_LANGUAGES,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
@@ -538,5 +539,17 @@ export const ChangeBioData: ActionCreator<PlayerCharacterActionTypes> = (
 export const startChangeBioData = (BioData: BiographicalData) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeBioData(BioData));
+    };
+};
+
+export const ChangeLanguages: ActionCreator<PlayerCharacterActionTypes> = (
+    Languages: string[]
+): PlayerCharacterActionTypes => ({
+    type: CHANGE_LANGUAGES,
+    Languages,
+});
+export const startChangeLanguages = (Languages: string[]) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeLanguages(Languages));
     };
 };

@@ -382,6 +382,14 @@ const playerCharacterReducer = (
                 ...state,
                 biographicalData: action.BioData,
             };
+        case "CHANGE_LANGUAGES":
+            console.debug(
+                `CHANGE_LANGUAGES in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                languages: action.Languages,
+            };
         default:
             return state;
     }

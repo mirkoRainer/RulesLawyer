@@ -232,6 +232,12 @@ export interface ChangeBioDataAction extends Action<string> {
     BioData: BiographicalData;
 }
 
+export const CHANGE_LANGUAGES = "CHANGE_LANGUAGES";
+export interface ChangeLanguagesAction extends Action<string> {
+    type: typeof CHANGE_LANGUAGES;
+    Languages: string[];
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -268,4 +274,5 @@ export type PlayerCharacterActionTypes =
     | AddSpellAction
     | DeleteSpellAction
     | ChangePCTraitsAction
-    | ChangeBioDataAction; // | SomeOtherAction
+    | ChangeBioDataAction
+    | ChangeLanguagesAction; // | SomeOtherAction

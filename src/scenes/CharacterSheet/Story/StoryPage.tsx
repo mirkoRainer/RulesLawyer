@@ -20,6 +20,7 @@ import { Divider, Layout, Text } from "@ui-kitten/components";
 import { StoryNavigationProps } from "./StoryNavigation";
 import { useFocusEffect } from "@react-navigation/native";
 import BiographicalView from "./Components/BiographicalView";
+import Languages from "./Components/Languages";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -84,14 +85,7 @@ const StoryPage: React.FC<Props> = (props) => {
                     {/*CharacterSketch placeholder*/}
                     <BiographicalView />
                     <Divider />
-                    <Layout style={{ alignSelf: "center", padding: 5 }}>
-                        <Text style={styles.sectionLabel} category="h6">
-                            Languages:
-                        </Text>
-                        <Text style={styles.text}>
-                            {props.languages.toString()}
-                        </Text>
-                    </Layout>
+                    <Languages />
                     <Divider />
                     <Personality personalityData={props.personalityData} />
                     <Divider />
@@ -125,7 +119,6 @@ interface LinkStateProps {
     alignment: string;
     deity: string;
     traits: string[];
-    languages: string[];
     abilityScores: AbilityScoreArray;
     weaponProficiencies: WeaponProficiencies;
 }
@@ -148,7 +141,6 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     traits: state.playerCharacter.traits,
     personalityData: state.playerCharacter.personalityData,
     campaignNotesData: state.playerCharacter.campaignNotesData,
-    languages: state.playerCharacter.languages,
     abilityScores: state.playerCharacter.abilityScores,
     weaponProficiencies: state.playerCharacter.weaponProficiencies,
 });
