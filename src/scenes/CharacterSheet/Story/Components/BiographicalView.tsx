@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         padding: 10,
         flexDirection: "row",
+        justifyContent: "center",
     },
     text: {
         alignSelf: "center",
