@@ -32,7 +32,7 @@ import {
 } from "./ActionHelper";
 import { update } from "lodash";
 import { ScrollView } from "react-native-gesture-handler";
-import { TraitSelector } from "../../../Shared/TraitSelector";
+import TraitSelector from "../../../Shared/TraitSelector";
 import { SkillSelector } from "../Skills/SkillSelector";
 import { WeaponSelector } from "./Weapons/WeaponSelector";
 
