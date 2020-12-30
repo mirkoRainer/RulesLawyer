@@ -9,6 +9,10 @@ import BuyingAndSellingActivity from "./Components/BuyingAndSellingActivity";
 import LongTermRestActivity from "./Components/LongTermRest";
 import RetrainingActivity from "./Components/Retraining";
 import CraftActivity from "./Components/CraftActivity";
+import EarnIncomeActivity from "./Components/EarnIncomeActivity";
+import TreatDiseaseActivity from "./Components/TreatDiseaseActivity";
+import CreateForgeryActivity from "./Components/CreateForgeryActivity";
+import SubsistActivity from "./Components/SubsistActivity";
 
 type Props = {};
 
@@ -24,10 +28,10 @@ export const Downtime: React.FC<Props> = (props) => {
                 <LongTermRestActivity />
                 <RetrainingActivity />
                 <CraftActivity />
-                <Text>Earn income (Crafting Lore Performance)</Text>
-                <Text>Treat Disease</Text>
-                <Text>Create Forgery</Text>
-                <Text>Subsist</Text>
+                <EarnIncomeActivity />
+                <TreatDiseaseActivity />
+                <CreateForgeryActivity />
+                <SubsistActivity />
             </ScrollView>
         </Layout>
     );
