@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import Personality, { PersonalityData } from "./Components/Personality";
+import Personality from "./Components/Personality";
 import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import {
     Background,
+    PersonalityData,
     WeaponProficiencies,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, {

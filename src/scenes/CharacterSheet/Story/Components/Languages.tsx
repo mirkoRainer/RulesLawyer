@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { EntireAppState } from "../../../../store/Store";
-import { LanguagesNavigationProp } from "../EditLanguages";
+import { LanguagesNavigationProp } from "../EditLanguagesView";
 
 const Languages: React.FC<Props> = (props) => {
     // make sure the screen is always refreshed.

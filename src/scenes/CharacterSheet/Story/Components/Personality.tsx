@@ -2,16 +2,22 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { PersonalityData } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { useNavigation } from "@react-navigation/native";
+import { PersonalityDataNavigationProp } from "../EditPersonalityView";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props {
     personalityData: PersonalityData;
 }
 
-export default class Personality extends Component<Props> {
-    public static defaultProps = {};
-
-    render() {
-        return (
+const Personality: React.FC<Props> = (props) => {
+    const navigation = useNavigation<PersonalityDataNavigationProp>();
+    const goToPersonalityEditView = () => {
+        console.debug("Navigation to EditPersonalityView");
+        navigation.navigate("EditPersonalityView");
+    };
+    return (
+        <TouchableOpacity onPress={goToPersonalityEditView}>
             <Layout style={styles.container}>
                 <Text style={styles.header} category="h3">
                     Personality
@@ -22,7 +28,7 @@ export default class Personality extends Component<Props> {
                     </Text>
                     <Text style={styles.text}>
                         {" "}
-                        {this.props.personalityData.attitude}{" "}
+                        {props.personalityData.attitude}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
@@ -31,7 +37,7 @@ export default class Personality extends Component<Props> {
                     </Text>
                     <Text style={styles.text}>
                         {" "}
-                        {this.props.personalityData.beliefs}{" "}
+                        {props.personalityData.beliefs}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
@@ -40,7 +46,7 @@ export default class Personality extends Component<Props> {
                     </Text>
                     <Text style={styles.text}>
                         {" "}
-                        {this.props.personalityData.likes}{" "}
+                        {props.personalityData.likes}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
@@ -49,7 +55,7 @@ export default class Personality extends Component<Props> {
                     </Text>
                     <Text style={styles.text}>
                         {" "}
-                        {this.props.personalityData.dislikes}{" "}
+                        {props.personalityData.dislikes}{" "}
                     </Text>
                 </Layout>
                 <Layout style={styles.rowContainerFlex3}>
@@ -58,13 +64,15 @@ export default class Personality extends Component<Props> {
                     </Text>
                     <Text style={styles.text}>
                         {" "}
-                        {this.props.personalityData.catchphrases}{" "}
+                        {props.personalityData.catchphrases}{" "}
                     </Text>
                 </Layout>
             </Layout>
-        );
-    }
-}
+        </TouchableOpacity>
+    );
+};
+
+export default Personality;
 
 const styles = StyleSheet.create({
     header: {

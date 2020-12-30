@@ -53,8 +53,8 @@ const EditBioDataView: React.FC<Props> = (props) => {
         goToBioDataView();
     };
     return (
-        <ScrollView>
-            <Layout style={{ flex: 1 }}>
+        <Layout style={{ flex: 1 }}>
+            <ScrollView>
                 <Layout style={styles.header}>
                     <Text>{"Biographical Data:"}</Text>
                     <Button
@@ -136,8 +136,8 @@ const EditBioDataView: React.FC<Props> = (props) => {
                         }
                     />
                 </Layout>
-            </Layout>
-        </ScrollView>
+            </ScrollView>
+        </Layout>
     );
 };
 
