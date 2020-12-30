@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout, Text, Button, ButtonGroup } from "@ui-kitten/components";
-import { floor } from "react-native-reanimated";
 import { bindActionCreators } from "redux";
 import { startChangeHitPoints } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { connect } from "react-redux";
@@ -22,8 +21,8 @@ export interface HitPointProps {
 }
 
 const HitPoints: React.FC<Props> = (props) => {
-    // @ts-ignore
     const PlusHPButton = (amount: number) => (
+        // @ts-ignore
         <Button
             onPress={() => {
                 props.AdjustHitPoints(amount, false);
@@ -33,8 +32,8 @@ const HitPoints: React.FC<Props> = (props) => {
             +{amount.toString()}
         </Button>
     );
-    // @ts-ignore
     const MinusHPButton = (amount: number) => (
+        // @ts-ignore
         <Button
             onPress={() => {
                 props.AdjustHitPoints(-amount, false);

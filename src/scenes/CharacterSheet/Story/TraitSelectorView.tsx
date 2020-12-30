@@ -1,5 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Layout } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
@@ -39,7 +39,6 @@ const TraitSelectorView: React.FC<Props> = (props) => {
     );
 };
 
-type Props = LinkStateProps & LinkDispatchProps;
 interface LinkStateProps {
     currentTraits: (keyof typeof Traits)[];
 }
@@ -58,5 +57,7 @@ const mapDispatchToProps = (
         startChangePCTraits: bindActionCreators(startChangePCTraits, dispatch),
     };
 };
+
+type Props = LinkStateProps & LinkDispatchProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(TraitSelectorView);

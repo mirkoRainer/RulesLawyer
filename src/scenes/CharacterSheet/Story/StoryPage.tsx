@@ -6,7 +6,6 @@ import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import {
     Background,
-    BiographicalData,
     WeaponProficiencies,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import CharacterMetadata, {
@@ -122,8 +121,6 @@ interface LinkStateProps {
     abilityScores: AbilityScoreArray;
     weaponProficiencies: WeaponProficiencies;
 }
-type Props = LinkStateProps & OwnProps;
-
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     characterName: state.playerCharacter.name,
     playerName: state.playerCharacter.playerName,
@@ -144,6 +141,8 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     abilityScores: state.playerCharacter.abilityScores,
     weaponProficiencies: state.playerCharacter.weaponProficiencies,
 });
+
+type Props = LinkStateProps & OwnProps;
 
 export default connect(mapStateToProps, null)(StoryPage);
 

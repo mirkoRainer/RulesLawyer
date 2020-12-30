@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-
-export interface PersonalityData {
-    attitude: string;
-    beliefs: string;
-    likes: string;
-    dislikes: string;
-    catchphrases: string;
-}
+import { PersonalityData } from "../../../../PF2eCoreLib/PlayerCharacter";
 
 interface Props {
     personalityData: PersonalityData;
