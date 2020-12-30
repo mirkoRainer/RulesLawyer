@@ -9,7 +9,6 @@ import {
     CHANGE_SUBCLASS,
     CHANGE_ALIGNMENT,
     CHANGE_DEITY,
-    CHANGE_NOTES,
     CHANGE_RESISTANCES,
     CHANGE_IMMUNITIES,
     CHANGE_WEAKNESSES,
@@ -26,7 +25,6 @@ import {
     ChangeSubClass,
     ChangeAlignment,
     ChangeDeity,
-    ChangeNotes,
     ChangeResistances,
     ChangeImmunities,
     ChangeWeaknesses,
@@ -125,15 +123,6 @@ export const TextEditModalStateSwitch = (
                 onSelect: () => {},
                 onTextChange: (value: string) => {
                     dispatch(ChangeDeity(value));
-                },
-            };
-        case CHANGE_NOTES:
-            return {
-                title: "Notes:",
-                value: state.playerCharacter.campaignNotesData.notes,
-                onSelect: () => {},
-                onTextChange: (value: string) => {
-                    dispatch(ChangeNotes(value));
                 },
             };
         case CHANGE_RESISTANCES:

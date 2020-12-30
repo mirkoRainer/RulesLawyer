@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import Personality from "./Components/Personality";
-import CampaignNotes, { CampaignNotesData } from "./Components/CampaignNotes";
+import CampaignNotes from "./Components/CampaignNotes";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import {
     Background,
+    CampaignNotesData,
     PersonalityData,
     WeaponProficiencies,
 } from "../../../PF2eCoreLib/PlayerCharacter";
@@ -20,7 +21,7 @@ import { Divider, Layout, Text } from "@ui-kitten/components";
 import { StoryNavigationProps } from "./StoryNavigation";
 import { useFocusEffect } from "@react-navigation/native";
 import BiographicalView from "./Components/BiographicalView";
-import Languages from "./Components/Languages";
+import LanguagesView from "./Components/Languages";
 
 const StoryPage: React.FC<Props> = (props) => {
     const titleText = "The Story of " + props.characterName;
@@ -85,7 +86,7 @@ const StoryPage: React.FC<Props> = (props) => {
                     {/*CharacterSketch placeholder*/}
                     <BiographicalView />
                     <Divider />
-                    <Languages />
+                    <LanguagesView languages={[]} />
                     <Divider />
                     <Personality personalityData={props.personalityData} />
                     <Divider />

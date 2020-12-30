@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { EntireAppState } from "../../../../store/Store";
 import { LanguagesNavigationProp } from "../EditLanguagesView";
 
-const Languages: React.FC<Props> = (props) => {
+const LanguagesView: React.FC<Props> = (props) => {
     // make sure the screen is always refreshed.
     const [state, setState] = useState({});
     useFocusEffect(
@@ -32,16 +32,16 @@ const Languages: React.FC<Props> = (props) => {
     );
 };
 
+type Props = LinkStateProps;
+
 interface LinkStateProps {
     languages: string[];
 }
-type Props = LinkStateProps;
-
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     languages: state.playerCharacter.languages,
 });
 
-export default connect(mapStateToProps, null)(Languages);
+export default connect(mapStateToProps, null)(LanguagesView);
 
 const styles = StyleSheet.create({
     centered: {

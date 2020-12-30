@@ -11,6 +11,7 @@ import {
     SpellSlot,
     BiographicalData,
     PersonalityData,
+    CampaignNotesData,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -70,12 +71,6 @@ export const CHANGE_DEITY = "CHANGE_DEITY";
 export interface ChangeDeityAction extends Action<string> {
     type: typeof CHANGE_DEITY;
     Deity: string;
-}
-
-export const CHANGE_NOTES = "CHANGE_NOTES";
-export interface ChangeNotesAction extends Action<string> {
-    type: typeof CHANGE_NOTES;
-    Notes: string;
 }
 
 export const CHANGE_RESISTANCES = "CHANGE_RESISTANCES";
@@ -245,6 +240,12 @@ export interface ChangePersonalityAction extends Action<string> {
     Personality: PersonalityData;
 }
 
+export const CHANGE_CAMPAIGN_NOTES = "CHANGE_CAMPAIGN_NOTES";
+export interface ChangeCampaignNotesAction extends Action<string> {
+    type: typeof CHANGE_CAMPAIGN_NOTES;
+    CampaignNotes: CampaignNotesData;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -255,7 +256,6 @@ export type PlayerCharacterActionTypes =
     | ChangeDeityAction
     | ChangeHeritageAction
     | ChangeImmunitiesAction
-    | ChangeNotesAction
     | ChangePlayerNameAction
     | ChangeResistancesAction
     | ChangeSensesAction
@@ -283,4 +283,5 @@ export type PlayerCharacterActionTypes =
     | ChangePCTraitsAction
     | ChangeBioDataAction
     | ChangeLanguagesAction
-    | ChangePersonalityAction; // | SomeOtherAction
+    | ChangePersonalityAction
+    | ChangeCampaignNotesAction; // | SomeOtherAction

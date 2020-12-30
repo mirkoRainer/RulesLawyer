@@ -11,6 +11,7 @@ import { EditWeaponProficiencyView } from "./EditWeaponProficiencyView";
 import EditBioDataView from "./EditBioDataView";
 import EditLanguages from "./EditLanguagesView";
 import EditPersonalityView from "./EditPersonalityView";
+import EditCampaignNotesView from "./EditCampaignNotesView";
 
 export type StoryStackParamList = {
     MainStoryView: undefined;
@@ -19,6 +20,7 @@ export type StoryStackParamList = {
     EditBioDataView: undefined;
     EditLanguagesView: undefined;
     EditPersonalityView: undefined;
+    EditCampaignNotesView: undefined;
 };
 
 export type StoryNavigationProps = StackNavigationProp<
@@ -34,6 +36,7 @@ export const StoryNavigator: React.FC = () => {
                 <Stack.Screen name="MainStoryView" component={StoryPage} />
                 <Stack.Screen
                     name="EditTraitsView"
+                    // @ts-ignore
                     component={TraitSelectorView}
                 />
                 <Stack.Screen
@@ -51,6 +54,10 @@ export const StoryNavigator: React.FC = () => {
                 <Stack.Screen
                     name="EditPersonalityView"
                     component={EditPersonalityView}
+                />
+                <Stack.Screen
+                    name="EditCampaignNotesView"
+                    component={EditCampaignNotesView}
                 />
             </Stack.Navigator>
         </NavigationContainer>

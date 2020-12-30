@@ -10,7 +10,6 @@ import {
     CHANGE_SUBCLASS,
     CHANGE_ALIGNMENT,
     CHANGE_DEITY,
-    CHANGE_NOTES,
     CHANGE_IMMUNITIES,
     CHANGE_WEAKNESSES,
     CHANGE_CONDITIONS,
@@ -38,6 +37,7 @@ import {
     CHANGE_BIO_DATA,
     CHANGE_LANGUAGES,
     CHANGE_PERSONALITY,
+    CHANGE_CAMPAIGN_NOTES,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
@@ -57,6 +57,7 @@ import {
     SpellSlot,
     BiographicalData,
     PersonalityData,
+    CampaignNotesData,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -169,18 +170,6 @@ export const ChangeDeity: ActionCreator<PlayerCharacterActionTypes> = (
 export const startChangeDeity = (Deity: string) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeDeity(Deity));
-    };
-};
-
-export const ChangeNotes: ActionCreator<PlayerCharacterActionTypes> = (
-    Notes: string
-): PlayerCharacterActionTypes => ({
-    type: CHANGE_NOTES,
-    Notes,
-});
-export const startChangeNotes = (Notes: string) => {
-    return (dispatch: Dispatch<AppActions>) => {
-        dispatch(ChangeNotes(Notes));
     };
 };
 
@@ -565,5 +554,17 @@ export const ChangePersonality: ActionCreator<PlayerCharacterActionTypes> = (
 export const startChangePersonality = (Personality: PersonalityData) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangePersonality(Personality));
+    };
+};
+
+export const ChangeCampaignNotes: ActionCreator<PlayerCharacterActionTypes> = (
+    CampaignNotes: CampaignNotesData
+): PlayerCharacterActionTypes => ({
+    type: CHANGE_CAMPAIGN_NOTES,
+    CampaignNotes,
+});
+export const startChangeCampaignNotes = (CampaignNotes: CampaignNotesData) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeCampaignNotes(CampaignNotes));
     };
 };

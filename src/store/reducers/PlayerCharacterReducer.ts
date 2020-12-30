@@ -8,7 +8,6 @@ import {
     CHANGE_BACKGROUND,
     CHANGE_ALIGNMENT,
     CHANGE_DEITY,
-    CHANGE_NOTES,
     CHANGE_RESISTANCES,
     CHANGE_IMMUNITIES,
     CHANGE_WEAKNESSES,
@@ -34,6 +33,7 @@ import {
     DELETE_SPELL,
     CHANGE_PC_TRAITS,
     CHANGE_BIO_DATA,
+    CHANGE_CAMPAIGN_NOTES,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -44,7 +44,6 @@ import {
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 import _ from "lodash";
-import { SpellList } from "../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -104,15 +103,6 @@ const playerCharacterReducer = (
             modifiedState = {
                 ...state,
                 deity: action.Deity,
-            };
-            return modifiedState;
-        case CHANGE_NOTES:
-            modifiedState = {
-                ...state,
-                campaignNotesData: {
-                    ...state.campaignNotesData,
-                    notes: action.Notes,
-                },
             };
             return modifiedState;
         case CHANGE_RESISTANCES:
@@ -401,6 +391,18 @@ const playerCharacterReducer = (
             return {
                 ...state,
                 personalityData: action.Personality,
+            };
+        case "CHANGE_CAMPAIGN_NOTES":
+            console.debug(
+                `CHANGE_CAMPAIGN_NOTES in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
+            return {
+                ...state,
+                campaignNotesData: action.CampaignNotes,
             };
         default:
             return state;
