@@ -10,6 +10,7 @@ import {
     Skill,
     SpellSlot,
     BiographicalData,
+    PersonalityData,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -238,6 +239,12 @@ export interface ChangeLanguagesAction extends Action<string> {
     Languages: string[];
 }
 
+export const CHANGE_PERSONALITY = "CHANGE_PERSONALITY";
+export interface ChangePersonalityAction extends Action<string> {
+    type: typeof CHANGE_PERSONALITY;
+    Personality: PersonalityData;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -275,4 +282,5 @@ export type PlayerCharacterActionTypes =
     | DeleteSpellAction
     | ChangePCTraitsAction
     | ChangeBioDataAction
-    | ChangeLanguagesAction; // | SomeOtherAction
+    | ChangeLanguagesAction
+    | ChangePersonalityAction; // | SomeOtherAction

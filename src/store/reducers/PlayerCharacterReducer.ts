@@ -390,6 +390,18 @@ const playerCharacterReducer = (
                 ...state,
                 languages: action.Languages,
             };
+        case "CHANGE_PERSONALITY":
+            console.debug(
+                `CHANGE_PERSONALITY in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
+            return {
+                ...state,
+                personalityData: action.Personality,
+            };
         default:
             return state;
     }

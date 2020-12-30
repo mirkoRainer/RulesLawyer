@@ -37,6 +37,7 @@ import {
     CHANGE_PC_TRAITS,
     CHANGE_BIO_DATA,
     CHANGE_LANGUAGES,
+    CHANGE_PERSONALITY,
 } from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
@@ -55,6 +56,7 @@ import {
     Skill,
     SpellSlot,
     BiographicalData,
+    PersonalityData,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -551,5 +553,17 @@ export const ChangeLanguages: ActionCreator<PlayerCharacterActionTypes> = (
 export const startChangeLanguages = (Languages: string[]) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeLanguages(Languages));
+    };
+};
+
+export const ChangePersonality: ActionCreator<PlayerCharacterActionTypes> = (
+    Personality: PersonalityData
+): PlayerCharacterActionTypes => ({
+    type: CHANGE_PERSONALITY,
+    Personality,
+});
+export const startChangePersonality = (Personality: PersonalityData) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangePersonality(Personality));
     };
 };
