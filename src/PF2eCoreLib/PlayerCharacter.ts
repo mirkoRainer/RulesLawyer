@@ -8,7 +8,7 @@ import { HealthData } from "./HealthData";
 import { ArmorGroup } from "./ArmorGroup";
 import { Guid } from "guid-typescript";
 
-export default interface PlayerCharacter {
+interface PlayerCharacter {
     metadata: Metadata;
     level: number;
     experiencePoints: number;
@@ -57,6 +57,8 @@ export default interface PlayerCharacter {
     spellSlots: SpellSlot[];
     spells: SpellList;
 }
+
+export default PlayerCharacter;
 
 export interface iClass {
     name: string;
@@ -149,6 +151,7 @@ export interface Item {
     invested: boolean;
     worn: boolean;
     readied: boolean;
+    quantity?: number;
 }
 
 export interface MagicTraditions {
