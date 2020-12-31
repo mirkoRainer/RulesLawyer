@@ -4,7 +4,7 @@ import { Layout, Text } from "@ui-kitten/components";
 
 type Props = {};
 
-export const Inventory: React.FC<Props> = (props) => {
+export const InventoryPage: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
             <Text>Inventory Page</Text>

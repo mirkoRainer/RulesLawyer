@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { Header, Divider } from "react-native-elements";
+import { Divider } from "react-native-elements";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { connect } from "react-redux";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
@@ -14,11 +14,8 @@ import { EntireAppState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Encounter from "./Encounter/Encounter";
-import StoryPage from "./Story/StoryPage";
 import Exploration from "./Exploration/Exploration";
 import { Downtime } from "./Downtime/Downtime";
-import { Inventory } from "./Inventory/Inventory";
-import SpellsPage from "./Encounter/Spells/SpellsPage";
 import TextEditModal from "../Shared/Modals/TextEditModal";
 import PickerModal from "../Shared/Modals/PickerModal";
 import {
@@ -33,6 +30,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 import { StoryNavigator } from "./Story/StoryNavigation";
+import { InventoryNavigator } from "./Inventory/InventoryNavigation";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -159,7 +157,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     />
                     <Tab.Screen
                         name="Inventory"
-                        component={Inventory}
+                        component={InventoryNavigator}
                         options={{ tabBarLabel: "Inventory" }}
                     />
                     <Tab.Screen
