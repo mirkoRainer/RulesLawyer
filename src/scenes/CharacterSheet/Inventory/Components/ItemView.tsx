@@ -1,13 +1,67 @@
+import { Card, Text, Layout } from "@ui-kitten/components";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { getBulkString } from "../InventoryHelper";
 
-type Props = {};
+type Props = {
+    item: Item;
+    index: number;
+    cardStatus: "primary" | "success" | "info" | "warning" | "danger";
+};
 
 export const ItemView: React.FC<Props> = (props) => {
+    const bulk = getBulkString(props.item.bulk);
+
+    const itemHeader = () => (
+        <Layout>
+            <Layout style={{ flexDirection: "row" }}>
+                <Text
+                    style={{ flex: 1, marginHorizontal: 10, marginVertical: 5 }}
+                    category="h6"
+                >
+                    {props.item.itemName}
+                </Text>
+                <Text
+                    style={{
+                        justifyContent: "flex-end",
+                        flex: 0.2,
+                        textAlign: "right",
+                        marginHorizontal: 10,
+                        marginVertical: 5,
+                    }}
+                >
+                    Bulk: {bulk}
+                </Text>
+            </Layout>
+            {props.item.invested ? (
+                <Text
+                    category="s2"
+                    style={{
+                        justifyContent: "flex-end",
+                        alignContent: "flex-start",
+                        flex: 0.2,
+                        textAlign: "right",
+                        marginHorizontal: 10,
+                        marginVertical: 5,
+                    }}
+                    appearance="hint"
+                >
+                    Invested
+                </Text>
+            ) : (
+                <></>
+            )}
+        </Layout>
+    );
     return (
-        <View>
-            <Text style={styles.centered}>ItemView</Text>
-        </View>
+        <Card
+            header={itemHeader}
+            status={props.cardStatus}
+            style={{ width: "100%" }}
+        >
+            <Text>{props.item.description}</Text>
+        </Card>
     );
 };
 

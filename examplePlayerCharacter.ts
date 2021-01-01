@@ -335,13 +335,15 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 invested: true,
                 worn: true,
                 readied: false,
+                description: "Rings that are double",
             },
             {
                 itemName: "Bracers of Missile Deflection",
                 bulk: 0.1,
-                invested: true,
+                invested: false,
                 worn: true,
                 readied: false,
+                description: "",
             },
             {
                 itemName: "Alchemist's Fire",
@@ -349,6 +351,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 invested: false,
                 worn: false,
                 readied: true,
+                description: "",
             },
             {
                 itemName: "Thieves Tools",
@@ -356,6 +359,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 invested: false,
                 worn: false,
                 readied: true,
+                description: "",
             },
             {
                 itemName: "Feather Token (Ladder)",
@@ -363,6 +367,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 invested: false,
                 worn: false,
                 readied: false,
+                description: "",
             },
             {
                 itemName: "Signal Whistle",
@@ -370,6 +375,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 invested: false,
                 worn: false,
                 readied: false,
+                description: "",
             },
         ],
     },

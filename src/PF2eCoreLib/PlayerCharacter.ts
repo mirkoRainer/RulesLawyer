@@ -147,6 +147,7 @@ export interface Inventory {
 
 export interface Item {
     itemName: string;
+    description: string;
     bulk: number;
     invested: boolean;
     worn: boolean;

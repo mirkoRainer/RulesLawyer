@@ -12,7 +12,6 @@ import { DetermineNextProficiency } from "../../../../PF2eCoreLib/Proficiencies"
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import { startToggleDarkMode } from "../../../../store/actions/Theme/ThemeActions";
 import { startChangeSkills } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
 

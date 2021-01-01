@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import WornItemsView from "./Components/WornItems";
 import ReadiedItemsView from "./Components/ReadiedItems";
@@ -10,9 +10,11 @@ type Props = {};
 export const InventoryPage: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
-            <WornItemsView />
-            <ReadiedItemsView />
-            <OtherItemsView />
+            <ScrollView>
+                <ReadiedItemsView readiedItems={[]} />
+                <WornItemsView wornItems={[]} />
+                <OtherItemsView otherItems={[]} />
+            </ScrollView>
         </Layout>
     );
 };
@@ -20,7 +22,6 @@ export const InventoryPage: React.FC<Props> = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
         justifyContent: "center",
     },
 });

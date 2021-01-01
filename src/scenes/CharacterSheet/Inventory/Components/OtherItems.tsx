@@ -1,18 +1,31 @@
 import { Button, Icon, Layout, Text } from "@ui-kitten/components";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
+import { ItemView } from "./ItemView";
 
 const OtherItemsView: React.FC<Props> = (props) => {
-    const DropDownIcon = (props: any) => <Icon {...props} name="eye-outline" />;
+    const [itemsVisible, setItemsVisible] = useState(true);
+    const iconName = itemsVisible ? "eye-off-outline" : "eye-outline";
+    const DropDownIcon = (props: any) => <Icon {...props} name={iconName} />;
+    const items: JSX.Element[] = [];
+    props.otherItems.forEach((item, index) =>
+        items.push(<ItemView item={item} index={index} cardStatus="success" />)
+    );
+    const toggleItemsVisible = () => setItemsVisible(!itemsVisible);
     return (
-        <Layout style={{ flex: 1 }}>
+        <Layout style={{ flex: 1, margin: 10 }}>
             <Layout style={styles.dropDownContainer}>
                 <Text category="h3">Other Items</Text>
-                <Button appearance="ghost" accessoryLeft={DropDownIcon} />
+                <Button
+                    appearance="ghost"
+                    accessoryLeft={DropDownIcon}
+                    onPress={toggleItemsVisible}
+                />
             </Layout>
+            <Layout>{itemsVisible ? items : undefined}</Layout>
         </Layout>
     );
 };
@@ -39,8 +52,8 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     dropDownContainer: {
-        alignItems: "center",
         flex: 1,
         flexDirection: "row",
+        justifyContent: "center",
     },
 });
