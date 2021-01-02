@@ -13,6 +13,7 @@ import {
     IndexPath,
 } from "@ui-kitten/components";
 import {
+    isWeapon,
     PF2Action,
     Skill,
     Weapon,
@@ -378,11 +379,16 @@ interface LinkStateProps {
 const mapStateToProps = (
     state: EntireAppState,
     ownProps: OwnProps
-): LinkStateProps => ({
-    action: state.playerCharacter.actions[ownProps.route.params.index],
-    skills: state.playerCharacter.skills,
-    weapons: state.playerCharacter.weapons,
-});
+): LinkStateProps => {
+    const weapons: Weapon[] = state.playerCharacter.inventory.items.filter<Weapon>(
+        isWeapon
+    );
+    return {
+        action: state.playerCharacter.actions[ownProps.route.params.index],
+        skills: state.playerCharacter.skills,
+        weapons,
+    };
+};
 
 export default connect(mapStateToProps, null)(EditActionView);
 

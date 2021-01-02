@@ -8,9 +8,13 @@
 	"settings": {
 		"cSpell.words": [
 			"HITPOINTS",
+			"Lamashtu",
+			"Mirko",
 			"Swipeable",
 			"descr",
-			"loremaster"
+			"loremaster",
+			"mirko",
+			"reduxjs"
 		],
 		"cSpell.enabled": true,
 		"editor.defaultFormatter": "dbaeumer.vscode-eslint",

@@ -1,44 +1,5 @@
 import { AppActions } from "../AllActionTypesAggregated";
-import {
-    CHANGE_CHARACTER_NAME,
-    CHANGE_PLAYER_NAME,
-    PlayerCharacterActionTypes,
-    CHANGE_ANCESTRY,
-    CHANGE_HERITAGE,
-    CHANGE_BACKGROUND,
-    CHANGE_CLASS,
-    CHANGE_SUBCLASS,
-    CHANGE_ALIGNMENT,
-    CHANGE_DEITY,
-    CHANGE_IMMUNITIES,
-    CHANGE_WEAKNESSES,
-    CHANGE_CONDITIONS,
-    CHANGE_SENSES,
-    CHANGE_RESISTANCES,
-    CHANGE_LEVEL,
-    CHANGE_EXPERIENCE_POINTS,
-    CHANGE_ABILITY_SCORE,
-    CHANGE_CLASS_DC_PROFICIENCY,
-    CHANGE_HIT_POINTS,
-    CHANGE_TEMPORARY_HITPOINTS,
-    CHANGE_DYING_VALUE,
-    CHANGE_WOUNDED_VALUE,
-    CHANGE_MAX_HITPOINTS,
-    CHANGE_SHIELD,
-    CHANGE_WORN_ARMOR,
-    CHANGE_SPEED,
-    CHANGE_PC_ACTIONS,
-    CHANGE_SKILLS,
-    CHANGE_SPELL_SLOTS,
-    UPDATE_SPELL,
-    DELETE_SPELL,
-    ADD_SPELL,
-    CHANGE_PC_TRAITS,
-    CHANGE_BIO_DATA,
-    CHANGE_LANGUAGES,
-    CHANGE_PERSONALITY,
-    CHANGE_CAMPAIGN_NOTES,
-} from "./PlayerCharacterActionTypes";
+import * as ActionTypes from "./PlayerCharacterActionTypes";
 import { ActionCreator, Dispatch } from "redux";
 import { AbilityScore } from "../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
@@ -50,7 +11,7 @@ import {
 import {
     Saves,
     Shield,
-    WornArmor,
+    Armor,
     Movement,
     PF2Action,
     Skill,
@@ -58,17 +19,20 @@ import {
     BiographicalData,
     PersonalityData,
     CampaignNotesData,
+    Weapon,
+    Item,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
     SpellList,
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 import { Traits } from "../../../PF2eCoreLib/Traits";
+import { PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (
     name: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_CHARACTER_NAME,
+    type: ActionTypes.CHANGE_CHARACTER_NAME,
     name,
 });
 export const startChangeCharacterName = (name: string) => {
@@ -80,7 +44,7 @@ export const startChangeCharacterName = (name: string) => {
 export const ChangePlayerName: ActionCreator<PlayerCharacterActionTypes> = (
     name: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_PLAYER_NAME,
+    type: ActionTypes.CHANGE_PLAYER_NAME,
     name,
 });
 export const startChangePlayerName = (name: string) => {
@@ -92,7 +56,7 @@ export const startChangePlayerName = (name: string) => {
 export const ChangeAncestry: ActionCreator<PlayerCharacterActionTypes> = (
     ancestry: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_ANCESTRY,
+    type: ActionTypes.CHANGE_ANCESTRY,
     ancestry,
 });
 export const startChangeAncestry = (ancestry: string) => {
@@ -104,7 +68,7 @@ export const startChangeAncestry = (ancestry: string) => {
 export const ChangeHeritage: ActionCreator<PlayerCharacterActionTypes> = (
     heritage: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_HERITAGE,
+    type: ActionTypes.CHANGE_HERITAGE,
     heritage,
 });
 export const startChangeHeritage = (heritage: string) => {
@@ -116,7 +80,7 @@ export const startChangeHeritage = (heritage: string) => {
 export const ChangeBackground: ActionCreator<PlayerCharacterActionTypes> = (
     Background: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_BACKGROUND,
+    type: ActionTypes.CHANGE_BACKGROUND,
     Background,
 });
 export const startChangeBackground = (Background: string) => {
@@ -128,7 +92,7 @@ export const startChangeBackground = (Background: string) => {
 export const ChangeClass: ActionCreator<PlayerCharacterActionTypes> = (
     Class: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_CLASS,
+    type: ActionTypes.CHANGE_CLASS,
     Class,
 });
 export const startChangeClass = (Class: string) => {
@@ -140,7 +104,7 @@ export const startChangeClass = (Class: string) => {
 export const ChangeSubClass: ActionCreator<PlayerCharacterActionTypes> = (
     SubClass: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_SUBCLASS,
+    type: ActionTypes.CHANGE_SUBCLASS,
     SubClass,
 });
 export const startChangeSubClass = (SubClass: string) => {
@@ -152,7 +116,7 @@ export const startChangeSubClass = (SubClass: string) => {
 export const ChangeAlignment: ActionCreator<PlayerCharacterActionTypes> = (
     Alignment: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_ALIGNMENT,
+    type: ActionTypes.CHANGE_ALIGNMENT,
     Alignment,
 });
 export const startChangeAlignment = (Alignment: string) => {
@@ -164,7 +128,7 @@ export const startChangeAlignment = (Alignment: string) => {
 export const ChangeDeity: ActionCreator<PlayerCharacterActionTypes> = (
     Deity: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_DEITY,
+    type: ActionTypes.CHANGE_DEITY,
     Deity,
 });
 export const startChangeDeity = (Deity: string) => {
@@ -176,7 +140,7 @@ export const startChangeDeity = (Deity: string) => {
 export const ChangeResistances: ActionCreator<PlayerCharacterActionTypes> = (
     Resistances: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_RESISTANCES,
+    type: ActionTypes.CHANGE_RESISTANCES,
     Resistances,
 });
 export const startChangeResistances = (Resistances: string) => {
@@ -188,7 +152,7 @@ export const startChangeResistances = (Resistances: string) => {
 export const ChangeImmunities: ActionCreator<PlayerCharacterActionTypes> = (
     Immunities: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_IMMUNITIES,
+    type: ActionTypes.CHANGE_IMMUNITIES,
     Immunities,
 });
 export const startChangeImmunities = (Immunities: string) => {
@@ -200,7 +164,7 @@ export const startChangeImmunities = (Immunities: string) => {
 export const ChangeWeaknesses: ActionCreator<PlayerCharacterActionTypes> = (
     Weaknesses: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_WEAKNESSES,
+    type: ActionTypes.CHANGE_WEAKNESSES,
     Weaknesses,
 });
 export const startChangeWeaknesses = (Weaknesses: string) => {
@@ -212,7 +176,7 @@ export const startChangeWeaknesses = (Weaknesses: string) => {
 export const ChangeConditions: ActionCreator<PlayerCharacterActionTypes> = (
     Conditions: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_CONDITIONS,
+    type: ActionTypes.CHANGE_CONDITIONS,
     Conditions,
 });
 export const startChangeConditions = (Conditions: string) => {
@@ -224,7 +188,7 @@ export const startChangeConditions = (Conditions: string) => {
 export const ChangeSenses: ActionCreator<PlayerCharacterActionTypes> = (
     Senses: string
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_SENSES,
+    type: ActionTypes.CHANGE_SENSES,
     Senses,
 });
 export const startChangeSenses = (Senses: string) => {
@@ -234,10 +198,10 @@ export const startChangeSenses = (Senses: string) => {
 };
 
 export const ChangeLevel: ActionCreator<PlayerCharacterActionTypes> = (
-    Level: number
+    level: number
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_LEVEL,
-    Level,
+    type: ActionTypes.CHANGE_LEVEL,
+    level,
 });
 export const startChangeLevel = (Level: string) => {
     return (dispatch: Dispatch<AppActions>) => {
@@ -248,7 +212,7 @@ export const startChangeLevel = (Level: string) => {
 export const ChangeExperiencePoints: ActionCreator<PlayerCharacterActionTypes> = (
     ExperiencePoints: number
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_EXPERIENCE_POINTS,
+    type: ActionTypes.CHANGE_EXPERIENCE_POINTS,
     ExperiencePoints,
 });
 export const startChangeExperiencePoints = (ExperiencePoints: number) => {
@@ -260,7 +224,7 @@ export const startChangeExperiencePoints = (ExperiencePoints: number) => {
 export const ChangeAbilityScore: ActionCreator<PlayerCharacterActionTypes> = (
     AbilityScore: AbilityScore
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_ABILITY_SCORE,
+    type: ActionTypes.CHANGE_ABILITY_SCORE,
     AbilityScore,
 });
 export const startChangeAbilityScore = (AbilityScore: AbilityScore) => {
@@ -272,7 +236,7 @@ export const startChangeAbilityScore = (AbilityScore: AbilityScore) => {
 export const ChangeClassDCProficiency: ActionCreator<PlayerCharacterActionTypes> = (
     ClassDCProficiency: Proficiencies
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_CLASS_DC_PROFICIENCY,
+    type: ActionTypes.CHANGE_CLASS_DC_PROFICIENCY,
     Proficiency: ClassDCProficiency,
 });
 export const startChangeClassDCProficiency = (
@@ -288,7 +252,7 @@ export const ChangeHitPoints: ActionCreator<PlayerCharacterActionTypes> = (
     HitPointDelta: number,
     RemovesWounded: boolean
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_HIT_POINTS,
+    type: ActionTypes.CHANGE_HIT_POINTS,
     HitPointDelta,
     RemovesWounded,
 });
@@ -304,7 +268,7 @@ export const startChangeHitPoints = (
 export const ChangeTemporaryHitPoints: ActionCreator<PlayerCharacterActionTypes> = (
     TemporaryHitPoints: number
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_TEMPORARY_HITPOINTS,
+    type: ActionTypes.CHANGE_TEMPORARY_HITPOINTS,
     TemporaryHitPoints,
 });
 export const startChangeTemporaryHitPoints = (delta: number) => {
@@ -316,7 +280,7 @@ export const startChangeTemporaryHitPoints = (delta: number) => {
 export const ChangeDyingValue: ActionCreator<PlayerCharacterActionTypes> = (
     DyingValue: number
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_DYING_VALUE,
+    type: ActionTypes.CHANGE_DYING_VALUE,
     DyingValue,
 });
 export const startChangeDyingValue = (DyingValue: number) => {
@@ -328,7 +292,7 @@ export const startChangeDyingValue = (DyingValue: number) => {
 export const ChangeWoundedValue: ActionCreator<PlayerCharacterActionTypes> = (
     WoundedValue: number
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_WOUNDED_VALUE,
+    type: ActionTypes.CHANGE_WOUNDED_VALUE,
     WoundedValue,
 });
 export const startChangeWoundedValue = (WoundedValue: number) => {
@@ -340,7 +304,7 @@ export const startChangeWoundedValue = (WoundedValue: number) => {
 export const ChangeMaxHitPoints: ActionCreator<PlayerCharacterActionTypes> = (
     MaxHitPoints: number
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_MAX_HITPOINTS,
+    type: ActionTypes.CHANGE_MAX_HITPOINTS,
     MaxHitPoints,
 });
 export const startChangeMaxHitPoints = (MaxHitPoints: number) => {
@@ -364,7 +328,7 @@ export const startChangeSaveProficiencies = (saves: Saves) => {
 export const ChangeShield: ActionCreator<PlayerCharacterActionTypes> = (
     Shield: Shield
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_SHIELD,
+    type: ActionTypes.CHANGE_SHIELD,
     Shield,
 });
 export const startChangeShield = (Shield: Shield) => {
@@ -374,12 +338,12 @@ export const startChangeShield = (Shield: Shield) => {
 };
 
 export const ChangeWornArmor: ActionCreator<PlayerCharacterActionTypes> = (
-    WornArmor: WornArmor
+    WornArmor: Armor
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_WORN_ARMOR,
+    type: ActionTypes.CHANGE_WORN_ARMOR,
     WornArmor,
 });
-export const startChangeWornArmor = (WornArmor: WornArmor) => {
+export const startChangeWornArmor = (WornArmor: Armor) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeWornArmor(WornArmor));
     };
@@ -402,7 +366,7 @@ export const startChangePerceptionProficiency = (
 export const ChangeSpeed: ActionCreator<PlayerCharacterActionTypes> = (
     Movements: Movement
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_SPEED,
+    type: ActionTypes.CHANGE_SPEED,
     Movements,
 });
 export const startChangeSpeed = (Movements: Movement) => {
@@ -414,7 +378,7 @@ export const startChangeSpeed = (Movements: Movement) => {
 export const ChangePF2Actions: ActionCreator<PlayerCharacterActionTypes> = (
     PF2Actions: PF2Action[]
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_PC_ACTIONS,
+    type: ActionTypes.CHANGE_PC_ACTIONS,
     Actions: PF2Actions,
 });
 export const startChangePF2Actions = (PF2Actions: PF2Action[]) => {
@@ -426,7 +390,7 @@ export const startChangePF2Actions = (PF2Actions: PF2Action[]) => {
 export const ChangeSkills: ActionCreator<PlayerCharacterActionTypes> = (
     Skills: Skill[]
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_SKILLS,
+    type: ActionTypes.CHANGE_SKILLS,
     Skills,
 });
 export const startChangeSkills = (Skills: Skill[]) => {
@@ -452,7 +416,7 @@ export const startChangeSpellProficiency = (
 export const ChangeSpellSlots: ActionCreator<PlayerCharacterActionTypes> = (
     SpellSlots: SpellSlot[]
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_SPELL_SLOTS,
+    type: ActionTypes.CHANGE_SPELL_SLOTS,
     SpellSlots,
 });
 export const startChangeSpellSlots = (SpellSlots: SpellSlot[]) => {
@@ -466,7 +430,7 @@ export const UpdateSpell: ActionCreator<PlayerCharacterActionTypes> = (
     SpellType: keyof SpellList,
     index: number
 ): PlayerCharacterActionTypes => ({
-    type: UPDATE_SPELL,
+    type: ActionTypes.UPDATE_SPELL,
     Spell,
     SpellType,
     index,
@@ -485,7 +449,7 @@ export const AddSpell: ActionCreator<PlayerCharacterActionTypes> = (
     Spell: Spell,
     SpellType: keyof SpellList
 ): PlayerCharacterActionTypes => ({
-    type: ADD_SPELL,
+    type: ActionTypes.ADD_SPELL,
     Spell,
     SpellType,
 });
@@ -499,7 +463,7 @@ export const DeleteSpell: ActionCreator<PlayerCharacterActionTypes> = (
     index: number,
     spellType: keyof SpellList
 ): PlayerCharacterActionTypes => ({
-    type: DELETE_SPELL,
+    type: ActionTypes.DELETE_SPELL,
     index,
     spellType,
 });
@@ -512,7 +476,7 @@ export const startDeleteSpell = (index: number, spellType: keyof SpellList) => {
 export const ChangePCTraits: ActionCreator<PlayerCharacterActionTypes> = (
     PCTraits: (keyof typeof Traits)[]
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_PC_TRAITS,
+    type: ActionTypes.CHANGE_PC_TRAITS,
     PCTraits,
 });
 export const startChangePCTraits = (PC_TRAITS: (keyof typeof Traits)[]) => {
@@ -524,7 +488,7 @@ export const startChangePCTraits = (PC_TRAITS: (keyof typeof Traits)[]) => {
 export const ChangeBioData: ActionCreator<PlayerCharacterActionTypes> = (
     BioData: BiographicalData
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_BIO_DATA,
+    type: ActionTypes.CHANGE_BIO_DATA,
     BioData,
 });
 export const startChangeBioData = (BioData: BiographicalData) => {
@@ -536,7 +500,7 @@ export const startChangeBioData = (BioData: BiographicalData) => {
 export const ChangeLanguages: ActionCreator<PlayerCharacterActionTypes> = (
     Languages: string[]
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_LANGUAGES,
+    type: ActionTypes.CHANGE_LANGUAGES,
     Languages,
 });
 export const startChangeLanguages = (Languages: string[]) => {
@@ -548,7 +512,7 @@ export const startChangeLanguages = (Languages: string[]) => {
 export const ChangePersonality: ActionCreator<PlayerCharacterActionTypes> = (
     Personality: PersonalityData
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_PERSONALITY,
+    type: ActionTypes.CHANGE_PERSONALITY,
     Personality,
 });
 export const startChangePersonality = (Personality: PersonalityData) => {
@@ -560,11 +524,23 @@ export const startChangePersonality = (Personality: PersonalityData) => {
 export const ChangeCampaignNotes: ActionCreator<PlayerCharacterActionTypes> = (
     CampaignNotes: CampaignNotesData
 ): PlayerCharacterActionTypes => ({
-    type: CHANGE_CAMPAIGN_NOTES,
+    type: ActionTypes.CHANGE_CAMPAIGN_NOTES,
     CampaignNotes,
 });
 export const startChangeCampaignNotes = (CampaignNotes: CampaignNotesData) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeCampaignNotes(CampaignNotes));
+    };
+};
+
+export const ChangeItem: ActionCreator<PlayerCharacterActionTypes> = (
+    NewItem: Item | Weapon | Armor | Shield
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.CHANGE_ITEM,
+    Item: NewItem,
+});
+export const startChangeItem = (Item: Item | Weapon | Armor | Shield) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeItem(Item));
     };
 };

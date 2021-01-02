@@ -24,9 +24,11 @@ import { EntireAppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import {
-    WornArmor,
+    Armor,
     Price,
     ArmorProficiencies,
+    DEFAULT_ARMOR,
+    isArmor,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
@@ -59,29 +61,29 @@ const EditWornArmor: React.FC<Props> = (props) => {
         <Icon {...props} name="checkmark-circle-outline" />
     );
     const [input, setInput] = useState({
-        Name: props.wornArmor.Name,
-        Category: props.wornArmor.Category,
-        Level: props.wornArmor.Level,
-        Price: {
-            Copper: props.wornArmor.Price.Copper.toString(),
-            Silver: props.wornArmor.Price.Silver.toString(),
-            Gold: props.wornArmor.Price.Gold.toString(),
-            Platinum: props.wornArmor.Price.Platinum.toString(),
+        name: props.wornArmor.name,
+        category: props.wornArmor.category,
+        level: props.wornArmor.level,
+        price: {
+            Copper: props.wornArmor.price.Copper.toString(),
+            Silver: props.wornArmor.price.Silver.toString(),
+            Gold: props.wornArmor.price.Gold.toString(),
+            Platinum: props.wornArmor.price.Platinum.toString(),
         },
-        ACBonus: props.wornArmor.ACBonus.toString(),
-        DexCap: props.wornArmor.DexCap.toString(),
-        StrengthRequirement: props.wornArmor.StrengthRequirement.toString(),
-        Bulk: props.wornArmor.Bulk.toString(),
-        WornBulk: props.wornArmor.WornBulk.toString(),
-        CheckPenaltyAmount: props.wornArmor.CheckPenalty.amount.toString(),
-        SpeedPenaltyAmount: props.wornArmor.SpeedPenalty.amount.toString(),
-        Group: props.wornArmor.Group,
-        Traits: props.wornArmor.Traits,
+        acBonus: props.wornArmor.acBonus.toString(),
+        dexCap: props.wornArmor.dexCap.toString(),
+        strengthRequirement: props.wornArmor.strengthRequirement.toString(),
+        bulk: props.wornArmor.bulk.toString(),
+        wornBulk: props.wornArmor.wornBulk.toString(),
+        checkPenaltyAmount: props.wornArmor.checkPenalty.amount.toString(),
+        speedPenaltyAmount: props.wornArmor.speedPenalty.amount.toString(),
+        group: props.wornArmor.armorGroup,
+        traits: props.wornArmor.traits,
     });
 
     const wornProficiency: Proficiencies = getWornArmorProficiency(
         props.armorProficiencies,
-        props.wornArmor.Category
+        props.wornArmor.category
     );
 
     const categoryData: Dictionary<keyof ArmorCategory> = {
@@ -94,14 +96,14 @@ const EditWornArmor: React.FC<Props> = (props) => {
         const trueIndex = index as IndexPath;
         setInput({
             ...input,
-            Category: categoryData[trueIndex.row],
+            category: categoryData[trueIndex.row],
         });
     };
     const handleLevelSelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         setInput({
             ...input,
-            Level: trueIndex.row,
+            level: trueIndex.row,
         });
     };
     const armorGroupData: Dictionary<string> = {
@@ -112,70 +114,70 @@ const EditWornArmor: React.FC<Props> = (props) => {
     };
     const handleArmorGroupSelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
-        const Group: ArmorGroup = armorGroupData[trueIndex.row] as ArmorGroup;
+        const group: ArmorGroup = armorGroupData[trueIndex.row] as ArmorGroup;
         setInput({
             ...input,
-            Group,
+            group,
         });
     };
-    const changeArmorName = (Name: string) => {
+    const changeArmorName = (name: string) => {
         setInput({
             ...input,
-            Name,
+            name,
         });
     };
-    const changeACBonus = (ACBonus: string) => {
+    const changeACBonus = (acBonus: string) => {
         setInput({
             ...input,
-            ACBonus,
+            acBonus,
         });
     };
-    const changeDexCap = (DexCap: string) => {
+    const changeDexCap = (dexCap: string) => {
         setInput({
             ...input,
-            DexCap,
+            dexCap,
         });
     };
-    const changePrice = (Price: typeof input.Price) => {
+    const changePrice = (price: typeof input.price) => {
         setInput({
             ...input,
-            Price,
+            price,
         });
     };
-    const changeCheckPenalty = (CheckPenaltyAmount: string) => {
+    const changeCheckPenalty = (checkPenaltyAmount: string) => {
         setInput({
             ...input,
-            CheckPenaltyAmount,
+            checkPenaltyAmount,
         });
     };
-    const changeSpeedPenalty = (SpeedPenaltyAmount: string) => {
+    const changeSpeedPenalty = (speedPenaltyAmount: string) => {
         setInput({
             ...input,
-            SpeedPenaltyAmount,
+            speedPenaltyAmount,
         });
     };
-    const changeStrengthRequirement = (StrengthRequirement: string) => {
+    const changeStrengthRequirement = (strengthRequirement: string) => {
         setInput({
             ...input,
-            StrengthRequirement,
+            strengthRequirement,
         });
     };
-    const changeBulk = (Bulk: string) => {
+    const changeBulk = (bulk: string) => {
         setInput({
             ...input,
-            Bulk,
+            bulk,
         });
     };
-    const changeWornBulk = (WornBulk: string) => {
+    const changeWornBulk = (wornBulk: string) => {
         setInput({
             ...input,
-            WornBulk,
+            wornBulk,
         });
     };
     const changeTraits = (traits: (keyof typeof Traits)[]) => {
         setInput({
             ...input,
-            Traits: traits,
+            traits: traits,
         });
     };
 
@@ -183,50 +185,57 @@ const EditWornArmor: React.FC<Props> = (props) => {
         props.updateWornArmor(inputToArmor(input));
         props.navigation.navigate("MainDefenseView");
     };
-    const inputToArmor = (convertFrom: typeof input): WornArmor => {
-        const acBonusIsNumber = isNumbersOnly(input.ACBonus);
-        const ACBonus = acBonusIsNumber ? parseInt(input.ACBonus) : 0;
-        const dexCapIsNumber = isNumbersOnly(input.DexCap);
-        const DexCap = dexCapIsNumber ? parseInt(input.DexCap) : 0;
-        const Copper = isNumbersOnly(input.Price.Copper)
-            ? parseInt(input.Price.Copper)
+    const inputToArmor = (convertFrom: typeof input): Armor => {
+        const acBonusIsNumber = isNumbersOnly(input.acBonus);
+        const acBonus = acBonusIsNumber ? parseInt(input.acBonus) : 0;
+        const dexCapIsNumber = isNumbersOnly(input.dexCap);
+        const dexCap = dexCapIsNumber ? parseInt(input.dexCap) : 0;
+        const Copper = isNumbersOnly(input.price.Copper)
+            ? parseInt(input.price.Copper)
             : 0;
-        const Silver = isNumbersOnly(input.Price.Silver)
-            ? parseInt(input.Price.Silver)
+        const Silver = isNumbersOnly(input.price.Silver)
+            ? parseInt(input.price.Silver)
             : 0;
-        const Gold = isNumbersOnly(input.Price.Gold)
-            ? parseInt(input.Price.Gold)
+        const Gold = isNumbersOnly(input.price.Gold)
+            ? parseInt(input.price.Gold)
             : 0;
-        const Platinum = isNumbersOnly(input.Price.Platinum)
-            ? parseInt(input.Price.Platinum)
+        const Platinum = isNumbersOnly(input.price.Platinum)
+            ? parseInt(input.price.Platinum)
             : 0;
-        const CheckPenalty: iBonus = isNumbersOnly(input.CheckPenaltyAmount)
+        const checkPenalty: iBonus = isNumbersOnly(input.checkPenaltyAmount)
             ? {
-                  ...props.wornArmor.CheckPenalty,
-                  amount: parseInt(input.CheckPenaltyAmount),
+                  ...props.wornArmor.checkPenalty,
+                  amount: parseInt(input.checkPenaltyAmount),
               }
-            : { ...props.wornArmor.CheckPenalty, amount: 0 };
-        const SpeedPenalty: iBonus = isNumbersOnly(input.SpeedPenaltyAmount)
+            : { ...props.wornArmor.checkPenalty, amount: 0 };
+        const speedPenalty: iBonus = isNumbersOnly(input.speedPenaltyAmount)
             ? {
-                  ...props.wornArmor.SpeedPenalty,
-                  amount: parseInt(input.SpeedPenaltyAmount),
+                  ...props.wornArmor.speedPenalty,
+                  amount: parseInt(input.speedPenaltyAmount),
               }
-            : { ...props.wornArmor.SpeedPenalty, amount: 0 };
+            : { ...props.wornArmor.speedPenalty, amount: 0 };
         return {
             ...convertFrom,
-            ACBonus,
-            DexCap,
-            StrengthRequirement: parseInt(input.StrengthRequirement),
-            Bulk: parseInt(input.Bulk),
-            WornBulk: parseInt(input.WornBulk),
-            Price: {
+            acBonus,
+            dexCap,
+            strengthRequirement: parseInt(input.strengthRequirement),
+            bulk: parseInt(input.bulk),
+            wornBulk: parseInt(input.wornBulk),
+            price: {
                 Copper,
                 Silver,
                 Gold,
                 Platinum,
             },
-            CheckPenalty,
-            SpeedPenalty,
+            checkPenalty,
+            speedPenalty,
+            armorGroup: input.group,
+            id: props.wornArmor.id,
+            description: props.wornArmor.description,
+            readied: false,
+            invested: props.wornArmor.invested,
+            worn: true,
+            isContainer: false,
         };
     };
 
@@ -246,7 +255,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                         <Input
                             label={"Name"}
                             placeholder="Armor Name"
-                            value={input.Name}
+                            value={input.name}
                             size="medium"
                             onChangeText={changeArmorName}
                         />
@@ -261,7 +270,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"AC Bonus"}
                                 placeholder="AC Bonus"
-                                value={input.ACBonus}
+                                value={input.acBonus}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeACBonus}
@@ -270,7 +279,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"Dexterity Cap"}
                                 placeholder="DEX Cap"
-                                value={input.DexCap}
+                                value={input.dexCap}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeDexCap}
@@ -280,7 +289,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                     </Card>
                     <Card>
                         <Select
-                            value={input.Category}
+                            value={input.category}
                             label={"Armor Category (" + wornProficiency + ")"}
                             onSelect={handleArmorCategorySelect}
                         >
@@ -290,7 +299,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <SelectItem title={"Heavy"} />
                         </Select>
                         <Select
-                            value={input.Group}
+                            value={input.group}
                             label={"Armor Group"}
                             onSelect={handleArmorGroupSelect}
                             placeholder={"Select Armor Group"}
@@ -305,7 +314,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <SelectItem title={ArmorGroup[ArmorGroup.Plate]} />
                         </Select>
                         <Select
-                            value={input.Level}
+                            value={input.level}
                             label={"Item Level"}
                             onSelect={handleLevelSelect}
                             placeholder={"Choose Item Level"}
@@ -315,7 +324,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <SelectItem title={2} />
                         </Select>
                         <CoinPriceEditor
-                            currentPrice={input.Price}
+                            currentPrice={input.price}
                             updatePrice={changePrice}
                         />
                     </Card>
@@ -331,7 +340,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"Check Penalty"}
                                 placeholder="Penalty"
-                                value={input.CheckPenaltyAmount}
+                                value={input.checkPenaltyAmount}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeCheckPenalty}
@@ -340,7 +349,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"Speed Penalty"}
                                 placeholder="Penalty"
-                                value={input.SpeedPenaltyAmount}
+                                value={input.speedPenaltyAmount}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeSpeedPenalty}
@@ -349,7 +358,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"Strength Req."}
                                 placeholder="STR Req"
-                                value={input.StrengthRequirement}
+                                value={input.strengthRequirement}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeStrengthRequirement}
@@ -366,7 +375,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"Bulk"}
                                 placeholder="Bulk"
-                                value={input.Bulk}
+                                value={input.bulk}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeBulk}
@@ -375,7 +384,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             <Input
                                 label={"Worn Bulk"}
                                 placeholder="Worn Bulk"
-                                value={input.WornBulk}
+                                value={input.wornBulk}
                                 size="medium"
                                 keyboardType="numeric"
                                 onChangeText={changeWornBulk}
@@ -385,7 +394,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                     </Card>
                     <TraitSelector
                         onSelection={changeTraits}
-                        currentTraits={props.wornArmor.Traits}
+                        currentTraits={props.wornArmor.traits}
                     />
                 </Layout>
             </ScrollView>
@@ -394,11 +403,11 @@ const EditWornArmor: React.FC<Props> = (props) => {
 };
 
 interface LinkDispatchProps {
-    updateWornArmor: (WornArmor: WornArmor) => void;
+    updateWornArmor: (WornArmor: Armor) => void;
 }
 
 interface LinkStateProps {
-    wornArmor: WornArmor;
+    wornArmor: Armor;
     armorProficiencies: ArmorProficiencies;
 }
 
@@ -414,10 +423,16 @@ const mapDispatchToProps = (
 const mapStateToProps = (
     state: EntireAppState,
     ownProps: OwnProps
-): LinkStateProps => ({
-    wornArmor: state.playerCharacter.wornArmor,
-    armorProficiencies: state.playerCharacter.armorProficiencies,
-});
+): LinkStateProps => {
+    const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
+        isArmor
+    );
+    const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
+    return {
+        wornArmor: wornArmor ? wornArmor : DEFAULT_ARMOR,
+        armorProficiencies: state.playerCharacter.armorProficiencies,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditWornArmor);
 

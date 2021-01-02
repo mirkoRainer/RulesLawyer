@@ -7,55 +7,53 @@ import { Traits } from "./Traits";
 import { HealthData } from "./HealthData";
 import { ArmorGroup } from "./ArmorGroup";
 import { Guid } from "guid-typescript";
+import { BonusType } from "./BonusTypes";
 
 interface PlayerCharacter {
-    metadata: Metadata;
-    level: number;
-    experiencePoints: number;
-    name: string;
-    playerName: string;
-    alignment: string;
-    deity: string;
-    traits: (keyof typeof Traits)[];
-    ancestry: Ancestry;
-    pcClass: iClass;
-    background: Background;
     abilityScores: AbilityScoreArray;
-    languages: string[];
-    wornArmor: WornArmor;
-    shield: Shield;
-    saves: Saves;
-    armorProficiencies: ArmorProficiencies;
-    skills: Skill[];
-    ancestryFeatsAndAbilities: AncestryFeatsAndAbility[];
-    hitPoint: HealthData;
-    movement: Movement;
-    weaponProficiencies: WeaponProficiencies;
-    weapons: Weapon[];
-    perceptionProficiency: Proficiencies;
-    senses: string;
-    resistances: string;
-    immunities: string;
-    conditions: string;
-    weakness: string;
-    skillFeats: AncestryFeatsAndAbility[];
-    generalFeats: AncestryFeatsAndAbility[];
-    classFeatsAndAbilities: AncestryFeatsAndAbility[];
-    bonusFeats: AncestryFeatsAndAbility[];
-    inventory: Inventory;
-    biographicalData: BiographicalData;
-    personalityData: PersonalityData;
-    campaignNotesData: CampaignNotesData;
     actions: PF2Action[];
-    spellcastingAbilityModifier: keyof AbilityScoreArray;
-    spellAttackProficiency: Proficiencies;
-    spellAttackItemBonus: number;
-    spellDCItemBonus: number;
+    alignment: string;
+    ancestry: Ancestry;
+    ancestryFeatsAndAbilities: AncestryFeatsAndAbility[];
+    armorProficiencies: ArmorProficiencies;
+    background: Background;
+    biographicalData: BiographicalData;
     bonuses: iBonus[];
-    penalties: iBonus[];
+    bonusFeats: AncestryFeatsAndAbility[];
+    campaignNotesData: CampaignNotesData;
+    classFeatsAndAbilities: AncestryFeatsAndAbility[];
+    conditions: string;
+    deity: string;
+    experiencePoints: number;
+    generalFeats: AncestryFeatsAndAbility[];
+    hitPoint: HealthData;
+    immunities: string;
+    inventory: Inventory;
+    languages: string[];
+    level: number;
     magicTraditions: MagicTraditions;
-    spellSlots: SpellSlot[];
+    metadata: Metadata;
+    movement: Movement;
+    name: string;
+    pcClass: iClass;
+    penalties: iBonus[];
+    perceptionProficiency: Proficiencies;
+    personalityData: PersonalityData;
+    playerName: string;
+    resistances: string;
+    saves: Saves;
+    senses: string;
+    skillFeats: AncestryFeatsAndAbility[];
+    skills: Skill[];
+    spellAttackItemBonus: number;
+    spellAttackProficiency: Proficiencies;
+    spellcastingAbilityModifier: keyof AbilityScoreArray;
+    spellDCItemBonus: number;
     spells: SpellList;
+    spellSlots: SpellSlot[];
+    traits: (keyof typeof Traits)[];
+    weakness: string;
+    weaponProficiencies: WeaponProficiencies;
 }
 
 export default PlayerCharacter;
@@ -141,20 +139,6 @@ export interface CampaignNotesData {
     organizations: string;
 }
 
-export interface Inventory {
-    items: Item[];
-}
-
-export interface Item {
-    itemName: string;
-    description: string;
-    bulk: number;
-    invested: boolean;
-    worn: boolean;
-    readied: boolean;
-    quantity?: number;
-}
-
 export interface MagicTraditions {
     prepared: boolean;
     spontaneous: boolean;
@@ -188,7 +172,7 @@ export interface Saves {
     will: Proficiencies;
 }
 
-export interface Shield {
+export interface Shield extends Item {
     hasShield: boolean;
     acBonus: number;
     hardness: number;
@@ -196,6 +180,28 @@ export interface Shield {
     currentHP: number;
     breakThreshold: number;
 }
+export function isShield(item: Item | Weapon | Armor | Shield): item is Shield {
+    return (item as Shield).breakThreshold !== undefined;
+}
+
+export const DEFAULT_SHIELD: Shield = {
+    id: Guid.create(),
+    description: "Leather Armor made from leather",
+    invested: false,
+    worn: true,
+    readied: false,
+    name: "Shield McShieldFace",
+    bulk: 1,
+    level: 1,
+    hasShield: true,
+    acBonus: 2,
+    hardness: 5,
+    maxHP: 20,
+    currentHP: 15,
+    breakThreshold: 10,
+    traits: ["Additive", "Grapple"],
+    isContainer: false,
+};
 
 export type Skills = {
     Acrobatics: "Acrobatics";
@@ -257,32 +263,85 @@ export interface OtherWeaponProficiencies {
     proficiency: Proficiencies;
 }
 
-export interface Weapon {
-    id: Guid;
-    name: string;
+export interface Weapon extends Item {
     ability: keyof AbilityScoreArray;
     toHitBonus: number;
     damageDice: string;
     damageAbilityModifier?: keyof AbilityScoreArray;
     damageType: string;
-    weaponTraits: (keyof typeof Traits)[];
     weaponCategory: keyof WeaponProficiencies;
 }
+export function isWeapon(item: Item | Weapon | Armor | Shield): item is Weapon {
+    return (item as Weapon).damageDice !== undefined;
+}
 
-export interface WornArmor {
-    Name: string;
-    Category: keyof ArmorCategory;
-    Level: number;
-    Price: Price;
-    ACBonus: number;
-    DexCap: number;
-    CheckPenalty: iBonus;
-    SpeedPenalty: iBonus;
-    StrengthRequirement: number;
-    Bulk: number;
-    WornBulk: number;
-    Group: ArmorGroup;
-    Traits: (keyof typeof Traits)[];
+export interface Armor extends Item {
+    category: keyof ArmorCategory;
+    acBonus: number;
+    dexCap: number;
+    checkPenalty: iBonus;
+    speedPenalty: iBonus;
+    strengthRequirement: number;
+    wornBulk: number;
+    armorGroup: ArmorGroup;
+    price: Price;
+}
+export function isArmor(item: Item | Weapon | Armor | Shield): item is Armor {
+    return (item as Armor).dexCap !== undefined;
+}
+export const DEFAULT_ARMOR: Armor = {
+    id: Guid.create(),
+    description: "Plain clothing offering no real protection",
+    invested: false,
+    worn: true,
+    readied: false,
+    name: "Clothes",
+    category: "Light",
+    level: 0,
+    price: { Copper: 0, Silver: 0, Gold: 0, Platinum: 0 },
+    acBonus: 0,
+    dexCap: 10,
+    checkPenalty: {
+        type: BonusType.Armor,
+        appliesTo: "StrAndDexChecks",
+        amount: 0,
+    },
+    speedPenalty: {
+        type: BonusType.Armor,
+        appliesTo: "speed",
+        amount: 0,
+    },
+    strengthRequirement: 0,
+    bulk: 0.1,
+    wornBulk: 0,
+    armorGroup: ArmorGroup.Clothing,
+    traits: [],
+    isContainer: false,
+};
+
+export interface Item {
+    bulk: number;
+    description: string;
+    id: Guid;
+    invested: boolean;
+    isContainer: boolean;
+    level: number;
+    name: string;
+    price?: Price;
+    quantity?: number;
+    readied: boolean;
+    traits: (keyof typeof Traits)[];
+    worn: boolean;
+    rarity?: "uncommon" | "rare" | "unique";
+}
+
+export interface Inventory {
+    items: (Item | Weapon | Armor | Shield)[];
+    containers: Container;
+}
+
+export interface Container {
+    itemIds: string[];
 }
 
 export interface Price {

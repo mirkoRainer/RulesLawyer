@@ -7,7 +7,8 @@
         "web": "expo start --web",
         "eject": "expo eject",
         "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
-        "populateData": "ts-node src/PF2eCoreLib/populateData/popuateData.ts"
+        "populateData": "ts-node src/PF2eCoreLib/populateData/popuateData.ts",
+        "watch": "tsc --watch --noEmit --project './tsconfig.json'"
     },
     "dependencies": {
         "@databases/expo": "^4.0.0",

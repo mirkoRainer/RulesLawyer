@@ -1,7 +1,8 @@
 import { Card, Text, Layout } from "@ui-kitten/components";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacityProps } from "react-native";
 import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { prop } from "../../../../PF2eCoreLib/TypescriptEvolution";
 import { getBulkString } from "../InventoryHelper";
 
 type Props = {
@@ -20,7 +21,7 @@ export const ItemView: React.FC<Props> = (props) => {
                     style={{ flex: 1, marginHorizontal: 10, marginVertical: 5 }}
                     category="h6"
                 >
-                    {props.item.itemName}
+                    {props.item.name}
                 </Text>
                 <Text
                     style={{
@@ -54,11 +55,13 @@ export const ItemView: React.FC<Props> = (props) => {
             )}
         </Layout>
     );
+    const cardProps: TouchableOpacityProps = { disabled: true }; // no touching items right now.
     return (
         <Card
             header={itemHeader}
             status={props.cardStatus}
             style={{ width: "100%" }}
+            {...cardProps}
         >
             <Text>{props.item.description}</Text>
         </Card>

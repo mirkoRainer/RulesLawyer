@@ -55,7 +55,6 @@ interface LinkDispatchProps {}
 
 interface LinkStateProps {
     playerCharacter: PlayerCharacter;
-    shield: Shield;
     resistances: string;
     immunities: string;
     weaknesses: string;
@@ -67,7 +66,6 @@ const mapDispatchToProps = (): LinkDispatchProps => {
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
-    shield: state.playerCharacter.shield,
     resistances: state.playerCharacter.resistances,
     immunities: state.playerCharacter.immunities,
     weaknesses: state.playerCharacter.weakness,

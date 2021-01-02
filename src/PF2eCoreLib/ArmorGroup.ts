@@ -3,4 +3,5 @@ export enum ArmorGroup {
     Composite = "Composite",
     Chain = "Chain",
     Plate = "Plate",
+    Clothing = "Clothing",
 }

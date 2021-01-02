@@ -8,7 +8,9 @@ import {
 } from "../../../../../PF2eCoreLib/AbilityScores";
 import {
     ArmorProficiencies,
-    WornArmor,
+    Armor,
+    isArmor,
+    DEFAULT_ARMOR,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
 import { GetProficiencyTotalWithLevel } from "../../../../../PF2eCoreLib/Proficiencies";
@@ -27,15 +29,15 @@ const ACView: React.FC<Props> = (props) => {
         props.dexterity.score
     );
     const modifier =
-        props.wornArmor.DexCap >= calculatedDexModifier
+        props.wornArmor.dexCap >= calculatedDexModifier
             ? calculatedDexModifier
-            : props.wornArmor.DexCap;
+            : props.wornArmor.dexCap;
     const wornProficiency = getWornArmorProficiency(
         props.armorProficiencies,
-        props.wornArmor.Category
+        props.wornArmor.category
     );
     const dexOrCap = () => {
-        if (props.wornArmor.DexCap >= calculatedDexModifier) {
+        if (props.wornArmor.dexCap >= calculatedDexModifier) {
             return <Text style={styles.calculatorText}>DEX</Text>;
         } else {
             return (
@@ -49,7 +51,7 @@ const ACView: React.FC<Props> = (props) => {
         10 +
         modifier +
         props.level +
-        props.wornArmor.ACBonus +
+        props.wornArmor.acBonus +
         GetProficiencyTotalWithLevel(wornProficiency, props.level);
 
     const navigateToWornArmorEditor = () => {
@@ -72,7 +74,7 @@ const ACView: React.FC<Props> = (props) => {
                     <Layout style={{ flex: 1 }}>
                         <ProficiencyArrayView proficiency={wornProficiency} />
                         <Text category="h6" style={{ textAlign: "center" }}>
-                            {props.wornArmor.Name}
+                            {props.wornArmor.name}
                         </Text>
                     </Layout>
                 </Layout>
@@ -89,7 +91,7 @@ const ACView: React.FC<Props> = (props) => {
                     <Text style={styles.calculatorNumber}>+{modifier}</Text>
                     {dexOrCap()}
                     <Text style={styles.calculatorNumber}>
-                        +{props.wornArmor.ACBonus}
+                        +{props.wornArmor.acBonus}
                     </Text>
                     <Text style={{ ...styles.calculatorText, flex: 1.3 }}>
                         Armor
@@ -149,7 +151,7 @@ interface LinkDispatchProps {}
 interface LinkStateProps {
     dexterity: AbilityScore;
     armorProficiencies: ArmorProficiencies;
-    wornArmor: WornArmor;
+    wornArmor: Armor;
     level: number;
 }
 
@@ -157,11 +159,18 @@ const mapDispatchToProps = (): LinkDispatchProps => {
     return {};
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    dexterity: state.playerCharacter.abilityScores.Dexterity,
-    armorProficiencies: state.playerCharacter.armorProficiencies,
-    wornArmor: state.playerCharacter.wornArmor,
-    level: state.playerCharacter.level,
-});
+const mapStateToProps = (state: EntireAppState): LinkStateProps => {
+    const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
+        isArmor
+    );
+    const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
+
+    return {
+        dexterity: state.playerCharacter.abilityScores.Dexterity,
+        armorProficiencies: state.playerCharacter.armorProficiencies,
+        level: state.playerCharacter.level,
+        wornArmor: wornArmor ? wornArmor : DEFAULT_ARMOR,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ACView);

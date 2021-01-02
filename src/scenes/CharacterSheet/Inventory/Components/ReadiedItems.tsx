@@ -12,7 +12,14 @@ const ReadiedItemsView: React.FC<Props> = (props) => {
     const DropDownIcon = (props: any) => <Icon {...props} name={iconName} />;
     const items: JSX.Element[] = [];
     props.readiedItems.forEach((item, index) =>
-        items.push(<ItemView item={item} index={index} cardStatus="warning" />)
+        items.push(
+            <ItemView
+                item={item}
+                index={index}
+                cardStatus="warning"
+                key={`${item.name}:[${index}]`}
+            />
+        )
     );
     const toggleItemsVisible = () => setItemsVisible(!itemsVisible);
     return (

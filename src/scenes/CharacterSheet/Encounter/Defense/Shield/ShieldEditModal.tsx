@@ -15,7 +15,11 @@ import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/
 import { EntireAppState } from "../../../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
-import { Shield } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import {
+    DEFAULT_SHIELD,
+    isShield,
+    Shield,
+} from "../../../../../PF2eCoreLib/PlayerCharacter";
 
 type OwnProps = {
     visible: boolean;
@@ -164,9 +168,17 @@ const mapDispatchToProps = (
 const mapStateToProps = (
     state: EntireAppState,
     ownProps: OwnProps
-): LinkStateProps => ({
-    shield: state.playerCharacter.shield,
-});
+): LinkStateProps => {
+    const shields: Shield[] = state.playerCharacter.inventory.items.filter<Shield>(
+        isShield
+    );
+    const wornShield: Shield | undefined = shields.find(
+        (shield) => shield.worn
+    );
+    return {
+        shield: wornShield ? wornShield : DEFAULT_SHIELD,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShieldEditModal);
 

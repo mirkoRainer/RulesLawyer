@@ -1,5 +1,6 @@
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import {
+    isWeapon,
     Weapon,
     WeaponProficiencies,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
@@ -30,7 +31,10 @@ export function GetProficiencyForWeapon(weapon: Weapon): Proficiencies {
 export function getWeaponsFromInventory(): string[] {
     const state = Store.getState();
     let weaponsInInventory: string[] = [];
-    state.playerCharacter.weapons.forEach((weapon) => {
+    const weapons: Weapon[] = state.playerCharacter.inventory.items.filter<Weapon>(
+        isWeapon
+    );
+    weapons.forEach((weapon) => {
         weaponsInInventory.push(weapon.name);
     });
     return weaponsInInventory;

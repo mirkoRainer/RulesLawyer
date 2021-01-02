@@ -34,6 +34,9 @@ import {
     CHANGE_PC_TRAITS,
     CHANGE_BIO_DATA,
     CHANGE_CAMPAIGN_NOTES,
+    CHANGE_LANGUAGES,
+    CHANGE_PERSONALITY,
+    CHANGE_ITEM,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -44,6 +47,7 @@ import {
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 import _ from "lodash";
+import { UpdateItemInInventory } from "./reducerHelper";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -51,185 +55,155 @@ const playerCharacterReducer = (
     state = defaultState,
     action: PlayerCharacterActionTypes
 ): PlayerCharacter => {
-    let modifiedState: PlayerCharacter;
-    let newHealthData: HealthData;
     switch (action.type) {
         case CHANGE_CHARACTER_NAME:
-            modifiedState = {
+            return {
                 ...state,
                 name: action.name,
             };
-            return modifiedState;
         case CHANGE_PLAYER_NAME:
-            modifiedState = {
+            return {
                 ...state,
                 playerName: action.name,
             };
-            return modifiedState;
         case CHANGE_ANCESTRY:
-            modifiedState = {
+            return {
                 ...state,
                 ancestry: {
                     ...state.ancestry,
                     name: action.ancestry,
                 },
             };
-            return modifiedState;
         case CHANGE_HERITAGE:
-            modifiedState = {
+            return {
                 ...state,
                 ancestry: {
                     ...state.ancestry,
                     heritage: action.heritage,
                 },
             };
-            return modifiedState;
         case CHANGE_BACKGROUND:
-            modifiedState = {
+            return {
                 ...state,
                 background: {
                     ...state.background,
                     name: action.Background,
                 },
             };
-            return modifiedState;
         case CHANGE_ALIGNMENT:
-            modifiedState = {
+            return {
                 ...state,
                 alignment: action.Alignment,
             };
-            return modifiedState;
         case CHANGE_DEITY:
-            modifiedState = {
+            return {
                 ...state,
                 deity: action.Deity,
             };
-            return modifiedState;
         case CHANGE_RESISTANCES:
-            modifiedState = {
+            return {
                 ...state,
                 resistances: action.Resistances,
             };
-            return modifiedState;
         case CHANGE_IMMUNITIES:
-            modifiedState = {
+            return {
                 ...state,
                 immunities: action.Immunities,
             };
-            return modifiedState;
         case CHANGE_WEAKNESSES:
-            modifiedState = {
+            return {
                 ...state,
                 weakness: action.Weaknesses,
             };
-            return modifiedState;
         case CHANGE_CONDITIONS:
-            modifiedState = {
+            return {
                 ...state,
                 conditions: action.Conditions,
             };
-            return modifiedState;
         case CHANGE_SENSES:
-            modifiedState = {
+            return {
                 ...state,
                 senses: action.Senses,
             };
-            return modifiedState;
         case CHANGE_LEVEL:
-            modifiedState = {
+            return {
                 ...state,
-                level: action.Level,
+                level: action.level,
             };
-            return modifiedState;
         case CHANGE_EXPERIENCE_POINTS:
-            modifiedState = {
+            return {
                 ...state,
                 experiencePoints: action.ExperiencePoints,
             };
-            return modifiedState;
         case CHANGE_ABILITY_SCORE:
-            modifiedState = {
+            return {
                 ...state,
                 abilityScores: UpdateAbilityScore(
                     action.AbilityScore,
                     state.abilityScores
                 ),
             };
-            return modifiedState;
         case CHANGE_CLASS_DC_PROFICIENCY:
-            modifiedState = {
+            return {
                 ...state,
                 pcClass: {
                     ...state.pcClass,
                     proficiency: action.Proficiency,
                 },
             };
-            return modifiedState;
         case CHANGE_HIT_POINTS:
             console.debug("CHANGE_HIT_POINTS");
             console.debug(`action: ${JSON.stringify(action, null, 1)}`);
-            newHealthData = ResolveHitPoints(
-                state.hitPoint,
-                action.HitPointDelta,
-                action.RemovesWounded
-            );
-            console.debug(
-                `newHealthData: ${JSON.stringify(newHealthData, null, 1)}`
-            );
-            modifiedState = {
+            return {
                 ...state,
-                hitPoint: newHealthData,
+                hitPoint: ResolveHitPoints(
+                    state.hitPoint,
+                    action.HitPointDelta,
+                    action.RemovesWounded
+                ),
             };
-            console.debug(
-                `result: ${JSON.stringify(modifiedState.hitPoint, null, 1)}`
-            );
-            return modifiedState;
         case CHANGE_TEMPORARY_HITPOINTS:
             console.debug("CHANGE_TEMPORARY_HITPOINTS");
-            modifiedState = {
+            return {
                 ...state,
                 hitPoint: {
                     ...state.hitPoint,
                     temporaryHitPoints: action.TemporaryHitPoints,
                 },
             };
-            return modifiedState;
         case CHANGE_DYING_VALUE:
             console.debug(
                 `CHANGE_DYING_VALUE in reducer. ${action.DyingValue}`
             );
-            modifiedState = {
+            return {
                 ...state,
                 hitPoint: {
                     ...state.hitPoint,
                     dying: action.DyingValue,
                 },
             };
-            return modifiedState;
         case CHANGE_WOUNDED_VALUE:
             console.debug(
                 `CHANGE_WOUNDED_VALUE in reducer. ${action.WoundedValue}`
             );
-            modifiedState = {
+            return {
                 ...state,
                 hitPoint: {
                     ...state.hitPoint,
                     wounded: action.WoundedValue,
                 },
             };
-            return modifiedState;
         case CHANGE_MAX_HITPOINTS:
             console.debug(
                 `CHANGE_MAX_HITPOINTS in reducer. ${action.MaxHitPoints}`
             );
-            modifiedState = {
+            return {
                 ...state,
                 hitPoint: {
                     ...state.hitPoint,
                     maxHitPoints: action.MaxHitPoints,
                 },
             };
-            return modifiedState;
         case CHANGE_SAVE_PROFICIENCIES:
             console.debug(
                 `CHANGE_SAVE_PROFICIENCIES in reducer. ${JSON.stringify(
@@ -238,20 +212,24 @@ const playerCharacterReducer = (
                     1
                 )}`
             );
-            modifiedState = {
+            return {
                 ...state,
                 saves: action.saves,
             };
-            return modifiedState;
         case CHANGE_SHIELD:
             console.debug(
                 `SHIELD in reducer. ${JSON.stringify(action.Shield, null, 1)}`
             );
-            modifiedState = {
+            return {
                 ...state,
-                shield: action.Shield,
+                inventory: {
+                    ...state.inventory,
+                    items: UpdateItemInInventory(
+                        action.Shield,
+                        state.inventory.items
+                    ),
+                },
             };
-            return modifiedState;
         case CHANGE_WORN_ARMOR:
             console.debug(
                 `CHANGE_WORN_ARMOR in reducer ${JSON.stringify(
@@ -262,7 +240,13 @@ const playerCharacterReducer = (
             );
             return {
                 ...state,
-                wornArmor: action.WornArmor,
+                inventory: {
+                    ...state.inventory,
+                    items: UpdateItemInInventory(
+                        action.WornArmor,
+                        state.inventory.items
+                    ),
+                },
             };
         case CHANGE_PERCEPTION_PROFICIENCY:
             console.debug(
@@ -372,7 +356,7 @@ const playerCharacterReducer = (
                 ...state,
                 biographicalData: action.BioData,
             };
-        case "CHANGE_LANGUAGES":
+        case CHANGE_LANGUAGES:
             console.debug(
                 `CHANGE_LANGUAGES in reducer ${JSON.stringify(action, null, 1)}`
             );
@@ -380,7 +364,7 @@ const playerCharacterReducer = (
                 ...state,
                 languages: action.Languages,
             };
-        case "CHANGE_PERSONALITY":
+        case CHANGE_PERSONALITY:
             console.debug(
                 `CHANGE_PERSONALITY in reducer ${JSON.stringify(
                     action,
@@ -392,7 +376,7 @@ const playerCharacterReducer = (
                 ...state,
                 personalityData: action.Personality,
             };
-        case "CHANGE_CAMPAIGN_NOTES":
+        case CHANGE_CAMPAIGN_NOTES:
             console.debug(
                 `CHANGE_CAMPAIGN_NOTES in reducer ${JSON.stringify(
                     action,
@@ -404,6 +388,21 @@ const playerCharacterReducer = (
                 ...state,
                 campaignNotesData: action.CampaignNotes,
             };
+        case CHANGE_ITEM:
+            console.debug(
+                `CHANGE_ITEM in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                inventory: {
+                    ...state.inventory,
+                    items: UpdateItemInInventory(
+                        action.Item,
+                        state.inventory.items
+                    ),
+                },
+            };
+
         default:
             return state;
     }

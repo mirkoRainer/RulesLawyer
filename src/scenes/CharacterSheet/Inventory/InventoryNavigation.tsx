@@ -5,11 +5,12 @@ import {
 } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { InventoryPage } from "./Inventory";
-import { EditItemView } from "./EditItemView";
+import { EditItemView } from "./Components/EditItemView";
+import EditInventoryView from "./EditInventoryView";
 
 export type InventoryStackParamList = {
     MainInventoryView: undefined;
-    EditItemView: undefined;
+    EditInventoryView: undefined;
 };
 
 export type InventoryNavigationProps = StackNavigationProp<
@@ -29,7 +30,10 @@ export const InventoryNavigator: React.FC = () => {
                     name="MainInventoryView"
                     component={InventoryPage}
                 />
-                <Stack.Screen name="EditItemView" component={EditItemView} />
+                <Stack.Screen
+                    name="EditInventoryView"
+                    component={EditInventoryView}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

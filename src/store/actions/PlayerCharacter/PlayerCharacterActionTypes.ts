@@ -4,7 +4,7 @@ import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { ProficiencyActionTypes } from "./ProficiencyActionTypes";
 import {
     Shield,
-    WornArmor,
+    Armor,
     Movement,
     PF2Action,
     Skill,
@@ -12,6 +12,7 @@ import {
     BiographicalData,
     PersonalityData,
     CampaignNotesData,
+    Item,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -106,7 +107,7 @@ export interface ChangeSensesAction extends Action<string> {
 export const CHANGE_LEVEL = "CHANGE_LEVEL";
 export interface ChangeLevelAction extends Action<string> {
     type: typeof CHANGE_LEVEL;
-    Level: number;
+    level: number;
 }
 
 export const CHANGE_EXPERIENCE_POINTS = "CHANGE_EXPERIENCE_POINTS";
@@ -167,7 +168,7 @@ export interface ChangeShieldAction extends Action<string> {
 export const CHANGE_WORN_ARMOR = "CHANGE_WORN_ARMOR";
 export interface ChangeWornArmorAction extends Action<string> {
     type: typeof CHANGE_WORN_ARMOR;
-    WornArmor: WornArmor;
+    WornArmor: Armor;
 }
 
 export const CHANGE_SPEED = "CHANGE_SPEED";
@@ -246,6 +247,12 @@ export interface ChangeCampaignNotesAction extends Action<string> {
     CampaignNotes: CampaignNotesData;
 }
 
+export const CHANGE_ITEM = "CHANGE_ITEM";
+export interface ChangeItemAction extends Action<string> {
+    type: typeof CHANGE_ITEM;
+    Item: Item;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -284,4 +291,5 @@ export type PlayerCharacterActionTypes =
     | ChangeBioDataAction
     | ChangeLanguagesAction
     | ChangePersonalityAction
-    | ChangeCampaignNotesAction; // | SomeOtherAction
+    | ChangeCampaignNotesAction
+    | ChangeItemAction; // | SomeOtherAction

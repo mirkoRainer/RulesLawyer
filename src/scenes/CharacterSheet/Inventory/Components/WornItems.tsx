@@ -12,7 +12,14 @@ const WornItemsView: React.FC<Props> = (props) => {
     const DropDownIcon = (props: any) => <Icon {...props} name={iconName} />;
     const items: JSX.Element[] = [];
     props.wornItems.forEach((item, index) =>
-        items.push(<ItemView item={item} index={index} cardStatus="primary" />)
+        items.push(
+            <ItemView
+                item={item}
+                index={index}
+                cardStatus="primary"
+                key={`${item.name}:[${index}]`}
+            />
+        )
     );
     const toggleItemsVisible = () => setItemsVisible(!itemsVisible);
     return (

@@ -11,7 +11,11 @@ import { EntireAppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
 import ShieldEditModal from "./ShieldEditModal";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Shield } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import {
+    DEFAULT_SHIELD,
+    isShield,
+    Shield,
+} from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ThunkDispatch } from "redux-thunk";
@@ -182,9 +186,17 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    shield: state.playerCharacter.shield,
-});
+const mapStateToProps = (state: EntireAppState): LinkStateProps => {
+    const shields: Shield[] = state.playerCharacter.inventory.items.filter<Shield>(
+        isShield
+    );
+    const wornShield: Shield | undefined = shields.find(
+        (shield) => shield.worn
+    );
+    return {
+        shield: wornShield ? wornShield : DEFAULT_SHIELD,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShieldView);
 
