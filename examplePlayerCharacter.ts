@@ -314,7 +314,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 worn: true,
                 readied: false,
                 name: "Shield McShieldFace",
-                bulk: 1,
+                bulk: 5,
                 level: 1,
                 hasShield: true,
                 acBonus: 2,
