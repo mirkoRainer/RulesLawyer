@@ -37,6 +37,7 @@ import {
     CHANGE_LANGUAGES,
     CHANGE_PERSONALITY,
     CHANGE_ITEM,
+    CHANGE_INVENTORY_ITEMS,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -400,6 +401,17 @@ const playerCharacterReducer = (
                         action.Item,
                         state.inventory.items
                     ),
+                },
+            };
+        case CHANGE_INVENTORY_ITEMS:
+            console.debug(
+                `CHANGE_INVENTORY in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                inventory: {
+                    ...state.inventory,
+                    items: action.InventoryItems,
                 },
             };
 

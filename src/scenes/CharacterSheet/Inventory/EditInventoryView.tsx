@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { ReactNode, useState } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import {
     Icon,
     Layout,
@@ -9,44 +9,72 @@ import {
 } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { EntireAppState } from "../../../store/Store";
-import { Item } from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Armor,
+    Item,
+    Shield,
+    Weapon,
+} from "../../../PF2eCoreLib/PlayerCharacter";
 import { useNavigation } from "@react-navigation/native";
 import { InventoryNavigationProps } from "./Inventory";
-import { EditItemView } from "./Components/EditItemView";
+import EditItemView from "./Components/EditItemView";
+import DraggableFlatList, {
+    RenderItemParams,
+} from "react-native-draggable-flatlist";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { startChangeInventory } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { bindActionCreators } from "redux";
 
 const EditInventoryView: React.FC<Props> = (props) => {
     const navigation = useNavigation<InventoryNavigationProps>();
+    const [items, setItems] = useState(props.items);
     const BackIcon = (props: any) => <Icon {...props} name="arrow-back" />;
     const BackAction = () => (
         <TopNavigationAction
             icon={BackIcon}
-            onPress={() => {
+            onPress={async () => {
+                await props.updateInventoryItems(items);
                 navigation.goBack();
             }}
         />
     );
 
-    const items: JSX.Element[] = [];
-    props.items.forEach((item, index, originalArrayOfItems) =>
-        items.push(
-            <EditItemView
-                key={`${item.name}:[${index}]`}
-                item={item}
-                index={index}
-                inventory={originalArrayOfItems}
-            />
-        )
-    );
+    const renderItem: (params: RenderItemParams<Item>) => ReactNode = (
+        params
+    ) => {
+        return (
+            <TouchableOpacity
+                style={{
+                    height: 100,
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+                onLongPress={params.drag}
+            >
+                <EditItemView
+                    item={params.item}
+                    index={params.index ? params.index : 0}
+                    inventory={items}
+                />
+            </TouchableOpacity>
+        );
+    };
 
     return (
         <Layout style={{ flex: 1 }}>
             <TopNavigation accessoryLeft={BackAction} title="Edit Inventory" />
-            {items}
+            <DraggableFlatList<Item>
+                data={items}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => `${item.name}-${index}`}
+                onDragEnd={(props) => setItems(props.data)}
+            />
         </Layout>
     );
 };
 
-type Props = LinkStateProps;
+type Props = LinkStateProps & LinkDispatchProps;
 
 interface LinkStateProps {
     items: Item[];
@@ -58,7 +86,22 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => {
     };
 };
 
-export default connect(mapStateToProps, null)(EditInventoryView);
+interface LinkDispatchProps {
+    updateInventoryItems: (items: (Item | Weapon | Shield | Armor)[]) => void;
+}
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => {
+    return {
+        updateInventoryItems: bindActionCreators(
+            startChangeInventory,
+            dispatch
+        ),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditInventoryView);
 
 const styles = StyleSheet.create({
     centered: {

@@ -544,3 +544,17 @@ export const startChangeItem = (Item: Item | Weapon | Armor | Shield) => {
         dispatch(ChangeItem(Item));
     };
 };
+
+export const ChangeInventory: ActionCreator<PlayerCharacterActionTypes> = (
+    InventoryItems: (Item | Weapon | Armor | Shield)[]
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.CHANGE_INVENTORY_ITEMS,
+    InventoryItems,
+});
+export const startChangeInventory = (
+    InventoryItems: (Item | Weapon | Armor | Shield)[]
+) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeInventory(InventoryItems));
+    };
+};

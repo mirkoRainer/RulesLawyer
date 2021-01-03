@@ -13,6 +13,7 @@ import {
     PersonalityData,
     CampaignNotesData,
     Item,
+    Weapon,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -253,6 +254,12 @@ export interface ChangeItemAction extends Action<string> {
     Item: Item;
 }
 
+export const CHANGE_INVENTORY_ITEMS = "CHANGE_INVENTORY_ITEMS";
+export interface ChangeInventoryAction extends Action<string> {
+    type: typeof CHANGE_INVENTORY_ITEMS;
+    InventoryItems: (Item | Weapon | Armor | Shield)[];
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -292,4 +299,5 @@ export type PlayerCharacterActionTypes =
     | ChangeLanguagesAction
     | ChangePersonalityAction
     | ChangeCampaignNotesAction
-    | ChangeItemAction; // | SomeOtherAction
+    | ChangeItemAction
+    | ChangeInventoryAction; // | SomeOtherAction

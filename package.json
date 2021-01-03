@@ -40,6 +40,7 @@
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.0.tar.gz",
+        "react-native-draggable-flatlist": "^2.5.1",
         "react-native-elements": "^1.2.7",
         "react-native-gesture-handler": "~1.8.0",
         "react-native-modal": "^11.5.6",
