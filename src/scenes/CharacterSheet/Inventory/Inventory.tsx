@@ -63,9 +63,6 @@ const InventoryPage: React.FC<Props> = (props) => {
                 <WornItemsView wornItems={[]} />
                 <OtherItemsView otherItems={[]} />
             </ScrollView>
-            <Button appearance="ghost" onPress={goToEditInventoryView}>
-                Edit Inventory
-            </Button>
         </Layout>
     );
 };

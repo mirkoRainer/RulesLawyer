@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import {
     Icon,
     Layout,
-    Text,
     TopNavigation,
     TopNavigationAction,
 } from "@ui-kitten/components";
@@ -25,6 +24,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { startChangeInventory } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { bindActionCreators } from "redux";
+import { ItemView } from "./Components/ItemView";
 
 const EditInventoryView: React.FC<Props> = (props) => {
     const navigation = useNavigation<InventoryNavigationProps>();
@@ -34,7 +34,7 @@ const EditInventoryView: React.FC<Props> = (props) => {
         <TopNavigationAction
             icon={BackIcon}
             onPress={async () => {
-                await props.updateInventoryItems(items);
+                if (props.items !== items) props.updateInventoryItems(items);
                 navigation.goBack();
             }}
         />
@@ -52,10 +52,10 @@ const EditInventoryView: React.FC<Props> = (props) => {
                 }}
                 onLongPress={params.drag}
             >
-                <EditItemView
+                <ItemView
                     item={params.item}
                     index={params.index ? params.index : 0}
-                    inventory={items}
+                    cardStatus="basic"
                 />
             </TouchableOpacity>
         );
@@ -63,12 +63,16 @@ const EditInventoryView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={{ flex: 1 }}>
-            <TopNavigation accessoryLeft={BackAction} title="Edit Inventory" />
+            <TopNavigation
+                accessoryLeft={BackAction}
+                title="Arrange Inventory"
+            />
             <DraggableFlatList<Item>
                 data={items}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => `${item.name}-${index}`}
                 onDragEnd={(props) => setItems(props.data)}
+                style={{ marginHorizontal: 5 }}
             />
         </Layout>
     );

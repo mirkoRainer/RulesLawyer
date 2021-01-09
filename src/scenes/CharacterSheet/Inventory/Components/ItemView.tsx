@@ -8,7 +8,7 @@ import { getBulkString } from "../InventoryHelper";
 type Props = {
     item: Item;
     index: number;
-    cardStatus: "primary" | "success" | "info" | "warning" | "danger";
+    cardStatus: "primary" | "success" | "info" | "warning" | "danger" | "basic";
 };
 
 export const ItemView: React.FC<Props> = (props) => {

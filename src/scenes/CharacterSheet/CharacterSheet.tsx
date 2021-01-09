@@ -31,7 +31,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 import { StoryNavigator } from "./Story/StoryNavigation";
 import { InventoryNavigator } from "./Inventory/InventoryNavigation";
-import { InventoryPage } from "./Inventory/Inventory";
+import InventoryPage from "./Inventory/Inventory";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,

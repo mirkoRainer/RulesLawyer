@@ -25,25 +25,23 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "eslint-plugin-tsdoc"
     ],
     "rules": {
         "prettier/prettier": ["error"],
         "react/prop-types": 0,
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-unused-vars": "off"
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "no-unused-vars": "off",
+        "tsdoc/syntax": "warn"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

@@ -18,3 +18,5 @@ exampleCharacter.json
 .vscode/settings.json
 PathbuilderExamplejson
 yarn-error.log
+cache
+coverage

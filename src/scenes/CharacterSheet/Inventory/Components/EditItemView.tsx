@@ -1,20 +1,29 @@
+import { Card, Layout, Text } from "@ui-kitten/components";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacityProps } from "react-native";
 import { connect } from "react-redux";
-import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import {
+    Armor,
+    Item,
+    Shield,
+    Weapon,
+} from "../../../../PF2eCoreLib/PlayerCharacter";
+import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
+import { startChangeItem } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";
 
 type OwnProps = {
     item: Item;
     index: number;
-    inventory: Item[];
 };
 
 const EditItemView: React.FC<Props> = (props) => {
     return (
-        <View>
-            <Text style={styles.centered}>{props.item.name}</Text>
-        </View>
+        <Layout>
+            <Text>{props.item.name}</Text>
+        </Layout>
     );
 };
 
@@ -26,7 +35,19 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => {
     return {};
 };
 
-export default connect(mapStateToProps, null)(EditItemView);
+interface LinkDispatchProps {
+    updateInventoryItem: (item: Item | Weapon | Shield | Armor) => void;
+}
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => {
+    return {
+        updateInventoryItem: bindActionCreators(startChangeItem, dispatch),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditItemView);
 
 const styles = StyleSheet.create({
     centered: {

@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import InventoryPage from "./Inventory";
-import { EditItemView } from "./Components/EditItemView";
+import EditItemView from "./Components/EditItemView";
 import EditInventoryView from "./EditInventoryView";
 
 export type InventoryStackParamList = {
