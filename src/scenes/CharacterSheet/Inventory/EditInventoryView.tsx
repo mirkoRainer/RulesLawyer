@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { EntireAppState } from "../../../store/Store";
 import {
     Armor,
+    InventoryItem,
     Item,
     Shield,
     Weapon,
@@ -40,7 +41,7 @@ const EditInventoryView: React.FC<Props> = (props) => {
         />
     );
 
-    const renderItem: (params: RenderItemParams<Item>) => ReactNode = (
+    const renderItem: (params: RenderItemParams<InventoryItem>) => ReactNode = (
         params
     ) => {
         return (
@@ -67,7 +68,7 @@ const EditInventoryView: React.FC<Props> = (props) => {
                 accessoryLeft={BackAction}
                 title="Arrange Inventory"
             />
-            <DraggableFlatList<Item>
+            <DraggableFlatList<InventoryItem>
                 data={items}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => `${item.name}-${index}`}
@@ -81,7 +82,7 @@ const EditInventoryView: React.FC<Props> = (props) => {
 type Props = LinkStateProps & LinkDispatchProps;
 
 interface LinkStateProps {
-    items: Item[];
+    items: InventoryItem[];
 }
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => {
@@ -91,7 +92,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => {
 };
 
 interface LinkDispatchProps {
-    updateInventoryItems: (items: (Item | Weapon | Shield | Armor)[]) => void;
+    updateInventoryItems: (items: InventoryItem[]) => void;
 }
 
 const mapDispatchToProps = (

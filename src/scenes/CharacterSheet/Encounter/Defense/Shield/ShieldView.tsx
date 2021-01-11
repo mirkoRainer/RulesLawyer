@@ -13,7 +13,7 @@ import ShieldEditModal from "./ShieldEditModal";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
     DEFAULT_SHIELD,
-    isShield,
+    IsShield,
     Shield,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
@@ -188,7 +188,7 @@ const mapDispatchToProps = (
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => {
     const shields: Shield[] = state.playerCharacter.inventory.items.filter<Shield>(
-        isShield
+        IsShield
     );
     const wornShield: Shield | undefined = shields.find(
         (shield) => shield.worn

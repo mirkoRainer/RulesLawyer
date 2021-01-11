@@ -13,7 +13,7 @@ import {
     IndexPath,
 } from "@ui-kitten/components";
 import {
-    isWeapon,
+    IsWeapon,
     PF2Action,
     Skill,
     Weapon,
@@ -381,7 +381,7 @@ const mapStateToProps = (
     ownProps: OwnProps
 ): LinkStateProps => {
     const weapons: Weapon[] = state.playerCharacter.inventory.items.filter<Weapon>(
-        isWeapon
+        IsWeapon
     );
     return {
         action: state.playerCharacter.actions[ownProps.route.params.index],

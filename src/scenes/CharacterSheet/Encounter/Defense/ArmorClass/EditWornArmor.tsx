@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Layout,
     Text,
     Input,
-    Icon,
     Card,
     Button,
     Select,
     SelectItem,
     IndexPath,
-    Divider,
 } from "@ui-kitten/components";
-import {
-    StyleSheet,
-    SafeAreaView,
-    KeyboardAvoidingView,
-    Dimensions,
-} from "react-native";
-import Modal from "react-native-modal";
+import { StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { EntireAppState } from "../../../../../store/Store";
@@ -25,10 +17,9 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import {
     Armor,
-    Price,
     ArmorProficiencies,
     DEFAULT_ARMOR,
-    isArmor,
+    IsArmor,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
@@ -44,6 +35,7 @@ import { getWornArmorProficiency } from "./ArmorClassHelper";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { DefenseStackParamList } from "../../DefenseNavigation";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { CheckIcon } from "../../../../Shared/IconButtons";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
@@ -52,14 +44,7 @@ export type EditArmorNavigationProps = StackNavigationProp<
     "EditWornArmor"
 >;
 
-interface OwnProps {
-    navigation: EditArmorNavigationProps;
-}
-
 const EditWornArmor: React.FC<Props> = (props) => {
-    const CheckIcon = (props: any) => (
-        <Icon {...props} name="checkmark-circle-outline" />
-    );
     const [input, setInput] = useState({
         name: props.wornArmor.name,
         category: props.wornArmor.category,
@@ -239,16 +224,24 @@ const EditWornArmor: React.FC<Props> = (props) => {
         };
     };
 
+    const header = () => {
+        if (!props.editArmor) {
+            return (
+                <Layout style={styles.header}>
+                    <Text category="h5">{"Worn Armor:"}</Text>
+                    <Button
+                        appearance="ghost"
+                        accessoryLeft={CheckIcon}
+                        onPress={changeWornArmor}
+                    />
+                </Layout>
+            );
+        }
+    };
+
     return (
         <Layout>
-            <Layout style={styles.header}>
-                <Text>{"Worn Armor:"}</Text>
-                <Button
-                    appearance="ghost"
-                    accessoryLeft={CheckIcon}
-                    onPress={changeWornArmor}
-                />
-            </Layout>
+            {header()}
             <ScrollView>
                 <Layout>
                     <Card>
@@ -402,6 +395,10 @@ const EditWornArmor: React.FC<Props> = (props) => {
     );
 };
 
+interface OwnProps {
+    navigation: EditArmorNavigationProps;
+    editArmor?: Armor;
+}
 interface LinkDispatchProps {
     updateWornArmor: (WornArmor: Armor) => void;
 }
@@ -424,8 +421,14 @@ const mapStateToProps = (
     state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => {
+    if (ownProps.editArmor) {
+        return {
+            wornArmor: ownProps.editArmor,
+            armorProficiencies: state.playerCharacter.armorProficiencies,
+        };
+    }
     const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
-        isArmor
+        IsArmor
     );
     const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
     return {

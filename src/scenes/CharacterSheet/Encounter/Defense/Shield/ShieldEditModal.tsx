@@ -17,7 +17,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import {
     DEFAULT_SHIELD,
-    isShield,
+    IsShield,
     Shield,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 
@@ -170,7 +170,7 @@ const mapStateToProps = (
     ownProps: OwnProps
 ): LinkStateProps => {
     const shields: Shield[] = state.playerCharacter.inventory.items.filter<Shield>(
-        isShield
+        IsShield
     );
     const wornShield: Shield | undefined = shields.find(
         (shield) => shield.worn

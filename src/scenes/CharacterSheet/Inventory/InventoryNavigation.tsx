@@ -11,6 +11,7 @@ import EditInventoryView from "./EditInventoryView";
 export type InventoryStackParamList = {
     MainInventoryView: undefined;
     EditInventoryView: undefined;
+    EditItemView: { itemGuid: string; index: number };
 };
 
 export type InventoryNavigationProps = StackNavigationProp<
@@ -34,6 +35,7 @@ export const InventoryNavigator: React.FC = () => {
                     name="EditInventoryView"
                     component={EditInventoryView}
                 />
+                <Stack.Screen name="EditItemView" component={EditItemView} />
             </Stack.Navigator>
         </NavigationContainer>
     );

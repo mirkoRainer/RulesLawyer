@@ -1,18 +1,20 @@
+import { useNavigation } from "@react-navigation/native";
 import { Card, Text, Layout } from "@ui-kitten/components";
 import React from "react";
 import { StyleSheet, TouchableOpacityProps } from "react-native";
-import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { prop } from "../../../../PF2eCoreLib/TypescriptEvolution";
+import { InventoryItem, Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { InventoryNavigationProps } from "../Inventory";
 import { getBulkString } from "../InventoryHelper";
 
 type Props = {
-    item: Item;
+    item: InventoryItem;
     index: number;
     cardStatus: "primary" | "success" | "info" | "warning" | "danger" | "basic";
 };
 
 export const ItemView: React.FC<Props> = (props) => {
     const bulk = getBulkString(props.item.bulk);
+    const navigation = useNavigation<InventoryNavigationProps>();
 
     const itemHeader = () => (
         <Layout>
@@ -55,13 +57,17 @@ export const ItemView: React.FC<Props> = (props) => {
             )}
         </Layout>
     );
-    const cardProps: TouchableOpacityProps = { disabled: true }; // no touching items right now.
     return (
         <Card
             header={itemHeader}
             status={props.cardStatus}
             style={{ width: "100%" }}
-            {...cardProps}
+            onLongPress={() =>
+                navigation.navigate("EditItemView", {
+                    itemGuid: props.item.id.toString(),
+                    index: props.index,
+                })
+            }
         >
             <Text>{props.item.description}</Text>
         </Card>

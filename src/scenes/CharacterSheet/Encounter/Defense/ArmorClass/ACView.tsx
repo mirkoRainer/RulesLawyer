@@ -9,7 +9,7 @@ import {
 import {
     ArmorProficiencies,
     Armor,
-    isArmor,
+    IsArmor,
     DEFAULT_ARMOR,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
@@ -161,7 +161,7 @@ const mapDispatchToProps = (): LinkDispatchProps => {
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => {
     const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
-        isArmor
+        IsArmor
     );
     const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
 

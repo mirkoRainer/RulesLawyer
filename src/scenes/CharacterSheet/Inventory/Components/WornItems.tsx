@@ -2,14 +2,14 @@ import { Button, Icon, Layout, Text } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { InventoryItem, Item } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
+import { EyeClosedOpenIcon, EyeOpenIcon } from "../../../Shared/IconButtons";
 import { ItemView } from "./ItemView";
 
 const WornItemsView: React.FC<Props> = (props) => {
     const [itemsVisible, setItemsVisible] = useState(true);
-    const iconName = itemsVisible ? "eye-off-outline" : "eye-outline";
-    const DropDownIcon = (props: any) => <Icon {...props} name={iconName} />;
+    const DropDownIcon = itemsVisible ? EyeOpenIcon : EyeClosedOpenIcon;
     const items: JSX.Element[] = [];
     props.wornItems.forEach((item, index) =>
         items.push(
@@ -40,7 +40,7 @@ const WornItemsView: React.FC<Props> = (props) => {
 type Props = LinkStateProps;
 
 interface LinkStateProps {
-    wornItems: Item[];
+    wornItems: InventoryItem[];
 }
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => {

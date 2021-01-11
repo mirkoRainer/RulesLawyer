@@ -21,6 +21,7 @@ import {
     CampaignNotesData,
     Weapon,
     Item,
+    InventoryItem,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -534,26 +535,24 @@ export const startChangeCampaignNotes = (CampaignNotes: CampaignNotesData) => {
 };
 
 export const ChangeItem: ActionCreator<PlayerCharacterActionTypes> = (
-    NewItem: Item | Weapon | Armor | Shield
+    NewItem: InventoryItem
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_ITEM,
     Item: NewItem,
 });
-export const startChangeItem = (Item: Item | Weapon | Armor | Shield) => {
+export const startChangeItem = (Item: InventoryItem) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeItem(Item));
     };
 };
 
 export const ChangeInventory: ActionCreator<PlayerCharacterActionTypes> = (
-    InventoryItems: (Item | Weapon | Armor | Shield)[]
+    InventoryItems: InventoryItem[]
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_INVENTORY_ITEMS,
     InventoryItems,
 });
-export const startChangeInventory = (
-    InventoryItems: (Item | Weapon | Armor | Shield)[]
-) => {
+export const startChangeInventory = (InventoryItems: InventoryItem[]) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeInventory(InventoryItems));
     };

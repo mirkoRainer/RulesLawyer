@@ -14,6 +14,7 @@ import {
     CampaignNotesData,
     Item,
     Weapon,
+    InventoryItem,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -251,13 +252,13 @@ export interface ChangeCampaignNotesAction extends Action<string> {
 export const CHANGE_ITEM = "CHANGE_ITEM";
 export interface ChangeItemAction extends Action<string> {
     type: typeof CHANGE_ITEM;
-    Item: Item;
+    Item: InventoryItem;
 }
 
 export const CHANGE_INVENTORY_ITEMS = "CHANGE_INVENTORY_ITEMS";
 export interface ChangeInventoryAction extends Action<string> {
     type: typeof CHANGE_INVENTORY_ITEMS;
-    InventoryItems: (Item | Weapon | Armor | Shield)[];
+    InventoryItems: InventoryItem[];
 }
 
 export type PlayerCharacterActionTypes =

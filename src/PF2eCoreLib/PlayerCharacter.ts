@@ -180,7 +180,7 @@ export interface Shield extends Item {
     currentHP: number;
     breakThreshold: number;
 }
-export function isShield(item: Item | Weapon | Armor | Shield): item is Shield {
+export function IsShield(item: InventoryItem): item is Shield {
     return (item as Shield).breakThreshold !== undefined;
 }
 
@@ -271,7 +271,7 @@ export interface Weapon extends Item {
     damageType: string;
     weaponCategory: keyof WeaponProficiencies;
 }
-export function isWeapon(item: Item | Weapon | Armor | Shield): item is Weapon {
+export function IsWeapon(item: InventoryItem): item is Weapon {
     return (item as Weapon).damageDice !== undefined;
 }
 
@@ -286,7 +286,7 @@ export interface Armor extends Item {
     armorGroup: ArmorGroup;
     price: Price;
 }
-export function isArmor(item: Item | Weapon | Armor | Shield): item is Armor {
+export function IsArmor(item: InventoryItem): item is Armor {
     return (item as Armor).dexCap !== undefined;
 }
 export const DEFAULT_ARMOR: Armor = {
@@ -325,6 +325,7 @@ export interface Item {
     id: Guid;
     invested: boolean;
     isContainer: boolean;
+    containedItems?: string[];
     level: number;
     name: string;
     price?: Price;
@@ -335,13 +336,13 @@ export interface Item {
     rarity?: "uncommon" | "rare" | "unique";
 }
 
-export interface Inventory {
-    items: (Item | Weapon | Armor | Shield)[];
-    containers: Container;
-}
+export type InventoryItem = Item &
+    Partial<Weapon> &
+    Partial<Armor> &
+    Partial<Shield>;
 
-export interface Container {
-    itemIds: string[];
+export interface Inventory {
+    items: InventoryItem[];
 }
 
 export interface Price {
