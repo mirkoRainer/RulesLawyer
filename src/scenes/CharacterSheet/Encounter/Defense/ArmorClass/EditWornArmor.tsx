@@ -29,7 +29,7 @@ import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
 import TraitSelector from "../../../../Shared/TraitSelector";
-import { getWornArmorProficiency } from "./ArmorClassHelper";
+import { getArmorProficiencyForCurrentPC } from "./ArmorClassHelper";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { DefenseStackParamList } from "../../DefenseNavigation";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -71,8 +71,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
         traits: props.wornArmor.traits,
     });
 
-    const wornProficiency: Proficiencies = getWornArmorProficiency(
-        props.armorProficiencies,
+    const wornProficiency: Proficiencies = getArmorProficiencyForCurrentPC(
         props.wornArmor.category
     );
 

@@ -1,11 +1,13 @@
 import { ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
+import Store from "../../../../../store/Store";
 
-export const getWornArmorProficiency = (
-    armorProficiencies: ArmorProficiencies,
+export const getArmorProficiencyForCurrentPC = (
     wornArmorCategory: ArmorCategory
 ): Proficiencies => {
+    const armorProficiencies = Store.getState().playerCharacter
+        .armorProficiencies;
     switch (wornArmorCategory) {
         case "Unarmored": {
             return armorProficiencies.unarmored;

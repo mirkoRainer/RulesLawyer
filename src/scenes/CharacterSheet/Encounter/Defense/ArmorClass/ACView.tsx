@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { getWornArmorProficiency } from "./ArmorClassHelper";
+import { getArmorProficiencyForCurrentPC } from "./ArmorClassHelper";
 import { EntireAppState } from "../../../../../store/Store";
 import {
     AbilityScore,
@@ -32,8 +32,7 @@ const ACView: React.FC<Props> = (props) => {
         props.wornArmor.dexCap >= calculatedDexModifier
             ? calculatedDexModifier
             : props.wornArmor.dexCap;
-    const wornProficiency = getWornArmorProficiency(
-        props.armorProficiencies,
+    const wornProficiency = getArmorProficiencyForCurrentPC(
         props.wornArmor.category
     );
     const dexOrCap = () => {
