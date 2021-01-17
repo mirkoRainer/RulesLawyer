@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Layout, Text, Card, Icon, Input } from "@ui-kitten/components";
+import { Layout, Text, Card, Icon, Input, Button } from "@ui-kitten/components";
 import { Traits } from "../../PF2eCoreLib/Traits";
 import { Pill } from "./Pill";
 import _ from "lodash";
@@ -11,7 +11,6 @@ export type TraitSelectorProps = {
 };
 
 const TraitSelector: React.FC<TraitSelectorProps> = (props) => {
-    console.debug(`${props.currentTraits} is the current traits`);
     const renderTrait = (trait: string, status: string) => {
         const onTraitPress = () => {
             console.debug("onTraitPress");
@@ -60,6 +59,7 @@ const TraitSelector: React.FC<TraitSelectorProps> = (props) => {
     });
 
     const [value, setValue] = React.useState("");
+    const [visible, setVisible] = React.useState(false);
     const searchIcon = (props: any) => <Icon {...props} name="search" />;
     const searchBar = () => {
         return (
@@ -75,25 +75,44 @@ const TraitSelector: React.FC<TraitSelectorProps> = (props) => {
 
     return (
         <Card>
-            <Text category="h5">Traits</Text>
-            <Layout>
-                <Text category="c2">Tap to remove</Text>
-                <Layout style={styles.traitContainer}>
-                    {renderActiveTraits}
-                </Layout>
-                {searchBar()}
-                <Text category="c2">Tap to add</Text>
-                <Layout style={styles.traitContainer}>
-                    {renderInactiveTraits.filter(
-                        (x) =>
-                            value === "" ||
-                            x.key
-                                ?.toString()
-                                .toLowerCase()
-                                .startsWith(value.toLowerCase())
-                    )}
-                </Layout>
+            <Layout
+                style={{
+                    flexDirection: "row",
+                    flex: 1,
+                    justifyContent: "space-between",
+                }}
+            >
+                <Text category="h5">Traits</Text>
+                <Button
+                    style={{ alignSelf: "flex-end" }}
+                    appearance="ghost"
+                    onPress={() => setVisible(!visible)}
+                >
+                    {visible ? "Collapse Traits" : "Edit Traits"}
+                </Button>
             </Layout>
+            {visible ? (
+                <Layout>
+                    <Text category="c2">Tap to remove</Text>
+                    <Layout style={styles.traitContainer}>
+                        {renderActiveTraits}
+                    </Layout>
+                    {searchBar()}
+                    <Text category="c2">Tap to add</Text>
+                    <Layout style={styles.traitContainer}>
+                        {renderInactiveTraits.filter(
+                            (x) =>
+                                value === "" ||
+                                x.key
+                                    ?.toString()
+                                    .toLowerCase()
+                                    .startsWith(value.toLowerCase())
+                        )}
+                    </Layout>
+                </Layout>
+            ) : (
+                <></>
+            )}
         </Card>
     );
 };
