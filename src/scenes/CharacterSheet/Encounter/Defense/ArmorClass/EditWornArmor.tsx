@@ -22,8 +22,6 @@ import {
     IsArmor,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
-import { Dictionary } from "../../../../Shared/Misc/Dictionary";
 import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
 import { ScrollView } from "react-native-gesture-handler";
 import { isNumbersOnly } from "../../../../Shared/Misc/StringToNumberHelper";
@@ -36,6 +34,11 @@ import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { DefenseStackParamList } from "../../DefenseNavigation";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CheckIcon } from "../../../../Shared/IconButtons";
+import {
+    ArmorCategoryData,
+    ArmorGroupData,
+} from "../../../../Shared/Armor/ArmorHelper";
+import AcBonusAndDexCap from "../../../../Shared/Armor/AcBonusAndDexCap";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
@@ -43,17 +46,17 @@ export type EditArmorNavigationProps = StackNavigationProp<
     DefenseStackParamList,
     "EditWornArmor"
 >;
-
+// TODO: Make this a selectable list of Armor in the Inventory
 const EditWornArmor: React.FC<Props> = (props) => {
     const [input, setInput] = useState({
         name: props.wornArmor.name,
         category: props.wornArmor.category,
         level: props.wornArmor.level,
         price: {
-            Copper: props.wornArmor.price.Copper.toString(),
-            Silver: props.wornArmor.price.Silver.toString(),
-            Gold: props.wornArmor.price.Gold.toString(),
-            Platinum: props.wornArmor.price.Platinum.toString(),
+            Copper: props.wornArmor.price.Copper,
+            Silver: props.wornArmor.price.Silver,
+            Gold: props.wornArmor.price.Gold,
+            Platinum: props.wornArmor.price.Platinum,
         },
         acBonus: props.wornArmor.acBonus.toString(),
         dexCap: props.wornArmor.dexCap.toString(),
@@ -71,17 +74,11 @@ const EditWornArmor: React.FC<Props> = (props) => {
         props.wornArmor.category
     );
 
-    const categoryData: Dictionary<keyof ArmorCategory> = {
-        0: "Unarmored",
-        1: "Light",
-        2: "Medium",
-        3: "Heavy",
-    };
     const handleArmorCategorySelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         setInput({
             ...input,
-            category: categoryData[trueIndex.row],
+            category: ArmorCategoryData[trueIndex.row],
         });
     };
     const handleLevelSelect = (index: IndexPath | IndexPath[]) => {
@@ -91,15 +88,9 @@ const EditWornArmor: React.FC<Props> = (props) => {
             level: trueIndex.row,
         });
     };
-    const armorGroupData: Dictionary<string> = {
-        0: ArmorGroup.Leather,
-        1: ArmorGroup.Composite,
-        2: ArmorGroup.Chain,
-        3: ArmorGroup.Plate,
-    };
     const handleArmorGroupSelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
-        const group: ArmorGroup = armorGroupData[trueIndex.row] as ArmorGroup;
+        const group: ArmorGroup = ArmorGroupData[trueIndex.row] as ArmorGroup;
         setInput({
             ...input,
             group,
@@ -175,18 +166,6 @@ const EditWornArmor: React.FC<Props> = (props) => {
         const acBonus = acBonusIsNumber ? parseInt(input.acBonus) : 0;
         const dexCapIsNumber = isNumbersOnly(input.dexCap);
         const dexCap = dexCapIsNumber ? parseInt(input.dexCap) : 0;
-        const Copper = isNumbersOnly(input.price.Copper)
-            ? parseInt(input.price.Copper)
-            : 0;
-        const Silver = isNumbersOnly(input.price.Silver)
-            ? parseInt(input.price.Silver)
-            : 0;
-        const Gold = isNumbersOnly(input.price.Gold)
-            ? parseInt(input.price.Gold)
-            : 0;
-        const Platinum = isNumbersOnly(input.price.Platinum)
-            ? parseInt(input.price.Platinum)
-            : 0;
         const checkPenalty: iBonus = isNumbersOnly(input.checkPenaltyAmount)
             ? {
                   ...props.wornArmor.checkPenalty,
@@ -206,12 +185,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
             strengthRequirement: parseInt(input.strengthRequirement),
             bulk: parseInt(input.bulk),
             wornBulk: parseInt(input.wornBulk),
-            price: {
-                Copper,
-                Silver,
-                Gold,
-                Platinum,
-            },
+            price: input.price,
             checkPenalty,
             speedPenalty,
             armorGroup: input.group,
@@ -252,33 +226,12 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             size="medium"
                             onChangeText={changeArmorName}
                         />
-                        <Layout
-                            style={{
-                                flex: 1,
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                                paddingBottom: 10,
-                            }}
-                        >
-                            <Input
-                                label={"AC Bonus"}
-                                placeholder="AC Bonus"
-                                value={input.acBonus}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeACBonus}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                            <Input
-                                label={"Dexterity Cap"}
-                                placeholder="DEX Cap"
-                                value={input.dexCap}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeDexCap}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                        </Layout>
+                        <AcBonusAndDexCap
+                            acBonus={input.acBonus}
+                            dexCap={input.dexCap}
+                            changeACBonus={changeACBonus}
+                            changeDexCap={changeDexCap}
+                        />
                     </Card>
                     <Card>
                         <Select
