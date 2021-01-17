@@ -88,7 +88,13 @@ const ACView: React.FC<Props> = (props) => {
                     <Text style={{ ...styles.calculatorNumber }} category="s1">
                         10
                     </Text>
-                    <Text style={styles.calculatorNumber}>+{modifier}</Text>
+                    <Text
+                        style={{
+                            ...styles.calculatorNumber,
+                        }}
+                    >
+                        +{modifier}
+                    </Text>
                     {dexOrCap()}
                     <Text style={styles.calculatorNumber}>
                         +{props.wornArmor.acBonus}
@@ -140,7 +146,7 @@ const styles = StyleSheet.create({
     calculatorNumber: {
         flex: 1,
         alignSelf: "center",
-        textAlign: "center",
+        textAlign: "right",
     },
 });
 
