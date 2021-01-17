@@ -82,11 +82,11 @@ const EditWornArmor: React.FC<Props> = (props) => {
             category: ArmorCategoryData[trueIndex.row] as ArmorCategory,
         });
     };
-    const handleLevelSelect = (index: IndexPath | IndexPath[]) => {
-        const trueIndex = index as IndexPath;
+    const onChangeLevel = (text: string) => {
+        const level: number = isNumbersOnly(text) ? parseInt(text) : 0;
         setInput({
             ...input,
-            level: trueIndex.row,
+            level,
         });
     };
     const handleArmorGroupSelect = (index: IndexPath | IndexPath[]) => {
@@ -244,16 +244,15 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             }
                             handleArmorGroupSelect={handleArmorGroupSelect}
                         />
-                        <Select
-                            value={input.level}
-                            label={"Item Level"}
-                            onSelect={handleLevelSelect}
-                            placeholder={"Choose Item Level"}
-                        >
-                            <SelectItem title={0} />
-                            <SelectItem title={1} />
-                            <SelectItem title={2} />
-                        </Select>
+                        <Input
+                            label={"Level"}
+                            placeholder="Item Level"
+                            value={input.level.toString()}
+                            size="medium"
+                            keyboardType="numeric"
+                            onChangeText={onChangeLevel}
+                            style={{ flex: 1, paddingHorizontal: 5 }}
+                        />
                         <CoinPriceEditor
                             currentPrice={input.price}
                             updatePrice={changePrice}
