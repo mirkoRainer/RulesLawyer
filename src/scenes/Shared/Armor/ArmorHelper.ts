@@ -2,7 +2,7 @@ import { ArmorCategory } from "../../../PF2eCoreLib/ArmorCategory";
 import { ArmorGroup } from "../../../PF2eCoreLib/ArmorGroup";
 import { Dictionary } from "../Misc/Dictionary";
 
-export const ArmorCategoryData: Dictionary<keyof ArmorCategory> = {
+export const ArmorCategoryData: Dictionary<string> = {
     0: "Unarmored",
     1: "Light",
     2: "Medium",

@@ -21,6 +21,7 @@ import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 
+// TODO: Equip Shield selector. DropDown?
 const ShieldView: React.FC<Props> = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const modalOn = () => {

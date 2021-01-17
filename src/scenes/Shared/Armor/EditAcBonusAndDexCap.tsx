@@ -9,7 +9,7 @@ type Props = {
     changeDexCap: (dexCap: string) => void;
 };
 
-const AcBonusAndDexCap: React.FC<Props> = (props) => {
+const EditAcBonusAndDexCap: React.FC<Props> = (props) => {
     return (
         <Layout
             style={{
@@ -41,7 +41,7 @@ const AcBonusAndDexCap: React.FC<Props> = (props) => {
     );
 };
 
-export default AcBonusAndDexCap;
+export default EditAcBonusAndDexCap;
 
 const styles = StyleSheet.create({
     centered: {

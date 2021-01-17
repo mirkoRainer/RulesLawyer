@@ -38,7 +38,9 @@ import {
     ArmorCategoryData,
     ArmorGroupData,
 } from "../../../../Shared/Armor/ArmorHelper";
-import AcBonusAndDexCap from "../../../../Shared/Armor/AcBonusAndDexCap";
+import EditAcBonusAndDexCap from "../../../../Shared/Armor/EditAcBonusAndDexCap";
+import { EditArmorCategoryAndGroup } from "../../../../Shared/Armor/EditArmorCategoryAndGroup";
+import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
@@ -78,7 +80,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
         const trueIndex = index as IndexPath;
         setInput({
             ...input,
-            category: ArmorCategoryData[trueIndex.row],
+            category: ArmorCategoryData[trueIndex.row] as ArmorCategory,
         });
     };
     const handleLevelSelect = (index: IndexPath | IndexPath[]) => {
@@ -226,7 +228,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                             size="medium"
                             onChangeText={changeArmorName}
                         />
-                        <AcBonusAndDexCap
+                        <EditAcBonusAndDexCap
                             acBonus={input.acBonus}
                             dexCap={input.dexCap}
                             changeACBonus={changeACBonus}
@@ -234,31 +236,15 @@ const EditWornArmor: React.FC<Props> = (props) => {
                         />
                     </Card>
                     <Card>
-                        <Select
-                            value={input.category}
-                            label={"Armor Category (" + wornProficiency + ")"}
-                            onSelect={handleArmorCategorySelect}
-                        >
-                            <SelectItem title={"Unarmored"} />
-                            <SelectItem title={"Light"} />
-                            <SelectItem title={"Medium"} />
-                            <SelectItem title={"Heavy"} />
-                        </Select>
-                        <Select
-                            value={input.group}
-                            label={"Armor Group"}
-                            onSelect={handleArmorGroupSelect}
-                            placeholder={"Select Armor Group"}
-                        >
-                            <SelectItem
-                                title={ArmorGroup[ArmorGroup.Leather]}
-                            />
-                            <SelectItem
-                                title={ArmorGroup[ArmorGroup.Composite]}
-                            />
-                            <SelectItem title={ArmorGroup[ArmorGroup.Chain]} />
-                            <SelectItem title={ArmorGroup[ArmorGroup.Plate]} />
-                        </Select>
+                        <EditArmorCategoryAndGroup
+                            category={input.category}
+                            group={input.group}
+                            proficiency={wornProficiency}
+                            handleArmorCategorySelect={
+                                handleArmorCategorySelect
+                            }
+                            handleArmorGroupSelect={handleArmorGroupSelect}
+                        />
                         <Select
                             value={input.level}
                             label={"Item Level"}

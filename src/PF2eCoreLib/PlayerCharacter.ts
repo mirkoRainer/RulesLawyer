@@ -276,7 +276,7 @@ export function IsWeapon(item: InventoryItem): item is Weapon {
 }
 
 export interface Armor extends Item {
-    category: keyof ArmorCategory;
+    category: ArmorCategory;
     acBonus: number;
     dexCap: number;
     checkPenalty: iBonus;

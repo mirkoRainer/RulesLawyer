@@ -434,9 +434,6 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 isContainer: false,
             },
         ],
-        containers: {
-            itemIds: [],
-        },
     },
     biographicalData: {
         ethnicity: "Varisian",
@@ -460,7 +457,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             "this is my campaign notes. They are thorough and they help my GM keep track of that various things that we do so he doesn't have to do all the work.",
         allies: "my trusty sword, my trusty dagger, my cat",
         enemies: "World Hungry",
-        organizations: "PETA, NRA, PFS, LP",
+        organizations: "NRA, PFS, LP",
     },
     actions: [
         {

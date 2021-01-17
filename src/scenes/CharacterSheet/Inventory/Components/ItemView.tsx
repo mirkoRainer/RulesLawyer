@@ -12,6 +12,7 @@ type Props = {
     cardStatus: "primary" | "success" | "info" | "warning" | "danger" | "basic";
 };
 
+// TODO: Add Armor, Weapon, Shield stats view and display conditionally.
 export const ItemView: React.FC<Props> = (props) => {
     const bulk = getBulkString(props.item.bulk);
     const navigation = useNavigation<InventoryNavigationProps>();

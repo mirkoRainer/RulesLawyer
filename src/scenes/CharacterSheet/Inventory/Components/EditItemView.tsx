@@ -1,6 +1,16 @@
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Button, Card, Layout, Text, Toggle } from "@ui-kitten/components";
+import {
+    Button,
+    Card,
+    IndexPath,
+    Input,
+    Layout,
+    Select,
+    SelectItem,
+    Text,
+    Toggle,
+} from "@ui-kitten/components";
 import { Guid } from "guid-typescript";
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacityProps } from "react-native";
@@ -18,12 +28,18 @@ import {
     IsArmor,
     InventoryItem,
     Inventory,
+    Price,
 } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangeItem } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";
+import CoinPriceEditor from "../../../Shared/CoinPriceEditor";
 import { CheckIcon } from "../../../Shared/IconButtons";
+import { Dictionary } from "../../../Shared/Misc/Dictionary";
+import { isNumbersOnly } from "../../../Shared/Misc/StringToNumberHelper";
+import TraitSelector from "../../../Shared/TraitSelector";
 import { InventoryStackParamList } from "../InventoryNavigation";
+import { EditItemTypeToggles } from "./EditItemTypeToggles";
 
 type OwnProps = {
     navigation: InventoryNavigationProps;
@@ -36,7 +52,7 @@ type InventoryNavigationProps = StackNavigationProp<
 >;
 type EditItemViewRouteProp = RouteProp<InventoryStackParamList, "EditItemView">;
 
-interface State {
+export interface EditItemState {
     item: InventoryItem;
     isWeapon: boolean;
     isShield: boolean;
@@ -44,7 +60,7 @@ interface State {
 }
 
 const EditItemView: React.FC<Props> = (props) => {
-    const [state, setState] = useState<State>(() => {
+    const [state, setState] = useState<EditItemState>(() => {
         const isWeapon = IsWeapon(props.item);
         const isArmor = IsArmor(props.item);
         const isShield = IsShield(props.item);
@@ -55,26 +71,115 @@ const EditItemView: React.FC<Props> = (props) => {
             isShield,
         };
     });
+
     const updateInventoryState = () => {
         props.updateInventoryItem(state.item);
         props.navigation.goBack();
     };
-    const onWeaponToggle = (toggleState: boolean) => {
+
+    const onChangeName = (text: string) => {
         setState({
             ...state,
-            isWeapon: toggleState,
+            item: { ...state.item, name: text },
         });
     };
-    const onShieldToggle = (toggleState: boolean) => {
+    const onChangeItemLevel = (text: string) => {
+        const valid = isNumbersOnly(text) && parseInt(text) >= 0;
+        if (valid) {
+            setState({
+                ...state,
+                item: { ...state.item, level: parseInt(text) },
+            });
+        }
+    };
+    const onChangeBulk = (text: string) => {
+        const valid = isNumbersOnly(text) && parseInt(text) >= 0;
+        if (valid) {
+            setState({
+                ...state,
+                item: { ...state.item, bulk: parseInt(text) },
+            });
+        }
+    };
+    const onChangeDescription = (text: string) => {
         setState({
             ...state,
-            isShield: toggleState,
+            item: { ...state.item, description: text },
         });
     };
-    const onArmorToggle = (toggleState: boolean) => {
+    const onChangeInvested = (toggle: boolean) => {
         setState({
             ...state,
-            isArmor: toggleState,
+            item: { ...state.item, invested: toggle },
+        });
+    };
+    const onChangeContainer = (toggle: boolean) => {
+        setState({
+            ...state,
+            item: { ...state.item, isContainer: toggle },
+        });
+    };
+    const onChangePrice = (newPrice: Price | undefined) => {
+        setState({
+            ...state,
+            item: {
+                ...state.item,
+                price: newPrice,
+            },
+        });
+    };
+    const onChangeQuantity = (text: string) => {
+        const valid = isNumbersOnly(text) && parseInt(text) >= 0;
+        if (valid) {
+            setState({
+                ...state,
+                item: { ...state.item, quantity: parseInt(text) },
+            });
+        }
+    };
+    const onChangeReadied = (toggle: boolean) => {
+        setState({
+            ...state,
+            item: { ...state.item, readied: toggle },
+        });
+    };
+    const onChangeWorn = (toggle: boolean) => {
+        setState({
+            ...state,
+            item: { ...state.item, worn: toggle },
+        });
+    };
+    const rarityData: Dictionary<string> = {
+        0: "Common",
+        1: "Uncommon",
+        2: "Rare",
+        3: "Unique",
+    };
+    const handleRaritySelect = (index: IndexPath | IndexPath[]) => {
+        const trueIndex = index as IndexPath;
+        let rarity: typeof state.item.rarity;
+        switch (trueIndex.row) {
+            case 0:
+                rarity = undefined; // Common
+                break;
+            case 1:
+                rarity = "uncommon";
+                break;
+            case 2:
+                rarity = "rare";
+                break;
+            case 3:
+                rarity = "unique";
+        }
+        setState({
+            ...state,
+            item: { ...state.item, rarity: rarity },
+        });
+    };
+    const onTraitSelection = (traits: string[]) => {
+        setState({
+            ...state,
+            item: { ...state.item, traits },
         });
     };
 
@@ -89,51 +194,125 @@ const EditItemView: React.FC<Props> = (props) => {
                 />
             </Layout>
             <ScrollView>
+                <EditItemTypeToggles setState={setState} state={state} />
+                <Input
+                    label={"Name"}
+                    placeholder="Item Name"
+                    value={state.item.name}
+                    onChangeText={onChangeName}
+                    style={{ flex: 1, paddingHorizontal: 5 }}
+                />
+                <Input
+                    label={"Level"}
+                    placeholder="Item Level"
+                    value={state.item.level.toString()}
+                    size="medium"
+                    keyboardType="numeric"
+                    onChangeText={onChangeItemLevel}
+                    style={{ flex: 1, paddingHorizontal: 5 }}
+                />
+                <Input
+                    label={"Bulk"}
+                    placeholder="Item Bulk"
+                    value={state.item.bulk.toString()}
+                    size="medium"
+                    keyboardType="numeric"
+                    onChangeText={onChangeBulk}
+                    style={{ flex: 1, paddingHorizontal: 5 }}
+                />
+                <Input
+                    label={"Description"}
+                    placeholder="Item Description"
+                    value={state.item.description}
+                    multiline={true}
+                    onChangeText={onChangeDescription}
+                    style={{ flex: 1, paddingHorizontal: 5 }}
+                />
                 <Layout
                     style={{
-                        flex: 1,
                         flexDirection: "row",
-                        alignContent: "space-between",
-                        justifyContent: "space-around",
+                        justifyContent: "space-between",
                         marginHorizontal: 10,
                     }}
                 >
                     <Layout>
+                        <Text category="s2" style={{ textAlign: "center" }}>
+                            Invested?
+                        </Text>
                         <Toggle
-                            checked={state.isWeapon}
-                            onChange={onWeaponToggle}
-                            disabled={state.isArmor || state.isShield}
+                            checked={state.item.invested}
+                            onChange={onChangeInvested}
                         />
-                        <Text>Is Weapon?</Text>
                     </Layout>
                     <Layout>
+                        <Text category="s2" style={{ textAlign: "center" }}>
+                            Readied?
+                        </Text>
                         <Toggle
-                            checked={state.isShield}
-                            onChange={onShieldToggle}
-                            disabled={state.isArmor || state.isWeapon}
+                            checked={state.item.readied}
+                            onChange={onChangeReadied}
                         />
-                        <Text>Is Shield?</Text>
                     </Layout>
                     <Layout>
+                        <Text category="s2" style={{ textAlign: "center" }}>
+                            Worn?
+                        </Text>
                         <Toggle
-                            checked={state.isArmor}
-                            onChange={onArmorToggle}
-                            disabled={state.isWeapon || state.isShield}
+                            checked={state.item.worn}
+                            onChange={onChangeWorn}
                         />
-                        <Text>Is Armor?</Text>
+                    </Layout>
+                    <Layout>
+                        <Text category="s2" style={{ textAlign: "center" }}>
+                            Is Container?
+                        </Text>
+                        <Toggle
+                            checked={state.item.isContainer}
+                            onChange={onChangeContainer}
+                        />
                     </Layout>
                 </Layout>
-                <Text>{Object.keys(state.item)}</Text>
-                {state.isShield ? <Text>Shield</Text> : <></>}
+                <Layout style={{ paddingHorizontal: 5 }}>
+                    <CoinPriceEditor
+                        currentPrice={state.item.price}
+                        updatePrice={onChangePrice}
+                    />
+                </Layout>
+                <Input
+                    label={"Quantity"}
+                    placeholder="Number of things you have"
+                    value={
+                        state.item.quantity
+                            ? state.item.quantity.toString()
+                            : "0"
+                    }
+                    onChangeText={onChangeQuantity}
+                    style={{ flex: 1, paddingHorizontal: 5 }}
+                />
+                <Select
+                    value={state.item.rarity}
+                    label={"Item Rarity"}
+                    onSelect={handleRaritySelect}
+                    placeholder={"Select Item Rarity"}
+                >
+                    <SelectItem title={rarityData[0]} />
+                    <SelectItem title={rarityData[1]} />
+                    <SelectItem title={rarityData[2]} />
+                    <SelectItem title={rarityData[3]} />
+                </Select>
+                <TraitSelector
+                    currentTraits={state.item.traits}
+                    onSelection={onTraitSelection}
+                />
                 {state.isArmor ? <Text>Armor</Text> : <></>}
                 {state.isWeapon ? <Text>Weapon</Text> : <></>}
+                {state.isShield ? <Text>Shield</Text> : <></>}
             </ScrollView>
         </Layout>
     );
 };
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
-
 interface LinkStateProps {
     item: InventoryItem;
 }

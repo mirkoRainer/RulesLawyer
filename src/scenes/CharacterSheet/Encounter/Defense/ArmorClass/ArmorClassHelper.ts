@@ -4,7 +4,7 @@ import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 
 export const getWornArmorProficiency = (
     armorProficiencies: ArmorProficiencies,
-    wornArmorCategory: keyof ArmorCategory
+    wornArmorCategory: ArmorCategory
 ): Proficiencies => {
     switch (wornArmorCategory) {
         case "Unarmored": {
