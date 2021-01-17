@@ -1,8 +1,19 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Input, Layout, Text } from "@ui-kitten/components";
+import { Price } from "../../PF2eCoreLib/PlayerCharacter";
+import { isNumbersOnly } from "./Misc/StringToNumberHelper";
 
 const CoinPriceEditor: React.FC<Props> = (props) => {
+    let currentPrice: Price = {
+        Copper: 0,
+        Silver: 0,
+        Gold: 0,
+        Platinum: 0,
+    };
+    if (props.currentPrice) {
+        currentPrice = props.currentPrice;
+    }
     return (
         <>
             <Text
@@ -15,25 +26,31 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
                 <Layout style={styles.inputColumn}>
                     <Input
                         label={"PP"}
-                        value={props.currentPrice.Platinum}
+                        value={currentPrice.Platinum.toString()}
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
+                            let value = isNumbersOnly(text)
+                                ? parseInt(text)
+                                : 0;
                             props.updatePrice({
-                                ...props.currentPrice,
-                                Platinum: text,
+                                ...currentPrice,
+                                Platinum: value,
                             });
                         }}
                     />
                     <Input
                         label={"SP"}
-                        value={props.currentPrice.Silver}
+                        value={currentPrice.Silver.toString()}
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
+                            let value = isNumbersOnly(text)
+                                ? parseInt(text)
+                                : 0;
                             props.updatePrice({
-                                ...props.currentPrice,
-                                Silver: text,
+                                ...currentPrice,
+                                Silver: value,
                             });
                         }}
                     />
@@ -41,25 +58,31 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
                 <Layout style={styles.inputColumn}>
                     <Input
                         label={"GP"}
-                        value={props.currentPrice.Gold}
+                        value={currentPrice.Gold.toString()}
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
+                            let value = isNumbersOnly(text)
+                                ? parseInt(text)
+                                : 0;
                             props.updatePrice({
-                                ...props.currentPrice,
-                                Gold: text,
+                                ...currentPrice,
+                                Gold: value,
                             });
                         }}
                     />
                     <Input
                         label={"CP"}
-                        value={props.currentPrice.Copper}
+                        value={currentPrice.Copper.toString()}
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
+                            let value = isNumbersOnly(text)
+                                ? parseInt(text)
+                                : 0;
                             props.updatePrice({
-                                ...props.currentPrice,
-                                Copper: text,
+                                ...currentPrice,
+                                Copper: value,
                             });
                         }}
                     />
@@ -70,18 +93,8 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
 };
 
 type Props = {
-    currentPrice: {
-        Copper: string;
-        Silver: string;
-        Gold: string;
-        Platinum: string;
-    };
-    updatePrice: (currentPrice: {
-        Copper: string;
-        Silver: string;
-        Gold: string;
-        Platinum: string;
-    }) => void;
+    currentPrice: Price | undefined;
+    updatePrice: (currentPrice: Price) => void;
 };
 
 const styles = StyleSheet.create({
