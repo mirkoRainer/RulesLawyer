@@ -4,4 +4,5 @@ export enum BonusType {
     Status = "status",
     Item = "item",
     Armor = "armor", // derived from check and speed penalties in Armor rules
+    Untyped = "untyped",
 }
