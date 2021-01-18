@@ -2,6 +2,12 @@ import { Layout, Toggle, Text } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import React from "react";
 import { EditItemState } from "./EditItemView";
+import {
+    Armor,
+    DEFAULT_ARMOR,
+    DEFAULT_ARMOR_ONLY_PROPS,
+    Item,
+} from "../../../../PF2eCoreLib/PlayerCharacter";
 
 interface Props {
     state: EditItemState;
@@ -22,10 +28,24 @@ export const EditItemTypeToggles: React.FC<Props> = (props) => {
         });
     };
     const onArmorToggle = (toggleState: boolean) => {
-        props.setState({
-            ...props.state,
-            isArmor: toggleState,
-        });
+        if (toggleState) {
+            const armorNoMore = props.state.item as Item;
+            props.setState({
+                ...props.state,
+                isArmor: toggleState,
+                item: armorNoMore,
+            });
+        } else {
+            const armorNow = props.state.item as Item;
+            props.setState({
+                ...props.state,
+                isArmor: toggleState,
+                item: {
+                    ...armorNow,
+                    ...DEFAULT_ARMOR_ONLY_PROPS,
+                },
+            });
+        }
     };
     return (
         <Layout style={styles.headerSection}>

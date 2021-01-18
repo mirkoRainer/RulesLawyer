@@ -39,6 +39,7 @@ import { Dictionary } from "../../../Shared/Misc/Dictionary";
 import { isNumbersOnly } from "../../../Shared/Misc/StringToNumberHelper";
 import TraitSelector from "../../../Shared/TraitSelector";
 import { InventoryStackParamList } from "../InventoryNavigation";
+import { EditArmor } from "./EditArmor";
 import { EditItemTypeToggles } from "./EditItemTypeToggles";
 
 type OwnProps = {
@@ -300,13 +301,21 @@ const EditItemView: React.FC<Props> = (props) => {
                     <SelectItem title={rarityData[2]} />
                     <SelectItem title={rarityData[3]} />
                 </Select>
+                {state.isArmor ? (
+                    <EditArmor
+                        armor={state.item as Armor}
+                        setState={setState}
+                        state={state}
+                    />
+                ) : (
+                    <></>
+                )}
+                {state.isWeapon ? <Text>Weapon</Text> : <></>}
+                {state.isShield ? <Text>Shield</Text> : <></>}
                 <TraitSelector
                     currentTraits={state.item.traits}
                     onSelection={onTraitSelection}
                 />
-                {state.isArmor ? <Text>Armor</Text> : <></>}
-                {state.isWeapon ? <Text>Weapon</Text> : <></>}
-                {state.isShield ? <Text>Shield</Text> : <></>}
             </ScrollView>
         </Layout>
     );

@@ -268,7 +268,7 @@ export interface Weapon extends Item {
     toHitBonus: number;
     damageDice: string;
     damageAbilityModifier?: keyof AbilityScoreArray;
-    damageType: string;
+    damageType: string; // TODO: enumerate damage types
     weaponCategory: keyof WeaponProficiencies;
 }
 export function IsWeapon(item: InventoryItem): item is Weapon {
@@ -289,6 +289,24 @@ export interface Armor extends Item {
 export function IsArmor(item: InventoryItem): item is Armor {
     return (item as Armor).dexCap !== undefined;
 }
+export const DEFAULT_ARMOR_ONLY_PROPS: Omit<Armor, keyof Item> = {
+    category: ArmorCategory.Unarmored,
+    acBonus: 0,
+    dexCap: 6,
+    checkPenalty: {
+        type: BonusType.Untyped,
+        appliesTo: "skills",
+        amount: 0,
+    },
+    speedPenalty: {
+        type: BonusType.Untyped,
+        appliesTo: "speed",
+        amount: 0,
+    },
+    strengthRequirement: 0,
+    wornBulk: 0,
+    armorGroup: ArmorGroup.Clothing,
+};
 export const DEFAULT_ARMOR: Armor = {
     id: Guid.create(),
     description: "Plain clothing offering no real protection",
@@ -296,7 +314,7 @@ export const DEFAULT_ARMOR: Armor = {
     worn: true,
     readied: false,
     name: "Clothes",
-    category: "Light",
+    category: ArmorCategory.Light,
     level: 0,
     price: { Copper: 0, Silver: 0, Gold: 0, Platinum: 0 },
     acBonus: 0,
@@ -335,6 +353,18 @@ export interface Item {
     worn: boolean;
     rarity?: "uncommon" | "rare" | "unique";
 }
+export const DEFAULT_ITEM: Item = {
+    bulk: 0,
+    description: "The default item",
+    id: Guid.create(),
+    invested: false,
+    isContainer: false,
+    level: 0,
+    name: "Default item",
+    readied: false,
+    traits: [],
+    worn: false,
+};
 
 export type InventoryItem = Item &
     Partial<Weapon> &
@@ -351,3 +381,16 @@ export interface Price {
     Gold: number;
     Platinum: number;
 }
+
+export const DEFAULT_WEAPON_ONLY_PROPS: Omit<Weapon, keyof Item> = {
+    ability: "Strength",
+    toHitBonus: 0,
+    damageDice: "1d4",
+    damageAbilityModifier: "Strength",
+    damageType: "slashing",
+    weaponCategory: "Simple",
+};
+export const DEFAULT_WEAPON: Weapon = {
+    ...DEFAULT_ITEM,
+    ...DEFAULT_WEAPON_ONLY_PROPS,
+};
