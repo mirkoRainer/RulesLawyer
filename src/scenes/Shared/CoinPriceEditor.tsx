@@ -2,7 +2,10 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Input, Layout, Text } from "@ui-kitten/components";
 import { Price } from "../../PF2eCoreLib/PlayerCharacter";
-import { isNumbersOnly } from "./Misc/StringToNumberHelper";
+import {
+    isNumbersOnly,
+    isNumbersOnlyElseReturn0,
+} from "./Misc/StringToNumberHelper";
 
 const CoinPriceEditor: React.FC<Props> = (props) => {
     let currentPrice: Price = {
@@ -30,9 +33,7 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
-                            let value = isNumbersOnly(text)
-                                ? parseInt(text)
-                                : 0;
+                            let value = isNumbersOnlyElseReturn0(text);
                             props.updatePrice({
                                 ...currentPrice,
                                 Platinum: value,
@@ -45,9 +46,7 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
-                            let value = isNumbersOnly(text)
-                                ? parseInt(text)
-                                : 0;
+                            let value = isNumbersOnlyElseReturn0(text);
                             props.updatePrice({
                                 ...currentPrice,
                                 Silver: value,
@@ -62,9 +61,7 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
-                            let value = isNumbersOnly(text)
-                                ? parseInt(text)
-                                : 0;
+                            let value = isNumbersOnlyElseReturn0(text);
                             props.updatePrice({
                                 ...currentPrice,
                                 Gold: value,
@@ -77,9 +74,7 @@ const CoinPriceEditor: React.FC<Props> = (props) => {
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={(text) => {
-                            let value = isNumbersOnly(text)
-                                ? parseInt(text)
-                                : 0;
+                            let value = isNumbersOnlyElseReturn0(text);
                             props.updatePrice({
                                 ...currentPrice,
                                 Copper: value,

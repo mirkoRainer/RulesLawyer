@@ -24,7 +24,10 @@ import {
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
 import { ScrollView } from "react-native-gesture-handler";
-import { isNumbersOnly } from "../../../../Shared/Misc/StringToNumberHelper";
+import {
+    isNumbersOnly,
+    isNumbersOnlyElseReturn0,
+} from "../../../../Shared/Misc/StringToNumberHelper";
 import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
@@ -41,6 +44,8 @@ import {
 import EditAcBonusAndDexCap from "../../../../Shared/Armor/EditAcBonusAndDexCap";
 import { EditArmorCategoryAndGroup } from "../../../../Shared/Armor/EditArmorCategoryAndGroup";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
+import { EditArmor } from "../../../Inventory/Components/EditArmor";
+import { EditArmorPenaltiesAndStrReq } from "../../../../Shared/Armor/EditArmorPenaltiesAndStrReq";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
@@ -83,7 +88,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
         });
     };
     const onChangeLevel = (text: string) => {
-        const level: number = isNumbersOnly(text) ? parseInt(text) : 0;
+        const level: number = isNumbersOnlyElseReturn0(text);
         setInput({
             ...input,
             level,
@@ -163,22 +168,16 @@ const EditWornArmor: React.FC<Props> = (props) => {
         props.navigation.navigate("MainDefenseView");
     };
     const inputToArmor = (convertFrom: typeof input): Armor => {
-        const acBonusIsNumber = isNumbersOnly(input.acBonus);
-        const acBonus = acBonusIsNumber ? parseInt(input.acBonus) : 0;
-        const dexCapIsNumber = isNumbersOnly(input.dexCap);
-        const dexCap = dexCapIsNumber ? parseInt(input.dexCap) : 0;
-        const checkPenalty: iBonus = isNumbersOnly(input.checkPenaltyAmount)
-            ? {
-                  ...props.wornArmor.checkPenalty,
-                  amount: parseInt(input.checkPenaltyAmount),
-              }
-            : { ...props.wornArmor.checkPenalty, amount: 0 };
-        const speedPenalty: iBonus = isNumbersOnly(input.speedPenaltyAmount)
-            ? {
-                  ...props.wornArmor.speedPenalty,
-                  amount: parseInt(input.speedPenaltyAmount),
-              }
-            : { ...props.wornArmor.speedPenalty, amount: 0 };
+        const acBonus = isNumbersOnlyElseReturn0(input.acBonus);
+        const dexCap = isNumbersOnlyElseReturn0(input.dexCap);
+        const checkPenalty: iBonus = {
+            ...props.wornArmor.checkPenalty,
+            amount: isNumbersOnlyElseReturn0(input.checkPenaltyAmount),
+        };
+        const speedPenalty: iBonus = {
+            ...props.wornArmor.speedPenalty,
+            amount: isNumbersOnlyElseReturn0(input.speedPenaltyAmount),
+        };
         return {
             ...convertFrom,
             acBonus,
@@ -215,118 +214,86 @@ const EditWornArmor: React.FC<Props> = (props) => {
     };
 
     return (
-        <Layout>
+        <Layout style={{ flex: 1 }}>
             {header()}
             <ScrollView>
-                <Layout>
-                    <Card>
+                <Card>
+                    <Input
+                        label={"Name"}
+                        placeholder="Armor Name"
+                        value={input.name}
+                        size="medium"
+                        onChangeText={changeArmorName}
+                    />
+                    <EditAcBonusAndDexCap
+                        acBonus={input.acBonus}
+                        dexCap={input.dexCap}
+                        changeACBonus={changeACBonus}
+                        changeDexCap={changeDexCap}
+                    />
+                </Card>
+                <Card>
+                    <EditArmorCategoryAndGroup
+                        category={input.category}
+                        group={input.group}
+                        proficiency={wornProficiency}
+                        handleArmorCategorySelect={handleArmorCategorySelect}
+                        handleArmorGroupSelect={handleArmorGroupSelect}
+                    />
+                    <Input
+                        label={"Level"}
+                        placeholder="Item Level"
+                        value={input.level.toString()}
+                        size="medium"
+                        keyboardType="numeric"
+                        onChangeText={onChangeLevel}
+                        style={{ flex: 1, paddingHorizontal: 5 }}
+                    />
+                    <CoinPriceEditor
+                        currentPrice={input.price}
+                        updatePrice={changePrice}
+                    />
+                </Card>
+                <Card>
+                    <EditArmorPenaltiesAndStrReq
+                        changeCheckPenalty={changeCheckPenalty}
+                        changeSpeedPenalty={changeSpeedPenalty}
+                        changeStrengthRequirement={changeStrengthRequirement}
+                        checkPenaltyAmount={input.checkPenaltyAmount}
+                        speedPenaltyAmount={input.speedPenaltyAmount}
+                        strengthRequirement={input.strengthRequirement}
+                    />
+                    <Layout
+                        style={{
+                            flex: 1,
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                        }}
+                    >
                         <Input
-                            label={"Name"}
-                            placeholder="Armor Name"
-                            value={input.name}
-                            size="medium"
-                            onChangeText={changeArmorName}
-                        />
-                        <EditAcBonusAndDexCap
-                            acBonus={input.acBonus}
-                            dexCap={input.dexCap}
-                            changeACBonus={changeACBonus}
-                            changeDexCap={changeDexCap}
-                        />
-                    </Card>
-                    <Card>
-                        <EditArmorCategoryAndGroup
-                            category={input.category}
-                            group={input.group}
-                            proficiency={wornProficiency}
-                            handleArmorCategorySelect={
-                                handleArmorCategorySelect
-                            }
-                            handleArmorGroupSelect={handleArmorGroupSelect}
-                        />
-                        <Input
-                            label={"Level"}
-                            placeholder="Item Level"
-                            value={input.level.toString()}
+                            label={"Bulk"}
+                            placeholder="Bulk"
+                            value={input.bulk}
                             size="medium"
                             keyboardType="numeric"
-                            onChangeText={onChangeLevel}
+                            onChangeText={changeBulk}
                             style={{ flex: 1, paddingHorizontal: 5 }}
                         />
-                        <CoinPriceEditor
-                            currentPrice={input.price}
-                            updatePrice={changePrice}
+                        <Input
+                            label={"Worn Bulk"}
+                            placeholder="Worn Bulk"
+                            value={input.wornBulk}
+                            size="medium"
+                            keyboardType="numeric"
+                            onChangeText={changeWornBulk}
+                            style={{ flex: 1, paddingHorizontal: 5 }}
                         />
-                    </Card>
-                    <Card>
-                        <Layout
-                            style={{
-                                flex: 1,
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                                paddingBottom: 10,
-                            }}
-                        >
-                            <Input
-                                label={"Check Penalty"}
-                                placeholder="Penalty"
-                                value={input.checkPenaltyAmount}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeCheckPenalty}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                            <Input
-                                label={"Speed Penalty"}
-                                placeholder="Penalty"
-                                value={input.speedPenaltyAmount}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeSpeedPenalty}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                            <Input
-                                label={"Strength Req."}
-                                placeholder="STR Req"
-                                value={input.strengthRequirement}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeStrengthRequirement}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                        </Layout>
-                        <Layout
-                            style={{
-                                flex: 1,
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                            }}
-                        >
-                            <Input
-                                label={"Bulk"}
-                                placeholder="Bulk"
-                                value={input.bulk}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeBulk}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                            <Input
-                                label={"Worn Bulk"}
-                                placeholder="Worn Bulk"
-                                value={input.wornBulk}
-                                size="medium"
-                                keyboardType="numeric"
-                                onChangeText={changeWornBulk}
-                                style={{ flex: 1, paddingHorizontal: 5 }}
-                            />
-                        </Layout>
-                    </Card>
-                    <TraitSelector
-                        onSelection={changeTraits}
-                        currentTraits={props.wornArmor.traits}
-                    />
-                </Layout>
+                    </Layout>
+                </Card>
+                <TraitSelector
+                    onSelection={changeTraits}
+                    currentTraits={props.wornArmor.traits}
+                />
             </ScrollView>
         </Layout>
     );

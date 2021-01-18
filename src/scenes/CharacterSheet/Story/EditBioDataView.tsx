@@ -8,7 +8,10 @@ import { bindActionCreators } from "redux";
 import { startChangeBioData } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { isNumbersOnly } from "../../Shared/Misc/StringToNumberHelper";
+import {
+    isNumbersOnly,
+    isNumbersOnlyElseReturn0,
+} from "../../Shared/Misc/StringToNumberHelper";
 import { useNavigation } from "@react-navigation/native";
 import { StoryStackParamList } from "./StoryNavigation";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -38,9 +41,9 @@ const EditBioDataView: React.FC<Props> = (props) => {
         weight: props.bioData.weight.toString(),
     });
     const inputToBioData = (convertFrom: typeof input): BiographicalData => {
-        const age = isNumbersOnly(input.age) ? parseInt(input.age) : 0;
-        const height = isNumbersOnly(input.height) ? parseInt(input.height) : 0;
-        const weight = isNumbersOnly(input.weight) ? parseInt(input.weight) : 0;
+        const age = isNumbersOnlyElseReturn0(input.age);
+        const height = isNumbersOnlyElseReturn0(input.height);
+        const weight = isNumbersOnlyElseReturn0(input.weight);
         return {
             ...convertFrom,
             age,
