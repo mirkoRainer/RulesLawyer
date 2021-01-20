@@ -10,6 +10,7 @@ import { InventoryStackParamList } from "./InventoryNavigation";
 import { EntireAppState } from "../../../store/Store";
 import { GetAbilityModifierFromScores } from "../../../PF2eCoreLib/AbilityScores";
 import { connect } from "react-redux";
+import { Ability } from "../../../PF2eCoreLib/Ability";
 
 export type InventoryNavigationProps = StackNavigationProp<
     InventoryStackParamList,
@@ -78,7 +79,7 @@ interface LinkStateProps {
 const mapStateToProps = (state: EntireAppState): LinkStateProps => {
     return {
         strengthModifier: GetAbilityModifierFromScores(
-            "Strength",
+            Ability.Strength,
             state.playerCharacter.abilityScores
         ),
         currentBulk: Math.floor(

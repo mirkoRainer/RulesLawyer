@@ -1,5 +1,7 @@
+import { Ability } from "./Ability";
+
 export interface AbilityScore {
-    ability: keyof AbilityScoreArray;
+    ability: Ability;
     score: number;
 }
 
@@ -12,21 +14,47 @@ export type AbilityScoreArray = {
     Charisma: AbilityScore;
 };
 
+export function AbilityEnumToAbilityScoreArrayKey(
+    ability: Ability
+): keyof AbilityScoreArray {
+    switch (ability) {
+        case Ability.Free:
+            return Ability.Free as keyof AbilityScoreArray;
+        case Ability.Strength:
+            return Ability.Strength as keyof AbilityScoreArray;
+        case Ability.Dexterity:
+            return Ability.Dexterity as keyof AbilityScoreArray;
+        case Ability.Constitution:
+            return Ability.Constitution as keyof AbilityScoreArray;
+        case Ability.Intelligence:
+            return Ability.Intelligence as keyof AbilityScoreArray;
+        case Ability.Wisdom:
+            return Ability.Wisdom as keyof AbilityScoreArray;
+        case Ability.Charisma:
+            return Ability.Charisma as keyof AbilityScoreArray;
+        default:
+            return Ability.Free as keyof AbilityScoreArray;
+    }
+}
+
 export function UpdateAbilityScore(
     newAbilityScore: AbilityScore,
     existingAbilityScores: AbilityScoreArray
 ): AbilityScoreArray {
     let scores = existingAbilityScores;
-    scores[newAbilityScore.ability] = newAbilityScore;
+    scores[
+        AbilityEnumToAbilityScoreArrayKey(newAbilityScore.ability)
+    ] = newAbilityScore;
     return scores;
 }
 
 export function GetAbilityModifierFromScores(
-    ability: keyof AbilityScoreArray | undefined,
+    ability: Ability | undefined,
     abilityScores: AbilityScoreArray
 ): number {
     if (ability) {
-        let abilityScore: AbilityScore = abilityScores[ability];
+        let abilityScore: AbilityScore =
+            abilityScores[AbilityEnumToAbilityScoreArrayKey(ability)];
         const abilityModifier =
             abilityScore !== undefined
                 ? CalculateAbilityScoreModifier(abilityScore.score)

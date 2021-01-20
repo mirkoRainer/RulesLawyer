@@ -1,3 +1,4 @@
+import { Ability } from "./Ability";
 import {
     GetAbilityModifierFromScores,
     AbilityScoreArray,
@@ -9,30 +10,30 @@ describe("Ability Scores", () => {
     describe("GetAbilityModifierFromScores", () => {
         it("appropriately calculates modifier based on score", () => {
             let abilityScores: AbilityScoreArray = {
-                Strength: { score: 12, ability: "Strength" },
-                Dexterity: { score: 12, ability: "Dexterity" },
-                Constitution: { score: 12, ability: "Constitution" },
-                Intelligence: { score: 12, ability: "Intelligence" },
-                Wisdom: { score: 12, ability: "Wisdom" },
-                Charisma: { score: 12, ability: "Charisma" },
+                Strength: { score: 12, ability: Ability.Strength },
+                Dexterity: { score: 12, ability: Ability.Dexterity },
+                Constitution: { score: 12, ability: Ability.Constitution },
+                Intelligence: { score: 12, ability: Ability.Intelligence },
+                Wisdom: { score: 12, ability: Ability.Wisdom },
+                Charisma: { score: 12, ability: Ability.Charisma },
             };
             let actual: number = GetAbilityModifierFromScores(
-                "Strength",
+                Ability.Strength,
                 abilityScores
             );
             expect(actual).toBe(1);
         });
         it("calculates the ability modifier for a requested Score", () => {
             let abilityScores: AbilityScoreArray = {
-                Strength: { score: 18, ability: "Strength" },
-                Dexterity: { score: 12, ability: "Dexterity" },
-                Constitution: { score: 12, ability: "Constitution" },
-                Intelligence: { score: 12, ability: "Intelligence" },
-                Wisdom: { score: 12, ability: "Wisdom" },
-                Charisma: { score: 12, ability: "Charisma" },
+                Strength: { score: 18, ability: Ability.Strength },
+                Dexterity: { score: 12, ability: Ability.Dexterity },
+                Constitution: { score: 12, ability: Ability.Constitution },
+                Intelligence: { score: 12, ability: Ability.Intelligence },
+                Wisdom: { score: 12, ability: Ability.Wisdom },
+                Charisma: { score: 12, ability: Ability.Charisma },
             };
             let actual: number = GetAbilityModifierFromScores(
-                "Strength",
+                Ability.Strength,
                 abilityScores
             );
             expect(actual).toBe(4);
@@ -41,14 +42,17 @@ describe("Ability Scores", () => {
     describe("UpdateAbilityScore", () => {
         it("assigns the new ability score to the appropriate ability entry", () => {
             let abilityScores: AbilityScoreArray = {
-                Strength: { score: 18, ability: "Strength" },
-                Dexterity: { score: 12, ability: "Dexterity" },
-                Constitution: { score: 12, ability: "Constitution" },
-                Intelligence: { score: 12, ability: "Intelligence" },
-                Wisdom: { score: 12, ability: "Wisdom" },
-                Charisma: { score: 12, ability: "Charisma" },
+                Strength: { score: 18, ability: Ability.Strength },
+                Dexterity: { score: 12, ability: Ability.Dexterity },
+                Constitution: { score: 12, ability: Ability.Constitution },
+                Intelligence: { score: 12, ability: Ability.Intelligence },
+                Wisdom: { score: 12, ability: Ability.Wisdom },
+                Charisma: { score: 12, ability: Ability.Charisma },
             };
-            let newAbility: AbilityScore = { score: 12, ability: "Strength" };
+            let newAbility: AbilityScore = {
+                score: 12,
+                ability: Ability.Strength,
+            };
             abilityScores = UpdateAbilityScore(newAbility, abilityScores);
             expect(abilityScores.Strength).toBe(newAbility);
         });

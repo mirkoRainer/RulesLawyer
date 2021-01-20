@@ -275,7 +275,7 @@ const ActionView: React.FC<Props> = (props) => {
                     {criticalFailure()}
                 </Layout>
                 {traits()}
-                <Layout style={styles.rulebook}>
+                <Layout style={styles.ruleBook}>
                     <Text style={styles.sourceOfAction}>
                         Source: {props.action.source}
                     </Text>
@@ -321,7 +321,7 @@ const ActionView: React.FC<Props> = (props) => {
 export default ActionView;
 
 const styles = StyleSheet.create({
-    rulebook: {
+    ruleBook: {
         flex: 1,
         flexDirection: "row",
         justifyContent: "flex-end",

@@ -8,6 +8,7 @@ import { HealthData } from "./HealthData";
 import { ArmorGroup } from "./ArmorGroup";
 import { Guid } from "guid-typescript";
 import { BonusType } from "./BonusTypes";
+import { Ability } from "./Ability";
 
 interface PlayerCharacter {
     abilityScores: AbilityScoreArray;
@@ -264,10 +265,10 @@ export interface OtherWeaponProficiencies {
 }
 
 export interface Weapon extends Item {
-    ability: keyof AbilityScoreArray;
+    ability: Ability;
     toHitBonus: number;
     damageDice: DamageDice[];
-    damageAbilityModifier?: keyof AbilityScoreArray;
+    damageAbilityModifier?: Ability;
     weaponCategory: keyof WeaponProficiencies;
 }
 export function IsWeapon(item: InventoryItem): item is Weapon {
@@ -382,10 +383,10 @@ export interface Price {
 }
 
 export const DEFAULT_WEAPON_ONLY_PROPS: Omit<Weapon, keyof Item> = {
-    ability: "Strength",
+    ability: Ability.Strength,
     toHitBonus: 0,
     damageDice: [{ formula: "1d4", damageType: ["piercing", "slashing"] }],
-    damageAbilityModifier: "Strength",
+    damageAbilityModifier: Ability.Strength,
     weaponCategory: "Simple",
 };
 export const DEFAULT_WEAPON: Weapon = {

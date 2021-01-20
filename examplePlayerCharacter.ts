@@ -4,6 +4,7 @@ import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
 import PlayerCharacter from "./src/PF2eCoreLib/PlayerCharacter";
 import { Guid } from "guid-typescript";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
+import { Ability } from "./src/PF2eCoreLib/Ability";
 
 export const examplePlayerCharacter: PlayerCharacter = {
     metadata: {},
@@ -25,15 +26,15 @@ export const examplePlayerCharacter: PlayerCharacter = {
         name: "Druid",
         subClass: "Wild Order",
         proficiency: Proficiencies.Master,
-        keyAbility: "Wisdom",
+        keyAbility: Ability.Wisdom,
     },
     abilityScores: {
-        Strength: { score: 10, ability: "Strength" },
-        Dexterity: { score: 16, ability: "Dexterity" },
-        Constitution: { score: 20, ability: "Constitution" },
-        Intelligence: { score: 6, ability: "Intelligence" },
-        Wisdom: { score: 18, ability: "Wisdom" },
-        Charisma: { score: 8, ability: "Charisma" },
+        Strength: { score: 10, ability: Ability.Strength },
+        Dexterity: { score: 16, ability: Ability.Dexterity },
+        Constitution: { score: 20, ability: Ability.Constitution },
+        Intelligence: { score: 6, ability: Ability.Intelligence },
+        Wisdom: { score: 18, ability: Ability.Wisdom },
+        Charisma: { score: 8, ability: Ability.Charisma },
     },
     languages: ["Common", "Dwarf", "Goblin"],
     saves: {
@@ -50,7 +51,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
     skills: [
         {
             name: "Acrobatics",
-            ability: "Dexterity",
+            ability: Ability.Dexterity,
             proficiency: Proficiencies.Legendary,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -58,7 +59,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Arcana",
-            ability: "Intelligence",
+            ability: Ability.Intelligence,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -66,7 +67,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Athletics",
-            ability: "Strength",
+            ability: Ability.Strength,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -74,7 +75,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Crafting",
-            ability: "Intelligence",
+            ability: Ability.Intelligence,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -82,7 +83,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Deception",
-            ability: "Charisma",
+            ability: Ability.Charisma,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -90,7 +91,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Diplomacy",
-            ability: "Charisma",
+            ability: Ability.Charisma,
             proficiency: Proficiencies.Untrained,
             itemBonus: 0,
             hasArmorPenalty: true,
@@ -98,7 +99,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Intimidation",
-            ability: "Charisma",
+            ability: Ability.Charisma,
             proficiency: Proficiencies.Expert,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -107,7 +108,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         {
             name: "Lore",
             loreDescriptor: "Golarion",
-            ability: "Intelligence",
+            ability: Ability.Intelligence,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -115,7 +116,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Medicine",
-            ability: "Wisdom",
+            ability: Ability.Wisdom,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -123,7 +124,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Nature",
-            ability: "Wisdom",
+            ability: Ability.Wisdom,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -131,7 +132,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Occultism",
-            ability: "Intelligence",
+            ability: Ability.Intelligence,
             proficiency: Proficiencies.Master,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -139,7 +140,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Performance",
-            ability: "Charisma",
+            ability: Ability.Charisma,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -147,7 +148,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Religion",
-            ability: "Wisdom",
+            ability: Ability.Wisdom,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -155,7 +156,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Society",
-            ability: "Intelligence",
+            ability: Ability.Intelligence,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -163,7 +164,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Stealth",
-            ability: "Dexterity",
+            ability: Ability.Dexterity,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -171,14 +172,14 @@ export const examplePlayerCharacter: PlayerCharacter = {
         },
         {
             name: "Survival",
-            ability: "Wisdom",
+            ability: Ability.Wisdom,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: false,
         },
         {
             name: "Thievery",
-            ability: "Dexterity",
+            ability: Ability.Dexterity,
             proficiency: Proficiencies.Trained,
             itemBonus: 1,
             hasArmorPenalty: true,
@@ -335,12 +336,12 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 readied: true,
                 worn: true,
                 name: "+1 ShortSword",
-                ability: "Strength",
+                ability: Ability.Strength,
                 toHitBonus: 1,
                 damageDice: [
                     { formula: "1d6", damageType: ["piercing", "slashing"] },
                 ],
-                damageAbilityModifier: "Strength",
+                damageAbilityModifier: Ability.Strength,
                 traits: ["Agile", "Finesse", "Versatile"],
                 weaponCategory: "Simple",
                 isContainer: false,
@@ -354,7 +355,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 invested: false,
                 readied: true,
                 worn: true,
-                ability: "Dexterity",
+                ability: Ability.Dexterity,
                 toHitBonus: 0,
                 damageDice: [{ formula: "1d8", damageType: ["piercing"] }],
                 damageAbilityModifier: undefined,
@@ -506,7 +507,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             source: "What grants this action",
         },
     ],
-    spellcastingAbilityModifier: "Wisdom",
+    spellcastingAbilityModifier: Ability.Wisdom,
     spellAttackProficiency: Proficiencies.Trained,
     spellAttackItemBonus: 1,
     spellDCItemBonus: 2,
