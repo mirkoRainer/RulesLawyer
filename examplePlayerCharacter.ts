@@ -3,6 +3,7 @@ import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
 import PlayerCharacter from "./src/PF2eCoreLib/PlayerCharacter";
 import { Guid } from "guid-typescript";
+import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 
 export const examplePlayerCharacter: PlayerCharacter = {
     metadata: {},
@@ -285,7 +286,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 worn: true,
                 readied: false,
                 name: "Leather Armor",
-                category: "Light",
+                category: ArmorCategory.Light,
                 level: 1,
                 price: { Copper: 0, Silver: 7, Gold: 0, Platinum: 0 },
                 acBonus: 2,
@@ -336,9 +337,10 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 name: "+1 ShortSword",
                 ability: "Strength",
                 toHitBonus: 1,
-                damageDice: "1d6",
+                damageDice: [
+                    { formula: "1d6", damageType: ["piercing", "slashing"] },
+                ],
                 damageAbilityModifier: "Strength",
-                damageType: "Piercing",
                 traits: ["Agile", "Finesse", "Versatile"],
                 weaponCategory: "Simple",
                 isContainer: false,
@@ -354,9 +356,8 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 worn: true,
                 ability: "Dexterity",
                 toHitBonus: 0,
-                damageDice: "1d8",
+                damageDice: [{ formula: "1d8", damageType: ["piercing"] }],
                 damageAbilityModifier: undefined,
-                damageType: "Piercing",
                 traits: ["Volley30"],
                 weaponCategory: "Martial",
                 isContainer: false,

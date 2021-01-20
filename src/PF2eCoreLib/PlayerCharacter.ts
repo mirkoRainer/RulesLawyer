@@ -266,9 +266,8 @@ export interface OtherWeaponProficiencies {
 export interface Weapon extends Item {
     ability: keyof AbilityScoreArray;
     toHitBonus: number;
-    damageDice: string;
+    damageDice: DamageDice[];
     damageAbilityModifier?: keyof AbilityScoreArray;
-    damageType: string; // TODO: enumerate damage types
     weaponCategory: keyof WeaponProficiencies;
 }
 export function IsWeapon(item: InventoryItem): item is Weapon {
@@ -385,12 +384,19 @@ export interface Price {
 export const DEFAULT_WEAPON_ONLY_PROPS: Omit<Weapon, keyof Item> = {
     ability: "Strength",
     toHitBonus: 0,
-    damageDice: "1d4",
+    damageDice: [{ formula: "1d4", damageType: ["piercing", "slashing"] }],
     damageAbilityModifier: "Strength",
-    damageType: "slashing",
     weaponCategory: "Simple",
 };
 export const DEFAULT_WEAPON: Weapon = {
     ...DEFAULT_ITEM,
     ...DEFAULT_WEAPON_ONLY_PROPS,
 };
+
+export interface Dice {
+    formula: string;
+}
+
+export interface DamageDice extends Dice {
+    damageType: string[]; // TODO: Enumerate damage types
+}
