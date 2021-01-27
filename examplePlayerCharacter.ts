@@ -339,7 +339,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 ability: Ability.Strength,
                 toHitBonus: 1,
                 damageDice: [
-                    { formula: "1d6", damageType: ["piercing", "slashing"] },
+                    { formula: "1d6", damageType: "piercing, slashing" },
                 ],
                 damageAbilityModifier: Ability.Strength,
                 traits: ["Agile", "Finesse", "Versatile"],
@@ -357,7 +357,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 worn: true,
                 ability: Ability.Dexterity,
                 toHitBonus: 0,
-                damageDice: [{ formula: "1d8", damageType: ["piercing"] }],
+                damageDice: [{ formula: "1d8", damageType: "piercing" }],
                 damageAbilityModifier: undefined,
                 traits: ["Volley30"],
                 weaponCategory: "Martial",

@@ -399,5 +399,5 @@ export interface Dice {
 }
 
 export interface DamageDice extends Dice {
-    damageType: string[]; // TODO: Enumerate damage types
+    damageType: string; // TODO: Enumerate damage types; Update inputs
 }

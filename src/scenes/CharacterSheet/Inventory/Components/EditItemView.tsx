@@ -41,6 +41,7 @@ import TraitSelector from "../../../Shared/TraitSelector";
 import { InventoryStackParamList } from "../InventoryNavigation";
 import { EditArmor } from "./EditArmor";
 import { EditItemTypeToggles } from "./EditItemTypeToggles";
+import { EditWeapon } from "./EditWeapon";
 
 type OwnProps = {
     navigation: InventoryNavigationProps;
@@ -295,6 +296,11 @@ const EditItemView: React.FC<Props> = (props) => {
                     label={"Item Rarity"}
                     onSelect={handleRaritySelect}
                     placeholder={"Select Item Rarity"}
+                    style={{
+                        flex: 1,
+                        paddingHorizontal: 5,
+                        paddingVertical: 5,
+                    }}
                 >
                     <SelectItem title={rarityData[0]} />
                     <SelectItem title={rarityData[1]} />
@@ -310,7 +316,15 @@ const EditItemView: React.FC<Props> = (props) => {
                 ) : (
                     <></>
                 )}
-                {state.isWeapon ? <Text>Weapon</Text> : <></>}
+                {state.isWeapon ? (
+                    <EditWeapon
+                        weapon={state.item as Weapon}
+                        state={state}
+                        setState={setState}
+                    />
+                ) : (
+                    <></>
+                )}
                 {state.isShield ? <Text>Shield</Text> : <></>}
                 <TraitSelector
                     currentTraits={state.item.traits}
