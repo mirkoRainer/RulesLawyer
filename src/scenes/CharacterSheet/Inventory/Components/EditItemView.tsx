@@ -12,8 +12,13 @@ import {
     Toggle,
 } from "@ui-kitten/components";
 import { Guid } from "guid-typescript";
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacityProps } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+    Keyboard,
+    KeyboardAvoidingView,
+    StyleSheet,
+    TouchableOpacityProps,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -73,8 +78,30 @@ const EditItemView: React.FC<Props> = (props) => {
             isShield,
         };
     });
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+    // TODO: Use this on all forms. Disable the update button if things are being typed.
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+            "keyboardDidShow",
+            () => {
+                setKeyboardVisible(true); // or some other action
+            }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            "keyboardDidHide",
+            () => {
+                setKeyboardVisible(false); // or some other action
+            }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
+        };
+    }, []);
 
     const updateInventoryState = () => {
+        Keyboard.dismiss();
         props.updateInventoryItem(state.item);
         props.navigation.goBack();
     };
@@ -193,144 +220,156 @@ const EditItemView: React.FC<Props> = (props) => {
                     appearance="ghost"
                     accessoryLeft={CheckIcon}
                     onPress={updateInventoryState}
+                    disabled={isKeyboardVisible}
                 />
             </Layout>
-            <ScrollView>
-                <EditItemTypeToggles setState={setState} state={state} />
-                <Input
-                    label={"Name"}
-                    placeholder="Item Name"
-                    value={state.item.name}
-                    onChangeText={onChangeName}
-                    style={{ flex: 1, paddingHorizontal: 5 }}
-                />
-                <Input
-                    label={"Level"}
-                    placeholder="Item Level"
-                    value={state.item.level.toString()}
-                    size="medium"
-                    keyboardType="numeric"
-                    onChangeText={onChangeItemLevel}
-                    style={{ flex: 1, paddingHorizontal: 5 }}
-                />
-                <Input
-                    label={"Bulk"}
-                    placeholder="Item Bulk"
-                    value={state.item.bulk.toString()}
-                    size="medium"
-                    keyboardType="numeric"
-                    onChangeText={onChangeBulk}
-                    style={{ flex: 1, paddingHorizontal: 5 }}
-                />
-                <Input
-                    label={"Description"}
-                    placeholder="Item Description"
-                    value={state.item.description}
-                    multiline={true}
-                    onChangeText={onChangeDescription}
-                    style={{ flex: 1, paddingHorizontal: 5 }}
-                />
-                <Layout
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        marginHorizontal: 10,
-                    }}
-                >
-                    <Layout>
-                        <Text category="s2" style={{ textAlign: "center" }}>
-                            Invested?
-                        </Text>
-                        <Toggle
-                            checked={state.item.invested}
-                            onChange={onChangeInvested}
-                        />
-                    </Layout>
-                    <Layout>
-                        <Text category="s2" style={{ textAlign: "center" }}>
-                            Readied?
-                        </Text>
-                        <Toggle
-                            checked={state.item.readied}
-                            onChange={onChangeReadied}
-                        />
-                    </Layout>
-                    <Layout>
-                        <Text category="s2" style={{ textAlign: "center" }}>
-                            Worn?
-                        </Text>
-                        <Toggle
-                            checked={state.item.worn}
-                            onChange={onChangeWorn}
-                        />
-                    </Layout>
-                    <Layout>
-                        <Text category="s2" style={{ textAlign: "center" }}>
-                            Is Container?
-                        </Text>
-                        <Toggle
-                            checked={state.item.isContainer}
-                            onChange={onChangeContainer}
-                        />
-                    </Layout>
-                </Layout>
-                <Layout style={{ paddingHorizontal: 5 }}>
-                    <CoinPriceEditor
-                        currentPrice={state.item.price}
-                        updatePrice={onChangePrice}
+            <KeyboardAvoidingView
+                style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "center",
+                }}
+                behavior="padding"
+                enabled
+                keyboardVerticalOffset={100}
+            >
+                <ScrollView>
+                    <EditItemTypeToggles setState={setState} state={state} />
+                    <Input
+                        label={"Name"}
+                        placeholder="Item Name"
+                        value={state.item.name}
+                        onChangeText={onChangeName}
+                        style={{ flex: 1, paddingHorizontal: 5 }}
                     />
-                </Layout>
-                <Input
-                    label={"Quantity"}
-                    placeholder="Number of things you have"
-                    value={
-                        state.item.quantity
-                            ? state.item.quantity.toString()
-                            : "0"
-                    }
-                    onChangeText={onChangeQuantity}
-                    style={{ flex: 1, paddingHorizontal: 5 }}
-                />
-                <Select
-                    value={state.item.rarity}
-                    label={"Item Rarity"}
-                    onSelect={handleRaritySelect}
-                    placeholder={"Select Item Rarity"}
-                    style={{
-                        flex: 1,
-                        paddingHorizontal: 5,
-                        paddingVertical: 5,
-                    }}
-                >
-                    <SelectItem title={rarityData[0]} />
-                    <SelectItem title={rarityData[1]} />
-                    <SelectItem title={rarityData[2]} />
-                    <SelectItem title={rarityData[3]} />
-                </Select>
-                {state.isArmor ? (
-                    <EditArmor
-                        armor={state.item as Armor}
-                        setState={setState}
-                        state={state}
+                    <Input
+                        label={"Level"}
+                        placeholder="Item Level"
+                        value={state.item.level.toString()}
+                        size="medium"
+                        keyboardType="numeric"
+                        onChangeText={onChangeItemLevel}
+                        style={{ flex: 1, paddingHorizontal: 5 }}
                     />
-                ) : (
-                    <></>
-                )}
-                {state.isWeapon ? (
-                    <EditWeapon
-                        weapon={state.item as Weapon}
-                        state={state}
-                        setState={setState}
+                    <Input
+                        label={"Bulk"}
+                        placeholder="Item Bulk"
+                        value={state.item.bulk.toString()}
+                        size="medium"
+                        keyboardType="numeric"
+                        onChangeText={onChangeBulk}
+                        style={{ flex: 1, paddingHorizontal: 5 }}
                     />
-                ) : (
-                    <></>
-                )}
-                {state.isShield ? <Text>Shield</Text> : <></>}
-                <TraitSelector
-                    currentTraits={state.item.traits}
-                    onSelection={onTraitSelection}
-                />
-            </ScrollView>
+                    <Input
+                        label={"Description"}
+                        placeholder="Item Description"
+                        value={state.item.description}
+                        multiline={true}
+                        onChangeText={onChangeDescription}
+                        style={{ flex: 1, paddingHorizontal: 5 }}
+                    />
+                    <Layout
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            marginHorizontal: 10,
+                        }}
+                    >
+                        <Layout>
+                            <Text category="s2" style={{ textAlign: "center" }}>
+                                Invested?
+                            </Text>
+                            <Toggle
+                                checked={state.item.invested}
+                                onChange={onChangeInvested}
+                            />
+                        </Layout>
+                        <Layout>
+                            <Text category="s2" style={{ textAlign: "center" }}>
+                                Readied?
+                            </Text>
+                            <Toggle
+                                checked={state.item.readied}
+                                onChange={onChangeReadied}
+                            />
+                        </Layout>
+                        <Layout>
+                            <Text category="s2" style={{ textAlign: "center" }}>
+                                Worn?
+                            </Text>
+                            <Toggle
+                                checked={state.item.worn}
+                                onChange={onChangeWorn}
+                            />
+                        </Layout>
+                        <Layout>
+                            <Text category="s2" style={{ textAlign: "center" }}>
+                                Is Container?
+                            </Text>
+                            <Toggle
+                                checked={state.item.isContainer}
+                                onChange={onChangeContainer}
+                            />
+                        </Layout>
+                    </Layout>
+                    <Layout style={{ paddingHorizontal: 5 }}>
+                        <CoinPriceEditor
+                            currentPrice={state.item.price}
+                            updatePrice={onChangePrice}
+                        />
+                    </Layout>
+                    <Input
+                        label={"Quantity"}
+                        placeholder="Number of things you have"
+                        value={
+                            state.item.quantity
+                                ? state.item.quantity.toString()
+                                : "0"
+                        }
+                        onChangeText={onChangeQuantity}
+                        style={{ flex: 1, paddingHorizontal: 5 }}
+                    />
+                    <Select
+                        value={state.item.rarity}
+                        label={"Item Rarity"}
+                        onSelect={handleRaritySelect}
+                        placeholder={"Select Item Rarity"}
+                        style={{
+                            flex: 1,
+                            paddingHorizontal: 5,
+                            paddingVertical: 5,
+                        }}
+                    >
+                        <SelectItem title={rarityData[0]} />
+                        <SelectItem title={rarityData[1]} />
+                        <SelectItem title={rarityData[2]} />
+                        <SelectItem title={rarityData[3]} />
+                    </Select>
+                    {state.isArmor ? (
+                        <EditArmor
+                            armor={state.item as Armor}
+                            setState={setState}
+                            state={state}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                    {state.isWeapon ? (
+                        <EditWeapon
+                            weapon={state.item as Weapon}
+                            state={state}
+                            setState={setState}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                    {state.isShield ? <Text>Shield</Text> : <></>}
+                    <TraitSelector
+                        currentTraits={state.item.traits}
+                        onSelection={onTraitSelection}
+                    />
+                </ScrollView>
+            </KeyboardAvoidingView>
         </Layout>
     );
 };

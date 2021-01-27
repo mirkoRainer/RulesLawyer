@@ -30,6 +30,7 @@ export const EditDamageDice: React.FC<Props> = (props) => {
     const handleAddDie = () => {
         dice.push({ damageType: "", formula: "1d4" });
         updateDiceInState(dice);
+        setDice(dice);
     };
 
     return (
@@ -38,15 +39,12 @@ export const EditDamageDice: React.FC<Props> = (props) => {
                 Dice
             </Text>
             <Button style={{ margin: 10 }} onPress={handleAddDie}>
-                Moar Dice! +++
+                One Moar Die! +
             </Button>
             {dice.map((x, index) => {
                 const setDie = (die: DamageDice, index: number) => {
-                    updateDiceInState([
-                        ...props.damageDice.splice(0, index),
-                        die,
-                        ...props.damageDice.splice(index + 1),
-                    ]);
+                    props.damageDice[index] = die;
+                    updateDiceInState(props.damageDice);
                 };
                 return (
                     <Layout key={JSON.stringify(x) + index}>
