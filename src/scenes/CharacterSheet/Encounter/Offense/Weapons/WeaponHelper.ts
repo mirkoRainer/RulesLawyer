@@ -16,8 +16,8 @@ export function GetProficiencyForWeapon(weapon: Weapon): Proficiencies {
             return proficiencies.Simple;
         case "Martial":
             return proficiencies.Martial;
-        case "Others":
-            proficiencies.Others.forEach((customProficiency) => {
+        case "Other":
+            proficiencies.Other.forEach((customProficiency) => {
                 if (customProficiency.description === weapon.name) {
                     return customProficiency.proficiency;
                 }
@@ -26,6 +26,11 @@ export function GetProficiencyForWeapon(weapon: Weapon): Proficiencies {
         default:
             return Proficiencies.Untrained;
     }
+}
+
+export function CurrentPCWeaponProficiencies(): WeaponProficiencies {
+    const state = Store.getState();
+    return state.playerCharacter.weaponProficiencies;
 }
 
 export function getWeaponsFromInventory(): string[] {

@@ -22,7 +22,7 @@ export const WeaponProficienciesView: React.FC<WeaponProficiencies> = (
         console.debug("Navigating to EditWeaponProficiencyView");
         navigation.navigate("EditWeaponProficiencyView");
     };
-    const otherProfs = props.Others;
+    const otherProfs = props.Other;
     let renderOthers: JSX.Element[] = [];
     otherProfs.forEach((proficiency) => {
         renderOthers.push(

@@ -11,6 +11,7 @@ type Props = {
     die: DamageDice;
     index: number;
     setDie: (die: DamageDice, index: number) => void;
+    deleteDie: () => void;
 };
 
 export const EditDie: React.FC<Props> = (props) => {
@@ -38,7 +39,11 @@ export const EditDie: React.FC<Props> = (props) => {
                         paddingVertical: 5,
                     }}
                 />
-                <Button style={{ margin: 10 }} status="danger">
+                <Button
+                    style={{ margin: 10 }}
+                    status="danger"
+                    onPress={props.deleteDie}
+                >
                     Delete -
                 </Button>
             </Layout>

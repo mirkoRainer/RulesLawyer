@@ -46,9 +46,18 @@ export const EditDamageDice: React.FC<Props> = (props) => {
                     props.damageDice[index] = die;
                     updateDiceInState(props.damageDice);
                 };
+                const deleteDie = () => {
+                    props.damageDice.splice(index, 1);
+                    updateDiceInState(props.damageDice);
+                };
                 return (
                     <Layout key={JSON.stringify(x) + index}>
-                        <EditDie die={x} index={index} setDie={setDie} />
+                        <EditDie
+                            die={x}
+                            index={index}
+                            setDie={setDie}
+                            deleteDie={deleteDie}
+                        />
                         <Divider />
                     </Layout>
                 );

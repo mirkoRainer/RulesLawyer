@@ -77,10 +77,7 @@ const StoryPage: React.FC<Props> = (props) => {
                         Unarmed={props.weaponProficiencies.Unarmed}
                         Simple={props.weaponProficiencies.Simple}
                         Martial={props.weaponProficiencies.Martial}
-                        Others={
-                            props.weaponProficiencies.Others
-                            /* Others should have a description and proficiency. */
-                        }
+                        Other={props.weaponProficiencies.Other}
                     />
                     <Divider />
                     {/*CharacterSketch placeholder*/}

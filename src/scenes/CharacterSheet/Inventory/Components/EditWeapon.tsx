@@ -8,13 +8,18 @@ import {
     SelectItem,
     Text,
 } from "@ui-kitten/components";
-import { Weapon } from "../../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Weapon,
+    WeaponProficiencies,
+} from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EditItemState } from "./EditItemView";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";
-import { Dictionary } from "../../../Shared/Misc/Dictionary";
 import { Ability } from "../../../../PF2eCoreLib/Ability";
-import { useGestureHandlerRef } from "@react-navigation/stack";
 import { EditDamageDice } from "./EditDamageDice";
+import {
+    CurrentPCWeaponProficiencies,
+    GetProficiencyForWeapon,
+} from "../../Encounter/Offense/Weapons/WeaponHelper";
 
 type Props = {
     weapon: Weapon;
@@ -64,6 +69,44 @@ export const EditWeapon: React.FC<Props> = (props) => {
             ...props.state,
             item: { ...props.state.item, ability },
         });
+    };
+    const weaponCategoryData = [
+        `Unarmed (${CurrentPCWeaponProficiencies().Unarmed})`,
+        `Simple (${CurrentPCWeaponProficiencies().Simple})`,
+        `Martial (${CurrentPCWeaponProficiencies().Martial})`,
+        "Other",
+    ];
+    const handleWeaponCategorySelect = (index: IndexPath | IndexPath[]) => {
+        const trueIndex = index as IndexPath;
+        let category: keyof WeaponProficiencies | undefined;
+        // TODO: Handle Editing of Other Category properties. i.e description and mapping description to weapon proficiency.
+        switch (weaponCategoryData[trueIndex.row]) {
+            case weaponCategoryData[0]:
+                category = "Unarmed";
+                break;
+            case weaponCategoryData[1]:
+                category = "Simple";
+                break;
+            case weaponCategoryData[2]:
+                category = "Martial";
+                break;
+            case weaponCategoryData[3]:
+                category = "Other";
+                break;
+            default:
+                category = undefined;
+                break;
+        }
+        props.setState({
+            ...props.state,
+            item: { ...props.state.item, weaponCategory: category },
+        });
+    };
+    const weaponCategories = () => {
+        let items: JSX.Element[] = weaponCategoryData.map((x) => (
+            <SelectItem title={x} key={x} />
+        ));
+        return items;
     };
     const handleDamageAbilitySelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
@@ -120,6 +163,21 @@ export const EditWeapon: React.FC<Props> = (props) => {
     };
     return (
         <Layout>
+            <Text category="h6" style={{ textAlign: "center" }}>
+                Weapon Properties
+            </Text>
+            {
+                // TODO: Enrich View with basic weapon stat breakdown calculations and summary
+            }
+            <Select
+                value={props.state.item.weaponCategory}
+                label={"Weapon Category"}
+                onSelect={handleWeaponCategorySelect}
+                placeholder={"Select Weapon Category"}
+                style={{ flex: 1, paddingHorizontal: 5, paddingVertical: 5 }}
+            >
+                {weaponCategories()}
+            </Select>
             <Input
                 label={"to Hit Bonus"}
                 placeholder="Bonus to Hit"
@@ -129,6 +187,9 @@ export const EditWeapon: React.FC<Props> = (props) => {
                 onChangeText={changeToHitBonus}
                 style={{ flex: 1, paddingHorizontal: 5, paddingVertical: 5 }}
             />
+            {
+                // TODO: Enrich Selection data with ability modifier in dropdown
+            }
             <Select
                 value={props.state.item.ability}
                 label={"to Hit Ability"}

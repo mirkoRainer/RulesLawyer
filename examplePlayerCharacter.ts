@@ -213,7 +213,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         Unarmed: Proficiencies.Trained,
         Simple: Proficiencies.Trained,
         Martial: Proficiencies.Untrained,
-        Others: [
+        Other: [
             {
                 description: "Brass Knuckles",
                 proficiency: Proficiencies.Expert,

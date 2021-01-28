@@ -256,7 +256,7 @@ export interface WeaponProficiencies {
     Unarmed: Proficiencies;
     Simple: Proficiencies;
     Martial: Proficiencies;
-    Others: OtherWeaponProficiencies[];
+    Other: OtherWeaponProficiencies[];
 }
 
 export interface OtherWeaponProficiencies {
