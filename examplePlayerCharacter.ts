@@ -318,7 +318,6 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 name: "Shield McShieldFace",
                 bulk: 5,
                 level: 1,
-                hasShield: true,
                 acBonus: 2,
                 hardness: 5,
                 maxHP: 20,

@@ -47,6 +47,7 @@ import { InventoryStackParamList } from "../InventoryNavigation";
 import { EditArmor } from "./EditArmor";
 import { EditItemTypeToggles } from "./EditItemTypeToggles";
 import { EditWeapon } from "./EditWeapon";
+import { EditShield } from "./EditShield";
 
 type OwnProps = {
     navigation: InventoryNavigationProps;
@@ -66,7 +67,7 @@ export interface EditItemState {
     isArmor: boolean;
 }
 
-const EditItemView: React.FC<Props> = (props) => {
+const EditItem: React.FC<Props> = (props) => {
     const [state, setState] = useState<EditItemState>(() => {
         const isWeapon = IsWeapon(props.item);
         const isArmor = IsArmor(props.item);
@@ -363,7 +364,15 @@ const EditItemView: React.FC<Props> = (props) => {
                     ) : (
                         <></>
                     )}
-                    {state.isShield ? <Text>Shield</Text> : <></>}
+                    {state.isShield ? (
+                        <EditShield
+                            shield={state.item as Shield}
+                            state={state}
+                            setState={setState}
+                        />
+                    ) : (
+                        <></>
+                    )}
                     <TraitSelector
                         currentTraits={state.item.traits}
                         onSelection={onTraitSelection}
@@ -417,7 +426,7 @@ const mapDispatchToProps = (
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditItemView);
+export default connect(mapStateToProps, mapDispatchToProps)(EditItem);
 
 const styles = StyleSheet.create({
     centered: {

@@ -6,8 +6,7 @@ import {
 } from "react-native";
 import { Button, Divider, Input, Layout, Text } from "@ui-kitten/components";
 import { DamageDice } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { EditItemState } from "./EditItemView";
-import { prop } from "../../../../PF2eCoreLib/TypescriptEvolution";
+import { EditItemState } from "./EditItem";
 import { EditDie } from "./EditDie";
 
 type Props = {

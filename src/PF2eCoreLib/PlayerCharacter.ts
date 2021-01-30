@@ -174,7 +174,6 @@ export interface Saves {
 }
 
 export interface Shield extends Item {
-    hasShield: boolean;
     acBonus: number;
     hardness: number;
     maxHP: number;
@@ -194,7 +193,6 @@ export const DEFAULT_SHIELD: Shield = {
     name: "Shield McShieldFace",
     bulk: 1,
     level: 1,
-    hasShield: true,
     acBonus: 2,
     hardness: 5,
     maxHP: 20,

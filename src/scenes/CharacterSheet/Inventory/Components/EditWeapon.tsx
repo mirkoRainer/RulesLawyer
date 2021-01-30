@@ -12,14 +12,11 @@ import {
     Weapon,
     WeaponProficiencies,
 } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { EditItemState } from "./EditItemView";
+import { EditItemState } from "./EditItem";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";
 import { Ability } from "../../../../PF2eCoreLib/Ability";
 import { EditDamageDice } from "./EditDamageDice";
-import {
-    CurrentPCWeaponProficiencies,
-    GetProficiencyForWeapon,
-} from "../../Encounter/Offense/Weapons/WeaponHelper";
+import { CurrentPCWeaponProficiencies } from "../../Encounter/Offense/Weapons/WeaponHelper";
 
 type Props = {
     weapon: Weapon;

@@ -17,7 +17,7 @@ import {
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import { useNavigation } from "@react-navigation/native";
 import { InventoryNavigationProps } from "./Inventory";
-import EditItemView from "./Components/EditItemView";
+import EditItem from "./Components/EditItem";
 import DraggableFlatList, {
     RenderItemParams,
 } from "react-native-draggable-flatlist";

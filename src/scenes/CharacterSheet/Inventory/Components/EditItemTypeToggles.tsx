@@ -1,7 +1,7 @@
 import { Layout, Toggle, Text } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import React from "react";
-import { EditItemState } from "./EditItemView";
+import { EditItemState } from "./EditItem";
 import {
     Armor,
     DEFAULT_ARMOR,

@@ -22,6 +22,9 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 
 // TODO: Equip Shield selector. DropDown?
+// TODO: Raise Shield button
+// TODO: Multiple Shields
+// TODO: Long press to EditShield
 const ShieldView: React.FC<Props> = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const modalOn = () => {
@@ -114,55 +117,58 @@ const ShieldView: React.FC<Props> = (props) => {
     };
 
     const onShieldToggle = (isChecked: boolean) => {
-        props.updateShield({ ...props.shield, hasShield: isChecked });
+        props.updateShield({ ...props.shield, worn: isChecked });
     };
 
-    const shieldView = props.shield.hasShield ? (
+    const shieldView = (
         <Layout style={styles.container}>
-            <Layout style={{ flex: 0.25, justifyContent: "center" }}>
-                <Text style={styles.title} category="h6">
-                    Shield
-                </Text>
-                <Toggle
-                    checked={props.shield.hasShield}
-                    onChange={onShieldToggle}
-                ></Toggle>
-            </Layout>
-            <Layout style={styles.shield}>
-                <Layout style={styles.horizontal}>
-                    <ButtonGroup
-                        style={styles.buttonGroup}
-                        size="tiny"
-                        status="danger"
+            <Text category="h5" style={{ textAlign: "center" }}>
+                Shield
+            </Text>
+            <Layout style={{ flexDirection: "row" }}>
+                {
+                    // TODO: Finish Raise shield Logic}
+                }
+                <Button>Raise Shield</Button>
+                <Layout style={styles.shield}>
+                    <Layout style={styles.horizontal}>
+                        <ButtonGroup
+                            style={styles.buttonGroup}
+                            size="tiny"
+                            status="danger"
+                        >
+                            {MinusHPButton(-1)}
+                            {MinusHPButton(-5)}
+                        </ButtonGroup>
+                        <TouchableOpacity
+                            onPress={modalOn}
+                            style={styles.hpNumber}
+                        >
+                            <Text category="h6">
+                                HP: {props.shield.currentHP!}/
+                                {props.shield.maxHP!}
+                            </Text>
+                        </TouchableOpacity>
+                        <ButtonGroup
+                            style={styles.buttonGroup}
+                            size="tiny"
+                            status="info"
+                        >
+                            {PlusHPButton(5)}
+                            {PlusHPButton(1)}
+                        </ButtonGroup>
+                    </Layout>
+                    <TouchableOpacity
+                        onPress={modalOn}
+                        style={styles.container}
                     >
-                        {MinusHPButton(-1)}
-                        {MinusHPButton(-5)}
-                    </ButtonGroup>
-                    <TouchableOpacity onPress={modalOn} style={styles.hpNumber}>
-                        <Text category="h6">
-                            HP: {props.shield.currentHP!}/{props.shield.maxHP!}
-                        </Text>
+                        <Layout style={styles.horizontal}>
+                            {shieldData()}
+                        </Layout>
                     </TouchableOpacity>
-                    <ButtonGroup
-                        style={styles.buttonGroup}
-                        size="tiny"
-                        status="info"
-                    >
-                        {PlusHPButton(5)}
-                        {PlusHPButton(1)}
-                    </ButtonGroup>
                 </Layout>
-                <TouchableOpacity onPress={modalOn} style={styles.container}>
-                    <Layout style={styles.horizontal}>{shieldData()}</Layout>
-                </TouchableOpacity>
             </Layout>
             <ShieldEditModal visible={modalVisible} toggleModal={modalOff} />
-        </Layout>
-    ) : (
-        <Layout style={{ paddingVertical: 5 }}>
-            <Toggle checked={props.shield.hasShield} onChange={onShieldToggle}>
-                {"Equip Shield"}
-            </Toggle>
         </Layout>
     );
 
@@ -204,8 +210,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShieldView);
 const styles = StyleSheet.create({
     container: {
         flex: 0.75,
-        flexDirection: "row",
-        justifyContent: "space-between",
+        textAlign: "center",
+
         paddingHorizontal: 10,
     },
     buttonGroup: {
