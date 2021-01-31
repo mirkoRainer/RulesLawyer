@@ -6,6 +6,7 @@ import {
     Button,
     ButtonGroup,
     Toggle,
+    Icon,
 } from "@ui-kitten/components";
 import { EntireAppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
@@ -26,6 +27,10 @@ import { AppActions } from "../../../../../store/actions/AllActionTypesAggregate
 // TODO: Multiple Shields
 // TODO: Long press to EditShield
 const ShieldView: React.FC<Props> = (props) => {
+    if (props.shield === undefined) {
+        return <></>;
+    }
+    const shield = props.shield;
     const [modalVisible, setModalVisible] = useState(false);
     const modalOn = () => {
         setModalVisible(true);
@@ -35,19 +40,19 @@ const ShieldView: React.FC<Props> = (props) => {
     };
 
     const adjustShieldHP = (amount: number) => {
-        const adjustedHP = props.shield.currentHP + amount;
+        const adjustedHP = shield.currentHP + amount;
         if (adjustedHP <= 0) {
-            props.updateShield({ ...props.shield, currentHP: 0 });
+            props.updateShield({ ...shield, currentHP: 0 });
             return;
         }
-        if (adjustedHP > props.shield.maxHP) {
+        if (adjustedHP > shield.maxHP) {
             props.updateShield({
-                ...props.shield,
-                currentHP: props.shield.maxHP,
+                ...shield,
+                currentHP: shield.maxHP,
             });
             return;
         }
-        props.updateShield({ ...props.shield, currentHP: adjustedHP });
+        props.updateShield({ ...shield, currentHP: adjustedHP });
     };
 
     const PlusHPButton = (amount: number) => (
@@ -73,27 +78,24 @@ const ShieldView: React.FC<Props> = (props) => {
     );
 
     const shieldData = () => {
-        if (props.shield.currentHP > props.shield.breakThreshold) {
+        if (shield.currentHP > shield.breakThreshold) {
             return (
                 <>
                     <Layout style={styles.column}>
                         <Text style={styles.text}>Bonus:</Text>
                         <Text style={styles.number}>
-                            +{props.shield.acBonus!}
+                            +{shield.acBonus.amount}
                         </Text>
                     </Layout>
                     <Layout style={styles.column}>
                         <Text style={styles.text}>BT:</Text>
                         <Text style={styles.number}>
-                            {props.shield.breakThreshold!}
+                            {shield.breakThreshold!}
                         </Text>
                     </Layout>
                     <Layout style={styles.column}>
                         <Text style={styles.text}>Hardness:</Text>
-                        <Text style={styles.number}>
-                            {" "}
-                            {props.shield.hardness!}
-                        </Text>
+                        <Text style={styles.number}> {shield.hardness!}</Text>
                     </Layout>
                 </>
             );
@@ -117,8 +119,24 @@ const ShieldView: React.FC<Props> = (props) => {
     };
 
     const onShieldToggle = (isChecked: boolean) => {
-        props.updateShield({ ...props.shield, worn: isChecked });
+        props.updateShield({ ...shield, worn: isChecked });
     };
+    const ShieldRaisedIcon = (props: any) => (
+        <Icon
+            {...props}
+            style={[props.style, { width: 32, height: 32 }]}
+            name="shield"
+        />
+    );
+    const ShieldDownIcon = (props: any) => (
+        <Icon
+            {...props}
+            style={[props.style, { width: 32, height: 32 }]}
+            name="shield-off"
+        />
+    );
+    const ShieldIcon = shield.isRaised ? ShieldRaisedIcon : ShieldDownIcon;
+    const handleShieldPress = () => {};
 
     const shieldView = (
         <Layout style={styles.container}>
@@ -129,7 +147,11 @@ const ShieldView: React.FC<Props> = (props) => {
                 {
                     // TODO: Finish Raise shield Logic}
                 }
-                <Button>Raise Shield</Button>
+                <Button
+                    accessoryRight={ShieldIcon}
+                    appearance="ghost"
+                    onPress={handleShieldPress}
+                />
                 <Layout style={styles.shield}>
                     <Layout style={styles.horizontal}>
                         <ButtonGroup
@@ -182,7 +204,7 @@ interface LinkDispatchProps {
 }
 
 interface LinkStateProps {
-    shield: Shield;
+    shield: Shield | undefined;
 }
 
 const mapDispatchToProps = (
@@ -201,7 +223,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => {
         (shield) => shield.worn
     );
     return {
-        shield: wornShield ? wornShield : DEFAULT_SHIELD,
+        shield: wornShield,
     };
 };
 
@@ -209,9 +231,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShieldView);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.75,
+        flex: 1,
         textAlign: "center",
-
         paddingHorizontal: 10,
     },
     buttonGroup: {

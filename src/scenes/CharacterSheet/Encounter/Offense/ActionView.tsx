@@ -35,6 +35,9 @@ import {
 } from "../../../../PF2eCoreLib/Proficiencies";
 import WeaponDamageSection from "./Weapons/WeaponDamageSection";
 import { GetProficiencyForWeapon } from "./Weapons/WeaponHelper";
+import { Bonus, GetCurrentPCBonuses } from "../../../../PF2eCoreLib/Bonus";
+import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
+import Store from "../../../../store/Store";
 
 interface Props {
     action: PF2Action;
@@ -145,20 +148,27 @@ const ActionView: React.FC<Props> = (props) => {
         );
 
     const skill = () => {
+        const currentSkill = Store.getState().playerCharacter.skills.find(
+            (x) => x.name === props.action.skill
+        );
         if (props.action.skill) {
             const skillAbilityScore: AbilityScore =
-                props.abilityScores[props.action.skill!.ability];
+                props.abilityScores[currentSkill!.ability];
             const total =
                 CalculateAbilityScoreModifier(skillAbilityScore.score) +
-                props.action.skill.itemBonus +
+                Bonus.GetBonusFor(
+                    props.action.skill,
+                    BonusType.Item,
+                    GetCurrentPCBonuses()
+                ) +
                 GetProficiencyTotalWithLevel(
-                    props.action.skill.proficiency,
+                    currentSkill!.proficiency,
                     props.level
                 );
             return (
                 <Layout style={{ flexDirection: "row" }}>
                     <Text style={{ flex: 1, textAlign: "right" }}>
-                        {props.action.skill.name} +{total}
+                        {props.action.skill} +{total}
                     </Text>
                 </Layout>
             );
@@ -171,7 +181,11 @@ const ActionView: React.FC<Props> = (props) => {
         if (!props.action.weapon) {
             return <></>;
         }
-        const toHitFromWeapon = props.action.weapon!.toHitBonus;
+        const toHitFromWeapon = Bonus.GetBonusFor(
+            "toHit",
+            BonusType.Item,
+            GetCurrentPCBonuses()
+        );
         const proficiencyWithWeapon: Proficiencies = GetProficiencyForWeapon(
             props.action.weapon
         );

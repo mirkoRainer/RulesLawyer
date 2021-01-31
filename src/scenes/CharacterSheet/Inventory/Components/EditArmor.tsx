@@ -16,6 +16,7 @@ import { ArmorCategory } from "../../../../PF2eCoreLib/ArmorCategory";
 import { iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { EditArmorPenaltiesAndStrReq } from "../../../Shared/Armor/EditArmorPenaltiesAndStrReq";
+import { ItemView } from "./ItemView";
 
 type Props = {
     armor: Armor;
@@ -25,10 +26,18 @@ type Props = {
 
 export const EditArmor: React.FC<Props> = (props) => {
     const onChangeAcBonus = (bonus: string) => {
-        const acBonus = isNumbersOnlyElseReturn0(bonus);
+        const acBonusInput = isNumbersOnlyElseReturn0(bonus);
         props.setState({
             ...props.state,
-            item: { ...props.state.item, acBonus },
+            item: {
+                ...props.state.item,
+                acBonus: {
+                    type: BonusType.Item,
+                    amount: acBonusInput,
+                    appliesTo: "ac",
+                    source: props.armor.id.toString(),
+                },
+            },
         });
     };
     const onChangeDexCap = (cap: string) => {
@@ -67,6 +76,7 @@ export const EditArmor: React.FC<Props> = (props) => {
             type: BonusType.Untyped,
             appliesTo: "skills", // TODO: make this better. :(
             amount: penalty,
+            source: props.armor.id.toString(),
         };
         props.setState({
             ...props.state,
@@ -82,6 +92,7 @@ export const EditArmor: React.FC<Props> = (props) => {
             type: BonusType.Untyped,
             appliesTo: "speed", // TODO: make this better. :(
             amount: penalty,
+            source: props.armor.id.toString(),
         };
         props.setState({
             ...props.state,
@@ -116,7 +127,7 @@ export const EditArmor: React.FC<Props> = (props) => {
     return (
         <Layout>
             <EditAcBonusAndDexCap
-                acBonus={props.armor.acBonus}
+                acBonus={props.armor.acBonus.amount}
                 dexCap={props.armor.dexCap}
                 changeACBonus={onChangeAcBonus}
                 changeDexCap={onChangeDexCap}

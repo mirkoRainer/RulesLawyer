@@ -16,6 +16,7 @@ import {
     IsWeapon,
     PF2Action,
     Skill,
+    Skills,
     Weapon,
 } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
@@ -90,8 +91,8 @@ const EditActionView: React.FC<Props> = (props) => {
         updateAction({ ...props.action, traits }, index);
     };
 
-    const updateSkill: (skill: Skill | undefined) => void = (
-        skill: Skill | undefined
+    const updateSkill: (skill: keyof Skills | undefined) => void = (
+        skill: keyof Skills | undefined
     ) => {
         updateAction({ ...props.action, skill }, index);
     };

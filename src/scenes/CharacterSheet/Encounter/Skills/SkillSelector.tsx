@@ -2,14 +2,14 @@ import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import { indexOf } from "lodash";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Skill, Skills } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { getSkillNamesArray } from "./SkillsHelper";
 import SkillsView from "./SkillsView";
 
 type Props = {
     currentSkills: Skill[];
-    currentSkillSelected: Skill | undefined;
-    onSelect: (skill: Skill | undefined) => void;
+    currentSkillSelected: keyof Skills | undefined;
+    onSelect: (skill: keyof Skills | undefined) => void;
 };
 
 export const SkillSelector: React.FC<Props> = (props) => {
@@ -24,7 +24,7 @@ export const SkillSelector: React.FC<Props> = (props) => {
         console.debug(
             `Not undefined so it's ${props.currentSkills[trueIndex.row - 1]}`
         );
-        props.onSelect(props.currentSkills[trueIndex.row - 1]);
+        props.onSelect(props.currentSkills[trueIndex.row - 1].name);
         return;
     };
 
@@ -42,17 +42,17 @@ export const SkillSelector: React.FC<Props> = (props) => {
     const value = props.currentSkillSelected
         ? `${
               props.currentSkills[
-                  indexOf(
-                      getSkillNamesArray(),
-                      props.currentSkillSelected?.name
-                  )
+                  indexOf(getSkillNamesArray(), props.currentSkillSelected)
               ].name
-          } (${props.currentSkillSelected.proficiency})`
+          } (${
+              props.currentSkills.find(
+                  (x) => x.name === props.currentSkillSelected
+              )!.proficiency
+          })`
         : "None";
     const selectedIndex = props.currentSkillSelected
         ? new IndexPath(
-              indexOf(getSkillNamesArray(), props.currentSkillSelected?.name) +
-                  1
+              indexOf(getSkillNamesArray(), props.currentSkillSelected) + 1
           )
         : new IndexPath(0);
 

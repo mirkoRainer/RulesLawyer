@@ -46,6 +46,7 @@ import { EditArmorCategoryAndGroup } from "../../../../Shared/Armor/EditArmorCat
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { EditArmor } from "../../../Inventory/Components/EditArmor";
 import { EditArmorPenaltiesAndStrReq } from "../../../../Shared/Armor/EditArmorPenaltiesAndStrReq";
+import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
@@ -168,7 +169,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
         props.navigation.navigate("MainDefenseView");
     };
     const inputToArmor = (convertFrom: typeof input): Armor => {
-        const acBonus = isNumbersOnlyElseReturn0(input.acBonus);
+        const acBonusInput = isNumbersOnlyElseReturn0(input.acBonus);
         const dexCap = isNumbersOnlyElseReturn0(input.dexCap);
         const checkPenalty: iBonus = {
             ...props.wornArmor.checkPenalty,
@@ -180,7 +181,12 @@ const EditWornArmor: React.FC<Props> = (props) => {
         };
         return {
             ...convertFrom,
-            acBonus,
+            acBonus: {
+                type: BonusType.Item,
+                amount: acBonusInput,
+                appliesTo: "ac",
+                source: props.wornArmor.id.toString(),
+            },
             dexCap,
             strengthRequirement: parseInt(input.strengthRequirement),
             bulk: parseInt(input.bulk),

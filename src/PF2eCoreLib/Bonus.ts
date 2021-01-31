@@ -1,11 +1,17 @@
 import { BonusType } from "./BonusTypes";
 import { prop } from "./TypescriptEvolution";
+import Store from "../store/Store";
 
 export interface iBonus {
     type: BonusType;
     appliesTo: string;
     amount: number;
+    source: string;
 }
+
+export const GetCurrentPCBonuses = (): iBonus[] => {
+    return Store.getState().playerCharacter.bonuses;
+};
 
 interface BonusesByType {
     circumstance: number;

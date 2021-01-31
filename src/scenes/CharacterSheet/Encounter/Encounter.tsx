@@ -30,6 +30,7 @@ export type EncounterTabParamList = {
 };
 
 const Encounter: React.FC<Props> = (props) => {
+    // TODO: Convert bottom tab to swipeable carousel
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
     // @ts-ignore
     const BottomTabBar = ({ navigation, state }) => {

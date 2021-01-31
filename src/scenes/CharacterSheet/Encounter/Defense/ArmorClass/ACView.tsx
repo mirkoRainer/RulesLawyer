@@ -19,6 +19,12 @@ import { Layout, Text } from "@ui-kitten/components";
 import EditWornArmor from "./EditWornArmor";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MainDefenseNavigationProps } from "../../DefenseNavigation";
+import {
+    Bonus,
+    GetCurrentPCBonuses,
+    iBonus,
+} from "../../../../../PF2eCoreLib/Bonus";
+import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 
 interface OwnProps {
     navigation: MainDefenseNavigationProps;
@@ -50,7 +56,7 @@ const ACView: React.FC<Props> = (props) => {
         10 +
         modifier +
         props.level +
-        props.wornArmor.acBonus +
+        Bonus.GetBonusFor("ac", BonusType.Item, GetCurrentPCBonuses()) +
         GetProficiencyTotalWithLevel(wornProficiency, props.level);
 
     const navigateToWornArmorEditor = () => {
@@ -96,7 +102,7 @@ const ACView: React.FC<Props> = (props) => {
                     </Text>
                     {dexOrCap()}
                     <Text style={styles.calculatorNumber}>
-                        +{props.wornArmor.acBonus}
+                        +{props.wornArmor.acBonus.amount}
                     </Text>
                     <Text style={{ ...styles.calculatorText, flex: 1.3 }}>
                         Armor
@@ -158,6 +164,7 @@ interface LinkStateProps {
     armorProficiencies: ArmorProficiencies;
     wornArmor: Armor;
     level: number;
+    bonuses: iBonus[];
 }
 
 const mapDispatchToProps = (): LinkDispatchProps => {
@@ -175,6 +182,9 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => {
         armorProficiencies: state.playerCharacter.armorProficiencies,
         level: state.playerCharacter.level,
         wornArmor: wornArmor ? wornArmor : DEFAULT_ARMOR,
+        bonuses: state.playerCharacter.bonuses.filter(
+            (x) => x.appliesTo === "ac"
+        ),
     };
 };
 

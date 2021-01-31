@@ -20,6 +20,7 @@ import {
     IsShield,
     Shield,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 
 type OwnProps = {
     visible: boolean;
@@ -66,7 +67,7 @@ const ShieldEditModal: React.FC<Props> = (props) => {
     };
 
     const changeShield = () => {
-        const acBonus = input.acBonus ? parseInt(input.acBonus) : 0;
+        const acBonusInput = input.acBonus ? parseInt(input.acBonus) : 0;
         const breakThreshold = input.BT ? parseInt(input.BT) : 0;
         const hardness = input.hardness ? parseInt(input.hardness) : 0;
         const maxHP = input.maxHp ? parseInt(input.maxHp) : 0;
@@ -76,7 +77,12 @@ const ShieldEditModal: React.FC<Props> = (props) => {
             newShield = {
                 ...props.shield,
                 currentHP,
-                acBonus,
+                acBonus: {
+                    type: BonusType.Circumstance,
+                    amount: acBonusInput,
+                    appliesTo: "ac",
+                    source: props.shield.id.toString(),
+                },
                 breakThreshold,
                 maxHP,
                 hardness,
@@ -84,7 +90,12 @@ const ShieldEditModal: React.FC<Props> = (props) => {
         } else {
             newShield = {
                 ...props.shield,
-                acBonus,
+                acBonus: {
+                    type: BonusType.Circumstance,
+                    amount: acBonusInput,
+                    appliesTo: "ac",
+                    source: props.shield.id.toString(),
+                },
                 breakThreshold,
                 maxHP,
                 hardness,

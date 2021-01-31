@@ -25,6 +25,8 @@ import { EntireAppState } from "../../../../../store/Store";
 import { bindActionCreators } from "redux";
 import { startChangeSpellProficiency } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
+import { Bonus } from "../../../../../PF2eCoreLib/Bonus";
+import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 
 const SpellAttackDCView: React.FC<Props> = (props) => {
     // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
@@ -93,6 +95,10 @@ const SpellAttackDCView: React.FC<Props> = (props) => {
                             DC
                         </Text>
                     </Layout>
+                    <Layout>
+                        <Text category="h5">+{spellAttackTotal}</Text>
+                        <Text category="h5">{spellDCTotal}</Text>
+                    </Layout>
                     <Layout style={styles.profAndMath}>
                         <ProficiencyArrayView proficiency={props.proficiency} />
                         <Layout style={styles.math}>
@@ -104,10 +110,6 @@ const SpellAttackDCView: React.FC<Props> = (props) => {
                             <Text>DC:</Text>
                             {spellDCItemBonus}
                         </Layout>
-                    </Layout>
-                    <Layout>
-                        <Text category="h5">+{spellAttackTotal}</Text>
-                        <Text category="h5">DC{spellDCTotal}</Text>
                     </Layout>
                 </Layout>
             </TouchableOpacity>
@@ -136,8 +138,16 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
             state.playerCharacter.spellcastingAbilityModifier
         ],
     level: state.playerCharacter.level,
-    spellAttackItemBonus: state.playerCharacter.spellAttackItemBonus,
-    spellDCItemBonus: state.playerCharacter.spellDCItemBonus,
+    spellAttackItemBonus: Bonus.GetBonusFor(
+        "spellAttack",
+        BonusType.Item,
+        state.playerCharacter.bonuses
+    ),
+    spellDCItemBonus: Bonus.GetBonusFor(
+        "spellDc",
+        BonusType.Item,
+        state.playerCharacter.bonuses
+    ),
 });
 
 const mapDispatchToProps = (

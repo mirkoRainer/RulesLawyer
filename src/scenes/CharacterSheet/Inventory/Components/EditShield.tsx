@@ -4,6 +4,7 @@ import { Input, Layout, Text } from "@ui-kitten/components";
 import { Shield } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EditItemState } from "./EditItem";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";
+import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 
 type Props = {
     shield: Shield;
@@ -13,12 +14,17 @@ type Props = {
 
 export const EditShield: React.FC<Props> = (props) => {
     const handleAcBonusChange = (text: string) => {
-        const acBonus = isNumbersOnlyElseReturn0(text);
+        const acBonusInput = isNumbersOnlyElseReturn0(text);
         props.setState({
             ...props.state,
             item: {
                 ...props.state.item,
-                acBonus,
+                acBonus: {
+                    appliesTo: "ac",
+                    type: BonusType.Circumstance,
+                    source: props.shield.id.toString(),
+                    amount: acBonusInput,
+                },
             },
         });
     };

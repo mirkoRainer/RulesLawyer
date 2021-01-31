@@ -46,10 +46,8 @@ interface PlayerCharacter {
     senses: string;
     skillFeats: AncestryFeatsAndAbility[];
     skills: Skill[];
-    spellAttackItemBonus: number;
     spellAttackProficiency: Proficiencies;
     spellcastingAbilityModifier: keyof AbilityScoreArray;
-    spellDCItemBonus: number;
     spells: SpellList;
     spellSlots: SpellSlot[];
     traits: (keyof typeof Traits)[];
@@ -98,7 +96,7 @@ export interface PF2Action {
     failure?: string;
     critFailure?: string;
     weapon?: Weapon;
-    skill?: Skill;
+    skill?: keyof Skills;
 }
 
 export interface Ancestry {
@@ -174,11 +172,12 @@ export interface Saves {
 }
 
 export interface Shield extends Item {
-    acBonus: number;
+    acBonus: iBonus;
     hardness: number;
     maxHP: number;
     currentHP: number;
     breakThreshold: number;
+    isRaised: boolean;
 }
 export function IsShield(item: InventoryItem): item is Shield {
     return (item as Shield).breakThreshold !== undefined;
@@ -193,13 +192,19 @@ export const DEFAULT_SHIELD: Shield = {
     name: "Shield McShieldFace",
     bulk: 1,
     level: 1,
-    acBonus: 2,
+    acBonus: {
+        type: BonusType.Circumstance,
+        appliesTo: "ac",
+        amount: 0,
+        source: "",
+    },
     hardness: 5,
     maxHP: 20,
     currentHP: 15,
     breakThreshold: 10,
     traits: ["Additive", "Grapple"],
     isContainer: false,
+    isRaised: false,
 };
 
 export type Skills = {
@@ -226,7 +231,6 @@ export interface Skill {
     name: keyof Skills;
     ability: keyof AbilityScoreArray;
     proficiency: Proficiencies;
-    itemBonus: number;
     hasArmorPenalty: boolean;
     armorPenalty?: number;
     loreDescriptor?: string;
@@ -264,7 +268,7 @@ export interface OtherWeaponProficiencies {
 
 export interface Weapon extends Item {
     ability: Ability;
-    toHitBonus: number;
+    toHitBonus: iBonus;
     damageDice: DamageDice[];
     damageAbilityModifier?: Ability;
     weaponCategory: keyof WeaponProficiencies;
@@ -275,7 +279,7 @@ export function IsWeapon(item: InventoryItem): item is Weapon {
 
 export interface Armor extends Item {
     category: ArmorCategory;
-    acBonus: number;
+    acBonus: iBonus;
     dexCap: number;
     checkPenalty: iBonus;
     speedPenalty: iBonus;
@@ -289,17 +293,24 @@ export function IsArmor(item: InventoryItem): item is Armor {
 }
 export const DEFAULT_ARMOR_ONLY_PROPS: Omit<Armor, keyof Item> = {
     category: ArmorCategory.Unarmored,
-    acBonus: 0,
+    acBonus: {
+        type: BonusType.Item,
+        appliesTo: "ac",
+        amount: 0,
+        source: "",
+    },
     dexCap: 6,
     checkPenalty: {
         type: BonusType.Untyped,
         appliesTo: "skills",
         amount: 0,
+        source: "",
     },
     speedPenalty: {
         type: BonusType.Untyped,
         appliesTo: "speed",
         amount: 0,
+        source: "",
     },
     strengthRequirement: 0,
     wornBulk: 0,
@@ -315,17 +326,24 @@ export const DEFAULT_ARMOR: Armor = {
     category: ArmorCategory.Light,
     level: 0,
     price: { Copper: 0, Silver: 0, Gold: 0, Platinum: 0 },
-    acBonus: 0,
+    acBonus: {
+        type: BonusType.Item,
+        appliesTo: "ac",
+        amount: 0,
+        source: "",
+    },
     dexCap: 10,
     checkPenalty: {
         type: BonusType.Armor,
         appliesTo: "StrAndDexChecks",
         amount: 0,
+        source: "",
     },
     speedPenalty: {
         type: BonusType.Armor,
         appliesTo: "speed",
         amount: 0,
+        source: "",
     },
     strengthRequirement: 0,
     bulk: 0.1,
@@ -382,8 +400,13 @@ export interface Price {
 
 export const DEFAULT_WEAPON_ONLY_PROPS: Omit<Weapon, keyof Item> = {
     ability: Ability.Strength,
-    toHitBonus: 0,
-    damageDice: [{ formula: "1d4", damageType: ["piercing", "slashing"] }],
+    toHitBonus: {
+        type: BonusType.Item,
+        appliesTo: "toHit",
+        amount: 0,
+        source: "",
+    },
+    damageDice: [{ formula: "1d4", damageType: "piercing, slashing" }],
     damageAbilityModifier: Ability.Strength,
     weaponCategory: "Simple",
 };

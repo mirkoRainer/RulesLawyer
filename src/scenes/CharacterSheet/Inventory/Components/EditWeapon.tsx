@@ -17,6 +17,7 @@ import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHel
 import { Ability } from "../../../../PF2eCoreLib/Ability";
 import { EditDamageDice } from "./EditDamageDice";
 import { CurrentPCWeaponProficiencies } from "../../Encounter/Offense/Weapons/WeaponHelper";
+import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 
 type Props = {
     weapon: Weapon;
@@ -26,12 +27,17 @@ type Props = {
 
 export const EditWeapon: React.FC<Props> = (props) => {
     const changeToHitBonus = (text: string) => {
-        const toHitBonus = isNumbersOnlyElseReturn0(text);
+        const toHitBonusInput = isNumbersOnlyElseReturn0(text);
         props.setState({
             ...props.state,
             item: {
                 ...props.state.item,
-                toHitBonus,
+                toHitBonus: {
+                    appliesTo: "toHit",
+                    type: BonusType.Item,
+                    source: props.weapon.id.toString(),
+                    amount: toHitBonusInput,
+                },
             },
         });
     };
