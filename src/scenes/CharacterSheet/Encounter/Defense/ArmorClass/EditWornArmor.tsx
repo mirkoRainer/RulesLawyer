@@ -66,7 +66,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
             Gold: props.wornArmor.price.Gold,
             Platinum: props.wornArmor.price.Platinum,
         },
-        acBonus: props.wornArmor.acBonus.toString(),
+        acBonus: props.wornArmor.acBonus.amount.toString(),
         dexCap: props.wornArmor.dexCap.toString(),
         strengthRequirement: props.wornArmor.strengthRequirement.toString(),
         bulk: props.wornArmor.bulk.toString(),

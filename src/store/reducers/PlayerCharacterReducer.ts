@@ -48,7 +48,8 @@ import {
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 import _ from "lodash";
-import { UpdateItemInInventory } from "./reducerHelper";
+import { InsertOrUpdateBonus, UpdateItemInInventory } from "./reducerHelper";
+import { iBonus } from "../../PF2eCoreLib/Bonus";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -241,6 +242,10 @@ const playerCharacterReducer = (
             );
             return {
                 ...state,
+                bonuses: InsertOrUpdateBonus(
+                    action.WornArmor.acBonus,
+                    state.bonuses
+                ),
                 inventory: {
                     ...state.inventory,
                     items: UpdateItemInInventory(

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import {
+    GetDiceStringPretty,
+    PF2Action,
+} from "../../../../PF2eCoreLib/PlayerCharacter";
 import {
     Layout,
     Text,
@@ -181,7 +184,7 @@ const ActionView: React.FC<Props> = (props) => {
         if (!props.action.weapon) {
             return <></>;
         }
-        const toHitFromWeapon = Bonus.GetBonusFor(
+        const toHitFromWeapon: number = Bonus.GetBonusFor(
             "toHit",
             BonusType.Item,
             GetCurrentPCBonuses()
@@ -189,11 +192,11 @@ const ActionView: React.FC<Props> = (props) => {
         const proficiencyWithWeapon: Proficiencies = GetProficiencyForWeapon(
             props.action.weapon
         );
-        const toHitFromProf = GetProficiencyTotalWithLevel(
+        const toHitFromProf: number = GetProficiencyTotalWithLevel(
             proficiencyWithWeapon,
             props.level
         );
-        const toHitFromAbility = GetAbilityModifierFromScores(
+        const toHitFromAbility: number = GetAbilityModifierFromScores(
             props.action.weapon.ability,
             props.abilityScores
         );
@@ -202,7 +205,9 @@ const ActionView: React.FC<Props> = (props) => {
             props.action.weapon.ability,
             props.abilityScores
         );
-        const damageDice = `${props.action.weapon.damageDice}+${bonusToDamageFromAbility}`;
+        const damageDice = `${GetDiceStringPretty(
+            props.action.weapon.damageDice
+        )}+${bonusToDamageFromAbility}`;
         return (
             <Layout style={{ flexDirection: "row" }}>
                 <Text style={{ flex: 1, textAlign: "right" }}>

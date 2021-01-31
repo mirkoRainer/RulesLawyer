@@ -276,6 +276,13 @@ export interface Weapon extends Item {
 export function IsWeapon(item: InventoryItem): item is Weapon {
     return (item as Weapon).damageDice !== undefined;
 }
+export const GetDiceStringPretty = (dice: DamageDice[]): string => {
+    let output: string = "";
+    dice.forEach((die) => {
+        output += die.formula + " " + die.damageType + " ";
+    });
+    return output;
+};
 
 export interface Armor extends Item {
     category: ArmorCategory;

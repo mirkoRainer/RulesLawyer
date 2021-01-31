@@ -1,3 +1,5 @@
+import _ from "lodash";
+import { iBonus } from "../../PF2eCoreLib/Bonus";
 import {
     Armor,
     InventoryItem,
@@ -5,6 +7,7 @@ import {
     Shield,
     Weapon,
 } from "../../PF2eCoreLib/PlayerCharacter";
+import Store from "../Store";
 
 export const UpdateItemInInventory = (
     newItem: InventoryItem,
@@ -20,4 +23,19 @@ export const UpdateItemInInventory = (
     }
     inventory[foundIndex] = newItem;
     return inventory;
+};
+
+export const InsertOrUpdateBonus = (
+    bonus: iBonus,
+    bonuses: iBonus[]
+): iBonus[] => {
+    const index = bonuses.findIndex((x) => _.isEqual(x, bonus));
+    if (index <= -1) {
+        // Bonus doesn't exist.
+        bonuses.push(bonus);
+        return bonuses;
+    } else {
+        bonuses[index] = bonus;
+        return bonuses;
+    }
 };
