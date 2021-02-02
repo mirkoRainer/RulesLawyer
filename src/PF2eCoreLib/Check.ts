@@ -1,7 +1,7 @@
-import { Bonus } from "./Bonus";
+import { iBonus } from "./Bonus";
 
 export interface Check {
-    Bonuses: Bonus[];
+    Bonuses: iBonus[];
     AbilityModifier: number;
-    Penalties: Bonus[];
+    Penalties: iBonus[];
 }

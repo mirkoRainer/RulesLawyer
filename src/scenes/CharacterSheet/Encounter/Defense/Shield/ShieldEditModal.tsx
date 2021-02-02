@@ -35,7 +35,7 @@ const ShieldEditModal: React.FC<Props> = (props) => {
     );
     const [input, setInput] = useState({
         maxHp: props.shield.maxHP.toString(),
-        acBonus: props.shield.acBonus.toString(),
+        acBonus: props.shield.acBonus.amount.toString(),
         BT: props.shield.breakThreshold.toString(),
         hardness: props.shield.hardness.toString(),
     });

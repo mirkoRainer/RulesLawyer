@@ -29,6 +29,7 @@ import {
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 import { Traits } from "../../../PF2eCoreLib/Traits";
 import { PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
+import { iBonus } from "../../../PF2eCoreLib/Bonus";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (
     name: string
@@ -555,5 +556,19 @@ export const ChangeInventory: ActionCreator<PlayerCharacterActionTypes> = (
 export const startChangeInventory = (InventoryItems: InventoryItem[]) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeInventory(InventoryItems));
+    };
+};
+
+export const AddOrRemoveBonus: ActionCreator<PlayerCharacterActionTypes> = (
+    bonus: iBonus,
+    remove: boolean
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.ADD_OR_REMOVE_BONUS,
+    bonus,
+    remove,
+});
+export const startAddOrRemoveBonus = (bonus: iBonus, remove: boolean) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(AddOrRemoveBonus(bonus, remove));
     };
 };

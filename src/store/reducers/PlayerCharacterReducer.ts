@@ -38,6 +38,7 @@ import {
     CHANGE_PERSONALITY,
     CHANGE_ITEM,
     CHANGE_INVENTORY_ITEMS,
+    ADD_OR_REMOVE_BONUS,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -48,8 +49,13 @@ import {
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 import _ from "lodash";
-import { InsertOrUpdateBonus, UpdateItemInInventory } from "./reducerHelper";
+import {
+    InsertOrUpdateBonus,
+    RemoveBonus,
+    UpdateItemInInventory,
+} from "./reducerHelper";
 import { iBonus } from "../../PF2eCoreLib/Bonus";
+import { AddOrRemoveBonus } from "../actions/PlayerCharacter/PlayerCharacterActions";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -419,7 +425,20 @@ const playerCharacterReducer = (
                     items: action.InventoryItems,
                 },
             };
-
+        case ADD_OR_REMOVE_BONUS:
+            console.debug(
+                `ADD_OR_REMOVE_BONUS in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
+            return {
+                ...state,
+                bonuses: action.remove
+                    ? RemoveBonus(action.bonus, state.bonuses)
+                    : InsertOrUpdateBonus(action.bonus, state.bonuses),
+            };
         default:
             return state;
     }

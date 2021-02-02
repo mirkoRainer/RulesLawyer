@@ -20,7 +20,7 @@ import EditWornArmor from "./EditWornArmor";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MainDefenseNavigationProps } from "../../DefenseNavigation";
 import {
-    Bonus,
+    GetBonusesFor,
     GetCurrentPCBonuses,
     iBonus,
 } from "../../../../../PF2eCoreLib/Bonus";
@@ -52,11 +52,15 @@ const ACView: React.FC<Props> = (props) => {
             );
         }
     };
+    const currentBonuses = GetCurrentPCBonuses();
+    const bonusesForAc = GetBonusesFor("ac", currentBonuses);
     const total =
         10 +
         modifier +
         props.level +
-        Bonus.GetBonusFor("ac", BonusType.Item, GetCurrentPCBonuses()) +
+        bonusesForAc.circumstance +
+        bonusesForAc.item +
+        bonusesForAc.status +
         GetProficiencyTotalWithLevel(wornProficiency, props.level);
 
     const navigateToWornArmorEditor = () => {

@@ -14,7 +14,7 @@ import { Layout, Text } from "@ui-kitten/components";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
 import { connect } from "react-redux";
 import { EntireAppState } from "../../../../store/Store";
-import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
+import { GetBonusesFor, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ThunkDispatch } from "redux-thunk";
@@ -40,11 +40,7 @@ const PerceptionView: React.FC<Props> = (props) => {
             </Text>
         </React.Fragment>
     );
-    const itemBonus = Bonus.GetBonusFor(
-        "perception",
-        BonusType.Item,
-        props.bonuses
-    );
+    const itemBonus = GetBonusesFor("perception", props.bonuses).item;
 
     const itemBonusView = (
         <Text style={styles.itemBonus}>Item: {itemBonus}</Text>

@@ -25,7 +25,7 @@ import { EntireAppState } from "../../../../../store/Store";
 import { bindActionCreators } from "redux";
 import { startChangeSpellProficiency } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
-import { Bonus } from "../../../../../PF2eCoreLib/Bonus";
+import { GetBonusesFor } from "../../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 
 const SpellAttackDCView: React.FC<Props> = (props) => {
@@ -138,16 +138,12 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
             state.playerCharacter.spellcastingAbilityModifier
         ],
     level: state.playerCharacter.level,
-    spellAttackItemBonus: Bonus.GetBonusFor(
+    spellAttackItemBonus: GetBonusesFor(
         "spellAttack",
-        BonusType.Item,
         state.playerCharacter.bonuses
-    ),
-    spellDCItemBonus: Bonus.GetBonusFor(
-        "spellDc",
-        BonusType.Item,
-        state.playerCharacter.bonuses
-    ),
+    ).item,
+    spellDCItemBonus: GetBonusesFor("spellDc", state.playerCharacter.bonuses)
+        .item,
 });
 
 const mapDispatchToProps = (

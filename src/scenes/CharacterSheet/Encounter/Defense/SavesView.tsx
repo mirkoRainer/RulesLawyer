@@ -8,7 +8,7 @@ import { SavesProp } from "./SavesProps";
 import ProficiencyView, {
     ProficiencyProps,
 } from "../../../Shared/ProficiencyView";
-import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
+import { GetBonusesFor, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { connect } from "react-redux";
 import { Saves } from "../../../../PF2eCoreLib/PlayerCharacter";
@@ -33,11 +33,7 @@ const SavesView: React.FC<Props> = (props) => {
             keyAbility: props.constitution,
             proficiency: props.saves.fortitude,
             level: props.level,
-            itemBonus: Bonus.GetBonusFor(
-                "fortitude",
-                BonusType.Item,
-                props.bonuses
-            ),
+            itemBonus: GetBonusesFor("fortitude", props.bonuses).item,
         };
     };
     const willSave = (): ProficiencyProps => {
@@ -46,11 +42,7 @@ const SavesView: React.FC<Props> = (props) => {
             keyAbility: props.wisdom,
             proficiency: props.saves.will,
             level: props.level,
-            itemBonus: Bonus.GetBonusFor(
-                "Wisdom",
-                BonusType.Item,
-                props.bonuses
-            ),
+            itemBonus: GetBonusesFor("Wisdom", props.bonuses).item,
         };
     };
     const reflexSave = (): ProficiencyProps => {
@@ -59,11 +51,7 @@ const SavesView: React.FC<Props> = (props) => {
             keyAbility: props.dexterity,
             proficiency: props.saves.reflex,
             level: props.level,
-            itemBonus: Bonus.GetBonusFor(
-                "Dexterity",
-                BonusType.Item,
-                props.bonuses
-            ),
+            itemBonus: GetBonusesFor("Dexterity", props.bonuses).item,
         };
     };
 

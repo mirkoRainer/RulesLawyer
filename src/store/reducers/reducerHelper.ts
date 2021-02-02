@@ -18,18 +18,35 @@ export const UpdateItemInInventory = (
     });
     if (foundIndex === -1) {
         console.error(
-            `Inventory item not found. ${JSON.stringify(newItem, null, 1)}`
+            `Inventory item not found. itemId:${newItem.id.toString()}`
         );
+        return inventory;
     }
     inventory[foundIndex] = newItem;
     return inventory;
+};
+
+export const InsertOrUpdateBonuses = (
+    newBonuses: iBonus[],
+    bonuses: iBonus[]
+): iBonus[] => {
+    let output = bonuses;
+    newBonuses.forEach((bonus) => {
+        output = InsertOrUpdateBonus(bonus, output);
+    });
+    return output;
 };
 
 export const InsertOrUpdateBonus = (
     bonus: iBonus,
     bonuses: iBonus[]
 ): iBonus[] => {
-    const index = bonuses.findIndex((x) => _.isEqual(x, bonus));
+    const index = bonuses.findIndex(
+        (x) =>
+            x.appliesTo === bonus.appliesTo &&
+            x.source === bonus.source &&
+            x.type === bonus.type
+    );
     if (index <= -1) {
         // Bonus doesn't exist.
         bonuses.push(bonus);
@@ -38,4 +55,7 @@ export const InsertOrUpdateBonus = (
         bonuses[index] = bonus;
         return bonuses;
     }
+};
+export const RemoveBonus = (bonus: iBonus, bonuses: iBonus[]): iBonus[] => {
+    return bonuses.filter((x) => !_.isEqual(x, bonus));
 };

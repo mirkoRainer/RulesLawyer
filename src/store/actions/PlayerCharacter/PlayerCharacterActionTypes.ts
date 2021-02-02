@@ -21,6 +21,7 @@ import {
     SpellList,
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 import { Traits } from "../../../PF2eCoreLib/Traits";
+import { iBonus } from "../../../PF2eCoreLib/Bonus";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -261,6 +262,13 @@ export interface ChangeInventoryAction extends Action<string> {
     InventoryItems: InventoryItem[];
 }
 
+export const ADD_OR_REMOVE_BONUS = "ADD_OR_REMOVE_BONUS";
+export interface AddOrRemoveBonusAction extends Action<string> {
+    type: typeof ADD_OR_REMOVE_BONUS;
+    bonus: iBonus;
+    remove: boolean;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -301,4 +309,5 @@ export type PlayerCharacterActionTypes =
     | ChangePersonalityAction
     | ChangeCampaignNotesAction
     | ChangeItemAction
-    | ChangeInventoryAction; // | SomeOtherAction
+    | ChangeInventoryAction
+    | AddOrRemoveBonusAction; // | SomeOtherAction

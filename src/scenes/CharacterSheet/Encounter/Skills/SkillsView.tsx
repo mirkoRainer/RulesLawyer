@@ -14,7 +14,10 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangeSkills } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useFocusEffect } from "@react-navigation/native";
-import { Bonus, GetCurrentPCBonuses } from "../../../../PF2eCoreLib/Bonus";
+import {
+    GetBonusesFor,
+    GetCurrentPCBonuses,
+} from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 
 interface OwnProps {}
@@ -41,11 +44,7 @@ const SkillsView: React.FC<Props> = (props) => {
             props.updateSkills(newSkills);
             setState({});
         };
-        const itemBonus = Bonus.GetBonusFor(
-            item.name,
-            BonusType.Item,
-            GetCurrentPCBonuses()
-        );
+        const itemBonus = GetBonusesFor(item.name, GetCurrentPCBonuses()).item;
         return (
             <Layout key={item.name}>
                 <TouchableOpacity onPress={handleSkillTouch}>

@@ -38,7 +38,10 @@ import {
 } from "../../../../PF2eCoreLib/Proficiencies";
 import WeaponDamageSection from "./Weapons/WeaponDamageSection";
 import { GetProficiencyForWeapon } from "./Weapons/WeaponHelper";
-import { Bonus, GetCurrentPCBonuses } from "../../../../PF2eCoreLib/Bonus";
+import {
+    GetBonusesFor,
+    GetCurrentPCBonuses,
+} from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import Store from "../../../../store/Store";
 
@@ -159,11 +162,7 @@ const ActionView: React.FC<Props> = (props) => {
                 props.abilityScores[currentSkill!.ability];
             const total =
                 CalculateAbilityScoreModifier(skillAbilityScore.score) +
-                Bonus.GetBonusFor(
-                    props.action.skill,
-                    BonusType.Item,
-                    GetCurrentPCBonuses()
-                ) +
+                GetBonusesFor(props.action.skill, GetCurrentPCBonuses()).item +
                 GetProficiencyTotalWithLevel(
                     currentSkill!.proficiency,
                     props.level
@@ -184,11 +183,10 @@ const ActionView: React.FC<Props> = (props) => {
         if (!props.action.weapon) {
             return <></>;
         }
-        const toHitFromWeapon: number = Bonus.GetBonusFor(
+        const toHitFromWeapon: number = GetBonusesFor(
             "toHit",
-            BonusType.Item,
             GetCurrentPCBonuses()
-        );
+        ).item;
         const proficiencyWithWeapon: Proficiencies = GetProficiencyForWeapon(
             props.action.weapon
         );

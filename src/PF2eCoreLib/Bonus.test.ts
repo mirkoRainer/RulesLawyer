@@ -1,9 +1,14 @@
-import { Bonus, iBonus } from "./Bonus";
+import {
+    BonusesByType,
+    DetermineBonusTotal,
+    GetBonusesFor,
+    iBonus,
+} from "./Bonus";
 import { BonusType } from "./BonusTypes";
 import { examplePlayerCharacter } from "../../examplePlayerCharacter";
 
 describe("Bonus", () => {
-    describe("GetBonusFor", () => {
+    describe("GetBonusesFor", () => {
         it("outputs bonus total by type", () => {
             const bonuses: iBonus[] = [
                 {
@@ -43,7 +48,7 @@ describe("Bonus", () => {
                     source: "",
                 },
             ];
-            const actual = Bonus.DetermineBonusTotal(bonuses);
+            const actual = DetermineBonusTotal(bonuses);
             expect(actual).toStrictEqual({
                 circumstance: expect.any(Number),
                 status: expect.any(Number),
@@ -95,26 +100,28 @@ describe("Bonus", () => {
                     source: "",
                 },
             ];
-            const actual = Bonus.DetermineBonusTotal(bonuses);
+            const actual = DetermineBonusTotal(bonuses);
             expect(actual).toStrictEqual({
                 circumstance: 1,
                 status: 3,
                 item: 4,
             });
         });
-        it("returns the highest number applied to the requested property for specified type", () => {
-            var actual = Bonus.GetBonusFor(
+        it("returns the highest number applied to the requested property", () => {
+            const exampleClassDc: BonusesByType = GetBonusesFor(
                 "classDc",
-                BonusType.Item,
                 examplePlayerCharacter.bonuses
             );
-            expect(actual).toBe(3);
-            actual = Bonus.GetBonusFor(
+            expect(exampleClassDc).toEqual({
+                item: 3,
+                circumstance: 0,
+                status: 0,
+            });
+            const nothingBonus = GetBonusesFor(
                 "nothing",
-                BonusType.Circumstance,
                 examplePlayerCharacter.bonuses
             );
-            expect(actual).toBe(0);
+            expect(nothingBonus.circumstance).toBe(0);
         });
     });
 });

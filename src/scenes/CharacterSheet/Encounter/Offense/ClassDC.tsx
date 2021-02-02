@@ -4,7 +4,7 @@ import { Layout } from "@ui-kitten/components";
 import ProficiencyView, {
     ProficiencyProps,
 } from "../../../Shared/ProficiencyView";
-import { Bonus, iBonus } from "../../../../PF2eCoreLib/Bonus";
+import { GetBonusesFor, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import PlayerCharacter, {
     iClass,
@@ -28,11 +28,7 @@ const ClassDC: React.FC<Props> = (props) => {
             keyAbility: props.abilityScores[props.pcClass.keyAbility],
             proficiency: props.pcClass.proficiency,
             level: props.level,
-            itemBonus: Bonus.GetBonusFor(
-                "classDc",
-                BonusType.Item,
-                props.bonuses
-            ),
+            itemBonus: GetBonusesFor("classDc", props.bonuses).item,
             is10base: true,
         };
     };

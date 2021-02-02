@@ -13,68 +13,58 @@ export const GetCurrentPCBonuses = (): iBonus[] => {
     return Store.getState().playerCharacter.bonuses;
 };
 
-interface BonusesByType {
+export interface BonusesByType {
     circumstance: number;
     status: number;
     item: number;
 }
-export class Bonus {
-    static DetermineBonusTotal(bonuses: iBonus[]): BonusesByType {
-        const output = { circumstance: 0, status: 0, item: 0 };
-        // Find all bonuses of one type
-        const circumstanceBonuses = bonuses.filter(
-            (bonus) => bonus.type === BonusType.Circumstance
-        );
-        // Grab the highest bonus of that type
-        output.circumstance = Math.max.apply(
-            Math,
-            circumstanceBonuses.map((bonus) => bonus.amount)
-        );
-        const statusBonuses = bonuses.filter(
-            (bonus) => bonus.type === BonusType.Status
-        );
-        output.status = Math.max.apply(
-            Math,
-            statusBonuses.map((bonus) => bonus.amount)
-        );
-        const itemBonuses = bonuses.filter(
-            (bonus) => bonus.type === BonusType.Item
-        );
-        output.item = Math.max.apply(
-            Math,
-            itemBonuses.map((bonus) => bonus.amount)
-        );
-        return output;
-    }
 
-    static GetBonusFor(
-        bonusFor: string,
-        type: BonusType,
-        bonuses: iBonus[]
-    ): number {
-        const bonusesFor = bonuses.filter(
-            (bonus) => bonus.appliesTo.toLowerCase() === bonusFor.toLowerCase()
-        );
-        if (bonusesFor.length === 0) return 0;
-        const bonusByType = Bonus.DetermineBonusTotal(bonusesFor);
-        let output: number;
-        switch (type) {
-            case BonusType.Item: {
-                output = prop(bonusByType, "item");
-                break;
-            }
-            case BonusType.Circumstance: {
-                output = prop(bonusByType, "circumstance");
-                break;
-            }
-            case BonusType.Status: {
-                output = prop(bonusByType, "status");
-                break;
-            }
-            default: {
-                output = 0;
-            }
-        }
-        return output;
-    }
-}
+export const DetermineBonusTotal = (bonuses: iBonus[]): BonusesByType => {
+    // Find all bonuses of one type
+    const circumstanceBonuses = bonuses.filter(
+        (bonus) => bonus.type === BonusType.Circumstance
+    );
+    const statusBonuses = bonuses.filter(
+        (bonus) => bonus.type === BonusType.Status
+    );
+    const itemBonuses = bonuses.filter(
+        (bonus) => bonus.type === BonusType.Item
+    );
+    const output = {
+        circumstance:
+            circumstanceBonuses.length === 0
+                ? 0
+                : Math.max.apply(
+                      // Find the highest iBonus based on the amount property
+                      Math,
+                      circumstanceBonuses.map((bonus) => bonus.amount)
+                  ),
+        status:
+            statusBonuses.length === 0
+                ? 0
+                : Math.max.apply(
+                      Math,
+                      statusBonuses.map((bonus) => bonus.amount)
+                  ),
+        item:
+            itemBonuses.length === 0
+                ? 0
+                : Math.max.apply(
+                      Math,
+                      itemBonuses.map((bonus) => bonus.amount)
+                  ),
+    };
+    return output;
+};
+
+export const GetBonusesFor = (
+    bonusFor: string,
+    bonuses: iBonus[]
+): BonusesByType => {
+    const bonusesFor = bonuses.filter(
+        (bonus) => bonus.appliesTo.toLowerCase() === bonusFor.toLowerCase()
+    );
+    if (bonusesFor.length === 0) return { circumstance: 0, status: 0, item: 0 };
+    const bonusByType = DetermineBonusTotal(bonusesFor);
+    return bonusByType;
+};

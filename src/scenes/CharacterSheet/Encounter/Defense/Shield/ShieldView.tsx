@@ -18,26 +18,24 @@ import {
     Shield,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
-import { startChangeShield } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import {
+    startAddOrRemoveBonus,
+    startChangeShield,
+} from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
+import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 
 // TODO: Equip Shield selector. DropDown?
 // TODO: Raise Shield button
 // TODO: Multiple Shields
-// TODO: Long press to EditShield
 const ShieldView: React.FC<Props> = (props) => {
     if (props.shield === undefined) {
         return <></>;
     }
     const shield = props.shield;
-    const [modalVisible, setModalVisible] = useState(false);
-    const modalOn = () => {
-        setModalVisible(true);
-    };
-    const modalOff = () => {
-        setModalVisible(false);
-    };
+    // TODO: Long press to EditShield
+    const editShield = () => {};
 
     const adjustShieldHP = (amount: number) => {
         const adjustedHP = shield.currentHP + amount;
@@ -118,9 +116,6 @@ const ShieldView: React.FC<Props> = (props) => {
         }
     };
 
-    const onShieldToggle = (isChecked: boolean) => {
-        props.updateShield({ ...shield, worn: isChecked });
-    };
     const ShieldRaisedIcon = (props: any) => (
         <Icon
             {...props}
@@ -136,7 +131,10 @@ const ShieldView: React.FC<Props> = (props) => {
         />
     );
     const ShieldIcon = shield.isRaised ? ShieldRaisedIcon : ShieldDownIcon;
-    const handleShieldPress = () => {};
+    const handleShieldPress = () => {
+        props.raiseShield(shield.acBonus, shield.isRaised);
+        props.updateShield({ ...shield, isRaised: !shield.isRaised });
+    };
 
     const shieldView = (
         <Layout style={styles.container}>
@@ -147,11 +145,15 @@ const ShieldView: React.FC<Props> = (props) => {
                 {
                     // TODO: Finish Raise shield Logic}
                 }
-                <Button
-                    accessoryRight={ShieldIcon}
-                    appearance="ghost"
-                    onPress={handleShieldPress}
-                />
+                {shield.currentHP > shield.breakThreshold ? (
+                    <Button
+                        accessoryRight={ShieldIcon}
+                        appearance="ghost"
+                        onPress={handleShieldPress}
+                    />
+                ) : (
+                    <></>
+                )}
                 <Layout style={styles.shield}>
                     <Layout style={styles.horizontal}>
                         <ButtonGroup
@@ -163,7 +165,7 @@ const ShieldView: React.FC<Props> = (props) => {
                             {MinusHPButton(-5)}
                         </ButtonGroup>
                         <TouchableOpacity
-                            onPress={modalOn}
+                            onLongPress={editShield}
                             style={styles.hpNumber}
                         >
                             <Text category="h6">
@@ -181,7 +183,7 @@ const ShieldView: React.FC<Props> = (props) => {
                         </ButtonGroup>
                     </Layout>
                     <TouchableOpacity
-                        onPress={modalOn}
+                        onLongPress={editShield}
                         style={styles.container}
                     >
                         <Layout style={styles.horizontal}>
@@ -190,7 +192,6 @@ const ShieldView: React.FC<Props> = (props) => {
                     </TouchableOpacity>
                 </Layout>
             </Layout>
-            <ShieldEditModal visible={modalVisible} toggleModal={modalOff} />
         </Layout>
     );
 
@@ -201,6 +202,7 @@ type Props = LinkDispatchProps & LinkStateProps;
 
 interface LinkDispatchProps {
     updateShield: (Shield: Shield) => void;
+    raiseShield: (bonus: iBonus, remove: boolean) => void;
 }
 
 interface LinkStateProps {
@@ -212,6 +214,7 @@ const mapDispatchToProps = (
 ): LinkDispatchProps => {
     return {
         updateShield: bindActionCreators(startChangeShield, dispatch),
+        raiseShield: bindActionCreators(startAddOrRemoveBonus, dispatch),
     };
 };
 
