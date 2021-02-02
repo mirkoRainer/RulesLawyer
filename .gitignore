@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+*.mp4
 
 # macOS
 .DS_Store
@@ -20,3 +21,4 @@ PathbuilderExamplejson
 yarn-error.log
 cache
 coverage
+examplePlayerCharacter.ts
