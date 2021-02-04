@@ -7,7 +7,6 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { connect } from "react-redux";
 import { CharacterBuildState } from "../../store/CharacterBuildState";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Header } from "react-native-elements";
 import { AncestrySelectView } from "./Components/AncestrySelectView";
@@ -96,25 +95,23 @@ export const Build: React.FC<Props> = (props) => {
                 }}
             />
             <Layout style={styles.horizontal}>
-                <NavigationContainer independent={true}>
-                    <Stack.Navigator initialRouteName={"BuildOverview"}>
-                        <Stack.Screen
-                            name="BuildOverview"
-                            component={BuildOverview}
-                        />
-                        <Stack.Screen
-                            name="AncestrySelect"
-                            component={AncestrySelectView}
-                        />
-                    </Stack.Navigator>
-                    <Layout>
-                        {
-                            //create a side navigator that indicates build step and status
-                        }
-                        <Text>ABC's</Text>
-                        <Text>Lvl 1</Text>
-                    </Layout>
-                </NavigationContainer>
+                <Stack.Navigator initialRouteName={"BuildOverview"}>
+                    <Stack.Screen
+                        name="BuildOverview"
+                        component={BuildOverview}
+                    />
+                    <Stack.Screen
+                        name="AncestrySelect"
+                        component={AncestrySelectView}
+                    />
+                </Stack.Navigator>
+                <Layout>
+                    {
+                        //create a side navigator that indicates build step and status
+                    }
+                    <Text>ABC's</Text>
+                    <Text>Lvl 1</Text>
+                </Layout>
             </Layout>
         </SafeAreaView>
     );

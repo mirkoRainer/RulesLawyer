@@ -32,7 +32,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
                 <Divider />
                 <ACView navigation={props.navigation} />
                 <Divider />
-                <ShieldView />
+                <ShieldView navigation={props.navigation} />
                 <Divider />
                 <SavesView />
                 <Divider />

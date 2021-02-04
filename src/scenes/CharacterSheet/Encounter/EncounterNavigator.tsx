@@ -10,26 +10,38 @@ import { startChangeClassDCProficiency } from "../../../store/actions/PlayerChar
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import PlayerCharacter from "../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+    BottomTabNavigationProp,
+    createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import EncounterSkills from "./EncounterSkills";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigatorScreenParams } from "@react-navigation/native";
 import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components";
 import { Layout } from "@ui-kitten/components";
 import Conditions from "../Conditions";
 import { OffenseNavigator } from "./OffenseNavigation";
-import { DefenseNavigator } from "./DefenseNavigation";
+import { DefenseNavigator, DefenseStackParamList } from "./DefenseNavigation";
 import { SpellsNavigator } from "./SpellsNavigation";
 
 var width: number = Dimensions.get("window").width; //full width
 
 export type EncounterTabParamList = {
     Offense: undefined;
-    Defense: undefined;
+    Defense: NavigatorScreenParams<DefenseStackParamList>;
     Skills: undefined;
     Spells: undefined;
 };
 
-const Encounter: React.FC<Props> = (props) => {
+export type EncounterDefenseNavigationProps = BottomTabNavigationProp<
+    EncounterTabParamList,
+    "Defense"
+>;
+export type EncounterOffenseNavigationProps = BottomTabNavigationProp<
+    EncounterTabParamList,
+    "Offense"
+>;
+
+const EncounterNavigator: React.FC<Props> = (props) => {
     // TODO: Convert bottom tab to swipeable carousel
     const Tab = createBottomTabNavigator<EncounterTabParamList>();
     // @ts-ignore
@@ -51,43 +63,41 @@ const Encounter: React.FC<Props> = (props) => {
     return (
         <Layout style={{ flex: 1 }}>
             <Conditions conditions={props.playerCharacter.conditions} />
-            <NavigationContainer independent={true}>
-                <Tab.Navigator
-                    tabBar={(props) => <BottomTabBar {...props} />}
-                    tabBarOptions={{
-                        activeTintColor: "tomato",
-                        inactiveTintColor: "grey",
-                        showLabel: true,
-                        labelStyle: {
-                            fontSize: 14,
-                        },
-                        keyboardHidesTabBar: true,
-                        tabStyle: styles.tab,
-                    }}
-                    initialRouteName={"Offense"}
-                >
-                    <Tab.Screen
-                        name="Offense"
-                        component={OffenseNavigator}
-                        options={{ tabBarLabel: "Your Turn" }}
-                    />
-                    <Tab.Screen
-                        name="Defense"
-                        component={DefenseNavigator}
-                        options={{ tabBarLabel: "Their Turn" }}
-                    />
-                    <Tab.Screen
-                        name="Skills"
-                        component={EncounterSkills}
-                        options={{ tabBarLabel: "Skillz" }}
-                    />
-                    <Tab.Screen
-                        name="Spells"
-                        component={SpellsNavigator}
-                        options={{ tabBarLabel: "Spells" }}
-                    />
-                </Tab.Navigator>
-            </NavigationContainer>
+            <Tab.Navigator
+                tabBar={(props) => <BottomTabBar {...props} />}
+                tabBarOptions={{
+                    activeTintColor: "tomato",
+                    inactiveTintColor: "grey",
+                    showLabel: true,
+                    labelStyle: {
+                        fontSize: 14,
+                    },
+                    keyboardHidesTabBar: true,
+                    tabStyle: styles.tab,
+                }}
+                initialRouteName={"Offense"}
+            >
+                <Tab.Screen
+                    name="Offense"
+                    component={OffenseNavigator}
+                    options={{ tabBarLabel: "Your Turn" }}
+                />
+                <Tab.Screen
+                    name="Defense"
+                    component={DefenseNavigator}
+                    options={{ tabBarLabel: "Their Turn" }}
+                />
+                <Tab.Screen
+                    name="Skills"
+                    component={EncounterSkills}
+                    options={{ tabBarLabel: "Skillz" }}
+                />
+                <Tab.Screen
+                    name="Spells"
+                    component={SpellsNavigator}
+                    options={{ tabBarLabel: "Spells" }}
+                />
+            </Tab.Navigator>
         </Layout>
     );
 };
@@ -122,7 +132,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     playerCharacter: state.playerCharacter,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Encounter);
+export default connect(mapStateToProps, mapDispatchToProps)(EncounterNavigator);
 
 const styles = StyleSheet.create({
     container: {

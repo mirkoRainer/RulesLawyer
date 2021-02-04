@@ -13,12 +13,7 @@ import {
 } from "@ui-kitten/components";
 import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
-import {
-    Keyboard,
-    KeyboardAvoidingView,
-    StyleSheet,
-    TouchableOpacityProps,
-} from "react-native";
+import { Keyboard, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

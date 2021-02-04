@@ -12,8 +12,13 @@ import {
 } from "../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Encounter from "./Encounter/Encounter";
+import {
+    BottomTabNavigationProp,
+    createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
+import EncounterNavigator, {
+    EncounterTabParamList,
+} from "./Encounter/EncounterNavigator";
 import Exploration from "./Exploration/Exploration";
 import { Downtime } from "./Downtime/Downtime";
 import TextEditModal from "../Shared/Modals/TextEditModal";
@@ -29,9 +34,13 @@ import {
 } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
-import { StoryNavigator } from "./Story/StoryNavigation";
-import { InventoryNavigator } from "./Inventory/InventoryNavigation";
-import InventoryPage from "./Inventory/Inventory";
+import { StoryNavigator, StoryStackParamList } from "./Story/StoryNavigation";
+import {
+    InventoryNavigator,
+    InventoryStackParamList,
+} from "./Inventory/InventoryNavigation";
+import InventoryView from "./Inventory/InventoryView";
+import { NavigatorScreenParams } from "@react-navigation/core";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -45,14 +54,24 @@ interface OwnProps {
 type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
 export type CharacterSheetTabParamList = {
-    Story: undefined;
-    Encounter: undefined;
+    Story: NavigatorScreenParams<StoryStackParamList>;
+    Encounter: NavigatorScreenParams<EncounterTabParamList>;
     Exploration: undefined;
     Downtime: undefined;
-    Inventory: undefined;
+    Inventory: NavigatorScreenParams<InventoryStackParamList>;
     Spells: undefined;
     Companions: undefined;
 };
+
+export type CharacterSheetEncounterTabNavigationProps = BottomTabNavigationProp<
+    CharacterSheetTabParamList,
+    "Encounter"
+>;
+
+export type CharacterSheetInventoryTabNavigationProps = BottomTabNavigationProp<
+    CharacterSheetTabParamList,
+    "Inventory"
+>;
 
 const CharacterSheet: React.FC<Props> = (props: Props) => {
     const pcClass = props.playerCharacter.pcClass;
@@ -143,7 +162,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 >
                     <Tab.Screen
                         name="Encounter"
-                        component={Encounter}
+                        component={EncounterNavigator}
                         options={{ tabBarLabel: "Encounter" }}
                     />
                     <Tab.Screen

@@ -3,15 +3,13 @@ import {
     createStackNavigator,
     StackNavigationProp,
 } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import InventoryPage from "./Inventory";
+import InventoryView from "./InventoryView";
 import EditItem from "./Components/EditItem";
-import EditInventoryView from "./EditInventoryView";
 
 export type InventoryStackParamList = {
     MainInventoryView: undefined;
     EditInventoryView: undefined;
-    EditItemView: { itemGuid: string; index: number };
+    EditItemView: { itemGuid: string };
 };
 
 export type InventoryNavigationProps = StackNavigationProp<
@@ -22,21 +20,9 @@ export type InventoryNavigationProps = StackNavigationProp<
 export const InventoryNavigator: React.FC = () => {
     const Stack = createStackNavigator<InventoryStackParamList>();
     return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator
-                initialRouteName="MainInventoryView"
-                headerMode="none"
-            >
-                <Stack.Screen
-                    name="MainInventoryView"
-                    component={InventoryPage}
-                />
-                <Stack.Screen
-                    name="EditInventoryView"
-                    component={EditInventoryView}
-                />
-                <Stack.Screen name="EditItemView" component={EditItem} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator initialRouteName="MainInventoryView" headerMode="none">
+            <Stack.Screen name="MainInventoryView" component={InventoryView} />
+            <Stack.Screen name="EditItemView" component={EditItem} />
+        </Stack.Navigator>
     );
 };

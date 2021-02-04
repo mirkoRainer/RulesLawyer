@@ -10,7 +10,6 @@ import {
 } from "@ui-kitten/components";
 import { EntireAppState } from "../../../../../store/Store";
 import { connect } from "react-redux";
-import ShieldEditModal from "./ShieldEditModal";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {
     DEFAULT_SHIELD,
@@ -25,10 +24,11 @@ import {
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
+import { MainDefenseNavigationProps } from "../../DefenseNavigation";
+import { EncounterDefenseNavigationProps } from "../../EncounterNavigator";
+import { CharacterSheetEncounterTabNavigationProps } from "../../../CharacterSheet";
 
 // TODO: Equip Shield selector. DropDown?
-// TODO: Raise Shield button
-// TODO: Multiple Shields
 const ShieldView: React.FC<Props> = (props) => {
     if (props.wornShields === undefined) {
         return <></>;
@@ -36,7 +36,19 @@ const ShieldView: React.FC<Props> = (props) => {
     let shields: JSX.Element[] = [];
     props.wornShields.forEach((shield) => {
         // TODO: Long press to EditShield
-        const editShield = () => {};
+        const editShield = () => {
+            console.debug(
+                "Navigating to EditItemView with " + shield.id.toString()
+            );
+            props.navigation
+                .dangerouslyGetParent<EncounterDefenseNavigationProps>()
+                ?.dangerouslyGetParent<CharacterSheetEncounterTabNavigationProps>()
+                ?.navigate("Inventory", {
+                    screen: "EditItemView",
+                    params: { itemGuid: shield.id.toString() },
+                });
+            // TODO: NAVIGATE!
+        };
         const adjustShieldHP = (amount: number) => {
             const adjustedHP = shield.currentHP + amount;
             if (adjustedHP <= 0) {
@@ -141,9 +153,6 @@ const ShieldView: React.FC<Props> = (props) => {
                     Shield
                 </Text>
                 <Layout style={{ flexDirection: "row" }}>
-                    {
-                        // TODO: Finish Raise shield Logic}
-                    }
                     {shield.currentHP > shield.breakThreshold ? (
                         <Button
                             accessoryRight={ShieldIcon}
@@ -165,6 +174,7 @@ const ShieldView: React.FC<Props> = (props) => {
                             </ButtonGroup>
                             <TouchableOpacity
                                 onLongPress={editShield}
+                                onPress={editShield}
                                 style={styles.hpNumber}
                             >
                                 <Text category="h6">
@@ -196,8 +206,11 @@ const ShieldView: React.FC<Props> = (props) => {
     return <Layout style={styles.container}>{shields}</Layout>;
 };
 
-type Props = LinkDispatchProps & LinkStateProps;
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
+interface OwnProps {
+    navigation: MainDefenseNavigationProps;
+}
 interface LinkDispatchProps {
     updateShield: (Shield: Shield) => void;
     raiseShield: (bonus: iBonus, remove: boolean) => void;

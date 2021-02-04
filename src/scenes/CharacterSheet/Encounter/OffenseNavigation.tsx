@@ -3,7 +3,6 @@ import {
     createStackNavigator,
     StackNavigationProp,
 } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
 import EncounterOffense from "./EncounterOffense";
 import EditActionsView from "./Offense/EditActionsView";
 import {
@@ -34,24 +33,10 @@ export const OffenseNavigator: React.FC = () => {
     const Stack = createStackNavigator<OffenseStackParamList>();
     const theme = useTheme();
     return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator
-                initialRouteName="MainOffenseView"
-                headerMode="none"
-            >
-                <Stack.Screen
-                    name="MainOffenseView"
-                    component={EncounterOffense}
-                />
-                <Stack.Screen
-                    name="EditActionsView"
-                    component={EditActionsView}
-                />
-                <Stack.Screen
-                    name="EditActionView"
-                    component={EditActionView}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator initialRouteName="MainOffenseView" headerMode="none">
+            <Stack.Screen name="MainOffenseView" component={EncounterOffense} />
+            <Stack.Screen name="EditActionsView" component={EditActionsView} />
+            <Stack.Screen name="EditActionView" component={EditActionView} />
+        </Stack.Navigator>
     );
 };

@@ -17,7 +17,7 @@ export type InventoryNavigationProps = StackNavigationProp<
     "EditInventoryView"
 >;
 
-const InventoryPage: React.FC<Props> = (props) => {
+const InventoryView: React.FC<Props> = (props) => {
     const navigation = useNavigation<InventoryNavigationProps>();
     const goToEditInventoryView = () => {
         console.debug("Navigation to Inventory");
@@ -94,7 +94,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => {
     };
 };
 
-export default connect(mapStateToProps, null)(InventoryPage);
+export default connect(mapStateToProps, null)(InventoryView);
 
 const styles = StyleSheet.create({
     container: {

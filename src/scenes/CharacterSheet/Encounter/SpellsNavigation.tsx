@@ -3,7 +3,6 @@ import {
     createStackNavigator,
     StackNavigationProp,
 } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
 import { SpellList } from "./Spells/Components/Spell";
 import SpellsPage from "./Spells/SpellsPage";
 import EditSpellView from "./Spells/EditSpellView";
@@ -25,12 +24,10 @@ export type MainOffenseNavigationProps = StackNavigationProp<
 export const SpellsNavigator: React.FC = () => {
     const Stack = createStackNavigator<SpellsStackParamList>();
     return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator initialRouteName="SpellsView" headerMode="none">
-                <Stack.Screen name="SpellsView" component={SpellsPage} />
-                <Stack.Screen name="AddSpellView" component={EditSpellView} />
-                <Stack.Screen name="EditSpellView" component={EditSpellView} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator initialRouteName="SpellsView" headerMode="none">
+            <Stack.Screen name="SpellsView" component={SpellsPage} />
+            <Stack.Screen name="AddSpellView" component={EditSpellView} />
+            <Stack.Screen name="EditSpellView" component={EditSpellView} />
+        </Stack.Navigator>
     );
 };

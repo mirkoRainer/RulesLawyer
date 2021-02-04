@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { Card, Text, Layout } from "@ui-kitten/components";
 import React from "react";
-import { StyleSheet, TouchableOpacityProps } from "react-native";
-import { InventoryItem, Item } from "../../../../PF2eCoreLib/PlayerCharacter";
-import { InventoryNavigationProps } from "../Inventory";
+import { StyleSheet } from "react-native";
+import { InventoryItem } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { InventoryNavigationProps } from "../InventoryView";
 import { getBulkString } from "../InventoryHelper";
 
 type Props = {
@@ -66,7 +66,6 @@ export const ItemView: React.FC<Props> = (props) => {
             onLongPress={() =>
                 navigation.navigate("EditItemView", {
                     itemGuid: props.item.id.toString(),
-                    index: props.index,
                 })
             }
         >
