@@ -17,6 +17,7 @@ const Exploration: React.FC<Props> = (props) => {
     return (
         <Layout>
             <ScrollView>
+                {/* TODO: Make the text display prettier */}
                 <AvoidNoticeActivity />
                 <DefendActivity />
                 <DetectMagicActivity />

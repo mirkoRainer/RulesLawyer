@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useRef, useState } from "react";
 import {
     Button,
     Divider,
@@ -7,24 +7,17 @@ import {
     Layout,
     Text,
 } from "@ui-kitten/components";
-import {
-    Alert,
-    Animated,
-    FlatList,
-    SafeAreaView,
-    StyleSheet,
-} from "react-native";
+import { Alert, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startChangeLanguages } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StoryStackParamList } from "./StoryNavigation";
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
+import { LanguageList } from "./Components/LanguageList";
 
 export type LanguagesNavigationProp = StackNavigationProp<
     StoryStackParamList,
@@ -32,7 +25,8 @@ export type LanguagesNavigationProp = StackNavigationProp<
 >;
 
 const EditLanguagesView: React.FC<Props> = (props) => {
-    // TODO: Display Language list
+    const [state, setState] = useState({});
+    const scrollRef = useRef<FlatList<string>>(null);
     const navigation = useNavigation<LanguagesNavigationProp>();
     const goToMainStoryView = () => {
         console.debug("Navigation to MainStory");
@@ -49,73 +43,30 @@ const EditLanguagesView: React.FC<Props> = (props) => {
         props.startChangeLanguages(input.languages);
         goToMainStoryView();
     };
-    const keyExtractor = (item: string) => item;
+    const keyExtractor = (language: string, index: number) => language + index;
     const renderItem = ({ item }: { item: string }) => {
-        const myRef = createRef<Swipeable>();
-        const renderRightAction = (
-            text: string,
-            color: string,
-            x: number,
-            progress: Animated.AnimatedInterpolation
-        ) => {
-            const trans = progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [x, 0],
+        const handleDeleteButtonPress = () => {
+            const languageToBeDeleted = item;
+            setInput({
+                ...input,
+                languages: input.languages.filter(
+                    (x) => x !== languageToBeDeleted
+                ),
             });
-            const close = () => {
-                const swipeRef = myRef.current;
-                swipeRef?.close();
-            };
-            const handleEditButtonPress = () => {
-                close();
-            };
-            const handleDeleteButtonPress = () => {
-                const swipeRef = myRef.current;
-                const languageToBeDeleted =
-                    // @ts-ignore
-                    swipeRef?.props.children?.props?.children;
-                setInput({
-                    ...input,
-                    languages: input.languages.filter(
-                        (x) => x !== languageToBeDeleted
-                    ),
-                });
-                close();
-            };
-            return (
-                <Animated.View
-                    style={{ flex: 1, transform: [{ translateX: trans }] }}
-                >
-                    <RectButton
-                        style={[styles.rightAction, { backgroundColor: color }]}
-                        onPress={handleDeleteButtonPress}
-                    >
-                        <Animated.Text style={styles.actionText}>
-                            {text}
-                        </Animated.Text>
-                    </RectButton>
-                </Animated.View>
-            );
-        };
-        const renderRightActions = (
-            progress: Animated.AnimatedInterpolation
-        ) => {
-            return (
-                <Layout style={{ width: 96, flexDirection: "row" }}>
-                    {/* {renderRightAction("Edit", "#ffab00", 128, progress)} */}
-                    {renderRightAction("Delete", "#dd2c00", 64, progress)}
-                </Layout>
-            );
         };
 
         return (
-            <Swipeable
-                friction={2}
-                renderRightActions={renderRightActions}
-                ref={myRef}
-            >
+            <Layout style={{ flexDirection: "row" }}>
                 <Text style={styles.actionText}>{item}</Text>
-            </Swipeable>
+                <Button
+                    style={styles.button}
+                    status="danger"
+                    appearance="ghost"
+                    onPress={handleDeleteButtonPress}
+                >
+                    Delete
+                </Button>
+            </Layout>
         );
     };
     const addNewLanguage = () => {
@@ -135,6 +86,17 @@ const EditLanguagesView: React.FC<Props> = (props) => {
         }
         input.languages.push(input.newLanguage);
         setInput({ ...input, newLanguage: "" });
+    };
+    const addLanguageFromList = (language: string) => {
+        if (input.languages.includes(language)) {
+            Alert.alert(
+                "Invalid Language",
+                "It looks like his language is already on the list. Please add a new unique language."
+            );
+            return;
+        }
+        input.languages.push(language);
+        setState({});
     };
     return (
         <Layout style={{ flex: 1 }}>
@@ -168,14 +130,25 @@ const EditLanguagesView: React.FC<Props> = (props) => {
                             setInput({ ...input, newLanguage })
                         }
                     />
-                    <Button onPress={addNewLanguage}>Add</Button>
+                    <Button
+                        onPress={addNewLanguage}
+                        style={{ marginVertical: 7, alignSelf: "center" }}
+                    >
+                        Add
+                    </Button>
                 </Layout>
+                <Divider />
+                <LanguageList addLanguage={addLanguageFromList} />
                 <Divider />
                 <SafeAreaView style={{ flex: 1 }}>
                     <FlatList<string>
+                        ref={scrollRef}
                         keyExtractor={keyExtractor}
                         data={input.languages}
                         renderItem={renderItem}
+                        onContentSizeChange={() =>
+                            scrollRef.current?.scrollToEnd()
+                        }
                     />
                 </SafeAreaView>
             </Layout>
@@ -226,9 +199,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     actionText: {
-        color: "white",
-        fontSize: 16,
-        backgroundColor: "transparent",
         padding: 10,
+        flex: 1,
     },
+    button: {},
 });

@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Keyboard, StyleSheet } from "react-native";
 import { Input, Layout, Text } from "@ui-kitten/components";
 import { Shield } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EditItemState } from "./EditItem";
@@ -13,6 +13,7 @@ type Props = {
 };
 
 export const EditShield: React.FC<Props> = (props) => {
+    // TODO: Use this on all forms. Disable the update button if things are being typed.
     const handleAcBonusChange = (text: string) => {
         const acBonusInput = isNumbersOnlyElseReturn0(text);
         props.setState({
@@ -73,7 +74,7 @@ export const EditShield: React.FC<Props> = (props) => {
             <Input
                 label={"AC Bonus"}
                 placeholder="Enter AC bonus For Shield"
-                value={props.shield.acBonus.toString()}
+                value={props.shield.acBonus.amount.toString()}
                 onChangeText={handleAcBonusChange}
                 style={{ flex: 1, paddingHorizontal: 5 }}
             />
