@@ -22,6 +22,7 @@ import {
     Weapon,
     Item,
     InventoryItem,
+    WeaponProficiencies,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -570,5 +571,19 @@ export const AddOrRemoveBonus: ActionCreator<PlayerCharacterActionTypes> = (
 export const startAddOrRemoveBonus = (bonus: iBonus, remove: boolean) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(AddOrRemoveBonus(bonus, remove));
+    };
+};
+
+export const ChangeWeaponProficiencies: ActionCreator<PlayerCharacterActionTypes> = (
+    WeaponProficiencies: WeaponProficiencies
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.CHANGE_WEAPON_PROFICIENCIES,
+    WeaponProficiencies,
+});
+export const startChangeWeaponProficiencies = (
+    WeaponProficiencies: WeaponProficiencies
+) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeWeaponProficiencies(WeaponProficiencies));
     };
 };

@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/stack";
 import StoryPage from "./StoryPage";
 import TraitSelectorView from "./TraitSelectorView";
-import { EditWeaponProficiencyView } from "./EditWeaponProficiencyView";
+import EditWeaponProficiencyView from "./EditWeaponProficiencyView";
 import EditBioDataView from "./EditBioDataView";
 import EditLanguages from "./EditLanguagesView";
 import EditPersonalityView from "./EditPersonalityView";
@@ -31,14 +31,11 @@ export const StoryNavigator: React.FC = () => {
     return (
         <Stack.Navigator initialRouteName="MainStoryView" headerMode="none">
             <Stack.Screen name="MainStoryView" component={StoryPage} />
-            <Stack.Screen
-                name="EditTraitsView"
-                // @ts-ignore
-                component={TraitSelectorView}
-            />
+            <Stack.Screen name="EditTraitsView" component={TraitSelectorView} />
             <Stack.Screen
                 name="EditWeaponProficiencyView"
                 component={EditWeaponProficiencyView}
+                options={{ headerTitle: "Edit Weapon Proficiencies" }}
             />
             <Stack.Screen name="EditBioDataView" component={EditBioDataView} />
             <Stack.Screen name="EditLanguagesView" component={EditLanguages} />

@@ -58,7 +58,7 @@ const EditActionView: React.FC<Props> = (props) => {
         <TopNavigationAction
             icon={BackIcon}
             onPress={() => {
-                props.navigation.navigate("EditActionsView");
+                props.navigation.goBack();
             }}
         />
     );

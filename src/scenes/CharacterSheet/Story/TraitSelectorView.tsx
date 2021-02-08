@@ -10,7 +10,7 @@ import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { startChangePCTraits } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../store/Store";
 import TraitSelector from "../../Shared/TraitSelector";
-import { StoryTraitSelectorHeader } from "./Components/StoryTraitSelectorHeader";
+import { StoryNavigatorHeader } from "./Components/StoryNavigatorHeader";
 
 const TraitSelectorView: React.FC<Props> = (props) => {
     const onSelection = (traits: (keyof typeof Traits)[]) => {
@@ -28,7 +28,7 @@ const TraitSelectorView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={{ flex: 1 }}>
-            <StoryTraitSelectorHeader />
+            <StoryNavigatorHeader title="Edit PC Traits" />;
             <ScrollView>
                 <TraitSelector
                     currentTraits={props.currentTraits}
@@ -50,8 +50,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     currentTraits: state.playerCharacter.traits,
 });
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: undefined
+    dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => {
     return {
         startChangePCTraits: bindActionCreators(startChangePCTraits, dispatch),

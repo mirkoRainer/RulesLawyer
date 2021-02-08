@@ -11,6 +11,7 @@ import {
     TopNavigation,
     Input,
     Divider,
+    ButtonGroup,
 } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
@@ -20,7 +21,6 @@ import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter
 import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
 import { indexOf } from "lodash";
-import EditActionView from "./EditActionView";
 import { NavigationState, useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
 import { Guid } from "guid-typescript";
@@ -58,12 +58,21 @@ const EditActionsView: React.FC<Props> = (props) => {
     };
 
     const EditButton = (index: number) => {
-        const handleDropDownButton = () => {
+        const handleEditButton = () => {
             props.navigation.push("EditActionView", { index, updateAction });
         };
+        return <Button onPress={handleEditButton}>Edit</Button>;
+    };
+    const DeleteButton = (index: number) => {
+        const handleDeleteButton = () => {
+            let newActions = props.actions;
+            newActions.splice(index, 1);
+            props.updateActions(newActions);
+            setState({});
+        };
         return (
-            <Button onPress={handleDropDownButton} style={{ flex: 0.2 }}>
-                Edit
+            <Button onPress={handleDeleteButton} status="danger">
+                -
             </Button>
         );
     };
@@ -75,6 +84,7 @@ const EditActionsView: React.FC<Props> = (props) => {
                 key={item.id.toString()}
             >
                 {EditButton(index)}
+                {DeleteButton(index)}
                 <Text
                     style={{
                         flex: 1,

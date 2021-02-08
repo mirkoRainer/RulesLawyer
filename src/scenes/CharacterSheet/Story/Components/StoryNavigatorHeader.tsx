@@ -7,7 +7,11 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { StoryNavigationProps } from "../StoryNavigation";
 
-export const StoryTraitSelectorHeader: React.FC = () => {
+type Props = {
+    title: string;
+};
+
+export const StoryNavigatorHeader: React.FC<Props> = (props) => {
     const navigation = useNavigation<StoryNavigationProps>();
 
     const BackIcon = (props: any) => <Icon {...props} name="arrow-back" />;
@@ -15,7 +19,7 @@ export const StoryTraitSelectorHeader: React.FC = () => {
         <TopNavigationAction
             icon={BackIcon}
             onPress={() => {
-                navigation.navigate("MainStoryView");
+                navigation.goBack();
             }}
         />
     );
@@ -23,7 +27,7 @@ export const StoryTraitSelectorHeader: React.FC = () => {
     return (
         <TopNavigation
             accessoryLeft={EditActionsBackAction}
-            title="Edit PC Traits"
+            title={props.title}
         />
     );
 };

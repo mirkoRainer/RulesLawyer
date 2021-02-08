@@ -6,23 +6,26 @@ import {
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import Store from "../../../../../store/Store";
 
+// TODO: Write TESTS!
 export function GetProficiencyForWeapon(weapon: Weapon): Proficiencies {
     const state = Store.getState();
     const proficiencies = state.playerCharacter.weaponProficiencies;
     switch (weapon.weaponCategory) {
+        case "Other":
+            proficiencies.Other.forEach((customProficiency) => {
+                // TODO: Make Other weapon proficiency and weapon name not need to match
+                // i.e.Currently you need to have +1 Shortsword as a weapon name and Other proficiency for it to match here.
+                if (customProficiency.description === weapon.name) {
+                    return customProficiency.proficiency;
+                }
+            });
+            return Proficiencies.Untrained;
         case "Unarmed":
             return proficiencies.Unarmed;
         case "Simple":
             return proficiencies.Simple;
         case "Martial":
             return proficiencies.Martial;
-        case "Other":
-            proficiencies.Other.forEach((customProficiency) => {
-                if (customProficiency.description === weapon.name) {
-                    return customProficiency.proficiency;
-                }
-            });
-            return Proficiencies.Untrained;
         default:
             return Proficiencies.Untrained;
     }

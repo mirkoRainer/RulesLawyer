@@ -24,9 +24,12 @@ export const WeaponProficienciesView: React.FC<WeaponProficiencies> = (
     };
     const otherProfs = props.Other;
     let renderOthers: JSX.Element[] = [];
-    otherProfs.forEach((proficiency) => {
+    otherProfs.forEach((proficiency, index) => {
         renderOthers.push(
-            <Layout style={styles.weaponProf} key={proficiency.description}>
+            <Layout
+                style={styles.weaponProf}
+                key={proficiency.description + index}
+            >
                 <Text style={styles.text} category="h6">
                     {proficiency.description}
                 </Text>

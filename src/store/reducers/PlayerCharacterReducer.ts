@@ -39,6 +39,7 @@ import {
     CHANGE_ITEM,
     CHANGE_INVENTORY_ITEMS,
     ADD_OR_REMOVE_BONUS,
+    CHANGE_WEAPON_PROFICIENCIES,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
@@ -439,6 +440,19 @@ const playerCharacterReducer = (
                     ? RemoveBonus(action.bonus, state.bonuses)
                     : InsertOrUpdateBonus(action.bonus, state.bonuses),
             };
+        case CHANGE_WEAPON_PROFICIENCIES:
+            console.debug(
+                `CHANGE_WEAPON_PROFICIENCIES in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
+            return {
+                ...state,
+                weaponProficiencies: action.WeaponProficiencies,
+            };
+
         default:
             return state;
     }

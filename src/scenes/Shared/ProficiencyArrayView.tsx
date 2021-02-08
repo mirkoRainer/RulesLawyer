@@ -7,8 +7,6 @@ import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { startStringPickerModalSelection } from "../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { PlayerCharacterActionTypes } from "../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 
 const ProficiencyArrayView: React.FC<Props> = (props) => {
     let trainedStyle;

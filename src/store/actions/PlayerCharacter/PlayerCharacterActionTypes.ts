@@ -15,6 +15,7 @@ import {
     Item,
     Weapon,
     InventoryItem,
+    WeaponProficiencies,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -269,6 +270,12 @@ export interface AddOrRemoveBonusAction extends Action<string> {
     remove: boolean;
 }
 
+export const CHANGE_WEAPON_PROFICIENCIES = "CHANGE_WEAPON_PROFICIENCIES";
+export interface ChangeWeaponProficienciesAction extends Action<string> {
+    type: typeof CHANGE_WEAPON_PROFICIENCIES;
+    WeaponProficiencies: WeaponProficiencies;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -310,4 +317,5 @@ export type PlayerCharacterActionTypes =
     | ChangeCampaignNotesAction
     | ChangeItemAction
     | ChangeInventoryAction
-    | AddOrRemoveBonusAction; // | SomeOtherAction
+    | AddOrRemoveBonusAction
+    | ChangeWeaponProficienciesAction; // | SomeOtherAction
