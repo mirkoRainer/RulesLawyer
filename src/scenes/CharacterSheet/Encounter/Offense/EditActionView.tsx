@@ -362,7 +362,7 @@ const EditActionView: React.FC<Props> = (props) => {
         <Layout style={{ flex: 1, padding: 10 }}>
             <TopNavigation
                 accessoryLeft={EditActionsBackAction}
-                title="Edit Actions"
+                title="Edit Action"
             />
             {Editor()}
         </Layout>

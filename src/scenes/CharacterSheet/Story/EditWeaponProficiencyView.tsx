@@ -18,7 +18,6 @@ import ProficiencyArrayView from "../../Shared/ProficiencyArrayView";
 import { StoryNavigatorHeader } from "./Components/StoryNavigatorHeader";
 
 const EditWeaponProficiencyView: React.FC<Props> = (props) => {
-    // TODO: Finish this!
     const [input, setInput] = useState<WeaponProficiencies>(
         props.weaponProficiencies
     );
