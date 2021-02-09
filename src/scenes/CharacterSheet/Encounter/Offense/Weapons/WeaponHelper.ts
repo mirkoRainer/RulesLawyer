@@ -6,14 +6,14 @@ import {
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import Store from "../../../../../store/Store";
 
-// TODO: Write TESTS for WeaponHelper.ts!
+// TODO [$6021f0207b27d600084dbee5]: Write TESTS for WeaponHelper.ts!
 export function GetProficiencyForWeapon(weapon: Weapon): Proficiencies {
     const state = Store.getState();
     const proficiencies = state.playerCharacter.weaponProficiencies;
     switch (weapon.weaponCategory) {
         case "Other":
             proficiencies.Other.forEach((customProficiency) => {
-                // TODO: Make Other weapon proficiency and weapon name not need to match
+                // TODO [$6021f0207b27d600084dbee6]: Make Other weapon proficiency and weapon name not need to match
                 // i.e.Currently you need to have +1 Shortsword as a weapon name and Other proficiency for it to match here.
                 // This will be tricky.
                 if (customProficiency.description === weapon.name) {

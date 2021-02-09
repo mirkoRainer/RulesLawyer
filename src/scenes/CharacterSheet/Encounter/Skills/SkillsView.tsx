@@ -32,8 +32,8 @@ const SkillsView: React.FC<Props> = (props) => {
             setState({});
         }, [])
     );
-    // TODO: Handle Lore Skills
-    // TODO: Add/Delete Lore Skills
+    // TODO [$6021f0207b27d600084dbee7]: Handle Lore Skills
+    // TODO [$6021f0207b27d600084dbee8]: Add/Delete Lore Skills
     const renderItem = (item: Skill) => {
         const index = indexOf(props.skills, item);
         const handleSkillTouch = () => {

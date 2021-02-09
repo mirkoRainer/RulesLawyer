@@ -82,7 +82,7 @@ export const EditWeapon: React.FC<Props> = (props) => {
     const handleWeaponCategorySelect = (index: IndexPath | IndexPath[]) => {
         const trueIndex = index as IndexPath;
         let category: keyof WeaponProficiencies | undefined;
-        // TODO: Handle Editing of Other Category properties. i.e description and mapping description to weapon proficiency.
+        // TODO [$6021f0207b27d600084dbeed]: Handle Editing of Other Category properties. i.e description and mapping description to weapon proficiency.
         switch (weaponCategoryData[trueIndex.row]) {
             case weaponCategoryData[0]:
                 category = "Unarmed";
@@ -170,7 +170,7 @@ export const EditWeapon: React.FC<Props> = (props) => {
                 Weapon Properties
             </Text>
             {
-                // TODO: Enrich View with basic weapon stat breakdown calculations and summary
+                // TODO [$6021f0207b27d600084dbeee]: Enrich View with basic weapon stat breakdown calculations and summary
             }
             <Select
                 value={props.state.item.weaponCategory}
@@ -191,7 +191,7 @@ export const EditWeapon: React.FC<Props> = (props) => {
                 style={{ flex: 1, paddingHorizontal: 5, paddingVertical: 5 }}
             />
             {
-                // TODO: Enrich Selection data with ability modifier in dropdown
+                // TODO [$6021f0207b27d600084dbeef]: Enrich Selection data with ability modifier in dropdown
             }
             <Select
                 value={props.state.item.ability}
