@@ -13,7 +13,6 @@ type Props = {
 };
 
 export const EditShield: React.FC<Props> = (props) => {
-    // TODO: Use this on all forms. Disable the update button if things are being typed.
     const handleAcBonusChange = (text: string) => {
         const acBonusInput = isNumbersOnlyElseReturn0(text);
         props.setState({

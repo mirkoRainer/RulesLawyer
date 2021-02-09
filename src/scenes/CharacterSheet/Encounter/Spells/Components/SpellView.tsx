@@ -16,7 +16,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { RectButton } from "react-native-gesture-handler";
 
 const SpellView: React.FC<Props> = (props) => {
-    if (props.spell === undefined) return <></>; //TODO: Make this better
+    if (props.spell === undefined) return <></>; //TODO: Make SpellView better
     return (
         <Layout style={styles.container}>
             <SwipeableSpellHeader {...props}></SwipeableSpellHeader>

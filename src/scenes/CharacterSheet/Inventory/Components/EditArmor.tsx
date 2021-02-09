@@ -74,7 +74,7 @@ export const EditArmor: React.FC<Props> = (props) => {
         const penalty: number = isNumbersOnlyElseReturn0(checkPenaltyAmount);
         const checkPenalty: iBonus = {
             type: BonusType.Untyped,
-            appliesTo: "skills", // TODO: make this better. :(
+            appliesTo: "skills", // TODO: Enumerate things that iBonus can "applyTo"
             amount: penalty,
             source: props.armor.id.toString(),
         };
@@ -90,7 +90,7 @@ export const EditArmor: React.FC<Props> = (props) => {
         const penalty: number = isNumbersOnlyElseReturn0(speedPenaltyAmount);
         const speedPenalty: iBonus = {
             type: BonusType.Untyped,
-            appliesTo: "speed", // TODO: make this better. :(
+            appliesTo: "speed",
             amount: penalty,
             source: props.armor.id.toString(),
         };

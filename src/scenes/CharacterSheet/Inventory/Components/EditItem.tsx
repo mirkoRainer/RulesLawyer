@@ -74,8 +74,28 @@ const EditItem: React.FC<Props> = (props) => {
             isShield,
         };
     });
-    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     // TODO: Use this on all forms. Disable the update button if things are being typed.
+    // const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+    // useEffect(() => {
+    //     const keyboardDidShowListener = Keyboard.addListener(
+    //         "keyboardDidShow",
+    //         () => {
+    //             setKeyboardVisible(true); // or some other action
+    //         }
+    //     );
+    //     const keyboardDidHideListener = Keyboard.addListener(
+    //         "keyboardDidHide",
+    //         () => {
+    //             setKeyboardVisible(false); // or some other action
+    //         }
+    //     );
+
+    //     return () => {
+    //         keyboardDidHideListener.remove();
+    //         keyboardDidShowListener.remove();
+    //     };
+    // }, []);
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
             "keyboardDidShow",

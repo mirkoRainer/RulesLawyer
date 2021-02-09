@@ -21,10 +21,16 @@ const EditWeaponProficiencyView: React.FC<Props> = (props) => {
     const [input, setInput] = useState<WeaponProficiencies>(
         props.weaponProficiencies
     );
+    // TODO: Use Navigation listener with local state to update redux.
+    // const navigation = useNavigation();
+    // useEffect(() => {
+    //     navigation.addListener("beforeRemove", (event) => {
+    //         props.updateWeaponProficiencies(input);
+    //     });
+    // }, [navigation]);
     const navigation = useNavigation();
     useEffect(() => {
         navigation.addListener("beforeRemove", (event) => {
-            // TODO: Use this with local state to update redux. File a bug to do this elsewhere too.
             props.updateWeaponProficiencies(input);
         });
     }, [navigation]);

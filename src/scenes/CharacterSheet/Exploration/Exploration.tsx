@@ -14,10 +14,10 @@ import SearchActivity from "./Components/SearchActivity";
 type Props = {};
 
 const Exploration: React.FC<Props> = (props) => {
+    /* TODO: Make the text display prettier for Exploration Page */
     return (
         <Layout>
             <ScrollView>
-                {/* TODO: Make the text display prettier */}
                 <AvoidNoticeActivity />
                 <DefendActivity />
                 <DetectMagicActivity />

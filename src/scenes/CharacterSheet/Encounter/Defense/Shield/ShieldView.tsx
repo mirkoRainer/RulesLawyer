@@ -35,7 +35,6 @@ const ShieldView: React.FC<Props> = (props) => {
     }
     let shields: JSX.Element[] = [];
     props.wornShields.forEach((shield) => {
-        // TODO: Long press to EditShield
         const editShield = () => {
             console.debug(
                 "Navigating to EditItemView with " + shield.id.toString()
@@ -47,7 +46,6 @@ const ShieldView: React.FC<Props> = (props) => {
                     screen: "EditItemView",
                     params: { itemGuid: shield.id.toString() },
                 });
-            // TODO: NAVIGATE!
         };
         const adjustShieldHP = (amount: number) => {
             const adjustedHP = shield.currentHP + amount;
