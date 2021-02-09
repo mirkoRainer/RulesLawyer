@@ -28,6 +28,8 @@ const EditWeaponProficiencyView: React.FC<Props> = (props) => {
     //         props.updateWeaponProficiencies(input);
     //     });
     // }, [navigation]);
+    //
+    // Self contain the component with state and update when focus is removed.
     const navigation = useNavigation();
     useEffect(() => {
         navigation.addListener("beforeRemove", (event) => {
