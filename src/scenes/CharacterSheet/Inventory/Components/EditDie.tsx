@@ -29,7 +29,7 @@ export const EditDie: React.FC<Props> = (props) => {
                     value={die.formula}
                     size="medium"
                     onChangeText={(text) => {
-                        // TODO [$6021f0207b27d600084dbeea]: Validate DiceFormula
+                        // TODO [#36]: Validate DiceFormula
                         setDie({ ...die, formula: text });
                     }}
                     onBlur={onBlur}
@@ -53,7 +53,7 @@ export const EditDie: React.FC<Props> = (props) => {
                 value={die.damageType}
                 size="medium"
                 onChangeText={(text) => {
-                    // TODO [$6021f0207b27d600084dbeeb]: Validate Damage type
+                    // TODO [#37]: Validate Damage type
                     setDie({ ...die, damageType: text });
                 }}
                 onBlur={onBlur}

@@ -21,7 +21,7 @@ export const Downtime: React.FC<Props> = (props) => {
         <Layout style={styles.container}>
             <Divider />
             <ScrollView>
-                {/* TODO [$6021f0207b27d600084dbee1]: Make the text here prettier */}
+                {/* TODO [#27]: Make the text here prettier */}
                 <PrepareSpellsActivity />
                 <BribeAContactActivity />
                 <CostOfLivingActivity />

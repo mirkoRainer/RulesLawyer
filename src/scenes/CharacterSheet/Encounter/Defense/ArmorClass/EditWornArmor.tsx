@@ -54,7 +54,7 @@ export type EditArmorNavigationProps = StackNavigationProp<
     DefenseStackParamList,
     "EditWornArmor"
 >;
-// TODO [$6021f0207b27d600084dbee2]: Make Worn Armor a selectable list of Armor in the Inventory
+// TODO [#28]: Make Worn Armor a selectable list of Armor in the Inventory
 const EditWornArmor: React.FC<Props> = (props) => {
     const [input, setInput] = useState({
         name: props.wornArmor.name,

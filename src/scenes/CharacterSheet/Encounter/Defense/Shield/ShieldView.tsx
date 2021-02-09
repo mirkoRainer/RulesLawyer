@@ -28,7 +28,7 @@ import { MainDefenseNavigationProps } from "../../DefenseNavigation";
 import { EncounterDefenseNavigationProps } from "../../EncounterNavigator";
 import { CharacterSheetEncounterTabNavigationProps } from "../../../CharacterSheet";
 
-// TODO [$6021f0207b27d600084dbee3]: Equip Shield selector. DropDown?
+// TODO [#29]: Equip Shield selector. DropDown?
 const ShieldView: React.FC<Props> = (props) => {
     if (props.wornShields === undefined) {
         return <></>;

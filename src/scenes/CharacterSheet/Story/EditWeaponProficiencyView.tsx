@@ -21,7 +21,7 @@ const EditWeaponProficiencyView: React.FC<Props> = (props) => {
     const [input, setInput] = useState<WeaponProficiencies>(
         props.weaponProficiencies
     );
-    // TODO [$6021f0207b27d600084dbef0]: Use Navigation listener with local state to update redux.
+    // TODO [#42]: Use Navigation listener with local state to update redux.
     // const navigation = useNavigation();
     // useEffect(() => {
     //     navigation.addListener("beforeRemove", (event) => {
