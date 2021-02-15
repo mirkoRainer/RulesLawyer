@@ -41,6 +41,7 @@ import {
 } from "./Inventory/InventoryNavigation";
 import InventoryView from "./Inventory/InventoryView";
 import { NavigatorScreenParams } from "@react-navigation/core";
+import { Companions } from "./Companions/Companions";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -115,18 +116,26 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
 
     const Tab = createBottomTabNavigator<CharacterSheetTabParamList>();
     // @ts-ignore
-    const BottomTabBar = ({ navigation, state }) => (
-        <BottomNavigation
-            selectedIndex={state.index}
-            onSelect={(index) => navigation.navigate(state.routeNames[index])}
-        >
-            <BottomNavigationTab title="Encounter" />
-            <BottomNavigationTab title="Exploration" />
-            <BottomNavigationTab title="Downtime" />
-            <BottomNavigationTab title="Inventory" />
-            <BottomNavigationTab title="Story" />
-        </BottomNavigation>
-    );
+    const BottomTabBar = ({ navigation, state }) => {
+        const companion: boolean = props.playerCharacter.companion
+            ? true
+            : false;
+        return (
+            <BottomNavigation
+                selectedIndex={state.index}
+                onSelect={(index) =>
+                    navigation.navigate(state.routeNames[index])
+                }
+            >
+                <BottomNavigationTab title="⚔️" />
+                <BottomNavigationTab title="🌳" />
+                <BottomNavigationTab title="⛺️" />
+                <BottomNavigationTab title="🧰" />
+                <BottomNavigationTab title="📖" />
+                {companion ? <BottomNavigationTab title="🐺" /> : <></>}
+            </BottomNavigation>
+        );
+    };
     const MenuIcon = (props: any) => <Icon {...props} name="menu-outline" />;
     const InfoIcon = (props: any) => <Icon {...props} name="info" />;
     const renderMenuAction = () => (
@@ -163,28 +172,15 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                     <Tab.Screen
                         name="Encounter"
                         component={EncounterNavigator}
-                        options={{ tabBarLabel: "Encounter" }}
                     />
-                    <Tab.Screen
-                        name="Exploration"
-                        component={Exploration}
-                        options={{ tabBarLabel: "Exploration" }}
-                    />
-                    <Tab.Screen
-                        name="Downtime"
-                        component={Downtime}
-                        options={{ tabBarLabel: "Downtime" }}
-                    />
+                    <Tab.Screen name="Exploration" component={Exploration} />
+                    <Tab.Screen name="Downtime" component={Downtime} />
                     <Tab.Screen
                         name="Inventory"
                         component={InventoryNavigator}
-                        options={{ tabBarLabel: "Inventory" }}
                     />
-                    <Tab.Screen
-                        name="Story"
-                        component={StoryNavigator}
-                        options={{ tabBarLabel: "Story" }}
-                    />
+                    <Tab.Screen name="Story" component={StoryNavigator} />
+                    <Tab.Screen name="Companions" component={Companions} />
                 </Tab.Navigator>
                 <TextEditModal />
                 <PickerModal />
