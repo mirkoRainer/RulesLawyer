@@ -7,7 +7,7 @@ type Props = {};
 export const Companions: React.FC<Props> = (props) => {
     return (
         <Layout>
-            {/* TODO: Finish Companion View 
+            {/* TODO [$6029e62a51eb81000840a2fd]: Finish Companion View 
             Need to lay out something similar to the companion sheet from the APG. */}
             <Text style={styles.centered}>Companions</Text>
         </Layout>
