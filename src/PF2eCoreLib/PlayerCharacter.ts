@@ -59,7 +59,7 @@ interface PlayerCharacter {
     familiar?: Familiar;
 }
 
-interface Companion {
+export interface Companion {
     abilityScores: AbilityScoreArray;
     actions: PF2Action[];
     advancement: {
@@ -267,7 +267,7 @@ export const DEFAULT_COMPANION: Companion = {
     },
 };
 
-interface Familiar {
+export interface Familiar {
     abilities: string;
     actions: PF2Action[];
     movement: Movement;

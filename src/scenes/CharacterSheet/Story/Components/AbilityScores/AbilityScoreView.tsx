@@ -16,15 +16,16 @@ import { Layout, Text } from "@ui-kitten/components";
 
 const AbilityScoreView: React.FC<Props> = (props) => {
     let formattedModifierString: string;
-    const modifier = CalculateAbilityScoreModifier(props.score);
+    const modifier = CalculateAbilityScoreModifier(props.abilityScore.score);
     formattedModifierString =
         modifier > 0 ? "+" + modifier : modifier.toString();
-    const abilityName = GetAbilityScoreAbbreviation(props.ability);
+    const abilityName = GetAbilityScoreAbbreviation(props.abilityScore.ability);
     const abilityScore: AbilityScore = {
-        ability: props.ability,
-        score: props.score,
+        ability: props.abilityScore.ability,
+        score: props.abilityScore.score,
     };
     const changeAbilityScore = () => {
+        if (props.companion) return; // don't do anything with companion.
         props.startPickerModal(CHANGE_ABILITY_SCORE, abilityScore);
     };
     return (
@@ -37,7 +38,7 @@ const AbilityScoreView: React.FC<Props> = (props) => {
                 category="h5"
                 onPress={changeAbilityScore}
             >
-                {props.score}
+                {props.abilityScore.score}
             </Text>
             <Text
                 style={styles.modifier}
@@ -50,7 +51,16 @@ const AbilityScoreView: React.FC<Props> = (props) => {
     );
 };
 
-type Props = AbilityScore & LinkDispatchProps;
+interface OwnProps {
+    abilityScore: AbilityScore;
+    companion?: boolean;
+}
+
+type Props = LinkDispatchProps & OwnProps;
+
+// TODO: Create separate editing View for most things.
+// There are a lot of editing functions tied into regular Views. These should be moved into their own view.
+// This will increase reusability and make it easier when we go to implement touch to roll on some of these views.
 
 interface LinkDispatchProps {
     startPickerModal: (actionType: string, abilityScore: AbilityScore) => void;
@@ -58,7 +68,7 @@ interface LinkDispatchProps {
 
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: AbilityScore
+    ownProps: OwnProps
 ): LinkDispatchProps => {
     return {
         startPickerModal: bindActionCreators(
