@@ -58,7 +58,7 @@ interface OwnProps {
 
 type Props = LinkDispatchProps & OwnProps;
 
-// TODO [$603cdcb5dfa3d900083f3d16]: Create separate editing View for most things.
+// TODO [#44]: Create separate editing View for most things.
 // There are a lot of editing functions tied into regular Views. These should be moved into their own view.
 // This will increase reusability and make it easier when we go to implement touch to roll on some of these views.
 
