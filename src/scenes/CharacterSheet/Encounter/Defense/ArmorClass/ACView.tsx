@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { getArmorProficiencyForCurrentPC } from "./ArmorClassHelper";
+import {
+    getArmorProficiencyForAnimalCompanion,
+    getArmorProficiencyForCurrentPC,
+} from "./ArmorClassHelper";
 import { EntireAppState } from "../../../../../store/Store";
 import {
     AbilityScore,
@@ -11,9 +14,14 @@ import {
     Armor,
     IsArmor,
     DEFAULT_ARMOR,
+    Companion,
+    DEFAULT_COMPANION_ARMOR,
 } from "../../../../../PF2eCoreLib/PlayerCharacter";
 import { connect } from "react-redux";
-import { GetProficiencyTotalWithLevel } from "../../../../../PF2eCoreLib/Proficiencies";
+import {
+    GetProficiencyTotalWithLevel,
+    GetProficiencyTotalWithoutLevel,
+} from "../../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../../Shared/ProficiencyArrayView";
 import { Layout, Text } from "@ui-kitten/components";
 import EditWornArmor from "./EditWornArmor";
@@ -24,11 +32,6 @@ import {
     GetCurrentPCBonuses,
     iBonus,
 } from "../../../../../PF2eCoreLib/Bonus";
-import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
-
-interface OwnProps {
-    navigation: MainDefenseNavigationProps;
-}
 
 const ACView: React.FC<Props> = (props) => {
     const calculatedDexModifier = CalculateAbilityScoreModifier(
@@ -38,9 +41,12 @@ const ACView: React.FC<Props> = (props) => {
         props.wornArmor.dexCap >= calculatedDexModifier
             ? calculatedDexModifier
             : props.wornArmor.dexCap;
-    const wornProficiency = getArmorProficiencyForCurrentPC(
-        props.wornArmor.category
-    );
+    const wornProficiency = props.isCompanion
+        ? getArmorProficiencyForAnimalCompanion(
+              props.companionIndex!,
+              props.wornArmor.category
+          )
+        : getArmorProficiencyForCurrentPC(props.wornArmor.category);
     const dexOrCap = () => {
         if (props.wornArmor.dexCap >= calculatedDexModifier) {
             return <Text style={styles.calculatorText}>DEX</Text>;
@@ -53,23 +59,30 @@ const ACView: React.FC<Props> = (props) => {
         }
     };
     const currentBonuses = GetCurrentPCBonuses();
-    const bonusesForAc = GetBonusesFor("ac", currentBonuses);
+    const bonusesForAc = props.isCompanion
+        ? GetBonusesFor("companion_ac", currentBonuses)
+        : GetBonusesFor("ac", currentBonuses);
     const total =
         10 +
         modifier +
-        props.level +
         bonusesForAc.circumstance +
         bonusesForAc.item +
         bonusesForAc.status +
         GetProficiencyTotalWithLevel(wornProficiency, props.level);
 
     const navigateToWornArmorEditor = () => {
-        props.navigation.navigate("EditWornArmor");
+        if (props.isCompanion) {
+            return;
+        }
+        props.navigation!.navigate("EditWornArmor");
     };
 
     return (
         <Layout style={styles.container}>
-            <TouchableOpacity onPress={navigateToWornArmorEditor}>
+            <TouchableOpacity
+                onPress={navigateToWornArmorEditor}
+                disabled={props.isCompanion}
+            >
                 <Layout style={styles.horizontal}>
                     <Text style={{ paddingLeft: 10 }} category="h5">
                         AC
@@ -112,11 +125,7 @@ const ACView: React.FC<Props> = (props) => {
                         Armor
                     </Text>
                     <Text style={styles.calculatorNumber}>
-                        +
-                        {GetProficiencyTotalWithLevel(
-                            wornProficiency,
-                            props.level
-                        )}
+                        +{GetProficiencyTotalWithoutLevel(wornProficiency)}
                     </Text>
                     <Text style={styles.calculatorText}>Prof</Text>
                     <Text style={{ ...styles.calculatorNumber, flex: 0.65 }}>
@@ -130,6 +139,70 @@ const ACView: React.FC<Props> = (props) => {
         </Layout>
     );
 };
+
+interface OwnProps {
+    navigation?: MainDefenseNavigationProps;
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
+
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
+
+interface LinkDispatchProps {}
+
+interface LinkStateProps {
+    dexterity: AbilityScore;
+    wornArmor: Armor;
+    level: number;
+    bonuses: iBonus[];
+}
+
+const mapDispatchToProps = (): LinkDispatchProps => {
+    return {};
+};
+
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion) {
+        const companion: Companion =
+            state.playerCharacter.companions[ownProps.companionIndex!];
+        const armors: Armor[] = companion.inventory.items.filter<Armor>(
+            IsArmor
+        );
+        const wornCompanionArmor: Armor | undefined = armors.find(
+            (armor) => armor.worn
+        );
+        const wornArmor = wornCompanionArmor
+            ? wornCompanionArmor
+            : DEFAULT_COMPANION_ARMOR;
+        return {
+            dexterity: companion.abilityScores.Dexterity,
+            level: state.playerCharacter.level,
+            wornArmor: wornArmor,
+            bonuses: state.playerCharacter.bonuses.filter(
+                (x) => x.appliesTo === "companion_ac"
+            ),
+        };
+    } else {
+        const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
+            IsArmor
+        );
+        const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
+
+        return {
+            dexterity: state.playerCharacter.abilityScores.Dexterity,
+            level: state.playerCharacter.level,
+            wornArmor: wornArmor ? wornArmor : DEFAULT_ARMOR,
+            bonuses: state.playerCharacter.bonuses.filter(
+                (x) => x.appliesTo === "ac"
+            ),
+        };
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ACView);
 
 const styles = StyleSheet.create({
     container: {
@@ -158,38 +231,3 @@ const styles = StyleSheet.create({
         textAlign: "right",
     },
 });
-
-type Props = LinkDispatchProps & LinkStateProps & OwnProps;
-
-interface LinkDispatchProps {}
-
-interface LinkStateProps {
-    dexterity: AbilityScore;
-    armorProficiencies: ArmorProficiencies;
-    wornArmor: Armor;
-    level: number;
-    bonuses: iBonus[];
-}
-
-const mapDispatchToProps = (): LinkDispatchProps => {
-    return {};
-};
-
-const mapStateToProps = (state: EntireAppState): LinkStateProps => {
-    const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
-        IsArmor
-    );
-    const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
-
-    return {
-        dexterity: state.playerCharacter.abilityScores.Dexterity,
-        armorProficiencies: state.playerCharacter.armorProficiencies,
-        level: state.playerCharacter.level,
-        wornArmor: wornArmor ? wornArmor : DEFAULT_ARMOR,
-        bonuses: state.playerCharacter.bonuses.filter(
-            (x) => x.appliesTo === "ac"
-        ),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ACView);

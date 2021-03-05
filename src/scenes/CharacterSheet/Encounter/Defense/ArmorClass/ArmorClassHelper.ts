@@ -26,3 +26,20 @@ export const getArmorProficiencyForCurrentPC = (
         }
     }
 };
+export const getArmorProficiencyForAnimalCompanion = (
+    index: number,
+    wornArmorCategory: ArmorCategory
+): Proficiencies => {
+    const companion = Store.getState().playerCharacter.companions[index];
+    switch (wornArmorCategory) {
+        case "Unarmored": {
+            return companion.unarmoredProficiency;
+        }
+        case "Barding": {
+            return companion.bardingProficiency;
+        }
+        default: {
+            return Proficiencies.Untrained;
+        }
+    }
+};

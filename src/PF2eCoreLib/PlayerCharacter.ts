@@ -55,7 +55,7 @@ interface PlayerCharacter {
     traits: (keyof typeof Traits)[];
     weakness: string;
     weaponProficiencies: WeaponProficiencies;
-    companion?: Companion;
+    companions: Companion[];
     familiar?: Familiar;
 }
 
@@ -543,6 +543,42 @@ export const DEFAULT_ARMOR_ONLY_PROPS: Omit<Armor, keyof Item> = {
     strengthRequirement: 0,
     wornBulk: 0,
     armorGroup: ArmorGroup.Clothing,
+};
+export const DEFAULT_COMPANION_ARMOR: Armor = {
+    id: Guid.create(),
+    description: "Fur or feathers",
+    invested: false,
+    worn: true,
+    readied: false,
+    name: "Fur or Feathers",
+    category: ArmorCategory.Unarmored,
+    level: 0,
+    price: { Copper: 0, Silver: 0, Gold: 0, Platinum: 0 },
+    acBonus: {
+        type: BonusType.Item,
+        appliesTo: "ac",
+        amount: 0,
+        source: "",
+    },
+    dexCap: 10,
+    checkPenalty: {
+        type: BonusType.Armor,
+        appliesTo: "StrAndDexChecks",
+        amount: 0,
+        source: "",
+    },
+    speedPenalty: {
+        type: BonusType.Armor,
+        appliesTo: "speed",
+        amount: 0,
+        source: "",
+    },
+    strengthRequirement: 0,
+    bulk: 0,
+    wornBulk: 0,
+    armorGroup: ArmorGroup.Clothing,
+    traits: [],
+    isContainer: false,
 };
 export const DEFAULT_ARMOR: Armor = {
     id: Guid.create(),
