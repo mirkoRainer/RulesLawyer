@@ -29,6 +29,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { MainDefenseNavigationProps } from "../../DefenseNavigation";
 import {
     GetBonusesFor,
+    GetCompanionBonuses,
     GetCurrentPCBonuses,
     iBonus,
 } from "../../../../../PF2eCoreLib/Bonus";
@@ -58,9 +59,11 @@ const ACView: React.FC<Props> = (props) => {
             );
         }
     };
-    const currentBonuses = GetCurrentPCBonuses();
+    const currentBonuses = props.isCompanion
+        ? GetCompanionBonuses(props.companionIndex!)
+        : GetCurrentPCBonuses();
     const bonusesForAc = props.isCompanion
-        ? GetBonusesFor("companion_ac", currentBonuses)
+        ? GetBonusesFor("ac", currentBonuses)
         : GetBonusesFor("ac", currentBonuses);
     const total =
         10 +
@@ -182,7 +185,7 @@ const mapStateToProps = (
             level: state.playerCharacter.level,
             wornArmor: wornArmor,
             bonuses: state.playerCharacter.bonuses.filter(
-                (x) => x.appliesTo === "companion_ac"
+                (x) => x.appliesTo === "ac"
             ),
         };
     } else {
