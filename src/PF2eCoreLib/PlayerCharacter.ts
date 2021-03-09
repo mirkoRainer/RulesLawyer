@@ -55,11 +55,11 @@ interface PlayerCharacter {
     traits: (keyof typeof Traits)[];
     weakness: string;
     weaponProficiencies: WeaponProficiencies;
-    companion?: Companion;
+    companions: Companion[];
     familiar?: Familiar;
 }
 
-interface Companion {
+export interface Companion {
     abilityScores: AbilityScoreArray;
     actions: PF2Action[];
     advancement: {
@@ -152,7 +152,9 @@ export const DEFAULT_COMPANION: Companion = {
     immunities: "",
     inventory: { items: [] },
     languages: ["Common"],
-    metaData: {},
+    metaData: {
+        id: Guid.create(),
+    },
     name: "Fido",
     perception: Proficiencies.Trained,
     resistance: "",
@@ -368,7 +370,9 @@ export interface MagicTraditions {
     occult: boolean;
 }
 
-export interface Metadata {}
+export interface Metadata {
+    id: Guid;
+}
 
 export type Movement = {
     landSpeed: number;

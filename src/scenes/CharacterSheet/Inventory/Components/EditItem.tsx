@@ -118,7 +118,11 @@ const EditItem: React.FC<Props> = (props) => {
 
     const updateInventoryState = () => {
         Keyboard.dismiss();
-        props.updateInventoryItem(state.item);
+        let item = state.item;
+        if (isNaN(item.level)) item.level = 0;
+        if (isNaN(item.bulk)) item.bulk = 0;
+        if (item.quantity && isNaN(item.quantity)) item.quantity = 0;
+        props.updateInventoryItem(item);
         props.navigation.goBack();
     };
 
@@ -129,22 +133,16 @@ const EditItem: React.FC<Props> = (props) => {
         });
     };
     const onChangeItemLevel = (text: string) => {
-        const valid = isNumbersOnly(text) && parseInt(text) >= 0;
-        if (valid) {
-            setState({
-                ...state,
-                item: { ...state.item, level: parseInt(text) },
-            });
-        }
+        setState({
+            ...state,
+            item: { ...state.item, level: parseInt(text) },
+        });
     };
     const onChangeBulk = (text: string) => {
-        const valid = isNumbersOnly(text) && parseInt(text) >= 0;
-        if (valid) {
-            setState({
-                ...state,
-                item: { ...state.item, bulk: parseInt(text) },
-            });
-        }
+        setState({
+            ...state,
+            item: { ...state.item, bulk: parseInt(text) },
+        });
     };
     const onChangeDescription = (text: string) => {
         setState({
@@ -174,13 +172,10 @@ const EditItem: React.FC<Props> = (props) => {
         });
     };
     const onChangeQuantity = (text: string) => {
-        const valid = isNumbersOnly(text) && parseInt(text) >= 0;
-        if (valid) {
-            setState({
-                ...state,
-                item: { ...state.item, quantity: parseInt(text) },
-            });
-        }
+        setState({
+            ...state,
+            item: { ...state.item, quantity: parseInt(text) },
+        });
     };
     const onChangeReadied = (toggle: boolean) => {
         setState({
@@ -261,7 +256,11 @@ const EditItem: React.FC<Props> = (props) => {
                     <Input
                         label={"Level"}
                         placeholder="Item Level"
-                        value={state.item.level.toString()}
+                        value={
+                            isNaN(state.item.level)
+                                ? ""
+                                : state.item.level.toString()
+                        }
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={onChangeItemLevel}
@@ -270,7 +269,11 @@ const EditItem: React.FC<Props> = (props) => {
                     <Input
                         label={"Bulk"}
                         placeholder="Item Bulk"
-                        value={state.item.bulk.toString()}
+                        value={
+                            isNaN(state.item.bulk)
+                                ? ""
+                                : state.item.bulk.toString()
+                        }
                         size="medium"
                         keyboardType="numeric"
                         onChangeText={onChangeBulk}
@@ -339,9 +342,10 @@ const EditItem: React.FC<Props> = (props) => {
                         placeholder="Number of things you have"
                         value={
                             state.item.quantity
-                                ? state.item.quantity.toString()
-                                : "0"
+                                ? state.item.quantity?.toString()
+                                : ""
                         }
+                        keyboardType="numeric"
                         onChangeText={onChangeQuantity}
                         style={{ flex: 1, paddingHorizontal: 5 }}
                     />
