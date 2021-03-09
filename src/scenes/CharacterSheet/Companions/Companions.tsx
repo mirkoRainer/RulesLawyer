@@ -1,59 +1,52 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Button, Divider, Layout, Text } from "@ui-kitten/components";
-import {
-    CompanionsStackParamList,
-    MainCompanionNavigationProps,
-} from "./CompanionsNavigator";
+import { Layout, Text } from "@ui-kitten/components";
 import { Companion } from "../../../PF2eCoreLib/PlayerCharacter";
-import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
-import { PropsService } from "@ui-kitten/components/devsupport";
-import { CompanionView } from "./Companion";
-import { ScrollView } from "react-native-gesture-handler";
+import { EntireAppState } from "../../../store/Store";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { CompanionView } from "./CompanionView";
 
-type OwnProps = {
-    navigation: MainCompanionNavigationProps;
-};
-
-const Companions: React.FC<Props> = ({ navigation, companions, level }) => {
-    let render: JSX.Element[] = [];
-    companions.forEach((x, index) => {
-        render.push(
-            <CompanionView
-                companion={x}
-                index={index}
-                key={index}
-                level={level}
-            />
-        );
-    });
+const Companions: React.FC<Props> = (props) => {
+    const render: JSX.Element[] =
+        props.companions.length > 0
+            ? props.companions.map<JSX.Element>((companion, index) => {
+                  return (
+                      <CompanionView
+                          companion={companion}
+                          key={index}
+                          index={index}
+                      />
+                  );
+              })
+            : [];
     return (
         <Layout style={{ flex: 1 }}>
-            <Text style={styles.centered} category="h5">
-                Companions
-            </Text>
-            <Divider />
-            <ScrollView>{render}</ScrollView>
+            {/* TODO [#43]: Finish Companion View 
+            Need to lay out something similar to the companion sheet from the APG. */}
+            <Text style={styles.centered}>Companions</Text>
+            {render}
         </Layout>
     );
 };
 
-type Props = LinkDispatchProps & LinkStateProps & OwnProps;
+interface OwnProps {}
 
+type Props = LinkDispatchProps & LinkStateProps & {};
 interface LinkDispatchProps {}
 
-interface LinkStateProps {
-    companions: Companion[];
-    level: number;
-}
-
-const mapDispatchToProps = (): LinkDispatchProps => {
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>,
+    ownProps: OwnProps
+): LinkDispatchProps => {
     return {};
 };
 
+interface LinkStateProps {
+    companions: Companion[];
+}
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    level: state.playerCharacter.level,
     companions: state.playerCharacter.companions,
 });
 

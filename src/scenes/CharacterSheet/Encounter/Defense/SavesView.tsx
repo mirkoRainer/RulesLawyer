@@ -79,7 +79,7 @@ const SavesView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={{ flex: 1 }}>
-            <TouchableOpacity onPress={changeFort}>
+            <TouchableOpacity disabled={props.isCompanion} onPress={changeFort}>
                 <ProficiencyView
                     title={"Fortitude"}
                     keyAbility={props.constitution}
@@ -88,7 +88,10 @@ const SavesView: React.FC<Props> = (props) => {
                     itemBonus={fortitudeSave().itemBonus}
                 />
             </TouchableOpacity>
-            <TouchableOpacity onPress={changeReflex}>
+            <TouchableOpacity
+                disabled={props.isCompanion}
+                onPress={changeReflex}
+            >
                 <ProficiencyView
                     title={"Reflex"}
                     keyAbility={props.dexterity}
@@ -97,7 +100,7 @@ const SavesView: React.FC<Props> = (props) => {
                     itemBonus={reflexSave().itemBonus}
                 />
             </TouchableOpacity>
-            <TouchableOpacity onPress={changeWill}>
+            <TouchableOpacity disabled={props.isCompanion} onPress={changeWill}>
                 <ProficiencyView
                     title={"Will"}
                     keyAbility={props.wisdom}
@@ -110,7 +113,12 @@ const SavesView: React.FC<Props> = (props) => {
     );
 };
 
-type Props = LinkDispatchProps & LinkStateProps;
+interface OwnProps {
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
+
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
 interface LinkDispatchProps {
     changeSaves: (saves: Saves) => void;
@@ -135,14 +143,39 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    constitution: state.playerCharacter.abilityScores.Constitution,
-    dexterity: state.playerCharacter.abilityScores.Dexterity,
-    wisdom: state.playerCharacter.abilityScores.Wisdom,
-    level: state.playerCharacter.level,
-    saves: state.playerCharacter.saves,
-    bonuses: state.playerCharacter.bonuses,
-});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion) {
+        return {
+            constitution:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .abilityScores.Constitution,
+            dexterity:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .abilityScores.Dexterity,
+            wisdom:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .abilityScores.Wisdom,
+            level: state.playerCharacter.level,
+            saves:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .saves,
+            bonuses:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .bonuses,
+        };
+    }
+    return {
+        constitution: state.playerCharacter.abilityScores.Constitution,
+        dexterity: state.playerCharacter.abilityScores.Dexterity,
+        wisdom: state.playerCharacter.abilityScores.Wisdom,
+        level: state.playerCharacter.level,
+        saves: state.playerCharacter.saves,
+        bonuses: state.playerCharacter.bonuses,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SavesView);
 

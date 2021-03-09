@@ -16,7 +16,7 @@ type Props = {};
 const Exploration: React.FC<Props> = (props) => {
     /* TODO [#35]: Make the text display prettier for Exploration Page */
     return (
-        <Layout>
+        <Layout style={{ flex: 1 }}>
             <ScrollView>
                 <AvoidNoticeActivity />
                 <DefendActivity />

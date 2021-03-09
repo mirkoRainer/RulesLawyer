@@ -2,51 +2,59 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 
-import { AbilityScoreArray } from "../../../../../PF2eCoreLib/AbilityScores";
+import {
+    AbilityScore,
+    AbilityScoreArray,
+} from "../../../../../PF2eCoreLib/AbilityScores";
 import AbilityScoreView from "./AbilityScoreView";
 
 export interface Props {
     abilityScores: AbilityScoreArray;
+    companion?: boolean;
 }
 export interface State {}
 
 export default class AbilityScores extends Component<Props, State> {
     render() {
-        const Strength = this.props.abilityScores["Strength"];
-        const Dexterity = this.props.abilityScores["Dexterity"];
-        const Constitution = this.props.abilityScores["Constitution"];
-        const Intelligence = this.props.abilityScores["Intelligence"];
-        const Wisdom = this.props.abilityScores["Wisdom"];
-        const Charisma = this.props.abilityScores["Charisma"];
+        const Strength: AbilityScore = this.props.abilityScores["Strength"];
+        const Dexterity: AbilityScore = this.props.abilityScores["Dexterity"];
+        const Constitution: AbilityScore = this.props.abilityScores[
+            "Constitution"
+        ];
+        const Intelligence: AbilityScore = this.props.abilityScores[
+            "Intelligence"
+        ];
+        const Wisdom: AbilityScore = this.props.abilityScores["Wisdom"];
+        const Charisma: AbilityScore = this.props.abilityScores["Charisma"];
         return (
             <Layout style={styles.container}>
                 <Layout style={styles.rowContainer}>
                     <Layout style={styles.borderlessContainer}>
                         <AbilityScoreView
-                            ability={Strength.ability}
-                            score={Strength.score}
+                            abilityScore={Strength}
+                            companion={this.props.companion}
                         />
                         <AbilityScoreView
-                            ability={Dexterity.ability}
-                            score={Dexterity.score}
+                            abilityScore={Dexterity}
+                            companion={this.props.companion}
                         />
                         <AbilityScoreView
-                            ability={Constitution.ability}
-                            score={Constitution.score}
+                            abilityScore={Constitution}
+                            companion={this.props.companion}
                         />
                     </Layout>
                     <Layout style={styles.borderlessContainer}>
                         <AbilityScoreView
-                            ability={Intelligence.ability}
-                            score={Intelligence.score}
+                            abilityScore={Intelligence}
+                            companion={this.props.companion}
                         />
                         <AbilityScoreView
-                            ability={Wisdom.ability}
-                            score={Wisdom.score}
+                            abilityScore={Wisdom}
+                            companion={this.props.companion}
                         />
                         <AbilityScoreView
-                            ability={Charisma.ability}
-                            score={Charisma.score}
+                            abilityScore={Charisma}
+                            companion={this.props.companion}
                         />
                     </Layout>
                 </Layout>

@@ -116,6 +116,8 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
 
     const Tab = createBottomTabNavigator<CharacterSheetTabParamList>();
     // @ts-ignore
+    const companion: boolean =
+        props.playerCharacter.companions.length > 0 ? true : false;
     const BottomTabBar = ({ navigation, state }) => {
         return (
             <BottomNavigation

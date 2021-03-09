@@ -541,6 +541,13 @@ export const examplePlayerCharacter: PlayerCharacter = {
     spellcastingAbilityModifier: Ability.Wisdom,
     spellAttackProficiency: Proficiencies.Trained,
     bonuses: [
+        // AC bonus from worn armor
+        {
+            type: BonusType.Item,
+            appliesTo: "ac",
+            amount: 2,
+            source: "armor",
+        },
         {
             type: BonusType.Item,
             appliesTo: "spellAttack",
@@ -660,7 +667,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         {
             abilityScores: {
                 Strength: { score: 10, ability: Ability.Strength },
-                Constitution: { score: 20, ability: Ability.Constitution },
+                Constitution: { score: 12, ability: Ability.Constitution },
                 Dexterity: { score: 16, ability: Ability.Dexterity },
                 Intelligence: { score: 6, ability: Ability.Intelligence },
                 Wisdom: { score: 18, ability: Ability.Wisdom },
@@ -712,7 +719,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             perception: Proficiencies.Trained,
             resistance: "",
             saves: {
-                fortitude: Proficiencies.Expert,
+                fortitude: Proficiencies.Legendary,
                 reflex: Proficiencies.Trained,
                 will: Proficiencies.Expert,
             },
