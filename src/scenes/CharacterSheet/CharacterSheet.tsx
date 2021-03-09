@@ -41,7 +41,7 @@ import {
 } from "./Inventory/InventoryNavigation";
 import InventoryView from "./Inventory/InventoryView";
 import { NavigatorScreenParams } from "@react-navigation/core";
-import { Companions } from "./Companions/Companions";
+import { CompanionsNavigator } from "./Companions/CompanionsNavigator";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -117,9 +117,6 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     const Tab = createBottomTabNavigator<CharacterSheetTabParamList>();
     // @ts-ignore
     const BottomTabBar = ({ navigation, state }) => {
-        const companion: boolean = props.playerCharacter.companion
-            ? true
-            : false;
         return (
             <BottomNavigation
                 selectedIndex={state.index}
@@ -132,7 +129,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 <BottomNavigationTab title="⛺️" />
                 <BottomNavigationTab title="🧰" />
                 <BottomNavigationTab title="📖" />
-                {companion ? <BottomNavigationTab title="🐺" /> : <></>}
+                <BottomNavigationTab title="🐺" />
             </BottomNavigation>
         );
     };
@@ -180,7 +177,10 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                         component={InventoryNavigator}
                     />
                     <Tab.Screen name="Story" component={StoryNavigator} />
-                    <Tab.Screen name="Companions" component={Companions} />
+                    <Tab.Screen
+                        name="Companions"
+                        component={CompanionsNavigator}
+                    />
                 </Tab.Navigator>
                 <TextEditModal />
                 <PickerModal />
