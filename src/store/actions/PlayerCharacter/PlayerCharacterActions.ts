@@ -282,48 +282,80 @@ export const startChangeHitPoints = (
 };
 
 export const ChangeTemporaryHitPoints: ActionCreator<PlayerCharacterActionTypes> = (
-    TemporaryHitPoints: number
+    TemporaryHitPoints: number,
+    isCompanion?: boolean,
+    companionIndex?: number
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_TEMPORARY_HITPOINTS,
     TemporaryHitPoints,
+    isCompanion,
+    companionIndex,
 });
-export const startChangeTemporaryHitPoints = (delta: number) => {
+export const startChangeTemporaryHitPoints = (
+    delta: number,
+    isCompanion?: boolean,
+    companionIndex?: number
+) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeTemporaryHitPoints(delta));
     };
 };
 
 export const ChangeDyingValue: ActionCreator<PlayerCharacterActionTypes> = (
-    DyingValue: number
+    DyingValue: number,
+    isCompanion?: boolean,
+    companionIndex?: number
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_DYING_VALUE,
     DyingValue,
+    isCompanion,
+    companionIndex,
 });
-export const startChangeDyingValue = (DyingValue: number) => {
+export const startChangeDyingValue = (
+    DyingValue: number,
+    isCompanion?: boolean,
+    companionIndex?: number
+) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeDyingValue(DyingValue));
     };
 };
 
 export const ChangeWoundedValue: ActionCreator<PlayerCharacterActionTypes> = (
-    WoundedValue: number
+    WoundedValue: number,
+    isCompanion?: boolean,
+    companionIndex?: number
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_WOUNDED_VALUE,
     WoundedValue,
+    isCompanion,
+    companionIndex,
 });
-export const startChangeWoundedValue = (WoundedValue: number) => {
+export const startChangeWoundedValue = (
+    WoundedValue: number,
+    isCompanion?: boolean,
+    companionIndex?: number
+) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeWoundedValue(WoundedValue));
     };
 };
 
 export const ChangeMaxHitPoints: ActionCreator<PlayerCharacterActionTypes> = (
-    MaxHitPoints: number
+    MaxHitPoints: number,
+    isCompanion?: boolean,
+    companionIndex?: number
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_MAX_HITPOINTS,
     MaxHitPoints,
+    isCompanion,
+    companionIndex,
 });
-export const startChangeMaxHitPoints = (MaxHitPoints: number) => {
+export const startChangeMaxHitPoints = (
+    MaxHitPoints: number,
+    isCompanion?: boolean,
+    companionIndex?: number
+) => {
     return (dispatch: Dispatch<AppActions>) => {
         dispatch(ChangeMaxHitPoints(MaxHitPoints));
     };

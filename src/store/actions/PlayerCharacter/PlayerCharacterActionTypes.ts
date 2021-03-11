@@ -145,24 +145,32 @@ export const CHANGE_TEMPORARY_HITPOINTS = "CHANGE_TEMPORARY_HITPOINTS";
 export interface ChangeTemporaryHitPointsAction extends Action<string> {
     type: typeof CHANGE_TEMPORARY_HITPOINTS;
     TemporaryHitPoints: number;
+    isCompanion?: boolean;
+    companionIndex?: number;
 }
 
 export const CHANGE_DYING_VALUE = "CHANGE_DYING_VALUE";
 export interface ChangeDyingValueAction extends Action<string> {
     type: typeof CHANGE_DYING_VALUE;
     DyingValue: number;
+    isCompanion?: boolean;
+    companionIndex?: number;
 }
 
 export const CHANGE_WOUNDED_VALUE = "CHANGE_WOUNDED_VALUE";
 export interface ChangeWoundedAction extends Action<string> {
     type: typeof CHANGE_WOUNDED_VALUE;
     WoundedValue: number;
+    isCompanion?: boolean;
+    companionIndex?: number;
 }
 
 export const CHANGE_MAX_HITPOINTS = "CHANGE_MAX_HITPOINTS";
 export interface ChangeMaxHitPointsAction extends Action<string> {
     type: typeof CHANGE_MAX_HITPOINTS;
     MaxHitPoints: number;
+    isCompanion?: boolean;
+    companionIndex?: number;
 }
 
 export const CHANGE_SHIELD = "CHANGE_SHIELD";

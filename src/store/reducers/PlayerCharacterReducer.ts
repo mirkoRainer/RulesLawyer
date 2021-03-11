@@ -172,7 +172,7 @@ const playerCharacterReducer = (
                 );
                 const newCompanions = state.companions.map(
                     (companion, index) => {
-                        if (indexOf(state.companions, companion) === index) {
+                        if (action.companionIndex === index) {
                             return {
                                 ...companion,
                                 hitPoints: newCompanion.hitPoints,
@@ -200,6 +200,31 @@ const playerCharacterReducer = (
             };
         case CHANGE_TEMPORARY_HITPOINTS:
             console.debug("CHANGE_TEMPORARY_HITPOINTS");
+            if (action.isCompanion && action.companionIndex !== undefined) {
+                const newCompanions = state.companions.map(
+                    (companion, index) => {
+                        if (action.companionIndex === index) {
+                            return {
+                                ...companion,
+                                hitPoints: {
+                                    ...companion.hitPoints,
+                                    temporaryHitPoints:
+                                        action.TemporaryHitPoints,
+                                },
+                            };
+                        }
+                        return companion;
+                    }
+                );
+                return {
+                    ...state,
+                    companions: newCompanions,
+                };
+            }
+            if (action.isCompanion && !action.companionIndex) {
+                console.error("No companion index found. Changing nothing.");
+                return { ...state };
+            }
             return {
                 ...state,
                 hitPoints: {
@@ -211,6 +236,26 @@ const playerCharacterReducer = (
             console.debug(
                 `CHANGE_DYING_VALUE in reducer. ${action.DyingValue}`
             );
+            if (action.isCompanion && action.companionIndex !== undefined) {
+                const newCompanions = state.companions.map(
+                    (companion, index) => {
+                        if (action.companionIndex === index) {
+                            return {
+                                ...companion,
+                                hitPoints: {
+                                    ...companion.hitPoints,
+                                    dying: action.DyingValue,
+                                },
+                            };
+                        }
+                        return companion;
+                    }
+                );
+                return {
+                    ...state,
+                    companions: newCompanions,
+                };
+            }
             return {
                 ...state,
                 hitPoints: {
@@ -222,6 +267,26 @@ const playerCharacterReducer = (
             console.debug(
                 `CHANGE_WOUNDED_VALUE in reducer. ${action.WoundedValue}`
             );
+            if (action.isCompanion && action.companionIndex !== undefined) {
+                const newCompanions = state.companions.map(
+                    (companion, index) => {
+                        if (action.companionIndex === index) {
+                            return {
+                                ...companion,
+                                hitPoints: {
+                                    ...companion.hitPoints,
+                                    wounded: action.WoundedValue,
+                                },
+                            };
+                        }
+                        return companion;
+                    }
+                );
+                return {
+                    ...state,
+                    companions: newCompanions,
+                };
+            }
             return {
                 ...state,
                 hitPoints: {
@@ -233,6 +298,26 @@ const playerCharacterReducer = (
             console.debug(
                 `CHANGE_MAX_HITPOINTS in reducer. ${action.MaxHitPoints}`
             );
+            if (action.isCompanion && action.companionIndex !== undefined) {
+                const newCompanions = state.companions.map(
+                    (companion, index) => {
+                        if (action.companionIndex === index) {
+                            return {
+                                ...companion,
+                                hitPoints: {
+                                    ...companion.hitPoints,
+                                    maxHitPoints: action.MaxHitPoints,
+                                },
+                            };
+                        }
+                        return companion;
+                    }
+                );
+                return {
+                    ...state,
+                    companions: newCompanions,
+                };
+            }
             return {
                 ...state,
                 hitPoints: {
