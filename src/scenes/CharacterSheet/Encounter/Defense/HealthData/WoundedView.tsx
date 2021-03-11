@@ -58,8 +58,8 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    woundedValue: state.playerCharacter.hitPoint.wounded,
-    maxDying: state.playerCharacter.hitPoint.maxDying,
+    woundedValue: state.playerCharacter.hitPoints.wounded,
+    maxDying: state.playerCharacter.hitPoints.maxDying,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WoundedView);

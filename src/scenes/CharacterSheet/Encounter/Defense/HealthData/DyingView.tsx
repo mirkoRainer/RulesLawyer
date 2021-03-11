@@ -58,8 +58,8 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    dyingValue: state.playerCharacter.hitPoint.dying,
-    maxDying: state.playerCharacter.hitPoint.maxDying,
+    dyingValue: state.playerCharacter.hitPoints.dying,
+    maxDying: state.playerCharacter.hitPoints.maxDying,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DyingView);

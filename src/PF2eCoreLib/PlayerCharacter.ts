@@ -28,7 +28,7 @@ interface PlayerCharacter {
     deity: string;
     experiencePoints: number;
     generalFeats: FeatOrAbility[];
-    hitPoint: HealthData;
+    hitPoints: HealthData;
     immunities: string;
     inventory: Inventory;
     languages: string[];

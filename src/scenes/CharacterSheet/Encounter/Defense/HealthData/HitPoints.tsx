@@ -11,21 +11,19 @@ import DyingView from "./DyingView";
 import WoundedView from "./WoundedView";
 import { CHANGE_MAX_HITPOINTS } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
-
-export interface HitPointProps {
-    max: number;
-    current: number;
-    temporary: number;
-    dying: number;
-    wounded: number;
-}
+import { HealthData } from "../../../../../PF2eCoreLib/HealthData";
 
 const HitPoints: React.FC<Props> = (props) => {
     const PlusHPButton = (amount: number) => (
         // @ts-ignore
         <Button
             onPress={() => {
-                props.AdjustHitPoints(amount, false);
+                props.AdjustHitPoints(
+                    amount,
+                    false,
+                    props.isCompanion,
+                    props.companionIndex
+                );
             }}
             style={styles.plus}
         >
@@ -36,7 +34,12 @@ const HitPoints: React.FC<Props> = (props) => {
         // @ts-ignore
         <Button
             onPress={() => {
-                props.AdjustHitPoints(-amount, false);
+                props.AdjustHitPoints(
+                    -amount,
+                    false,
+                    props.isCompanion,
+                    props.companionIndex
+                );
             }}
             style={styles.minus}
         >
@@ -46,12 +49,21 @@ const HitPoints: React.FC<Props> = (props) => {
 
     const handleHPTap = () => {
         console.debug("handleHPTap");
-        props.startPickerModal(CHANGE_MAX_HITPOINTS, props.max);
+        props.startPickerModal(
+            CHANGE_MAX_HITPOINTS,
+            props.healthData.maxHitPoints
+        );
     };
 
     const maxHP = () => {
-        const delta = props.max - props.current;
-        props.AdjustHitPoints(delta, false);
+        const delta =
+            props.healthData.maxHitPoints - props.healthData.currentHitPoints;
+        props.AdjustHitPoints(
+            delta,
+            false,
+            props.isCompanion,
+            props.companionIndex
+        );
     };
 
     return (
@@ -74,7 +86,8 @@ const HitPoints: React.FC<Props> = (props) => {
                         </Text>
                         <Text category="h4" style={styles.text}>
                             {" "}
-                            {props.current}/{props.max}{" "}
+                            {props.healthData.currentHitPoints}/
+                            {props.healthData.maxHitPoints}{" "}
                         </Text>
                     </TouchableOpacity>
                     <Button size="tiny" status="basic" onPress={maxHP}>
@@ -98,15 +111,27 @@ const HitPoints: React.FC<Props> = (props) => {
     );
 };
 
-type Props = HitPointProps & LinkDispatchProps;
+type Props = OwnProps & LinkDispatchProps;
+
+interface OwnProps {
+    healthData: HealthData;
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
 
 interface LinkDispatchProps {
-    AdjustHitPoints: (delta: number, removesWounded: boolean) => void;
+    AdjustHitPoints: (
+        delta: number,
+        removesWounded: boolean,
+        isCompanion?: boolean,
+        companionIndex?: number
+    ) => void;
     startPickerModal: (actionType: string, maxHitPoints: number) => void;
 }
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>
+    dispatch: ThunkDispatch<any, any, AppActions>,
+    ownProp: OwnProps
 ): LinkDispatchProps => ({
     AdjustHitPoints: bindActionCreators(startChangeHitPoints, dispatch),
     startPickerModal: bindActionCreators(

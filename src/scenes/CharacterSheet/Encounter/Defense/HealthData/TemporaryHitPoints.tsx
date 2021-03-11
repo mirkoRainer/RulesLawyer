@@ -58,7 +58,7 @@ const mapDispatchToProps = (
 };
 
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    temporaryHitPoints: state.playerCharacter.hitPoint.temporaryHitPoints,
+    temporaryHitPoints: state.playerCharacter.hitPoints.temporaryHitPoints,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemporaryHitPoints);

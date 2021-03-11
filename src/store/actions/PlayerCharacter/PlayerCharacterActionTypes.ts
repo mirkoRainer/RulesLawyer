@@ -137,6 +137,8 @@ export interface ChangeHitPointsAction extends Action<string> {
     type: typeof CHANGE_HIT_POINTS;
     HitPointDelta: number;
     RemovesWounded: boolean;
+    isCompanion?: boolean;
+    companionIndex?: number;
 }
 
 export const CHANGE_TEMPORARY_HITPOINTS = "CHANGE_TEMPORARY_HITPOINTS";

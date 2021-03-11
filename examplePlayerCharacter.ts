@@ -182,7 +182,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
         { title: "Feat 13th", description: "other Dwarf Stuff" },
         { title: "Feat 17th", description: "other Dwarf Stuff" },
     ],
-    hitPoint: {
+    hitPoints: {
         maxHitPoints: 30,
         currentHitPoints: 30,
         temporaryHitPoints: 2,
@@ -702,9 +702,9 @@ export const examplePlayerCharacter: PlayerCharacter = {
             conditions: "",
             feats: [],
             hitPoints: {
-                maxHitPoints: 30,
-                currentHitPoints: 30,
-                temporaryHitPoints: 2,
+                maxHitPoints: 20,
+                currentHitPoints: 20,
+                temporaryHitPoints: 4,
                 dying: 0,
                 maxDying: 4,
                 wounded: 1,

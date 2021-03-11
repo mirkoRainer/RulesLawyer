@@ -23,8 +23,6 @@ const Companions: React.FC<Props> = (props) => {
             : [];
     return (
         <Layout style={{ flex: 1 }}>
-            {/* TODO [#43]: Finish Companion View 
-            Need to lay out something similar to the companion sheet from the APG. */}
             <Text style={styles.centered}>Companions</Text>
             {render}
         </Layout>

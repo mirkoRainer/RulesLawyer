@@ -49,7 +49,7 @@ import {
     CHANGE_PERCEPTION_PROFICIENCY,
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
-import _ from "lodash";
+import _, { indexOf } from "lodash";
 import {
     InsertOrUpdateBonus,
     RemoveBonus,
@@ -163,10 +163,37 @@ const playerCharacterReducer = (
         case CHANGE_HIT_POINTS:
             console.debug("CHANGE_HIT_POINTS");
             console.debug(`action: ${JSON.stringify(action, null, 1)}`);
+            if (action.isCompanion && action.companionIndex !== undefined) {
+                const newCompanion = state.companions[action.companionIndex];
+                newCompanion.hitPoints = ResolveHitPoints(
+                    newCompanion.hitPoints,
+                    action.HitPointDelta,
+                    action.RemovesWounded
+                );
+                const newCompanions = state.companions.map(
+                    (companion, index) => {
+                        if (indexOf(state.companions, companion) === index) {
+                            return {
+                                ...companion,
+                                hitPoints: newCompanion.hitPoints,
+                            };
+                        }
+                        return companion;
+                    }
+                );
+                return {
+                    ...state,
+                    companions: newCompanions,
+                };
+            }
+            if (action.isCompanion && !action.companionIndex) {
+                console.error("No companion index found. Changing nothing.");
+                return { ...state };
+            }
             return {
                 ...state,
-                hitPoint: ResolveHitPoints(
-                    state.hitPoint,
+                hitPoints: ResolveHitPoints(
+                    state.hitPoints,
                     action.HitPointDelta,
                     action.RemovesWounded
                 ),
@@ -175,8 +202,8 @@ const playerCharacterReducer = (
             console.debug("CHANGE_TEMPORARY_HITPOINTS");
             return {
                 ...state,
-                hitPoint: {
-                    ...state.hitPoint,
+                hitPoints: {
+                    ...state.hitPoints,
                     temporaryHitPoints: action.TemporaryHitPoints,
                 },
             };
@@ -186,8 +213,8 @@ const playerCharacterReducer = (
             );
             return {
                 ...state,
-                hitPoint: {
-                    ...state.hitPoint,
+                hitPoints: {
+                    ...state.hitPoints,
                     dying: action.DyingValue,
                 },
             };
@@ -197,8 +224,8 @@ const playerCharacterReducer = (
             );
             return {
                 ...state,
-                hitPoint: {
-                    ...state.hitPoint,
+                hitPoints: {
+                    ...state.hitPoints,
                     wounded: action.WoundedValue,
                 },
             };
@@ -208,8 +235,8 @@ const playerCharacterReducer = (
             );
             return {
                 ...state,
-                hitPoint: {
-                    ...state.hitPoint,
+                hitPoints: {
+                    ...state.hitPoints,
                     maxHitPoints: action.MaxHitPoints,
                 },
             };

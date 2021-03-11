@@ -253,18 +253,31 @@ export const startChangeClassDCProficiency = (
 
 export const ChangeHitPoints: ActionCreator<PlayerCharacterActionTypes> = (
     HitPointDelta: number,
-    RemovesWounded: boolean
+    RemovesWounded: boolean,
+    isCompanion?: boolean,
+    companionIndex?: number
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_HIT_POINTS,
     HitPointDelta,
     RemovesWounded,
+    isCompanion,
+    companionIndex,
 });
 export const startChangeHitPoints = (
     HitPointDelta: number,
-    RemovesWounded: boolean
+    RemovesWounded: boolean,
+    isCompanion?: boolean,
+    companionIndex?: number
 ) => {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(ChangeHitPoints(HitPointDelta, RemovesWounded));
+        dispatch(
+            ChangeHitPoints(
+                HitPointDelta,
+                RemovesWounded,
+                isCompanion,
+                companionIndex
+            )
+        );
     };
 };
 

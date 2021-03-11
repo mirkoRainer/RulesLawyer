@@ -20,15 +20,7 @@ const EncounterDefense: React.FC<Props> = (props) => {
         <Layout style={styles.container}>
             <ScrollView>
                 <Divider />
-                <HitPoints
-                    max={props.playerCharacter.hitPoint.maxHitPoints}
-                    current={props.playerCharacter.hitPoint.currentHitPoints}
-                    temporary={
-                        props.playerCharacter.hitPoint.temporaryHitPoints
-                    }
-                    dying={props.playerCharacter.hitPoint.dying}
-                    wounded={props.playerCharacter.hitPoint.wounded}
-                />
+                <HitPoints healthData={props.playerCharacter.hitPoints} />
                 <Divider />
                 <ACView navigation={props.navigation} />
                 <Divider />
