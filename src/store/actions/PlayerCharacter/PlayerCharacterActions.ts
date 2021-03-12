@@ -31,6 +31,7 @@ import {
 import { Traits } from "../../../PF2eCoreLib/Traits";
 import { PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
 import { iBonus } from "../../../PF2eCoreLib/Bonus";
+import { CommonActions } from "@react-navigation/native";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (
     name: string
@@ -297,7 +298,7 @@ export const startChangeTemporaryHitPoints = (
     companionIndex?: number
 ) => {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(ChangeTemporaryHitPoints(delta));
+        dispatch(ChangeTemporaryHitPoints(delta, isCompanion, companionIndex));
     };
 };
 
@@ -317,7 +318,7 @@ export const startChangeDyingValue = (
     companionIndex?: number
 ) => {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(ChangeDyingValue(DyingValue));
+        dispatch(ChangeDyingValue(DyingValue, isCompanion, companionIndex));
     };
 };
 
@@ -337,7 +338,7 @@ export const startChangeWoundedValue = (
     companionIndex?: number
 ) => {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(ChangeWoundedValue(WoundedValue));
+        dispatch(ChangeWoundedValue(WoundedValue, isCompanion, companionIndex));
     };
 };
 
@@ -357,7 +358,7 @@ export const startChangeMaxHitPoints = (
     companionIndex?: number
 ) => {
     return (dispatch: Dispatch<AppActions>) => {
-        dispatch(ChangeMaxHitPoints(MaxHitPoints));
+        dispatch(ChangeMaxHitPoints(MaxHitPoints, isCompanion, companionIndex));
     };
 };
 

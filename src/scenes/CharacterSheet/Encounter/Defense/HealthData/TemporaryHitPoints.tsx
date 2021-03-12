@@ -19,7 +19,11 @@ const TemporaryHitPoints: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.container}>
-            <TouchableOpacity style={styles.container} onPress={changeTempHP}>
+            <TouchableOpacity
+                style={styles.container}
+                onPress={changeTempHP}
+                disabled={props.isCompanion}
+            >
                 <Text style={styles.text} category="p1">
                     {" "}
                     Temp:{" "}
@@ -35,7 +39,10 @@ const TemporaryHitPoints: React.FC<Props> = (props) => {
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
-interface OwnProps {}
+interface OwnProps {
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
 
 interface LinkDispatchProps {
     startPickerModal: (actionType: string, tempHitPoints: number) => void;
@@ -57,9 +64,21 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    temporaryHitPoints: state.playerCharacter.hitPoints.temporaryHitPoints,
-});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion && ownProps.companionIndex !== undefined) {
+        return {
+            temporaryHitPoints:
+                state.playerCharacter.companions[ownProps.companionIndex]
+                    .hitPoints.temporaryHitPoints,
+        };
+    }
+    return {
+        temporaryHitPoints: state.playerCharacter.hitPoints.temporaryHitPoints,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemporaryHitPoints);
 

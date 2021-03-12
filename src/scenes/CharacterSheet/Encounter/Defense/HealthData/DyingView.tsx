@@ -12,9 +12,17 @@ const DyingView: React.FC<Props> = (props) => {
     const handleTapOnDying = () => {
         console.debug("handleTapOnDying");
         if (props.dyingValue === props.maxDying) {
-            props.changeDying(0); //reset Dying to 0 on tap if at max dying
+            props.changeDying(
+                0,
+                props.isCompanion ? true : false,
+                props.companionIndex
+            ); //reset Dying to 0 on tap if at max dying
         } else {
-            props.changeDying(props.dyingValue + 1);
+            props.changeDying(
+                props.dyingValue + 1,
+                props.isCompanion ? true : false,
+                props.companionIndex
+            );
         }
     };
 
@@ -37,10 +45,17 @@ const DyingView: React.FC<Props> = (props) => {
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
-interface OwnProps {}
+interface OwnProps {
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
 
 interface LinkDispatchProps {
-    changeDying: (DyingValue: number) => void;
+    changeDying: (
+        DyingValue: number,
+        isCompanion?: boolean,
+        companionIndex?: number
+    ) => void;
 }
 
 interface LinkStateProps {
@@ -57,10 +72,25 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    dyingValue: state.playerCharacter.hitPoints.dying,
-    maxDying: state.playerCharacter.hitPoints.maxDying,
-});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion) {
+        return {
+            dyingValue:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .hitPoints.dying,
+            maxDying:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .hitPoints.maxDying,
+        };
+    }
+    return {
+        dyingValue: state.playerCharacter.hitPoints.dying,
+        maxDying: state.playerCharacter.hitPoints.maxDying,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DyingView);
 

@@ -199,7 +199,13 @@ const playerCharacterReducer = (
                 ),
             };
         case CHANGE_TEMPORARY_HITPOINTS:
-            console.debug("CHANGE_TEMPORARY_HITPOINTS");
+            console.debug(
+                `CHANGE_TEMPORARY_HITPOINTS in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
             if (action.isCompanion && action.companionIndex !== undefined) {
                 const newCompanions = state.companions.map(
                     (companion, index) => {
@@ -234,7 +240,11 @@ const playerCharacterReducer = (
             };
         case CHANGE_DYING_VALUE:
             console.debug(
-                `CHANGE_DYING_VALUE in reducer. ${action.DyingValue}`
+                `CHANGE_DYING_VALUE in reducer. ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
             );
             if (action.isCompanion && action.companionIndex !== undefined) {
                 const newCompanions = state.companions.map(
@@ -265,7 +275,11 @@ const playerCharacterReducer = (
             };
         case CHANGE_WOUNDED_VALUE:
             console.debug(
-                `CHANGE_WOUNDED_VALUE in reducer. ${action.WoundedValue}`
+                `CHANGE_WOUNDED_VALUE in reducer. ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
             );
             if (action.isCompanion && action.companionIndex !== undefined) {
                 const newCompanions = state.companions.map(
@@ -296,7 +310,11 @@ const playerCharacterReducer = (
             };
         case CHANGE_MAX_HITPOINTS:
             console.debug(
-                `CHANGE_MAX_HITPOINTS in reducer. ${action.MaxHitPoints}`
+                `CHANGE_MAX_HITPOINTS in reducer. ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
             );
             if (action.isCompanion && action.companionIndex !== undefined) {
                 const newCompanions = state.companions.map(

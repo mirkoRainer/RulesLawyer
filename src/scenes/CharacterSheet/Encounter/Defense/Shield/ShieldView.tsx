@@ -148,7 +148,7 @@ const ShieldView: React.FC<Props> = (props) => {
         shields.push(
             <Layout key={shield.id.toString()}>
                 <Text category="h5" style={{ textAlign: "center" }}>
-                    Shield
+                    {shield.name}
                 </Text>
                 <Layout style={{ flexDirection: "row" }}>
                     {shield.currentHP > shield.breakThreshold ? (

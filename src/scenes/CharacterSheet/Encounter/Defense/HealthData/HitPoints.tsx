@@ -102,9 +102,18 @@ const HitPoints: React.FC<Props> = (props) => {
             </Layout>
             <Layout style={{ padding: 10, flex: 0.65 }}>
                 <Layout style={styles.rowContainer}>
-                    <TemporaryHitPoints />
-                    <DyingView />
-                    <WoundedView />
+                    <TemporaryHitPoints
+                        isCompanion={props.isCompanion}
+                        companionIndex={props.companionIndex}
+                    />
+                    <DyingView
+                        isCompanion={props.isCompanion}
+                        companionIndex={props.companionIndex}
+                    />
+                    <WoundedView
+                        isCompanion={props.isCompanion}
+                        companionIndex={props.companionIndex}
+                    />
                 </Layout>
             </Layout>
         </Layout>

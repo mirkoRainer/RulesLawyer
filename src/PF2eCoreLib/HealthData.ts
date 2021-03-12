@@ -48,7 +48,10 @@ const AddHitPoints = (healthData: HealthData, heal: number): HealthData => {
     }
     if (healthData.dying > 0 && currentHitPoints === 0) {
         newHealthData.dying = 0;
-        newHealthData.wounded += 1;
+        newHealthData.wounded =
+            newHealthData.wounded >= newHealthData.maxDying
+                ? 0
+                : newHealthData.wounded + 1;
         newHealthData.currentHitPoints = IncreaseHP(
             currentHitPoints,
             maxHitPoints,

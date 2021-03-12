@@ -1,4 +1,4 @@
-import { Layout, Text } from "@ui-kitten/components";
+import { Divider, Layout, Text } from "@ui-kitten/components";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,20 +13,21 @@ type Props = { companion: Companion; index: number };
 export const CompanionView: React.FC<Props> = (props) => {
     return (
         <Layout style={{ flex: 1 }}>
-            <Text style={styles.centered}>{props.companion.name}</Text>
-            <ScrollView>
-                <AbilityScores
-                    abilityScores={props.companion.abilityScores}
-                    companion={true}
-                />
-                <ACView isCompanion={true} companionIndex={props.index} />
-                <SavesView isCompanion={true} companionIndex={props.index} />
-                <HitPoints
-                    isCompanion={true}
-                    companionIndex={props.index}
-                    healthData={props.companion.hitPoints}
-                />
-            </ScrollView>
+            <Text style={styles.centered} category="h2">
+                {props.companion.name}
+            </Text>
+            <AbilityScores
+                abilityScores={props.companion.abilityScores}
+                companion={true}
+            />
+            <ACView isCompanion={true} companionIndex={props.index} />
+            <SavesView isCompanion={true} companionIndex={props.index} />
+            <HitPoints
+                isCompanion={true}
+                companionIndex={props.index}
+                healthData={props.companion.hitPoints}
+            />
+            <Divider />
         </Layout>
     );
 };

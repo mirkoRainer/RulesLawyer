@@ -11,10 +11,18 @@ import { bindActionCreators } from "redux";
 const WoundedView: React.FC<Props> = (props) => {
     const handleTapOnWounded = () => {
         console.debug("handleTapOnWounded");
-        if (props.woundedValue === props.maxDying) {
-            props.changeWounded(0); //reset Wounded to 0 on tap if at max dying
+        if (props.woundedValue >= props.maxDying) {
+            props.changeWounded(
+                0,
+                props.isCompanion ? true : false,
+                props.companionIndex
+            ); //reset Wounded to 0 on tap if at max dying
         } else {
-            props.changeWounded(props.woundedValue + 1);
+            props.changeWounded(
+                props.woundedValue + 1,
+                props.isCompanion ? true : false,
+                props.companionIndex
+            );
         }
     };
 
@@ -37,10 +45,16 @@ const WoundedView: React.FC<Props> = (props) => {
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
-interface OwnProps {}
-
+interface OwnProps {
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
 interface LinkDispatchProps {
-    changeWounded: (WoundedValue: number) => void;
+    changeWounded: (
+        WoundedValue: number,
+        isCompanion?: boolean,
+        companionIndex?: number
+    ) => void;
 }
 
 interface LinkStateProps {
@@ -57,10 +71,25 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    woundedValue: state.playerCharacter.hitPoints.wounded,
-    maxDying: state.playerCharacter.hitPoints.maxDying,
-});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion) {
+        return {
+            woundedValue:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .hitPoints.wounded,
+            maxDying:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .hitPoints.maxDying,
+        };
+    }
+    return {
+        woundedValue: state.playerCharacter.hitPoints.wounded,
+        maxDying: state.playerCharacter.hitPoints.maxDying,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(WoundedView);
 

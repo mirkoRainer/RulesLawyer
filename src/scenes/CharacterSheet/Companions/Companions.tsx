@@ -7,6 +7,7 @@ import { EntireAppState } from "../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { CompanionView } from "./CompanionView";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Companions: React.FC<Props> = (props) => {
     const render: JSX.Element[] =
@@ -24,7 +25,7 @@ const Companions: React.FC<Props> = (props) => {
     return (
         <Layout style={{ flex: 1 }}>
             <Text style={styles.centered}>Companions</Text>
-            {render}
+            <ScrollView>{render}</ScrollView>
         </Layout>
     );
 };
