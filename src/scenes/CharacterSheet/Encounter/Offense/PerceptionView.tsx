@@ -71,7 +71,10 @@ const PerceptionView: React.FC<Props> = (props) => {
 
     return (
         <Layout style={styles.flex1}>
-            <TouchableOpacity onPress={handleProficiencyChange}>
+            <TouchableOpacity
+                onPress={handleProficiencyChange}
+                disabled={props.isCompanion}
+            >
                 <Layout style={styles.horizontal}>
                     <Text style={styles.title10} category="h5">
                         Perception
@@ -87,14 +90,22 @@ const PerceptionView: React.FC<Props> = (props) => {
                     </Layout>
                 </Layout>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleChangeSenses}>
+            <TouchableOpacity
+                onPress={handleChangeSenses}
+                disabled={props.isCompanion}
+            >
                 {senses}
             </TouchableOpacity>
         </Layout>
     );
 };
 
-type Props = LinkDispatchProps & LinkStateProps;
+type Props = LinkDispatchProps & LinkStateProps & OwnProps;
+
+interface OwnProps {
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
 
 interface LinkDispatchProps {
     changeProficiency: (newProficiency: Proficiencies) => void;
@@ -121,13 +132,35 @@ const mapDispatchToProps = (
     };
 };
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    keyAbility: state.playerCharacter.abilityScores.Wisdom,
-    proficiency: state.playerCharacter.perceptionProficiency,
-    level: state.playerCharacter.level,
-    bonuses: state.playerCharacter.bonuses,
-    senses: state.playerCharacter.senses,
-});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion) {
+        return {
+            keyAbility:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .abilityScores.Wisdom,
+            proficiency:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .perception,
+            level: state.playerCharacter.level,
+            bonuses:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .bonuses,
+            senses:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .senses,
+        };
+    }
+    return {
+        keyAbility: state.playerCharacter.abilityScores.Wisdom,
+        proficiency: state.playerCharacter.perceptionProficiency,
+        level: state.playerCharacter.level,
+        bonuses: state.playerCharacter.bonuses,
+        senses: state.playerCharacter.senses,
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PerceptionView);
 

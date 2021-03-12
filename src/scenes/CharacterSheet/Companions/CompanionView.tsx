@@ -6,6 +6,8 @@ import { Companion } from "../../../PF2eCoreLib/PlayerCharacter";
 import ACView from "../Encounter/Defense/ArmorClass/ACView";
 import HitPoints from "../Encounter/Defense/HealthData/HitPoints";
 import SavesView from "../Encounter/Defense/SavesView";
+import Movements from "../Encounter/Offense/Movements";
+import PerceptionView from "../Encounter/Offense/PerceptionView";
 import AbilityScores from "../Story/Components/AbilityScores/AbilityScoresView";
 
 type Props = { companion: Companion; index: number };
@@ -27,7 +29,9 @@ export const CompanionView: React.FC<Props> = (props) => {
                 companionIndex={props.index}
                 healthData={props.companion.hitPoints}
             />
+            <PerceptionView isCompanion={true} companionIndex={props.index} />
             <Divider />
+            <Movements movements={props.companion.speed} isCompanion={true} />
         </Layout>
     );
 };

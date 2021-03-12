@@ -670,7 +670,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 Constitution: { score: 12, ability: Ability.Constitution },
                 Dexterity: { score: 16, ability: Ability.Dexterity },
                 Intelligence: { score: 6, ability: Ability.Intelligence },
-                Wisdom: { score: 18, ability: Ability.Wisdom },
+                Wisdom: { score: 14, ability: Ability.Wisdom },
                 Charisma: { score: 8, ability: Ability.Charisma },
             },
             actions: [
@@ -716,7 +716,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 id: Guid.create(),
             },
             name: "Fido",
-            perception: Proficiencies.Trained,
+            perception: Proficiencies.Legendary,
             resistance: "",
             saves: {
                 fortitude: Proficiencies.Legendary,
@@ -790,10 +790,10 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 },
             ],
             speed: {
-                landSpeed: 25,
+                landSpeed: 45,
                 burrowSpeed: 5,
                 climbSpeed: 10,
-                flySpeed: 0,
+                flySpeed: 20,
             },
             supportBenefit: "Licking the dishes int he dishwasher.",
             traits: [],

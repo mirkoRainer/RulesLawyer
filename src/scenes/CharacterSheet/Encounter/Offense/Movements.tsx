@@ -175,6 +175,7 @@ const Movements: React.FC<Props> = (props) => {
             <TouchableOpacity
                 style={styles.horizontal}
                 onPress={handleToggleModal}
+                disabled={props.isCompanion}
             >
                 <Layout style={styles.container}>
                     <Text style={styles.text} category="h6">
@@ -193,6 +194,7 @@ const Movements: React.FC<Props> = (props) => {
 
 interface OwnProps {
     movements: Movement;
+    isCompanion?: boolean;
 }
 
 type Props = OwnProps & LinkDispatchProps;
