@@ -18,11 +18,6 @@ import {
     GetBonusesFor,
     GetCurrentPCBonuses,
 } from "../../../../PF2eCoreLib/Bonus";
-import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
-
-interface OwnProps {}
-
-type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
 const SkillsView: React.FC<Props> = (props) => {
     // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
@@ -49,7 +44,10 @@ const SkillsView: React.FC<Props> = (props) => {
         const itemBonus = GetBonusesFor(item.name, GetCurrentPCBonuses()).item;
         return (
             <Layout key={item.name}>
-                <TouchableOpacity onPress={handleSkillTouch}>
+                <TouchableOpacity
+                    onPress={handleSkillTouch}
+                    disabled={props.isCompanion}
+                >
                     <ProficiencyView
                         title={item.name.toString()}
                         keyAbility={props.abilityScores[item.ability]}
@@ -78,17 +76,40 @@ const SkillsView: React.FC<Props> = (props) => {
     );
 };
 
+type Props = OwnProps & LinkStateProps & LinkDispatchProps;
+
+interface OwnProps {
+    isCompanion?: boolean;
+    companionIndex?: number;
+}
+
 interface LinkStateProps {
     abilityScores: AbilityScoreArray;
     skills: Skill[];
     level: number;
 }
 
-const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
-    abilityScores: state.playerCharacter.abilityScores,
-    skills: state.playerCharacter.skills,
-    level: state.playerCharacter.level,
-});
+const mapStateToProps = (
+    state: EntireAppState,
+    ownProps: OwnProps
+): LinkStateProps => {
+    if (ownProps.isCompanion) {
+        return {
+            abilityScores:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .abilityScores,
+            skills:
+                state.playerCharacter.companions[ownProps.companionIndex!]
+                    .skills,
+            level: state.playerCharacter.level,
+        };
+    }
+    return {
+        abilityScores: state.playerCharacter.abilityScores,
+        skills: state.playerCharacter.skills,
+        level: state.playerCharacter.level,
+    };
+};
 
 interface LinkDispatchProps {
     updateSkills: (skills: Skill[]) => void;

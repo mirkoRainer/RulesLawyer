@@ -803,7 +803,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             advancement: {
                 advancedManuever: {
                     id: Guid.create(),
-                    name: "Advanced",
+                    name: "Advanced Manuever",
                     numberOfActions: 1,
                     traits: ["Attack", "Athletics"],
                     bookAbbreviation: "CRB",

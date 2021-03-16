@@ -18,6 +18,7 @@ const Companions: React.FC<Props> = (props) => {
                           companion={companion}
                           key={index}
                           index={index}
+                          level={props.level}
                       />
                   );
               })
@@ -44,9 +45,11 @@ const mapDispatchToProps = (
 
 interface LinkStateProps {
     companions: Companion[];
+    level: number;
 }
 const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     companions: state.playerCharacter.companions,
+    level: state.playerCharacter.level,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Companions);

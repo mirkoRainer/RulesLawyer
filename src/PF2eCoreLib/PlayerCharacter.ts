@@ -63,7 +63,7 @@ export interface Companion {
     abilityScores: AbilityScoreArray;
     actions: PF2Action[];
     advancement: {
-        advancedManuever: PF2Action;
+        advancedManuever?: PF2Action;
         mature: boolean;
         nimble: boolean;
         savage: boolean;

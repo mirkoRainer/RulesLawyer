@@ -14,10 +14,6 @@ import { useState } from "react";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { MainOffenseNavigationProps } from "../OffenseNavigation";
 
-interface OwnProps {
-    navigation: MainOffenseNavigationProps;
-}
-
 const ActionsAndActivities: React.FC<Props> = (props) => {
     // make sure the screen is always refreshed.
     const [state, setState] = useState({});
@@ -72,6 +68,9 @@ const ActionsAndActivities: React.FC<Props> = (props) => {
 
 type Props = OwnProps & LinkDispatchProps & LinkStateProps;
 
+interface OwnProps {
+    navigation: MainOffenseNavigationProps;
+}
 interface LinkDispatchProps {
     updateActions: (action: PF2Action[]) => void;
 }
