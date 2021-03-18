@@ -2,7 +2,12 @@ import { Divider, Layout, Text } from "@ui-kitten/components";
 import { Guid } from "guid-typescript";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Companion, PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Companion,
+    InventoryItem,
+    Item,
+    PF2Action,
+} from "../../../PF2eCoreLib/PlayerCharacter";
 import ACView from "../Encounter/Defense/ArmorClass/ACView";
 import HitPoints from "../Encounter/Defense/HealthData/HitPoints";
 import SavesView from "../Encounter/Defense/SavesView";
@@ -10,12 +15,14 @@ import ActionView from "../Encounter/Offense/ActionView";
 import Movements from "../Encounter/Offense/Movements";
 import PerceptionView from "../Encounter/Offense/PerceptionView";
 import SkillsView from "../Encounter/Skills/SkillsView";
+import { ItemView } from "../Inventory/Components/ItemView";
+import InventoryView from "../Inventory/InventoryView";
 import AbilityScores from "../Story/Components/AbilityScores/AbilityScoresView";
 
 type Props = { companion: Companion; index: number; level: number };
 
 export const CompanionView: React.FC<Props> = (props) => {
-    const renderItem = (item: PF2Action, actionIndex: number) => {
+    const renderAction = (item: PF2Action, actionIndex: number) => {
         return (
             <ActionView
                 action={item}
@@ -27,7 +34,7 @@ export const CompanionView: React.FC<Props> = (props) => {
     };
     const actions: JSX.Element[] = [];
     props.companion.actions.forEach((action, index) => {
-        actions.push(renderItem(action, index));
+        actions.push(renderAction(action, index));
     });
     const advancedManuever: JSX.Element | undefined = props.companion
         .advancement.advancedManuever ? (
@@ -41,6 +48,20 @@ export const CompanionView: React.FC<Props> = (props) => {
     const nimble: string = props.companion.advancement.nimble ? "Nimble" : "";
     const savage: string = props.companion.advancement.savage ? "Savage" : "";
     const matureNimbleSavage: string = `${mature} ${nimble} ${savage}`;
+    const renderItem = (item: InventoryItem, index: number) => {
+        return (
+            <ItemView
+                item={item}
+                index={index}
+                cardStatus="basic"
+                key={item.id.toString()}
+            />
+        );
+    };
+    const items: JSX.Element[] = [];
+    props.companion.inventory.items.forEach((item, index) => {
+        items.push(renderItem(item, index));
+    });
     return (
         <Layout style={{ flex: 1 }}>
             <Text style={styles.centered} category="h2">
@@ -89,6 +110,10 @@ export const CompanionView: React.FC<Props> = (props) => {
             />
             <SkillsView isCompanion={true} companionIndex={props.index} />
             <Divider />
+            <Text category="h4" style={styles.centered}>
+                Items
+            </Text>
+            {items}
         </Layout>
     );
 };

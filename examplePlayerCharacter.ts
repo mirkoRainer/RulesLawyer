@@ -710,7 +710,23 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 wounded: 1,
             },
             immunities: "",
-            inventory: { items: [] },
+            inventory: {
+                items: [
+                    {
+                        name: "Collar of Good Boi",
+                        id: Guid.create(),
+                        level: 20,
+                        bulk: 0.1,
+                        invested: true,
+                        worn: true,
+                        readied: false,
+                        description:
+                            "This collar is only for the goodest of bois.",
+                        traits: [],
+                        isContainer: false,
+                    },
+                ],
+            },
             languages: ["Common"],
             metaData: {
                 id: Guid.create(),
