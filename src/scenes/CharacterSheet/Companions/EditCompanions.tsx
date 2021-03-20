@@ -10,9 +10,11 @@ type Props = {
 export const EditCompanions: React.FC<Props> = ({ navigation }) => {
     return (
         <Layout>
-            <Text style={styles.centered}>EditCompanions</Text>
+            <Text style={styles.centered} category="h3">
+                EditCompanions
+            </Text>
             <Button onPress={() => navigation.navigate("MainCompanionView")}>
-                edit
+                Back
             </Button>
         </Layout>
     );
@@ -21,5 +23,6 @@ export const EditCompanions: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
     centered: {
         alignSelf: "center",
+        paddingVertical: 10,
     },
 });

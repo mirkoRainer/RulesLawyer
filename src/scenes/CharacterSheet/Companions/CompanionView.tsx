@@ -18,6 +18,7 @@ import SkillsView from "../Encounter/Skills/SkillsView";
 import { ItemView } from "../Inventory/Components/ItemView";
 import InventoryView from "../Inventory/InventoryView";
 import AbilityScores from "../Story/Components/AbilityScores/AbilityScoresView";
+import { CompanionDetailsView } from "./CompanionDetailsView";
 
 type Props = { companion: Companion; index: number; level: number };
 
@@ -64,7 +65,7 @@ export const CompanionView: React.FC<Props> = (props) => {
     });
     return (
         <Layout style={{ flex: 1 }}>
-            <Text style={styles.centered} category="h2">
+            <Text style={styles.centered} category="h3">
                 {props.companion.name}
             </Text>
             {props.companion.advancement.mature ||
@@ -78,6 +79,12 @@ export const CompanionView: React.FC<Props> = (props) => {
             )}
             <Divider />
             <ACView isCompanion={true} companionIndex={props.index} />
+            <Divider />
+            <HitPoints
+                isCompanion={true}
+                companionIndex={props.index}
+                healthData={props.companion.hitPoints}
+            />
             <Divider />
             <ActionView
                 action={{
@@ -93,11 +100,6 @@ export const CompanionView: React.FC<Props> = (props) => {
             />
             {advancedManuever}
             {actions}
-            <HitPoints
-                isCompanion={true}
-                companionIndex={props.index}
-                healthData={props.companion.hitPoints}
-            />
             <Divider />
             <SavesView isCompanion={true} companionIndex={props.index} />
             <PerceptionView isCompanion={true} companionIndex={props.index} />
@@ -114,6 +116,8 @@ export const CompanionView: React.FC<Props> = (props) => {
                 Items
             </Text>
             {items}
+            <Divider />
+            <CompanionDetailsView details={props.companion.details} />
         </Layout>
     );
 };

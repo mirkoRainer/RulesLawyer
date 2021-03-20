@@ -11,6 +11,7 @@ import { Guid } from "guid-typescript";
 
 export type CompanionsStackParamList = {
     MainCompanionView: undefined;
+    EditCompanionsView: undefined;
     EditCompanionView: { companionGuid: Guid };
 };
 
@@ -24,7 +25,10 @@ export const CompanionsNavigator: React.FC = (props) => {
     return (
         <Stack.Navigator initialRouteName="MainCompanionView" headerMode="none">
             <Stack.Screen name="MainCompanionView" component={Companions} />
-            <Stack.Screen name="EditCompanionView" component={EditCompanions} />
+            <Stack.Screen
+                name="EditCompanionsView"
+                component={EditCompanions}
+            />
         </Stack.Navigator>
     );
 };

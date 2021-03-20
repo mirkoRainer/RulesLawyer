@@ -59,6 +59,17 @@ interface PlayerCharacter {
     familiar?: Familiar;
 }
 
+export interface CompanionDetails {
+    variety: string;
+    age: string;
+    height: string;
+    weight: string;
+    attitude: string;
+    likes: string;
+    dislikes: string;
+    notes: string;
+}
+
 export interface Companion {
     abilityScores: AbilityScoreArray;
     actions: PF2Action[];
@@ -73,16 +84,7 @@ export interface Companion {
     bardingProficiency: Proficiencies;
     bonuses: iBonus[];
     conditions: string;
-    details: {
-        variety: string;
-        age: string;
-        height: string;
-        weight: string;
-        attitude: string;
-        likes: string;
-        dislikes: string;
-        notes: string;
-    };
+    details: CompanionDetails;
     feats: FeatOrAbility[];
     hitPoints: HealthData;
     immunities: string;
