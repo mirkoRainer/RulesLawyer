@@ -40,8 +40,13 @@ import {
     CHANGE_INVENTORY_ITEMS,
     ADD_OR_REMOVE_BONUS,
     CHANGE_WEAPON_PROFICIENCIES,
+    DELETE_COMPANION,
+    ADD_COMPANION,
+    CHANGE_COMPANION,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
-import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacter, {
+    DEFAULT_COMPANION,
+} from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
 import {
@@ -57,6 +62,7 @@ import {
 } from "./reducerHelper";
 import { iBonus } from "../../PF2eCoreLib/Bonus";
 import { AddOrRemoveBonus } from "../actions/PlayerCharacter/PlayerCharacterActions";
+import { Guid } from "guid-typescript";
 
 const defaultState: PlayerCharacter = examplePlayerCharacter;
 
@@ -582,7 +588,47 @@ const playerCharacterReducer = (
                 ...state,
                 weaponProficiencies: action.WeaponProficiencies,
             };
-
+        case DELETE_COMPANION:
+            console.debug(
+                `DELETE_COMPANION in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                companions: state.companions.filter((companion) => {
+                    return (
+                        companion.metaData.id.toString() !==
+                        action.CompanionId.toString()
+                    );
+                }),
+            };
+        case ADD_COMPANION:
+            console.debug(
+                `ADD_COMPANION in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                companions: _.concat(state.companions, {
+                    ...DEFAULT_COMPANION,
+                    metaData: { id: action.id },
+                }),
+            };
+        case CHANGE_COMPANION:
+            console.debug(
+                `CHANGE_COMPANION in reducer ${JSON.stringify(action, null, 1)}`
+            );
+            return {
+                ...state,
+                companions: state.companions.map((companion) => {
+                    if (
+                        companion.metaData.id ===
+                        action.NewCompanion.metaData.id
+                    ) {
+                        return action.NewCompanion;
+                    } else {
+                        return companion;
+                    }
+                }),
+            };
         default:
             return state;
     }

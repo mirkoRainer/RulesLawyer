@@ -10,7 +10,9 @@ export interface iBonus {
 }
 
 export const GetCompanionBonuses = (index: number): iBonus[] => {
-    return Store.getState().playerCharacter.companions[index].bonuses;
+    return Store.getState().playerCharacter.companions[index]
+        ? Store.getState().playerCharacter.companions[index].bonuses
+        : [];
 };
 
 export const GetCurrentPCBonuses = (): iBonus[] => {

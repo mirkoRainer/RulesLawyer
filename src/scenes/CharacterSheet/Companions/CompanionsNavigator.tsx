@@ -6,7 +6,7 @@ import {
     StackNavigationProp,
 } from "@react-navigation/stack";
 import Companions from "./Companions";
-import { EditCompanions } from "./EditCompanions";
+import EditCompanions from "./EditCompanions";
 import { Guid } from "guid-typescript";
 
 export type CompanionsStackParamList = {

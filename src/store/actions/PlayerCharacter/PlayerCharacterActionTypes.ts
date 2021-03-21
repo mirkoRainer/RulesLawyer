@@ -16,6 +16,7 @@ import {
     Weapon,
     InventoryItem,
     WeaponProficiencies,
+    Companion,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -23,6 +24,7 @@ import {
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 import { Traits } from "../../../PF2eCoreLib/Traits";
 import { iBonus } from "../../../PF2eCoreLib/Bonus";
+import { Guid } from "guid-typescript";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -286,6 +288,24 @@ export interface ChangeWeaponProficienciesAction extends Action<string> {
     WeaponProficiencies: WeaponProficiencies;
 }
 
+export const DELETE_COMPANION = "DELETE_COMPANION";
+export interface DeleteCompanionAction extends Action<string> {
+    type: typeof DELETE_COMPANION;
+    CompanionId: Guid;
+}
+
+export const ADD_COMPANION = "ADD_COMPANION";
+export interface AddCompanionAction extends Action<string> {
+    type: typeof ADD_COMPANION;
+    id: Guid;
+}
+
+export const CHANGE_COMPANION = "CHANGE_COMPANION";
+export interface ChangeCompanionAction extends Action<string> {
+    type: typeof CHANGE_COMPANION;
+    NewCompanion: Companion;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -328,4 +348,7 @@ export type PlayerCharacterActionTypes =
     | ChangeItemAction
     | ChangeInventoryAction
     | AddOrRemoveBonusAction
-    | ChangeWeaponProficienciesAction; // | SomeOtherAction
+    | ChangeWeaponProficienciesAction
+    | DeleteCompanionAction
+    | AddCompanionAction
+    | ChangeCompanionAction; // | SomeOtherAction

@@ -23,6 +23,7 @@ import {
     Item,
     InventoryItem,
     WeaponProficiencies,
+    Companion,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     Spell,
@@ -32,6 +33,7 @@ import { Traits } from "../../../PF2eCoreLib/Traits";
 import { PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
 import { iBonus } from "../../../PF2eCoreLib/Bonus";
 import { CommonActions } from "@react-navigation/native";
+import { Guid } from "guid-typescript";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (
     name: string
@@ -631,5 +633,41 @@ export const startChangeWeaponProficiencies = (
 ) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeWeaponProficiencies(WeaponProficiencies));
+    };
+};
+
+export const DeleteCompanion: ActionCreator<PlayerCharacterActionTypes> = (
+    CompanionId: Guid
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.DELETE_COMPANION,
+    CompanionId,
+});
+export const startDeleteCompanion = (CompanionId: Guid) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(DeleteCompanion(CompanionId));
+    };
+};
+
+export const AddCompanion: ActionCreator<PlayerCharacterActionTypes> = (
+    id: Guid
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.ADD_COMPANION,
+    id,
+});
+export const startAddCompanion = (id: Guid) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(AddCompanion(id));
+    };
+};
+
+export const ChangeCompanion: ActionCreator<PlayerCharacterActionTypes> = (
+    NewCompanion: Companion
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.CHANGE_COMPANION,
+    NewCompanion,
+});
+export const startChangeCompanion = (Companion: Companion) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeCompanion(Companion));
     };
 };
