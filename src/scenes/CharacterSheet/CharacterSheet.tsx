@@ -13,6 +13,7 @@ import {
 import { EntireAppState } from "../../store/Store";
 import { ThunkDispatch } from "redux-thunk";
 import {
+    BottomTabBarProps,
     BottomTabNavigationProp,
     createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
@@ -31,6 +32,7 @@ import {
     TopNavigation,
     Icon,
     TopNavigationAction,
+    BottomNavigationProps,
 } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
@@ -42,6 +44,12 @@ import {
 import InventoryView from "./Inventory/InventoryView";
 import { NavigatorScreenParams } from "@react-navigation/core";
 import { CompanionsNavigator } from "./Companions/CompanionsNavigator";
+import {
+    NavigationHelpers,
+    ParamListBase,
+    TabNavigationState,
+} from "@react-navigation/native";
+import { BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -118,7 +126,16 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
     // @ts-ignore
     const companion: boolean =
         props.playerCharacter.companions.length > 0 ? true : false;
-    const BottomTabBar = ({ navigation, state }) => {
+    const BottomTabBar = ({
+        navigation,
+        state,
+    }: {
+        navigation: NavigationHelpers<
+            ParamListBase,
+            BottomTabNavigationEventMap
+        >;
+        state: TabNavigationState<ParamListBase>;
+    }) => {
         return (
             <BottomNavigation
                 selectedIndex={state.index}
@@ -156,7 +173,9 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
                 />
                 <Divider />
                 <Tab.Navigator
-                    tabBar={(props) => <BottomTabBar {...props} />}
+                    tabBar={(props: BottomTabBarProps) => (
+                        <BottomTabBar {...props} />
+                    )}
                     tabBarOptions={{
                         activeTintColor: "tomato",
                         inactiveTintColor: "grey",

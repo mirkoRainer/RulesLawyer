@@ -1,5 +1,6 @@
 import { Ability } from "./Ability";
 import { Language } from "./Language";
+import { Size } from "./Size";
 import { Traits } from "./Traits";
 
 interface IAncestry {
