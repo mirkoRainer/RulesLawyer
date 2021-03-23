@@ -12,6 +12,7 @@ export type AbilityScoreArray = {
     Intelligence: AbilityScore;
     Wisdom: AbilityScore;
     Charisma: AbilityScore;
+    [key: string]: AbilityScore;
 };
 
 export function AbilityEnumToAbilityScoreArrayKey(

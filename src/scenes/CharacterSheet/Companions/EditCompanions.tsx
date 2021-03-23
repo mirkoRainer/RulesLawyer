@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Divider, Layout, Text } from "@ui-kitten/components";
-import { MainCompanionNavigationProps } from "./CompanionsNavigator";
+import { EditCompanionsNavigationProps } from "./CompanionsNavigator";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { ThunkDispatch } from "redux-thunk";
@@ -15,7 +15,7 @@ import { bindActionCreators } from "redux";
 import { Guid } from "guid-typescript";
 
 const EditCompanions: React.FC<Props> = (props) => {
-    const navigation = useNavigation<MainCompanionNavigationProps>();
+    const navigation = useNavigation<EditCompanionsNavigationProps>();
     const renderCompanionRows: JSX.Element[] = [];
     if (props.companions) {
         props.companions.forEach((companion, index) => {

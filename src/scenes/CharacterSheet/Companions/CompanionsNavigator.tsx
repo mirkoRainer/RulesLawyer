@@ -8,16 +8,25 @@ import {
 import Companions from "./Companions";
 import EditCompanions from "./EditCompanions";
 import { Guid } from "guid-typescript";
+import EditCompanion from "./EditCompanion";
 
 export type CompanionsStackParamList = {
     MainCompanionView: undefined;
     EditCompanionsView: undefined;
-    EditCompanionView: { companionGuid: Guid };
+    EditCompanionView: { companionGuid: string };
 };
 
 export type MainCompanionNavigationProps = StackNavigationProp<
     CompanionsStackParamList,
     "MainCompanionView"
+>;
+export type EditCompanionsNavigationProps = StackNavigationProp<
+    CompanionsStackParamList,
+    "EditCompanionsView"
+>;
+export type EditCompanionNavigationProps = StackNavigationProp<
+    CompanionsStackParamList,
+    "EditCompanionView"
 >;
 
 export const CompanionsNavigator: React.FC = (props) => {
@@ -29,6 +38,7 @@ export const CompanionsNavigator: React.FC = (props) => {
                 name="EditCompanionsView"
                 component={EditCompanions}
             />
+            <Stack.Screen name="EditCompanionView" component={EditCompanion} />
         </Stack.Navigator>
     );
 };

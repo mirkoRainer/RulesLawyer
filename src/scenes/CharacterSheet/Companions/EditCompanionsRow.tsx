@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import { startDeleteCompanion } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
-import { Companion } from "../../../PF2eCoreLib/PlayerCharacter";
 import { bindActionCreators } from "redux";
+import { useNavigation } from "@react-navigation/native";
+import { EditCompanionsNavigationProps } from "./CompanionsNavigator";
 
 const EditCompanionsRow: React.FC<Props> = (props) => {
+    const navigation = useNavigation<EditCompanionsNavigationProps>();
     return (
         <Layout>
             <Layout style={{ flexDirection: "row", padding: 10 }}>
@@ -20,6 +22,11 @@ const EditCompanionsRow: React.FC<Props> = (props) => {
                     size="small"
                     style={styles.rowButton}
                     appearance="ghost"
+                    onPress={() =>
+                        navigation.navigate("EditCompanionView", {
+                            companionGuid: props.id.toString(),
+                        })
+                    }
                 >
                     Edit
                 </Button>
