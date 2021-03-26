@@ -77,7 +77,6 @@ export const CompanionView: React.FC<Props> = (props) => {
             ) : (
                 <></>
             )}
-            <Divider />
             <ACView isCompanion={true} companionIndex={props.index} />
             <Divider />
             <HitPoints

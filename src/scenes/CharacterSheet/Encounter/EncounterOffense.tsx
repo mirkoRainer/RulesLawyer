@@ -1,6 +1,6 @@
 import React from "react";
 import { RefreshControl, StyleSheet } from "react-native";
-import PlayerCharacter, {
+import PlayerCharacterData, {
     PF2Action,
 } from "../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
@@ -42,7 +42,7 @@ interface OwnProps {
 interface LinkDispatchProps {}
 
 interface LinkStateProps {
-    playerCharacter: PlayerCharacter;
+    playerCharacter: PlayerCharacterData;
     actions: PF2Action[];
 }
 

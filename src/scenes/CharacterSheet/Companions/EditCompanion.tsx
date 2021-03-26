@@ -1,31 +1,81 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Button, Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { startChangeCompanion } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { Companion } from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Armor,
+    Companion,
+    IsArmor,
+} from "../../../PF2eCoreLib/PlayerCharacter";
 import {
     CompanionsStackParamList,
     EditCompanionNavigationProps,
 } from "./CompanionsNavigator";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { EditAbilityScores } from "../../Shared/Components/EditAbilityScores";
+import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
+import { SelectWornArmor } from "../../Shared/Components/SelectArmor";
 
 const EditCompanion: React.FC<Props> = (props) => {
-    const [companion, setCompanion] = useState(props.companion);
+    const setNewAbilityScores = (abilityScores: AbilityScoreArray) => {
+        props.updateCompanion({ ...props.companion, abilityScores });
+    };
+    const onSelectWornArmor = (newArmor: Armor) => {
+        const updatedItems = props.companion.inventory.items.map(
+            (item, index) => {
+                // If it's Armor, set Worn to true if it's the new Armor, otherwise, false.
+                if (IsArmor(item)) {
+                    if (item.id.equals(newArmor.id)) {
+                        return { ...newArmor, worn: true };
+                    } else {
+                        return { ...item, worn: false };
+                    }
+                }
+                return item;
+            }
+        );
+        props.updateCompanion({
+            ...props.companion,
+            inventory: { items: updatedItems },
+        });
+    };
+    const currentArmor: Armor = props.companion.inventory.items.find(
+        (x) => IsArmor(x) && x.worn
+    )! as Armor;
     return (
         <Layout style={{ flex: 1 }}>
+            <Layout style={{ flexDirection: "row" }}>
+                <Button
+                    onPress={() => {
+                        props.navigation.goBack();
+                    }}
+                    style={{ alignSelf: "flex-end" }}
+                    appearance="ghost"
+                >
+                    Back
+                </Button>
+                <Text category="h3" style={styles.centered}>
+                    Editing {props.companion.name}
+                </Text>
+            </Layout>
             <ScrollView>
-                <Text>{props.companion.name}</Text>
                 <EditAbilityScores
-                    abilityScores={companion.abilityScores}
+                    abilityScores={props.companion.abilityScores}
                     scoreRanges={Array.from(new Array(30), (x, i) => i + 1)}
-                    onSelect={() => {}}
+                    onSelect={setNewAbilityScores}
+                />
+                <SelectWornArmor
+                    availableArmor={props.companion.inventory.items.filter(
+                        IsArmor
+                    )}
+                    onSelect={onSelectWornArmor}
+                    currentArmor={currentArmor}
                 />
             </ScrollView>
         </Layout>

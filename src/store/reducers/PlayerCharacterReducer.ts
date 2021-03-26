@@ -43,33 +43,33 @@ import {
     DELETE_COMPANION,
     ADD_COMPANION,
     CHANGE_COMPANION,
+    CHANGE_COMPANION_TEMP_HP,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
-import PlayerCharacter, {
+import PlayerCharacterData, {
     DEFAULT_COMPANION,
+    PlayerCharacter,
 } from "../../PF2eCoreLib/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
-import { ResolveHitPoints, HealthData } from "../../PF2eCoreLib/HealthData";
+import { ResolveHitPoints } from "../../PF2eCoreLib/HealthData";
 import {
     CHANGE_SAVE_PROFICIENCIES,
     CHANGE_PERCEPTION_PROFICIENCY,
     CHANGE_SPELL_PROFICIENCY,
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
-import _, { indexOf } from "lodash";
+import _ from "lodash";
 import {
     InsertOrUpdateBonus,
     RemoveBonus,
     UpdateItemInInventory,
 } from "./reducerHelper";
-import { iBonus } from "../../PF2eCoreLib/Bonus";
-import { AddOrRemoveBonus } from "../actions/PlayerCharacter/PlayerCharacterActions";
-import { Guid } from "guid-typescript";
+import { startDeleteSpell } from "../actions/PlayerCharacter/PlayerCharacterActions";
 
-const defaultState: PlayerCharacter = examplePlayerCharacter;
+const defaultState: PlayerCharacterData = new PlayerCharacter().data;
 
 const playerCharacterReducer = (
     state = defaultState,
     action: PlayerCharacterActionTypes
-): PlayerCharacter => {
+): PlayerCharacterData => {
     switch (action.type) {
         case CHANGE_CHARACTER_NAME:
             return {
@@ -629,6 +629,34 @@ const playerCharacterReducer = (
                     }
                 }),
             };
+        case CHANGE_COMPANION_TEMP_HP:
+            console.debug(
+                `CHANGE_COMPANION_TEMP_HP in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
+            return {
+                ...state,
+                companions: state.companions.map((companion) => {
+                    if (
+                        companion.metaData.id ===
+                        state.companions[action.companionIndex].metaData.id
+                    ) {
+                        return {
+                            ...companion,
+                            hitPoints: {
+                                ...companion.hitPoints,
+                                temporaryHitPoints: action.newTempHp,
+                            },
+                        };
+                    } else {
+                        return companion;
+                    }
+                }),
+            };
+
         default:
             return state;
     }

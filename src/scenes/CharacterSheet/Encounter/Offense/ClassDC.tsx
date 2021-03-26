@@ -6,7 +6,7 @@ import ProficiencyView, {
 } from "../../../Shared/ProficiencyView";
 import { GetBonusesFor, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
-import PlayerCharacter, {
+import PlayerCharacterData, {
     iClass,
 } from "../../../../PF2eCoreLib/PlayerCharacter";
 import { Action, bindActionCreators } from "redux";

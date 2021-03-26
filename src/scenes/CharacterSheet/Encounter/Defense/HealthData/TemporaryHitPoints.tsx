@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Layout, Text } from "@ui-kitten/components";
+import { Button, Layout, Text } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -8,6 +8,11 @@ import { CHANGE_TEMPORARY_HITPOINTS } from "../../../../../store/actions/PlayerC
 import { EntireAppState } from "../../../../../store/Store";
 import { startNumberPickerModalSelection } from "../../../../../store/actions/Modals/ModalsActions";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
+import {
+    startChangeCompanion,
+    startChangeCompanionTempHp,
+} from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
+import { Companion } from "../../../../../PF2eCoreLib/PlayerCharacter";
 
 const TemporaryHitPoints: React.FC<Props> = (props) => {
     const changeTempHP = () => {
@@ -16,6 +21,38 @@ const TemporaryHitPoints: React.FC<Props> = (props) => {
             props.temporaryHitPoints
         );
     };
+    const changeTempHpCompanion = (delta: number) => {
+        props.changeCompanionTempHp(
+            props.temporaryHitPoints + delta,
+            props.companionIndex!
+        );
+    };
+    const plus = props.isCompanion ? (
+        <Button
+            appearance="outline"
+            style={{ flex: 0.25 }}
+            onPress={() => {
+                changeTempHpCompanion(1);
+            }}
+        >
+            +
+        </Button>
+    ) : (
+        <></>
+    );
+    const minus = props.isCompanion ? (
+        <Button
+            appearance="outline"
+            style={{ flex: 0.25 }}
+            onPress={() => {
+                changeTempHpCompanion(-1);
+            }}
+        >
+            -
+        </Button>
+    ) : (
+        <></>
+    );
 
     return (
         <Layout style={styles.container}>
@@ -24,14 +61,18 @@ const TemporaryHitPoints: React.FC<Props> = (props) => {
                 onPress={changeTempHP}
                 disabled={props.isCompanion}
             >
-                <Text style={styles.text} category="p1">
-                    {" "}
-                    Temp:{" "}
-                </Text>
-                <Text category="h4" style={styles.text}>
-                    {" "}
-                    {props.temporaryHitPoints}{" "}
-                </Text>
+                {plus}
+                <Layout style={{ alignItems: "center", padding: 5, flex: 1 }}>
+                    <Text style={styles.text} category="p1">
+                        {" "}
+                        Temp:{" "}
+                    </Text>
+                    <Text category="h4" style={styles.text}>
+                        {" "}
+                        {props.temporaryHitPoints}{" "}
+                    </Text>
+                </Layout>
+                {minus}
             </TouchableOpacity>
         </Layout>
     );
@@ -46,6 +87,7 @@ interface OwnProps {
 
 interface LinkDispatchProps {
     startPickerModal: (actionType: string, tempHitPoints: number) => void;
+    changeCompanionTempHp: (newTempHp: number, index: number) => void;
 }
 
 interface LinkStateProps {
@@ -59,6 +101,10 @@ const mapDispatchToProps = (
     return {
         startPickerModal: bindActionCreators(
             startNumberPickerModalSelection,
+            dispatch
+        ),
+        changeCompanionTempHp: bindActionCreators(
+            startChangeCompanionTempHp,
             dispatch
         ),
     };
@@ -84,8 +130,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(TemporaryHitPoints);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1.2,
         alignItems: "center",
+        flexDirection: "row",
     },
     text: {},
 });

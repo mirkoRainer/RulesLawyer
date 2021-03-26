@@ -13,7 +13,7 @@ import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Layout, Text } from "@ui-kitten/components";
-import PlayerCharacter from "../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacterData from "../../PF2eCoreLib/PlayerCharacter";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 
 type BuildNavigationProps = DrawerNavigationProp<RootDrawerParamList, "Build">;
@@ -109,7 +109,7 @@ export const Build: React.FC<Props> = (props) => {
                     {
                         //create a side navigator that indicates build step and status
                     }
-                    <Text>ABC's</Text>
+                    <Text>{"ABC's"}</Text>
                     <Text>Lvl 1</Text>
                 </Layout>
             </Layout>
@@ -119,7 +119,7 @@ export const Build: React.FC<Props> = (props) => {
 
 interface LinkStateProps {
     buildState: CharacterBuildState;
-    playerCharacter: PlayerCharacter;
+    playerCharacter: PlayerCharacterData;
 }
 //all actions to be dispatched
 interface LinkDispatchProps {}

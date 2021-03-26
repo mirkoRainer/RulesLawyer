@@ -671,3 +671,20 @@ export const startChangeCompanion = (Companion: Companion) => {
         dispatch(ChangeCompanion(Companion));
     };
 };
+
+export const ChangeCompanionTempHp: ActionCreator<PlayerCharacterActionTypes> = (
+    newTempHp: number,
+    companionIndex: number
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.CHANGE_COMPANION_TEMP_HP,
+    newTempHp,
+    companionIndex,
+});
+export const startChangeCompanionTempHp = (
+    newTempHp: number,
+    companionIndex: number
+) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeCompanionTempHp(newTempHp, companionIndex));
+    };
+};

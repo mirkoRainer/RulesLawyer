@@ -10,8 +10,10 @@ import { Guid } from "guid-typescript";
 import { BonusType } from "./BonusTypes";
 import { Ability } from "./Ability";
 import { Size } from "./Size";
+import { examplePlayerCharacter } from "../../examplePlayerCharacter";
+import { ItemView } from "../scenes/CharacterSheet/Inventory/Components/ItemView";
 
-interface PlayerCharacter {
+interface PlayerCharacterData {
     abilityScores: AbilityScoreArray;
     actions: PF2Action[];
     alignment: string;
@@ -59,6 +61,38 @@ interface PlayerCharacter {
     familiar?: Familiar;
 }
 
+export class PlayerCharacter {
+    constructor(existingData?: PlayerCharacterData) {
+        this._data = existingData ? existingData : examplePlayerCharacter;
+        // Ensure that every PC and Companion has default Armor
+        if (
+            !this._data.inventory.items.find((item) => {
+                return item.name === "Unarmored";
+            })
+        ) {
+            // We didn't find the default armor on the PC
+            this._data.inventory.items.push(DEFAULT_ARMOR);
+        }
+        this._data.companions.forEach((companion) => {
+            if (
+                !companion.inventory.items.find((item) => {
+                    return item.name === "Fur, Feathers, or Scales";
+                })
+            ) {
+                // We didn't find the default armor on the companion.
+                companion.inventory.items.push(DEFAULT_COMPANION_ARMOR);
+            }
+        });
+    }
+
+    private _data: PlayerCharacterData;
+    public get data(): PlayerCharacterData {
+        return this._data;
+    }
+    public set data(v: PlayerCharacterData) {
+        this._data = v;
+    }
+}
 export interface CompanionDetails {
     variety: string;
     age: string;
@@ -260,7 +294,7 @@ export const DEFAULT_COMPANION: Companion = {
         savage: false,
     },
     details: {
-        variety: "pitbull",
+        variety: "pit-bull",
         age: "22",
         height: "2",
         weight: "3",
@@ -280,7 +314,7 @@ export interface Familiar {
     size: Size;
 }
 
-export default PlayerCharacter;
+export default PlayerCharacterData;
 
 export interface iClass {
     name: string;
@@ -552,11 +586,11 @@ export const DEFAULT_ARMOR_ONLY_PROPS: Omit<Armor, keyof Item> = {
 };
 export const DEFAULT_COMPANION_ARMOR: Armor = {
     id: Guid.create(),
-    description: "Fur or feathers",
+    description: "Fur, feathers, or scales",
     invested: false,
     worn: true,
     readied: false,
-    name: "Fur or Feathers",
+    name: "Fur, Feathers, or Scales",
     category: ArmorCategory.Unarmored,
     level: 0,
     price: { Copper: 0, Silver: 0, Gold: 0, Platinum: 0 },
@@ -592,7 +626,7 @@ export const DEFAULT_ARMOR: Armor = {
     invested: false,
     worn: true,
     readied: false,
-    name: "Clothes",
+    name: "Unarmored",
     category: ArmorCategory.Light,
     level: 0,
     price: { Copper: 0, Silver: 0, Gold: 0, Platinum: 0 },
@@ -651,6 +685,10 @@ export const DEFAULT_ITEM: Item = {
     traits: [],
     worn: false,
 };
+
+export function IsWorn(item: InventoryItem): boolean {
+    return item.worn === true;
+}
 
 export type InventoryItem = Item &
     Partial<Weapon> &

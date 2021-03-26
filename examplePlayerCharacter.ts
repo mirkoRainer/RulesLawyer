@@ -1,13 +1,13 @@
 import { Proficiencies } from "./src/PF2eCoreLib/Proficiencies";
 import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
-import PlayerCharacter from "./src/PF2eCoreLib/PlayerCharacter";
+import PlayerCharacterData from "./src/PF2eCoreLib/PlayerCharacter";
 import { Guid } from "guid-typescript";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { Ability } from "./src/PF2eCoreLib/Ability";
 import { Size } from "./src/PF2eCoreLib/Size";
 
-export const examplePlayerCharacter: PlayerCharacter = {
+export const examplePlayerCharacter: PlayerCharacterData = {
     metadata: {
         id: Guid.create(),
     },
@@ -305,7 +305,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
             },
             {
                 id: Guid.create(),
-                description: "Leather Armor made from leather",
+                description: "Shield made from leather",
                 invested: false,
                 worn: true,
                 readied: false,
@@ -721,8 +721,44 @@ export const examplePlayerCharacter: PlayerCharacter = {
                         worn: true,
                         readied: false,
                         description:
-                            "This collar is only for the goodest of bois.",
+                            "This collar is only for the best of bois.",
                         traits: [],
+                        isContainer: false,
+                    },
+                    {
+                        id: Guid.create(),
+                        description: "Leather Armor made from leather",
+                        invested: false,
+                        worn: true,
+                        readied: false,
+                        name: "Leather Armor",
+                        category: ArmorCategory.Light,
+                        level: 1,
+                        price: { Copper: 0, Silver: 7, Gold: 0, Platinum: 0 },
+                        acBonus: {
+                            type: BonusType.Item,
+                            appliesTo: "ac",
+                            amount: 2,
+                            source: "armor",
+                        },
+                        dexCap: 4,
+                        checkPenalty: {
+                            type: BonusType.Armor,
+                            appliesTo: "StrAndDexChecks",
+                            amount: 0,
+                            source: "armor",
+                        },
+                        speedPenalty: {
+                            type: BonusType.Armor,
+                            appliesTo: "speed",
+                            amount: 0,
+                            source: "armor",
+                        },
+                        strengthRequirement: 12,
+                        bulk: 1,
+                        wornBulk: 1,
+                        armorGroup: ArmorGroup.Leather,
+                        traits: ["Additive", "Grapple"],
                         isContainer: false,
                     },
                 ],
@@ -834,7 +870,7 @@ export const examplePlayerCharacter: PlayerCharacter = {
                 savage: false,
             },
             details: {
-                variety: "pitbull",
+                variety: "pit bull",
                 age: "22",
                 height: "2",
                 weight: "3",

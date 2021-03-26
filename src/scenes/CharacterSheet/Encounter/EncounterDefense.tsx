@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import PlayerCharacter, { Shield } from "../../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacterData, {
+    Shield,
+} from "../../../PF2eCoreLib/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import HitPoints from "./Defense/HealthData/HitPoints";
@@ -46,7 +48,7 @@ type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 interface LinkDispatchProps {}
 
 interface LinkStateProps {
-    playerCharacter: PlayerCharacter;
+    playerCharacter: PlayerCharacterData;
     resistances: string;
     immunities: string;
     weaknesses: string;

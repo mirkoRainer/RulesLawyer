@@ -9,6 +9,7 @@
         "resolveJsonModule": true,
         "strict": true,
         "esModuleInterop": true,
+        "target": "ES6",
         "types": ["node", "jest"]
     }
 }

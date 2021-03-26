@@ -306,6 +306,13 @@ export interface ChangeCompanionAction extends Action<string> {
     NewCompanion: Companion;
 }
 
+export const CHANGE_COMPANION_TEMP_HP = "CHANGE_COMPANION_TEMP_HP";
+export interface ChangeCompanionTempHpAction extends Action<string> {
+    type: typeof CHANGE_COMPANION_TEMP_HP;
+    newTempHp: number;
+    companionIndex: number;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -351,4 +358,5 @@ export type PlayerCharacterActionTypes =
     | ChangeWeaponProficienciesAction
     | DeleteCompanionAction
     | AddCompanionAction
-    | ChangeCompanionAction; // | SomeOtherAction
+    | ChangeCompanionAction
+    | ChangeCompanionTempHpAction; // | SomeOtherAction
