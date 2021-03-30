@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Card, Text, Layout } from "@ui-kitten/components";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { InventoryItem } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { InventoryItem } from "../../../../PF2eCoreLib/PlayerCharacter/Inventory";
 import { InventoryNavigationProps } from "../InventoryView";
 import { getBulkString } from "../InventoryHelper";
 

@@ -8,10 +8,8 @@ import {
     SelectItem,
     Text,
 } from "@ui-kitten/components";
-import {
-    Weapon,
-    WeaponProficiencies,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Weapon } from "../../../../PF2eCoreLib/PlayerCharacter/Weapon";
+import { WeaponProficiencies } from "../../../../PF2eCoreLib/PlayerCharacter/WeaponProficiencies";
 import { EditItemState } from "./EditItem";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";
 import { Ability } from "../../../../PF2eCoreLib/Ability";

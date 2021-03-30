@@ -12,7 +12,7 @@ import {
 import {
     Armor,
     DEFAULT_ARMOR,
-} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/Armor";
 
 export const SelectWornArmor: React.FC<Props> = (props) => {
     const armors = props.availableArmor.sort();

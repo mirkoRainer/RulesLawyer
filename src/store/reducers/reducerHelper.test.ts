@@ -2,12 +2,12 @@ import { Guid } from "guid-typescript";
 import { iBonus } from "../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../PF2eCoreLib/BonusTypes";
 import {
-    DEFAULT_ARMOR,
     DEFAULT_ITEM,
-    DEFAULT_WEAPON,
     InventoryItem,
-} from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../PF2eCoreLib/PlayerCharacter/Inventory";
+import { DEFAULT_ARMOR } from "../../PF2eCoreLib/PlayerCharacter/Armor";
 import * as reducerHelper from "./reducerHelper";
+import { DEFAULT_WEAPON } from "../../PF2eCoreLib/PlayerCharacter/Weapon";
 
 global.console = {
     ...console,

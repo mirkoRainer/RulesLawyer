@@ -19,7 +19,7 @@ import {
     DEFAULT_SHIELD,
     IsShield,
     Shield,
-} from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../../../PF2eCoreLib/PlayerCharacter/Shield";
 import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 
 type OwnProps = {

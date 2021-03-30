@@ -11,7 +11,7 @@ import ProficiencyView, {
 import { GetBonusesFor, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import { connect } from "react-redux";
-import { Saves } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Saves } from "../../../../PF2eCoreLib/PlayerCharacter/Saves";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { bindActionCreators } from "redux";
 import {

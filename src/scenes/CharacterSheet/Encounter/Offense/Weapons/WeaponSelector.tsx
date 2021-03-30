@@ -2,7 +2,7 @@ import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import { indexOf } from "lodash";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Weapon } from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Weapon } from "../../../../../PF2eCoreLib/PlayerCharacter/Weapon";
 import { getWeaponsFromInventory } from "./WeaponHelper";
 
 type Props = {

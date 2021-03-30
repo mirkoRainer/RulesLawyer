@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
     InventoryItem,
     Item,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/Inventory";
 import { EntireAppState } from "../../../../store/Store";
 import { EyeClosedOpenIcon, EyeOpenIcon } from "../../../Shared/IconButtons";
 import { ItemView } from "./ItemView";

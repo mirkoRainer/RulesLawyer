@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Skill } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Skill } from "../../../PF2eCoreLib/PlayerCharacter/Skill";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import SkillsView from "./Skills/SkillsView";

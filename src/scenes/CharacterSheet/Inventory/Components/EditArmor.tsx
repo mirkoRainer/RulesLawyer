@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { IndexPath, Input, Layout, Text } from "@ui-kitten/components";
-import { Armor } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Armor } from "../../../../PF2eCoreLib/PlayerCharacter/Armor";
 import { EditItemState } from "./EditItem";
 import EditAcBonusAndDexCap from "../../../Shared/Armor/EditAcBonusAndDexCap";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";

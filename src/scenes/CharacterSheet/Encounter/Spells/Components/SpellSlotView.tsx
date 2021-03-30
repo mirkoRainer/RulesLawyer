@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text, Icon, Button } from "@ui-kitten/components";
-import { SpellSlot } from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { SpellSlot } from "../../../../../PF2eCoreLib/PlayerCharacter/SpellSlot";
 import { useFocusEffect } from "@react-navigation/native";
 
 type Props = {

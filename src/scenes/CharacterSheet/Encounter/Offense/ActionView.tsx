@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import {
-    GetDiceStringPretty,
-    PF2Action,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { GetDiceStringPretty } from "../../../../PF2eCoreLib/PlayerCharacter/Dice";
+import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
 import {
     Layout,
     Text,

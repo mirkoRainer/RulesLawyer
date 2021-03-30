@@ -12,7 +12,7 @@ import {
     startChangeCompanion,
     startChangeCompanionTempHp,
 } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { Companion } from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Companion } from "../../../../../PF2eCoreLib/PlayerCharacter/Companion";
 
 const TemporaryHitPoints: React.FC<Props> = (props) => {
     const changeTempHP = () => {

@@ -21,7 +21,7 @@ import {
 } from "../PlayerCharacter/PlayerCharacterActions";
 import { ChangePickerSelection } from "./ModalsActions";
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
-import { Movement } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Movement } from "../../../PF2eCoreLib/PlayerCharacter/Movement";
 
 export const PickerModalStateSwitch = (
     actionType: string,

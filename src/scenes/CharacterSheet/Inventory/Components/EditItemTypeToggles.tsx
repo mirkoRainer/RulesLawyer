@@ -2,12 +2,12 @@ import { Layout, Toggle, Text } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import React from "react";
 import { EditItemState } from "./EditItem";
+import { Item } from "../../../../PF2eCoreLib/PlayerCharacter/Inventory";
 import {
     Armor,
     DEFAULT_ARMOR,
     DEFAULT_ARMOR_ONLY_PROPS,
-    Item,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/Armor";
 
 interface Props {
     state: EditItemState;

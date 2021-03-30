@@ -14,11 +14,11 @@ import {
 } from "@ui-kitten/components";
 import {
     IsWeapon,
-    PF2Action,
-    Skill,
-    Skills,
     Weapon,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/Weapon";
+import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter/Skill";
+import { Skills } from "../../../../PF2eCoreLib/PlayerCharacter/Skills";
+import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
 import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";

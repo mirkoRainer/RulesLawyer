@@ -13,11 +13,8 @@ import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { startChangeCompanion } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import {
-    Armor,
-    Companion,
-    IsArmor,
-} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Armor, IsArmor } from "../../../PF2eCoreLib/PlayerCharacter/Armor";
+import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/Companion";
 import {
     CompanionsStackParamList,
     EditCompanionNavigationProps,

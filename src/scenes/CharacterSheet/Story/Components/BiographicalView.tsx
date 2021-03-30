@@ -5,7 +5,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { BiographicalData } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { BiographicalData } from "../../../../PF2eCoreLib/PlayerCharacter/BiographicalData";
 import { EntireAppState } from "../../../../store/Store";
 import { startChangeBioData } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { useNavigation } from "@react-navigation/native";

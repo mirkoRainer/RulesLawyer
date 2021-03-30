@@ -2,10 +2,8 @@ import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import { indexOf } from "lodash";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import {
-    Skill,
-    Skills,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter/Skill";
+import { Skills } from "../../../../PF2eCoreLib/PlayerCharacter/Skills";
 import { getSkillNamesArray } from "./SkillsHelper";
 import SkillsView from "./SkillsView";
 

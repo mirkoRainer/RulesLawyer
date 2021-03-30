@@ -1,12 +1,12 @@
 import _ from "lodash";
 import { iBonus } from "../../PF2eCoreLib/Bonus";
 import {
-    Armor,
     InventoryItem,
     Item,
-    Shield,
-    Weapon,
-} from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../PF2eCoreLib/PlayerCharacter/Inventory";
+import { Armor } from "../../PF2eCoreLib/PlayerCharacter/Armor";
+import { Weapon } from "../../PF2eCoreLib/PlayerCharacter/Weapon";
+import { Shield } from "../../PF2eCoreLib/PlayerCharacter/Shield";
 import Store from "../Store";
 
 export const UpdateItemInInventory = (

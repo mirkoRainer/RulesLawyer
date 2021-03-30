@@ -1,6 +1,6 @@
 import { Proficiencies } from "../../../PF2eCoreLib/Proficiencies";
 import { Action } from "redux";
-import { Saves } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Saves } from "../../../PF2eCoreLib/PlayerCharacter/Saves";
 
 export const CHANGE_SAVE_PROFICIENCIES = "CHANGE_SAVE_PROFICIENCIES";
 export interface ChangeSaveProficienciesAction extends Action<string> {

@@ -1,4 +1,4 @@
-import { Skills } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Skills } from "../../../../PF2eCoreLib/PlayerCharacter/Skills";
 import SkillsView from "./SkillsView";
 
 export const getSkillNamesArray = () => {

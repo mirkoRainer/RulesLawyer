@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Keyboard, StyleSheet } from "react-native";
 import { Input, Layout, Text } from "@ui-kitten/components";
-import { Shield } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Shield } from "../../../../PF2eCoreLib/PlayerCharacter/Shield";
 import { EditItemState } from "./EditItem";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";

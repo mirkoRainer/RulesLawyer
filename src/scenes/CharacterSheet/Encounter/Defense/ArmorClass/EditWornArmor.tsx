@@ -17,10 +17,10 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import {
     Armor,
-    ArmorProficiencies,
     DEFAULT_ARMOR,
     IsArmor,
-} from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../../../PF2eCoreLib/PlayerCharacter/Armor";
+import { ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter/ArmorProficiencies";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
 import { ScrollView } from "react-native-gesture-handler";

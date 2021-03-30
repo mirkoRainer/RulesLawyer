@@ -47,9 +47,9 @@ import {
     CHANGE_COMPANION_HP,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacterData, {
-    DEFAULT_COMPANION,
     PlayerCharacter,
 } from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { DEFAULT_COMPANION } from "../../PF2eCoreLib/PlayerCharacter/Companion";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints } from "../../PF2eCoreLib/HealthData";
 import {

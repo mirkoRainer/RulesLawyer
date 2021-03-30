@@ -4,12 +4,10 @@ import Personality from "./Components/Personality";
 import CampaignNotes from "./Components/CampaignNotes";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
-import {
-    Background,
-    CampaignNotesData,
-    PersonalityData,
-    WeaponProficiencies,
-} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Background } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter/WeaponProficiencies";
+import { PersonalityData } from "../../../PF2eCoreLib/PlayerCharacter/PersonalityData";
+import { CampaignNotesData } from "../../../PF2eCoreLib/PlayerCharacter/CampaignNotesData";
 import CharacterMetadata, {
     CharacterMetadataProps,
 } from "./Components/CharacterMetadata";

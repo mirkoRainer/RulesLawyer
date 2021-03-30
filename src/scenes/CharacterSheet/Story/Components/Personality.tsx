@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-import { PersonalityData } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { PersonalityData } from "../../../../PF2eCoreLib/PlayerCharacter/PersonalityData";
 import { useNavigation } from "@react-navigation/native";
 import { PersonalityDataNavigationProp } from "../EditPersonalityView";
 import { TouchableOpacity } from "react-native-gesture-handler";

@@ -18,18 +18,21 @@ import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import { Price } from "../../../../PF2eCoreLib/PlayerCharacter/Price";
 import {
-    Armor,
     Item,
-    Shield,
-    Weapon,
-    IsWeapon,
-    IsShield,
-    IsArmor,
     InventoryItem,
     Inventory,
-    Price,
-} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/Inventory";
+import { Armor, IsArmor } from "../../../../PF2eCoreLib/PlayerCharacter/Armor";
+import {
+    Weapon,
+    IsWeapon,
+} from "../../../../PF2eCoreLib/PlayerCharacter/Weapon";
+import {
+    Shield,
+    IsShield,
+} from "../../../../PF2eCoreLib/PlayerCharacter/Shield";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangeItem } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";

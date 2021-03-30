@@ -18,7 +18,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { bindActionCreators } from "redux";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
 import { EntireAppState } from "../../../../store/Store";
 import { indexOf } from "lodash";
 import { NavigationState, useFocusEffect } from "@react-navigation/native";

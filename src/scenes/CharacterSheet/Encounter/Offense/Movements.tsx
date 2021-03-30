@@ -24,7 +24,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { CHANGE_SPEED } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
 import { Picker } from "@react-native-community/picker";
 import { startChangeSpeed } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { Movement } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Movement } from "../../../../PF2eCoreLib/PlayerCharacter/Movement";
 
 const Movements: React.FC<Props> = (props) => {
     const handleSpeedSelect = (value: React.ReactText, index: number) => {

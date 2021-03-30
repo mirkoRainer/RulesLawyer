@@ -9,22 +9,22 @@ import {
     CHANGE_SPELL_PROFICIENCY,
 } from "./ProficiencyActionTypes";
 import {
-    Saves,
-    Shield,
-    Armor,
-    Movement,
-    PF2Action,
-    Skill,
-    SpellSlot,
-    BiographicalData,
-    PersonalityData,
-    CampaignNotesData,
-    Weapon,
     Item,
     InventoryItem,
-    WeaponProficiencies,
-    Companion,
-} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/Inventory";
+import { Armor } from "../../../PF2eCoreLib/PlayerCharacter/Armor";
+import { Weapon } from "../../../PF2eCoreLib/PlayerCharacter/Weapon";
+import { WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter/WeaponProficiencies";
+import { SpellSlot } from "../../../PF2eCoreLib/PlayerCharacter/SpellSlot";
+import { Skill } from "../../../PF2eCoreLib/PlayerCharacter/Skill";
+import { Shield } from "../../../PF2eCoreLib/PlayerCharacter/Shield";
+import { PersonalityData } from "../../../PF2eCoreLib/PlayerCharacter/PersonalityData";
+import { Saves } from "../../../PF2eCoreLib/PlayerCharacter/Saves";
+import { Movement } from "../../../PF2eCoreLib/PlayerCharacter/Movement";
+import { BiographicalData } from "../../../PF2eCoreLib/PlayerCharacter/BiographicalData";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import { CampaignNotesData } from "../../../PF2eCoreLib/PlayerCharacter/CampaignNotesData";
+import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/Companion";
 import {
     Spell,
     SpellList,

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Divider, Layout, Text } from "@ui-kitten/components";
-import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/Companion";
 import { connect } from "react-redux";
 import { EntireAppState } from "../../../store/Store";
 import { ThunkDispatch } from "redux-thunk";

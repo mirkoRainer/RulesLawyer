@@ -3,11 +3,11 @@ import { Guid } from "guid-typescript";
 import React from "react";
 import { StyleSheet } from "react-native";
 import {
-    Companion,
     InventoryItem,
     Item,
-    PF2Action,
-} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/Inventory";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/Companion";
 import ACView from "../Encounter/Defense/ArmorClass/ACView";
 import HitPoints from "../Encounter/Defense/HealthData/HitPoints";
 import SavesView from "../Encounter/Defense/SavesView";

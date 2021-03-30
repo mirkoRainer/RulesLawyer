@@ -1,4 +1,4 @@
-import { ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
+import { ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter/ArmorProficiencies";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import Store from "../../../../../store/Store";
