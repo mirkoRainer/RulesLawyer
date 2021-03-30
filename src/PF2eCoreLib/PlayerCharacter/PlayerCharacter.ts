@@ -1,16 +1,16 @@
-import { AbilityScoreArray } from "./AbilityScores";
-import { Proficiencies } from "./Proficiencies";
-import { iBonus } from "./Bonus";
-import { SpellList } from "../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
-import { ArmorCategory } from "./ArmorCategory";
-import { Traits } from "./Traits";
-import { HealthData } from "./HealthData";
-import { ArmorGroup } from "./ArmorGroup";
+import { AbilityScoreArray } from "../AbilityScores";
+import { Proficiencies } from "../Proficiencies";
+import { iBonus } from "../Bonus";
+import { SpellList } from "../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
+import { ArmorCategory } from "../ArmorCategory";
+import { Traits } from "../Traits";
+import { HealthData } from "../HealthData";
+import { ArmorGroup } from "../ArmorGroup";
 import { Guid } from "guid-typescript";
-import { BonusType } from "./BonusTypes";
-import { Ability } from "./Ability";
-import { Size } from "./Size";
-import { examplePlayerCharacter } from "../../examplePlayerCharacter";
+import { BonusType } from "../BonusTypes";
+import { Ability } from "../Ability";
+import { Size } from "../Size";
+import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
 
 interface PlayerCharacterData {
     abilityScores: AbilityScoreArray;

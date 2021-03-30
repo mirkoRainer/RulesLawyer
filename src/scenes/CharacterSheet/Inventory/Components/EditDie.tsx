@@ -5,7 +5,7 @@ import {
     TextInputFocusEventData,
 } from "react-native";
 import { Button, Input, Layout, Text } from "@ui-kitten/components";
-import { DamageDice } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { DamageDice } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 
 type Props = {
     die: DamageDice;

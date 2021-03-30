@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import { startTextEditModal } from "../../../../../store/actions/Modals/ModalsActions";
 import { connect } from "react-redux";
 import { CHANGE_BACKGROUND } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActionTypes";
-import { Background } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { Background } from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import styles from "./CharacterMetadata.styles";
 
 const BackgroundTextView: React.FC<Props> = (props) => {

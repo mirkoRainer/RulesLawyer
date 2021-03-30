@@ -6,7 +6,7 @@ import {
     Item,
     Shield,
     Weapon,
-} from "../../PF2eCoreLib/PlayerCharacter";
+} from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import Store from "../Store";
 
 export const UpdateItemInInventory = (

@@ -4,7 +4,7 @@ import DraggableFlatList, {
     DraggableFlatListProps,
     RenderItemParams,
 } from "react-native-draggable-flatlist";
-import { Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Item } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 
 /**
  * The label for a Section with the Filter function to determine what falls under the section. If more than one Section result in the same filter, only the first Section in the array will have the <T> under it.

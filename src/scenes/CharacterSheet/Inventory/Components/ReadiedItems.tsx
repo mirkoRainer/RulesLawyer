@@ -2,7 +2,10 @@ import { Button, Icon, Layout, Text } from "@ui-kitten/components";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { InventoryItem, Item } from "../../../../PF2eCoreLib/PlayerCharacter";
+import {
+    InventoryItem,
+    Item,
+} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
 import { EyeClosedOpenIcon, EyeOpenIcon } from "../../../Shared/IconButtons";
 import { ItemView } from "./ItemView";

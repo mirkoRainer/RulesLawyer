@@ -15,7 +15,7 @@ import {
     DEFAULT_SHIELD,
     IsShield,
     Shield,
-} from "../../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { bindActionCreators } from "redux";
 import {
     startAddOrRemoveBonus,

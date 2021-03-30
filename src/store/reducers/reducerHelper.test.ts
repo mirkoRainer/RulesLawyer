@@ -6,7 +6,7 @@ import {
     DEFAULT_ITEM,
     DEFAULT_WEAPON,
     InventoryItem,
-} from "../../PF2eCoreLib/PlayerCharacter";
+} from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import * as reducerHelper from "./reducerHelper";
 
 global.console = {

@@ -1,7 +1,7 @@
 import { Proficiencies } from "./src/PF2eCoreLib/Proficiencies";
 import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
-import PlayerCharacterData from "./src/PF2eCoreLib/PlayerCharacter";
+import PlayerCharacterData from "./src/PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { Guid } from "guid-typescript";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { Ability } from "./src/PF2eCoreLib/Ability";

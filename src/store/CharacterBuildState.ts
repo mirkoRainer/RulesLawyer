@@ -1,5 +1,5 @@
 import { AbilityScoreArray } from "../PF2eCoreLib/AbilityScores";
-import { Skills } from "../PF2eCoreLib/PlayerCharacter";
+import { Skills } from "../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { Proficiencies } from "../PF2eCoreLib/Proficiencies";
 import { Ancestries } from "../PF2eCoreLib/Ancestries";
 import { Backgrounds } from "../PF2eCoreLib/Backgrounds";

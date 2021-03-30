@@ -20,7 +20,7 @@ import {
     ArmorProficiencies,
     DEFAULT_ARMOR,
     IsArmor,
-} from "../../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { startChangeWornArmor } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import CoinPriceEditor from "../../../../Shared/CoinPriceEditor";
 import { ScrollView } from "react-native-gesture-handler";

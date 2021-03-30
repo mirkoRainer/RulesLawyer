@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Icon, Input, Layout, Text } from "@ui-kitten/components";
 import { ScrollView, StyleSheet } from "react-native";
-import { BiographicalData } from "../../../PF2eCoreLib/PlayerCharacter";
+import { BiographicalData } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";

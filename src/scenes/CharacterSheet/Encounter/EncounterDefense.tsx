@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import PlayerCharacterData, {
     Shield,
-} from "../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import HitPoints from "./Defense/HealthData/HitPoints";

@@ -6,7 +6,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
-import { Companion, IsArmor } from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Companion,
+    IsArmor,
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import EditCompanionsRow from "./EditCompanionsRow";

@@ -18,7 +18,7 @@ import {
     Skill,
     Skills,
     Weapon,
-} from "../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";

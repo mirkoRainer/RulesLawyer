@@ -17,7 +17,7 @@ import {
     Armor,
     Companion,
     IsArmor,
-} from "../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import {
     CompanionsStackParamList,
     EditCompanionNavigationProps,

@@ -11,7 +11,7 @@ import Alignment from "./CharacterMetadata/Alignment";
 import Deity from "./CharacterMetadata/Deity";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
-import { Background } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Background } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import BackgroundTextView from "./CharacterMetadata/BackgroundView";
 import ClassTextView from "./CharacterMetadata/ClassView";
 

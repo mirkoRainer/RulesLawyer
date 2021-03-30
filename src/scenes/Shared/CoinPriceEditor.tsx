@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Input, Layout, Text } from "@ui-kitten/components";
-import { Price } from "../../PF2eCoreLib/PlayerCharacter";
+import { Price } from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import {
     isNumbersOnly,
     isNumbersOnlyElseReturn0,

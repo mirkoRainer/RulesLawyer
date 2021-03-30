@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import ActionView from "./ActionView";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { Layout, Text, Divider, Icon, Button } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

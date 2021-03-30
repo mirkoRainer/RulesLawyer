@@ -7,7 +7,7 @@ import {
     InventoryItem,
     Item,
     PF2Action,
-} from "../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import ACView from "../Encounter/Defense/ArmorClass/ACView";
 import HitPoints from "../Encounter/Defense/HealthData/HitPoints";
 import SavesView from "../Encounter/Defense/SavesView";

@@ -3,7 +3,7 @@ import {
     IsWeapon,
     Weapon,
     WeaponProficiencies,
-} from "../../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import Store from "../../../../../store/Store";
 
 // TODO [#31]: Write TESTS for WeaponHelper.ts!

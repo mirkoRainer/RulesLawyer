@@ -7,7 +7,7 @@ import {
     DEFAULT_ARMOR,
     DEFAULT_ARMOR_ONLY_PROPS,
     Item,
-} from "../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 
 interface Props {
     state: EditItemState;

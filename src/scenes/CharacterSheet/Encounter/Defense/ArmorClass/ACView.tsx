@@ -16,7 +16,7 @@ import {
     DEFAULT_ARMOR,
     Companion,
     DEFAULT_COMPANION_ARMOR,
-} from "../../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { connect } from "react-redux";
 import {
     GetProficiencyTotalWithLevel,

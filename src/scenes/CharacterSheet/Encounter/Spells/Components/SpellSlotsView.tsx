@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../../../store/actions/AllActionTypesAggregated";
 import { bindActionCreators } from "redux";
-import { SpellSlot } from "../../../../../PF2eCoreLib/PlayerCharacter";
+import { SpellSlot } from "../../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { startChangeSpellSlots } from "../../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { prop } from "../../../../../PF2eCoreLib/TypescriptEvolution";
 import { useFocusEffect } from "@react-navigation/native";

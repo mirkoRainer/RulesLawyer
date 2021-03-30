@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-import { CompanionDetails } from "../../../PF2eCoreLib/PlayerCharacter";
+import { CompanionDetails } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 
 type Props = {
     details: CompanionDetails;

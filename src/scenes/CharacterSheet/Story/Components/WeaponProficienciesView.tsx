@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { OtherWeaponProficiency } from "../../Encounter/Offense/Weapons/OtherWeaponProficiency";
 import { Proficiencies } from "../../../../PF2eCoreLib/Proficiencies";
 import ProficiencyArrayView from "../../../Shared/ProficiencyArrayView";
-import { WeaponProficiencies } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { WeaponProficiencies } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { Layout, Text } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";

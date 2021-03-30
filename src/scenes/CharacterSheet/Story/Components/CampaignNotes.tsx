@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-import { CampaignNotesData } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { CampaignNotesData } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { CampaignNotesDataNavigationProp } from "../EditCampaignNotesView";
 import { useNavigation } from "@react-navigation/native";

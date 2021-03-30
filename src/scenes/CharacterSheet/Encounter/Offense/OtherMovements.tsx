@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-import { Movement } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Movement } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 
 interface Props {
     movements: Movement;

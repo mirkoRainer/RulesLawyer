@@ -8,7 +8,7 @@ import { GetBonusesFor, iBonus } from "../../../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
 import PlayerCharacterData, {
     iClass,
-} from "../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { Action, bindActionCreators } from "redux";
 import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";

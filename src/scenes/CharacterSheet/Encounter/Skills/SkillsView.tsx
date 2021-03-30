@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import ProficiencyView from "../../../Shared/ProficiencyView";
-import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter";
+import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { AbilityScoreArray } from "../../../../PF2eCoreLib/AbilityScores";
 import { EntireAppState } from "../../../../store/Store";
 import { connect } from "react-redux";

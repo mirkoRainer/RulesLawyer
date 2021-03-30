@@ -29,7 +29,7 @@ import {
     InventoryItem,
     Inventory,
     Price,
-} from "../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import { startChangeItem } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../../store/Store";

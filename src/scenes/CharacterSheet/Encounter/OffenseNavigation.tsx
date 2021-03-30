@@ -12,7 +12,7 @@ import {
     useTheme,
 } from "@ui-kitten/components";
 import EditActionView from "./Offense/EditActionView";
-import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { DefenseStackParamList } from "./DefenseNavigation";
 
 export type OffenseStackParamList = {

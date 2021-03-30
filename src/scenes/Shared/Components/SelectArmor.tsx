@@ -9,7 +9,10 @@ import {
     SelectItem,
     Text,
 } from "@ui-kitten/components";
-import { Armor, DEFAULT_ARMOR } from "../../../PF2eCoreLib/PlayerCharacter";
+import {
+    Armor,
+    DEFAULT_ARMOR,
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 
 export const SelectWornArmor: React.FC<Props> = (props) => {
     const armors = props.availableArmor.sort();

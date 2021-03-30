@@ -13,7 +13,7 @@ import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Layout, Text } from "@ui-kitten/components";
-import PlayerCharacterData from "../../PF2eCoreLib/PlayerCharacter";
+import PlayerCharacterData from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 
 type BuildNavigationProps = DrawerNavigationProp<RootDrawerParamList, "Build">;

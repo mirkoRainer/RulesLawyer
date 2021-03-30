@@ -11,7 +11,7 @@ import {
 import {
     Weapon,
     WeaponProficiencies,
-} from "../../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { EditItemState } from "./EditItem";
 import { isNumbersOnlyElseReturn0 } from "../../../Shared/Misc/StringToNumberHelper";
 import { Ability } from "../../../../PF2eCoreLib/Ability";

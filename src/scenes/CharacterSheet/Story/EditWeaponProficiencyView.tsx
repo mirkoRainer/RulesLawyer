@@ -6,7 +6,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
-import { WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter";
+import { WeaponProficiencies } from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import {
     DetermineNextProficiency,
     Proficiencies,

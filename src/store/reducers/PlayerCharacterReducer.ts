@@ -49,7 +49,7 @@ import {
 import PlayerCharacterData, {
     DEFAULT_COMPANION,
     PlayerCharacter,
-} from "../../PF2eCoreLib/PlayerCharacter";
+} from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { UpdateAbilityScore } from "../../PF2eCoreLib/AbilityScores";
 import { ResolveHitPoints } from "../../PF2eCoreLib/HealthData";
 import {

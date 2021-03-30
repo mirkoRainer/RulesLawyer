@@ -2,7 +2,7 @@ import React from "react";
 import { RefreshControl, StyleSheet } from "react-native";
 import PlayerCharacterData, {
     PF2Action,
-} from "../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import Movements from "./Offense/Movements";

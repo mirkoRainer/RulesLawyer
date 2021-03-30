@@ -9,7 +9,7 @@ import {
     CampaignNotesData,
     PersonalityData,
     WeaponProficiencies,
-} from "../../../PF2eCoreLib/PlayerCharacter";
+} from "../../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import CharacterMetadata, {
     CharacterMetadataProps,
 } from "./Components/CharacterMetadata";
