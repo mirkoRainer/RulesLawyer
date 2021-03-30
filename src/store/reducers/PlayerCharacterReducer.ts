@@ -44,6 +44,7 @@ import {
     ADD_COMPANION,
     CHANGE_COMPANION,
     CHANGE_COMPANION_TEMP_HP,
+    CHANGE_COMPANION_HP,
 } from "../actions/PlayerCharacter/PlayerCharacterActionTypes";
 import PlayerCharacterData, {
     DEFAULT_COMPANION,
@@ -650,6 +651,27 @@ const playerCharacterReducer = (
                                 ...companion.hitPoints,
                                 temporaryHitPoints: action.newTempHp,
                             },
+                        };
+                    } else {
+                        return companion;
+                    }
+                }),
+            };
+        case CHANGE_COMPANION_HP:
+            console.debug(
+                `CHANGE_COMPANION_HP in reducer ${JSON.stringify(
+                    action,
+                    null,
+                    1
+                )}`
+            );
+            return {
+                ...state,
+                companions: state.companions.map((companion) => {
+                    if (companion.metaData.id.equals(action.companionId)) {
+                        return {
+                            ...companion,
+                            hitPoints: action.newHp,
                         };
                     } else {
                         return companion;

@@ -44,7 +44,6 @@ import {
 import EditAcBonusAndDexCap from "../../../../Shared/Armor/EditAcBonusAndDexCap";
 import { EditArmorCategoryAndGroup } from "../../../../Shared/Armor/EditArmorCategoryAndGroup";
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
-import { EditArmor } from "../../../Inventory/Components/EditArmor";
 import { EditArmorPenaltiesAndStrReq } from "../../../../Shared/Armor/EditArmorPenaltiesAndStrReq";
 import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
 

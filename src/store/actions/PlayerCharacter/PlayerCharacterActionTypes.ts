@@ -25,6 +25,7 @@ import {
 import { Traits } from "../../../PF2eCoreLib/Traits";
 import { iBonus } from "../../../PF2eCoreLib/Bonus";
 import { Guid } from "guid-typescript";
+import { HealthData } from "../../../PF2eCoreLib/HealthData";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
 export interface ChangeCharacterNameAction extends Action<string> {
@@ -313,6 +314,13 @@ export interface ChangeCompanionTempHpAction extends Action<string> {
     companionIndex: number;
 }
 
+export const CHANGE_COMPANION_HP = "CHANGE_COMPANION_HP";
+export interface ChangeCompanionHpAction extends Action<string> {
+    type: typeof CHANGE_COMPANION_HP;
+    newHp: HealthData;
+    companionId: Guid;
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -359,4 +367,5 @@ export type PlayerCharacterActionTypes =
     | DeleteCompanionAction
     | AddCompanionAction
     | ChangeCompanionAction
-    | ChangeCompanionTempHpAction; // | SomeOtherAction
+    | ChangeCompanionTempHpAction
+    | ChangeCompanionHpAction; // | SomeOtherAction

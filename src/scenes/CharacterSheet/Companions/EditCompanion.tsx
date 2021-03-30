@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Layout, Text } from "@ui-kitten/components";
+import {
+    Button,
+    Layout,
+    PopoverPlacements,
+    Text,
+    Toggle,
+} from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { EntireAppState } from "../../../store/Store";
@@ -21,6 +27,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { EditAbilityScores } from "../../Shared/Components/EditAbilityScores";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
 import { SelectWornArmor } from "../../Shared/Components/SelectArmor";
+import EditHitPoints from "../../Shared/Components/EditHitPoints";
 
 const EditCompanion: React.FC<Props> = (props) => {
     const setNewAbilityScores = (abilityScores: AbilityScoreArray) => {
@@ -48,6 +55,24 @@ const EditCompanion: React.FC<Props> = (props) => {
     const currentArmor: Armor = props.companion.inventory.items.find(
         (x) => IsArmor(x) && x.worn
     )! as Armor;
+    const onChangeMature = (mature: boolean) => {
+        props.updateCompanion({
+            ...props.companion,
+            advancement: { ...props.companion.advancement, mature },
+        });
+    };
+    const onChangeNimble = (nimble: boolean) => {
+        props.updateCompanion({
+            ...props.companion,
+            advancement: { ...props.companion.advancement, nimble },
+        });
+    };
+    const onChangeSavage = (savage: boolean) => {
+        props.updateCompanion({
+            ...props.companion,
+            advancement: { ...props.companion.advancement, savage },
+        });
+    };
     return (
         <Layout style={{ flex: 1 }}>
             <Layout style={{ flexDirection: "row" }}>
@@ -65,6 +90,30 @@ const EditCompanion: React.FC<Props> = (props) => {
                 </Text>
             </Layout>
             <ScrollView>
+                <Layout style={{ flexDirection: "row", paddingHorizontal: 10 }}>
+                    <Toggle
+                        checked={props.companion.advancement.mature}
+                        onChange={onChangeMature}
+                    >
+                        Mature
+                    </Toggle>
+                    <Toggle
+                        checked={props.companion.advancement.nimble}
+                        onChange={onChangeNimble}
+                    >
+                        Nimble
+                    </Toggle>
+                    <Toggle
+                        checked={props.companion.advancement.savage}
+                        onChange={onChangeSavage}
+                    >
+                        Savage
+                    </Toggle>
+                </Layout>
+                <EditHitPoints
+                    hitPoints={props.companion.hitPoints}
+                    companionId={props.companion.metaData.id}
+                />
                 <EditAbilityScores
                     abilityScores={props.companion.abilityScores}
                     scoreRanges={Array.from(new Array(30), (x, i) => i + 1)}

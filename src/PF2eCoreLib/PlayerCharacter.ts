@@ -11,7 +11,6 @@ import { BonusType } from "./BonusTypes";
 import { Ability } from "./Ability";
 import { Size } from "./Size";
 import { examplePlayerCharacter } from "../../examplePlayerCharacter";
-import { ItemView } from "../scenes/CharacterSheet/Inventory/Components/ItemView";
 
 interface PlayerCharacterData {
     abilityScores: AbilityScoreArray;
