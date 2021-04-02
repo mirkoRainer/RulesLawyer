@@ -4,21 +4,15 @@ import {
     StackNavigationProp,
 } from "@react-navigation/stack";
 import EncounterOffense from "./EncounterOffense";
-import EditActionsView from "./Offense/EditActionsView";
-import {
-    Icon,
-    TopNavigationAction,
-    TopNavigation,
-    useTheme,
-} from "@ui-kitten/components";
-import EditActionView from "./Offense/EditActionView";
+import { useTheme } from "@ui-kitten/components";
 import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
-import { DefenseStackParamList } from "./DefenseNavigation";
+import EditActionPcView from "./Offense/EditActionPcView";
+import EditActionsPcView from "./Offense/EditActionsPcView";
 
 export type OffenseStackParamList = {
     MainOffenseView: undefined;
     EditActionsView: undefined;
-    EditActionView: {
+    EditActionPcView: {
         index: number;
         updateAction: (updatedAction: PF2Action, index: number) => void;
     };
@@ -35,8 +29,14 @@ export const OffenseNavigator: React.FC = () => {
     return (
         <Stack.Navigator initialRouteName="MainOffenseView" headerMode="none">
             <Stack.Screen name="MainOffenseView" component={EncounterOffense} />
-            <Stack.Screen name="EditActionsView" component={EditActionsView} />
-            <Stack.Screen name="EditActionView" component={EditActionView} />
+            <Stack.Screen
+                name="EditActionsView"
+                component={EditActionsPcView}
+            />
+            <Stack.Screen
+                name="EditActionPcView"
+                component={EditActionPcView}
+            />
         </Stack.Navigator>
     );
 };

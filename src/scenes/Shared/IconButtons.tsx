@@ -11,3 +11,5 @@ export const EyeOpenIcon = (props: any) => (
 export const EyeClosedOpenIcon = (props: any) => (
     <Icon {...props} name={"eye-off-outline"} />
 );
+export const BackIcon = (props: any) => <Icon {...props} name="arrow-back" />;
+export const PlusIcon = (props: any) => <Icon {...props} name="plus" />;

@@ -101,8 +101,8 @@ export class PlayerCharacter {
     public get data(): PlayerCharacterData {
         return this._data;
     }
-    public set data(v: PlayerCharacterData) {
-        this._data = v;
+    public set data(data: PlayerCharacterData) {
+        this._data = data;
     }
 }
 export default PlayerCharacterData;

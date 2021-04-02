@@ -33,7 +33,7 @@ export const SelectWornArmor: React.FC<Props> = (props) => {
         return <SelectItem title={armor.name} key={armor.id.toString()} />;
     });
     return (
-        <Layout style={{ flex: 1 }}>
+        <Layout style={{ flex: 1, padding: 10 }}>
             <Layout style={{ ...styles.wrapRow, paddingHorizontal: 10 }}>
                 <Text category="h5" style={styles.centered}>
                     Select Worn Armor
