@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { GetDiceStringPretty } from "../../../../PF2eCoreLib/PlayerCharacter/Dice";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import { GetDiceStringPretty } from "../../../PF2eCoreLib/PlayerCharacter/Dice";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
 import {
     Layout,
     Text,
@@ -13,8 +13,8 @@ import {
     SelectItem,
     IndexPath,
 } from "@ui-kitten/components";
-import { Pill } from "../../../Shared/Pill";
-import ActionsAndActivities from "./ActionsAndActivities";
+import { Pill } from "../Pill";
+import ActionsAndActivities from "../../CharacterSheet/Encounter/Offense/ActionsAndActivities";
 import {
     DetermineActionSymbol,
     freeActionSymbol,
@@ -29,19 +29,16 @@ import {
     CalculateAbilityScoreModifier,
     GetAbilityModifierFromScores,
     GetAbilityScoreAbbreviation,
-} from "../../../../PF2eCoreLib/AbilityScores";
+} from "../../../PF2eCoreLib/AbilityScores";
 import {
     GetProficiencyTotalWithLevel,
     Proficiencies,
-} from "../../../../PF2eCoreLib/Proficiencies";
-import WeaponDamageSection from "./Weapons/WeaponDamageSection";
-import { GetProficiencyForWeapon } from "./Weapons/WeaponHelper";
-import {
-    GetBonusesFor,
-    GetCurrentPCBonuses,
-} from "../../../../PF2eCoreLib/Bonus";
-import { BonusType } from "../../../../PF2eCoreLib/BonusTypes";
-import Store from "../../../../store/Store";
+} from "../../../PF2eCoreLib/Proficiencies";
+import WeaponDamageSection from "../../CharacterSheet/Encounter/Offense/Weapons/WeaponDamageSection";
+import { GetProficiencyForWeapon } from "../../CharacterSheet/Encounter/Offense/Weapons/WeaponHelper";
+import { GetBonusesFor, GetCurrentPCBonuses } from "../../../PF2eCoreLib/Bonus";
+import { BonusType } from "../../../PF2eCoreLib/BonusTypes";
+import Store from "../../../store/Store";
 
 interface Props {
     action: PF2Action;

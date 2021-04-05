@@ -3,11 +3,11 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Layout, Text, Button } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
-import { EntireAppState } from "../../../../store/Store";
 import { indexOf } from "lodash";
 import { Guid } from "guid-typescript";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { EntireAppState } from "../../../store/Store";
 
 interface OwnProps {
     companionId?: Guid;

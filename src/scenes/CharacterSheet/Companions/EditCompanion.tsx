@@ -23,7 +23,7 @@ import { RouteProp } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import { EditAbilityScores } from "../../Shared/Components/EditAbilityScores";
 import { AbilityScoreArray } from "../../../PF2eCoreLib/AbilityScores";
-import { SelectWornArmor } from "../../Shared/Components/SelectArmor";
+import { SelectWornArmor } from "../../Shared/Armor/SelectArmor";
 import EditHitPoints from "../../Shared/Components/EditHitPoints";
 
 const EditCompanion: React.FC<Props> = (props) => {

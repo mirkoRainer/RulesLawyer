@@ -706,3 +706,20 @@ export const startChangeCompanionHitPoints = (
         dispatch(ChangeCompanionHp(newHp, companionId));
     };
 };
+
+export const ChangeCompanionActions: ActionCreator<PlayerCharacterActionTypes> = (
+    companionId: Guid,
+    newActions: PF2Action[]
+): PlayerCharacterActionTypes => ({
+    type: ActionTypes.CHANGE_COMPANION_ACTIONS,
+    companionId,
+    actions: newActions,
+});
+export const startChangeCompanionActions = (
+    companionId: Guid,
+    newActions: PF2Action[]
+) => {
+    return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
+        dispatch(ChangeCompanionActions(companionId, newActions));
+    };
+};

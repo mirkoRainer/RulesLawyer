@@ -321,6 +321,13 @@ export interface ChangeCompanionHpAction extends Action<string> {
     companionId: Guid;
 }
 
+export const CHANGE_COMPANION_ACTIONS = "CHANGE_COMPANION_ACTIONS";
+export interface ChangeCompanionActionsAction extends Action<string> {
+    type: typeof CHANGE_COMPANION_ACTIONS;
+    companionId: Guid;
+    actions: PF2Action[];
+}
+
 export type PlayerCharacterActionTypes =
     | ChangeAlignmentAction
     | ChangeAncestryAction
@@ -368,4 +375,5 @@ export type PlayerCharacterActionTypes =
     | AddCompanionAction
     | ChangeCompanionAction
     | ChangeCompanionTempHpAction
-    | ChangeCompanionHpAction; // | SomeOtherAction
+    | ChangeCompanionHpAction
+    | ChangeCompanionActionsAction; // | SomeOtherAction

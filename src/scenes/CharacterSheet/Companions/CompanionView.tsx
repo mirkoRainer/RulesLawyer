@@ -11,7 +11,7 @@ import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/Companion";
 import ACView from "../Encounter/Defense/ArmorClass/ACView";
 import HitPoints from "../Encounter/Defense/HealthData/HitPoints";
 import SavesView from "../Encounter/Defense/SavesView";
-import ActionView from "../Encounter/Offense/ActionView";
+import ActionView from "../../Shared/Actions/ActionView";
 import Movements from "../Encounter/Offense/Movements";
 import PerceptionView from "../Encounter/Offense/PerceptionView";
 import SkillsView from "../Encounter/Skills/SkillsView";

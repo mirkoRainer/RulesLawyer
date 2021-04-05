@@ -7,14 +7,7 @@ import {
     SelectItem,
     IndexPath,
 } from "@ui-kitten/components";
-import {
-    IsWeapon,
-    Weapon,
-} from "../../../../PF2eCoreLib/PlayerCharacter/Weapon";
-import { Skill } from "../../../../PF2eCoreLib/PlayerCharacter/Skill";
-import { Skills } from "../../../../PF2eCoreLib/PlayerCharacter/Skills";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
-import { EntireAppState } from "../../../../store/Store";
+
 import {
     reactionSymbol,
     freeActionSymbol,
@@ -24,12 +17,17 @@ import {
     DetermineActionSymbol,
 } from "./ActionHelper";
 import { ScrollView } from "react-native-gesture-handler";
-import TraitSelector from "../../../Shared/TraitSelector";
-import { SkillSelector } from "../Skills/SkillSelector";
-import { WeaponSelector } from "./Weapons/WeaponSelector";
 import { Guid } from "guid-typescript";
-import { Companion } from "../../../../PF2eCoreLib/PlayerCharacter/Companion";
 import { connect } from "react-redux";
+import { Skills } from "../../../PF2eCoreLib/PlayerCharacter/Skills";
+import { IsWeapon, Weapon } from "../../../PF2eCoreLib/PlayerCharacter/Weapon";
+import { WeaponSelector } from "../../CharacterSheet/Encounter/Offense/Weapons/WeaponSelector";
+import { SkillSelector } from "../../CharacterSheet/Encounter/Skills/SkillSelector";
+import TraitSelector from "../TraitSelector";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import { Skill } from "../../../PF2eCoreLib/PlayerCharacter/Skill";
+import { EntireAppState } from "../../../store/Store";
+import { Companion } from "../../../PF2eCoreLib/PlayerCharacter/Companion";
 
 const EditAction: React.FC<Props> = (props) => {
     const NumberOfActionsSelector = () => {

@@ -9,19 +9,26 @@ import {
 } from "@ui-kitten/components";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
-import { OffenseStackParamList } from "../OffenseNavigation";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { BackIcon, PlusIcon } from "../../../Shared/IconButtons";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import {
+    RouteProp,
+    useFocusEffect,
+    useNavigation,
+} from "@react-navigation/native";
 import { bindActionCreators } from "redux";
-import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { Guid } from "guid-typescript";
-import { EntireAppState } from "../../../../store/Store";
-import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
-import EditActions from "../../../Shared/Actions/EditActions";
+import {
+    CompanionsStackParamList,
+    EditCompanionActionsNavigationProps,
+} from "./CompanionsNavigator";
+import { BackIcon, PlusIcon } from "../../Shared/IconButtons";
+import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
+import EditActions from "../../Shared/Actions/EditActions";
+import { EntireAppState } from "../../../store/Store";
+import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
+import { startChangeCompanionActions } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 
-const EditActionsPcView: React.FC<Props> = (props) => {
+const EditActionsCompanionView: React.FC<Props> = (props) => {
     // ensure the page refreshes data when it's navigated back to but setting state when the page is focus. React.useCallback prevents an infinite loop.
     const [state, setState] = useState({});
     useFocusEffect(
@@ -29,22 +36,25 @@ const EditActionsPcView: React.FC<Props> = (props) => {
             setState({});
         }, [])
     );
-    const navigation = useNavigation<ActionsNavigationProps>();
+    const navigation = useNavigation<EditCompanionActionsNavigationProps>();
     const EditActionsBackAction = () => (
         <TopNavigationAction
             icon={BackIcon}
             onPress={() => {
-                navigation.navigate("MainOffenseView");
+                navigation.goBack();
             }}
         />
     );
-    const handleEditButton = (index: number) => {
-        navigation.push("EditActionPcView", { index });
+    const updateAction = (newAction: PF2Action, index: number) => {
+        let actions = props.actions;
+        actions[index] = newAction;
+        props.updateActions(props.route.params.companionGuid, actions);
     };
+    const handleEditButton = (index: number) => {};
     const handleDeleteButton = (index: number) => {
         let newActions = props.actions;
         newActions.splice(index, 1);
-        props.updateActions(newActions);
+        props.updateActions(props.route.params.companionGuid, newActions);
     };
     const handleAddNewActionButton = () => {
         let actions = props.actions;
@@ -56,7 +66,7 @@ const EditActionsPcView: React.FC<Props> = (props) => {
             description: "Description here",
             source: "Source of the Action",
         });
-        props.updateActions(actions);
+        props.updateActions(props.route.params.companionGuid, actions);
         setState({});
     };
     return (
@@ -83,17 +93,10 @@ const EditActionsPcView: React.FC<Props> = (props) => {
     );
 };
 
-type ActionsNavigationProps = StackNavigationProp<
-    OffenseStackParamList,
-    "EditActionsView"
->;
+type Props = OwnProps & LinkStateProps & LinkDispatchProps;
 
-type Props = OwnProps & LinkDispatchProps & LinkStateProps;
-
-interface OwnProps {}
-
-interface LinkDispatchProps {
-    updateActions: (action: PF2Action[]) => void;
+interface OwnProps {
+    route: RouteProp<CompanionsStackParamList, "EditCompanionActionsView">;
 }
 
 interface LinkStateProps {
@@ -104,13 +107,20 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
     actions: state.playerCharacter.actions,
 });
 
+interface LinkDispatchProps {
+    updateActions: (companionId: Guid, action: PF2Action[]) => void;
+}
+
 const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
-    updateActions: bindActionCreators(startChangePF2Actions, dispatch),
+    updateActions: bindActionCreators(startChangeCompanionActions, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditActionsPcView);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(EditActionsCompanionView);
 
 export const styles = StyleSheet.create({
     centered: {

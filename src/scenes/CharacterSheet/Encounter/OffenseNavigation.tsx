@@ -14,7 +14,6 @@ export type OffenseStackParamList = {
     EditActionsView: undefined;
     EditActionPcView: {
         index: number;
-        updateAction: (updatedAction: PF2Action, index: number) => void;
     };
 };
 
