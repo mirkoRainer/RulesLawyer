@@ -13,3 +13,10 @@ export const EyeClosedOpenIcon = (props: any) => (
 );
 export const BackIcon = (props: any) => <Icon {...props} name="arrow-back" />;
 export const PlusIcon = (props: any) => <Icon {...props} name="plus" />;
+
+export const ArrowDownIcon = (props: any) => (
+    <Icon {...props} name={"arrow-ios-downward-outline"} />
+);
+export const ArrowForwardIcon = (props: any) => (
+    <Icon {...props} name={"arrow-ios-forward-outline"} />
+);

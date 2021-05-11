@@ -10,13 +10,14 @@ import EditCompanions from "./EditCompanions";
 import { Guid } from "guid-typescript";
 import EditCompanion from "./EditCompanion";
 import EditActionsCompanionView from "./EditActionsCompanionView";
+import EditActionCompanionView from "./EditActionCompanionView";
 
 export type CompanionsStackParamList = {
     MainCompanionView: undefined;
     EditCompanionsView: undefined;
     EditCompanionView: { companionGuid: string };
     EditCompanionActionsView: { companionGuid: Guid };
-    EditCompanionActionView: { companionGuid: string; index: number };
+    EditCompanionActionView: { companionGuid: Guid; actionIndex: number };
 };
 
 export type MainCompanionNavigationProps = StackNavigationProp<
@@ -36,7 +37,7 @@ export type EditCompanionActionsNavigationProps = StackNavigationProp<
     CompanionsStackParamList,
     "EditCompanionActionsView"
 >;
-s;
+
 export type EditCompanionActionNavigationProps = StackNavigationProp<
     CompanionsStackParamList,
     "EditCompanionActionView"
@@ -55,6 +56,10 @@ export const CompanionsNavigator: React.FC = (props) => {
             <Stack.Screen
                 name="EditCompanionActionsView"
                 component={EditActionsCompanionView}
+            />
+            <Stack.Screen
+                name="EditCompanionActionView"
+                component={EditActionCompanionView}
             />
         </Stack.Navigator>
     );

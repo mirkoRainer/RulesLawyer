@@ -123,6 +123,20 @@ const EditCompanion: React.FC<Props> = (props) => {
                     onSelect={onSelectWornArmor}
                     currentArmor={currentArmor}
                 />
+                <Layout style={{ padding: 10 }}>
+                    <Button
+                        onPress={() =>
+                            props.navigation.navigate(
+                                "EditCompanionActionsView",
+                                {
+                                    companionGuid: props.companion.metaData.id,
+                                }
+                            )
+                        }
+                    >
+                        Edit Companion Actions
+                    </Button>
+                </Layout>
             </ScrollView>
         </Layout>
     );

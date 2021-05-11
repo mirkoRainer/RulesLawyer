@@ -19,7 +19,7 @@ import { Guid } from "guid-typescript";
 import { startChangeCompanionHitPoints } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { bindActionCreators } from "redux";
 import { indexOf } from "lodash";
-import { CheckIcon } from "../IconButtons";
+import { ArrowForwardIcon, ArrowDownIcon, CheckIcon } from "../IconButtons";
 
 const EditHitPoints: React.FC<Props> = (props) => {
     const maxDyingArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -65,16 +65,6 @@ const EditHitPoints: React.FC<Props> = (props) => {
         return "";
     };
     const [state, setState] = useState(false);
-    const ArrowIcon = (props: any) => (
-        <Icon
-            {...props}
-            name={
-                state
-                    ? "arrow-ios-downward-outline"
-                    : "arrow-ios-forward-outline"
-            }
-        />
-    );
     return (
         <Layout style={{ flex: 1, padding: 10 }}>
             <Layout style={{ ...styles.wrapRow, paddingHorizontal: 10 }}>
@@ -83,7 +73,7 @@ const EditHitPoints: React.FC<Props> = (props) => {
                 </Text>
                 <Button
                     appearance="ghost"
-                    accessoryRight={ArrowIcon}
+                    accessoryRight={state ? ArrowDownIcon : ArrowForwardIcon}
                     onPress={() => setState(!state)}
                 />
             </Layout>

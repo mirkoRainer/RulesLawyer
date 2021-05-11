@@ -1,6 +1,6 @@
-import { Divider, Layout, Text } from "@ui-kitten/components";
+import { Button, Divider, Layout, Text } from "@ui-kitten/components";
 import { Guid } from "guid-typescript";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import {
     InventoryItem,
@@ -19,6 +19,7 @@ import { ItemView } from "../Inventory/Components/ItemView";
 import InventoryView from "../Inventory/InventoryView";
 import AbilityScores from "../Story/Components/AbilityScores/AbilityScoresView";
 import { CompanionDetailsView } from "./CompanionDetailsView";
+import { ArrowDownIcon, ArrowForwardIcon } from "../../Shared/IconButtons";
 
 type Props = { companion: Companion; index: number; level: number };
 
@@ -63,60 +64,88 @@ export const CompanionView: React.FC<Props> = (props) => {
     props.companion.inventory.items.forEach((item, index) => {
         items.push(renderItem(item, index));
     });
+    const [visible, setVisible] = useState(false);
     return (
         <Layout style={{ flex: 1 }}>
-            <Text style={styles.centered} category="h3">
-                {props.companion.name}
-            </Text>
-            {props.companion.advancement.mature ||
-            props.companion.advancement.nimble ||
-            props.companion.advancement.savage ? (
-                <Text style={styles.centered} category="s2">
-                    {matureNimbleSavage}
-                </Text>
+            <Layout style={{ flexDirection: "row" }}>
+                <Layout style={{ flex: 1 }}>
+                    <Text style={styles.centered} category="h3">
+                        {props.companion.name}
+                    </Text>
+                    {props.companion.advancement.mature ||
+                    props.companion.advancement.nimble ||
+                    props.companion.advancement.savage ? (
+                        <Text style={styles.centered} category="s2">
+                            {matureNimbleSavage}
+                        </Text>
+                    ) : (
+                        <></>
+                    )}
+                </Layout>
+                <Button
+                    appearance="ghost"
+                    accessoryRight={visible ? ArrowDownIcon : ArrowForwardIcon}
+                    onPress={() => setVisible(!visible)}
+                />
+            </Layout>
+            {visible ? (
+                <Layout>
+                    <ACView isCompanion={true} companionIndex={props.index} />
+                    <Divider />
+                    <HitPoints
+                        isCompanion={true}
+                        companionIndex={props.index}
+                        healthData={props.companion.hitPoints}
+                    />
+                    <Divider />
+                    <ActionView
+                        action={{
+                            description: props.companion.supportBenefit,
+                            name: "Support",
+                            id: Guid.create(),
+                            numberOfActions: 1,
+                            source: "Companion Support Benefit",
+                            traits: [],
+                        }}
+                        abilityScores={props.companion.abilityScores}
+                        level={props.level}
+                    />
+                    {advancedManuever}
+                    {actions}
+                    <Divider />
+                    <SavesView
+                        isCompanion={true}
+                        companionIndex={props.index}
+                    />
+                    <PerceptionView
+                        isCompanion={true}
+                        companionIndex={props.index}
+                    />
+                    <Divider />
+                    <Movements
+                        movements={props.companion.speed}
+                        isCompanion={true}
+                    />
+                    <Divider />
+                    <AbilityScores
+                        abilityScores={props.companion.abilityScores}
+                        companion={true}
+                    />
+                    <SkillsView
+                        isCompanion={true}
+                        companionIndex={props.index}
+                    />
+                    <Divider />
+                    <Text category="h4" style={styles.centered}>
+                        Items
+                    </Text>
+                    {items}
+                    <Divider />
+                    <CompanionDetailsView details={props.companion.details} />
+                </Layout>
             ) : (
                 <></>
             )}
-            <ACView isCompanion={true} companionIndex={props.index} />
-            <Divider />
-            <HitPoints
-                isCompanion={true}
-                companionIndex={props.index}
-                healthData={props.companion.hitPoints}
-            />
-            <Divider />
-            <ActionView
-                action={{
-                    description: props.companion.supportBenefit,
-                    name: "Support",
-                    id: Guid.create(),
-                    numberOfActions: 1,
-                    source: "Companion Support Benefit",
-                    traits: [],
-                }}
-                abilityScores={props.companion.abilityScores}
-                level={props.level}
-            />
-            {advancedManuever}
-            {actions}
-            <Divider />
-            <SavesView isCompanion={true} companionIndex={props.index} />
-            <PerceptionView isCompanion={true} companionIndex={props.index} />
-            <Divider />
-            <Movements movements={props.companion.speed} isCompanion={true} />
-            <Divider />
-            <AbilityScores
-                abilityScores={props.companion.abilityScores}
-                companion={true}
-            />
-            <SkillsView isCompanion={true} companionIndex={props.index} />
-            <Divider />
-            <Text category="h4" style={styles.centered}>
-                Items
-            </Text>
-            {items}
-            <Divider />
-            <CompanionDetailsView details={props.companion.details} />
         </Layout>
     );
 };

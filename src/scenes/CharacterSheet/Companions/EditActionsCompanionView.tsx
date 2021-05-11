@@ -50,11 +50,17 @@ const EditActionsCompanionView: React.FC<Props> = (props) => {
         actions[index] = newAction;
         props.updateActions(props.route.params.companionGuid, actions);
     };
-    const handleEditButton = (index: number) => {};
+    const handleEditButton = (index: number) => {
+        navigation.navigate("EditCompanionActionView", {
+            companionGuid: props.route.params.companionGuid,
+            actionIndex: index,
+        });
+    };
     const handleDeleteButton = (index: number) => {
         let newActions = props.actions;
         newActions.splice(index, 1);
         props.updateActions(props.route.params.companionGuid, newActions);
+        setState({});
     };
     const handleAddNewActionButton = () => {
         let actions = props.actions;

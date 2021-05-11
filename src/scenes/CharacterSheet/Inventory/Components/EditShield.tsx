@@ -85,7 +85,11 @@ export const EditShield: React.FC<Props> = (props) => {
             <Input
                 label={"Hardness"}
                 placeholder="Enter Shield Hardness"
-                value={props.shield.hardness.toString()}
+                value={
+                    props.shield.hardness
+                        ? props.shield.hardness.toString()
+                        : "0"
+                }
                 onChangeText={handleHardnessChange}
                 keyboardType="numeric"
                 style={{ flex: 1, paddingHorizontal: 5 }}
@@ -93,7 +97,7 @@ export const EditShield: React.FC<Props> = (props) => {
             <Input
                 label={"Max HP"}
                 placeholder="Enter Shield Max HP"
-                value={props.shield.maxHP.toString()}
+                value={props.shield.maxHP ? props.shield.maxHP.toString() : "0"}
                 onChangeText={handleHPChange}
                 keyboardType="numeric"
                 style={{ flex: 1, paddingHorizontal: 5 }}
@@ -101,7 +105,11 @@ export const EditShield: React.FC<Props> = (props) => {
             <Input
                 label={"Break Threshold (Usually half Max HP)"}
                 placeholder="Enter Shield Break Threshold"
-                value={props.shield.breakThreshold.toString()}
+                value={
+                    props.shield.breakThreshold
+                        ? props.shield.breakThreshold.toString()
+                        : "0"
+                }
                 onChangeText={handleBreakThresholdChange}
                 keyboardType="numeric"
                 style={{ flex: 1, paddingHorizontal: 5 }}
