@@ -85,7 +85,7 @@ export const DEFAULT_ARMOR: Armor = {
     id: Guid.create(),
     description: "Plain clothing offering no real protection",
     invested: false,
-    worn: true,
+    worn: false,
     readied: false,
     name: "Unarmored",
     category: ArmorCategory.Light,

@@ -10,7 +10,9 @@ export type TraitSelectorProps = {
     onSelection: (traits: (keyof typeof Traits)[]) => void;
 };
 
-const TraitSelector: React.FC<TraitSelectorProps> = (props) => {
+export const TraitSelector: React.FC<TraitSelectorProps> = (
+    props
+): JSX.Element => {
     const renderTrait = (trait: string, status: string) => {
         const onTraitPress = () => {
             console.debug("onTraitPress");
@@ -93,7 +95,9 @@ const TraitSelector: React.FC<TraitSelectorProps> = (props) => {
             </Layout>
             {visible ? (
                 <Layout>
-                    <Text category="c2">Tap to remove</Text>
+                    <Text category="c2" testID={"TapToRemove"}>
+                        Tap to remove
+                    </Text>
                     <Layout style={styles.traitContainer}>
                         {renderActiveTraits}
                     </Layout>
@@ -116,8 +120,6 @@ const TraitSelector: React.FC<TraitSelectorProps> = (props) => {
         </Card>
     );
 };
-
-export default TraitSelector;
 
 const styles = StyleSheet.create({
     centered: {

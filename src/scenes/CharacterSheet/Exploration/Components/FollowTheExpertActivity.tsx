@@ -32,7 +32,9 @@ const FollowTheExpertActivity: React.FC<Props> = (props) => {
     return (
         <Layout style={styles.container}>
             <Layout style={styles.row}>
-                <Text category="h3">Follow the Expert</Text>
+                <Text category="h3" style={{ paddingLeft: 5 }}>
+                    Follow the Expert
+                </Text>
                 <Button
                     appearance="ghost"
                     status="basic"

@@ -9,7 +9,7 @@ import { Traits } from "../../../PF2eCoreLib/Traits";
 import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { startChangePCTraits } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { EntireAppState } from "../../../store/Store";
-import TraitSelector from "../../Shared/TraitSelector";
+import { TraitSelector } from "../../Shared/TraitSelector";
 import { StoryNavigatorHeader } from "./Components/StoryNavigatorHeader";
 
 const TraitSelectorView: React.FC<Props> = (props) => {

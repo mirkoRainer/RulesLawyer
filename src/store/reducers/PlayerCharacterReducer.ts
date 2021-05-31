@@ -60,6 +60,7 @@ import {
 } from "../actions/PlayerCharacter/ProficiencyActionTypes";
 import _ from "lodash";
 import {
+    ChangeArmorThatIsWorn,
     InsertOrUpdateBonus,
     RemoveBonus,
     UpdateItemInInventory,
@@ -393,7 +394,7 @@ const playerCharacterReducer = (
                 ),
                 inventory: {
                     ...state.inventory,
-                    items: UpdateItemInInventory(
+                    items: ChangeArmorThatIsWorn(
                         action.WornArmor,
                         state.inventory.items
                     ),

@@ -15,7 +15,6 @@ import {
     DEFAULT_ARMOR,
     DEFAULT_COMPANION_ARMOR,
 } from "../../../../../PF2eCoreLib/PlayerCharacter/Armor";
-import { ArmorProficiencies } from "../../../../../PF2eCoreLib/PlayerCharacter/ArmorProficiencies";
 import { Companion } from "../../../../../PF2eCoreLib/PlayerCharacter/Companion";
 import { connect } from "react-redux";
 import {

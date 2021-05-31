@@ -8,6 +8,8 @@ import {
     Select,
     SelectItem,
     IndexPath,
+    TopNavigation,
+    TopNavigationAction,
 } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import { bindActionCreators } from "redux";
@@ -31,12 +33,11 @@ import {
 import { iBonus } from "../../../../../PF2eCoreLib/Bonus";
 import { ArmorGroup } from "../../../../../PF2eCoreLib/ArmorGroup";
 import { Traits } from "../../../../../PF2eCoreLib/Traits";
-import TraitSelector from "../../../../Shared/TraitSelector";
 import { getArmorProficiencyForCurrentPC } from "./ArmorClassHelper";
 import { Proficiencies } from "../../../../../PF2eCoreLib/Proficiencies";
 import { DefenseStackParamList } from "../../DefenseNavigation";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CheckIcon } from "../../../../Shared/IconButtons";
+import { BackIcon, CheckIcon } from "../../../../Shared/IconButtons";
 import {
     ArmorCategoryData,
     ArmorGroupData,
@@ -46,6 +47,7 @@ import { EditArmorCategoryAndGroup } from "../../../../Shared/Armor/EditArmorCat
 import { ArmorCategory } from "../../../../../PF2eCoreLib/ArmorCategory";
 import { EditArmorPenaltiesAndStrReq } from "../../../../Shared/Armor/EditArmorPenaltiesAndStrReq";
 import { BonusType } from "../../../../../PF2eCoreLib/BonusTypes";
+import { ArmorSelector } from "./ArmorSelector";
 
 type Props = LinkStateProps & LinkDispatchProps & OwnProps;
 
@@ -203,25 +205,31 @@ const EditWornArmor: React.FC<Props> = (props) => {
         };
     };
 
-    const header = () => {
-        if (!props.editArmor) {
-            return (
-                <Layout style={styles.header}>
-                    <Text category="h5">{"Worn Armor:"}</Text>
-                    <Button
-                        appearance="ghost"
-                        accessoryLeft={CheckIcon}
-                        onPress={changeWornArmor}
-                    />
-                </Layout>
-            );
-        }
+    const header = () => {};
+    const onArmorSelect = (armor: Armor | undefined) => {
+        if (!armor) return;
+        props.updateWornArmor(armor);
     };
 
     return (
         <Layout style={{ flex: 1 }}>
-            {header()}
-            <ScrollView>
+            <TopNavigation
+                accessoryLeft={() => (
+                    <TopNavigationAction
+                        icon={BackIcon}
+                        onPress={() => {
+                            props.navigation.goBack();
+                        }}
+                    />
+                )}
+                title={"Select Armor to Wear"}
+            />
+            <ArmorSelector
+                currentArmors={props.armors}
+                currentArmorSelected={props.wornArmor}
+                onSelect={onArmorSelect}
+            />
+            {/* <ScrollView>
                 <Card>
                     <Input
                         label={"Name"}
@@ -299,7 +307,7 @@ const EditWornArmor: React.FC<Props> = (props) => {
                     onSelection={changeTraits}
                     currentTraits={props.wornArmor.traits}
                 />
-            </ScrollView>
+            </ScrollView> */}
         </Layout>
     );
 };
@@ -315,6 +323,7 @@ interface LinkDispatchProps {
 interface LinkStateProps {
     wornArmor: Armor;
     armorProficiencies: ArmorProficiencies;
+    armors: Armor[];
 }
 
 const mapDispatchToProps = (
@@ -330,19 +339,21 @@ const mapStateToProps = (
     state: EntireAppState,
     ownProps: OwnProps
 ): LinkStateProps => {
+    const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
+        IsArmor
+    );
     if (ownProps.editArmor) {
         return {
             wornArmor: ownProps.editArmor,
             armorProficiencies: state.playerCharacter.armorProficiencies,
+            armors,
         };
     }
-    const armors: Armor[] = state.playerCharacter.inventory.items.filter<Armor>(
-        IsArmor
-    );
     const wornArmor: Armor | undefined = armors.find((armor) => armor.worn);
     return {
         wornArmor: wornArmor ? wornArmor : DEFAULT_ARMOR,
         armorProficiencies: state.playerCharacter.armorProficiencies,
+        armors,
     };
 };
 

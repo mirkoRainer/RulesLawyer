@@ -20,3 +20,11 @@ export const ArrowDownIcon = (props: any) => (
 export const ArrowForwardIcon = (props: any) => (
     <Icon {...props} name={"arrow-ios-forward-outline"} />
 );
+
+export const MenuIcon = (props: any) => <Icon {...props} name="menu-outline" />;
+
+export const InfoIcon = (props: any) => <Icon {...props} name="info" />;
+
+export const PermIdentityIcon = (props: any) => (
+    <Icon {...props} name="person-outline" />
+);

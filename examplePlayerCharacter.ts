@@ -6,6 +6,7 @@ import { Guid } from "guid-typescript";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { Ability } from "./src/PF2eCoreLib/Ability";
 import { Size } from "./src/PF2eCoreLib/Size";
+import { DEFAULT_ARMOR } from "./src/PF2eCoreLib/PlayerCharacter/Armor";
 
 export const examplePlayerCharacter: PlayerCharacterData = {
     metadata: {
@@ -267,6 +268,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
     ],
     inventory: {
         items: [
+            DEFAULT_ARMOR,
             {
                 id: Guid.create(),
                 description: "Leather Armor made from leather",

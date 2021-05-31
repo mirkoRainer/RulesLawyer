@@ -50,6 +50,7 @@ import {
     TabNavigationState,
 } from "@react-navigation/native";
 import { BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import { InfoIcon, MenuIcon } from "../Shared/IconButtons";
 
 type CharacterSheetNavigationProps = DrawerNavigationProp<
     RootDrawerParamList,
@@ -152,8 +153,7 @@ const CharacterSheet: React.FC<Props> = (props: Props) => {
             </BottomNavigation>
         );
     };
-    const MenuIcon = (props: any) => <Icon {...props} name="menu-outline" />;
-    const InfoIcon = (props: any) => <Icon {...props} name="info" />;
+
     const renderMenuAction = () => (
         <TopNavigationAction icon={MenuIcon} onPress={toggleNavigation} />
     );

@@ -4,10 +4,10 @@ import { Layout, Text } from "@ui-kitten/components";
 
 type Props = {};
 
-export const LevelView: React.FC<Props> = (props) => {
+export const LevelsView: React.FC<Props> = (props) => {
     return (
         <Layout>
-            <Text style={styles.centered}>LevelView</Text>
+            <Text style={styles.centered}>LevelsView</Text>
         </Layout>
     );
 };

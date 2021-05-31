@@ -6,7 +6,8 @@
         "ios": "expo start --ios",
         "web": "expo start --web",
         "eject": "expo eject",
-        "test": "jest --verbose --coverage",
+        "test": "jest",
+        "test:verbose": "jest --verbose --coverage",
         "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
         "test:update": "jest --verbose --coverage --updateSnapshot",
         "test:watch": "jest --verbose --watch",
@@ -45,7 +46,7 @@
         "lodash": "^4.17.20",
         "prettier": "^2.0.4",
         "react": "16.13.1",
-        "react-dom": "16.13.1",
+        "react-dom": "^17.0.2",
         "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
         "react-native-draggable-flatlist": "https://github.com/mirkoRainer/react-native-draggable-flatlist/tarball/Publish",
         "react-native-elements": "^1.2.7",
@@ -63,16 +64,23 @@
     },
     "devDependencies": {
         "@babel/core": "~7.9.0",
-        "@babel/preset-typescript": "^7.10.1",
+        "@babel/preset-typescript": "^7.13.0",
         "@expo/webpack-config": "~0.12.45",
-        "@types/jest": "^26.0.20",
+        "@testing-library/jest-native": "^4.0.1",
+        "@testing-library/react-native": "^7.2.0",
+        "@types/enzyme": "^3.10.8",
+        "@types/enzyme-adapter-react-16": "^1.0.6",
+        "@types/jest": "^26.0.23",
         "@types/react": "~16.9.35",
         "@types/react-native": "~0.63.2",
         "@types/react-test-renderer": "^17.0.0",
         "@typescript-eslint/eslint-plugin": "^2.28.0",
         "@typescript-eslint/parser": "^2.28.0",
         "@ui-kitten/metro-config": "^5.0.0",
+        "babel-jest": "^26.6.3",
         "babel-preset-expo": "8.3.0",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.6",
         "eslint": "^6.8.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",
@@ -83,11 +91,12 @@
         "eslint-plugin-react-hooks": "^2.5.1",
         "eslint-plugin-standard": "^4.0.1",
         "husky": "^4.3.0",
-        "jest": "^26.0.1",
+        "jest": "^26.6.3",
+        "jest-fetch-mock": "^3.0.3",
         "pretty-quick": "^3.0.2",
-        "react-test-renderer": "^17.0.1",
-        "ts-jest": "^26.5.2",
-        "typescript": "~4.0.0"
+        "react-test-renderer": "^17.0.2",
+        "ts-jest": "^27.0.1",
+        "typescript": "^4.2.4"
     },
     "private": true,
     "husky": {
@@ -95,13 +104,8 @@
             "pre-commit": "pretty-quick --staged"
         }
     },
+    "license": "GPL-3.0-or-later",
     "jest": {
-        "preset": "react-native",
-        "coverageThreshold": {
-            "global": {
-                "statements": 80
-            }
-        }
-    },
-    "license": "GPL-3.0-or-later"
+        "preset": "react-native"
+    }
 }

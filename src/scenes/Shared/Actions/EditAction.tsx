@@ -23,7 +23,7 @@ import { Skills } from "../../../PF2eCoreLib/PlayerCharacter/Skills";
 import { IsWeapon, Weapon } from "../../../PF2eCoreLib/PlayerCharacter/Weapon";
 import { WeaponSelector } from "../../CharacterSheet/Encounter/Offense/Weapons/WeaponSelector";
 import { SkillSelector } from "../../CharacterSheet/Encounter/Skills/SkillSelector";
-import TraitSelector from "../TraitSelector";
+import { TraitSelector } from "../TraitSelector";
 import { PF2Action } from "../../../PF2eCoreLib/PlayerCharacter/PF2Action";
 import { Skill } from "../../../PF2eCoreLib/PlayerCharacter/Skill";
 import { EntireAppState } from "../../../store/Store";

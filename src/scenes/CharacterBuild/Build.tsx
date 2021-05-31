@@ -8,13 +8,21 @@ import { AppActions } from "../../store/actions/AllActionTypesAggregated";
 import { connect } from "react-redux";
 import { CharacterBuildState } from "../../store/CharacterBuildState";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Header } from "react-native-elements";
 import { AncestrySelectView } from "./Components/AncestrySelectView";
 import { BuildOverview } from "./Components/BuildOverview";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Layout, Text } from "@ui-kitten/components";
+import {
+    Layout,
+    Text,
+    TopNavigation,
+    TopNavigationAction,
+    ViewPager,
+} from "@ui-kitten/components";
 import PlayerCharacterData from "../../PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
+import { MenuIcon, PermIdentityIcon } from "../Shared/IconButtons";
+import { BackgroundSelectView } from "./Components/BackgroundSelectView";
+import { ClassSelectView } from "./Components/ClassSelectView";
 
 type BuildNavigationProps = DrawerNavigationProp<RootDrawerParamList, "Build">;
 
@@ -76,43 +84,38 @@ export const Build: React.FC<Props> = (props) => {
 
     const Stack = createStackNavigator<BuildStackParamList>();
 
+    const renderMenuAction = () => (
+        <TopNavigationAction icon={MenuIcon} onPress={toggleNavigation} />
+    );
+    const renderSheetAction = () => (
+        <TopNavigationAction
+            icon={PermIdentityIcon}
+            onPress={goToCharacterSheet}
+        />
+    );
+
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+    const shouldLoadComponent = (index: number) => index === selectedIndex;
+
     return (
         <SafeAreaView>
-            <Header
-                leftComponent={{
-                    icon: "menu",
-                    color: "#eee",
-                    onPress: toggleNavigation,
-                }}
-                centerComponent={{
-                    text: headerText(),
-                    style: { color: "#eee" },
-                }}
-                rightComponent={{
-                    icon: "perm-identity",
-                    color: "#eee",
-                    onPress: goToCharacterSheet,
-                }}
+            <TopNavigation
+                alignment="center"
+                title={headerText()}
+                accessoryLeft={renderMenuAction}
+                accessoryRight={renderSheetAction}
             />
-            <Layout style={styles.horizontal}>
-                <Stack.Navigator initialRouteName={"BuildOverview"}>
-                    <Stack.Screen
-                        name="BuildOverview"
-                        component={BuildOverview}
-                    />
-                    <Stack.Screen
-                        name="AncestrySelect"
-                        component={AncestrySelectView}
-                    />
-                </Stack.Navigator>
-                <Layout>
-                    {
-                        //create a side navigator that indicates build step and status
-                    }
-                    <Text>{"ABC's"}</Text>
-                    <Text>Lvl 1</Text>
-                </Layout>
-            </Layout>
+            <ViewPager
+                selectedIndex={selectedIndex}
+                shouldLoadComponent={shouldLoadComponent}
+                onSelect={(index) => setSelectedIndex(index)}
+            >
+                <BuildOverview />
+                <AncestrySelectView />
+                <BackgroundSelectView />
+                <ClassSelectView />
+            </ViewPager>
         </SafeAreaView>
     );
 };
@@ -134,6 +137,9 @@ const mapDispatchToProps = (): LinkDispatchProps => ({});
 export default connect(mapStateToProps, mapDispatchToProps)(Build);
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     horizontal: {
         flexDirection: "row",
         flex: 1,

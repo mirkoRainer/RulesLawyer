@@ -16,3 +16,9 @@ Using React Native, this repo aims to recreate the Pathfinder Second Edition cha
 -   The android and web version are not the focus, so they may not look great (the iOS one doesn't look great yet either....)
 
 Please use complete descriptive words for your variables and functions that express the intent of the variable or function. Use Pathfinder 2e specific language where possible to keep everything within context. https://dzone.com/articles/naming-conventions-from-uncle-bobs-clean-code-phil
+
+## What Could Be Improved - 20210511
+
+-   Consistent UX. Tap, double tap, long top should be standardized for functionality across the app.
+-   Standardize navigation methods.
+-   Dice Rolling could be added

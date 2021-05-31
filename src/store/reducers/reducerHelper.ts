@@ -4,10 +4,12 @@ import {
     InventoryItem,
     Item,
 } from "../../PF2eCoreLib/PlayerCharacter/Inventory";
-import { Armor } from "../../PF2eCoreLib/PlayerCharacter/Armor";
+import { Armor, IsArmor } from "../../PF2eCoreLib/PlayerCharacter/Armor";
 import { Weapon } from "../../PF2eCoreLib/PlayerCharacter/Weapon";
 import { Shield } from "../../PF2eCoreLib/PlayerCharacter/Shield";
 import Store from "../Store";
+import { ChangeWornArmor } from "../actions/PlayerCharacter/PlayerCharacterActions";
+import { ArmorCategoryData } from "../../scenes/Shared/Armor/ArmorHelper";
 
 export const UpdateItemInInventory = (
     newItem: InventoryItem,
@@ -58,4 +60,18 @@ export const InsertOrUpdateBonus = (
 };
 export const RemoveBonus = (bonus: iBonus, bonuses: iBonus[]): iBonus[] => {
     return bonuses.filter((x) => !_.isEqual(x, bonus));
+};
+
+export const ChangeArmorThatIsWorn = (
+    newArmor: Armor,
+    inventory: InventoryItem[]
+): InventoryItem[] => {
+    return inventory.map((item) => {
+        if (!IsArmor(item)) return item;
+        if (newArmor.id.equals(item.id)) {
+            return { ...item, worn: true };
+        } else {
+            return { ...item, worn: false };
+        }
+    });
 };

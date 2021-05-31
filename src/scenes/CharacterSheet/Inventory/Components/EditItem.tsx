@@ -40,7 +40,7 @@ import CoinPriceEditor from "../../../Shared/CoinPriceEditor";
 import { CheckIcon } from "../../../Shared/IconButtons";
 import { Dictionary } from "../../../Shared/Misc/Dictionary";
 import { isNumbersOnly } from "../../../Shared/Misc/StringToNumberHelper";
-import TraitSelector from "../../../Shared/TraitSelector";
+import { TraitSelector } from "../../../Shared/TraitSelector";
 import { InventoryStackParamList } from "../InventoryNavigation";
 import { EditArmor } from "./EditArmor";
 import { EditItemTypeToggles } from "./EditItemTypeToggles";
@@ -65,7 +65,7 @@ export interface EditItemState {
     isArmor: boolean;
 }
 
-const EditItem: React.FC<Props> = (props) => {
+const EditItemView: React.FC<Props> = (props) => {
     const [state, setState] = useState<EditItemState>(() => {
         const isWeapon = IsWeapon(props.item);
         const isArmor = IsArmor(props.item);
@@ -227,7 +227,7 @@ const EditItem: React.FC<Props> = (props) => {
     };
 
     return (
-        <Layout style={{ flex: 1 }}>
+        <Layout style={{ flex: 1, paddingHorizontal: 10 }}>
             <Layout style={styles.header}>
                 <Text category="h5">Editing: {state.item.name}</Text>
                 <Button
@@ -448,7 +448,7 @@ const mapDispatchToProps = (
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditItem);
+export default connect(mapStateToProps, mapDispatchToProps)(EditItemView);
 
 const styles = StyleSheet.create({
     centered: {

@@ -5,9 +5,13 @@ import {
     DEFAULT_ITEM,
     InventoryItem,
 } from "../../PF2eCoreLib/PlayerCharacter/Inventory";
-import { DEFAULT_ARMOR } from "../../PF2eCoreLib/PlayerCharacter/Armor";
+import {
+    DEFAULT_ARMOR,
+    IsArmor,
+} from "../../PF2eCoreLib/PlayerCharacter/Armor";
 import * as reducerHelper from "./reducerHelper";
 import { DEFAULT_WEAPON } from "../../PF2eCoreLib/PlayerCharacter/Weapon";
+import { examplePlayerCharacter } from "../../../examplePlayerCharacter";
 
 global.console = {
     ...console,
@@ -18,7 +22,7 @@ global.console = {
 
 describe("reducerHelper", () => {
     describe("UpdateItemInInventory", () => {
-        it("throws and error and returns the input inventory when the item doesn't exist", () => {
+        it("throws an error and returns the input inventory when the item doesn't exist", () => {
             const guid = Guid.create();
             const inventory: InventoryItem[] = [DEFAULT_WEAPON, DEFAULT_ITEM];
             const absentItem: InventoryItem = {
@@ -138,6 +142,40 @@ describe("reducerHelper", () => {
             expect(
                 reducerHelper.RemoveBonus(bonusToRemove, oldBonuses).length
             ).toBe(2);
+        });
+    });
+    describe("ChangeArmorThatIsWorn", () => {
+        let inventoryItems: InventoryItem[] = [];
+        beforeEach(() => {
+            inventoryItems = examplePlayerCharacter.inventory.items.slice();
+        });
+        afterEach(() => {
+            inventoryItems = [];
+        });
+        it("results in only one worn armor", () => {
+            let wornCount = 0;
+            const updatedInventory = reducerHelper.ChangeArmorThatIsWorn(
+                DEFAULT_ARMOR,
+                inventoryItems
+            );
+            updatedInventory.forEach((item) => {
+                if (item.worn && IsArmor(item)) {
+                    wornCount++;
+                }
+            });
+            expect(wornCount).toBe(1);
+        });
+        it("Marks the passed in armor as worn", () => {
+            expect(inventoryItems.find((x) => x.worn === true)?.name).toBe(
+                "Leather Armor"
+            ); // Ensure leather armor for the example is worn
+            const updatedInventory = reducerHelper.ChangeArmorThatIsWorn(
+                DEFAULT_ARMOR,
+                inventoryItems
+            );
+            expect(updatedInventory.find((x) => x.worn === true)?.name).toBe(
+                "Unarmored"
+            );
         });
     });
 });
