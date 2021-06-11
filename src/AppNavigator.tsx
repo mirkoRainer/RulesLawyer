@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { RootDrawerParamList } from "./RootDrawerParamList";
-import MainMenu from "./scenes/MainMenu";
+import { MainMenu } from "./scenes/MainMenu/MainMenu";
 import Build from "./scenes/CharacterBuild/Build";
 import CharacterSheet from "./scenes/CharacterSheet/CharacterSheet";
 import SaveView from "./scenes/SaveView";

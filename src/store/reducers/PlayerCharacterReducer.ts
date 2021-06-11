@@ -65,7 +65,6 @@ import {
     RemoveBonus,
     UpdateItemInInventory,
 } from "./reducerHelper";
-import { startDeleteSpell } from "../actions/PlayerCharacter/PlayerCharacterActions";
 
 const defaultState: PlayerCharacterData = new PlayerCharacter().data;
 
