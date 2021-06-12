@@ -3,7 +3,8 @@ import { Proficiencies } from "../Proficiencies";
 import { iBonus } from "../Bonus";
 import { Traits } from "../Traits";
 import { HealthData } from "../HealthData";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { Ability } from "../Ability";
 import { Size } from "../Size";
 import { CompanionDetails } from "./CompanionDetails";
@@ -62,7 +63,7 @@ export const DEFAULT_COMPANION: Companion = {
     },
     actions: [
         {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Bark",
             numberOfActions: 2,
             traits: ["Attack", "Flourish"],
@@ -72,7 +73,7 @@ export const DEFAULT_COMPANION: Companion = {
             source: "What grants this action",
         },
         {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Fetch",
             numberOfActions: 0,
             traits: ["FreeAction", "Verbal"],
@@ -100,7 +101,7 @@ export const DEFAULT_COMPANION: Companion = {
     inventory: { items: [] },
     languages: ["Common"],
     metaData: {
-        id: Guid.create(),
+        id: uuidv4(),
     },
     name: "Fido",
     perception: Proficiencies.Trained,
@@ -189,7 +190,7 @@ export const DEFAULT_COMPANION: Companion = {
     weaknesses: "hugs",
     advancement: {
         advancedManuever: {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Advanced",
             numberOfActions: 1,
             traits: ["Attack", "Athletics"],

@@ -2,7 +2,8 @@ import { Proficiencies } from "./src/PF2eCoreLib/Proficiencies";
 import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
 import PlayerCharacterData from "./src/PF2eCoreLib/PlayerCharacter/PlayerCharacter";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { Ability } from "./src/PF2eCoreLib/Ability";
 import { Size } from "./src/PF2eCoreLib/Size";
@@ -10,7 +11,7 @@ import { DEFAULT_ARMOR } from "./src/PF2eCoreLib/PlayerCharacter/Armor";
 
 export const examplePlayerCharacter: PlayerCharacterData = {
     metadata: {
-        id: Guid.create(),
+        id: uuidv4(),
     },
     level: 1,
     experiencePoints: 100,
@@ -270,7 +271,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
         items: [
             DEFAULT_ARMOR,
             {
-                id: Guid.create(),
+                id: uuidv4(),
                 description: "Leather Armor made from leather",
                 invested: false,
                 worn: true,
@@ -306,7 +307,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                 isContainer: false,
             },
             {
-                id: Guid.create(),
+                id: uuidv4(),
                 description: "Shield made from leather",
                 invested: false,
                 worn: true,
@@ -328,7 +329,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                 isContainer: false,
             },
             {
-                id: Guid.create(),
+                id: uuidv4(),
                 description: "Another Shield",
                 invested: false,
                 worn: true,
@@ -350,7 +351,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                 isContainer: false,
             },
             {
-                id: Guid.create(),
+                id: uuidv4(),
                 description: "A magical short sword",
                 bulk: 1,
                 level: 5,
@@ -374,7 +375,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                 isContainer: false,
             },
             {
-                id: Guid.create(),
+                id: uuidv4(),
                 name: "Longbow",
                 description: "A longbow of yew",
                 bulk: 1,
@@ -396,7 +397,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                 isContainer: false,
             },
             {
-                id: Guid.create(),
+                id: uuidv4(),
                 level: 5,
                 name: "Doubling Rings",
                 bulk: 0,
@@ -409,7 +410,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             {
                 name: "Bracers of Missile Deflection",
-                id: Guid.create(),
+                id: uuidv4(),
                 level: 5,
                 bulk: 0.1,
                 invested: false,
@@ -421,7 +422,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             {
                 name: "Alchemist's Fire",
-                id: Guid.create(),
+                id: uuidv4(),
                 level: 5,
                 bulk: 0.1,
                 invested: false,
@@ -433,7 +434,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             {
                 name: "Thieves Tools",
-                id: Guid.create(),
+                id: uuidv4(),
                 level: 5,
                 bulk: 0.1,
                 invested: false,
@@ -445,7 +446,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             {
                 name: "Feather Token (Ladder)",
-                id: Guid.create(),
+                id: uuidv4(),
                 level: 5,
                 bulk: 0,
                 invested: false,
@@ -457,7 +458,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             {
                 name: "Signal Whistle",
-                id: Guid.create(),
+                id: uuidv4(),
                 level: 5,
                 bulk: 0.1,
                 invested: false,
@@ -495,7 +496,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
     },
     actions: [
         {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Shove",
             numberOfActions: 1,
             traits: ["Attack", "Athletics"],
@@ -507,7 +508,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             skill: "Athletics",
         },
         {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Power Attack",
             numberOfActions: 2,
             traits: ["Attack", "Flourish"],
@@ -517,7 +518,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             source: "What grants this action",
         },
         {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Speak out loud",
             numberOfActions: 0,
             traits: ["FreeAction", "Verbal"],
@@ -527,7 +528,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             source: "What grants this action",
         },
         {
-            id: Guid.create(),
+            id: uuidv4(),
             name: "Attack of Opportunity",
             numberOfActions: 0.5,
             traits: [],
@@ -677,7 +678,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             actions: [
                 {
-                    id: Guid.create(),
+                    id: uuidv4(),
                     name: "Bark",
                     numberOfActions: 2,
                     traits: ["Attack", "Flourish"],
@@ -687,7 +688,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                     source: "What grants this action",
                 },
                 {
-                    id: Guid.create(),
+                    id: uuidv4(),
                     name: "Fetch",
                     numberOfActions: 0,
                     traits: ["FreeAction", "Verbal"],
@@ -716,7 +717,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                 items: [
                     {
                         name: "Collar of Good Boi",
-                        id: Guid.create(),
+                        id: uuidv4(),
                         level: 20,
                         bulk: 0.1,
                         invested: true,
@@ -728,7 +729,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
                         isContainer: false,
                     },
                     {
-                        id: Guid.create(),
+                        id: uuidv4(),
                         description: "Leather Armor made from leather",
                         invested: false,
                         worn: true,
@@ -767,7 +768,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             },
             languages: ["Common"],
             metaData: {
-                id: Guid.create(),
+                id: uuidv4(),
             },
             name: "Fido",
             perception: Proficiencies.Legendary,
@@ -856,7 +857,7 @@ export const examplePlayerCharacter: PlayerCharacterData = {
             weaknesses: "hugs",
             advancement: {
                 advancedManuever: {
-                    id: Guid.create(),
+                    id: uuidv4(),
                     name: "Advanced Manuever",
                     numberOfActions: 1,
                     traits: ["Attack", "Athletics"],

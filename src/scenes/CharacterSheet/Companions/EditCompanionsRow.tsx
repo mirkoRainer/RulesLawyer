@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Divider, Layout, Text } from "@ui-kitten/components";
-import { Guid } from "guid-typescript";
 import { connect } from "react-redux";
 import { startDeleteCompanion } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { ThunkDispatch } from "redux-thunk";
@@ -24,7 +23,7 @@ const EditCompanionsRow: React.FC<Props> = (props) => {
                     appearance="ghost"
                     onPress={() =>
                         navigation.navigate("EditCompanionView", {
-                            companionGuid: props.id.toString(),
+                            companionUuid: props.id,
                         })
                     }
                 >
@@ -52,11 +51,11 @@ type Props = LinkDispatchProps & OwnProps;
 export type OwnProps = {
     name: string;
     index: number;
-    id: Guid;
+    id: string;
 };
 
 interface LinkDispatchProps {
-    delete: (id: Guid) => void;
+    delete: (id: string) => void;
 }
 
 const mapDispatchToProps = (

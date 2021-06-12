@@ -9,7 +9,7 @@ import EditItemView from "./Components/EditItem";
 export type InventoryStackParamList = {
     MainInventoryView: undefined;
     EditInventoryView: undefined;
-    EditItemView: { itemGuid: string };
+    EditItemView: { itemUuid: string };
 };
 
 export type InventoryNavigationProps = StackNavigationProp<

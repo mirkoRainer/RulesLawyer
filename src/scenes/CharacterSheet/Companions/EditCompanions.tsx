@@ -13,7 +13,8 @@ import { connect } from "react-redux";
 import EditCompanionsRow from "./EditCompanionsRow";
 import { startAddCompanion } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { bindActionCreators } from "redux";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 const EditCompanions: React.FC<Props> = (props) => {
     const navigation = useNavigation<EditCompanionsNavigationProps>();
@@ -49,7 +50,7 @@ const EditCompanions: React.FC<Props> = (props) => {
                 {renderCompanionRows}
                 <Button
                     style={{ margin: 10, alignSelf: "center" }}
-                    onPress={() => props.add(Guid.create())}
+                    onPress={() => props.add(uuidv4())}
                 >
                     + Add New Companion
                 </Button>
@@ -61,7 +62,7 @@ const EditCompanions: React.FC<Props> = (props) => {
 type Props = LinkDispatchProps & LinkStateProps & {};
 
 interface LinkDispatchProps {
-    add: (id: Guid) => void;
+    add: (id: string) => void;
 }
 
 const mapDispatchToProps = (

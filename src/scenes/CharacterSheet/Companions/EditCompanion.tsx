@@ -129,7 +129,7 @@ const EditCompanion: React.FC<Props> = (props) => {
                             props.navigation.navigate(
                                 "EditCompanionActionsView",
                                 {
-                                    companionGuid: props.companion.metaData.id,
+                                    companionUuid: props.companion.metaData.id,
                                 }
                             )
                         }
@@ -171,7 +171,7 @@ const mapStateToProps = (
     const companion = state.playerCharacter.companions.find(
         (companion) =>
             companion.metaData.id.toString() ===
-            ownProps.route.params.companionGuid
+            ownProps.route.params.companionUuid
     );
     if (!companion) {
         ownProps.navigation.goBack();

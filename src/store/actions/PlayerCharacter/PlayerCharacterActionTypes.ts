@@ -24,7 +24,6 @@ import {
 } from "../../../scenes/CharacterSheet/Encounter/Spells/Components/Spell";
 import { Traits } from "../../../PF2eCoreLib/Traits";
 import { iBonus } from "../../../PF2eCoreLib/Bonus";
-import { Guid } from "guid-typescript";
 import { HealthData } from "../../../PF2eCoreLib/HealthData";
 
 export const CHANGE_CHARACTER_NAME = "CHANGE_CHARACTER_NAME";
@@ -292,13 +291,13 @@ export interface ChangeWeaponProficienciesAction extends Action<string> {
 export const DELETE_COMPANION = "DELETE_COMPANION";
 export interface DeleteCompanionAction extends Action<string> {
     type: typeof DELETE_COMPANION;
-    CompanionId: Guid;
+    CompanionId: string;
 }
 
 export const ADD_COMPANION = "ADD_COMPANION";
 export interface AddCompanionAction extends Action<string> {
     type: typeof ADD_COMPANION;
-    id: Guid;
+    id: string;
 }
 
 export const CHANGE_COMPANION = "CHANGE_COMPANION";
@@ -318,13 +317,13 @@ export const CHANGE_COMPANION_HP = "CHANGE_COMPANION_HP";
 export interface ChangeCompanionHpAction extends Action<string> {
     type: typeof CHANGE_COMPANION_HP;
     newHp: HealthData;
-    companionId: Guid;
+    companionId: string;
 }
 
 export const CHANGE_COMPANION_ACTIONS = "CHANGE_COMPANION_ACTIONS";
 export interface ChangeCompanionActionsAction extends Action<string> {
     type: typeof CHANGE_COMPANION_ACTIONS;
-    companionId: Guid;
+    companionId: string;
     actions: PF2Action[];
 }
 

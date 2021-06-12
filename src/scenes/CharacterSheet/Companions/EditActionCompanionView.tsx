@@ -19,7 +19,6 @@ import {
     CompanionsStackParamList,
     EditCompanionActionNavigationProps,
 } from "./CompanionsNavigator";
-import { Guid } from "guid-typescript";
 
 const EditActionCompanionView: React.FC<Props> = (props) => {
     const navigation = useNavigation<EditCompanionActionNavigationProps>();
@@ -27,7 +26,7 @@ const EditActionCompanionView: React.FC<Props> = (props) => {
     const updateAction = (newAction: PF2Action, index: number) => {
         let actions = props.actions;
         actions[index] = newAction;
-        props.updateActions(props.route.params.companionGuid, actions);
+        props.updateActions(props.route.params.companionUuid, actions);
     };
 
     const BackIcon = (props: any) => <Icon {...props} name="arrow-back" />;
@@ -64,7 +63,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
 });
 
 interface LinkDispatchProps {
-    updateActions: (companionId: Guid, action: PF2Action[]) => void;
+    updateActions: (companionId: string, action: PF2Action[]) => void;
 }
 
 const mapDispatchToProps = (

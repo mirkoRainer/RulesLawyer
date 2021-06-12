@@ -7,7 +7,8 @@ import {
 } from "@react-navigation/stack";
 import Companions from "./Companions";
 import EditCompanions from "./EditCompanions";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import EditCompanion from "./EditCompanion";
 import EditActionsCompanionView from "./EditActionsCompanionView";
 import EditActionCompanionView from "./EditActionCompanionView";
@@ -15,9 +16,9 @@ import EditActionCompanionView from "./EditActionCompanionView";
 export type CompanionsStackParamList = {
     MainCompanionView: undefined;
     EditCompanionsView: undefined;
-    EditCompanionView: { companionGuid: string };
-    EditCompanionActionsView: { companionGuid: Guid };
-    EditCompanionActionView: { companionGuid: Guid; actionIndex: number };
+    EditCompanionView: { companionUuid: string };
+    EditCompanionActionsView: { companionUuid: string };
+    EditCompanionActionView: { companionUuid: string; actionIndex: number };
 };
 
 export type MainCompanionNavigationProps = StackNavigationProp<

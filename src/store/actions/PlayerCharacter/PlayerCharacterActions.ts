@@ -32,8 +32,6 @@ import {
 import { Traits } from "../../../PF2eCoreLib/Traits";
 import { PlayerCharacterActionTypes } from "./PlayerCharacterActionTypes";
 import { iBonus } from "../../../PF2eCoreLib/Bonus";
-import { CommonActions } from "@react-navigation/native";
-import { Guid } from "guid-typescript";
 import { HealthData } from "../../../PF2eCoreLib/HealthData";
 
 export const ChangeCharacterName: ActionCreator<PlayerCharacterActionTypes> = (
@@ -638,24 +636,24 @@ export const startChangeWeaponProficiencies = (
 };
 
 export const DeleteCompanion: ActionCreator<PlayerCharacterActionTypes> = (
-    CompanionId: Guid
+    CompanionId: string
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.DELETE_COMPANION,
     CompanionId,
 });
-export const startDeleteCompanion = (CompanionId: Guid) => {
+export const startDeleteCompanion = (CompanionId: string) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(DeleteCompanion(CompanionId));
     };
 };
 
 export const AddCompanion: ActionCreator<PlayerCharacterActionTypes> = (
-    id: Guid
+    id: string
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.ADD_COMPANION,
     id,
 });
-export const startAddCompanion = (id: Guid) => {
+export const startAddCompanion = (id: string) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(AddCompanion(id));
     };
@@ -692,7 +690,7 @@ export const startChangeCompanionTempHp = (
 
 export const ChangeCompanionHp: ActionCreator<PlayerCharacterActionTypes> = (
     newHp: HealthData,
-    companionId: Guid
+    companionId: string
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_COMPANION_HP,
     newHp,
@@ -700,7 +698,7 @@ export const ChangeCompanionHp: ActionCreator<PlayerCharacterActionTypes> = (
 });
 export const startChangeCompanionHitPoints = (
     newHp: HealthData,
-    companionId: Guid
+    companionId: string
 ) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {
         dispatch(ChangeCompanionHp(newHp, companionId));
@@ -708,7 +706,7 @@ export const startChangeCompanionHitPoints = (
 };
 
 export const ChangeCompanionActions: ActionCreator<PlayerCharacterActionTypes> = (
-    companionId: Guid,
+    companionId: string,
     newActions: PF2Action[]
 ): PlayerCharacterActionTypes => ({
     type: ActionTypes.CHANGE_COMPANION_ACTIONS,
@@ -716,7 +714,7 @@ export const ChangeCompanionActions: ActionCreator<PlayerCharacterActionTypes> =
     actions: newActions,
 });
 export const startChangeCompanionActions = (
-    companionId: Guid,
+    companionId: string,
     newActions: PF2Action[]
 ) => {
     return (dispatch: Dispatch<AppActions>, getState: () => AppActions) => {

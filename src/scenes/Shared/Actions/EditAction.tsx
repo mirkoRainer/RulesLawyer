@@ -17,7 +17,6 @@ import {
     DetermineActionSymbol,
 } from "./ActionHelper";
 import { ScrollView } from "react-native-gesture-handler";
-import { Guid } from "guid-typescript";
 import { connect } from "react-redux";
 import { Skills } from "../../../PF2eCoreLib/PlayerCharacter/Skills";
 import { IsWeapon, Weapon } from "../../../PF2eCoreLib/PlayerCharacter/Weapon";
@@ -335,7 +334,7 @@ type Props = OwnProps & LinkStateProps;
 type OwnProps = {
     updateAction: (updatedAction: PF2Action, index: number) => void;
     actionIndex: number;
-    companionId?: Guid;
+    companionId?: string;
 };
 
 interface LinkStateProps {

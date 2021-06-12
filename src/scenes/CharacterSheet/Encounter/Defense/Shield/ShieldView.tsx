@@ -44,7 +44,7 @@ const ShieldView: React.FC<Props> = (props) => {
                 ?.dangerouslyGetParent<CharacterSheetEncounterTabNavigationProps>()
                 ?.navigate("Inventory", {
                     screen: "EditItemView",
-                    params: { itemGuid: shield.id.toString() },
+                    params: { itemUuid: shield.id },
                 });
         };
         const adjustShieldHP = (amount: number) => {

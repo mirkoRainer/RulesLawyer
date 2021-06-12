@@ -1,5 +1,6 @@
 import { Traits } from "../Traits";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { Shield } from "./Shield";
 import { Weapon } from "./Weapon";
 import { Armor } from "./Armor";
@@ -16,7 +17,7 @@ export type InventoryItem = Item &
 export interface Item {
     bulk: number;
     description: string;
-    id: Guid;
+    id: string;
     invested: boolean;
     isContainer: boolean;
     containedItems?: string[];
@@ -32,7 +33,7 @@ export interface Item {
 export const DEFAULT_ITEM: Item = {
     bulk: 0,
     description: "The default item",
-    id: Guid.create(),
+    id: uuidv4(),
     invested: false,
     isContainer: false,
     level: 0,

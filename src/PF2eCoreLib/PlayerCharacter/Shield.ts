@@ -1,5 +1,6 @@
 import { iBonus } from "../Bonus";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { BonusType } from "../BonusTypes";
 import { Item, InventoryItem } from "./Inventory";
 
@@ -16,7 +17,7 @@ export function IsShield(item: InventoryItem): item is Shield {
 }
 
 export const DEFAULT_SHIELD: Shield = {
-    id: Guid.create(),
+    id: uuidv4(),
     description: "Leather Armor made from leather",
     invested: false,
     worn: true,

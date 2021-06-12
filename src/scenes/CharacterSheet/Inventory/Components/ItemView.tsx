@@ -64,7 +64,7 @@ export const ItemView: React.FC<Props> = (props) => {
             style={{ width: "100%" }}
             onLongPress={() =>
                 navigation.navigate("EditItemView", {
-                    itemGuid: props.item.id.toString(),
+                    itemUuid: props.item.id,
                 })
             }
         >

@@ -1,10 +1,9 @@
 import { Traits } from "../Traits";
-import { Guid } from "guid-typescript";
 import { Weapon } from "./Weapon";
 import { Skills } from "./Skills";
 
 export interface PF2Action {
-    id: Guid;
+    id: string;
     name: string;
     numberOfActions: number;
     traits: (keyof typeof Traits)[];

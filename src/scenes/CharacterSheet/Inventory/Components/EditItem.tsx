@@ -11,7 +11,8 @@ import {
     Text,
     Toggle,
 } from "@ui-kitten/components";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -415,13 +416,13 @@ const mapStateToProps = (
     ownProps: OwnProps
 ): LinkStateProps => {
     let item = state.playerCharacter.inventory.items.find(
-        (x) => x.id.toString() === ownProps.route.params.itemGuid.toString()
+        (x) => x.id.toString() === ownProps.route.params.itemUuid.toString()
     );
     if (!item) {
         item = {
             bulk: 1,
             description: "New Item",
-            id: Guid.create(),
+            id: uuidv4(),
             invested: false,
             isContainer: false,
             level: 0,

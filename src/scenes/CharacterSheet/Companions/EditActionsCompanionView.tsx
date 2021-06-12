@@ -16,7 +16,8 @@ import {
     useNavigation,
 } from "@react-navigation/native";
 import { bindActionCreators } from "redux";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import {
     CompanionsStackParamList,
     EditCompanionActionsNavigationProps,
@@ -48,31 +49,31 @@ const EditActionsCompanionView: React.FC<Props> = (props) => {
     const updateAction = (newAction: PF2Action, index: number) => {
         let actions = props.actions;
         actions[index] = newAction;
-        props.updateActions(props.route.params.companionGuid, actions);
+        props.updateActions(props.route.params.companionUuid, actions);
     };
     const handleEditButton = (index: number) => {
         navigation.navigate("EditCompanionActionView", {
-            companionGuid: props.route.params.companionGuid,
+            companionUuid: props.route.params.companionUuid,
             actionIndex: index,
         });
     };
     const handleDeleteButton = (index: number) => {
         let newActions = props.actions;
         newActions.splice(index, 1);
-        props.updateActions(props.route.params.companionGuid, newActions);
+        props.updateActions(props.route.params.companionUuid, newActions);
         setState({});
     };
     const handleAddNewActionButton = () => {
         let actions = props.actions;
         actions.push({
-            id: Guid.create(),
+            id: uuidv4(),
             name: "New Action",
             numberOfActions: 1,
             traits: [],
             description: "Description here",
             source: "Source of the Action",
         });
-        props.updateActions(props.route.params.companionGuid, actions);
+        props.updateActions(props.route.params.companionUuid, actions);
         setState({});
     };
     return (
@@ -114,7 +115,7 @@ const mapStateToProps = (state: EntireAppState): LinkStateProps => ({
 });
 
 interface LinkDispatchProps {
-    updateActions: (companionId: Guid, action: PF2Action[]) => void;
+    updateActions: (companionUuid: string, action: PF2Action[]) => void;
 }
 
 const mapDispatchToProps = (

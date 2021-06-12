@@ -15,7 +15,6 @@ import { AppActions } from "../../../store/actions/AllActionTypesAggregated";
 import { EntireAppState } from "../../../store/Store";
 import { connect } from "react-redux";
 import { HealthData } from "../../../PF2eCoreLib/HealthData";
-import { Guid } from "guid-typescript";
 import { startChangeCompanionHitPoints } from "../../../store/actions/PlayerCharacter/PlayerCharacterActions";
 import { bindActionCreators } from "redux";
 import { indexOf } from "lodash";
@@ -140,14 +139,14 @@ const EditHitPoints: React.FC<Props> = (props) => {
 type Props = LinkDispatchProps & LinkStateProps & OwnProps;
 
 interface OwnProps {
-    companionId: Guid;
+    companionId: string;
     hitPoints: HealthData;
 }
 
 interface LinkDispatchProps {
     changeCompanionHitPoints: (
         newHitPoints: HealthData,
-        companionId: Guid
+        companionId: string
     ) => void;
 }
 

@@ -1,7 +1,8 @@
 import { iBonus } from "../Bonus";
 import { ArmorCategory } from "../ArmorCategory";
 import { ArmorGroup } from "../ArmorGroup";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { BonusType } from "../BonusTypes";
 import { Price } from "./Price";
 import { Item, InventoryItem } from "./Inventory";
@@ -46,7 +47,7 @@ export const DEFAULT_ARMOR_ONLY_PROPS: Omit<Armor, keyof Item> = {
     armorGroup: ArmorGroup.Clothing,
 };
 export const DEFAULT_COMPANION_ARMOR: Armor = {
-    id: Guid.create(),
+    id: uuidv4(),
     description: "Fur, feathers, or scales",
     invested: false,
     worn: true,
@@ -82,7 +83,7 @@ export const DEFAULT_COMPANION_ARMOR: Armor = {
     isContainer: false,
 };
 export const DEFAULT_ARMOR: Armor = {
-    id: Guid.create(),
+    id: uuidv4(),
     description: "Plain clothing offering no real protection",
     invested: false,
     worn: false,

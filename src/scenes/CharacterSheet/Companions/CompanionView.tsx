@@ -1,5 +1,6 @@
 import { Button, Divider, Layout, Text } from "@ui-kitten/components";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import {
@@ -102,7 +103,7 @@ export const CompanionView: React.FC<Props> = (props) => {
                         action={{
                             description: props.companion.supportBenefit,
                             name: "Support",
-                            id: Guid.create(),
+                            id: uuidv4(),
                             numberOfActions: 1,
                             source: "Companion Support Benefit",
                             traits: [],

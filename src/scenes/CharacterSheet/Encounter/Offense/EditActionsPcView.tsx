@@ -16,7 +16,8 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { PF2Action } from "../../../../PF2eCoreLib/PlayerCharacter/PF2Action";
 import { bindActionCreators } from "redux";
 import { startChangePF2Actions } from "../../../../store/actions/PlayerCharacter/PlayerCharacterActions";
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { EntireAppState } from "../../../../store/Store";
 import { AppActions } from "../../../../store/actions/AllActionTypesAggregated";
 import EditActions from "../../../Shared/Actions/EditActions";
@@ -49,7 +50,7 @@ const EditActionsPcView: React.FC<Props> = (props) => {
     const handleAddNewActionButton = () => {
         let actions = props.actions;
         actions.push({
-            id: Guid.create(),
+            id: uuidv4(),
             name: "New Action",
             numberOfActions: 1,
             traits: [],

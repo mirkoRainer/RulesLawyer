@@ -1,4 +1,5 @@
-import { Guid } from "guid-typescript";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { iBonus } from "../../PF2eCoreLib/Bonus";
 import { BonusType } from "../../PF2eCoreLib/BonusTypes";
 import {
@@ -23,11 +24,11 @@ global.console = {
 describe("reducerHelper", () => {
     describe("UpdateItemInInventory", () => {
         it("throws an error and returns the input inventory when the item doesn't exist", () => {
-            const guid = Guid.create();
+            const uuid = uuidv4();
             const inventory: InventoryItem[] = [DEFAULT_WEAPON, DEFAULT_ITEM];
             const absentItem: InventoryItem = {
                 ...DEFAULT_ARMOR,
-                id: guid,
+                id: uuid,
             };
             reducerHelper.UpdateItemInInventory(absentItem, inventory);
             expect(global.console.error).toHaveBeenCalledWith(
