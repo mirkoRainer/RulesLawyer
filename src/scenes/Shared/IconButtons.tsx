@@ -28,3 +28,7 @@ export const InfoIcon = (props: any) => <Icon {...props} name="info" />;
 export const PermIdentityIcon = (props: any) => (
     <Icon {...props} name="person-outline" />
 );
+
+export const VerticalEllipseIcon = (props: any) => (
+    <Icon {...props} name="more-vertical-outline" />
+);

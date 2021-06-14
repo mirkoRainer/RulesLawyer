@@ -19,9 +19,7 @@ export const ArmorSelector: React.FC<Props> = (props) => {
     };
     const navigation = useNavigation();
     navigation.addListener("beforeRemove", () => {
-        props.onSelect(
-            props.currentArmors.find((x) => x.id.equals(armorState.id))
-        );
+        props.onSelect(props.currentArmors.find((x) => x.id === armorState.id));
     });
     // useEffect(() => {
     // }, [navigation, armorState]);

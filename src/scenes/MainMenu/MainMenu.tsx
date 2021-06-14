@@ -6,6 +6,7 @@ import {
     TopNavigation,
     TopNavigationAction,
     Text,
+    Button,
 } from "@ui-kitten/components";
 import { RootDrawerParamList } from "../../RootDrawerParamList";
 import { MenuIcon } from "../Shared/IconButtons";
@@ -49,14 +50,18 @@ export const MainMenu: React.FC<Props> = (props) => {
     const loadData = async () => {
         const ids = await getArrayOfAllKeysFromLocalStorage();
         console.log(JSON.stringify(ids));
-        let list: PlayerCharacterData[] = [];
         ids.forEach(async (id) => {
             if (uuidValidate(id)) {
                 loadCharacterByUuid(id).then((x) => {
                     console.log(JSON.stringify(x?.metadata.id.toString()));
                     if (x) {
-                        charactersToDisplay.push(x);
-                        setCharactersToDisplay(charactersToDisplay);
+                        if (
+                            charactersToDisplay.filter(
+                                (x) => x.metadata.id === x.metadata.id
+                            ).length === 0
+                        ) {
+                            setCharactersToDisplay([...charactersToDisplay, x]);
+                        }
                     }
                 });
             }
@@ -70,11 +75,10 @@ export const MainMenu: React.FC<Props> = (props) => {
                 title="Rules Lawyer 2e"
             />
             <Layout style={styles.container}>
-                {charactersToDisplay ? (
-                    <CharacterList playerCharacters={charactersToDisplay} />
-                ) : (
-                    <Text>Loading</Text>
-                )}
+                <Layout style={{ padding: 5 }}>
+                    <Button>Create New Player Character</Button>
+                </Layout>
+                <CharacterList playerCharacters={charactersToDisplay} />
             </Layout>
         </SafeAreaView>
     );

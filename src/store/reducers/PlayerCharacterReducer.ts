@@ -669,7 +669,7 @@ const playerCharacterReducer = (
             return {
                 ...state,
                 companions: state.companions.map((companion) => {
-                    if (companion.metaData.id.equals(action.companionId)) {
+                    if (companion.metaData.id === action.companionId) {
                         return {
                             ...companion,
                             hitPoints: action.newHp,
@@ -690,7 +690,7 @@ const playerCharacterReducer = (
             return {
                 ...state,
                 companions: state.companions.map((companion) => {
-                    if (companion.metaData.id.equals(action.companionId)) {
+                    if (companion.metaData.id === action.companionId) {
                         return {
                             ...companion,
                             actions: action.actions,

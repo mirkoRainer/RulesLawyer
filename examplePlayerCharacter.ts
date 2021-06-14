@@ -3,7 +3,7 @@ import { BonusType } from "./src/PF2eCoreLib/BonusTypes";
 import { ArmorGroup } from "./src/PF2eCoreLib/ArmorGroup";
 import PlayerCharacterData from "./src/PF2eCoreLib/PlayerCharacter/PlayerCharacter";
 import "react-native-get-random-values";
-import { v4 as uuidv4 } from "uuid";
+import { NIL as uuidNil, v4 as uuidv4 } from "uuid";
 import { ArmorCategory } from "./src/PF2eCoreLib/ArmorCategory";
 import { Ability } from "./src/PF2eCoreLib/Ability";
 import { Size } from "./src/PF2eCoreLib/Size";
@@ -11,7 +11,7 @@ import { DEFAULT_ARMOR } from "./src/PF2eCoreLib/PlayerCharacter/Armor";
 
 export const examplePlayerCharacter: PlayerCharacterData = {
     metadata: {
-        id: uuidv4(),
+        id: uuidNil, // All zero uuid for testing
     },
     level: 1,
     experiencePoints: 100,

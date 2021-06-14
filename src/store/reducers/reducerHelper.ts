@@ -16,7 +16,7 @@ export const UpdateItemInInventory = (
     inventory: InventoryItem[]
 ): InventoryItem[] => {
     const foundIndex = inventory.findIndex((item) => {
-        return item.id.equals(newItem.id);
+        return item.id === newItem.id;
     });
     if (foundIndex === -1) {
         console.error(
@@ -68,7 +68,7 @@ export const ChangeArmorThatIsWorn = (
 ): InventoryItem[] => {
     return inventory.map((item) => {
         if (!IsArmor(item)) return item;
-        if (newArmor.id.equals(item.id)) {
+        if (newArmor.id === item.id) {
             return { ...item, worn: true };
         } else {
             return { ...item, worn: false };

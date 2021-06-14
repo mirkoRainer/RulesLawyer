@@ -35,7 +35,7 @@ const EditCompanion: React.FC<Props> = (props) => {
             (item, index) => {
                 // If it's Armor, set Worn to true if it's the new Armor, otherwise, false.
                 if (IsArmor(item)) {
-                    if (item.id.equals(newArmor.id)) {
+                    if (item.id === newArmor.id) {
                         return { ...newArmor, worn: true };
                     } else {
                         return { ...item, worn: false };

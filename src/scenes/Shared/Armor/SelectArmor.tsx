@@ -52,8 +52,8 @@ export const SelectWornArmor: React.FC<Props> = (props) => {
                         style={styles.centered}
                         selectedIndex={
                             new IndexPath(
-                                armors.findIndex((x) =>
-                                    x.id.equals(props.currentArmor.id)
+                                armors.findIndex(
+                                    (x) => x.id === props.currentArmor.id
                                 )
                             )
                         }

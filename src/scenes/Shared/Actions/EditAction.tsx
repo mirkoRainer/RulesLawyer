@@ -349,7 +349,7 @@ const mapStateToProps = (
 ): LinkStateProps => {
     if (ownProps.companionId !== undefined) {
         const companion: Companion = state.playerCharacter.companions.find(
-            (x) => x.metaData.id.equals(ownProps.companionId!)
+            (x) => x.metaData.id === ownProps.companionId!
         )!;
         const weapons: Weapon[] = companion.inventory.items.filter<Weapon>(
             IsWeapon
